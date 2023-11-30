@@ -32,14 +32,13 @@ func deal_damage(damage_data: DealDamageData) -> void:
 	if attacker == victim: 
 		attacker = null
 	
-	# get stats from our stat components. We need to duplicate otherwise
-	# we're changing the base stats
+	# get stats from our stat components
 	var modified_attacker_stats: EntityStats = null
 	if attacker != null:
-		modified_attacker_stats = attacker.get_stat_component().stats.duplicate()
-	var modified_victim_stats: EntityStats = victim.get_stat_component().stats.duplicate()
+		modified_attacker_stats = attacker.get_stat_component().get_stat_copy()
+	var modified_victim_stats: EntityStats = victim.get_stat_component().get_stat_copy()
 	
-	# apply buffs
+	# apply modified damage from buffs
 	if attacker != null and !damage_data.ignore_attacker_buffs:
 		for buff: BuffBase in attacker.get_buff_component().current_buffs:
 			buff.get_modified_stats(modified_attacker_stats)

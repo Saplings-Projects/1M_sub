@@ -15,9 +15,9 @@ var _is_interactable: bool = true
 
 
 func set_interactable(interactable: bool) -> void:
-	_is_interactable = interactable
-	if not _is_interactable:
+	if not interactable:
 		on_unhover.emit()
+	_is_interactable = interactable
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

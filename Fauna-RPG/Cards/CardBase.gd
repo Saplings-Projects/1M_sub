@@ -41,6 +41,7 @@ func _deal_damage(attacker: Entity, victim: Entity) -> void:
 	# damage victim
 	if damage_to_apply_to_victim != 0.0:
 		_damage_entity(victim, attacker, damage_to_apply_to_victim, affect_all_victims)
+	
 	#damage attacker
 	if damage_to_apply_to_attacker != 0.0:
 		_damage_entity(attacker, attacker, damage_to_apply_to_attacker, affect_all_attackers)
@@ -50,6 +51,7 @@ func _damage_entity(victim: Entity, attacker: Entity, damage_amount: float, dama
 	var victim_damage_data: DealDamageData = DealDamageData.new()
 	victim_damage_data.damage = damage_amount
 	victim_damage_data.attacker = attacker
+	
 	# If damage_all is set, try to damage all the party members set in the party component
 	if damage_all:
 		var party: Array[Entity] = victim.get_party_component().party
@@ -62,6 +64,7 @@ func _damage_entity(victim: Entity, attacker: Entity, damage_amount: float, dama
 
 
 func _apply_buffs(attacker: Entity, victim: Entity) -> void:
+	# apply buffs to attacker
 	for buff: BuffBase in buffs_to_apply_to_attacker:
 		if affect_all_attackers:
 			for party_member: Entity in attacker.get_party_component().party:
@@ -69,6 +72,7 @@ func _apply_buffs(attacker: Entity, victim: Entity) -> void:
 		else:
 			attacker.get_buff_component().add_buff(buff, attacker)
 	
+	# apply buffs to victim
 	for buff: BuffBase in buffs_to_apply_to_victim:
 		if affect_all_victims:
 			for party_member: Entity in victim.get_party_component().party:

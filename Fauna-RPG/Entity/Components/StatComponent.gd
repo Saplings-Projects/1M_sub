@@ -6,4 +6,9 @@ class_name StatComponent
 ## have different stats based on the Entity type.
 
 
-var stats: EntityStats = EntityStats.new()
+var _stats: EntityStats = EntityStats.new()
+
+
+# we want to get a duplicate of stats so we aren't modifying the base.
+func get_stat_copy() -> EntityStats:
+	return _stats.duplicate()

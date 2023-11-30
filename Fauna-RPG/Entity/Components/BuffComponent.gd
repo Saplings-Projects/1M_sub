@@ -26,7 +26,7 @@ func apply_turn_start_buffs() -> void:
 	for buff: BuffBase in current_buffs:
 		buff.on_turn_start()
 		
-		# remove buff if turn duration is deplete
+		# remove buff if turn duration is depleted
 		if not buff.infinite_duration:
 			buff.buff_turn_duration -= 1
 			if buff.buff_turn_duration <= 0:

@@ -83,10 +83,10 @@ func _on_enemy_clicked(enemy: Enemy) -> void:
 
 func _try_player_play_card_on_entity(entity: Entity) -> void:
 	if CardManager.is_card_queued():
-		var success: bool = _on_attack(CardManager.queued_card.stats, PlayerManager.player, entity)
+		var success: bool = _on_attack(CardManager.queued_card.card_data, PlayerManager.player, entity)
 		if success:
 			CardManager.notify_successful_play()
 
 
-func _on_attack(attack_stats: CardBase, attacker: Entity, victim: Entity) -> bool:
-	return attack_stats.try_play_card(attacker, victim)
+func _on_attack(attack_card: CardBase, attacker: Entity, victim: Entity) -> bool:
+	return attack_card.try_play_card(attacker, victim)
