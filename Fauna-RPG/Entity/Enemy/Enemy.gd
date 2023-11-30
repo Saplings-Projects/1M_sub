@@ -8,7 +8,7 @@ func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 
 
-func _on_phase_changed(new_phase : Enums.Phase, _old_phase : Enums.Phase) -> void:
+func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	get_click_handler().set_interactable(new_phase == Enums.Phase.PLAYER_ATTACKING)
 
 

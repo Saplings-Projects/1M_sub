@@ -6,7 +6,7 @@ class_name StatComponent
 ## have different stats based on the Entity type.
 
 
-var stats : EntityStats
+var stats: EntityStats
 
 
 func _ready() -> void:

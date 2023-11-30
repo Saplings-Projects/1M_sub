@@ -3,12 +3,12 @@ class_name BuffComponent
 ## Applies buffs to the entity and holds a list of current buffs.
 
 
-var current_buffs : Array[BuffBase]
+var current_buffs: Array[BuffBase]
 
 
-func add_buff(new_buff : BuffBase, buff_applier : Entity) -> void:
+func add_buff(new_buff: BuffBase, buff_applier: Entity) -> void:
 	# duplicate the buff so we aren't modifying the base
-	var buff_copy : BuffBase = new_buff.duplicate()
+	var buff_copy: BuffBase = new_buff.duplicate()
 
 	current_buffs.append(buff_copy)
 	
@@ -17,8 +17,8 @@ func add_buff(new_buff : BuffBase, buff_applier : Entity) -> void:
 	buff_copy.init_buff(entity_owner, buff_applier)
 
 
-func remove_buff(new_buff : BuffBase) -> void:
-	var buff_index : int = current_buffs.find(new_buff)
+func remove_buff(new_buff: BuffBase) -> void:
+	var buff_index: int = current_buffs.find(new_buff)
 	current_buffs.remove_at(buff_index)
 
 

@@ -11,16 +11,16 @@ signal on_unhover
 # emits any time the mouse moves in the area
 signal on_mouse_hovering
 
-var _is_interactable : bool = true
+var _is_interactable: bool = true
 
 
-func set_interactable(interactable : bool):
+func set_interactable(interactable: bool) -> void:
 	_is_interactable = interactable
 	if not _is_interactable:
 		on_unhover.emit()
 
 
-func _on_area_2d_input_event(_viewport, event, _shape_idx):
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not _is_interactable:
 		return
 		
@@ -30,14 +30,14 @@ func _on_area_2d_input_event(_viewport, event, _shape_idx):
 		on_mouse_hovering.emit()
 
 
-func _on_area_2d_mouse_entered():
+func _on_area_2d_mouse_entered() -> void:
 	if not _is_interactable:
 		return
 
 	on_hover.emit()
 
 
-func _on_area_2d_mouse_exited():
+func _on_area_2d_mouse_exited() -> void:
 	if not _is_interactable:
 		return
 		

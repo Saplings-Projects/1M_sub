@@ -9,21 +9,21 @@ class_name BuffBase
 ## the stats in get_modified_stats.
 
 
-@export var infinite_duration : bool = false
-@export var buff_turn_duration : int = 3
-@export var buff_power : float = 1.0
+@export var infinite_duration: bool = false
+@export var buff_turn_duration: int = 3
+@export var buff_power: float = 1.0
 
 
-var buff_owner : Entity = null
-var buff_applier : Entity = null
+var buff_owner: Entity = null
+var buff_applier: Entity = null
 
 
-func init_buff(in_owner : Entity, in_applier : Entity) -> void:
+func init_buff(in_owner: Entity, in_applier: Entity) -> void:
 	buff_owner = in_owner
 	buff_applier = in_applier
 
 
-func get_modified_stats(stats : EntityStats) -> EntityStats:
+func get_modified_stats(stats: EntityStats) -> EntityStats:
 	return stats
 
 

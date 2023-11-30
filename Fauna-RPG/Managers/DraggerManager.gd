@@ -2,8 +2,8 @@ extends Node
 ## Unused. Allows you to drag a card around instead of clicking and queuing.
 
 
-var is_dragging : bool = false
-var dragging_object : Node2D = null
+var is_dragging: bool = false
+var dragging_object: Node2D = null
 
 func _process(_delta):
 	if dragging_object != null:
@@ -12,7 +12,7 @@ func _process(_delta):
 			set_dragging(null)
 
 
-func set_dragging(in_dragging_object : Node2D):
+func set_dragging(in_dragging_object: Node2D):
 	if in_dragging_object == null:
 		is_dragging = false
 		dragging_object = null
@@ -23,5 +23,5 @@ func set_dragging(in_dragging_object : Node2D):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
-func is_dragging_object(in_object : Node2D):
+func is_dragging_object(in_object: Node2D):
 	return in_object == dragging_object

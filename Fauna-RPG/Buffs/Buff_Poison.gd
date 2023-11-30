@@ -4,7 +4,7 @@ class_name Buff_Poison
 
 
 func on_turn_start() -> void:
-	var damage_data : DealDamageData = DealDamageData.new()
+	var damage_data: DealDamageData = DealDamageData.new()
 	damage_data.damage = buff_power
 	damage_data.attacker = buff_applier
 	damage_data.ignore_attacker_buffs = true

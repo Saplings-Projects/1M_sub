@@ -4,22 +4,22 @@ extends Node
 ## TODO could potentially use this for global drawing of cards.
 
 
-signal successful_card_play(card : CardWorld)
+signal successful_card_play(card: CardWorld)
 
-var queued_card : CardWorld = null
+var queued_card: CardWorld = null
 
 
-func is_card_queued():
+func is_card_queued() -> bool:
 	return queued_card != null
 
 
-func set_queued_card(card : CardWorld):
+func set_queued_card(card: CardWorld) -> void:
 	if card == null:
 		queued_card = null
 	else:
 		queued_card = card
 
 
-func notify_successful_play():
+func notify_successful_play() -> void:
 	successful_card_play.emit(queued_card)
 	set_queued_card(null)

@@ -5,17 +5,17 @@ class_name PartyComponent
 ## An entity's party also contains the owning entity.
 
 
-@export var team : Enums.Team = Enums.Team.ENEMY
+@export var team: Enums.Team = Enums.Team.ENEMY
 
-var party : Array[Entity] = []
+var party: Array[Entity] = []
 
 
-func can_play_on_entity(application_type : Enums.ApplicationType, victim : Entity) -> bool:
+func can_play_on_entity(application_type: Enums.ApplicationType, victim: Entity) -> bool:
 	if application_type == Enums.ApplicationType.ALL:
 		return true
 	
-	var victim_team : Enums.Team = victim.get_party_component().team
-	var attacker_team : Enums.Team = team
+	var victim_team: Enums.Team = victim.get_party_component().team
+	var attacker_team: Enums.Team = team
 	
 	if victim_team == attacker_team:
 		if application_type == Enums.ApplicationType.FRIENDLY_ONLY:
@@ -27,9 +27,9 @@ func can_play_on_entity(application_type : Enums.ApplicationType, victim : Entit
 	return false
 
 
-func set_party(in_party : Array[Entity]) -> void:
+func set_party(in_party: Array[Entity]) -> void:
 	party += in_party
 	
 
-func add_party_member(party_member : Entity) -> void:
+func add_party_member(party_member: Entity) -> void:
 	party.append(party_member)

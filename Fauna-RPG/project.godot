@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Fauna-RPG"
 run/main_scene="res://#Scenes/TestingScene.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 PlayerManager="*res://Managers/PlayerManager.gd"
 CardManager="*res://Managers/CardManager.gd"
 PhaseManager="*res://Managers/PhaseManager.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 

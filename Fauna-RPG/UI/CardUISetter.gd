@@ -6,13 +6,13 @@ class_name CardUISetter
 ## in the actual Card class, so we can keep that class as minimal as possible.
 
 
-@export var title_label : Label
-@export var description_label : Label
-@export var key_art : TextureRect
+@export var title_label: Label
+@export var description_label: Label
+@export var key_art: TextureRect
 
 
-func _ready():
-	var parent_card : CardWorld = get_parent() as CardWorld
+func _ready() -> void:
+	var parent_card: CardWorld = get_parent() as CardWorld
 	
 	assert(parent_card != null, "Couldn't find parent card. Make sure this is attached to a card.")
 	
@@ -23,7 +23,7 @@ func _ready():
 		parent_card.on_card_stats_initialized.connect(_stats_initialized)
 
 
-func _stats_initialized(in_stats : CardBase):
+func _stats_initialized(in_stats: CardBase) -> void:
 	title_label.text = in_stats.card_title
 	description_label.text = in_stats.card_description
 	if in_stats.card_key_art:

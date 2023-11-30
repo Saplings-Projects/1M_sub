@@ -6,8 +6,8 @@ class_name EntityComponent
 ## reference to the owner for whatever it needs.
 
 
-var entity_owner : Entity = null
+var entity_owner: Entity = null
 
 
-func init_entity_component(in_owner : Entity) -> void:
+func init_entity_component(in_owner: Entity) -> void:
 	entity_owner = in_owner

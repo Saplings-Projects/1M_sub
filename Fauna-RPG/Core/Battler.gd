@@ -6,10 +6,10 @@ class_name Battler
 ## battle actions (player clicking on enemies, enemy attacks, applying buffs).
 
 
-@export var enemies_to_summon : Array[PackedScene]
-@export var enemy_spacing : float = 50.0
+@export var enemies_to_summon: Array[PackedScene]
+@export var enemy_spacing: float = 50.0
 
-var _enemy_list : Array[Entity]
+var _enemy_list: Array[Entity]
 
 
 func _ready() -> void:
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _summon_enemies() -> void:
 	for enemy_index in enemies_to_summon.size():
-		var enemy_instance : Node = enemies_to_summon[enemy_index].instantiate()
+		var enemy_instance: Node = enemies_to_summon[enemy_index].instantiate()
 		add_child(enemy_instance)
 		_enemy_list.append(enemy_instance)
 		enemy_instance.get_click_handler().on_click.connect(_on_enemy_clicked.bind(enemy_instance))
@@ -42,7 +42,7 @@ func _on_player_initialized() -> void:
 	PlayerManager.player.get_party_component().add_party_member(PlayerManager.player)
 
 
-func _on_phase_changed(new_phase : Enums.Phase, _old_phase : Enums.Phase) -> void:
+func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	if new_phase == Enums.Phase.PLAYER_ATTACKING:
 		_on_player_start_turn()
 	
@@ -56,7 +56,7 @@ func _on_player_start_turn() -> void:
 
 
 # enemy start phase: apply buffs and attack player. Afterwards, set phase to player phase
-# note: these are applied in two separate loops just encase an enemy affects another member of their
+# NOTE: these are applied in two separate loops just encase an enemy affects another member of their
 # party with a buff during their attack
 func _on_enemy_start_turn() -> void:
 	# apply buffs
@@ -65,7 +65,7 @@ func _on_enemy_start_turn() -> void:
 	
 	# enemy attack
 	for enemy in _enemy_list:
-		var success : bool = _on_attack(enemy.get_behavior_component().attack, enemy, PlayerManager.player)
+		var success: bool = _on_attack(enemy.get_behavior_component().attack, enemy, PlayerManager.player)
 		assert(success == true, "Enemy failed to attack.")
 	
 	PhaseManager.set_phase(Enums.Phase.PLAYER_ATTACKING)
@@ -77,16 +77,16 @@ func _on_player_clicked() -> void:
 
 
 # when player clicks an enemy (eg: damage card)
-func _on_enemy_clicked(enemy : Enemy) -> void:
+func _on_enemy_clicked(enemy: Enemy) -> void:
 	_try_player_play_card_on_entity(enemy)
 
 
-func _try_player_play_card_on_entity(entity : Entity) -> void:
+func _try_player_play_card_on_entity(entity: Entity) -> void:
 	if CardManager.is_card_queued():
-		var success : bool = _on_attack(CardManager.queued_card.stats, PlayerManager.player, entity)
+		var success: bool = _on_attack(CardManager.queued_card.stats, PlayerManager.player, entity)
 		if success:
 			CardManager.notify_successful_play()
 
 
-func _on_attack(attack_stats : CardBase, attacker : Entity, victim : Entity) -> bool:
+func _on_attack(attack_stats: CardBase, attacker: Entity, victim: Entity) -> bool:
 	return attack_stats.try_play_card(attacker, victim)

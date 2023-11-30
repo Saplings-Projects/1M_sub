@@ -3,10 +3,10 @@ class_name Card_DamageHealth
 # Deals damage equal to the amount of health that the attacker has lost.
 
 
-func _deal_damage(attacker : Entity, victim : Entity):
-	var health_lost = attacker.get_health_component().max_health - attacker.get_health_component().current_health
+func _deal_damage(attacker: Entity, victim: Entity) -> void:
+	var health_lost: float = attacker.get_health_component().max_health - attacker.get_health_component().current_health
 	
-	var damage_data : DealDamageData = DealDamageData.new()
+	var damage_data: DealDamageData = DealDamageData.new()
 	damage_data.damage = health_lost
 	damage_data.attacker = attacker
 	damage_data.ignore_attacker_buffs = true

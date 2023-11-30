@@ -6,4 +6,4 @@ class_name BehaviorComponent
 ## control the AI decision making for the enemy.
 
 
-@export var attack : CardBase
+@export var attack: CardBase

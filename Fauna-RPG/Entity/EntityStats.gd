@@ -9,5 +9,5 @@ class_name EntityStats
 ## is removed. See get_modified_stats on BuffBase for an example.
 
 
-var damage_dealt_increase : float = 0
-var damage_taken_increase : float = 0
+var damage_dealt_increase: float = 0
+var damage_taken_increase: float = 0

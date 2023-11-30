@@ -59,4 +59,4 @@ script = ExtResource("8_yr066")
 script = ExtResource("9_kvor6")
 attack = ExtResource("10_l5325")
 
-[connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_area_2d_input_event" flags=18]
+[connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_area_2d_input_event"]
