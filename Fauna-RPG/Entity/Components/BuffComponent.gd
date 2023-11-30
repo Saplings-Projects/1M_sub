@@ -23,7 +23,7 @@ func remove_buff(new_buff: BuffBase) -> void:
 
 
 func apply_turn_start_buffs() -> void:
-	for buff in current_buffs:
+	for buff: BuffBase in current_buffs:
 		buff.on_turn_start()
 		
 		# remove buff if turn duration is deplete

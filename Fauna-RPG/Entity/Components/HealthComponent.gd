@@ -41,10 +41,10 @@ func deal_damage(damage_data: DealDamageData) -> void:
 	
 	# apply buffs
 	if attacker != null and !damage_data.ignore_attacker_buffs:
-		for buff in attacker.get_buff_component().current_buffs:
+		for buff: BuffBase in attacker.get_buff_component().current_buffs:
 			buff.get_modified_stats(modified_attacker_stats)
 	if !damage_data.ignore_victim_buffs:
-		for buff in victim.get_buff_component().current_buffs:
+		for buff: BuffBase in victim.get_buff_component().current_buffs:
 			buff.get_modified_stats(modified_victim_stats)
 	
 	var damage_taken_increase: float = 0.0

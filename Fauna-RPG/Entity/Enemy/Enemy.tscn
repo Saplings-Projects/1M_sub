@@ -20,20 +20,20 @@ font_size = 26
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_ya6nf")
 
-[node name="StatComponent" type="Node2D" parent="."]
+[node name="StatComponent" type="Node" parent="."]
 script = ExtResource("2_twygh")
 
-[node name="BuffComponent" type="Node2D" parent="."]
+[node name="BuffComponent" type="Node" parent="."]
 script = ExtResource("3_7qc0d")
 
-[node name="HealthComponent" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_t7jp6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6, 6)
 texture = ExtResource("5_dxya8")
 
-[node name="ClickHandler" type="Node2D" parent="."]
+[node name="ClickHandler" type="Node" parent="."]
 script = ExtResource("6_m32ri")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -52,11 +52,13 @@ label_settings = SubResource("LabelSettings_urr12")
 script = ExtResource("7_tofxs")
 health_component = NodePath("../HealthComponent")
 
-[node name="PartyComponent" type="Node2D" parent="."]
+[node name="PartyComponent" type="Node" parent="."]
 script = ExtResource("8_yr066")
 
-[node name="BehaviorComponent" type="Node2D" parent="."]
+[node name="BehaviorComponent" type="Node" parent="."]
 script = ExtResource("9_kvor6")
 attack = ExtResource("10_l5325")
 
-[connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="ClickHandler" method="_on_mouse_exited"]

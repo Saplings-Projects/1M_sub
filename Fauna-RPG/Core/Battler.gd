@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _summon_enemies() -> void:
-	for enemy_index in enemies_to_summon.size():
+	for enemy_index: int in enemies_to_summon.size():
 		var enemy_instance: Node = enemies_to_summon[enemy_index].instantiate()
 		add_child(enemy_instance)
 		_enemy_list.append(enemy_instance)
@@ -33,7 +33,7 @@ func _summon_enemies() -> void:
 		enemy_instance.position.x += enemy_spacing * enemy_index
 	
 	# setup party
-	for enemy in _enemy_list:
+	for enemy: Entity in _enemy_list:
 		enemy.get_party_component().set_party(_enemy_list)
 
 
@@ -60,11 +60,11 @@ func _on_player_start_turn() -> void:
 # party with a buff during their attack
 func _on_enemy_start_turn() -> void:
 	# apply buffs
-	for enemy in _enemy_list:
+	for enemy: Entity in _enemy_list:
 		enemy.get_buff_component().apply_turn_start_buffs()
 	
 	# enemy attack
-	for enemy in _enemy_list:
+	for enemy: Entity in _enemy_list:
 		var success: bool = _on_attack(enemy.get_behavior_component().attack, enemy, PlayerManager.player)
 		assert(success == true, "Enemy failed to attack.")
 	

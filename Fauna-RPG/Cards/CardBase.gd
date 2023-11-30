@@ -55,23 +55,23 @@ func _damage_entity(victim: Entity, attacker: Entity, damage_amount: float, dama
 		var party: Array[Entity] = victim.get_party_component().party
 		assert(party.size() > 0, "Entity has an empty party. Make sure you added party members.")
 		
-		for party_member in party:
+		for party_member: Entity in party:
 			party_member.get_health_component().deal_damage(victim_damage_data)
 	else:
 		victim.get_health_component().deal_damage(victim_damage_data)
 
 
 func _apply_buffs(attacker: Entity, victim: Entity) -> void:
-	for buff in buffs_to_apply_to_attacker:
+	for buff: BuffBase in buffs_to_apply_to_attacker:
 		if affect_all_attackers:
-			for party_member in attacker.get_party_component().party:
+			for party_member: Entity in attacker.get_party_component().party:
 				party_member.get_buff_component().add_buff(buff, attacker)
 		else:
 			attacker.get_buff_component().add_buff(buff, attacker)
 	
-	for buff in buffs_to_apply_to_victim:
+	for buff: BuffBase in buffs_to_apply_to_victim:
 		if affect_all_victims:
-			for party_member in victim.get_party_component().party:
+			for party_member: Entity in victim.get_party_component().party:
 				party_member.get_buff_component().add_buff(buff, attacker)
 		else:
 			victim.get_buff_component().add_buff(buff, attacker)

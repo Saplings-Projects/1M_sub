@@ -1,4 +1,4 @@
-extends Node2D
+extends EntityComponent
 class_name BehaviorComponent
 ## Enemy's behavior.
 ##

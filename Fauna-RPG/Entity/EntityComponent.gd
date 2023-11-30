@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name EntityComponent
 ## Base component that an entity can use.
 ## 

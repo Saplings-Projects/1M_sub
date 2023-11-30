@@ -29,12 +29,13 @@ func _process(_delta: float) -> void:
 
 func deal_cards() -> void:
 	discard_all_cards()
-	for card_index in default_hand.size():
+	for card_index: int in default_hand.size():
 		# create card and add to list
 		var card_instance: CardWorld = card_scene.instantiate()
 		add_child(card_instance)
 		cards.append(card_instance)
 		card_instance.init_card(default_hand[card_index])
+		
 		# bind mouse events
 		var card_click_handler: ClickHandler = card_instance.get_click_handler()
 		card_click_handler.on_click.connect(_on_card_clicked.bind(card_instance))
@@ -43,7 +44,7 @@ func deal_cards() -> void:
 
 
 func discard_all_cards() -> void:
-	for card in cards:
+	for card: CardWorld in cards:
 		card.queue_free()
 	cards.clear()
 
@@ -104,7 +105,7 @@ func _update_card_positions() -> void:
 	var per_card_width: float = 0
 	if cards.size() > 1:
 		per_card_width = total_hand_width / (cards.size() - 1)
-	for card_index in cards.size():
+	for card_index: int in cards.size():
 		var card: CardWorld = cards[card_index]
 		var card_x: float = per_card_width * card_index
 		

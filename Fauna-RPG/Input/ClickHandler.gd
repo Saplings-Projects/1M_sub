@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name ClickHandler
 
 
@@ -20,7 +20,11 @@ func set_interactable(interactable: bool) -> void:
 		on_unhover.emit()
 
 
-func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	_on_gui_input_event(event)
+
+
+func _on_gui_input_event(event: InputEvent) -> void:
 	if not _is_interactable:
 		return
 		
@@ -30,14 +34,14 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 		on_mouse_hovering.emit()
 
 
-func _on_area_2d_mouse_entered() -> void:
+func _on_mouse_entered() -> void:
 	if not _is_interactable:
 		return
 
 	on_hover.emit()
 
 
-func _on_area_2d_mouse_exited() -> void:
+func _on_mouse_exited() -> void:
 	if not _is_interactable:
 		return
 		
