@@ -15,6 +15,8 @@ class_name CardBase
 @export var damage_to_apply_to_attacker : float = 0.0
 @export var buffs_to_apply_to_victim : Array[BuffBase]
 @export var buffs_to_apply_to_attacker : Array[BuffBase]
+@export var affect_all_victims : bool = false
+@export var affect_all_attackers : bool = false
 @export var application_type : Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
 @export var card_title : String = "NULL"
 @export var card_key_art : ImageTexture = null
@@ -31,24 +33,45 @@ func try_play_card(attacker : Entity, victim : Entity) -> bool:
 func _on_card_play(attacker : Entity, victim : Entity) -> void:
 	_deal_damage(attacker, victim)
 	_apply_buffs(attacker, victim)
-	# TODO do other functionality that lots of cards may share (eg: restore AP, draw cards)
+	# TODO add other functionality that lots of cards may share (eg: restore AP, draw cards)
 
 
 # override in child cards if you want to deal damage in a unique way
 func _deal_damage(attacker : Entity, victim : Entity) -> void:
+	# damage victim
+	if damage_to_apply_to_victim != 0.0:
+		_damage_entity(victim, attacker, damage_to_apply_to_victim, affect_all_victims)
+	#damage attacker
+	if damage_to_apply_to_attacker != 0.0:
+		_damage_entity(attacker, attacker, damage_to_apply_to_attacker, affect_all_attackers)
+
+
+func _damage_entity(victim : Entity, attacker: Entity, damage_amount : float, damage_all : bool) -> void:
 	var victim_damage_data : DealDamageData = DealDamageData.new()
-	victim_damage_data.damage = damage_to_apply_to_victim
+	victim_damage_data.damage = damage_amount
 	victim_damage_data.attacker = attacker
-	victim.get_health_component().deal_damage(victim_damage_data)
-	
-	var attacker_damage_data : DealDamageData = DealDamageData.new()
-	attacker_damage_data.damage = damage_to_apply_to_attacker
-	attacker_damage_data.attacker = attacker	
-	attacker.get_health_component().deal_damage(attacker_damage_data)
+	# If damage_all is set, try to damage all the party members set in the party component
+	if damage_all:
+		var party : Array[Entity] = victim.get_party_component().party
+		assert(party.size() > 0, "Entity has an empty party. Make sure you added party members.")
+		
+		for party_member in party:
+			party_member.get_health_component().deal_damage(victim_damage_data)
+	else:
+		victim.get_health_component().deal_damage(victim_damage_data)
 
 
 func _apply_buffs(attacker : Entity, victim : Entity) -> void:
 	for buff in buffs_to_apply_to_attacker:
-		attacker.get_buff_component().add_buff(buff, attacker)
+		if affect_all_attackers:
+			for party_member in attacker.get_party_component().party:
+				party_member.get_buff_component().add_buff(buff, attacker)
+		else:
+			attacker.get_buff_component().add_buff(buff, attacker)
+	
 	for buff in buffs_to_apply_to_victim:
-		victim.get_buff_component().add_buff(buff, attacker)
+		if affect_all_victims:
+			for party_member in victim.get_party_component().party:
+				party_member.get_buff_component().add_buff(buff, attacker)
+		else:
+			victim.get_buff_component().add_buff(buff, attacker)

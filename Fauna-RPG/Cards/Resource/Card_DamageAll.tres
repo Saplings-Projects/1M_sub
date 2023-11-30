@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=2 format=3 uid="uid://0x385c3nuq8f"]
+
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j02oq"]
+
+[resource]
+script = ExtResource("1_j02oq")
+damage_to_apply_to_victim = 2.0
+damage_to_apply_to_attacker = 0.0
+buffs_to_apply_to_victim = Array[Resource("res://Buffs/BuffBase.gd")]([])
+buffs_to_apply_to_attacker = Array[Resource("res://Buffs/BuffBase.gd")]([])
+affect_all_victims = true
+affect_all_attackers = false
+application_type = 1
+card_title = "Damage All"
+card_description = "Deal 2 damage to all enemies"

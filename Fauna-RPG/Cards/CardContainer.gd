@@ -42,26 +42,26 @@ func deal_cards() -> void:
 		card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card_instance))
 
 
-func discard_all_cards():
+func discard_all_cards() -> void:
 	for card in cards:
 		card.queue_free()
 	cards.clear()
 
 
-func remove_card(card : CardWorld):
+func remove_card(card : CardWorld) -> void:
 	var card_index : int = cards.find(card)
 	cards[card_index].queue_free()
 	cards.remove_at(card_index)
 
 
-func _on_phase_changed(new_phase : Enums.Phase, _old_phase : Enums.Phase):
+func _on_phase_changed(new_phase : Enums.Phase, _old_phase : Enums.Phase) -> void:
 	if new_phase == Enums.Phase.PLAYER_ATTACKING:
 		deal_cards()
 	if new_phase == Enums.Phase.ENEMY_ATTACKING:
 		discard_all_cards()
 
 
-func _on_card_clicked(card : CardWorld):
+func _on_card_clicked(card : CardWorld) -> void:
 	if CardManager.is_card_queued():
 		CardManager.queued_card.get_lerp_component().desired_position.y = 0
 		CardManager.set_queued_card(null)
@@ -70,25 +70,25 @@ func _on_card_clicked(card : CardWorld):
 		card.get_lerp_component().desired_position.y = -card_queued_offset
 
 
-func _on_card_hovering(card : CardWorld):
+func _on_card_hovering(card : CardWorld) -> void:
 	if !CardManager.is_card_queued() and !_card_is_hovered:
 		card.get_lerp_component().desired_position.y = -card_hovered_offset
 		card.z_index = 1
 		_card_is_hovered = true
 
 
-func _on_card_unhovered(card : CardWorld):
+func _on_card_unhovered(card : CardWorld) -> void:
 	if !CardManager.is_card_queued():
 		card.get_lerp_component().desired_position.y = 0
 		card.z_index = 0
 		_card_is_hovered = false
 
 
-func _on_card_successful_play(card : CardWorld):
+func _on_card_successful_play(card : CardWorld) -> void:
 	remove_card(card)
 
 
-func _update_card_positions():
+func _update_card_positions() -> void:
 	if cards.size() <= 0:
 		return
 	

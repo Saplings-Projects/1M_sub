@@ -9,7 +9,7 @@ class_name Battler
 @export var enemies_to_summon : Array[PackedScene]
 @export var enemy_spacing : float = 50.0
 
-var _enemy_list : Array[Enemy]
+var _enemy_list : Array[Entity]
 
 
 func _ready() -> void:
@@ -31,10 +31,15 @@ func _summon_enemies() -> void:
 		_enemy_list.append(enemy_instance)
 		enemy_instance.get_click_handler().on_click.connect(_on_enemy_clicked.bind(enemy_instance))
 		enemy_instance.position.x += enemy_spacing * enemy_index
+	
+	# setup party
+	for enemy in _enemy_list:
+		enemy.get_party_component().set_party(_enemy_list)
 
 
 func _on_player_initialized() -> void:
 	PlayerManager.player.get_click_handler().on_click.connect(_on_player_clicked)
+	PlayerManager.player.get_party_component().add_party_member(PlayerManager.player)
 
 
 func _on_phase_changed(new_phase : Enums.Phase, _old_phase : Enums.Phase) -> void:
@@ -51,11 +56,15 @@ func _on_player_start_turn() -> void:
 
 
 # enemy start phase: apply buffs and attack player. Afterwards, set phase to player phase
+# note: these are applied in two separate loops just encase an enemy affects another member of their
+# party with a buff during their attack
 func _on_enemy_start_turn() -> void:
+	# apply buffs
 	for enemy in _enemy_list:
-		# apply buffs
 		enemy.get_buff_component().apply_turn_start_buffs()
-		# enemy attack
+	
+	# enemy attack
+	for enemy in _enemy_list:
 		var success : bool = _on_attack(enemy.get_behavior_component().attack, enemy, PlayerManager.player)
 		assert(success == true, "Enemy failed to attack.")
 	
