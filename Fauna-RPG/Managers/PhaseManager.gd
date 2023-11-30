@@ -6,6 +6,7 @@ extends Node
 ## be kept to as little calls as we can to reduce confusion with game phase changes.
 
 
+signal on_game_start
 signal on_phase_changed(new_phase: Enums.Phase, old_phase: Enums.Phase)
 var current_phase: Enums.Phase = Enums.Phase.NONE
 
@@ -20,6 +21,7 @@ func _ready() -> void:
 
 func _start_game() -> void:
 	set_phase(Enums.Phase.PLAYER_ATTACKING)
+	on_game_start.emit()
 
 
 func set_phase(phase: Enums.Phase) -> void:

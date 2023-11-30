@@ -6,8 +6,4 @@ class_name StatComponent
 ## have different stats based on the Entity type.
 
 
-var stats: EntityStats
-
-
-func _ready() -> void:
-	stats = EntityStats.new()
+var stats: EntityStats = EntityStats.new()
