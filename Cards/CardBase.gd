@@ -9,6 +9,9 @@ class_name CardBase
 ## and override one of the functions below.
 ## This resource also has data that is used for displaying the card in the world, like
 ## description, title, and key art.
+## This includes functionality for applying damage to both the victim and attacker. Attackers may
+## wish to take damage in some contexts.
+## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
 
 @export var damage_to_apply_to_victim: float = 0.0
