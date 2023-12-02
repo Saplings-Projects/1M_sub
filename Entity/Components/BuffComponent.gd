@@ -9,12 +9,19 @@ var current_buffs: Array[BuffBase]
 func add_buff(new_buff: BuffBase, buff_applier: Entity) -> void:
 	# duplicate the buff so we aren't modifying the base
 	var buff_copy: BuffBase = new_buff.duplicate()
-
-	current_buffs.append(buff_copy)
 	
-	assert(entity_owner != null, "BuffComponent has no owner. Please call init on Entity.")
+	# see if the buff was already applied. If so, add to the duration instead of applying
+	var buff_index: int = current_buffs.find(buff_copy)
+	if buff_index != -1:
+		current_buffs[buff_index].buff_turn_duration += buff_copy.buff_turn_duration
 	
-	buff_copy.init_buff(entity_owner, buff_applier)
+	# we don't have this buff, add it as new
+	else:
+		current_buffs.append(buff_copy)
+		
+		assert(entity_owner != null, "BuffComponent has no owner. Please call init on Entity.")
+		
+		buff_copy.init_buff(entity_owner, buff_applier)
 
 
 func remove_buff(new_buff: BuffBase) -> void:
