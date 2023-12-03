@@ -11,9 +11,9 @@ func add_buff(new_buff: BuffBase, buff_applier: Entity) -> void:
 	var buff_copy: BuffBase = new_buff.duplicate()
 	
 	# see if the buff was already applied. If so, add to the duration instead of applying
-	var buff_index: int = current_buffs.find(buff_copy)
-	if buff_index != -1:
-		current_buffs[buff_index].buff_turn_duration += buff_copy.buff_turn_duration
+	var found_buff = Helpers.find_first_from_array_by_type(current_buffs, buff_copy.get_script())
+	if found_buff != null:
+		found_buff.buff_turn_duration += buff_copy.buff_turn_duration
 	
 	# we don't have this buff, add it as new
 	else:

@@ -8,3 +8,10 @@ static func get_child_node_of_type(node: Node, type: Variant) -> Variant:
 		if is_instance_of(child, type):
 			return child
 	return null
+
+
+static func find_first_from_array_by_type(array: Array[Variant], type: Variant) -> Variant:
+	for value: Variant in array:
+		if is_instance_of(value, type):
+			return value
+	return null
