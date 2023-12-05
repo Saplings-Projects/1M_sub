@@ -1,7 +1,8 @@
 # Contributing : how to ?
 
-If you want to help with code, first check that there is no issue already opened about the thing you want to work on. If there is not, please create an issue. Wait for at least one other person to validate the issue, in order to make sure that the issue you opened is clear
-If there is already an existing issue (that has been approved by someone else than the one opening the issue), then assign yourself on the issue and fork the repository to work on it. This is of course if no one has been assigned on this task first.
+If you want to help with code, first check that there is no issue already opened about the thing you want to work on. 
+- If there is not, please create one. Wait for at least one other person to validate the issue you created, in order to make sure that everything is clear.
+- If there is already one (that has been approved), then assign yourself on the issue and fork the repository to work on it. This is of course if no one has been assigned on this task first.
 
 For bigger tasks that might need multiple people working on it, a branch for that specific task will be opened. Pull request will be made to this branch and not the main.
 
