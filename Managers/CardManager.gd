@@ -14,10 +14,7 @@ func is_card_queued() -> bool:
 
 
 func set_queued_card(card: CardWorld) -> void:
-	if card == null:
-		queued_card = null
-	else:
-		queued_card = card
+	queued_card = card
 
 
 func notify_successful_play() -> void:
