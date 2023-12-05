@@ -1,0 +1,23 @@
+# Contributing : how to ?
+
+If you want to help with code, first check that there is no issue already opened about the thing you want to work on. If there is not, please create an issue. Wait for at least one other person to validate the issue, in order to make sure that the issue you opened is clear
+If there is already an existing issue (that has been approved by someone else than the one opening the issue), then assign yourself on the issue and fork the repository to work on it. This is of course if no one has been assigned on this task first.
+
+For bigger tasks that might need multiple people working on it, a branch for that specific task will be opened. Pull request will be made to this branch and not the main.
+
+## Pull requests
+
+Please use the pull request template located at .github/pull_request_template.md . Please link to the issue that the pull request is related to. Here is a (non exhaustive) list of reasons for which your pull request can be closed :
+- you didn't use the pull request template.
+- you didn't open an issue related to the code you wrote.
+- you didn't synchronise your fork after another pull request has been merged and that creates a lot of merge issues. Please deal with those problems locally before opening a pull request.
+- you made few very big commits. Please break down your big commits in smaller and more manageable commits if possible.
+
+## Tests
+
+If you are writing code that implements something new, please provide test files written in GDScript (that can be run on GUT), as they will be useful to test future PR.
+
+## Code formatting
+
+As of the writing of this CONTRIBUTING.md there is no code formatter for Godot, even though it might come later. Try to follow the code conventions of the [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
+Use static typing whenever possible.
