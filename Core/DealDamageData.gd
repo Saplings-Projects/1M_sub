@@ -4,6 +4,6 @@ class_name DealDamageData
 
 
 var damage: float
-var attacker: Entity
-var ignore_attacker_buffs: bool = false
-var ignore_victim_buffs: bool = false
+var caster: Entity
+var ignore_caster_buffs: bool = false
+var ignore_target_buffs: bool = false

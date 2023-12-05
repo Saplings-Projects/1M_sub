@@ -37,7 +37,7 @@ func after_each():
 func test_take_damage():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 5.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 
 	_player_health_component.deal_damage(deal_damage_data)
 	assert_eq(_player_health_component.current_health, 95.0)
@@ -46,16 +46,16 @@ func test_take_damage():
 func test_take_lots_of_damage():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 999999.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 
 	_player_health_component.deal_damage(deal_damage_data)
 	assert_eq(_player_health_component.current_health, 0.0)
 
 
-func test_null_attacker():
+func test_null_caster():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 50.0
-	deal_damage_data.attacker = null
+	deal_damage_data.caster = null
 
 	_player_health_component.deal_damage(deal_damage_data)
 	assert_eq(_player_health_component.current_health, 50.0)
@@ -64,7 +64,7 @@ func test_null_attacker():
 func test_heal():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = -50.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 	
 	_player_health_component._set_health(50.0)
 	_player_health_component.deal_damage(deal_damage_data)
@@ -74,7 +74,7 @@ func test_heal():
 func test_attack_enemy():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 50.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 
 	_enemy_health_component.deal_damage(deal_damage_data)
 	assert_eq(_enemy_health_component.current_health, 50.0)
@@ -84,7 +84,7 @@ func test_attack_enemy():
 func test_strength_buff():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 50.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 	
 	var strength_buff = Buff_Strength.new()
 	strength_buff.buff_power = 1.0
@@ -98,7 +98,7 @@ func test_strength_buff():
 func test_weakness_buff():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 50.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 	
 	var weakness_buff = Buff_Weakness.new()
 	weakness_buff.buff_power = 1.0
@@ -112,7 +112,7 @@ func test_weakness_buff():
 func test_vulnerability_buff():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 50.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 	
 	var vulnerability_buff = Buff_Vulnerability.new()
 	vulnerability_buff.buff_power = 1.0
@@ -125,7 +125,7 @@ func test_vulnerability_buff():
 func test_vulnerability_weakness_strength():
 	var deal_damage_data = DealDamageData.new()
 	deal_damage_data.damage = 50.0
-	deal_damage_data.attacker = _player
+	deal_damage_data.caster = _player
 	
 	var vulnerability_buff = Buff_Vulnerability.new()
 	vulnerability_buff.buff_power = 1.0

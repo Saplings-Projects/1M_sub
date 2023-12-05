@@ -1,15 +1,15 @@
 extends CardBase
 class_name Card_DamageHealth
-# Deals damage equal to the amount of health that the attacker has lost.
+# Deals damage equal to the amount of health that the caster has lost.
 
 
-func _deal_damage(attacker: Entity, victim: Entity) -> void:
-	var health_lost: float = attacker.get_health_component().max_health - attacker.get_health_component().current_health
+func _deal_damage(caster: Entity, target: Entity) -> void:
+	var health_lost: float = caster.get_health_component().max_health - caster.get_health_component().current_health
 	
 	var damage_data: DealDamageData = DealDamageData.new()
 	damage_data.damage = health_lost
-	damage_data.attacker = attacker
-	damage_data.ignore_attacker_buffs = true
-	damage_data.ignore_victim_buffs = true
+	damage_data.caster = caster
+	damage_data.ignore_caster_buffs = true
+	damage_data.ignore_target_buffs = true
 	
-	victim.get_health_component().deal_damage(damage_data)
+	target.get_health_component().deal_damage(damage_data)

@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_44g0o")
-damage_to_apply_to_victim = 3.0
-damage_to_apply_to_attacker = 0.0
-buffs_to_apply_to_victim = Array[Resource("res://Buffs/BuffBase.gd")]([])
-buffs_to_apply_to_attacker = Array[Resource("res://Buffs/BuffBase.gd")]([])
-affect_all_victims = false
-affect_all_attackers = false
+damage_to_apply_to_target = 3.0
+damage_to_apply_to_caster = 0.0
+buffs_to_apply_to_target = Array[Resource("res://Buffs/BuffBase.gd")]([])
+buffs_to_apply_to_caster = Array[Resource("res://Buffs/BuffBase.gd")]([])
+affect_all_targets = false
+affect_all_casters = false
 application_type = 1
 card_title = "Damage"
 card_description = "Deal 3 damage"

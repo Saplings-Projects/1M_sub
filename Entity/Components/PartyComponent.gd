@@ -10,14 +10,14 @@ class_name PartyComponent
 var party: Array[Entity] = []
 
 
-func can_play_on_entity(application_type: Enums.ApplicationType, victim: Entity) -> bool:
+func can_play_on_entity(application_type: Enums.ApplicationType, target: Entity) -> bool:
 	if application_type == Enums.ApplicationType.ALL:
 		return true
 	
-	var victim_team: Enums.Team = victim.get_party_component().team
-	var attacker_team: Enums.Team = team
+	var target_team: Enums.Team = target.get_party_component().team
+	var caster_team: Enums.Team = team
 	
-	if victim_team == attacker_team:
+	if target_team == caster_team:
 		if application_type == Enums.ApplicationType.FRIENDLY_ONLY:
 			return true
 	else:

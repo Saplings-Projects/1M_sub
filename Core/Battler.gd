@@ -88,5 +88,5 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 			CardManager.notify_successful_play()
 
 
-func _on_attack(attack_card: CardBase, attacker: Entity, victim: Entity) -> bool:
-	return attack_card.try_play_card(attacker, victim)
+func _on_attack(attack_card: CardBase, caster: Entity, target: Entity) -> bool:
+	return attack_card.try_play_card(caster, target)
