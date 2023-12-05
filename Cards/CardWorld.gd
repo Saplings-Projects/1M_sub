@@ -24,8 +24,8 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 
 
 func get_lerp_component() -> LerpComponent:
-	return Helpers.get_child_node_of_type(self, LerpComponent) as LerpComponent
+	return Helpers.get_first_child_node_of_type(self, LerpComponent) as LerpComponent
 
 
 func get_click_handler() -> ClickHandler:
-	return Helpers.get_child_node_of_type(self, ClickHandler) as ClickHandler
+	return Helpers.get_first_child_node_of_type(self, ClickHandler) as ClickHandler

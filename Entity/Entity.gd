@@ -13,20 +13,20 @@ func _ready() -> void:
 
 
 func get_buff_component() -> BuffComponent:
-	return Helpers.get_child_node_of_type(self, BuffComponent) as BuffComponent
+	return Helpers.get_first_child_node_of_type(self, BuffComponent) as BuffComponent
 
 	
 func get_stat_component() -> StatComponent:
-	return Helpers.get_child_node_of_type(self, StatComponent) as StatComponent
+	return Helpers.get_first_child_node_of_type(self, StatComponent) as StatComponent
 
 	
 func get_health_component() -> HealthComponent:
-	return Helpers.get_child_node_of_type(self, HealthComponent) as HealthComponent
+	return Helpers.get_first_child_node_of_type(self, HealthComponent) as HealthComponent
 
 
 func get_party_component() -> PartyComponent:
-	return Helpers.get_child_node_of_type(self, PartyComponent) as PartyComponent
+	return Helpers.get_first_child_node_of_type(self, PartyComponent) as PartyComponent
 
 
 func get_click_handler() -> ClickHandler:
-	return Helpers.get_child_node_of_type(self, ClickHandler) as ClickHandler
+	return Helpers.get_first_child_node_of_type(self, ClickHandler) as ClickHandler

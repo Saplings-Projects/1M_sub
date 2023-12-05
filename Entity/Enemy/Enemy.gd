@@ -13,4 +13,4 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 
 
 func get_behavior_component() -> BehaviorComponent:
-	return Helpers.get_child_node_of_type(self, BehaviorComponent) as BehaviorComponent
+	return Helpers.get_first_child_node_of_type(self, BehaviorComponent) as BehaviorComponent
