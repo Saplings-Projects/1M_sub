@@ -21,10 +21,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Docker test
-        # need to add @ release version tag instead of main
         # awaiting for v 9.2 for godot 4.2 to release
-        uses: ceceppa/godot-gut-ci@main
+        uses: ceceppa/godot-gut-ci@0.2.0
         with:
-          godot-version: 4.2.0
+          godot-version: 4.1.0
           gut-params: -gdir=res://tests/unit
 
