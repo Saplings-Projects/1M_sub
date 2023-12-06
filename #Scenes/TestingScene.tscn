@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://87fedoq257xg"]
+
+[ext_resource type="Script" path="res://Cards/CardContainer.gd" id="1_cwemj"]
+[ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_tx1h0"]
+[ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
+[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="3_6uosf"]
+[ext_resource type="Resource" uid="uid://5yn4t13kwwoo" path="res://Cards/Resource/Card_DamageHealth.tres" id="4_nsiy1"]
+[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="5_4b2q2"]
+[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="6_bferu"]
+[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="7_7bwak"]
+[ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
+[ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="11_6xwul"]
+
+[node name="TestingScene" type="Node2D"]
+
+[node name="CardContainer" type="Node2D" parent="."]
+script = ExtResource("1_cwemj")
+card_scene = ExtResource("2_tx1h0")
+total_hand_width = 500.0
+card_queued_offset = 200.0
+default_hand = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("3_6uosf"), ExtResource("4_nsiy1"), ExtResource("5_4b2q2"), ExtResource("6_bferu"), ExtResource("7_7bwak")])
+
+[node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
+
+[node name="Player" parent="." instance=ExtResource("3_4psp7")]
+position = Vector2(595, 284)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/UIControl"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "end turn"
+script = ExtResource("11_6xwul")
+
+[connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]

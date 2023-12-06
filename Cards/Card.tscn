@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://caxbd2ppk3ans"]
+
+[ext_resource type="Script" path="res://Cards/CardWorld.gd" id="1_4el5m"]
+[ext_resource type="Texture2D" uid="uid://nheutko3fha3" path="res://Cards/card.png" id="2_k6rq5"]
+[ext_resource type="Script" path="res://Input/ClickHandler.gd" id="3_du4nn"]
+[ext_resource type="Script" path="res://Helpers/LerpComponent.gd" id="4_ujyje"]
+[ext_resource type="Script" path="res://UI/CardUISetter.gd" id="5_hkyxd"]
+[ext_resource type="Texture2D" uid="uid://bdc5r0w6lyh34" path="res://Cards/card_image.png" id="6_p357x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ooxvf"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_4el5m")
+
+[node name="ClickHandler" type="Node2D" parent="."]
+script = ExtResource("3_du4nn")
+
+[node name="LerpComponent" type="Node2D" parent="."]
+script = ExtResource("4_ujyje")
+lerp_speed = 7.0
+
+[node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "key_art")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -134.0
+offset_right = 94.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_hkyxd")
+title_label = NodePath("VerticalLayout/Title")
+description_label = NodePath("VerticalLayout/Description")
+key_art = NodePath("VerticalLayout/KeyArt")
+
+[node name="SelectionButton" type="TextureButton" parent="CardUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_k6rq5")
+texture_pressed = ExtResource("2_k6rq5")
+texture_hover = ExtResource("2_k6rq5")
+texture_disabled = ExtResource("2_k6rq5")
+texture_focused = ExtResource("2_k6rq5")
+
+[node name="VerticalLayout" type="VBoxContainer" parent="CardUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="CardUI/VerticalLayout"]
+custom_minimum_size = Vector2(188, 23)
+layout_mode = 2
+text = "Card Title"
+label_settings = SubResource("LabelSettings_ooxvf")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KeyArt" type="TextureRect" parent="CardUI/VerticalLayout"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_p357x")
+stretch_mode = 3
+
+[node name="Description" type="Label" parent="CardUI/VerticalLayout"]
+custom_minimum_size = Vector2(188, 127)
+layout_mode = 2
+text = "This is a test description for a card. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+label_settings = SubResource("LabelSettings_ooxvf")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="gui_input" from="CardUI/SelectionButton" to="ClickHandler" method="_on_gui_input_event"]
+[connection signal="mouse_entered" from="CardUI/SelectionButton" to="ClickHandler" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CardUI/SelectionButton" to="ClickHandler" method="_on_mouse_exited"]
