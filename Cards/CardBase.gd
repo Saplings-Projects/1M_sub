@@ -43,14 +43,14 @@ func _on_card_play(caster: Entity, target: Entity) -> void:
 func _deal_damage(caster: Entity, target: Entity) -> void:
 	# damage target
 	if damage_to_apply_to_target != 0.0:
-		_damage_entity(target, caster, damage_to_apply_to_target, affect_all_targets)
+		_damage_entity(caster, target, damage_to_apply_to_target, affect_all_targets)
 	
 	#damage caster
 	if damage_to_apply_to_caster != 0.0:
 		_damage_entity(caster, caster, damage_to_apply_to_caster, affect_all_casters)
 
 
-func _damage_entity(target: Entity, caster: Entity, damage_amount: float, damage_all: bool) -> void:
+func _damage_entity(caster: Entity, target: Entity, damage_amount: float, damage_all: bool) -> void:
 	var target_damage_data: DealDamageData = DealDamageData.new()
 	target_damage_data.damage = damage_amount
 	target_damage_data.caster = caster
