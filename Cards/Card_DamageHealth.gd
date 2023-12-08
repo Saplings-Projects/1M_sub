@@ -2,7 +2,7 @@ extends CardBase
 class_name Card_DamageHealth
 # Deals damage equal to the amount of health that the caster has lost.
 
-
+# @Override
 func _deal_damage(caster: Entity, target: Entity) -> void:
 	var health_lost: float = caster.get_health_component().max_health - caster.get_health_component().current_health
 	

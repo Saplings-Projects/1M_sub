@@ -2,7 +2,7 @@ extends Entity
 class_name Enemy
 ## Base enemy entity class.
 
-
+# @Override
 func _ready() -> void:
 	super()
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)

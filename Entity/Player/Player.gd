@@ -2,7 +2,7 @@ extends Entity
 class_name Player
 ## Base player Entity class.
 
-
+# @Override
 func _ready() -> void:
 	super()
 	PlayerManager.set_player(self)
