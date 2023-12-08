@@ -22,4 +22,5 @@ If you are writing code that implements something new, please provide test files
 
 As of the writing of this CONTRIBUTING.md there is no code formatter for Godot, even though it might come later. Try to follow the code conventions of the [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
 
-Use static typing whenever possible.
+- Use static typing whenever possible.
+- Add # @Override for children classes that implement a function declared in a parent class.
