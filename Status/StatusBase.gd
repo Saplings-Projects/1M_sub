@@ -11,8 +11,8 @@ class_name StatusBase
 
 
 @export var infinite_duration: bool = false
-@export var buff_turn_duration: int = 3
-@export var buff_power: float = 1.0
+@export var status_turn_duration: int = 3
+@export var status_power: float = 1.0
 
 
 var status_owner: Entity = null
