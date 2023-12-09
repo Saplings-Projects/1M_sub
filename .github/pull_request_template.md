@@ -1,6 +1,6 @@
 # Description
 
-A short descripton of the changes this pull request brings.
+A short description of the changes this pull request brings.
 
 ## Related issue(s)
 
