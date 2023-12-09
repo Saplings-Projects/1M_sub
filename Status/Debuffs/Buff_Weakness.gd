@@ -1,8 +1,8 @@
-extends BuffBase
-class_name Buff_Weakness
+extends StatusBase
+class_name Debuff_Weakness
 ## Vulnerability buff decreases the amount of damage that an Entity deals
 
 # @Override
 func get_modified_stats(stats: EntityStats) -> EntityStats:
-	stats.damage_dealt_increase -= buff_power
+	stats.damage_dealt_increase -= status_power
 	return stats
