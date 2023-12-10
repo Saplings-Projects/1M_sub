@@ -15,3 +15,7 @@ static func find_first_from_array_by_type(array: Array[Variant], type: Variant) 
 		if is_instance_of(value, type):
 			return value
 	return null
+
+
+static func get_random_array_index(array: Array[Variant]) -> int:
+	return RandomGenerator.random.randi_range(0, array.size() - 1)
