@@ -1,13 +1,9 @@
 extends Node
-
-
-var random: RandomNumberGenerator = null
+## Initializes randomness for the game.
 
 
 func _ready() -> void:
-	random = RandomNumberGenerator.new()
-	random.seed = randi()
+	var seed: int = randi()
+	seed(seed)
 	
-	print("Random seed set to: " + str(random.seed))
-	
-	random.randomize()
+	print("Random seed set to: " + str(seed))
