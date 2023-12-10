@@ -2,13 +2,11 @@ extends Node2D
 class_name CardContainer
 ## Lays out cards in the player's hand and spawns new cards.
 ##
-## When a card is clicked, it is set as the CardManager's queued_card by this class.
-## The queued_card can then be accessed from anywhere.
+## When a card is clicked, it is set as the queued_card.
 ## When a card is queued, you can't hover any other cards in your deck. Left click any card to
 ## remove the current card from the queue.
 ## TODO Right click cancels the queued card instead?
-## TODO We need a global way to deal cards so we can deal cards from
-## card effects (eg: draw 2 cards). There is also no concept of draw pile/discard pile.
+
 
 signal on_card_counts_updated
 
@@ -30,8 +28,7 @@ func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
 	
-	draw_pile = default_deck.duplicate()
-	draw_pile.shuffle()
+	_init_default_draw_pile()
 
 
 func _process(_delta: float) -> void:
@@ -65,6 +62,8 @@ func draw_cards(amount: int) -> void:
 
 
 func discard_all_cards() -> void:
+	# Discard cards until our hand is empty. We do it with a while-loop instead of a for-loop
+	# because we don't want cards_in_hand to change size during the iteration
 	while cards_in_hand.size() > 0:
 		_discard_last_card()
 
@@ -72,10 +71,12 @@ func discard_all_cards() -> void:
 func discard_random_card(amount: int) -> void:
 	var valid_cards_to_discard: Array[CardWorld] = []
 	
-	for card in cards_in_hand:
+	# We don't want to discard the currently queued card
+	for card: CardWorld in cards_in_hand:
 		if card != queued_card:
 			valid_cards_to_discard.append(card)
 	
+	# Discard - clamping desired amount to the size of our valid cards
 	var amount_to_discard: int = mini(valid_cards_to_discard.size(), amount)
 	for discarding_index: int in amount_to_discard:
 		var random_index: int = Helpers.get_random_array_index(valid_cards_to_discard)
@@ -96,6 +97,12 @@ func get_discard_pile_size() -> int:
 	return discard_pile.size()
 
 
+func _init_default_draw_pile() -> void:
+	draw_pile = default_deck.duplicate()
+	draw_pile.shuffle()
+
+
+# Final place where a card is created and added to the world
 func _draw_card() -> void:
 	# if draw pile is empty, shuffle discard pile into draw pile. Clear discard pile.
 	if draw_pile.size() <= 0:
@@ -115,7 +122,7 @@ func _draw_card() -> void:
 	on_card_counts_updated.emit()
 
 
-func _create_card_in_world(card_data: CardBase):
+func _create_card_in_world(card_data: CardBase) -> void:
 	var card_instance: CardWorld = card_scene.instantiate()
 	add_child(card_instance)
 	cards_in_hand.append(card_instance)
@@ -129,6 +136,7 @@ func _create_card_in_world(card_data: CardBase):
 	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card_instance))
 
 
+# Final place where a card is discarded and removed from the world
 func _discard_card_at_index(card_index: int) -> void:
 	var card: CardWorld = cards_in_hand[card_index]
 	

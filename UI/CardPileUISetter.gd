@@ -12,11 +12,11 @@ func _ready() -> void:
 		CardManager.on_card_container_initialized.connect(_on_card_container_initialized)
 
 
-func _on_card_container_initialized():
+func _on_card_container_initialized() -> void:
 	CardManager.card_container.on_card_counts_updated.connect(_on_card_counts_updated)
 
 
-func _on_card_counts_updated():
+func _on_card_counts_updated() -> void:
 	pile_count_label.text = str(_get_count())
 
 

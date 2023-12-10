@@ -4,7 +4,7 @@ extends Node
 var random: RandomNumberGenerator = null
 
 
-func _ready():
+func _ready() -> void:
 	random = RandomNumberGenerator.new()
 	random.seed = randi()
 	

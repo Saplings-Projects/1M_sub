@@ -86,8 +86,9 @@ func _on_enemy_clicked(enemy: Enemy) -> void:
 
 func _try_player_play_card_on_entity(entity: Entity) -> void:
 	if CardManager.card_container.is_card_queued():
-		var queued_card = CardManager.card_container.queued_card
+		var queued_card: CardWorld = CardManager.card_container.queued_card
 		var success: bool = _on_attack(queued_card.card_data, PlayerManager.player, entity)
+		
 		if success:
 			CardManager.card_container.remove_queued_card()
 			queued_card.card_data.on_post_card_played()

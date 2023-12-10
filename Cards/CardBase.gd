@@ -38,10 +38,13 @@ func try_play_card(caster: Entity, target: Entity) -> bool:
 func _on_card_play(caster: Entity, target: Entity) -> void:
 	_deal_damage(caster, target)
 	_apply_buffs(caster, target)
-	# TODO add other functionality that lots of cards may share (eg: restore AP, draw cards)
+	# TODO add other functionality that lots of cards may share (eg: restore AP)
 
 
+# Called after the card has been discarded
 func on_post_card_played():
+	# We handle drawing and discarding in on_post_card_played because we want to wait for the
+	# queued card to discard first so it doesn't influence the amount of cards in our hand
 	_draw_cards()
 	_discard_cards()
 
@@ -91,9 +94,9 @@ func _apply_buffs(caster: Entity, target: Entity) -> void:
 			target.get_buff_component().add_buff(buff, caster)
 
 
-func _draw_cards():
+func _draw_cards() -> void:
 	CardManager.card_container.draw_cards(amount_of_cards_to_draw)
 
 
-func _discard_cards():
+func _discard_cards() -> void:
 	CardManager.card_container.discard_random_card(amount_of_cards_to_discard)
