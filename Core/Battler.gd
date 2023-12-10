@@ -68,6 +68,9 @@ func _on_enemy_start_turn() -> void:
 		var success: bool = _on_attack(enemy.get_behavior_component().attack, enemy, PlayerManager.player)
 		assert(success == true, "Enemy failed to attack.")
 	
+	# TODO: temporary delay so we can see the draw pile and discard pile working
+	await get_tree().create_timer(1.0).timeout
+	
 	PhaseManager.set_phase(Enums.Phase.PLAYER_ATTACKING)
 
 
@@ -82,10 +85,12 @@ func _on_enemy_clicked(enemy: Enemy) -> void:
 
 
 func _try_player_play_card_on_entity(entity: Entity) -> void:
-	if CardManager.is_card_queued():
-		var success: bool = _on_attack(CardManager.queued_card.card_data, PlayerManager.player, entity)
+	if CardManager.card_container.is_card_queued():
+		var queued_card = CardManager.card_container.queued_card
+		var success: bool = _on_attack(queued_card.card_data, PlayerManager.player, entity)
 		if success:
-			CardManager.notify_successful_play()
+			CardManager.card_container.remove_queued_card()
+			queued_card.card_data.on_post_card_played()
 
 
 func _on_attack(attack_card: CardBase, caster: Entity, target: Entity) -> bool:

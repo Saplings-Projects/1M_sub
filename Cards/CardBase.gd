@@ -20,6 +20,8 @@ class_name CardBase
 @export var buffs_to_apply_to_caster: Array[BuffBase]
 @export var affect_all_targets: bool = false
 @export var affect_all_casters: bool = false
+@export var amount_of_cards_to_draw: int = 0
+@export var amount_of_cards_to_discard: int = 0
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
 @export var card_title: String = "NULL"
 @export var card_key_art: ImageTexture = null
@@ -37,6 +39,11 @@ func _on_card_play(caster: Entity, target: Entity) -> void:
 	_deal_damage(caster, target)
 	_apply_buffs(caster, target)
 	# TODO add other functionality that lots of cards may share (eg: restore AP, draw cards)
+
+
+func on_post_card_played():
+	_draw_cards()
+	_discard_cards()
 
 
 # override in child cards if you want to deal damage in a unique way
@@ -82,3 +89,11 @@ func _apply_buffs(caster: Entity, target: Entity) -> void:
 				party_member.get_buff_component().add_buff(buff, caster)
 		else:
 			target.get_buff_component().add_buff(buff, caster)
+
+
+func _draw_cards():
+	CardManager.card_container.draw_cards(amount_of_cards_to_draw)
+
+
+func _discard_cards():
+	CardManager.card_container.discard_random_card(amount_of_cards_to_discard)
