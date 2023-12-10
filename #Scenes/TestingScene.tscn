@@ -1,57 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://87fedoq257xg"]
+[gd_scene load_steps=16 format=3 uid="uid://87fedoq257xg"]
 
 [ext_resource type="Script" path="res://Cards/CardContainer.gd" id="1_cwemj"]
 [ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_tx1h0"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
-[ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_obxy7"]
+[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="5_0xkni"]
+[ext_resource type="Resource" uid="uid://5yn4t13kwwoo" path="res://Cards/Resource/Card_DamageHealth.tres" id="6_suulu"]
+[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="7_lb4jj"]
+[ext_resource type="Resource" uid="uid://bo7u4vmuakwj8" path="res://Cards/Resource/Card_DrawCards.tres" id="8_ac0op"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
+[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="9_lin0v"]
+[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="10_5fv5a"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
-
-[sub_resource type="Resource" id="Resource_qq156"]
-script = ExtResource("5_obxy7")
-damage_to_apply_to_target = 0.0
-damage_to_apply_to_caster = 0.0
-buffs_to_apply_to_target = Array[Resource("res://Buffs/BuffBase.gd")]([])
-buffs_to_apply_to_caster = Array[Resource("res://Buffs/BuffBase.gd")]([])
-affect_all_targets = false
-affect_all_casters = false
-amount_of_cards_to_draw = 0
-amount_of_cards_to_discard = 0
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
-
-[sub_resource type="Resource" id="Resource_wodrl"]
-script = ExtResource("5_obxy7")
-damage_to_apply_to_target = 0.0
-damage_to_apply_to_caster = 0.0
-buffs_to_apply_to_target = Array[Resource("res://Buffs/BuffBase.gd")]([])
-buffs_to_apply_to_caster = Array[Resource("res://Buffs/BuffBase.gd")]([])
-affect_all_targets = false
-affect_all_casters = false
-amount_of_cards_to_draw = 0
-amount_of_cards_to_discard = 0
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
-
-[sub_resource type="Resource" id="Resource_1agst"]
-script = ExtResource("5_obxy7")
-damage_to_apply_to_target = 0.0
-damage_to_apply_to_caster = 0.0
-buffs_to_apply_to_target = Array[Resource("res://Buffs/BuffBase.gd")]([])
-buffs_to_apply_to_caster = Array[Resource("res://Buffs/BuffBase.gd")]([])
-affect_all_targets = false
-affect_all_casters = false
-amount_of_cards_to_draw = 0
-amount_of_cards_to_discard = 0
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
 
 [node name="TestingScene" type="Node2D"]
 
@@ -65,7 +28,7 @@ script = ExtResource("1_cwemj")
 card_scene = ExtResource("2_tx1h0")
 total_hand_width = 500.0
 card_queued_offset = 200.0
-default_deck = Array[ExtResource("5_obxy7")]([SubResource("Resource_qq156"), SubResource("Resource_wodrl"), SubResource("Resource_1agst")])
+default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("5_0xkni"), ExtResource("6_suulu"), ExtResource("7_lb4jj"), ExtResource("8_ac0op"), ExtResource("9_lin0v"), ExtResource("10_5fv5a")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
