@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://87fedoq257xg"]
+[gd_scene load_steps=14 format=3 uid="uid://87fedoq257xg"]
 
 [ext_resource type="Script" path="res://Cards/CardContainer.gd" id="1_cwemj"]
 [ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_tx1h0"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_obxy7"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
+[ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
+[ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
@@ -92,7 +94,7 @@ grow_vertical = 0
 text = "end turn"
 script = ExtResource("14_dpe64")
 
-[node name="DrawPile" type="TextureButton" parent="CanvasLayer/UIControl"]
+[node name="DrawPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -108,6 +110,8 @@ texture_hover = ExtResource("11_pw70x")
 texture_disabled = ExtResource("11_pw70x")
 texture_focused = ExtResource("11_pw70x")
 stretch_mode = 0
+script = ExtResource("8_voref")
+pile_count_label = NodePath("DrawPileCount")
 
 [node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DrawPile"]
 layout_mode = 1
@@ -120,7 +124,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DiscardPile" type="TextureButton" parent="CanvasLayer/UIControl"]
+[node name="DiscardPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -139,6 +143,8 @@ texture_hover = ExtResource("12_kxw48")
 texture_disabled = ExtResource("12_kxw48")
 texture_focused = ExtResource("12_kxw48")
 stretch_mode = 0
+script = ExtResource("10_pqly7")
+pile_count_label = NodePath("DrawPileCount")
 
 [node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DiscardPile"]
 layout_mode = 1
