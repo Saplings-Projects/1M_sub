@@ -1,0 +1,29 @@
+# Automatically launches GUT tests on push and PR on the main
+
+name: CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  execute-gut:
+    name: Run GUT tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Docker test
+        # awaiting for v 9.2 for godot 4.2 to release
+        uses: ceceppa/godot-gut-ci@0.2.0
+        with:
+          godot-version: 4.1.0
+          gut-params: -gdir=res://tests/unit
+
