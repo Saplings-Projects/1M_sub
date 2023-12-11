@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Entity/Enemy/Enemy.gd" id="1_ya6nf"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
-[ext_resource type="Script" path="res://Entity/Components/BuffComponent.gd" id="3_7qc0d"]
+[ext_resource type="Script" path="res://Entity/Components/StatusComponent.gd" id="3_7qc0d"]
 [ext_resource type="Script" path="res://Entity/Components/HealthComponent.gd" id="4_t7jp6"]
 [ext_resource type="Texture2D" uid="uid://bu626jwgp3r5x" path="res://Entity/Enemy/sapling.png" id="5_dxya8"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="6_m32ri"]
@@ -23,7 +23,7 @@ script = ExtResource("1_ya6nf")
 [node name="StatComponent" type="Node" parent="."]
 script = ExtResource("2_twygh")
 
-[node name="BuffComponent" type="Node" parent="."]
+[node name="StatusComponent" type="Node" parent="."]
 script = ExtResource("3_7qc0d")
 
 [node name="HealthComponent" type="Node" parent="."]
