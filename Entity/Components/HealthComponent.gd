@@ -15,7 +15,7 @@ func _ready() -> void:
 
 # Allow caster to be null, but not the target.
 # If caster is null, we assume that the damage came from an unknown source,
-# so buffs won't calculate.
+# so status won't calculate.
 # Use a negative damage value if you want to heal.
 func deal_damage(damage_data: DealDamageData) -> void:
 	var damage: float = damage_data.damage
@@ -38,25 +38,25 @@ func deal_damage(damage_data: DealDamageData) -> void:
 		modified_caster_stats = caster.get_stat_component().get_stat_copy()
 	var modified_target_stats: EntityStats = target.get_stat_component().get_stat_copy()
 	
-	# apply modified damage from buffs
-	if caster != null and !damage_data.ignore_caster_buffs:
-		for buff: BuffBase in caster.get_buff_component().current_buffs:
-			buff.get_modified_stats(modified_caster_stats)
-	if !damage_data.ignore_target_buffs:
-		for buff: BuffBase in target.get_buff_component().current_buffs:
-			buff.get_modified_stats(modified_target_stats)
+	# apply modified damage from status
+	if caster != null and !damage_data.ignore_caster_status:
+		for status: StatusBase in caster.get_status_component().current_status:
+			status.get_modified_stats(modified_caster_stats)
+	if !damage_data.ignore_target_status:
+		for status: StatusBase in target.get_status_component().current_status:
+			status.get_modified_stats(modified_target_stats)
 	
 	var damage_taken_increase: float = 0.0
 	var damage_dealt_increase: float = 0.0
 
-	# we don't want to take into account these buffs when healing
-	# TODO if desired, we can add stats for healing buff increases (we heal when damage < 0)
+	# we don't want to take into account these status when healing
+	# TODO if desired, we can add stats for healing status increases (we heal when damage < 0)
 	if damage > 0.0:
 		damage_taken_increase = modified_target_stats.damage_taken_increase
 		if caster != null:
 			damage_dealt_increase = modified_caster_stats.damage_dealt_increase
 	
-	# find modified damage based on buffs
+	# find modified damage based on status
 	var total_damage: float = damage + damage_taken_increase + damage_dealt_increase
 
 	# apply damage to our health

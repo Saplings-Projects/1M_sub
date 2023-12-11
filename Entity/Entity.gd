@@ -6,14 +6,14 @@ class_name Entity
 
 
 func _ready() -> void:
-	get_buff_component().init_entity_component(self)
+	get_status_component().init_entity_component(self)
 	get_health_component().init_entity_component(self)
 	get_party_component().init_entity_component(self)
 	get_stat_component().init_entity_component(self)
 
 
-func get_buff_component() -> BuffComponent:
-	return Helpers.get_first_child_node_of_type(self, BuffComponent) as BuffComponent
+func get_status_component() -> StatusComponent:
+	return Helpers.get_first_child_node_of_type(self, StatusComponent) as StatusComponent
 
 	
 func get_stat_component() -> StatComponent:
