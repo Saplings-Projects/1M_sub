@@ -24,6 +24,6 @@ jobs:
         # awaiting for v 9.2 for godot 4.2 to release
         uses: ceceppa/godot-gut-ci@0.2.0
         with:
-          godot_version: 4.1.0
+          godot_version: 4.2
           gut_params: -gdir=res://Tests/
 
