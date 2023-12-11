@@ -16,8 +16,8 @@ class_name CardBase
 
 @export var damage_to_apply_to_target: float = 0.0
 @export var damage_to_apply_to_caster: float = 0.0
-@export var buffs_to_apply_to_target: Array[BuffBase]
-@export var buffs_to_apply_to_caster: Array[BuffBase]
+@export var status_to_apply_to_target: Array[StatusBase]
+@export var status_to_apply_to_caster: Array[StatusBase]
 @export var affect_all_targets: bool = false
 @export var affect_all_casters: bool = false
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
@@ -35,7 +35,7 @@ func try_play_card(caster: Entity, target: Entity) -> bool:
 
 func _on_card_play(caster: Entity, target: Entity) -> void:
 	_deal_damage(caster, target)
-	_apply_buffs(caster, target)
+	_apply_status(caster, target)
 	# TODO add other functionality that lots of cards may share (eg: restore AP, draw cards)
 
 
@@ -66,19 +66,19 @@ func _damage_entity(caster: Entity, target: Entity, damage_amount: float, damage
 		target.get_health_component().deal_damage(target_damage_data)
 
 
-func _apply_buffs(caster: Entity, target: Entity) -> void:
-	# apply buffs to caster
-	for buff: BuffBase in buffs_to_apply_to_caster:
+func _apply_status(caster: Entity, target: Entity) -> void:
+	# apply status to caster
+	for status: StatusBase in status_to_apply_to_caster:
 		if affect_all_casters:
 			for party_member: Entity in caster.get_party_component().party:
-				party_member.get_buff_component().add_buff(buff, caster)
+				party_member.get_status_component().add_status(status, caster)
 		else:
-			caster.get_buff_component().add_buff(buff, caster)
+			caster.get_status_component().add_status(status, caster)
 	
-	# apply buffs to target
-	for buff: BuffBase in buffs_to_apply_to_target:
+	# apply status to target
+	for status: StatusBase in status_to_apply_to_target:
 		if affect_all_targets:
 			for party_member: Entity in target.get_party_component().party:
-				party_member.get_buff_component().add_buff(buff, caster)
+				party_member.get_status_component().add_status(status, caster)
 		else:
-			target.get_buff_component().add_buff(buff, caster)
+			target.get_status_component().add_status(status, caster)
