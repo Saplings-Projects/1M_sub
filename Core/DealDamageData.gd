@@ -5,5 +5,5 @@ class_name DealDamageData
 
 var damage: float
 var caster: Entity
-var ignore_caster_buffs: bool = false
-var ignore_target_buffs: bool = false
+var ignore_caster_status: bool = false
+var ignore_target_status: bool = false
