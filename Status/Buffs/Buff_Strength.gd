@@ -1,4 +1,4 @@
-extends StatusBase
+extends BuffBase
 class_name Buff_Strength
 ## Strength buff increases an Entity's damage stat
 

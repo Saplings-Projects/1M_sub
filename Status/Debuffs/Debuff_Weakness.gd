@@ -1,4 +1,4 @@
-extends StatusBase
+extends DebuffBase
 class_name Debuff_Weakness
 ## Vulnerability buff decreases the amount of damage that an Entity deals
 
