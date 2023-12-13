@@ -36,7 +36,7 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 func on_card_play(caster: Entity, target: Entity) -> void:
 	_deal_damage(caster, target)
-	_apply_buffs(caster, target)
+	_apply_status(caster, target)
 	_draw_cards()
 	_discard_random_cards()
 	# TODO add other functionality that lots of cards may share (eg: restore AP)
