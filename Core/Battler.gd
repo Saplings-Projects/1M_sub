@@ -8,6 +8,7 @@ class_name Battler
 
 @export var enemies_to_summon: Array[PackedScene]
 @export var enemy_spacing: float = 50.0
+@export var enemy_attack_time: float = 1.0
 
 var _enemy_list: Array[Entity]
 
@@ -69,7 +70,7 @@ func _on_enemy_start_turn() -> void:
 		assert(success == true, "Enemy failed to attack.")
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(enemy_attack_time).timeout
 	
 	PhaseManager.set_phase(Enums.Phase.PLAYER_ATTACKING)
 

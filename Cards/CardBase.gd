@@ -46,7 +46,7 @@ func on_post_card_played():
 	# We handle drawing and discarding in on_post_card_played because we want to wait for the
 	# queued card to discard first so it doesn't influence the amount of cards in our hand
 	_draw_cards()
-	_discard_cards()
+	_discard_random_cards()
 
 
 # override in child cards if you want to deal damage in a unique way
@@ -98,5 +98,5 @@ func _draw_cards() -> void:
 	CardManager.card_container.draw_cards(amount_of_cards_to_draw)
 
 
-func _discard_cards() -> void:
+func _discard_random_cards() -> void:
 	CardManager.card_container.discard_random_card(amount_of_cards_to_discard)

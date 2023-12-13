@@ -48,7 +48,7 @@ func is_card_queued() -> bool:
 	return queued_card != null
 
 
-func deal_to_hand_limit() -> void:
+func deal_to_starting_hand_size() -> void:
 	# deal to our starting hand size, ignoring amount of cards we already have
 	var amount_to_draw: int = maxi(0, starting_hand_size - cards_in_hand.size())
 	draw_cards(amount_to_draw)
@@ -69,19 +69,11 @@ func discard_all_cards() -> void:
 
 
 func discard_random_card(amount: int) -> void:
-	var valid_cards_to_discard: Array[CardWorld] = []
-	
-	# We don't want to discard the currently queued card
-	for card: CardWorld in cards_in_hand:
-		if card != queued_card:
-			valid_cards_to_discard.append(card)
-	
-	# Discard - clamping desired amount to the size of our valid cards
-	var amount_to_discard: int = mini(valid_cards_to_discard.size(), amount)
+	# Discard - clamping desired amount to the size of our current hand
+	var amount_to_discard: int = mini(cards_in_hand.size(), amount)
 	for discarding_index: int in amount_to_discard:
-		var random_index: int = Helpers.get_random_array_index(valid_cards_to_discard)
-		discard_card(valid_cards_to_discard[random_index])
-		valid_cards_to_discard.remove_at(random_index)
+		var random_index: int = Helpers.get_random_array_index(cards_in_hand)
+		discard_card(cards_in_hand[random_index])
 
 
 func discard_card(card: CardWorld) -> void:
@@ -129,11 +121,15 @@ func _create_card_in_world(card_data: CardBase) -> void:
 
 	card_instance.init_card(card_data)
 	
+	_bind_card_input(card_instance)
+
+
+func _bind_card_input(card: CardWorld):
 	# bind mouse events
-	var card_click_handler: ClickHandler = card_instance.get_click_handler()
-	card_click_handler.on_click.connect(_on_card_clicked.bind(card_instance))
-	card_click_handler.on_mouse_hovering.connect(_on_card_hovering.bind(card_instance))
-	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card_instance))
+	var card_click_handler: ClickHandler = card.get_click_handler()
+	card_click_handler.on_click.connect(_on_card_clicked.bind(card))
+	card_click_handler.on_mouse_hovering.connect(_on_card_hovering.bind(card))
+	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card))
 
 
 # Final place where a card is discarded and removed from the world
@@ -157,7 +153,7 @@ func _discard_last_card() -> void:
 
 func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	if new_phase == Enums.Phase.PLAYER_ATTACKING:
-		deal_to_hand_limit()
+		deal_to_starting_hand_size()
 	if new_phase == Enums.Phase.ENEMY_ATTACKING:
 		discard_all_cards()
 
