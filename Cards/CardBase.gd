@@ -28,25 +28,18 @@ class_name CardBase
 @export var card_description: String = "NULL"
 
 
-func try_play_card(caster: Entity, target: Entity) -> bool:
+func can_play_card(caster: Entity, target: Entity) -> bool:
 	if caster.get_party_component().can_play_on_entity(application_type, target):
-		_on_card_play(caster, target)
 		return true
 	return false
 
 
-func _on_card_play(caster: Entity, target: Entity) -> void:
+func on_card_play(caster: Entity, target: Entity) -> void:
 	_deal_damage(caster, target)
 	_apply_buffs(caster, target)
-	# TODO add other functionality that lots of cards may share (eg: restore AP)
-
-
-# Called after the card has been discarded
-func on_post_card_played():
-	# We handle drawing and discarding in on_post_card_played because we want to wait for the
-	# queued card to discard first so it doesn't influence the amount of cards in our hand
 	_draw_cards()
 	_discard_random_cards()
+	# TODO add other functionality that lots of cards may share (eg: restore AP)
 
 
 # override in child cards if you want to deal damage in a unique way
