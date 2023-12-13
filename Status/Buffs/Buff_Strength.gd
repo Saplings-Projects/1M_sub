@@ -4,5 +4,5 @@ class_name Buff_Strength
 
 # @Override
 func get_modified_stats(stats: EntityStats) -> EntityStats:
-	stats.damage_dealt_increase += buff_power
+	stats.damage_dealt_increase += status_power
 	return stats

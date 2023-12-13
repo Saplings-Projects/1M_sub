@@ -3,7 +3,7 @@ class_name Battler
 ## Spawns enemies and controls the flow of battle.
 ## 
 ## This class holds a list of all the enemies, so it's a good central place to dispatch
-## battle actions (player clicking on enemies, enemy attacks, applying buffs).
+## battle actions (player clicking on enemies, enemy attacks, applying status).
 
 
 @export var enemies_to_summon: Array[PackedScene]
@@ -51,18 +51,18 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 		_on_enemy_start_turn()
 
 
-# player start phase: apply buffs
+# player start phase: apply status
 func _on_player_start_turn() -> void:
-	PlayerManager.player.get_buff_component().apply_turn_start_buffs()
+	PlayerManager.player.get_status_component().apply_turn_start_status()
 
 
-# enemy start phase: apply buffs and attack player. Afterwards, set phase to player phase
+# enemy start phase: apply status and attack player. Afterwards, set phase to player phase
 # NOTE: these are applied in two separate loops just encase an enemy affects another member of their
-# party with a buff during their attack
+# party with a status during their attack
 func _on_enemy_start_turn() -> void:
-	# apply buffs
+	# apply status
 	for enemy: Entity in _enemy_list:
-		enemy.get_buff_component().apply_turn_start_buffs()
+		enemy.get_status_component().apply_turn_start_status()
 	
 	# enemy attack
 	for enemy: Entity in _enemy_list:
