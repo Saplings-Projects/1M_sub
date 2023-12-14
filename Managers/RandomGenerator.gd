@@ -2,8 +2,17 @@ extends Node
 ## Initializes randomness for the game.
 
 
+const GAME_SEED = -1
+
+
 func _ready() -> void:
-	var seed: int = randi()
-	seed(seed)
+	set_seed(GAME_SEED)
+
+
+func set_seed(given_seed: int = -1) -> void:
+	var set_seed: int = given_seed
+	if set_seed == -1:
+		set_seed = randi()
+	seed(set_seed)
 	
-	print("Random seed set to: " + str(seed))
+	print("Seed set to: " + str(set_seed))
