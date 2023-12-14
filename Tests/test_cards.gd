@@ -9,11 +9,6 @@ var _card_container: CardContainer = null
 var _cards_in_hand: Array[CardWorld] = []
 
 
-func before_all():
-	#PhaseManager.queue_free()
-	pass
-
-
 func before_each():
 	_battler = _battler_scene.instantiate()
 	_card_container = _card_container_scene.instantiate()
