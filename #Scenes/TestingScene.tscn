@@ -1,16 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://87fedoq257xg"]
+[gd_scene load_steps=9 format=3 uid="uid://87fedoq257xg"]
 
-[ext_resource type="Script" path="res://Cards/CardContainer.gd" id="1_cwemj"]
-[ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_tx1h0"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
-[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="5_0xkni"]
-[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="7_lb4jj"]
-[ext_resource type="Resource" uid="uid://5yn4t13kwwoo" path="res://Cards/Resource/Card_DamageHealth.tres" id="7_n8kog"]
-[ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Card_DrawCards.tres" id="8_fyvym"]
+[ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
-[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="9_t0jkk"]
-[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="10_gbmu7"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
@@ -23,12 +16,7 @@
 [node name="Player" parent="." instance=ExtResource("3_4psp7")]
 position = Vector2(595, 284)
 
-[node name="CardContainer" type="Node2D" parent="."]
-script = ExtResource("1_cwemj")
-card_scene = ExtResource("2_tx1h0")
-total_hand_width = 500.0
-card_queued_offset = 200.0
-default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("7_lb4jj"), ExtResource("5_0xkni"), ExtResource("7_n8kog"), ExtResource("8_fyvym"), ExtResource("9_t0jkk"), ExtResource("10_gbmu7")])
+[node name="CardContainer" parent="." instance=ExtResource("3_e7sws")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
