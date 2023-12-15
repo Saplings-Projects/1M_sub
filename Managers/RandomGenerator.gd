@@ -2,6 +2,8 @@ extends Node
 ## Initializes randomness for the game.
 
 
+# Set this to a value other than -1 to have deterministic randomness.
+# Make sure to set back to -1 when done testing!
 const GAME_SEED = -1
 
 
