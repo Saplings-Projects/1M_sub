@@ -15,12 +15,20 @@ func before_each():
 	
 	# fill deck with 50 default cards
 	_card_container.default_deck.resize(50)
-	_card_container.default_deck.fill(CardBase.new())
 	_card_container.max_hand_size = 10
 	_card_container.starting_hand_size = 5
 	
+	# assign cards names of Card1-Card50
+	for card_index: int in _card_container.default_deck.size():
+		_card_container.default_deck[card_index] = CardBase.new()
+		_card_container.default_deck[card_index].card_title = "Card" + str(card_index + 1)
+	
 	get_tree().root.add_child(_battler)
 	get_tree().root.add_child(_card_container)
+	
+	# set draw pile to default deck. This removes any randomness from shuffling on _ready()
+	# so each card will have a name Card1-Card50 in the draw pile
+	_card_container.draw_pile = _card_container.default_deck.duplicate()
 
 
 func after_each():
@@ -36,7 +44,7 @@ func test_draw_cards():
 	assert_eq(_card_container.discard_pile.size(), 0)
 
 
-func test_draw_two_cards():
+func test_draw_cards_2():
 	_card_container.draw_cards(5)
 	_card_container.draw_cards(5)
 	
@@ -54,7 +62,7 @@ func test_discard_cards():
 	assert_eq(_card_container.discard_pile.size(), 1)
 
 
-func test_discard_two_cards():
+func test_discard_cards_2():
 	_card_container.draw_cards(5)
 	_card_container.discard_random_card(1)
 	_card_container.discard_random_card(1)
@@ -89,11 +97,12 @@ func test_draw_to_max():
 
 
 func test_discard_specific():
-	_card_container.draw_cards(1)
-	var card: CardWorld = _card_container.cards_in_hand[0]
+	_card_container.draw_cards(5)
+	var card: CardWorld = _card_container.cards_in_hand[2]
+	assert_eq(card.card_data.card_title, "Card3")
 	
 	_card_container.discard_card(card)
 	
-	assert_eq(_card_container.cards_in_hand.size(), 0)
-	assert_eq(_card_container.draw_pile.size(), 49)
+	assert_eq(_card_container.cards_in_hand.size(), 4)
+	assert_eq(_card_container.draw_pile.size(), 45)
 	assert_eq(_card_container.discard_pile.size(), 1)
