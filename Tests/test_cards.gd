@@ -101,13 +101,14 @@ func test_discard_specific():
 	
 	var discard_card: CardWorld = _card_container.cards_in_hand[2]
 	
-	assert_eq(_card_container.cards_in_hand[0].card_data.card_title, "Card1")
-	assert_eq(_card_container.cards_in_hand[1].card_data.card_title, "Card2")
 	assert_eq(discard_card.card_data.card_title, "Card3")
-	assert_eq(_card_container.cards_in_hand[3].card_data.card_title, "Card4")
-	assert_eq(_card_container.cards_in_hand[4].card_data.card_title, "Card5")
 	
 	_card_container.discard_card(discard_card)
+	
+	assert_eq(_card_container.cards_in_hand[0].card_data.card_title, "Card1")
+	assert_eq(_card_container.cards_in_hand[1].card_data.card_title, "Card2")
+	assert_eq(_card_container.cards_in_hand[2].card_data.card_title, "Card4")
+	assert_eq(_card_container.cards_in_hand[3].card_data.card_title, "Card5")
 	
 	assert_eq(_card_container.cards_in_hand.size(), 4)
 	assert_eq(_card_container.draw_pile.size(), 45)
