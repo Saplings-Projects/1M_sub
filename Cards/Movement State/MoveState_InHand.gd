@@ -2,18 +2,25 @@ extends CardMovementState
 class_name MoveState_InHand
 
 
-@export var lerp_speed: float = 10.0
+const LERP_SPEED: float = 15.0
+const EASE_TIME: float = 0.5
+const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
+const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
 
 
 # @Override
 func on_state_enter() -> void:
+	# Ease scale to one. Resets any scale changes that happened in other states (HOVERED, QUEUED)
 	_state.card.create_tween()\
-	.tween_property(_state.card, EasingConstants.SCALE_PROPERTY, Vector2.ONE, 0.5)\
-	.set_ease(Tween.EASE_OUT)\
-	.set_trans(Tween.TRANS_CUBIC)
+	.tween_property(_state.card, EasingConstants.SCALE_PROPERTY, Vector2.ONE, EASE_TIME)\
+	.set_ease(EASE_TYPE)\
+	.set_trans(TRANS_TYPE)
 
 
 # @Override
 func on_state_process(delta: float) -> void:
-	_state.card.position = _state.card.position.lerp(_state.desired_position, delta * lerp_speed)
-	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, _state.desired_rotation, delta * lerp_speed)
+	# Ease to desired position in the hand
+	_state.card.position = _state.card.position.lerp(_state.desired_position, delta * LERP_SPEED)
+	
+	# Ease rotation
+	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, _state.desired_rotation, delta * LERP_SPEED)

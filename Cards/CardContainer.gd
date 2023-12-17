@@ -138,8 +138,12 @@ func _create_card_in_world(card_data: CardBase) -> void:
 
 	card.init_card(card_data)
 	
+	# set starting position of the card to the draw pile, so it visually shows it dealing from there
 	card.global_position = draw_pile_ui.global_position
+
+	# force an update of the card positions so they are up to date with this new card
 	_update_card_positions()
+	
 	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.MOVING_TO_HAND)
 	
 	_bind_card_input(card)
@@ -246,7 +250,6 @@ func _on_card_clicked(card: CardWorld) -> void:
 		set_queued_card(card)
 
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
-
 		_focus_card(card, card_queued_offset)
 
 
