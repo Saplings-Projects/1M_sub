@@ -259,12 +259,17 @@ func _on_card_unhovered(card: CardWorld) -> void:
 
 func _focus_card(card: CardWorld, offset: float) -> void:
 	card.get_card_movement_component().state_properties.desired_position.y = -offset
-	card.z_index = 1
+	
+	# children at the top of the hierarchy will render in front
+	move_child(card, get_child_count())
 
 
 func _unfocus_card(card: CardWorld) -> void:
 	card.get_card_movement_component().state_properties.desired_position.y = 0
-	card.z_index = 0
+	
+	# move back to original place in the hierarchy
+	var card_index: int = cards_in_hand.find(card)
+	move_child(card, card_index)
 
 
 func _update_card_positions() -> void:
