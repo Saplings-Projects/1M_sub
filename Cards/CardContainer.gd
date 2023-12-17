@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name CardContainer
 ## Lays out cards in the player's hand and spawns new cards.
 ##
@@ -209,14 +209,6 @@ func _update_card_positions() -> void:
 	if cards_in_hand.size() <= 0:
 		return
 	
-	var viewport_width: float = get_viewport_rect().size.x
-	var viewport_height: float = get_viewport_rect().size.y
-	
-	# set container to bottom center of screen (doing every frame encase the viewport size changes)
-	position.x = viewport_width / 2
-	position.x -= total_hand_width / 2
-	position.y = viewport_height 
-	
 	# set spacing of each card
 	var per_card_width: float = 0
 	if cards_in_hand.size() > 1:
@@ -224,5 +216,7 @@ func _update_card_positions() -> void:
 	for card_index: int in cards_in_hand.size():
 		var card: CardWorld = cards_in_hand[card_index]
 		var card_x: float = per_card_width * card_index
+
+		card_x -= total_hand_width / 2.0
 
 		card.get_card_movement_component().desired_position.x = card_x

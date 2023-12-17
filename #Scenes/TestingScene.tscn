@@ -16,8 +16,6 @@
 [node name="Player" parent="." instance=ExtResource("3_4psp7")]
 position = Vector2(595, 284)
 
-[node name="CardContainer" parent="." instance=ExtResource("3_e7sws")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UIControl" type="Control" parent="CanvasLayer"]
@@ -28,6 +26,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="CardContainer" parent="CanvasLayer/UIControl" instance=ExtResource("3_e7sws")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+card_hovered_offset = null
+starting_hand_size = null
+max_hand_size = null
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 1

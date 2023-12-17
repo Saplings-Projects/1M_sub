@@ -10,7 +10,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_ooxvf"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_4el5m")
 
 [node name="ClickHandler" type="Node" parent="."]
@@ -20,7 +22,7 @@ script = ExtResource("3_du4nn")
 script = ExtResource("6_qvt2l")
 
 [node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "key_art")]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

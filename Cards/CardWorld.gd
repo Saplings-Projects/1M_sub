@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name CardWorld
 ## Card object that exists in the world. Not to be confused with CardBase,
 ## which holds a card's data.
