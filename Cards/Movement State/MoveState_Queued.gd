@@ -6,7 +6,7 @@ const LERP_SPEED: float = 10.0
 const EASE_TIME: float = 0.5
 const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
-const QUEUE_OFFSET: float = -100
+const QUEUE_OFFSET: float = -150
 const SCALE_AMOUNT: Vector2 = Vector2(1.3, 1.3)
 
 
