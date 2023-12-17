@@ -20,4 +20,4 @@ func on_state_process(delta: float) -> void:
 	offset_desired_position.y += queue_offset
 	
 	_state.card.position = _state.card.position.lerp(offset_desired_position, delta * lerp_speed)
-	_state.card.rotation_degrees = 0.0
+	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * lerp_speed)
