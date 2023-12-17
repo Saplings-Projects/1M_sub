@@ -245,22 +245,24 @@ func _on_card_clicked(card: CardWorld) -> void:
 		# If we click a card with no card queued, queue it
 		set_queued_card(card)
 
+		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
+
 		_focus_card(card, card_queued_offset)
 
 
 func _on_card_hovering(card: CardWorld) -> void:
 	if !is_card_queued():
+		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.HOVERED)
 		_focus_card(card, card_hovered_offset)
 
 
 func _on_card_unhovered(card: CardWorld) -> void:
 	if !is_card_queued():
+		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.IN_HAND)
 		_unfocus_card(card)
 
 
 func _focus_card(card: CardWorld, offset: float) -> void:
-	card.get_card_movement_component().state_properties.desired_position.y = -offset
-	
 	_focused_card = card
 	
 	# children at the top of the hierarchy will render in front
@@ -268,8 +270,6 @@ func _focus_card(card: CardWorld, offset: float) -> void:
 
 
 func _unfocus_card(card: CardWorld) -> void:
-	card.get_card_movement_component().state_properties.desired_position.y = 0
-	
 	_focused_card = null
 	
 	# move back to original place in the hierarchy
@@ -299,8 +299,6 @@ func _update_card_positions() -> void:
 		
 		current_hand_width = per_card_width * (amount_of_cards - 1)
 	
-	var half_hand_width: float = current_hand_width / 2.0
-	
 	for card_index: int in amount_of_cards:
 		var card: CardWorld = cards_in_hand[card_index]
 		var movement_component: CardMovementComponent = card.get_card_movement_component()
@@ -310,7 +308,7 @@ func _update_card_positions() -> void:
 		var card_y: float = 0.0
 		
 		# center cards
-		card_x -= half_hand_width
+		card_x -= current_hand_width / 2.0
 		
 		# if we are focusing a card, scoot other cards out of the way
 		# we move closer cards further away, which results in a sort of "accordion" effect
@@ -330,11 +328,11 @@ func _update_card_positions() -> void:
 		var card_index_scaled: float = Helpers.convert_from_range(card.global_position.x, 0.0, viewport_width, -1.0, 1.0)
 		
 		# curve the cards in hand by finding the y value on a parabola
-		# y = ax^2 - a where a = max offset and x = card_index scaled to a range of -1 to 1
+		# y = ax^2 - a where a = max_hand_offset_y and x = x position scaled to a range of -1 to 1
 		card_y = (pow(card_index_scaled, 2.0) * max_hand_offset_y) - max_hand_offset_y
 		
 		# rotate cards on a cubic curve
-		# y = ax^3 where a = max_rotation and x = value between [-1, 1]
+		# y = ax^3 where a = max_rotation and x = x position scaled to a range of -1 to 1
 		var rotation_amount: float = pow(card_index_scaled, 3) * max_rotation
 		
 		match movement_component.current_move_state:
@@ -343,6 +341,14 @@ func _update_card_positions() -> void:
 				movement_component.state_properties.desired_position.y = card_y
 				movement_component.state_properties.desired_rotation = rotation_amount
 			Enums.CardMovementState.MOVING_TO_HAND:
+				movement_component.state_properties.desired_position.x = card_x
+				movement_component.state_properties.desired_position.y = card_y
+				movement_component.state_properties.desired_rotation = rotation_amount
+			Enums.CardMovementState.HOVERED:
+				movement_component.state_properties.desired_position.x = card_x
+				movement_component.state_properties.desired_position.y = card_y
+				movement_component.state_properties.desired_rotation = rotation_amount
+			Enums.CardMovementState.QUEUED:
 				movement_component.state_properties.desired_position.x = card_x
 				movement_component.state_properties.desired_position.y = card_y
 				movement_component.state_properties.desired_rotation = rotation_amount

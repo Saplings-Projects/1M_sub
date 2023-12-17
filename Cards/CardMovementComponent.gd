@@ -12,6 +12,8 @@ var _state_mapping: Dictionary = {
 	Enums.CardMovementState.MOVING_TO_HAND: MoveState_MovingToHand.new(),
 	Enums.CardMovementState.IN_HAND: MoveState_InHand.new(),
 	Enums.CardMovementState.DISCARDING: MoveState_Discarding.new(),
+	Enums.CardMovementState.HOVERED: MoveState_Hovered.new(),
+	Enums.CardMovementState.QUEUED: MoveState_Queued.new(),
 }
 
 
@@ -19,6 +21,11 @@ func _ready():
 	# init state with the parent. Parent should always be a CardWorld
 	assert(get_parent() is CardWorld, "Please attach this to a CardWorld!")
 	state_properties.card = get_parent()
+	
+	# bind exit state events
+	for state in _state_mapping:
+		if _has_state(state):
+			_state_mapping[state].trigger_exit_state.connect(_on_state_triggered_exit)
 	
 	set_movement_state(current_move_state)
 
@@ -43,7 +50,6 @@ func set_movement_state(new_state: Enums.CardMovementState):
 func _on_state_enter(state: Enums.CardMovementState):
 	if _has_state(state):
 		_state_mapping[state].init_state(state_properties)
-		_state_mapping[state].trigger_exit_state.connect(_on_state_triggered_exit)
 		_state_mapping[state].on_state_enter()
 
 
