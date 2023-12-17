@@ -21,3 +21,7 @@ func on_state_process(delta: float) -> void:
 
 func on_state_exit() -> void:
 	pass
+
+
+func can_transition_from(new_state: Enums.CardMovementState) -> bool:
+	return true

@@ -2,7 +2,7 @@ extends CardMovementState
 class_name MoveState_InHand
 
 
-const LERP_SPEED: float = 15.0
+const LERP_SPEED: float = 10.0
 const EASE_TIME: float = 0.5
 const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC

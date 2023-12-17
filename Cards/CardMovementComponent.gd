@@ -38,6 +38,11 @@ func set_movement_state(new_state: Enums.CardMovementState):
 	if new_state == current_move_state:
 		return
 	
+	# Check if we can transition from the current state. Exit if not.
+	if _has_state(current_move_state):
+		if not _state_mapping[current_move_state].can_transition_from(new_state):
+			return
+	
 	_on_state_exit(current_move_state)
 	
 	current_move_state = new_state

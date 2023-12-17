@@ -165,6 +165,10 @@ func _discard_card_at_index(card_index: int) -> void:
 	
 	# remove from hand and add to discard queue
 	cards_in_hand.remove_at(card_index)
+	
+	 # force an update of the card positions so they are up to date with this new card
+	_update_card_positions()
+	
 	_add_to_discard_queue(card)
 	
 	on_card_counts_updated.emit()
@@ -186,14 +190,14 @@ func _handle_card_draw_queue():
 	if _draw_timer != null:
 		return
 	
-	_draw_timer = get_tree().create_timer(card_draw_time)
-	await _draw_timer.timeout
-	_draw_timer = null
-
 	var card_data: CardBase = _cards_queued_for_add[0]
 	_cards_queued_for_add.remove_at(0)
 	
 	_create_card_in_world(card_data)
+	
+	_draw_timer = get_tree().create_timer(card_draw_time)
+	await _draw_timer.timeout
+	_draw_timer = null
 	
 	if _cards_queued_for_add.size() > 0:
 		_handle_card_draw_queue()
@@ -209,15 +213,16 @@ func _handle_discard_queue() -> void:
 	if _discard_timer != null:
 		return
 	
-	_discard_timer = get_tree().create_timer(card_discard_time)
-	await _discard_timer.timeout
-	_discard_timer = null
-	
 	var card: CardWorld = _cards_queued_for_discard[0]
 	_cards_queued_for_discard.remove_at(0)
 	
+	# Set desired position to the discard pile UI and then set state
 	card.get_card_movement_component().state_properties.desired_position = discard_pile_ui.global_position
 	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.DISCARDING)
+	
+	_discard_timer = get_tree().create_timer(card_discard_time)
+	await _discard_timer.timeout
+	_discard_timer = null
 	
 	if _cards_queued_for_discard.size() > 0:
 		_handle_discard_queue()
@@ -302,6 +307,7 @@ func _update_card_positions() -> void:
 		
 		current_hand_width = per_card_width * (amount_of_cards - 1)
 	
+	# start setting positions for each card
 	for card_index: int in amount_of_cards:
 		var card: CardWorld = cards_in_hand[card_index]
 		var movement_component: CardMovementComponent = card.get_card_movement_component()
@@ -338,5 +344,6 @@ func _update_card_positions() -> void:
 		# y = ax^3 where a = max_rotation and x = x position scaled to a range of -1 to 1
 		var rotation_amount: float = pow(card_index_scaled, 3) * max_rotation
 		
+		# set position and rotation
 		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
 		movement_component.state_properties.desired_rotation = rotation_amount
