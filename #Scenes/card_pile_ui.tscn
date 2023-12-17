@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bl3au25n1f8ld"]
+
+[node name="CardPileUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 255.0
+offset_right = 774.0
+offset_bottom = 400.0
+text = "This space has been intentionlly left blank"

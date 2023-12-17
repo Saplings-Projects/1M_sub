@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://87fedoq257xg"]
+[gd_scene load_steps=10 format=3 uid="uid://87fedoq257xg"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
+[ext_resource type="Script" path="res://UI/ShowCardPile.gd" id="7_e2ywb"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
@@ -64,6 +65,13 @@ stretch_mode = 0
 script = ExtResource("8_voref")
 pile_count_label = NodePath("DrawPileCount")
 
+[node name="ShowCardPile" type="Button" parent="CanvasLayer/UIControl/DrawPile"]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 47.0
+offset_bottom = 42.0
+script = ExtResource("7_e2ywb")
+
 [node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DrawPile"]
 layout_mode = 1
 anchors_preset = 15
@@ -96,6 +104,14 @@ texture_focused = ExtResource("12_kxw48")
 stretch_mode = 0
 script = ExtResource("10_pqly7")
 pile_count_label = NodePath("DrawPileCount")
+
+[node name="ShowCardPile" type="Button" parent="CanvasLayer/UIControl/DiscardPile"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 47.0
+offset_bottom = 42.0
+script = ExtResource("7_e2ywb")
 
 [node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DiscardPile"]
 layout_mode = 1
