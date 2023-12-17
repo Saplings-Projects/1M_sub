@@ -19,6 +19,9 @@ signal on_card_counts_updated
 @export var max_hand_size: int = 10
 @export var card_draw_time: float = 0.2
 @export var card_discard_time: float = 0.1
+@export var max_hand_width: float = 100
+@export var min_card_separation: float = 100
+@export var max_card_separation: float = 100
 @export var draw_pile_ui: DrawPileUISetter = null
 @export var discard_pile_ui: DiscardPileUISetter = null
 
@@ -130,6 +133,7 @@ func _create_card_in_world(card_data: CardBase) -> void:
 	card.init_card(card_data)
 	
 	card.global_position = draw_pile_ui.global_position
+	_update_card_positions()
 	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.MOVING_TO_HAND)
 	
 	_bind_card_input(card)
@@ -264,24 +268,37 @@ func _unfocus_card(card: CardWorld) -> void:
 
 
 func _update_card_positions() -> void:
-	if cards_in_hand.size() <= 0:
+	var amount_of_cards: int = cards_in_hand.size()
+	
+	if amount_of_cards <= 0:
 		return
 	
-	# set spacing of each card
-	var per_card_width: float = 0
-	if cards_in_hand.size() > 1:
-		per_card_width = total_hand_width / (cards_in_hand.size() - 1)
-	for card_index: int in cards_in_hand.size():
-		var card: CardWorld = cards_in_hand[card_index]
-		var card_x: float = per_card_width * card_index
+	# set hand width to the max of all our card separations
+	var per_card_width: float = max_card_separation
+	var current_hand_width: float = 0
+	if amount_of_cards > 1:
+		current_hand_width = per_card_width * (amount_of_cards - 1)
+	
+	# if our width is over the set maximum, reduce down the width between cards
+	if current_hand_width > max_hand_width:
+		var hand_over_max_delta: float = current_hand_width - max_hand_width
+		var new_separation: float = hand_over_max_delta / amount_of_cards
 		
+		per_card_width -= new_separation
+		per_card_width = maxf(per_card_width, min_card_separation)
+		
+		current_hand_width = per_card_width * (amount_of_cards - 1)
+	
+	var half_hand_width: float = current_hand_width / 2.0
+	
+	for card_index: int in amount_of_cards:
+		var card: CardWorld = cards_in_hand[card_index]
 		var movement_component: CardMovementComponent = card.get_card_movement_component()
 		var move_state: Enums.CardMovementState = movement_component.current_move_state
-
-		card_x -= total_hand_width / 2.0
-
-		match move_state:
-			Enums.CardMovementState.MOVING_TO_HAND:
-				movement_component.state_properties.desired_position.x = card_x
-			Enums.CardMovementState.IN_HAND:
-				movement_component.state_properties.desired_position.x = card_x
+		
+		var card_x: float = per_card_width * card_index
+		
+		# center cards
+		card_x -= half_hand_width
+		
+		movement_component.state_properties.desired_position.x = card_x
