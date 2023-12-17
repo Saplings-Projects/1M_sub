@@ -19,6 +19,8 @@ signal on_card_counts_updated
 @export var max_hand_size: int = 10
 @export var card_draw_time: float = 0.2
 @export var card_discard_time: float = 0.1
+@export var draw_pile_ui: DrawPileUISetter = null
+@export var discard_pile_ui: DiscardPileUISetter = null
 
 var cards_in_hand: Array[CardWorld] = []
 var draw_pile: Array[CardBase] = []
@@ -121,13 +123,16 @@ func _draw_card() -> void:
 
 
 func _create_card_in_world(card_data: CardBase) -> void:
-	var card_instance: CardWorld = card_scene.instantiate()
-	add_child(card_instance)
-	cards_in_hand.append(card_instance)
+	var card: CardWorld = card_scene.instantiate()
+	add_child(card)
+	cards_in_hand.append(card)
 
-	card_instance.init_card(card_data)
+	card.init_card(card_data)
 	
-	_bind_card_input(card_instance)
+	card.global_position = draw_pile_ui.global_position
+	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.MOVING_TO_HAND)
+	
+	_bind_card_input(card)
 
 
 func _bind_card_input(card: CardWorld):
@@ -144,7 +149,7 @@ func _discard_card_at_index(card_index: int) -> void:
 	# add to discard pile
 	discard_pile.append(card.card_data)
 	
-	# remove from world
+	# remove from hand and add to discard queue
 	cards_in_hand.remove_at(card_index)
 	_add_to_discard_queue(card)
 	
@@ -196,7 +201,9 @@ func _handle_discard_queue() -> void:
 	
 	var card: CardWorld = _cards_queued_for_discard[0]
 	_cards_queued_for_discard.remove_at(0)
-	card.queue_free()
+	
+	card.get_card_movement_component().state_properties.desired_position = discard_pile_ui.global_position
+	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.DISCARDING)
 	
 	if _cards_queued_for_discard.size() > 0:
 		_handle_discard_queue()
@@ -247,12 +254,12 @@ func _on_card_unhovered(card: CardWorld) -> void:
 
 
 func _focus_card(card: CardWorld, offset: float) -> void:
-	card.get_card_movement_component().desired_position.y = -offset
+	card.get_card_movement_component().state_properties.desired_position.y = -offset
 	card.z_index = 1
 
 
 func _unfocus_card(card: CardWorld) -> void:
-	card.get_card_movement_component().desired_position.y = 0
+	card.get_card_movement_component().state_properties.desired_position.y = 0
 	card.z_index = 0
 
 
@@ -267,7 +274,14 @@ func _update_card_positions() -> void:
 	for card_index: int in cards_in_hand.size():
 		var card: CardWorld = cards_in_hand[card_index]
 		var card_x: float = per_card_width * card_index
+		
+		var movement_component: CardMovementComponent = card.get_card_movement_component()
+		var move_state: Enums.CardMovementState = movement_component.current_move_state
 
 		card_x -= total_hand_width / 2.0
 
-		card.get_card_movement_component().desired_position.x = card_x
+		match move_state:
+			Enums.CardMovementState.MOVING_TO_HAND:
+				movement_component.state_properties.desired_position.x = card_x
+			Enums.CardMovementState.IN_HAND:
+				movement_component.state_properties.desired_position.x = card_x
