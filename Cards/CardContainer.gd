@@ -22,6 +22,8 @@ signal on_card_counts_updated
 @export var max_hand_width: float = 100
 @export var min_card_separation: float = 100
 @export var max_card_separation: float = 100
+# Amount that other cards will scoot out of the way when you hover a card
+@export var hover_offset_max: float = 50.0
 @export var draw_pile_ui: DrawPileUISetter = null
 @export var discard_pile_ui: DiscardPileUISetter = null
 
@@ -30,6 +32,7 @@ var draw_pile: Array[CardBase] = []
 var discard_pile: Array[CardBase] = []
 var queued_card: CardWorld = null
 
+var _focused_card: CardWorld = null
 var _cards_queued_for_add: Array[CardBase] = []
 var _draw_timer: SceneTreeTimer = null
 var _cards_queued_for_discard: Array[CardWorld] = []
@@ -238,13 +241,8 @@ func _on_card_clicked(card: CardWorld) -> void:
 	else:
 		# If we click a card with no card queued, queue it
 		set_queued_card(card)
+
 		_focus_card(card, card_queued_offset)
-		
-		# Unfocus all other cards
-		for other_card in cards_in_hand:
-			if other_card == card:
-				continue
-			_unfocus_card(other_card)
 
 
 func _on_card_hovering(card: CardWorld) -> void:
@@ -260,12 +258,16 @@ func _on_card_unhovered(card: CardWorld) -> void:
 func _focus_card(card: CardWorld, offset: float) -> void:
 	card.get_card_movement_component().state_properties.desired_position.y = -offset
 	
+	_focused_card = card
+	
 	# children at the top of the hierarchy will render in front
 	move_child(card, get_child_count())
 
 
 func _unfocus_card(card: CardWorld) -> void:
 	card.get_card_movement_component().state_properties.desired_position.y = 0
+	
+	_focused_card = null
 	
 	# move back to original place in the hierarchy
 	var card_index: int = cards_in_hand.find(card)
@@ -305,5 +307,18 @@ func _update_card_positions() -> void:
 		
 		# center cards
 		card_x -= half_hand_width
+		
+		# if we are focusing a card, scoot other cards out of the way
+		# we move closer cards further away, which results in a sort of "accordion" effect
+		if _focused_card != null:
+			var focused_card_index: int = cards_in_hand.find(_focused_card)
+			if card_index != focused_card_index:
+				var scaled_hover_offset: float = hover_offset_max
+				var index_delta: float = absi(card_index - focused_card_index)
+				scaled_hover_offset = scaled_hover_offset / index_delta
+				if card_index < focused_card_index:
+					card_x -= scaled_hover_offset
+				else:
+					card_x += scaled_hover_offset
 		
 		movement_component.state_properties.desired_position.x = card_x
