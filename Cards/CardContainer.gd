@@ -335,24 +335,5 @@ func _update_card_positions() -> void:
 		# y = ax^3 where a = max_rotation and x = x position scaled to a range of -1 to 1
 		var rotation_amount: float = pow(card_index_scaled, 3) * max_rotation
 		
-		match movement_component.current_move_state:
-			Enums.CardMovementState.NONE:
-				movement_component.state_properties.desired_position.x = card_x
-				movement_component.state_properties.desired_position.y = card_y
-				movement_component.state_properties.desired_rotation = rotation_amount
-			Enums.CardMovementState.MOVING_TO_HAND:
-				movement_component.state_properties.desired_position.x = card_x
-				movement_component.state_properties.desired_position.y = card_y
-				movement_component.state_properties.desired_rotation = rotation_amount
-			Enums.CardMovementState.HOVERED:
-				movement_component.state_properties.desired_position.x = card_x
-				movement_component.state_properties.desired_position.y = card_y
-				movement_component.state_properties.desired_rotation = rotation_amount
-			Enums.CardMovementState.QUEUED:
-				movement_component.state_properties.desired_position.x = card_x
-				movement_component.state_properties.desired_position.y = card_y
-				movement_component.state_properties.desired_rotation = rotation_amount
-			Enums.CardMovementState.IN_HAND:
-				movement_component.state_properties.desired_position.x = card_x
-				movement_component.state_properties.desired_position.y = card_y
-				movement_component.state_properties.desired_rotation = rotation_amount
+		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
+		movement_component.state_properties.desired_rotation = rotation_amount
