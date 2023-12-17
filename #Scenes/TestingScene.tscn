@@ -105,6 +105,7 @@ max_hand_width = 900.0
 min_card_separation = 90.0
 max_card_separation = 120.0
 hover_offset_max = 100.0
+max_rotation = 40.0
 draw_pile_ui = NodePath("../DrawPile")
 discard_pile_ui = NodePath("../DiscardPile")
 

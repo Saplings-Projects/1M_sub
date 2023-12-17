@@ -24,6 +24,9 @@ signal on_card_counts_updated
 @export var max_card_separation: float = 100
 # Amount that other cards will scoot out of the way when you hover a card
 @export var hover_offset_max: float = 50.0
+@export var max_rotation: float = 30
+# Max amount of visual offset for cards. Increasing this will make cards more "curved"
+@export var max_hand_offset_y: float = 100
 @export var draw_pile_ui: DrawPileUISetter = null
 @export var discard_pile_ui: DiscardPileUISetter = null
 
@@ -304,6 +307,7 @@ func _update_card_positions() -> void:
 		var move_state: Enums.CardMovementState = movement_component.current_move_state
 		
 		var card_x: float = per_card_width * card_index
+		var card_y: float = 0.0
 		
 		# center cards
 		card_x -= half_hand_width
@@ -321,4 +325,28 @@ func _update_card_positions() -> void:
 				else:
 					card_x += scaled_hover_offset
 		
-		movement_component.state_properties.desired_position.x = card_x
+		# scale card's x value to a range of [-1, 1] from range of [0, viewport width]
+		var viewport_width: float = get_viewport_rect().size.x
+		var card_index_scaled: float = Helpers.convert_from_range(card.global_position.x, 0.0, viewport_width, -1.0, 1.0)
+		
+		# curve the cards in hand by finding the y value on a parabola
+		# y = ax^2 - a where a = max offset and x = card_index scaled to a range of -1 to 1
+		card_y = (pow(card_index_scaled, 2.0) * max_hand_offset_y) - max_hand_offset_y
+		
+		# rotate cards on a cubic curve
+		# y = ax^3 where a = max_rotation and x = value between [-1, 1]
+		var rotation_amount: float = pow(card_index_scaled, 3) * max_rotation
+		
+		match movement_component.current_move_state:
+			Enums.CardMovementState.NONE:
+				movement_component.state_properties.desired_position.x = card_x
+				movement_component.state_properties.desired_position.y = card_y
+				movement_component.state_properties.desired_rotation = rotation_amount
+			Enums.CardMovementState.MOVING_TO_HAND:
+				movement_component.state_properties.desired_position.x = card_x
+				movement_component.state_properties.desired_position.y = card_y
+				movement_component.state_properties.desired_rotation = rotation_amount
+			Enums.CardMovementState.IN_HAND:
+				movement_component.state_properties.desired_position.x = card_x
+				movement_component.state_properties.desired_position.y = card_y
+				movement_component.state_properties.desired_rotation = rotation_amount
