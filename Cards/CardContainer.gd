@@ -196,12 +196,12 @@ func _on_card_unhovered(card: CardWorld) -> void:
 
 
 func _focus_card(card: CardWorld, offset: float) -> void:
-	card.get_lerp_component().desired_position.y = -offset
+	card.get_card_movement_component().desired_position.y = -offset
 	card.z_index = 1
 
 
 func _unfocus_card(card: CardWorld) -> void:
-	card.get_lerp_component().desired_position.y = 0
+	card.get_card_movement_component().desired_position.y = 0
 	card.z_index = 0
 
 
@@ -225,4 +225,4 @@ func _update_card_positions() -> void:
 		var card: CardWorld = cards_in_hand[card_index]
 		var card_x: float = per_card_width * card_index
 
-		card.get_lerp_component().desired_position.x = card_x
+		card.get_card_movement_component().desired_position.x = card_x
