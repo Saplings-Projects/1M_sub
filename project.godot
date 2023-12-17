@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerManager="*res://Managers/PlayerManager.gd"
 CardManager="*res://Managers/CardManager.gd"
 PhaseManager="*res://Managers/PhaseManager.gd"
+RandomGenerator="*res://Managers/RandomGenerator.gd"
 
 [display]
 

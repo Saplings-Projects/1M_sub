@@ -1,29 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://87fedoq257xg"]
+[gd_scene load_steps=9 format=3 uid="uid://87fedoq257xg"]
 
-[ext_resource type="Script" path="res://Cards/CardContainer.gd" id="1_cwemj"]
-[ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_tx1h0"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
-[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="3_6uosf"]
-[ext_resource type="Resource" uid="uid://5yn4t13kwwoo" path="res://Cards/Resource/Card_DamageHealth.tres" id="4_nsiy1"]
-[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="5_4b2q2"]
-[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="6_bferu"]
-[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="7_7bwak"]
+[ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
-[ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="11_6xwul"]
+[ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
+[ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
+[ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
+[ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
+[ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 
 [node name="TestingScene" type="Node2D"]
-
-[node name="CardContainer" type="Node2D" parent="."]
-script = ExtResource("1_cwemj")
-card_scene = ExtResource("2_tx1h0")
-total_hand_width = 500.0
-card_queued_offset = 200.0
-default_hand = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("3_6uosf"), ExtResource("4_nsiy1"), ExtResource("5_4b2q2"), ExtResource("6_bferu"), ExtResource("7_7bwak")])
 
 [node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
 
 [node name="Player" parent="." instance=ExtResource("3_4psp7")]
 position = Vector2(595, 284)
+
+[node name="CardContainer" parent="." instance=ExtResource("3_e7sws")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -43,11 +36,76 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -32.0
+offset_left = -145.0
+offset_top = -141.0
+offset_right = -35.0
+offset_bottom = -109.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "end turn"
-script = ExtResource("11_6xwul")
+script = ExtResource("14_dpe64")
+
+[node name="DrawPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -69.0
+offset_right = 70.0
+offset_bottom = -29.0
+grow_vertical = 0
+texture_normal = ExtResource("11_pw70x")
+texture_pressed = ExtResource("11_pw70x")
+texture_hover = ExtResource("11_pw70x")
+texture_disabled = ExtResource("11_pw70x")
+texture_focused = ExtResource("11_pw70x")
+stretch_mode = 0
+script = ExtResource("8_voref")
+pile_count_label = NodePath("DrawPileCount")
+
+[node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DrawPile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiscardPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -72.0
+offset_right = -24.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("12_kxw48")
+texture_pressed = ExtResource("12_kxw48")
+texture_hover = ExtResource("12_kxw48")
+texture_disabled = ExtResource("12_kxw48")
+texture_focused = ExtResource("12_kxw48")
+stretch_mode = 0
+script = ExtResource("10_pqly7")
+pile_count_label = NodePath("DrawPileCount")
+
+[node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DiscardPile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]

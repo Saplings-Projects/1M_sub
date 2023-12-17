@@ -8,6 +8,7 @@ class_name Battler
 
 @export var enemies_to_summon: Array[PackedScene]
 @export var enemy_spacing: float = 50.0
+@export var enemy_attack_time: float = 1.0
 
 var _enemy_list: Array[Entity]
 
@@ -65,8 +66,16 @@ func _on_enemy_start_turn() -> void:
 	
 	# enemy attack
 	for enemy: Entity in _enemy_list:
-		var success: bool = _on_attack(enemy.get_behavior_component().attack, enemy, PlayerManager.player)
-		assert(success == true, "Enemy failed to attack.")
+		var enemy_attack: CardBase = enemy.get_behavior_component().attack
+		var can_attack: bool = enemy_attack.can_play_card(enemy, PlayerManager.player)
+		
+		assert(can_attack == true, "Enemy failed to attack.")
+		
+		if can_attack:
+			enemy_attack.on_card_play(enemy, PlayerManager.player)
+	
+	# TODO: temporary delay so we can see the draw pile and discard pile working
+	await get_tree().create_timer(enemy_attack_time).timeout
 	
 	PhaseManager.set_phase(Enums.Phase.PLAYER_ATTACKING)
 
@@ -82,11 +91,12 @@ func _on_enemy_clicked(enemy: Enemy) -> void:
 
 
 func _try_player_play_card_on_entity(entity: Entity) -> void:
-	if CardManager.is_card_queued():
-		var success: bool = _on_attack(CardManager.queued_card.card_data, PlayerManager.player, entity)
-		if success:
-			CardManager.notify_successful_play()
-
-
-func _on_attack(attack_card: CardBase, caster: Entity, target: Entity) -> bool:
-	return attack_card.try_play_card(caster, target)
+	if CardManager.card_container.is_card_queued():
+		var queued_card_data: CardBase = CardManager.card_container.queued_card.card_data
+		var can_play: bool = queued_card_data.can_play_card(PlayerManager.player, entity)
+		
+		if can_play:
+			# remove queued card, then play the card
+			# This is so the queued card doesn't have any influence over our hand count
+			CardManager.card_container.remove_queued_card()
+			queued_card_data.on_card_play(PlayerManager.player, entity)

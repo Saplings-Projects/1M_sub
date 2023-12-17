@@ -20,23 +20,26 @@ class_name CardBase
 @export var status_to_apply_to_caster: Array[StatusBase]
 @export var affect_all_targets: bool = false
 @export var affect_all_casters: bool = false
+@export var amount_of_cards_to_draw: int = 0
+@export var amount_of_cards_to_discard: int = 0
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
 @export var card_title: String = "NULL"
 @export var card_key_art: ImageTexture = null
 @export var card_description: String = "NULL"
 
 
-func try_play_card(caster: Entity, target: Entity) -> bool:
+func can_play_card(caster: Entity, target: Entity) -> bool:
 	if caster.get_party_component().can_play_on_entity(application_type, target):
-		_on_card_play(caster, target)
 		return true
 	return false
 
 
-func _on_card_play(caster: Entity, target: Entity) -> void:
+func on_card_play(caster: Entity, target: Entity) -> void:
 	_deal_damage(caster, target)
 	_apply_status(caster, target)
-	# TODO add other functionality that lots of cards may share (eg: restore AP, draw cards)
+	_draw_cards()
+	_discard_random_cards()
+	# TODO add other functionality that lots of cards may share (eg: restore AP)
 
 
 # override in child cards if you want to deal damage in a unique way
@@ -82,3 +85,11 @@ func _apply_status(caster: Entity, target: Entity) -> void:
 				party_member.get_status_component().add_status(status, caster)
 		else:
 			target.get_status_component().add_status(status, caster)
+
+
+func _draw_cards() -> void:
+	CardManager.card_container.draw_cards(amount_of_cards_to_draw)
+
+
+func _discard_random_cards() -> void:
+	CardManager.card_container.discard_random_card(amount_of_cards_to_discard)

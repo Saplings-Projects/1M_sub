@@ -1,22 +1,14 @@
 extends Node
-## Global AutoLoaded class that allows you to get the currently queued card from anywhere.
-##
-## TODO could potentially use this for global drawing of cards.
+## Global AutoLoaded class that allows you to get the card container from anywhere.
 
 
-signal successful_card_play(card: CardWorld)
+signal on_card_container_initialized
 
-var queued_card: CardWorld = null
-
-
-func is_card_queued() -> bool:
-	return queued_card != null
+var card_container: CardContainer = null
 
 
-func set_queued_card(card: CardWorld) -> void:
-	queued_card = card
-
-
-func notify_successful_play() -> void:
-	successful_card_play.emit(queued_card)
-	set_queued_card(null)
+# Call this from CardContainer to initialize. This allows you to get the current CardContainer from
+# anywhere by calling CardManager.card_container
+func set_card_container(in_card_container: CardContainer) -> void:
+	card_container = in_card_container
+	on_card_container_initialized.emit()
