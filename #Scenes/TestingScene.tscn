@@ -36,9 +36,9 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-card_hovered_offset = null
-starting_hand_size = null
-max_hand_size = null
+card_hovered_offset = 100.0
+starting_hand_size = 5
+max_hand_size = 10
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 1

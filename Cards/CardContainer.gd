@@ -17,11 +17,18 @@ signal on_card_counts_updated
 @export var default_deck: Array[CardBase]
 @export var starting_hand_size: int = 5
 @export var max_hand_size: int = 10
+@export var card_draw_time: float = 0.2
+@export var card_discard_time: float = 0.1
 
 var cards_in_hand: Array[CardWorld] = []
 var draw_pile: Array[CardBase] = []
 var discard_pile: Array[CardBase] = []
 var queued_card: CardWorld = null
+
+var _cards_queued_for_add: Array[CardBase] = []
+var _draw_timer: SceneTreeTimer = null
+var _cards_queued_for_discard: Array[CardWorld] = []
+var _discard_timer: SceneTreeTimer = null
 
 
 func _ready() -> void:
@@ -94,7 +101,6 @@ func _init_default_draw_pile() -> void:
 	draw_pile.shuffle()
 
 
-# Final place where a card is created and added to the world
 func _draw_card() -> void:
 	# if draw pile is empty, shuffle discard pile into draw pile. Clear discard pile.
 	if draw_pile.size() <= 0:
@@ -109,7 +115,7 @@ func _draw_card() -> void:
 	var drawn_card: CardBase = draw_pile[0]
 	draw_pile.remove_at(0)
 	
-	_create_card_in_world(drawn_card)
+	_add_to_card_draw_queue(drawn_card)
 	
 	on_card_counts_updated.emit()
 
@@ -132,7 +138,6 @@ func _bind_card_input(card: CardWorld):
 	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card))
 
 
-# Final place where a card is discarded and removed from the world
 func _discard_card_at_index(card_index: int) -> void:
 	var card: CardWorld = cards_in_hand[card_index]
 	
@@ -141,7 +146,7 @@ func _discard_card_at_index(card_index: int) -> void:
 	
 	# remove from world
 	cards_in_hand.remove_at(card_index)
-	card.queue_free()
+	_add_to_discard_queue(card)
 	
 	on_card_counts_updated.emit()
 
@@ -149,6 +154,52 @@ func _discard_card_at_index(card_index: int) -> void:
 func _discard_last_card() -> void:
 	if cards_in_hand.size() > 0:
 		_discard_card_at_index(cards_in_hand.size() - 1)
+
+
+
+func _add_to_card_draw_queue(card: CardBase):
+	_cards_queued_for_add.append(card)
+	_handle_card_draw_queue()
+
+
+# Final place where a card is created and added to the world
+func _handle_card_draw_queue():
+	if _draw_timer != null:
+		return
+	
+	_draw_timer = get_tree().create_timer(card_draw_time)
+	await _draw_timer.timeout
+	_draw_timer = null
+
+	var card_data: CardBase = _cards_queued_for_add[0]
+	_cards_queued_for_add.remove_at(0)
+	
+	_create_card_in_world(card_data)
+	
+	if _cards_queued_for_add.size() > 0:
+		_handle_card_draw_queue()
+
+
+func _add_to_discard_queue(card: CardWorld) -> void:
+	_cards_queued_for_discard.append(card)
+	_handle_discard_queue()
+
+
+# Final place where a card is discarded and removed from the world
+func _handle_discard_queue() -> void:
+	if _discard_timer != null:
+		return
+	
+	_discard_timer = get_tree().create_timer(card_discard_time)
+	await _discard_timer.timeout
+	_discard_timer = null
+	
+	var card: CardWorld = _cards_queued_for_discard[0]
+	_cards_queued_for_discard.remove_at(0)
+	card.queue_free()
+	
+	if _cards_queued_for_discard.size() > 0:
+		_handle_discard_queue()
 
 
 func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
