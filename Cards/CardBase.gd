@@ -56,31 +56,11 @@ func on_card_play() -> void:
 	_apply_all_effects()
 
 
-# override in child cards if you want to deal damage in a unique way
-# func _deal_damage(caster: Entity, target: Entity) -> void:
-# 	# damage target
-# 	if damage_to_apply_to_target != 0.0:
-# 		_damage_entity(caster, target, damage_to_apply_to_target, affect_all_targets)
-	
-# 	#damage caster
-# 	if damage_to_apply_to_caster != 0.0:
-# 		_damage_entity(caster, caster, damage_to_apply_to_caster, affect_all_casters)
-
-
-func _damage_entity(caster: Entity, target: Entity, damage_amount: float, damage_all: bool) -> void:
+func damage_entity(caster: Entity, target: Entity, damage_amount: float) -> void:
 	var target_damage_data: DealDamageData = DealDamageData.new()
 	target_damage_data.damage = damage_amount
 	target_damage_data.caster = caster
-	
-	# If damage_all is set, try to damage all the party members set in the party component
-	if damage_all:
-		var party: Array[Entity] = target.get_party_component().party
-		assert(party.size() > 0, "Entity has an empty party. Make sure you added party members.")
-		
-		for party_member: Entity in party:
-			party_member.get_health_component().deal_damage(target_damage_data)
-	else:
-		target.get_health_component().deal_damage(target_damage_data)
+	target.get_health_component().deal_damage(target_damage_data)
 
 
 func _draw_cards() -> void:
