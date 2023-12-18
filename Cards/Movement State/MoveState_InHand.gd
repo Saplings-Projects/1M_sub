@@ -1,5 +1,6 @@
 extends CardMovementState
 class_name MoveState_InHand
+## InHand state. Moves to desired position
 
 
 const LERP_SPEED: float = 10.0

@@ -1,5 +1,6 @@
 extends CardMovementState
 class_name MoveState_Queued
+## Queued state. Moves to desired position with a y-offset
 
 
 const LERP_SPEED: float = 10.0

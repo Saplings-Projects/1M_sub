@@ -1,5 +1,6 @@
 extends CardMovementState
 class_name MoveState_Discarding
+## Discarding state. Moves to the discard pile and scales down to 0
 
 
 const LERP_SPEED: float = 10.0
@@ -16,7 +17,7 @@ func on_state_enter() -> void:
 	.tween_property(_state.card, EasingConstants.GLOBAL_POSITION_PROPERTY, _state.desired_position, EASE_TIME)\
 	.set_ease(EASE_TYPE)\
 	.set_trans(TRANS_TYPE)\
-	.finished.connect(func(): _state.card.queue_free())
+	.finished.connect(_on_easing_finished)
 	
 	# Scale down to zero
 	_state.card.create_tween()\
@@ -35,3 +36,7 @@ func on_state_process(delta: float) -> void:
 func can_transition_from(new_state: Enums.CardMovementState) -> bool:
 	# Once you discard, you can't exit this state
 	return false
+
+
+func _on_easing_finished() -> void:
+	_state.card.queue_free()

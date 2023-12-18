@@ -1,5 +1,6 @@
 extends CardMovementState
 class_name MoveState_Hovered
+## Hovering state. Moves to desired position with a y-offset
 
 
 const LERP_SPEED: float = 10.0

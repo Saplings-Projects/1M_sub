@@ -1,5 +1,6 @@
 extends Node
 class_name CardStateProperties
+## Properties used by CardMovementStates
 
 
 var card: CardWorld = null

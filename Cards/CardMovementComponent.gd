@@ -1,12 +1,18 @@
 extends Node
 class_name CardMovementComponent
+## Holds a mapping of CardMovementState and dispatches state events to them.
+##
+## To make a new state, derive from CardMovementState. Then add it to the mapping via _state_mapping
 
 
 signal on_movement_state_update(new_state: Enums.CardMovementState)
 
 var current_move_state: Enums.CardMovementState = Enums.CardMovementState.NONE
+# This is meant to be updated by CardContainer. This property Resource is sent to the state when
+# it is initialized, so it will update in the state whenever it is updated in CardContainer. 
 var state_properties: CardStateProperties = CardStateProperties.new()
 
+# Map each enum to a CardMovementState Resource
 var _state_mapping: Dictionary = {
 	Enums.CardMovementState.NONE: null,
 	Enums.CardMovementState.MOVING_TO_HAND: MoveState_MovingToHand.new(),
@@ -17,24 +23,24 @@ var _state_mapping: Dictionary = {
 }
 
 
-func _ready():
+func _ready() -> void:
 	# init state with the parent. Parent should always be a CardWorld
 	assert(get_parent() is CardWorld, "Please attach this to a CardWorld!")
 	state_properties.card = get_parent()
 	
 	# bind exit state events
-	for state in _state_mapping:
+	for state: Enums.CardMovementState in _state_mapping:
 		if _has_state(state):
 			_state_mapping[state].trigger_exit_state.connect(_on_state_triggered_exit)
 	
 	set_movement_state(current_move_state)
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_on_state_process(current_move_state)
 
 
-func set_movement_state(new_state: Enums.CardMovementState):
+func set_movement_state(new_state: Enums.CardMovementState) -> void:
 	if new_state == current_move_state:
 		return
 	
@@ -52,19 +58,19 @@ func set_movement_state(new_state: Enums.CardMovementState):
 	on_movement_state_update.emit(current_move_state)
 
 
-func _on_state_enter(state: Enums.CardMovementState):
+func _on_state_enter(state: Enums.CardMovementState) -> void:
 	if _has_state(state):
 		_state_mapping[state].init_state(state_properties)
 		_state_mapping[state].on_state_enter()
 
 
-func _on_state_process(state: Enums.CardMovementState):
+func _on_state_process(state: Enums.CardMovementState) -> void:
 	if _has_state(state):
 		var delta: float = get_process_delta_time()
 		_state_mapping[state].on_state_process(delta)
 
 
-func _on_state_exit(state: Enums.CardMovementState):
+func _on_state_exit(state: Enums.CardMovementState) -> void:
 	if _has_state(state):
 		_state_mapping[state].on_state_exit()
 

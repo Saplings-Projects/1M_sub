@@ -156,7 +156,7 @@ func _create_card_in_world(card_data: CardBase) -> void:
 	card_movement.on_movement_state_update.connect(_on_card_change_state.bind(card))
 
 
-func _on_card_change_state(new_state: Enums.CardMovementState, card: CardWorld):
+func _on_card_change_state(new_state: Enums.CardMovementState, card: CardWorld) -> void:
 	# once we enter IN_HAND state, bind input
 	if new_state == Enums.CardMovementState.IN_HAND:
 		_bind_card_input(card)
@@ -165,7 +165,7 @@ func _on_card_change_state(new_state: Enums.CardMovementState, card: CardWorld):
 		card.get_card_movement_component().on_movement_state_update.disconnect(_on_card_change_state)
 
 
-func _bind_card_input(card: CardWorld):
+func _bind_card_input(card: CardWorld) -> void:
 	# bind mouse events
 	var card_click_handler: ClickHandler = card.get_click_handler()
 	card_click_handler.on_click.connect(_on_card_clicked.bind(card))
@@ -173,6 +173,7 @@ func _bind_card_input(card: CardWorld):
 	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card))
 
 
+# This is where a card is removed from the hand and added to the discard pile.
 func _discard_card_at_index(card_index: int) -> void:
 	var card: CardWorld = cards_in_hand[card_index]
 	
@@ -181,7 +182,6 @@ func _discard_card_at_index(card_index: int) -> void:
 	
 	# remove from hand and add to discard queue
 	cards_in_hand.remove_at(card_index)
-	
 	_add_to_discard_queue(card)
 	
 	on_card_counts_updated.emit()
@@ -192,14 +192,16 @@ func _discard_last_card() -> void:
 		_discard_card_at_index(cards_in_hand.size() - 1)
 
 
-
-func _add_to_card_draw_queue(card: CardBase):
+func _add_to_card_draw_queue(card: CardBase) -> void:
 	_cards_queued_for_add.append(card)
 	_handle_card_draw_queue()
 
 
-# Final place where a card is created and added to the world
-func _handle_card_draw_queue():
+# Final place where a card is created and added to the world.
+# NOTE: at this point, cards have already been removed from the draw pile, but not added to your hand.
+# Cards are removed from the draw pile in _draw_card.
+# _create_card_in_world spawns the cards in the queue and adds them to your hand.
+func _handle_card_draw_queue() -> void:
 	if _draw_timer != null:
 		return
 	
@@ -221,8 +223,11 @@ func _add_to_discard_queue(card: CardWorld) -> void:
 	_handle_discard_queue()
 
 
-# Final place where a card is discarded
+# Looping queue that starts the discarding animation for cards.
 # NOTE: a card is destroyed when the DISCARDING state is finished. See MoveState_Discarding
+# NOTE: if you discard multiple cards at once, the cards you discarded are technically removed
+# from your hand and added to the discard pile immediately (see _discard_card_at_index).
+# This function simply starts movement states on those cards that were discarded.
 func _handle_discard_queue() -> void:
 	if _discard_timer != null:
 		return
@@ -270,13 +275,13 @@ func _on_card_clicked(card: CardWorld) -> void:
 		set_queued_card(card)
 
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
-		_focus_card(card, card_queued_offset)
+		_focus_card(card)
 
 
 func _on_card_hovering(card: CardWorld) -> void:
 	if !is_card_queued():
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.HOVERED)
-		_focus_card(card, card_hovered_offset)
+		_focus_card(card)
 
 
 func _on_card_unhovered(card: CardWorld) -> void:
@@ -285,7 +290,7 @@ func _on_card_unhovered(card: CardWorld) -> void:
 		_unfocus_card(card)
 
 
-func _focus_card(card: CardWorld, offset: float) -> void:
+func _focus_card(card: CardWorld) -> void:
 	_focused_card = card
 	
 	# children at the top of the hierarchy will render in front

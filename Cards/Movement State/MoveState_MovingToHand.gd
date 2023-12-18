@@ -1,5 +1,6 @@
 extends CardMovementState
 class_name MoveState_MovingToHand
+ ## MovingToHand state. Scales to 1 from 0 and sets to desired position
 
 
 const LERP_SPEED: float = 15.0
@@ -17,13 +18,18 @@ func on_state_enter() -> void:
 	.set_ease(EASE_TYPE)\
 	.set_trans(TRANS_TYPE)\
 	.from(Vector2.ZERO)\
-	.finished.connect(func(): trigger_exit_state.emit(Enums.CardMovementState.IN_HAND))
+	.finished.connect(_on_easing_finished)
 
 
 # @Override
-func on_state_process(delta: float):
+func on_state_process(delta: float) -> void:
 	# Ease to desired position in the hand
 	_state.card.position = _state.card.position.lerp(_state.desired_position, delta * LERP_SPEED)
 	
 	# Ease rotation
 	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, _state.desired_rotation, delta * LERP_SPEED)
+
+
+func _on_easing_finished() -> void:
+	# Fire off this signal, which should exit this state and enter the IN_HAND state
+	trigger_exit_state.emit(Enums.CardMovementState.IN_HAND)

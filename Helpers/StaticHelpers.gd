@@ -21,6 +21,7 @@ static func get_random_array_index(array: Array[Variant]) -> int:
 	return randi_range(0, array.size() - 1)
 
 
+# Scales from range to a new range
 static func convert_from_range(value: float, from_min: float, from_max: float, to_min: float, to_max: float) -> float:
 	var from_range: float = from_max - from_min
 	var to_value: float = 0.0
