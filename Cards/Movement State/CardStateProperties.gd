@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 class_name CardStateProperties
 ## Properties used by CardMovementStates
 
