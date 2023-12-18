@@ -9,6 +9,7 @@ class_name CardContainer
 
 
 signal on_card_counts_updated
+signal on_cards_finished_dealing
 
 @export var card_scene: PackedScene
 @export var total_hand_width: float = 100
@@ -80,7 +81,7 @@ func deal_to_starting_hand_size() -> void:
 func draw_cards(amount: int) -> void:
 	for card_index: int in amount:
 		# limit amount of cards to a maximum
-		if cards_in_hand.size() < max_hand_size:
+		if get_total_queued_hand_size() < max_hand_size:
 			_draw_card()
 
 
@@ -102,6 +103,18 @@ func discard_random_card(amount: int) -> void:
 func discard_card(card: CardWorld) -> void:
 	var card_index: int = cards_in_hand.find(card)
 	_discard_card_at_index(card_index)
+
+
+# Gets all the cards that will be in your hand once animations are completed.
+# This includes cards that are queued and cards already in your hand.
+#func get_current_hand_data() -> Array[CardBase]:
+	#var total_cards: Array[CardBase] = _cards_queued_for_add
+	#for card in cards_in_hand:
+		#total_cards.append(card.card_data)
+	#return total_cards
+
+func get_total_queued_hand_size() -> int:
+	return _cards_queued_for_add.size() + cards_in_hand.size()
 
 
 func get_draw_pile_size() -> int:
@@ -131,9 +144,58 @@ func _draw_card() -> void:
 	var drawn_card: CardBase = draw_pile[0]
 	draw_pile.remove_at(0)
 	
+	# add to queue for creation at a later time
 	_add_to_card_draw_queue(drawn_card)
 	
 	on_card_counts_updated.emit()
+
+
+# This is where a card is removed from the hand and added to the discard pile.
+func _discard_card_at_index(card_index: int) -> void:
+	var card: CardWorld = cards_in_hand[card_index]
+	
+	# add to discard pile
+	discard_pile.append(card.card_data)
+	
+	# remove from hand and add to discard queue
+	cards_in_hand.remove_at(card_index)
+	_add_to_discard_queue(card)
+	
+	on_card_counts_updated.emit()
+
+
+func _discard_last_card() -> void:
+	if cards_in_hand.size() > 0:
+		_discard_card_at_index(cards_in_hand.size() - 1)
+
+
+func _add_to_card_draw_queue(card: CardBase) -> void:
+	_cards_queued_for_add.append(card)
+	_handle_card_draw_queue()
+
+
+# Final place where a card is created and added to the world.
+# NOTE: at this point, cards have already been removed from the draw pile.
+# Cards are removed from the draw pile in _draw_card.
+# _create_card_in_world spawns the cards in the queue and adds them to your hand.
+func _handle_card_draw_queue() -> void:
+	if _draw_timer != null:
+		return
+	
+	var card_data: CardBase = _cards_queued_for_add[0]
+	_cards_queued_for_add.remove_at(0)
+	
+	_create_card_in_world(card_data)
+	
+	# Wait for a timer to expire before adding another card
+	_draw_timer = get_tree().create_timer(card_draw_time)
+	await _draw_timer.timeout
+	_draw_timer = null
+	
+	if _cards_queued_for_add.size() > 0:
+		_handle_card_draw_queue()
+	else:
+		on_cards_finished_dealing.emit()
 
 
 func _create_card_in_world(card_data: CardBase) -> void:
@@ -144,7 +206,8 @@ func _create_card_in_world(card_data: CardBase) -> void:
 	card.init_card(card_data)
 	
 	# set starting position of the card to the draw pile, so it visually shows it dealing from there
-	card.global_position = draw_pile_ui.global_position
+	if draw_pile_ui:
+		card.global_position = draw_pile_ui.global_position
 
 	# force an update of the card positions so they are up to date with this new card
 	_update_card_positions()
@@ -173,51 +236,6 @@ func _bind_card_input(card: CardWorld) -> void:
 	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card))
 
 
-# This is where a card is removed from the hand and added to the discard pile.
-func _discard_card_at_index(card_index: int) -> void:
-	var card: CardWorld = cards_in_hand[card_index]
-	
-	# add to discard pile
-	discard_pile.append(card.card_data)
-	
-	# remove from hand and add to discard queue
-	cards_in_hand.remove_at(card_index)
-	_add_to_discard_queue(card)
-	
-	on_card_counts_updated.emit()
-
-
-func _discard_last_card() -> void:
-	if cards_in_hand.size() > 0:
-		_discard_card_at_index(cards_in_hand.size() - 1)
-
-
-func _add_to_card_draw_queue(card: CardBase) -> void:
-	_cards_queued_for_add.append(card)
-	_handle_card_draw_queue()
-
-
-# Final place where a card is created and added to the world.
-# NOTE: at this point, cards have already been removed from the draw pile, but not added to your hand.
-# Cards are removed from the draw pile in _draw_card.
-# _create_card_in_world spawns the cards in the queue and adds them to your hand.
-func _handle_card_draw_queue() -> void:
-	if _draw_timer != null:
-		return
-	
-	var card_data: CardBase = _cards_queued_for_add[0]
-	_cards_queued_for_add.remove_at(0)
-	
-	_create_card_in_world(card_data)
-	
-	_draw_timer = get_tree().create_timer(card_draw_time)
-	await _draw_timer.timeout
-	_draw_timer = null
-	
-	if _cards_queued_for_add.size() > 0:
-		_handle_card_draw_queue()
-
-
 func _add_to_discard_queue(card: CardWorld) -> void:
 	_cards_queued_for_discard.append(card)
 	_handle_discard_queue()
@@ -225,9 +243,10 @@ func _add_to_discard_queue(card: CardWorld) -> void:
 
 # Looping queue that starts the discarding animation for cards.
 # NOTE: a card is destroyed when the DISCARDING state is finished. See MoveState_Discarding
-# NOTE: if you discard multiple cards at once, the cards you discarded are technically removed
-# from your hand and added to the discard pile immediately (see _discard_card_at_index).
-# This function simply starts movement states on those cards that were discarded.
+# NOTE: when you discard cards, they are removed from your hand and added to the discard pile
+# immediately (see _discard_card_at_index).
+# This function simply starts movement states on those cards that were discarded and eventually
+# destroys them.
 func _handle_discard_queue() -> void:
 	if _discard_timer != null:
 		return
@@ -237,9 +256,11 @@ func _handle_discard_queue() -> void:
 	
 	# Set desired position to the discard pile UI and then set state
 	var movement: CardMovementComponent = card.get_card_movement_component()
-	movement.state_properties.desired_position = discard_pile_ui.global_position
+	if discard_pile_ui:
+		movement.state_properties.desired_position = discard_pile_ui.global_position
 	movement.set_movement_state(Enums.CardMovementState.DISCARDING)
 	
+	# Wait for timer to expire before discarding another card
 	_discard_timer = get_tree().create_timer(card_discard_time)
 	await _discard_timer.timeout
 	_discard_timer = null
