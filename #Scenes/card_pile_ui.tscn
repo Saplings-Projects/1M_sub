@@ -1,17 +1,40 @@
-[gd_scene format=3 uid="uid://bl3au25n1f8ld"]
+[gd_scene load_steps=2 format=3 uid="uid://bl3au25n1f8ld"]
 
-[node name="CardPileUI" type="Control"]
+[ext_resource type="Script" path="res://UI/card_pile_ui.gd" id="1_1s2o8"]
+
+[node name="card_pile_ui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1s2o8")
 
-[node name="Label" type="Label" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.365
+anchor_top = 0.301
+anchor_right = 0.67
+anchor_bottom = 0.594
+offset_left = -0.200012
+offset_top = 0.279984
+offset_right = 0.399963
+offset_bottom = 0.319977
+columns = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 450.0
-offset_top = 255.0
-offset_right = 774.0
-offset_bottom = 400.0
-text = "This space has been intentionlly left blank"
+offset_left = 4.0
+offset_top = 550.0
+offset_right = 65.0
+offset_bottom = 590.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
