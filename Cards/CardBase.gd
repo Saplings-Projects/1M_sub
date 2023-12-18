@@ -47,9 +47,7 @@ func _apply_all_effects() -> void:
 
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
-	if caster.get_party_component().can_play_on_entity(application_type, target):
-		return true
-	return false
+	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
 func on_card_play() -> void:
