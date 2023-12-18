@@ -18,8 +18,9 @@ class_name CardBase
 @export var damage_to_apply_to_caster: float = 0.0
 @export var status_to_apply_to_target: Array[StatusBase]
 @export var status_to_apply_to_caster: Array[StatusBase]
-@export var affect_all_targets: bool = false
-@export var affect_all_casters: bool = false
+# @export var affect_all_targets: bool = false
+# @export var affect_all_casters: bool = false
+# not needed since we use a list of targets, and the party can also be targets
 @export var amount_of_cards_to_draw: int = 0
 @export var amount_of_cards_to_discard: int = 0
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
@@ -40,9 +41,9 @@ func parse_card_data(card_data: Dictionary) -> void:
 	# TODO
 	pass
 
-func apply_all_effects() -> void:
+func _apply_all_effects() -> void:
 	for effect_data: EffectData in card_effects_data:
-		self.effect_data.apply_effect()
+		effect_data.apply_effect_data()
 
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
@@ -51,23 +52,19 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 	return false
 
 
-func on_card_play(caster: Entity, target: Entity) -> void:
-	_deal_damage(caster, target)
-	_apply_status(caster, target)
-	_draw_cards()
-	_discard_random_cards()
-	# TODO add other functionality that lots of cards may share (eg: restore AP)
+func on_card_play() -> void:
+	_apply_all_effects()
 
 
 # override in child cards if you want to deal damage in a unique way
-func _deal_damage(caster: Entity, target: Entity) -> void:
-	# damage target
-	if damage_to_apply_to_target != 0.0:
-		_damage_entity(caster, target, damage_to_apply_to_target, affect_all_targets)
+# func _deal_damage(caster: Entity, target: Entity) -> void:
+# 	# damage target
+# 	if damage_to_apply_to_target != 0.0:
+# 		_damage_entity(caster, target, damage_to_apply_to_target, affect_all_targets)
 	
-	#damage caster
-	if damage_to_apply_to_caster != 0.0:
-		_damage_entity(caster, caster, damage_to_apply_to_caster, affect_all_casters)
+# 	#damage caster
+# 	if damage_to_apply_to_caster != 0.0:
+# 		_damage_entity(caster, caster, damage_to_apply_to_caster, affect_all_casters)
 
 
 func _damage_entity(caster: Entity, target: Entity, damage_amount: float, damage_all: bool) -> void:
@@ -84,24 +81,6 @@ func _damage_entity(caster: Entity, target: Entity, damage_amount: float, damage
 			party_member.get_health_component().deal_damage(target_damage_data)
 	else:
 		target.get_health_component().deal_damage(target_damage_data)
-
-
-func _apply_status(caster: Entity, target: Entity) -> void:
-	# apply status to caster
-	for status: StatusBase in status_to_apply_to_caster:
-		if affect_all_casters:
-			for party_member: Entity in caster.get_party_component().party:
-				party_member.get_status_component().add_status(status, caster)
-		else:
-			caster.get_status_component().add_status(status, caster)
-	
-	# apply status to target
-	for status: StatusBase in status_to_apply_to_target:
-		if affect_all_targets:
-			for party_member: Entity in target.get_party_component().party:
-				party_member.get_status_component().add_status(status, caster)
-		else:
-			target.get_status_component().add_status(status, caster)
 
 
 func _draw_cards() -> void:
