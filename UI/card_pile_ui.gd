@@ -9,16 +9,16 @@ extends Control
 var discard_pile: Array[CardBase] = CardManager.card_container.discard_pile
 var draw_pile: Array[CardBase]    = CardManager.card_container.draw_pile
 var deck: Array[CardBase]         = CardManager.card_container.default_deck
-var cards_to_display: Array[CardBase]
+var cards_to_display: Array[CardBase] = []
 
 
 # TODO bind esc to return to the game
-func _on_button_pressed():
+func _on_button_pressed() -> void:
 	queue_free()
 
 
 #Im open for suggestions with the name of this fuction 
-func populate(parent_name):
+func populate(parent_name) -> void:
 	
 
 
