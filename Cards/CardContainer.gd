@@ -58,6 +58,7 @@ func set_queued_card(card: CardWorld) -> void:
 
 
 func remove_queued_card() -> void:
+	_focused_card = null
 	discard_card(queued_card)
 	set_queued_card(null)
 
