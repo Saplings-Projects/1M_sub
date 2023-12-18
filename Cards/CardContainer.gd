@@ -105,14 +105,6 @@ func discard_card(card: CardWorld) -> void:
 	_discard_card_at_index(card_index)
 
 
-# Gets all the cards that will be in your hand once animations are completed.
-# This includes cards that are queued and cards already in your hand.
-#func get_current_hand_data() -> Array[CardBase]:
-	#var total_cards: Array[CardBase] = _cards_queued_for_add
-	#for card in cards_in_hand:
-		#total_cards.append(card.card_data)
-	#return total_cards
-
 func get_total_queued_hand_size() -> int:
 	return _cards_queued_for_add.size() + cards_in_hand.size()
 
@@ -130,6 +122,7 @@ func _init_default_draw_pile() -> void:
 	draw_pile.shuffle()
 
 
+# This is where cards are removed from the draw pile.
 func _draw_card() -> void:
 	# if draw pile is empty, shuffle discard pile into draw pile. Clear discard pile.
 	if draw_pile.size() <= 0:
@@ -177,7 +170,7 @@ func _add_to_card_draw_queue(card: CardBase) -> void:
 # Final place where a card is created and added to the world.
 # NOTE: at this point, cards have already been removed from the draw pile.
 # Cards are removed from the draw pile in _draw_card.
-# _create_card_in_world spawns the cards in the queue and adds them to your hand.
+# _create_card_in_world spawns the cards from the queue and adds them to your hand.
 func _handle_card_draw_queue() -> void:
 	if _draw_timer != null:
 		return
@@ -209,7 +202,7 @@ func _create_card_in_world(card_data: CardBase) -> void:
 	if draw_pile_ui:
 		card.global_position = draw_pile_ui.global_position
 
-	# force an update of the card positions so they are up to date with this new card
+	# force an update of the card positions so all card positions are up to date with this new card
 	_update_card_positions()
 	
 	var card_movement: CardMovementComponent = card.get_card_movement_component()
@@ -245,7 +238,7 @@ func _add_to_discard_queue(card: CardWorld) -> void:
 # NOTE: a card is destroyed when the DISCARDING state is finished. See MoveState_Discarding
 # NOTE: when you discard cards, they are removed from your hand and added to the discard pile
 # immediately (see _discard_card_at_index).
-# This function simply starts movement states on those cards that were discarded and eventually
+# This function starts movement states on those cards that were queued and eventually
 # destroys them.
 func _handle_discard_queue() -> void:
 	if _discard_timer != null:
@@ -333,20 +326,21 @@ func _update_card_positions() -> void:
 		return
 	
 	# set hand width to the max of all our card separations
-	var per_card_width: float = max_card_separation
+	var per_card_separation: float = max_card_separation
 	var current_hand_width: float = 0
 	if amount_of_cards > 1:
-		current_hand_width = per_card_width * (amount_of_cards - 1)
+		current_hand_width = per_card_separation * (amount_of_cards - 1)
 	
-	# if our width is over the set maximum, reduce down the width between cards
+	# if our hand width is over the set maximum, reduce down the width between cards
+	# only reduce down to the min_card_separation
 	if current_hand_width > max_hand_width:
-		var hand_over_max_delta: float = current_hand_width - max_hand_width
-		var new_separation: float = hand_over_max_delta / amount_of_cards
+		var amount_hand_over_max: float = current_hand_width - max_hand_width
+		var new_per_card_separation_delta: float = amount_hand_over_max / amount_of_cards
 		
-		per_card_width -= new_separation
-		per_card_width = maxf(per_card_width, min_card_separation)
+		per_card_separation -= new_per_card_separation_delta
+		per_card_separation = maxf(per_card_separation, min_card_separation)
 		
-		current_hand_width = per_card_width * (amount_of_cards - 1)
+		current_hand_width = per_card_separation * (amount_of_cards - 1)
 	
 	# start setting positions for each card
 	for card_index: int in amount_of_cards:
@@ -354,10 +348,10 @@ func _update_card_positions() -> void:
 		var movement_component: CardMovementComponent = card.get_card_movement_component()
 		var move_state: Enums.CardMovementState = movement_component.current_move_state
 		
-		var card_x: float = per_card_width * card_index
+		var card_x: float = per_card_separation * card_index
 		var card_y: float = 0.0
 		
-		# center cards
+		# center cards in the hand
 		card_x -= current_hand_width / 2.0
 		
 		# if we are focusing a card, scoot other cards out of the way
@@ -366,14 +360,12 @@ func _update_card_positions() -> void:
 			var focused_card_index: int = cards_in_hand.find(_focused_card)
 			if card_index != focused_card_index:
 				var scaled_hover_offset: float = hover_offset_max
-				var index_delta: float = absi(card_index - focused_card_index)
+				var index_delta: float = card_index - focused_card_index
 				scaled_hover_offset = scaled_hover_offset / index_delta
-				if card_index < focused_card_index:
-					card_x -= scaled_hover_offset
-				else:
-					card_x += scaled_hover_offset
+				card_x += scaled_hover_offset
 		
-		# scale card's x value to a range of [-1, 1] from range of [0, viewport width]
+		# scale card's x-value to a range of [-1, 1] from range of [0, viewport width]
+		# this is so we can use the x-value more easily for our positioning equations below
 		var viewport_width: float = get_viewport_rect().size.x
 		var card_x_scaled: float = Helpers.convert_from_range(card.global_position.x, 0.0, viewport_width, -1.0, 1.0)
 		

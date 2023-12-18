@@ -9,7 +9,7 @@ signal on_movement_state_update(new_state: Enums.CardMovementState)
 
 var current_move_state: Enums.CardMovementState = Enums.CardMovementState.NONE
 # This is meant to be updated by CardContainer. This property Resource is sent to the state when
-# it is initialized, so it will update in the state whenever it is updated in CardContainer. 
+# it is initialized, so it will update in the state whenever it is updated in here. 
 var state_properties: CardStateProperties = CardStateProperties.new()
 
 # Map each enum to a CardMovementState Resource
@@ -60,6 +60,7 @@ func set_movement_state(new_state: Enums.CardMovementState) -> void:
 
 func _on_state_enter(state: Enums.CardMovementState) -> void:
 	if _has_state(state):
+		# Send the properties to the state and start it
 		_state_mapping[state].init_state(state_properties)
 		_state_mapping[state].on_state_enter()
 
