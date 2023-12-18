@@ -166,9 +166,6 @@ func _discard_card_at_index(card_index: int) -> void:
 	# remove from hand and add to discard queue
 	cards_in_hand.remove_at(card_index)
 	
-	 # force an update of the card positions so they are up to date with this new card
-	_update_card_positions()
-	
 	_add_to_discard_queue(card)
 	
 	on_card_counts_updated.emit()
@@ -208,7 +205,8 @@ func _add_to_discard_queue(card: CardWorld) -> void:
 	_handle_discard_queue()
 
 
-# Final place where a card is discarded and removed from the world
+# Final place where a card is discarded
+# NOTE: a card is destroyed when the DISCARDING state is finished. See MoveState_Discarding
 func _handle_discard_queue() -> void:
 	if _discard_timer != null:
 		return
@@ -217,8 +215,9 @@ func _handle_discard_queue() -> void:
 	_cards_queued_for_discard.remove_at(0)
 	
 	# Set desired position to the discard pile UI and then set state
-	card.get_card_movement_component().state_properties.desired_position = discard_pile_ui.global_position
-	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.DISCARDING)
+	var movement: CardMovementComponent = card.get_card_movement_component()
+	movement.state_properties.desired_position = discard_pile_ui.global_position
+	movement.set_movement_state(Enums.CardMovementState.DISCARDING)
 	
 	_discard_timer = get_tree().create_timer(card_discard_time)
 	await _discard_timer.timeout
@@ -334,15 +333,15 @@ func _update_card_positions() -> void:
 		
 		# scale card's x value to a range of [-1, 1] from range of [0, viewport width]
 		var viewport_width: float = get_viewport_rect().size.x
-		var card_index_scaled: float = Helpers.convert_from_range(card.global_position.x, 0.0, viewport_width, -1.0, 1.0)
+		var card_x_scaled: float = Helpers.convert_from_range(card.global_position.x, 0.0, viewport_width, -1.0, 1.0)
 		
 		# curve the cards in hand by finding the y value on a parabola
 		# y = ax^2 - a where a = max_hand_offset_y and x = x position scaled to a range of -1 to 1
-		card_y = (pow(card_index_scaled, 2.0) * max_hand_offset_y) - max_hand_offset_y
+		card_y = (pow(card_x_scaled, 2.0) * max_hand_offset_y) - max_hand_offset_y
 		
 		# rotate cards on a cubic curve
 		# y = ax^3 where a = max_rotation and x = x position scaled to a range of -1 to 1
-		var rotation_amount: float = pow(card_index_scaled, 3) * max_rotation
+		var rotation_amount: float = pow(card_x_scaled, 3) * max_rotation
 		
 		# set position and rotation
 		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
