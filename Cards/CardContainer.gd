@@ -67,6 +67,10 @@ func is_card_queued() -> bool:
 	return queued_card != null
 
 
+func are_cards_dealing() -> bool:
+	return _cards_queued_for_add.size() > 0
+
+
 func deal_to_starting_hand_size() -> void:
 	# deal to our starting hand size, ignoring amount of cards we already have
 	var amount_to_draw: int = maxi(0, starting_hand_size - cards_in_hand.size())
