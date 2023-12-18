@@ -66,6 +66,7 @@ script = ExtResource("8_voref")
 pile_count_label = NodePath("DrawPileCount")
 
 [node name="ShowCardPile" type="Button" parent="CanvasLayer/UIControl/DrawPile"]
+layout_mode = 0
 offset_left = -1.0
 offset_top = -2.0
 offset_right = 47.0
