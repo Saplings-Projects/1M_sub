@@ -52,10 +52,3 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 func on_card_play() -> void:
 	_apply_all_effects()
-
-
-func damage_entity(caster: Entity, target: Entity, damage_amount: float) -> void:
-	var target_damage_data: DealDamageData = DealDamageData.new()
-	target_damage_data.damage = damage_amount
-	target_damage_data.caster = caster
-	target.get_health_component().deal_damage(target_damage_data)
