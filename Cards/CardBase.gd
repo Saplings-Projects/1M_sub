@@ -27,6 +27,23 @@ class_name CardBase
 @export var card_key_art: ImageTexture = null
 @export var card_description: String = "NULL"
 
+var card_effects_data: Array[EffectData] = []
+
+func _ready() -> void:
+	card_effects_data = []
+
+# Need a parser of some sort to read a plainform card data and translate it to EffectData
+# This will call EffectData.add_effect_data() in a loop for every new effect
+
+@warning_ignore("unused_parameter")
+func parse_card_data(card_data: Dictionary) -> void:
+	# TODO
+	pass
+
+func apply_all_effects() -> void:
+	for effect_data: EffectData in card_effects_data:
+		self.effect_data.apply_effect()
+
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	if caster.get_party_component().can_play_on_entity(application_type, target):
