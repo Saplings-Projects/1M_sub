@@ -145,9 +145,20 @@ func _create_card_in_world(card_data: CardBase) -> void:
 	# force an update of the card positions so they are up to date with this new card
 	_update_card_positions()
 	
-	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.MOVING_TO_HAND)
+	var card_movement: CardMovementComponent = card.get_card_movement_component()
+	card_movement.set_movement_state(Enums.CardMovementState.MOVING_TO_HAND)
 	
-	_bind_card_input(card)
+	# Wait for card to finish moving, then bind input
+	card_movement.on_movement_state_update.connect(_on_card_change_state.bind(card))
+
+
+func _on_card_change_state(new_state: Enums.CardMovementState, card: CardWorld):
+	# once we enter IN_HAND state, bind input
+	if new_state == Enums.CardMovementState.IN_HAND:
+		_bind_card_input(card)
+		
+		# unbind movement signal so it doesn't keep firing for every state
+		card.get_card_movement_component().on_movement_state_update.disconnect(_on_card_change_state)
 
 
 func _bind_card_input(card: CardWorld):
