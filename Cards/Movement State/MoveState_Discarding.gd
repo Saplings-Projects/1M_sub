@@ -2,7 +2,8 @@ extends CardMovementState
 class_name MoveState_Discarding
 
 
-const EASE_TIME: float = 0.5
+const LERP_SPEED: float = 10.0
+const EASE_TIME: float = 0.3
 const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
 
@@ -22,6 +23,12 @@ func on_state_enter() -> void:
 	.tween_property(_state.card, EasingConstants.SCALE_PROPERTY, Vector2.ZERO, EASE_TIME)\
 	.set_ease(EASE_TYPE)\
 	.set_trans(TRANS_TYPE)
+
+
+# @Override
+func on_state_process(delta: float) -> void:
+	# Ease rotation
+	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * LERP_SPEED)
 
 
 # @Override
