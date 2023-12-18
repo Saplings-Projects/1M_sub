@@ -61,9 +61,5 @@ func damage_entity(caster: Entity, target: Entity, damage_amount: float) -> void
 	target.get_health_component().deal_damage(target_damage_data)
 
 
-func _draw_cards() -> void:
-	CardManager.card_container.draw_cards(amount_of_cards_to_draw)
-
-
 func _discard_random_cards() -> void:
 	CardManager.card_container.discard_random_card(amount_of_cards_to_discard)
