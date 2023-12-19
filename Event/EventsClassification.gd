@@ -2,6 +2,7 @@ extends Node
 
 enum EventsClassification { EVENT_MOB, EVENT_RANDOM, EVENT_SHOP, EVENT_HEAL }
 
+# Test function for creating event, will remove later
 func createEvent(index: int) -> Event:
 	var event = null
 	match index:
