@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl3au25n1f8ld"]
+
+[ext_resource type="Script" path="res://UI/CardScrollUI.gd" id="1_sopxy"]
+
+[node name="CardScrollUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sopxy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.309804)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 550.0
+offset_right = 65.0
+offset_bottom = 581.0
+text = "Return"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+offset_left = 223.0
+offset_top = 142.0
+offset_right = 1049.0
+offset_bottom = 530.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(186.475, 200)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 165
+theme_override_constants/v_separation = 200
+columns = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 573.0
+offset_right = 747.0
+offset_bottom = 631.0
+text = "Showing "
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

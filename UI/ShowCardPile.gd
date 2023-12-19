@@ -3,7 +3,7 @@ extends Button
 
 @onready var parent_node = $".."
 @onready var root = parent_node.get_parent()
-@onready var cardUI: PackedScene = preload("res://#Scenes/card_pile_ui.tscn")
+@onready var cardUI: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 
 	
 func _pressed() -> void:
@@ -11,7 +11,3 @@ func _pressed() -> void:
 	var uiPile = cardUI.instantiate()
 	uiPile.populate(parent_node.get_name())
 	root.add_child(uiPile)
-	
-	
-
-	
