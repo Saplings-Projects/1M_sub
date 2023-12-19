@@ -1,5 +1,5 @@
-extends Event
-class_name Event_Shop
+extends EventBase
+class_name EventMob
 
 # @Override
 func _init(scene: String) -> void:
@@ -7,4 +7,4 @@ func _init(scene: String) -> void:
 	
 # @Override
 func _update_event() -> void:
-	print("Updating shop")
+	print("Update Mob")

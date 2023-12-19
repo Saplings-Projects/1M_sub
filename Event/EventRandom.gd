@@ -1,5 +1,5 @@
-extends Event
-class_name Event_Heal
+extends EventBase
+class_name EventRandom
 
 # @Override
 func _init(scene: String) -> void:
@@ -7,4 +7,4 @@ func _init(scene: String) -> void:
 	
 # @Override
 func _update_event() -> void:
-	print("Updating Heal Event")
+	print("Updating Random Event")

@@ -1,7 +1,7 @@
 extends Resource
-class_name Event
+class_name EventBase
 
-#const EVENTS_CLASSIFICATION = [Event_Mob, Event_Random, Event_Shop, Event_Heal]
+const EVENTS_CLASSIFICATION: Array[EventBase] = [EventMob.new(""), EventRandom.new(""), EventShop.new(""), EventHeal.new("")]
 
 var packedScene: String = ""
 
