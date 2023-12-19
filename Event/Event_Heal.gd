@@ -1,8 +1,10 @@
 extends Event
 class_name Event_Heal
 
-func _init():
-	print("Initializing Heal Event")
+# @Override
+func _init(scene: String) -> void:
+	super(scene)
 	
-func _update():
+# @Override
+func _update_event() -> void:
 	print("Updating Heal Event")

@@ -1,8 +1,10 @@
 extends Event
 class_name Event_Shop
 
-func _init():
-	print("Initializing Shop")
+# @Override
+func _init(scene: String) -> void:
+	super(scene)
 	
-func _update():
+# @Override
+func _update_event() -> void:
 	print("Updating shop")
