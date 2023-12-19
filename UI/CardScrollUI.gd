@@ -7,7 +7,7 @@ var draw_pile: Array[CardBase]    = CardManager.card_container.draw_pile
 var deck: Array[CardBase]         = CardManager.card_container.default_deck
 var cards_to_display: Array[CardBase] = []
 var card_worlds: Array[CardWorld] = []
-var cardworld: CardWorld
+var cardworld: CardWorld = null
 
 func _on_button_pressed() -> void:
 	queue_free()
@@ -21,17 +21,17 @@ func _input(event) -> void:
 
 func populate(parent_name: String) -> void:
 	
-	if parent_name == "DiscardPile":
-		cards_to_display = discard_pile
-		$Label.text = "Showing the discard pile"
-
-	elif parent_name == "DrawPile":
-		cards_to_display = draw_pile
-		$Label.text = "Showing the draw pile"
-
-	elif parent_name == "Deck":
-		cards_to_display = deck
-		$Label.text = "Showing the deck"
+	match parent_name:
+		"DiscardPile":
+			cards_to_display = discard_pile
+			$Label.text = "Showing the discard pile"
+		"DrawPile":
+			cards_to_display = draw_pile
+			$Label.text = "Showing the draw pile"
+		"Deck":
+			cards_to_display = deck
+			$Label.text = "Showing the deck"
+		
 	
 	cards_to_display.sort()
 
