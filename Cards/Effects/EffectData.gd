@@ -1,4 +1,4 @@
-class_name EffectData extends Node
+class_name EffectData extends Resource
 
 # Effect data is a wrapper for the Effect class. It contains an effect, a caster, a target and a value (which will be applied by the effect)
 
