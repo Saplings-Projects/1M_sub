@@ -13,8 +13,8 @@ func _on_button_pressed() -> void:
 	queue_free()
 
 #Pressing escape will return you to the game
-func _input(event) -> void:
-	if event.is_action("escape"):
+func _input(inputevent: InputEvent) -> void:
+	if inputevent.is_action("escape"):
 		queue_free()
 
 
