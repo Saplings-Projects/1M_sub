@@ -233,7 +233,7 @@ func _add_to_discard_queue(card: CardWorld) -> void:
 	_cards_queued_for_discard.append(card)
 	_handle_discard_queue()
 
-
+const FIRST_CARD_TO_DISCARD_INDEX = 0;
 # Looping queue that starts the discarding animation for cards.
 # NOTE: a card is destroyed when the DISCARDING state is finished. See MoveState_Discarding
 # NOTE: when you discard cards, they are removed from your hand and added to the discard pile
@@ -244,8 +244,8 @@ func _handle_discard_queue() -> void:
 	if _discard_timer != null:
 		return
 	
-	var card: CardWorld = _cards_queued_for_discard[0]
-	_cards_queued_for_discard.remove_at(0)
+	var card: CardWorld = _cards_queued_for_discard[FIRST_CARD_TO_DISCARD_INDEX]
+	_cards_queued_for_discard.remove_at(FIRST_CARD_TO_DISCARD_INDEX)
 	
 	# Set desired position to the discard pile UI and then set state
 	var movement: CardMovementComponent = card.get_card_movement_component()

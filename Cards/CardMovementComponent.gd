@@ -30,7 +30,7 @@ func _ready() -> void:
 	
 	# bind exit state events
 	for state: Enums.CardMovementState in _state_mapping:
-		if _has_state(state):
+		if _state_not_null(state):
 			_state_mapping[state].trigger_exit_state.connect(_on_state_triggered_exit)
 	
 	set_movement_state(current_move_state)
@@ -45,7 +45,7 @@ func set_movement_state(new_state: Enums.CardMovementState) -> void:
 		return
 	
 	# Check if we can transition from the current state. Exit if not.
-	if _has_state(current_move_state):
+	if _state_not_null(current_move_state):
 		if not _state_mapping[current_move_state].can_transition_from(new_state):
 			return
 	
@@ -59,24 +59,24 @@ func set_movement_state(new_state: Enums.CardMovementState) -> void:
 
 
 func _on_state_enter(state: Enums.CardMovementState) -> void:
-	if _has_state(state):
+	if _state_not_null(state):
 		# Send the properties to the state and start it
 		_state_mapping[state].init_state(state_properties)
 		_state_mapping[state].on_state_enter()
 
 
 func _on_state_process(state: Enums.CardMovementState) -> void:
-	if _has_state(state):
+	if _state_not_null(state):
 		var delta: float = get_process_delta_time()
 		_state_mapping[state].on_state_process(delta)
 
 
 func _on_state_exit(state: Enums.CardMovementState) -> void:
-	if _has_state(state):
+	if _state_not_null(state):
 		_state_mapping[state].on_state_exit()
 
 
-func _has_state(state: Enums.CardMovementState) -> bool:
+func _state_not_null(state: Enums.CardMovementState) -> bool:
 	return _state_mapping[state] != null
 
 
