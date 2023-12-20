@@ -1,13 +1,13 @@
 extends Resource
 class_name EventBase
 
-const EVENTS_CLASSIFICATION: Array[EventBase] = [EventMob.new(""), EventRandom.new(""), EventShop.new(""), EventHeal.new("")]
+var EVENTS_CLASSIFICATION: Array[EventBase] = [EventMob.new(), EventRandom.new(), EventShop.new(), EventHeal.new()]
 
 var packedScene: String = ""
 
 # Initialize Event
-func _init(scene: String) -> void:
-	packedScene = scene
+func _init() -> void:
+	pass
 	
 func _update_event() -> void:
 	pass

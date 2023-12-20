@@ -2,8 +2,8 @@ extends EventBase
 class_name EventRandom
 
 # @Override
-func _init(scene: String) -> void:
-	super(scene)
+func _init() -> void:
+	pass
 	
 # @Override
 func _update_event() -> void:
