@@ -21,6 +21,7 @@ script = ExtResource("4_ujyje")
 lerp_speed = 7.0
 
 [node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "key_art")]
+custom_minimum_size = Vector2(188, 268)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
