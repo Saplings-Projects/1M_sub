@@ -3,7 +3,7 @@ class_name MoveState_Hovered
 ## Hovering state. Moves to desired position with a y-offset
 
 
-const LERP_SPEED: float = 10.0
+const MOVE_SPEED: float = 10.0
 const EASE_TIME: float = 0.5
 const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
@@ -26,7 +26,7 @@ func on_state_process(delta: float) -> void:
 	var offset_desired_position: Vector2 = _state.desired_position
 	offset_desired_position.y += HOVER_OFFSET
 	
-	_state.card.position = _state.card.position.lerp(offset_desired_position, delta * LERP_SPEED)
+	_state.card.position = _state.card.position.lerp(offset_desired_position, delta * MOVE_SPEED)
 	
 	# Ease rotation
-	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * LERP_SPEED)
+	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * MOVE_SPEED)

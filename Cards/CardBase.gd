@@ -13,7 +13,6 @@ class_name CardBase
 ## wish to take damage in some contexts.
 ## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
-
 @export var damage_to_apply_to_target: float = 0.0
 @export var damage_to_apply_to_caster: float = 0.0
 @export var status_to_apply_to_target: Array[StatusBase]
@@ -39,6 +38,7 @@ func on_card_play(caster: Entity, target: Entity) -> void:
 	_apply_status(caster, target)
 	_draw_cards()
 	_discard_random_cards()
+	CardManager.on_card_action_finished.emit(self)
 	# TODO add other functionality that lots of cards may share (eg: restore AP)
 
 

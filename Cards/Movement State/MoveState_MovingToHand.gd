@@ -3,7 +3,7 @@ class_name MoveState_MovingToHand
  ## MovingToHand state. Scales to 1 from 0 and sets to desired position
 
 
-const LERP_SPEED: float = 15.0
+const MOVE_SPEED: float = 15.0
 const EASE_TIME: float = 0.5
 const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
@@ -24,10 +24,10 @@ func on_state_enter() -> void:
 # @Override
 func on_state_process(delta: float) -> void:
 	# Ease to desired position in the hand
-	_state.card.position = _state.card.position.lerp(_state.desired_position, delta * LERP_SPEED)
+	_state.card.position = _state.card.position.lerp(_state.desired_position, delta * MOVE_SPEED)
 	
 	# Ease rotation
-	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, _state.desired_rotation, delta * LERP_SPEED)
+	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, _state.desired_rotation, delta * MOVE_SPEED)
 
 
 func _on_easing_finished() -> void:

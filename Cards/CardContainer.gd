@@ -36,6 +36,7 @@ var draw_pile: Array[CardBase] = []
 var discard_pile: Array[CardBase] = []
 var queued_card: CardWorld = null
 
+var _active_cards: Array[CardBase] = []
 var _focused_card: CardWorld = null
 var _cards_queued_for_add: Array[CardBase] = []
 var _draw_timer: SceneTreeTimer = null
@@ -46,6 +47,7 @@ var _discard_timer: SceneTreeTimer = null
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
+	CardManager.on_card_action_finished.connect(remove_active_card)
 	
 	_init_default_draw_pile()
 
@@ -67,6 +69,17 @@ func remove_queued_card() -> void:
 func is_card_queued() -> bool:
 	return queued_card != null
 
+
+func set_active_card(card: CardBase) -> void:
+	_active_cards.append(card)
+
+
+func remove_active_card(card: CardBase) -> void:
+	_active_cards.erase(card)
+
+
+func are_cards_active() -> bool:
+	return _active_cards.size() > 0
 
 func are_cards_dealing() -> bool:
 	return _cards_queued_for_add.size() > 0

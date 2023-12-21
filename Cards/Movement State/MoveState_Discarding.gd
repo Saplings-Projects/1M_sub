@@ -3,7 +3,7 @@ class_name MoveState_Discarding
 ## Discarding state. Moves to the discard pile and scales down to 0
 
 
-const LERP_SPEED: float = 10.0
+const MOVE_SPEED: float = 10.0
 const EASE_TIME: float = 0.3
 const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
@@ -29,7 +29,7 @@ func on_state_enter() -> void:
 # @Override
 func on_state_process(delta: float) -> void:
 	# Ease rotation
-	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * LERP_SPEED)
+	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * MOVE_SPEED)
 
 
 # @Override
