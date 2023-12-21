@@ -36,7 +36,7 @@ var draw_pile: Array[CardBase] = []
 var discard_pile: Array[CardBase] = []
 var queued_card: CardWorld = null
 
-var _active_cards: Array[CardBase] = []
+var _active_card: CardBase = null
 var _focused_card: CardWorld = null
 var _cards_queued_for_add: Array[CardBase] = []
 var _draw_timer: SceneTreeTimer = null
@@ -71,15 +71,15 @@ func is_card_queued() -> bool:
 
 
 func set_active_card(card: CardBase) -> void:
-	_active_cards.append(card)
+	_active_card = card
 
 
 func remove_active_card(card: CardBase) -> void:
-	_active_cards.erase(card)
+	_active_card = null
 
 
 func are_cards_active() -> bool:
-	return _active_cards.size() > 0
+	return _active_card != null
 
 func are_cards_dealing() -> bool:
 	return _cards_queued_for_add.size() > 0
