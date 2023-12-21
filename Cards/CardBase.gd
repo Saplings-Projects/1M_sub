@@ -34,14 +34,14 @@ func parse_card_data(card_data: Dictionary) -> void:
 	# TODO
 	pass
 
-func _apply_all_effects(entity: Entity) -> void:
+func _apply_all_effects(target: Entity) -> void:
 	for effect_data: EffectData in card_effects_data:
-		effect_data.apply_effect_data(entity)
+		effect_data.apply_effect_data(target)
 
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
-func on_card_play(entity: Entity) -> void:
-	_apply_all_effects(entity)
+func on_card_play(target: Entity) -> void:
+	_apply_all_effects(target)
