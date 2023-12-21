@@ -14,21 +14,14 @@ class_name CardBase
 ## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
 
-@export var damage_to_apply_to_target: float = 0.0
-@export var damage_to_apply_to_caster: float = 0.0
-@export var status_to_apply_to_target: Array[StatusBase]
-@export var status_to_apply_to_caster: Array[StatusBase]
-# @export var affect_all_targets: bool = false
-# @export var affect_all_casters: bool = false
-# not needed since we use a list of targets, and the party can also be targets
-@export var amount_of_cards_to_draw: int = 0
-@export var amount_of_cards_to_discard: int = 0
+# @export var status_to_apply_to_target: Array[StatusBase]
+# @export var status_to_apply_to_caster: Array[StatusBase]
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
 @export var card_title: String = "NULL"
 @export var card_key_art: ImageTexture = null
 @export var card_description: String = "NULL"
 
-var card_effects_data: Array[EffectData] = []
+@export var card_effects_data: Array[EffectData] = []
 
 func _ready() -> void:
 	card_effects_data = []
@@ -41,14 +34,14 @@ func parse_card_data(card_data: Dictionary) -> void:
 	# TODO
 	pass
 
-func _apply_all_effects() -> void:
+func _apply_all_effects(entity: Entity) -> void:
 	for effect_data: EffectData in card_effects_data:
-		effect_data.apply_effect_data()
+		effect_data.apply_effect_data(entity)
 
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
-func on_card_play() -> void:
-	_apply_all_effects()
+func on_card_play(entity: Entity) -> void:
+	_apply_all_effects(entity)

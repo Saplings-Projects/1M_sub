@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://87fedoq257xg"]
+[gd_scene load_steps=13 format=3 uid="uid://87fedoq257xg"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
+[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="4_uiqnj"]
+[ext_resource type="Resource" uid="uid://5yn4t13kwwoo" path="res://Cards/Resource/Card_DamageHealth.tres" id="5_j13b3"]
+[ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Card_DrawCards.tres" id="6_4i4gj"]
+[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="8_cs735"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
@@ -17,6 +21,7 @@
 position = Vector2(595, 284)
 
 [node name="CardContainer" parent="." instance=ExtResource("3_e7sws")]
+default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_uiqnj"), ExtResource("5_j13b3"), ExtResource("6_4i4gj"), ExtResource("8_cs735")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
