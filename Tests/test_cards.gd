@@ -6,7 +6,6 @@ var _battler_scene: PackedScene = load("res://Core/Battler.tscn")
 var _card_container_scene: PackedScene = load("res://Cards/CardContainer.tscn")
 var _battler: Battler = null
 var _card_container: CardContainer = null
-# var _cards_in_hand: Array[CardWorld] = []
 
 
 func before_each():
