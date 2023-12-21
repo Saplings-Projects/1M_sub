@@ -1,12 +1,11 @@
 extends Resource
-class_name Room
+class_name RoomBase
 ## Class for a room on the map. Provides base classes for all rooms to use regardless of the type
 ##
 ## Holds basic functionality for a room on the map
 
-enum RoomType
+enum RoomEvent
 {
-	UNKNOWN,
 	MONSTER,
 	HEAL,
 	SHOP,
@@ -14,8 +13,5 @@ enum RoomType
 
 @export var light_level: int = 0
 @export var has_torch: bool = false
-@export var this_room_type:RoomType = RoomType.UNKNOWN
-@export var coordinates:Vector2
-func get_room_type():
-	return this_room_type
-
+@export var this_room_event: RoomEvent
+@export var coordinates: Vector2
