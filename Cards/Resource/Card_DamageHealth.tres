@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="Card_DamageHealth" load_steps=2 format=3 uid="uid://5yn4t13kwwoo"]
+[gd_resource type="Resource" script_class="Card_DamageHealth" load_steps=6 format=3 uid="uid://5yn4t13kwwoo"]
 
 [ext_resource type="Script" path="res://Cards/Card_DamageHealth.gd" id="1_ighm7"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamageHealth.gd" id="1_tnci4"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_8c1ca"]
+
+[sub_resource type="Resource" id="Resource_uik3s"]
+script = ExtResource("1_tnci4")
+
+[sub_resource type="Resource" id="Resource_dqy87"]
+script = ExtResource("2_8c1ca")
+effect = SubResource("Resource_uik3s")
+value = 0
 
 [resource]
 script = ExtResource("1_ighm7")
-damage_to_apply_to_victim = 0.0
-damage_to_apply_to_attacker = 0.0
-status_to_apply_to_victim = Array[Resource("res://Status/StatusBase.gd")]([])
-status_to_apply_to_attacker = Array[Resource("res://Status/StatusBase.gd")]([])
 application_type = 1
 card_title = "Damage Health"
 card_description = "Deal damage equal to health lost."
+card_effects_data = Array[ExtResource("2_8c1ca")]([SubResource("Resource_dqy87")])
