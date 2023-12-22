@@ -39,7 +39,9 @@ WiP
 
 ## Status
 
+`Status` is the way we deal with conditions on a character that stays on them for multiple turns. For example, poison, weakness, strength... There are 2 catergories of `Status`, which are `Buff` and `Debuff`. The difference between effects and status is that effects do something when a card is played and status do something at a given time in the turn. The `EffectPoison` applies a `DebuffPoison` to the target.
 
+Each `Entity` has an array of Status where we store said `Status`. At the start of the turn of each entity, the `Status` inside the array are applied (and the number of turns left is decreased by 1, if the status is not for the entire duration of the fight). Note that conditions that carry between fights (such as conditions provided by relics) do not qualify as `Status`, they are handled differently.
 
 # Entity
 
