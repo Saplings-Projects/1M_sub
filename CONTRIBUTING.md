@@ -22,6 +22,8 @@ Here is a (non exhaustive) list of reasons for which your pull request can be cl
 - you didn't synchronise your fork after another pull request has been merged and that creates a lot of merge issues. Please deal with those problems locally before opening a pull request.
 - you made few very big commits. Please break down your big commits in smaller and more manageable commits if possible.
 
+If you are the last one to approve a pull request, there are no unresolved conversations and the tests are passing, you can merge the pull request yourself.
+
 ## Tests
 
 If you are writing code that implements something new, please provide test files written in GDScript (that can be run on GUT), as they will be useful to test future PR. If you do not know what to write tests on, don't hesitate to ask.
