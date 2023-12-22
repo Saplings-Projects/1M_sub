@@ -90,6 +90,10 @@ You now have only 1 torch left, which lets you continue up to node level 10 at n
 
 *Include image in next commits*
 
-## Special events
+## Unique events
+
+The player might encounter unique events on the map. They will be shown on the map as little twinkle of lights (which can be seen even if the room is in the dark). To trigger the unique event, the light level needs to be at least 2 (ie the room needs to be in range of 2 light sources). The unique event is triggered after the normal event of the room. The player can choose to not do the unique event and move on to the next room.
+
+Special events provide unique bonuses. They can be a unique relic, only accessible through these special events, or they might be a unique dungeon with special cards. Unique events might be more difficult than normal events, which is why some players might decide to not go for them.
 
 # Animation
