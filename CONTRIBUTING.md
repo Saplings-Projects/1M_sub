@@ -6,6 +6,12 @@ If you want to help with code, first check that there is no issue already opened
 
 For bigger tasks that might need multiple people working on it, a branch for that specific task will be opened. Pull request will be made to this branch and not the main.
 
+## Commits
+
+Make commits in the following way:
+- Write an explicite title. If for example you decide to change a function you wrote previously, don't just write "changed function X", but explain what you changed in the function. If it's too long in a single title, either you can break your commit in multiple commits, or you can use the commit description.
+- Commits should be of the minimal size possible. If you change multiple files in a single commit and the changes made don't influence each other, please break down your commit in multiple commits.
+
 ## Pull requests
 
 Please use the pull request template located at .github/pull_request_template.md . Please link to the issue that the pull request is related to. **One Pull Request = One Issue.**
