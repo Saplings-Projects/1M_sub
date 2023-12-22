@@ -13,6 +13,8 @@
 
 # Disclaimer
 
+**This documentation is meant as a way to help people who want to contribute to the codebase. If you want to play the game, this will only spoil things for you.**
+
 This documentation is not meant as an in-depth explanation of every function. It is meant as a general overview of the classes, their functions and how they interact. 
 
 For more information, please refer to the source code.
@@ -47,10 +49,47 @@ Each `Entity` has an array of Status where we store said `Status`. At the start 
 
 # Map
 
+The structure of the map is the following:
+
+*Include image in next commits*
+
 ## Rooms
+
+Rooms are the basis of the map (they are the squares you can see on the image of the map). The map is a 2D Array of rooms. Each room holds basic information about the event in this room as well as informations about the presence of a light source and the level of light in the room (see [Light mechanic](#light-mechanic) for more informations).
 
 ## Events
 
+What might happen in this new room ? Mystery, mystery... Events is the way we decide what is going to happen in each room. Currently, the list of events is the following:
+
+- Mob: an encounter with enemies
+- Random: you don't know what is going to happen. Most likely, you will face a unique scenario with choices, but it might also be a mob, a shop, a heal or any other event.
+- Shop: buy and sell cards
+- Heal: well... as it says
+
+Events can change depending on the level of light in the room. The distribution of events is decided at map level to have something coherent.
+
+## Moving on the map
+
+Players will move once the event in the room they are in is over. They must go up one floor when going in a new room. The player can go to the room directly above them or the ones on the sides. This movement pattern may change due to some relics.
+
 ## Light mechanic
+
+One of the main feature of the game is the ability for the player to influence the map through his actions. The player can place a light source (refered as "torch" for now) in a room, after the event is over and before using the map. The light source will then be used to light the room and the rooms around it.
+
+You start the map at level 0. There is a torch placed here by default and you can see everything up to 3 node in every direction you can move to, so you can plan your route. This area is lit and combats/events are normal difficulty in the light radius.
+
+You work your way up to node 3 and can now only see node level 4 that is dimly lit since it is not within torch radius. Tutorial prompts you that these combats/events will be more difficult but with greater reward (risk reward). Node levels 5 and beyond are in darkness and cannot be seen until you move next to them and they become dimly lit.
+
+Place a torch? Y/N
+
+You place one of your 3 torches, not feeling overconfident, and the next 3 levels are lit up(4-6). You take a path leading to 2 combats on levels 4 and 5, but you mess up the first and are worried. You can place a second torch within the radius of the first, which does 2 things. 1: causes 3 levels away to become lit(5-7). 2: Levels 5 and 6 are now brightly lit because they are in the radius of 2 torches, which makes combat/events easier.
+
+You now have only 1 torch left, which lets you continue up to node level 10 at normal difficulty, or less at easier difficulty. You can buy more at a shop, and combats have a chance to drop one. If you have torches remaining at the end of a map, you get a bonus.
+
+### How event changes are made
+
+*Include image in next commits*
+
+## Special events
 
 # Animation
