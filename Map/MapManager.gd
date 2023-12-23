@@ -1,21 +1,21 @@
 extends Node2D
 ## Class to manage backend for rooms (generation and such)
-
-static func generate_rooms(_map:MapBase): ## Populates a map with rooms that have random room types. More in depth algorithms will be added later
-	var _grid = [] ## 2d array to return. this will be populated with rooms
-	for i in _map.width: ## construct 2d array to return
+ 
+static func create_map(): ## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
+	var _map: MapBase = MapBase.new()
+	var _grid: Array = [] ## 2d array to return. this will be populated with rooms
+	
+	for i: int in _map.width.size(): ## construct 2d array to return
 		_grid.append([])
-		for j in _map.height:
+		for j: int in _map.width[i]:
 			_grid[i].append(0)
 
-	for x in range(_map.width): ## loop through elements of the grid and assign a room type
-		for y in range(_map.height):
+	for x: int in range(_map.width.size()): ## loop through elements of the grid and assign a room type
+		for y: int in range(_map.width[x]):
 			var _generated_room: RoomBase = RoomBase.new()
-			var _rand_type: String = _generated_room.RoomEvent.keys()[randi() % _generated_room.RoomEvent.size()]
-			var _rand_type_index: int = _generated_room.RoomEvent.get(_rand_type)
-			_grid[x][y] = _rand_type
-			_generated_room.coordinates = Vector2(x,y)
-			#print("Generated room at: " + str(_generated_room.coordinates) + " with event " + str(_rand_type) + ", Map size: " + str(Vector2(_map.width, _map.height)))
+			var _rand_type_index: int = randi() % _generated_room.possible_events.size()
+			var _room_event: EventBase = _generated_room.possible_events[_rand_type_index].new()
+			_generated_room.this_room_event = _room_event
+			_grid[x][y] = _generated_room
 	_map.rooms = _grid
-	#print(_map.rooms)
 	return _map

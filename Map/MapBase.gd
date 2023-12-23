@@ -4,7 +4,6 @@ class_name MapBase
 ##
 ## Holds basic functionality for a map
 
-@export var rooms: Array = [] ## 2D array of rooms on the map. this will be assigned when generating rooms
-@export var width:int = 3
-@export var height:int = 3
+@export var rooms: Array = [RoomBase] ## 2D array of rooms on the map. this will be assigned when generating rooms
+@export var width: PackedInt32Array = [2,3,2]
 

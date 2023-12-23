@@ -4,14 +4,7 @@ class_name RoomBase
 ##
 ## Holds basic functionality for a room on the map
 
-enum RoomEvent
-{
-	MONSTER,
-	HEAL,
-	SHOP,
-}
-
+@export var possible_events: Array = [EventHeal, EventMob, EventRandom, EventShop]
 @export var light_level: int = 0
 @export var has_torch: bool = false
-@export var this_room_event: RoomEvent
-@export var coordinates: Vector2
+@export var this_room_event: EventBase
