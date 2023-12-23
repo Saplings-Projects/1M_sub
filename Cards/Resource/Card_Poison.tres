@@ -1,24 +1,20 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=4 format=3 uid="uid://ctx8jsvac84so"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://ctx8jsvac84so"]
 
-[ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="1_f6yj1"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectPoison.gd" id="1_lkanu"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_u6k7h"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_omhae"]
 
-[sub_resource type="Resource" id="Resource_0h6wx"]
-script = ExtResource("1_f6yj1")
-infinite_duration = false
-status_turn_duration = 3
-status_power = 1.0
+[sub_resource type="Resource" id="Resource_55baw"]
+script = ExtResource("1_lkanu")
+
+[sub_resource type="Resource" id="Resource_bamld"]
+script = ExtResource("2_omhae")
+effect = SubResource("Resource_55baw")
+value = 3
 
 [resource]
 script = ExtResource("1_u6k7h")
-damage_to_apply_to_target = 0.0
-damage_to_apply_to_caster = 0.0
-status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([SubResource("Resource_0h6wx")])
-status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
-affect_all_targets = false
-affect_all_casters = false
-amount_of_cards_to_draw = 0
-amount_of_cards_to_discard = 0
 application_type = 1
 card_title = "Poison"
 card_description = "Apply 3 poison"
+card_effects_data = Array[ExtResource("2_omhae")]([SubResource("Resource_bamld")])
