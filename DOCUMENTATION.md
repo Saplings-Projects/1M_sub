@@ -51,7 +51,7 @@ Each `Entity` has an array of Status where we store said `Status`. At the start 
 
 The structure of the map is the following:
 
-*Include image in next commits*
+![Map structure](documentation_images/map_concept.png)
 
 ## Rooms
 
@@ -88,7 +88,7 @@ You now have only 1 torch left, which lets you continue up to node level 10 at n
 
 ### How event changes are made
 
-*Include image in next commits*
+![Light mechanic](documentation_images/light_mechanic_explanation.png)
 
 ## Unique events
 
