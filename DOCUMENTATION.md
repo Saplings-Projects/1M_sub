@@ -78,6 +78,10 @@ Players will move once the event in the room they are in is over. They must go u
 
 One of the main feature of the game is the ability for the player to influence the map through his actions. The player can place a light source (refered as "torch" for now) in a room, after the event is over and before using the map. The light source will then be used to light the room and the rooms around it.
 
+Using a light source will cause the `light level` to change in surrounding rooms. Each room in the radius of a light gains one light level from it. If a room is in the radius of effect of 2 light sources, then its light level is 2. Changing the `light level` in a room **may** cause its event to change. In simpler terms, the player can influence the encounters they will face by placing light sources in rooms as they travel.
+
+__An example__:
+
 You start the map at level 0. There is a torch placed here by default and you can see everything up to 3 node in every direction you can move to, so you can plan your route. This area is lit and combats/events are normal difficulty in the light radius.
 
 You work your way up to node 3 and can now only see node level 4 that is dimly lit since it is not within torch radius. Tutorial prompts you that these combats/events will be more difficult but with greater reward (risk reward). Node levels 5 and beyond are in darkness and cannot be seen until you move next to them and they become dimly lit.
