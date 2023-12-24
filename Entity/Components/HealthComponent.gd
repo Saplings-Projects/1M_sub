@@ -55,9 +55,11 @@ func deal_damage(damage_data: DealDamageData) -> void:
 		damage_taken_increase = modified_target_stats.damage_taken_increase
 		if caster != null:
 			damage_dealt_increase = modified_caster_stats.damage_dealt_increase
+			# TODO change this to update to the new system
 	
 	# find modified damage based on status
 	var total_damage: float = damage + damage_taken_increase + damage_dealt_increase
+	# TODO change this to update to the new system
 
 	# apply damage to our health
 	var new_health: float = clampf(current_health - total_damage, 0, max_health)
