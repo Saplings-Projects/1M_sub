@@ -57,6 +57,8 @@ The structure of the map is the following:
 
 Rooms are the basis of the map (they are the squares you can see on the image of the map). The map is a 2D Array of rooms. Each room holds basic information about the event in this room as well as informations about the presence of a light source and the level of light in the room (see [Light mechanic](#light-mechanic) for more informations).
 
+Players will know what events are in the room if said room is in the radius of a light (or the player is immediately next to it). The other rooms of the map are in darkness and the player doesn't know the event in them before. We will use icons to show to the player what events they will encounter.
+
 ## Events
 
 What might happen in this new room ? Mystery, mystery... Events is the way we decide what is going to happen in each room. Currently, the list of events is the following:
