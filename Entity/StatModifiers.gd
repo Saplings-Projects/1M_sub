@@ -9,3 +9,7 @@ func _init() -> void:
                     "temporary_add":        0,  # int
                     "temporary_multiply":   1   # float
                 }
+
+func reset_temp_to_default() -> void:
+    modifiers["temporary_add"] = 0
+    modifiers["temporary_multiply"] = 1
