@@ -8,6 +8,11 @@ class_name EntityStats
 ## we don't have to worry about reverting the state of the stats whenever the buff/item/equipment
 ## is removed. See get_modified_stats on BuffBase for an example.
 
+## The previous statement will probably change, since we want to modify stats at runtime and we revert the changes when effects are removed.
+
+var buff_count: int = 0
+var offense_modifier_dict: StatDictBase = StatDictBase.new()
+var defense_modifier_dict: StatDictBase = StatDictBase.new()
 
 var damage_dealt_increase: float = 0
 var damage_taken_increase: float = 0
