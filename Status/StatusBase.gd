@@ -23,10 +23,11 @@ func init_status(in_owner: Entity, in_applier: Entity) -> void:
 	status_owner = in_owner
 	status_applier = in_applier
 
+func on_apply() -> void:
+	pass
 
-func get_modified_stats(stats: EntityStats) -> EntityStats:
-	return stats
-
+func on_remove() -> void:
+	pass
 
 func on_turn_start() -> void:
 	pass

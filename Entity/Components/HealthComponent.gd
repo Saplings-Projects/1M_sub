@@ -33,6 +33,7 @@ func deal_damage(damage_data: DealDamageData) -> void:
 		caster = null
 	
 	# get stats from our stat components
+	# TODO change this to update to the new system
 	var modified_caster_stats: EntityStats = null
 	if caster != null:
 		modified_caster_stats = caster.get_stat_component().get_stat_copy()
