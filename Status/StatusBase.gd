@@ -15,13 +15,13 @@ class_name StatusBase
 @export var status_power: float = 1.0
 
 
-var status_owner: Entity = null
-var status_applier: Entity = null
+var status_target: Entity = null
+var status_caster: Entity = null
 
 
-func init_status(in_owner: Entity, in_applier: Entity) -> void:
-	status_owner = in_owner
-	status_applier = in_applier
+func init_status(in_caster: Entity, in_target: Entity) -> void:
+	status_caster = in_caster
+	status_target = in_target
 
 func on_apply() -> void:
 	pass
