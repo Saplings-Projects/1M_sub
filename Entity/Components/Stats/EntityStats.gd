@@ -10,7 +10,7 @@ class_name EntityStats
 
 ## The previous statement will probably change, since we want to modify stats at runtime and we revert the changes when effects are removed.
 
-var buff_count: int = 0
+var modification_count: int = 0
 var offense_modifier_dict: StatDictBase = null
 var defense_modifier_dict: StatDictBase = null
 
@@ -23,6 +23,13 @@ func _init() -> void:
 func reset_modifier_dict_temp_to_default() -> void:
     offense_modifier_dict.reset_all_temp_to_default()
     defense_modifier_dict.reset_all_temp_to_default()
+
+func change_stat(   modifier_dict: StatDictBase, 
+                    name: String,
+                    new_modification: StatModifiers
+                    ) -> void:
+    modifier_dict.change_modifier_of_given_name(name, new_modification)
+    modification_count += 1
 
 var damage_dealt_increase: float = 0
 var damage_taken_increase: float = 0
