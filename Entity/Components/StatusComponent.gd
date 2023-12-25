@@ -14,6 +14,10 @@ func add_status(new_status: StatusBase, status_applier: Entity) -> void:
 	var found_status = Helpers.find_first_from_array_by_type(current_status, status_copy.get_script())
 	if found_status != null:
 		found_status.status_turn_duration += status_copy.status_turn_duration
+		if found_status.status_power != status_copy.status_power:
+			found_status.status_power = status_copy.status_power
+			# this is a design choice, we choose that if a status has changed its powwer
+			# then we keep the number of turns and use the new power
 	
 	# we don't have this status, add it as new
 	else:
