@@ -21,6 +21,8 @@ var status_caster: Entity = null
 var is_on_apply: bool = false
 # assuming that status are not on_apply and on_turn_start for now
 # ie they don't have an effect at the start and also every turn
+var status_modifier: StatModifiers = null
+# this is only useful for status that modify stats
 
 
 func init_status(in_caster: Entity, in_target: Entity) -> void:
@@ -35,6 +37,7 @@ func on_apply() -> void:
 	var new_modification: StatModifiers = _calculate_new_modification(offense_modifier, defense_modifier)
 	var targeted_modifier_dict = _return_targeted_modifier_dict()
 	target_stats.change_stat(targeted_modifier_dict, modifier_name, new_modification)
+	status_modifier = new_modification # store the value to revert when using on_remove()
 
 
 func _calculate_new_modification(offense_modifier: StatModifiers, defense_modifier: StatModifiers) -> StatModifiers:
@@ -57,10 +60,23 @@ func _return_modifier_name() -> String:
 func _return_targeted_modifier_dict() -> StatDictBase:
 	var modifier_dict: StatDictBase = StatDictBase.new()
 	return modifier_dict
+
+func _calculate_invert_modification(modifier: StatModifiers) -> StatModifiers:
+	var invert_modification: StatModifiers = StatModifiers.new()
+	invert_modification["permanent_add"] = -modifier["permanent_add"]
+	invert_modification["permanent_multiply"] = 1 / modifier["permanent_multiply"]
+	invert_modification["temporary_add"] = -modifier["temporary_add"]
+	invert_modification["temporary_multiply"] = 1 / modifier["temporary_multiply"]
+
+	return invert_modification
 	
 
 func on_remove() -> void:
-	pass
+	var modifier_name: String = _return_modifier_name()
+	var targeted_modifier_dict = _return_targeted_modifier_dict()
+	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
+	var invert_modification: StatModifiers = _calculate_invert_modification(status_modifier)
+	target_stats.change_stat(targeted_modifier_dict, modifier_name, invert_modification)
 
 func on_turn_start() -> void:
 	pass
