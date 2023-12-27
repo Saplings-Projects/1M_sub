@@ -72,7 +72,7 @@ func _on_enemy_start_turn() -> void:
 		assert(can_attack == true, "Enemy failed to attack.")
 		
 		if can_attack:
-			enemy_attack.on_card_play(PlayerManager.player)
+			enemy_attack.on_card_play(enemy, PlayerManager.player)
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
@@ -99,4 +99,5 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 			# remove queued card, then play the card
 			# This is so the queued card doesn't have any influence over our hand count
 			CardManager.card_container.remove_queued_card()
-			queued_card_data.on_card_play(entity)
+			CardManager.card_container.set_active_card(queued_card_data)
+			queued_card_data.on_card_play(PlayerManager.player, entity)

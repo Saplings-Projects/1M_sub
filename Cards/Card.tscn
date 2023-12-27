@@ -3,25 +3,26 @@
 [ext_resource type="Script" path="res://Cards/CardWorld.gd" id="1_4el5m"]
 [ext_resource type="Texture2D" uid="uid://nheutko3fha3" path="res://Cards/card.png" id="2_k6rq5"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="3_du4nn"]
-[ext_resource type="Script" path="res://Helpers/LerpComponent.gd" id="4_ujyje"]
 [ext_resource type="Script" path="res://UI/CardUISetter.gd" id="5_hkyxd"]
 [ext_resource type="Texture2D" uid="uid://bdc5r0w6lyh34" path="res://Cards/card_image.png" id="6_p357x"]
+[ext_resource type="Script" path="res://Cards/CardMovementComponent.gd" id="6_qvt2l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ooxvf"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_4el5m")
 
-[node name="ClickHandler" type="Node2D" parent="."]
+[node name="ClickHandler" type="Node" parent="."]
 script = ExtResource("3_du4nn")
 
-[node name="LerpComponent" type="Node2D" parent="."]
-script = ExtResource("4_ujyje")
-lerp_speed = 7.0
+[node name="CardMovementComponent" type="Node" parent="."]
+script = ExtResource("6_qvt2l")
 
 [node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "key_art")]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

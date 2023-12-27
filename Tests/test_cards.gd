@@ -2,27 +2,24 @@ extends GutTest
 ## Tests for cards
 
 
-var _battler_scene: PackedScene = load("res://Core/Battler.tscn")
 var _card_container_scene: PackedScene = load("res://Cards/CardContainer.tscn")
-var _battler: Battler = null
 var _card_container: CardContainer = null
 
 
 func before_each():
-	_battler = _battler_scene.instantiate()
 	_card_container = _card_container_scene.instantiate()
 	
 	# fill deck with 50 default cards
 	_card_container.default_deck.resize(50)
 	_card_container.max_hand_size = 10
-	_card_container.starting_hand_size = 5
+	_card_container.starting_hand_size = 0
+	_card_container.card_draw_time = .05
 	
 	# assign cards names of Card1-Card50
 	for card_index: int in _card_container.default_deck.size():
 		_card_container.default_deck[card_index] = CardBase.new()
 		_card_container.default_deck[card_index].card_title = "Card" + str(card_index + 1)
 	
-	get_tree().root.add_child(_battler)
 	get_tree().root.add_child(_card_container)
 	
 	# set draw pile to default deck. This removes any randomness from shuffling on _ready()
@@ -31,12 +28,12 @@ func before_each():
 
 
 func after_each():
-	_battler.queue_free()
 	_card_container.queue_free()
 
 
 func test_draw_cards():
 	_card_container.draw_cards(5)
+	await _card_container.on_cards_finished_dealing
 	
 	assert_eq(_card_container.cards_in_hand.size(), 5)
 	assert_eq(_card_container.draw_pile.size(), 45)
@@ -46,6 +43,7 @@ func test_draw_cards():
 func test_draw_cards_2():
 	_card_container.draw_cards(5)
 	_card_container.draw_cards(5)
+	await _card_container.on_cards_finished_dealing
 	
 	assert_eq(_card_container.cards_in_hand.size(), 10)
 	assert_eq(_card_container.draw_pile.size(), 40)
@@ -54,6 +52,7 @@ func test_draw_cards_2():
 
 func test_discard_cards():
 	_card_container.draw_cards(5)
+	await _card_container.on_cards_finished_dealing
 	_card_container.discard_random_card(1)
 	
 	assert_eq(_card_container.cards_in_hand.size(), 4)
@@ -63,6 +62,7 @@ func test_discard_cards():
 
 func test_discard_cards_2():
 	_card_container.draw_cards(5)
+	await _card_container.on_cards_finished_dealing
 	_card_container.discard_random_card(1)
 	_card_container.discard_random_card(1)
 	
@@ -72,6 +72,7 @@ func test_discard_cards_2():
 
 func test_discard_all():
 	_card_container.draw_cards(5)
+	await _card_container.on_cards_finished_dealing
 	_card_container.discard_all_cards()
 	
 	assert_eq(_card_container.cards_in_hand.size(), 0)
@@ -80,7 +81,9 @@ func test_discard_all():
 
 
 func test_deal_starting_hand():
+	_card_container.starting_hand_size = 5
 	_card_container.deal_to_starting_hand_size()
+	await _card_container.on_cards_finished_dealing
 	
 	assert_eq(_card_container.cards_in_hand.size(), 5)
 	assert_eq(_card_container.draw_pile.size(), 45)
@@ -89,6 +92,7 @@ func test_deal_starting_hand():
 
 func test_draw_to_max():
 	_card_container.draw_cards(50)
+	await _card_container.on_cards_finished_dealing
 	
 	assert_eq(_card_container.cards_in_hand.size(), 10)
 	assert_eq(_card_container.draw_pile.size(), 40)
@@ -97,6 +101,7 @@ func test_draw_to_max():
 
 func test_discard_specific():
 	_card_container.draw_cards(5)
+	await _card_container.on_cards_finished_dealing
 	
 	var discard_card: CardWorld = _card_container.cards_in_hand[2]
 	
