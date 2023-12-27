@@ -36,16 +36,17 @@ func deal_damage(damage_data: DealDamageData) -> void:
 	# TODO change this to update to the new system
 	var modified_caster_stats: EntityStats = null
 	if caster != null:
-		modified_caster_stats = caster.get_stat_component().get_stat_copy()
-	var modified_target_stats: EntityStats = target.get_stat_component().get_stat_copy()
+		modified_caster_stats = caster.get_stat_component().get_stats()
+	var modified_target_stats: EntityStats = target.get_stat_component().get_stats()
 	
 	# apply modified damage from status
-	if caster != null and !damage_data.ignore_caster_status:
-		for status: StatusBase in caster.get_status_component().current_status:
-			status.get_modified_stats(modified_caster_stats)
-	if !damage_data.ignore_target_status:
-		for status: StatusBase in target.get_status_component().current_status:
-			status.get_modified_stats(modified_target_stats)
+	# TODO this might not be needed anymore
+	# if caster != null and !damage_data.ignore_caster_status:
+	# 	for status: StatusBase in caster.get_status_component().current_status:
+	# 		status.get_modified_stats(modified_caster_stats)
+	# if !damage_data.ignore_target_status:
+	# 	for status: StatusBase in target.get_status_component().current_status:
+	# 		status.get_modified_stats(modified_target_stats)
 	
 	var damage_taken_increase: float = 0.0
 	var damage_dealt_increase: float = 0.0
