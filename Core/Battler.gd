@@ -100,3 +100,8 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 			# This is so the queued card doesn't have any influence over our hand count
 			CardManager.card_container.remove_queued_card()
 			queued_card_data.on_card_play(entity)
+
+# TODO condition check for killing enemies and removing them from the combat
+# TODO condition check for killing player and ending the combat
+# TODO condition check for killing all enemies and ending the combat
+# TODO reset temporary stats at the end of the combat using EntityStats.reset_modifier_dict_temp_to_default()
