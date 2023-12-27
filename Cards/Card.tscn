@@ -22,7 +22,8 @@ script = ExtResource("3_du4nn")
 script = ExtResource("6_qvt2l")
 
 [node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "key_art")]
-layout_mode = 1
+custom_minimum_size = Vector2(188, 268)
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
