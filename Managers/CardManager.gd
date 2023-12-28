@@ -3,6 +3,7 @@ extends Node
 
 
 signal on_card_container_initialized
+signal on_card_action_finished(card: CardWorld)
 
 var card_container: CardContainer = null
 
