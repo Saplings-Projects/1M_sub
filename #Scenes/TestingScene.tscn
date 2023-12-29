@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=22 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
@@ -17,7 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
-[ext_resource type="Script" path="res://UI/ShowCardPile.gd" id="15_jywnl"]
+[ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
+[ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 
 [sub_resource type="Resource" id="Resource_82ci8"]
 script = ExtResource("10_qowiy")
@@ -50,6 +51,7 @@ card_description = "NULL"
 card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
 
 [node name="TestingScene" type="Node2D"]
+metadata/_edit_vertical_guides_ = [1216.0]
 
 [node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
 
@@ -132,14 +134,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/UIControl/DrawPile"]
-layout_mode = 0
-offset_left = 77.0
-offset_top = -76.0
-offset_right = 123.0
-offset_bottom = -30.0
-script = ExtResource("15_jywnl")
-
 [node name="DiscardPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
 layout_mode = 1
 anchors_preset = 3
@@ -173,11 +167,22 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/UIControl/DiscardPile"]
-layout_mode = 0
-offset_top = -3.0
-offset_right = 46.0
-offset_bottom = 43.0
-script = ExtResource("15_jywnl")
+[node name="DeckPile" type="TextureButton" parent="CanvasLayer/UIControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.00078
+anchor_right = 1.00078
+offset_left = -62.0
+offset_top = 35.0
+offset_right = -22.0
+offset_bottom = 75.0
+texture_normal = ExtResource("18_b54hn")
+texture_pressed = ExtResource("18_b54hn")
+texture_hover = ExtResource("18_b54hn")
+texture_disabled = ExtResource("18_b54hn")
+texture_focused = ExtResource("18_b54hn")
+stretch_mode = 0
+script = ExtResource("19_ucc6f")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
