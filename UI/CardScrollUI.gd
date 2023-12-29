@@ -44,12 +44,16 @@ func populate(parent_name: String) -> void:
 	for card: CardBase in cards_to_display:
 
 		cardworld = card_scene.instantiate()
-		$ScrollContainer/GridContainer.add_child(control_cardworld(cardworld))
+		cardui = cardworld.get_child(CARDUI_INDEX)
 
+		cardworld.custom_minimum_size = (cardui.size * CARD_SCALE) + SIZE_OFFSET
+		cardui.scale = CARD_SCALE
+		cardui.anchors_preset = CORNER_TOP_LEFT
+		cardui.position = CARDUI_POS
+
+		$ScrollContainer/GridContainer.add_child(cardworld)
+		print(cardworld.custom_minimum_size)
 		cardworld.init_card(card)
-	
-	
-
 
 
 
