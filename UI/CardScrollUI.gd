@@ -37,7 +37,6 @@ func populate(parent_name: String) -> void:
 		"DeckPile":
 			cards_to_display = deck
 			$Label.text = "Showing the deck"
-		
 	
 	cards_to_display.sort()
 
@@ -54,16 +53,3 @@ func populate(parent_name: String) -> void:
 		$ScrollContainer/GridContainer.add_child(cardworld)
 		print(cardworld.custom_minimum_size)
 		cardworld.init_card(card)
-
-
-
-
-
-		
-		
-		
-				
-		
-	
-	
-	
