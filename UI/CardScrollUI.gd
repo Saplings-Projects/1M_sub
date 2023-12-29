@@ -51,18 +51,6 @@ func populate(parent_name: String) -> void:
 	
 
 
-func control_cardworld(card: CardWorld) -> Control:
-
-	var control: Control = Control.new()
-	var cardui: Control = card.get_children()[2] # Gets the control node CardUI 
-
-	control.size = cardui.size
-	cardui.position =  Vector2(3, 4)
-	cardui.scale = Vector2(.7, .7)
-
-	control.add_child(card)
-
-	return control
 
 
 
