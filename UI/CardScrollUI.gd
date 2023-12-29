@@ -51,5 +51,5 @@ func populate(parent_name: String) -> void:
 		cardui.position = CARDUI_POS
 
 		$ScrollContainer/GridContainer.add_child(cardworld)
-		print(cardworld.custom_minimum_size)
+		
 		cardworld.init_card(card)
