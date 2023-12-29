@@ -3,7 +3,7 @@ class_name CardPileUISetter
 
 
 @export var pile_count_label: Label = null
-
+@onready var cardUI: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 
 func _ready() -> void:
 	if CardManager.card_container != null:
@@ -22,3 +22,9 @@ func _on_card_counts_updated() -> void:
 
 func _get_count() -> int:
 	return CardManager.card_container.get_draw_pile_size()
+
+func _pressed() -> void:
+
+	var uiPile = cardUI.instantiate()
+	uiPile.populate(get_name())
+	$"..".add_child(uiPile)
