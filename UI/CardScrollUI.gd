@@ -8,6 +8,12 @@ var deck: Array[CardBase]         = CardManager.card_container.default_deck
 var cards_to_display: Array[CardBase] = []
 var card_worlds: Array[CardWorld] = []
 var cardworld: CardWorld = null
+var cardui: Control = null
+
+const CARD_SCALE: Vector2 = Vector2(.7, .7)
+const CARDUI_INDEX: int = 2
+const CARDUI_POS: Vector2 = Vector2(4,4)
+const SIZE_OFFSET: Vector2 = Vector2(10,10)
 
 func _on_button_pressed() -> void:
 	queue_free()
