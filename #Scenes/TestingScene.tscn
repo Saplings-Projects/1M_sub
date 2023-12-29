@@ -134,9 +134,10 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer/UIControl/DrawPile"]
 layout_mode = 0
-offset_top = -3.0
-offset_right = 46.0
-offset_bottom = 43.0
+offset_left = 77.0
+offset_top = -76.0
+offset_right = 123.0
+offset_bottom = -30.0
 script = ExtResource("15_jywnl")
 
 [node name="DiscardPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
@@ -173,6 +174,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer/UIControl/DiscardPile"]
+layout_mode = 0
 offset_top = -3.0
 offset_right = 46.0
 offset_bottom = 43.0

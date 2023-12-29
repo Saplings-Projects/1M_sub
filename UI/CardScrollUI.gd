@@ -34,7 +34,7 @@ func populate(parent_name: String) -> void:
 		"DrawPile":
 			cards_to_display = draw_pile
 			$Label.text = "Showing the draw pile"
-		"Deck":
+		"DeckPile":
 			cards_to_display = deck
 			$Label.text = "Showing the deck"
 		
