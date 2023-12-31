@@ -7,7 +7,7 @@ class_name CardWorld
 signal on_card_data_initialized(card_data: CardBase)
 
 var card_data: CardBase = null
-
+var CardCastType : Enums.CardCastType
 
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
@@ -16,6 +16,13 @@ func _ready() -> void:
 func init_card(in_card_data: CardBase) -> void:
 	card_data = in_card_data
 	on_card_data_initialized.emit(card_data)
+	
+	CardCastType = Enums.CardCastType.INSTA_CAST
+	
+	for effectData : EffectData in card_data.card_effects_data:
+		if(effectData.target_type == Enums.TargetType.SINGLE_TARGET):
+			CardCastType = Enums.CardCastType.TARGET
+			break
 
 
 func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
