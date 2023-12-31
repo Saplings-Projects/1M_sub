@@ -9,7 +9,9 @@ const EASE_TYPE: Tween.EaseType = Tween.EASE_OUT
 const TRANS_TYPE: Tween.TransitionType = Tween.TRANS_CUBIC
 const QUEUE_OFFSET: float = -150
 const SCALE_AMOUNT: Vector2 = Vector2(1.3, 1.3)
-
+const OFFSET_FROM_MOUSE : Vector2 = Vector2(0, 100)
+#Position of card if it's target type
+const TARGET_CARD_POS : Vector2 = Vector2(-500, -500)
 
 # @Override
 func on_state_enter() -> void:
@@ -23,10 +25,15 @@ func on_state_enter() -> void:
 # @Override
 func on_state_process(delta: float) -> void:
 	# Ease position with an offset
-	var offset_desired_position: Vector2 = _state.desired_position
+	var offset_desired_position: Vector2 = _state.card.get_global_mouse_position()
 	offset_desired_position.y += QUEUE_OFFSET
+	offset_desired_position -= _state.card.get_parent().position
+	offset_desired_position += OFFSET_FROM_MOUSE
 	
-	_state.card.position = _state.card.position.lerp(offset_desired_position, delta * MOVE_SPEED)
+	if(offset_desired_position.y < CardManager.card_container.play_at_height && _state.card.card_cast_type != Enums.CardCastType.INSTA_CAST):
+		_state.card.position = _state.card.position.lerp(TARGET_CARD_POS, delta * MOVE_SPEED)
+	else :
+		_state.card.position = _state.card.position.lerp(offset_desired_position, delta * MOVE_SPEED)
 	
 	# Ease rotation
 	_state.card.rotation_degrees = lerpf(_state.card.rotation_degrees, 0.0, delta * MOVE_SPEED)
