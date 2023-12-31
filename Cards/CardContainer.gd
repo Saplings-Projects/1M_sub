@@ -30,6 +30,10 @@ signal on_cards_finished_dealing
 @export var max_hand_offset_y: float = 100
 @export var draw_pile_ui: DrawPileUISetter = null
 @export var discard_pile_ui: DiscardPileUISetter = null
+# Height at where cards gets played
+@export var play_at_height : float 
+
+@export var battler_refrence : Battler
 
 var cards_in_hand: Array[CardWorld] = []
 var draw_pile: Array[CardBase] = []
@@ -284,19 +288,23 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 
 func _on_card_clicked(card: CardWorld) -> void:
 	if is_card_queued():
-		var previously_queued_card: CardWorld = queued_card
-		
-		# If we click ANY card while we have one queued, unqueue the queued card
-		set_queued_card(null)
-		
-		# If the card we clicked was the global queued card, we are still hovering it
-		if card == previously_queued_card:
-			_on_card_hovering(card)
+		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && _is_queued_card_in_play_area()):
+			_play_card()
 		else:
-			# If we clicked another card, then we already unhovered the queued card
-			_on_card_unhovered(previously_queued_card)
-			# Now call this function again for the card we clicked, which should queue it
-			_on_card_clicked(card)
+		
+			var previously_queued_card: CardWorld = queued_card
+		
+			# If we click ANY card while we have one queued, unqueue the queued card
+			set_queued_card(null)
+		
+			# If the card we clicked was the global queued card, we are still hovering it
+			if card == previously_queued_card:
+				_on_card_hovering(card)
+			else:
+				# If we clicked another card, then we already unhovered the queued card
+				_on_card_unhovered(previously_queued_card)
+				# Now call this function again for the card we clicked, which should queue it
+				_on_card_clicked(card)
 	else:
 		# If we click a card with no card queued, queue it
 		set_queued_card(card)
@@ -304,6 +312,24 @@ func _on_card_clicked(card: CardWorld) -> void:
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
 		_focus_card(card)
 
+func _play_card():
+	var queued_card_data: CardBase = queued_card.card_data
+	var target : Entity
+	
+	
+	match queued_card_data.application_type:
+		Enums.ApplicationType.ALL:
+			target = PlayerManager.player
+		Enums.ApplicationType.ENEMY_ONLY:
+			target = battler_refrence._enemy_list[0]
+		Enums.ApplicationType.FRIENDLY_ONLY:
+			target = PlayerManager.player
+	# remove queued card, then play the card
+	# This is so the queued card doesn't have any influence over our hand count
+	CardManager.card_container.remove_queued_card()
+	CardManager.card_container.set_active_card(queued_card_data)
+	queued_card_data.on_card_play(PlayerManager.player, target)
+	
 
 func _on_card_hovering(card: CardWorld) -> void:
 	if !is_card_queued():
@@ -393,3 +419,6 @@ func _update_card_positions() -> void:
 		# set position and rotation
 		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
 		movement_component.state_properties.desired_rotation = rotation_amount
+
+func _is_queued_card_in_play_area() -> bool:
+	return queued_card.position.y < play_at_height 
