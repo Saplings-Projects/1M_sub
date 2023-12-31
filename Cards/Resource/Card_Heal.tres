@@ -1,6 +1,17 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=2 format=3 uid="uid://d12g33rc6c3u5"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://d12g33rc6c3u5"]
 
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_b2lcg"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_y1itd"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_54lmp"]
+
+[sub_resource type="Resource" id="Resource_rcons"]
+script = ExtResource("1_b2lcg")
+
+[sub_resource type="Resource" id="Resource_1kn0j"]
+script = ExtResource("2_54lmp")
+effect = SubResource("Resource_rcons")
+value = -1
+target_type = 1
 
 [resource]
 script = ExtResource("1_y1itd")
@@ -10,6 +21,9 @@ status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([])
 status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
 affect_all_targets = false
 affect_all_casters = false
+amount_of_cards_to_draw = 0
+amount_of_cards_to_discard = 0
 application_type = 0
 card_title = "Heal"
 card_description = "Heal 1 damage"
+card_effects_data = Array[ExtResource("2_54lmp")]([SubResource("Resource_1kn0j")])

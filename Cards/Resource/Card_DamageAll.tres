@@ -1,6 +1,17 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=2 format=3 uid="uid://0x385c3nuq8f"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://0x385c3nuq8f"]
 
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j02oq"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_lqjml"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_0yowl"]
+
+[sub_resource type="Resource" id="Resource_m2hux"]
+script = ExtResource("1_lqjml")
+
+[sub_resource type="Resource" id="Resource_wy80t"]
+script = ExtResource("2_0yowl")
+effect = SubResource("Resource_m2hux")
+value = 2
+target_type = 1
 
 [resource]
 script = ExtResource("1_j02oq")
@@ -10,6 +21,9 @@ status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([])
 status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
 affect_all_targets = true
 affect_all_casters = false
+amount_of_cards_to_draw = 0
+amount_of_cards_to_discard = 0
 application_type = 1
 card_title = "Damage All"
 card_description = "Deal 2 damage to all enemies"
+card_effects_data = Array[ExtResource("2_0yowl")]([SubResource("Resource_wy80t")])

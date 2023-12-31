@@ -15,3 +15,4 @@ amount_of_cards_to_discard = 0
 application_type = 1
 card_title = "NULL"
 card_description = "NULL"
+card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])

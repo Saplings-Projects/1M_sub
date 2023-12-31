@@ -12,6 +12,7 @@ script = ExtResource("1_vf50y")
 script = ExtResource("2_22qxd")
 effect = SubResource("Resource_jtcab")
 value = 1
+target_type = 0
 
 [sub_resource type="Resource" id="Resource_8ayko"]
 script = ExtResource("3_0bbwh")
@@ -20,6 +21,7 @@ script = ExtResource("3_0bbwh")
 script = ExtResource("2_22qxd")
 effect = SubResource("Resource_8ayko")
 value = 2
+target_type = 0
 
 [resource]
 script = ExtResource("1_h8l2w")
