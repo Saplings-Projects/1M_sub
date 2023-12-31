@@ -30,6 +30,12 @@ enum TargetType
 	ALL_TARGETS,
 }
 
+enum CardCastType
+{
+	TARGET,
+	INSTA_CAST,
+}
+
 enum CardMovementState
 {
 	NONE,
