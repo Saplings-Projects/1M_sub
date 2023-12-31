@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui") instance=ExtResource("3_e7sws")]
+[node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui", "battler_refrence") instance=ExtResource("3_e7sws")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -44,15 +44,22 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+card_hovered_offset = null
 default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_wvn3v"), ExtResource("5_j1lqt"), ExtResource("6_4124l"), ExtResource("7_smkw8"), ExtResource("9_ojxic"), ExtResource("8_x6t2k"), ExtResource("10_w0xgm"), ExtResource("11_3k5t2")])
 starting_hand_size = 10
+max_hand_size = null
+card_draw_time = null
+card_discard_time = null
 max_hand_width = 900.0
 min_card_separation = 90.0
 max_card_separation = 120.0
 hover_offset_max = 100.0
 max_rotation = 40.0
+max_hand_offset_y = null
 draw_pile_ui = NodePath("../DrawPile")
 discard_pile_ui = NodePath("../DiscardPile")
+play_at_height = -400.0
+battler_refrence = NodePath("../../../Battler")
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 1

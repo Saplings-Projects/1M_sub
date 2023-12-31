@@ -48,12 +48,9 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
-func on_card_play(caster: Entity, target: Entity) -> void:
-	_apply_all_effects(target)
-	_deal_damage(caster, target)
-	_apply_status(caster, target)
-	_draw_cards()
-	_discard_random_cards()
+func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
+	for entity : Entity in targets:
+		_apply_all_effects(entity)
 	CardManager.on_card_action_finished.emit(self)
 	# TODO add other functionality that lots of cards may share (eg: restore AP)
 

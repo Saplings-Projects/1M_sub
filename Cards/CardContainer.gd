@@ -314,16 +314,16 @@ func _on_card_clicked(card: CardWorld) -> void:
 
 func _play_card():
 	var queued_card_data: CardBase = queued_card.card_data
-	var target : Entity
+	var target : Array[Entity]
 	
 	
 	match queued_card_data.application_type:
 		Enums.ApplicationType.ALL:
-			target = PlayerManager.player
+			target = [PlayerManager.player]
 		Enums.ApplicationType.ENEMY_ONLY:
-			target = battler_refrence._enemy_list[0]
+			target = battler_refrence._enemy_list
 		Enums.ApplicationType.FRIENDLY_ONLY:
-			target = PlayerManager.player
+			target = [PlayerManager.player]
 	# remove queued card, then play the card
 	# This is so the queued card doesn't have any influence over our hand count
 	CardManager.card_container.remove_queued_card()
