@@ -4,7 +4,7 @@ var card_scene: PackedScene = preload("res://Cards/Card.tscn")
 
 var discard_pile: Array[CardBase] = CardManager.card_container.discard_pile
 var draw_pile: Array[CardBase]    = CardManager.card_container.draw_pile
-var deck: Array[CardBase]         = CardManager.card_container.default_deck
+var deck_pile: Array[CardBase]         = CardManager.card_container.default_deck
 var cards_to_display: Array[CardBase] = []
 var card_worlds: Array[CardWorld] = []
 var cardworld: CardWorld = null
@@ -35,8 +35,8 @@ func populate(parent_name: String) -> void:
 			cards_to_display = draw_pile
 			$Label.text = "Showing the draw pile"
 		"DeckPile":
-			cards_to_display = deck
-			$Label.text = "Showing the deck"
+			cards_to_display = deck_pile
+			$Label.text = "Showing the deck pile"
 	
 	cards_to_display.sort()
 
