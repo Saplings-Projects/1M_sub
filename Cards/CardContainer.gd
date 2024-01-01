@@ -288,7 +288,7 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 
 func _on_card_clicked(card: CardWorld) -> void:
 	if is_card_queued():
-		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && _is_queued_card_in_play_area()):
+		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && is_queued_card_in_play_area()):
 			_play_card()
 		else:
 		
@@ -316,19 +316,11 @@ func _play_card():
 	var queued_card_data: CardBase = queued_card.card_data
 	var target : Array[Entity]
 	
-	
-	match queued_card_data.application_type:
-		Enums.ApplicationType.ALL:
-			target = [PlayerManager.player]
-		Enums.ApplicationType.ENEMY_ONLY:
-			target = battler_refrence._enemy_list
-		Enums.ApplicationType.FRIENDLY_ONLY:
-			target = [PlayerManager.player]
 	# remove queued card, then play the card
 	# This is so the queued card doesn't have any influence over our hand count
 	CardManager.card_container.remove_queued_card()
 	CardManager.card_container.set_active_card(queued_card_data)
-	queued_card_data.on_card_play(PlayerManager.player, target)
+	queued_card_data.on_card_play(PlayerManager.player, [])
 	
 
 func _on_card_hovering(card: CardWorld) -> void:
@@ -420,5 +412,5 @@ func _update_card_positions() -> void:
 		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
 		movement_component.state_properties.desired_rotation = rotation_amount
 
-func _is_queued_card_in_play_area() -> bool:
-	return queued_card.position.y < play_at_height 
+func is_queued_card_in_play_area() -> bool:
+	return get_global_mouse_position().y < play_at_height 
