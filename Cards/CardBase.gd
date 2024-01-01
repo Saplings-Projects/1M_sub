@@ -43,16 +43,44 @@ func _apply_all_effects(target: Entity) -> void:
 	for effect_data: EffectData in card_effects_data:
 		effect_data.apply_effect_data(target)
 
+func _apply_effect(target : Entity, effect: EffectData):
+	effect.apply_effect_data(target)
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
 func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
+	#Split up targeted attacks and all attacks
+	var target_effects: Array[EffectData] = []
+	var all_effects: Array[EffectData] = []
+	
+	for effect_data: EffectData in card_effects_data:
+		if(effect_data.target_type == Enums.TargetType.SINGLE_TARGET):
+			target_effects.push_front(effect_data)
+		else :
+			all_effects.push_front( effect_data)
+	#Apply single target
 	for entity : Entity in targets:
-		_apply_all_effects(entity)
+		for effect : EffectData in target_effects:
+			_apply_effect(entity, effect)
+	#Get every unit that is to be affected by card
+	var all_target : Array[Entity]
+	
+	match application_type:
+		Enums.ApplicationType.ALL:
+			all_target = CardManager.card_container.battler_refrence._enemy_list
+			all_target += [PlayerManager.player]
+		Enums.ApplicationType.ENEMY_ONLY:
+			all_target = CardManager.card_container.battler_refrence._enemy_list
+		Enums.ApplicationType.FRIENDLY_ONLY:
+			all_target = [PlayerManager.player]
+	#apply effect to every target
+	for entity : Entity in all_target:
+		for effect : EffectData in all_effects:
+			_apply_effect(entity, effect)
+	
 	CardManager.on_card_action_finished.emit(self)
-	# TODO add other functionality that lots of cards may share (eg: restore AP)
 
 
 # override in child cards if you want to deal damage in a unique way
