@@ -6,6 +6,9 @@ var _card_container_scroll_scene: PackedScene  = load("res://#Scenes/CardScrollU
 var _card_container: CardContainer = null
 var _card_scroll: Control = null
 
+const SCROLLCONTAINER = 2
+const GRIDCONTAINER = 0
+
 
 func _test_setter():
 	_card_container = _card_container_scene.instantiate()
@@ -24,10 +27,8 @@ func _test_setter():
 	
 	get_tree().root.add_child(_card_container)
 
-	
-	_card_scroll.discard_pile = _card_container.default_deck.duplicate()
 	_card_scroll.deck_pile = _card_container.default_deck.duplicate()
-	_card_scroll.draw_pile = _card_container.default_deck.duplicate()
+	
 
 func test_populate():
 	
@@ -35,7 +36,7 @@ func test_populate():
 	_card_scroll.populate("DeckPile")
 
 	var cards_in_pile: int = len(_card_scroll.deck_pile)
-	var grid: GridContainer = _card_scroll.get_node("GridContainer")
+	var grid: GridContainer = _card_scroll.get_child(SCROLLCONTAINER).get_child(GRIDCONTAINER)
 
 	assert_eq(cards_in_pile, grid.get_child_count())
 	
