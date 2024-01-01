@@ -18,9 +18,8 @@ const SIZE_OFFSET: Vector2 = Vector2(10,10)
 func _on_button_pressed() -> void:
 	queue_free()
 
-#Pressing escape will return you to the game
-func _input(inputevent: InputEvent) -> void:
-	if inputevent.is_action("escape"):
+func _input(_inputevent: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_ESCAPE):
 		queue_free()
 
 
