@@ -244,6 +244,7 @@ func _bind_card_input(card: CardWorld) -> void:
 	card_click_handler.on_click.connect(_on_card_clicked.bind(card))
 	card_click_handler.on_mouse_hovering.connect(_on_card_hovering.bind(card))
 	card_click_handler.on_unhover.connect(_on_card_unhovered.bind(card))
+	card_click_handler.on_right_click.connect(on_right_click.bind(card))
 
 
 func _add_to_discard_queue(card: CardWorld) -> void:
@@ -411,6 +412,10 @@ func _update_card_positions() -> void:
 		# set position and rotation
 		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
 		movement_component.state_properties.desired_rotation = rotation_amount
+
+func on_right_click(card : CardWorld):
+	set_queued_card(null)
+	_on_card_hovering(card)
 
 func is_queued_card_in_play_area() -> bool:
 	return get_global_mouse_position().y < play_at_height 
