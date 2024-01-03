@@ -36,8 +36,8 @@ func populate(parent_name: String) -> void:
 		"DeckPile":
 			cards_to_display = deck_pile
 			$Label.text = "Showing the deck pile"
-	
-	cards_to_display.sort()
+			
+	cards_to_display.sort_custom(card_sort_by_title)
 
 	for card: CardBase in cards_to_display:
 
@@ -52,3 +52,9 @@ func populate(parent_name: String) -> void:
 		$ScrollContainer/GridContainer.add_child(cardworld)
 		
 		cardworld.init_card(card)
+
+func card_sort_by_title(card_A: CardBase, card_B: CardBase) -> bool:
+	if card_A.card_title.to_lower() < card_B.card_title.to_lower():
+		return true
+	return false
+
