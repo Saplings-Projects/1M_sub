@@ -36,10 +36,11 @@ func test_populate():
 	
 	_card_scroll.populate("DeckPile")
 
-	var cards_in_pile: int = len(_card_scroll.deck_pile)
+	var card_pile = _card_scroll.deck_pile
 	var grid: GridContainer = _card_scroll.get_child(SCROLL_CONTAINER_INDEX).get_child(GRID_CONTAINER_INDEX)
 
-	assert_eq(cards_in_pile, grid.get_child_count())
-	
+	for card_index in len(card_pile):
+		var card_data_deck = card_pile[card_index]
+		var card_data_grid = grid.get_child(card_index).card_data
 
-
+		assert_eq(card_data_deck, card_data_grid)
