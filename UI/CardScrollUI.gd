@@ -15,9 +15,9 @@ const CARDUI_INDEX: int = 2
 const CARDUI_POS: Vector2 = Vector2(4,4)
 const SIZE_OFFSET: Vector2 = Vector2(10,10)
 
-func _on_button_pressed() -> void:
-	queue_free()
 
+
+#deletes the root node CardScrollUI
 func _input(_inputevent: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_ESCAPE):
 		queue_free()
