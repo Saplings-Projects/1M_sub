@@ -2,9 +2,9 @@ extends Control
 
 var card_scene: PackedScene = preload("res://Cards/Card.tscn")
 
-var discard_pile: Array[CardBase] = CardManager.card_container.discard_pile
-var draw_pile: Array[CardBase]    = CardManager.card_container.draw_pile
-var deck_pile: Array[CardBase]   = CardManager.card_container.default_deck
+var discard_pile: Array[CardBase]
+var draw_pile: Array[CardBase] 
+var deck_pile: Array[CardBase] 
 var cards_to_display: Array[CardBase] = []
 var card_worlds: Array[CardWorld] = []
 var cardworld: CardWorld = null
