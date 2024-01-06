@@ -6,6 +6,7 @@ class_name EffectData extends Resource
 var caster: Entity = null
 var list_targets: Array[Entity] = []
 @export var value: int = 0
+@export var target_type : Enums.TargetType = Enums.TargetType.ALL_TARGETS
 
 func _init(_effect: EffectBase = null, _caster: Entity = null, _list_targets: Array[Entity] = [], _value: int = 0) -> void:
 	self.effect = _effect

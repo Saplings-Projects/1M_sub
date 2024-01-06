@@ -24,6 +24,18 @@ enum ApplicationType
 	ALL,
 }
 
+enum TargetType
+{
+	SINGLE_TARGET,
+	ALL_TARGETS,
+}
+
+enum CardCastType
+{
+	TARGET,
+	INSTA_CAST,
+}
+
 enum CardMovementState
 {
 	NONE,

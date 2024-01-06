@@ -2,8 +2,10 @@ extends Node
 class_name ClickHandler
 
 
-# emits when area is clicked
+# emits when area is left clicked
 signal on_click
+# emits when area is right clicked
+signal on_right_click
 # emits once when the area is hovered
 signal on_hover
 # emits once when the area is unhovered
@@ -27,9 +29,12 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 func _on_gui_input_event(event: InputEvent) -> void:
 	if not _is_interactable:
 		return
-		
+	
 	if event is InputEventMouseButton and event.pressed:
-		on_click.emit()
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			on_click.emit()
+		else:
+			on_right_click.emit()
 	if event is InputEventMouseMotion:
 		on_mouse_hovering.emit()
 
