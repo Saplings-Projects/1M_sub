@@ -13,7 +13,6 @@ class_name CardBase
 ## wish to take damage in some contexts.
 ## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
-
 @export var damage_to_apply_to_target: float = 0.0
 @export var damage_to_apply_to_caster: float = 0.0
 @export var status_to_apply_to_target: Array[StatusBase]
@@ -27,18 +26,35 @@ class_name CardBase
 @export var card_key_art: ImageTexture = null
 @export var card_description: String = "NULL"
 
+@export var card_effects_data: Array[EffectData] = []
+
+func _ready() -> void:
+	card_effects_data = []
+
+# Need a parser of some sort to read a plainform card data and translate it to EffectData
+# This will call EffectData.add_effect_data() in a loop for every new effect
+
+@warning_ignore("unused_parameter")
+func parse_card_data(card_data: Dictionary) -> void:
+	# TODO
+	pass
+
+func _apply_all_effects(target: Entity) -> void:
+	for effect_data: EffectData in card_effects_data:
+		effect_data.apply_effect_data(target)
+
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
-	if caster.get_party_component().can_play_on_entity(application_type, target):
-		return true
-	return false
+	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
 func on_card_play(caster: Entity, target: Entity) -> void:
+	_apply_all_effects(target)
 	_deal_damage(caster, target)
 	_apply_status(caster, target)
 	_draw_cards()
 	_discard_random_cards()
+	CardManager.on_card_action_finished.emit(self)
 	# TODO add other functionality that lots of cards may share (eg: restore AP)
 
 

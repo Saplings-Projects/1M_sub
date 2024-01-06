@@ -1,7 +1,6 @@
 extends Resource
 class_name EventBase
 
-var EVENTS_CLASSIFICATION: Array[Resource] = [EventMob, EventRandom, EventShop, EventHeal]
 
 var packedScene: String = ""
 

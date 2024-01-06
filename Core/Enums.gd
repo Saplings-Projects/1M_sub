@@ -23,3 +23,13 @@ enum ApplicationType
 	ENEMY_ONLY,
 	ALL,
 }
+
+enum CardMovementState
+{
+	NONE,
+	MOVING_TO_HAND,
+	IN_HAND,
+	DISCARDING,
+	HOVERED,
+	QUEUED,
+}

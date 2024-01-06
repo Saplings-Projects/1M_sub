@@ -11,9 +11,6 @@ var _battler: Battler = null
 var _player_health_component: HealthComponent = null
 var _enemy_health_component: HealthComponent = null
 
-func before_all():
-	await PhaseManager.on_game_start
-
 
 func before_each():
 	_player = _player_scene.instantiate()
