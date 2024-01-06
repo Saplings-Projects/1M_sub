@@ -28,8 +28,6 @@ func before_each():
 	
 
 func after_each():
-	
-	
 	_card_container.free()
 	_card_scroll.free()
 	
