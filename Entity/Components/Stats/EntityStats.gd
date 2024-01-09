@@ -30,3 +30,32 @@ func change_stat(   modifier_dict: StatDictBase,
                     ) -> void:
     modifier_dict.change_modifier_of_given_name(name, new_modification)
     modification_count += 1
+
+func _calculate_modified_value_offense(name: String, base_value: int) -> int:
+    var modified_value: int = base_value
+    var modifier: StatModifiers = offense_modifier_dict.stat_dict[name]
+    modified_value += modifier.add_to_temp
+    modified_value += modifier.add_to_permanent
+    modified_value *= modifier.mult_to_temp
+    modified_value *= modifier.mult_to_permanent
+    # a problem with this approach is that the heal which uses a negative value
+    # won't work anymore (we will basically reduce the heal instead of increasing it)
+    # this is only a problem with the heal, so I think the problem should be dealt with in the heal effect
+
+    return ceil(modified_value)
+
+func _calculate_modified_value_defense(name: String, base_value: int) -> int:
+    var modified_value: int = base_value
+    var modifier: StatModifiers = defense_modifier_dict.stat_dict[name]
+    modified_value -= modifier.add_to_temp
+    modified_value -= modifier.add_to_permanent
+    modified_value /= modifier.mult_to_temp
+    modified_value /= modifier.mult_to_permanent
+
+    return ceil(modified_value)
+
+func calculate_modified_value(name: String, base_value: int, is_offense: bool) -> int:
+    if is_offense:
+        return _calculate_modified_value_offense(name, base_value)
+    else:
+        return _calculate_modified_value_defense(name, base_value)
