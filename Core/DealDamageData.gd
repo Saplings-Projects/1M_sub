@@ -7,3 +7,5 @@ var damage: float
 var caster: Entity
 var ignore_caster_status: bool = false
 var ignore_target_status: bool = false
+
+# TODO is this needed anymore ?
