@@ -13,9 +13,6 @@ class_name CardBase
 ## wish to take damage in some contexts.
 ## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
-
-# @export var status_to_apply_to_target: Array[StatusBase]
-# @export var status_to_apply_to_caster: Array[StatusBase]
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
 @export var card_title: String = "NULL"
 @export var card_key_art: ImageTexture = null
@@ -43,5 +40,7 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
-func on_card_play(target: Entity) -> void:
+func on_card_play(caster: Entity, target: Entity) -> void:
 	_apply_all_effects(target)
+	CardManager.on_card_action_finished.emit(self)
+	# TODO add other functionality that lots of cards may share (eg: restore AP)
