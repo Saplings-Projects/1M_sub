@@ -30,6 +30,3 @@ func change_stat(   modifier_dict: StatDictBase,
                     ) -> void:
     modifier_dict.change_modifier_of_given_name(name, new_modification)
     modification_count += 1
-
-var damage_dealt_increase: float = 0
-var damage_taken_increase: float = 0
