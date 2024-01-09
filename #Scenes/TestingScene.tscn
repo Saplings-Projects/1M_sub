@@ -11,14 +11,48 @@
 [ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="8_x6t2k"]
 [ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="9_ojxic"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
+[ext_resource type="Script" path="res://Cards/Card_DamageHealth.gd" id="10_qowiy"]
 [ext_resource type="Resource" uid="uid://3s4aet1ciesh" path="res://Cards/Resource/Card_damage_and_poison.tres" id="10_w0xgm"]
 [ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Card_EnemyAttack.tres" id="11_3k5t2"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Resource" uid="uid://uv2rili0xf3x" path="res://Cards/Resource/Card_Damage_EVERYTHING.tres" id="12_ikall"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
+[ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
+[ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
+
+[sub_resource type="Resource" id="Resource_82ci8"]
+script = ExtResource("10_qowiy")
+damage_to_apply_to_target = 0.0
+damage_to_apply_to_caster = 0.0
+status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([])
+status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
+affect_all_targets = false
+affect_all_casters = false
+amount_of_cards_to_draw = 0
+amount_of_cards_to_discard = 0
+application_type = 1
+card_title = "NULL"
+card_description = "NULL"
+card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
+
+[sub_resource type="Resource" id="Resource_bjuo7"]
+script = ExtResource("10_qowiy")
+damage_to_apply_to_target = 0.0
+damage_to_apply_to_caster = 0.0
+status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([])
+status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
+affect_all_targets = false
+affect_all_casters = false
+amount_of_cards_to_draw = 0
+amount_of_cards_to_discard = 0
+application_type = 1
+card_title = "NULL"
+card_description = "NULL"
+card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
 
 [node name="TestingScene" type="Node2D"]
+metadata/_edit_vertical_guides_ = [1216.0]
 
 [node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
 
@@ -135,5 +169,23 @@ grow_vertical = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DeckPile" type="TextureButton" parent="CanvasLayer/UIControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.00078
+anchor_right = 1.00078
+offset_left = -62.0
+offset_top = 35.0
+offset_right = -22.0
+offset_bottom = 75.0
+texture_normal = ExtResource("18_b54hn")
+texture_pressed = ExtResource("18_b54hn")
+texture_hover = ExtResource("18_b54hn")
+texture_disabled = ExtResource("18_b54hn")
+texture_focused = ExtResource("18_b54hn")
+stretch_mode = 0
+script = ExtResource("19_ucc6f")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
