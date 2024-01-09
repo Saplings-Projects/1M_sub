@@ -17,12 +17,16 @@ func _apply_status(status: StatusBase, caster: Entity, target: Entity) -> void:
 
 func calculate_value(name: String, caster: Entity, target: Entity, value: int) -> int:
     var modified_value: int = value
-    var caster_stats: EntityStats = caster.get_stats_component().get_stats()
-    modified_value = caster_stats.calculate_modified_value(name, modified_value, true) 
+    var caster_stats: EntityStats = null
+    if caster != null:
+        caster_stats = caster.get_stats_component().get_stats()
+        modified_value = caster_stats.calculate_modified_value(name, modified_value, true) 
     # is_offense = true, caster attacks
 
-    var target_stats: EntityStats = target.get_stats_component().get_stats()
-    modified_value = target_stats.calculate_modified_value(name, modified_value, false) 
+    var target_stats: EntityStats = null
+    if target != null:
+        target_stats = target.get_stats_component().get_stats()
+        modified_value = target_stats.calculate_modified_value(name, modified_value, false) 
     # is_offense = false, target defends
 
     return modified_value
