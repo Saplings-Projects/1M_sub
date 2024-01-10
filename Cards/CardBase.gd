@@ -48,7 +48,7 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#Apply single target
 	_apply_all_effects(targets, target_effects)
 	#Get every unit that is to be affected by card
-	var all_target : Array[Entity] = get_all_targets()
+	var all_target : Array[Entity] = CardManager.card_container.battler_refrence.get_all_targets(application_type)
 
 	#apply effect to every target
 	_apply_all_effects(all_target, all_effects)
@@ -73,17 +73,3 @@ func get_all_effects() -> Array[EffectData]:
 			
 	return All_effects
 
-func get_all_targets() -> Array[Entity]:
-	var all_target : Array[Entity]
-	
-	match application_type:
-		Enums.ApplicationType.ALL:
-			all_target = CardManager.card_container.battler_refrence._enemy_list
-			all_target += [PlayerManager.player]
-		Enums.ApplicationType.ENEMY_ONLY:
-			all_target = CardManager.card_container.battler_refrence._enemy_list
-		Enums.ApplicationType.FRIENDLY_ONLY:
-			all_target = [PlayerManager.player]
-			
-	return all_target
-	

@@ -101,3 +101,18 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 			CardManager.card_container.remove_queued_card()
 			CardManager.card_container.set_active_card(queued_card_data)
 			queued_card_data.on_card_play(PlayerManager.player, [entity])
+			
+func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
+	var all_target : Array[Entity]
+	
+	match application_type:
+		Enums.ApplicationType.ALL:
+			all_target = _enemy_list
+			all_target += [PlayerManager.player]
+		Enums.ApplicationType.ENEMY_ONLY:
+			all_target = _enemy_list
+		Enums.ApplicationType.FRIENDLY_ONLY:
+			all_target = [PlayerManager.player]
+			
+	return all_target
+	
