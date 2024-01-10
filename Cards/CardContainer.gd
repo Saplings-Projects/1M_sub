@@ -424,6 +424,8 @@ func is_queued_card_in_play_area() -> bool:
 func _handle_queued_card():
 	if(queued_card == null):
 		return
+		
+	#check if right button is pressed
 	if(Input.is_mouse_button_pressed(2)):
 		un_queue_card(queued_card)
 	pass
