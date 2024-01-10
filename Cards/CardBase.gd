@@ -35,9 +35,6 @@ func _apply_all_effects(target: Entity) -> void:
 	for effect_data: EffectData in card_effects_data:
 		effect_data.apply_effect_data(target)
 
-func _apply_effect(target : Entity, effect: EffectData):
-	effect.apply_effect_data(target)
-
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
@@ -55,7 +52,7 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#Apply single target
 	for entity : Entity in targets:
 		for effect : EffectData in target_effects:
-			_apply_effect(entity, effect)
+			effect.apply_effect_data(entity)
 	#Get every unit that is to be affected by card
 	var all_target : Array[Entity]
 	
@@ -70,6 +67,6 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#apply effect to every target
 	for entity : Entity in all_target:
 		for effect : EffectData in all_effects:
-			_apply_effect(entity, effect)
+			effect.apply_effect_data(entity)
 	
 	CardManager.on_card_action_finished.emit(self)
