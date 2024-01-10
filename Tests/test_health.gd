@@ -11,6 +11,7 @@ var _enemy_2: Entity = null
 var _battler: Battler = null
 var _player_health_component: HealthComponent = null
 var _enemy_health_component: HealthComponent = null
+var _enemy_list: Array[Entity]
 
 
 func before_each():
@@ -18,6 +19,8 @@ func before_each():
 	_enemy = _enemy_scene.instantiate()
 	_enemy_2 = _enemy_scene.instantiate()
 	_battler = _battler_scene.instantiate()
+	
+	_enemy_list = [_enemy, _enemy_2]
 	
 	get_tree().root.add_child(_player)
 	get_tree().root.add_child(_enemy)
@@ -153,21 +156,24 @@ func test_poison_status():
 
 	poison_status.on_turn_start()
 	assert_eq(_enemy_health_component.current_health, 99.0)
-	
+
+# Test Card to Deal 2 damage to all enemies	
 func test_card_damage_all():
-	_enemy.get_party_component().set_party([_enemy, _enemy_2])
+	_enemy.get_party_component().set_party(_enemy_list)
 	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAll.tres")
 	
 	card_damage_all.on_card_play(_player, _enemy)
 	assert_eq(_enemy_health_component.current_health, 98.0)
 	assert_eq(_enemy_2.get_health_component().current_health, 98.0)
 
+# Test Card to Deal 3 damage to an enemy
 func test_card_damage():
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.on_card_play(_player, _enemy)
 	
 	assert_eq(_enemy_health_component.current_health, 97.0)
 
+# Test Card to deal damage to enemy based on amount of player health lost
 func test_card_damage_health():
 	_player.get_health_component()._set_health(90.0)
 	var card_damage_health: CardBase = load("res://Cards/Resource/Card_DamageHealth.tres")
@@ -175,6 +181,7 @@ func test_card_damage_health():
 	
 	assert_eq(_enemy_health_component.current_health, 90.0)
 
+# Test Card that applies 3 poison to enemy and does poison damage on enemy turn
 func test_card_poison():
 	var card_poison: CardBase = load("res://Cards/Resource/Card_Poison.tres")
 	
@@ -191,6 +198,7 @@ func test_card_poison():
 	# it deals only 1 damage per turn
 	assert_eq(_enemy_health_component.current_health, 99.0)
 
+# Test Card that deals 1 damage and applies poison to enemy and does poison damage on enemy turn
 func test_card_damage_and_poison():
 	var card_damage_and_poison: CardBase = load("res://Cards/Resource/Card_damage_and_poison.tres")
 
@@ -208,6 +216,7 @@ func test_card_damage_and_poison():
 	# it deals only 1 damage per turn
 	assert_eq(_enemy_health_component.current_health, 98.0)
 
+# Test Card that heals one HP to player
 func test_card_heal():
 	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
 	_player_health_component._set_health(95.0)
