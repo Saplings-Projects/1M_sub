@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=20 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
@@ -11,7 +11,6 @@
 [ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="8_x6t2k"]
 [ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="9_ojxic"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
-[ext_resource type="Script" path="res://Cards/Card_DamageHealth.gd" id="10_qowiy"]
 [ext_resource type="Resource" uid="uid://3s4aet1ciesh" path="res://Cards/Resource/Card_damage_and_poison.tres" id="10_w0xgm"]
 [ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Card_EnemyAttack.tres" id="11_3k5t2"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
@@ -20,36 +19,6 @@
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
-
-[sub_resource type="Resource" id="Resource_82ci8"]
-script = ExtResource("10_qowiy")
-damage_to_apply_to_target = 0.0
-damage_to_apply_to_caster = 0.0
-status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([])
-status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
-affect_all_targets = false
-affect_all_casters = false
-amount_of_cards_to_draw = 0
-amount_of_cards_to_discard = 0
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
-card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
-
-[sub_resource type="Resource" id="Resource_bjuo7"]
-script = ExtResource("10_qowiy")
-damage_to_apply_to_target = 0.0
-damage_to_apply_to_caster = 0.0
-status_to_apply_to_target = Array[Resource("res://Status/StatusBase.gd")]([])
-status_to_apply_to_caster = Array[Resource("res://Status/StatusBase.gd")]([])
-affect_all_targets = false
-affect_all_casters = false
-amount_of_cards_to_draw = 0
-amount_of_cards_to_discard = 0
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
-card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
 
 [node name="TestingScene" type="Node2D"]
 metadata/_edit_vertical_guides_ = [1216.0]

@@ -31,9 +31,10 @@ func parse_card_data(card_data: Dictionary) -> void:
 	# TODO
 	pass
 
-func _apply_all_effects(target: Entity) -> void:
-	for effect_data: EffectData in card_effects_data:
-		effect_data.apply_effect_data(target)
+func _apply_all_effects(targets: Array[Entity], effects: Array[EffectData]) -> void:
+	for target : Entity in targets:
+		for effect : EffectData in effects:
+			effect.apply_effect_data(target)
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
@@ -41,19 +42,38 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#Split up targeted attacks and all attacks
+	var target_effects: Array[EffectData] = get_target_effects()
+	var all_effects: Array[EffectData] = get_all_effects()
+	
+	#Apply single target
+	_apply_all_effects(targets, target_effects)
+	#Get every unit that is to be affected by card
+	var all_target : Array[Entity] = get_all_targets()
+
+	#apply effect to every target
+	_apply_all_effects(all_target, all_effects)
+	
+	CardManager.on_card_action_finished.emit(self)
+
+func get_target_effects() -> Array[EffectData]:
 	var target_effects: Array[EffectData] = []
-	var all_effects: Array[EffectData] = []
 	
 	for effect_data: EffectData in card_effects_data:
 		if(effect_data.target_type == Enums.TargetType.SINGLE_TARGET):
-			target_effects.push_front(effect_data)
-		else :
-			all_effects.push_front( effect_data)
-	#Apply single target
-	for entity : Entity in targets:
-		for effect : EffectData in target_effects:
-			effect.apply_effect_data(entity)
-	#Get every unit that is to be affected by card
+			target_effects.append(effect_data)
+			
+	return target_effects
+
+func get_all_effects() -> Array[EffectData]:
+	var All_effects: Array[EffectData] = []
+	
+	for effect_data: EffectData in card_effects_data:
+		if(effect_data.target_type == Enums.TargetType.ALL_TARGETS):
+			All_effects.append(effect_data)
+			
+	return All_effects
+
+func get_all_targets() -> Array[Entity]:
 	var all_target : Array[Entity]
 	
 	match application_type:
@@ -64,9 +84,6 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 			all_target = CardManager.card_container.battler_refrence._enemy_list
 		Enums.ApplicationType.FRIENDLY_ONLY:
 			all_target = [PlayerManager.player]
-	#apply effect to every target
-	for entity : Entity in all_target:
-		for effect : EffectData in all_effects:
-			effect.apply_effect_data(entity)
+			
+	return all_target
 	
-	CardManager.on_card_action_finished.emit(self)
