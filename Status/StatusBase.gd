@@ -30,10 +30,10 @@ func init_status(in_caster: Entity, in_target: Entity) -> void:
 	status_target = in_target
 
 func on_apply() -> void:
-	var modifier_name: String = _return_modifier_name()
-	var offense_modifier: StatModifiers = status_caster.get_stat_component().get_stats().offense_modifier_dict[modifier_name]
+	var modifier_name: int = _return_modifier_name()
+	var offense_modifier: StatModifiers = status_caster.get_stat_component().get_stats().offense_modifier_dict.stat_dict[modifier_name]
 	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
-	var defense_modifier: StatModifiers = target_stats.defense_modifier_dict[modifier_name]
+	var defense_modifier: StatModifiers = target_stats.defense_modifier_dict.stat_dict[modifier_name]
 	var new_modification: StatModifiers = _calculate_new_modification(offense_modifier, defense_modifier)
 	var targeted_modifier_dict = _return_targeted_modifier_dict()
 	target_stats.change_stat(targeted_modifier_dict, modifier_name, new_modification)
@@ -52,8 +52,8 @@ func _calculate_new_modification(offense_modifier: StatModifiers, defense_modifi
 	return new_modification
 
 # To be overriden by the status children which say which stat they are influencing
-func _return_modifier_name() -> String:
-	return ""
+func _return_modifier_name() -> int:
+	return -1
 
 # To be overriden by the status children which say which dictionary they influence (offense or defense)
 # for example, a buff strength affects the offense dictionary. A debuff vulnerability affects the defense
@@ -72,11 +72,12 @@ func _calculate_invert_modification(modifier: StatModifiers) -> StatModifiers:
 	
 
 func on_remove() -> void:
-	var modifier_name: String = _return_modifier_name()
+	var modifier_name: int = _return_modifier_name()
 	var targeted_modifier_dict = _return_targeted_modifier_dict()
 	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
 	var invert_modification: StatModifiers = _calculate_invert_modification(status_modifier)
 	target_stats.change_stat(targeted_modifier_dict, modifier_name, invert_modification)
+	status_modifier = null # reset to original state
 
 func on_turn_start() -> void:
 	pass

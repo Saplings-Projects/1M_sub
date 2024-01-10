@@ -25,15 +25,15 @@ func reset_modifier_dict_temp_to_default() -> void:
     defense_modifier_dict.reset_all_temp_to_default()
 
 func change_stat(   modifier_dict: StatDictBase, 
-                    name: String,
+                    enum_name: int,
                     new_modification: StatModifiers
                     ) -> void:
-    modifier_dict.change_modifier_of_given_name(name, new_modification)
+    modifier_dict.change_modifier_of_given_name(enum_name, new_modification)
     modification_count += 1
 
-func _calculate_modified_value_offense(name: String, base_value: int) -> int:
+func _calculate_modified_value_offense(enum_name: int, base_value: int) -> int:
     var modified_value: int = base_value
-    var modifier: StatModifiers = offense_modifier_dict.stat_dict[name]
+    var modifier: StatModifiers = offense_modifier_dict.stat_dict[enum_name]
     modified_value += modifier.add_to_temp
     modified_value += modifier.add_to_permanent
     modified_value *= modifier.mult_to_temp
@@ -44,9 +44,9 @@ func _calculate_modified_value_offense(name: String, base_value: int) -> int:
 
     return ceil(modified_value)
 
-func _calculate_modified_value_defense(name: String, base_value: int) -> int:
+func _calculate_modified_value_defense(enum_name: int, base_value: int) -> int:
     var modified_value: int = base_value
-    var modifier: StatModifiers = defense_modifier_dict.stat_dict[name]
+    var modifier: StatModifiers = defense_modifier_dict.stat_dict[enum_name]
     modified_value -= modifier.add_to_temp
     modified_value -= modifier.add_to_permanent
     modified_value /= modifier.mult_to_temp
@@ -54,8 +54,8 @@ func _calculate_modified_value_defense(name: String, base_value: int) -> int:
 
     return ceil(modified_value)
 
-func calculate_modified_value(name: String, base_value: int, is_offense: bool) -> int:
+func calculate_modified_value(enum_name: int, base_value: int, is_offense: bool) -> int:
     if is_offense:
-        return _calculate_modified_value_offense(name, base_value)
+        return _calculate_modified_value_offense(enum_name, base_value)
     else:
-        return _calculate_modified_value_defense(name, base_value)
+        return _calculate_modified_value_defense(enum_name, base_value)
