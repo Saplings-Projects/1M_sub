@@ -77,74 +77,12 @@ func test_attack_enemy():
 	assert_eq(_enemy_health_component.current_health, 50.0)
 
 
-# apply strength to player and damage enemy
-func test_strength_status():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 50.0
-	deal_damage_data.caster = _player
-	
-	var strength_status = Buff_Strength.new()
-	strength_status.status_power = 1.0
-	_player.get_status_component().add_status(strength_status, _player)
-
-	_enemy_health_component.deal_damage(deal_damage_data)
-	assert_eq(_enemy_health_component.current_health, 49.0)
-
-
-# apply weakness to player and damage enemy
-func test_weakness_status():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 50.0
-	deal_damage_data.caster = _player
-	
-	var weakness_status = Debuff_Weakness.new()
-	weakness_status.status_power = 1.0
-	_player.get_status_component().add_status(weakness_status, _player)
-
-	_enemy_health_component.deal_damage(deal_damage_data)
-	assert_eq(_enemy_health_component.current_health, 51.0)
-
-
-# apply vulnerability to enemy and damage enemy
-func test_vulnerability_status():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 50.0
-	deal_damage_data.caster = _player
-	
-	var vulnerability_status = Debuff_Vulnerability.new()
-	vulnerability_status.status_power = 1.0
-	_enemy.get_status_component().add_status(vulnerability_status, _player)
-
-	_enemy_health_component.deal_damage(deal_damage_data)
-	assert_eq(_enemy_health_component.current_health, 49.0)
-
-
-func test_vulnerability_weakness_strength():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 50.0
-	deal_damage_data.caster = _player
-	
-	var vulnerability_status = Debuff_Vulnerability.new()
-	vulnerability_status.status_power = 1.0
-	_enemy.get_status_component().add_status(vulnerability_status, _player)
-
-	var weakness_status = Debuff_Weakness.new()
-	weakness_status.status_power = 2.0
-	_player.get_status_component().add_status(weakness_status, _player)
-	
-	var strength_status = Buff_Strength.new()
-	strength_status.status_power = 1.0
-	_player.get_status_component().add_status(strength_status, _player)
-
-	_enemy_health_component.deal_damage(deal_damage_data)
-	assert_eq(_enemy_health_component.current_health, 50.0)
-
-
 func test_poison_status():
 	var poison_status = Debuff_Poison.new()
 	poison_status.status_power = 1.0
 	poison_status.status_turn_duration = 3.0
-	poison_status.status_owner = _enemy
+	poison_status.status_target = _enemy
+	poison_status.status_caster = _player
 	_enemy.get_status_component().add_status(poison_status, _player)
 
 	poison_status.on_turn_start()
