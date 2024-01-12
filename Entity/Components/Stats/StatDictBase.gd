@@ -11,7 +11,7 @@ enum POSSIBLE_MODIFIER_NAMES {
 var stat_dict: Dictionary = {} # is a dictionary of StatModifiers
 
 func _init() -> void:
-	for enum_name_index in POSSIBLE_MODIFIER_NAMES.values():
+	for enum_name_index: int in POSSIBLE_MODIFIER_NAMES.values():
 		stat_dict[enum_name_index] = StatModifiers.new()
 
 # maybe the name could be a bit more unique compared to `reset_temp_to_default`?
