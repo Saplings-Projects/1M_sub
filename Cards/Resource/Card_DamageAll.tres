@@ -1,10 +1,20 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=2 format=3 uid="uid://0x385c3nuq8f"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://0x385c3nuq8f"]
 
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamageAll.gd" id="1_5m74j"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j02oq"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_kr6on"]
+
+[sub_resource type="Resource" id="Resource_1loka"]
+script = ExtResource("1_5m74j")
+
+[sub_resource type="Resource" id="Resource_s752v"]
+script = ExtResource("2_kr6on")
+effect = SubResource("Resource_1loka")
+value = 2
 
 [resource]
 script = ExtResource("1_j02oq")
 application_type = null
 card_title = "Damage All"
 card_description = "Deal 2 damage to all enemies"
-card_effects_data = null
+card_effects_data = Array[ExtResource("2_kr6on")]([SubResource("Resource_s752v")])
