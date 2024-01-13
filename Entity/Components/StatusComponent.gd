@@ -33,7 +33,7 @@ func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 		
 		assert(entity_owner != null, "statusComponent has no owner. Please call init on Entity.")
 		
-		status_copy.init_status(entity_owner, status_caster)
+		status_copy.init_status(status_caster, entity_owner)
 		if status_copy.is_on_apply:
 			status_copy.on_apply()
 
