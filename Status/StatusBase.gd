@@ -39,36 +39,18 @@ func init_status(in_caster: Entity, in_target: Entity) -> void:
 	# since it depends on the target, it can't be set in the _init()
 
 func on_apply() -> void:
-	var modifier_name: int = _return_modifier_name()
-	var offense_modifier: StatModifiers = status_caster.get_stat_component().get_stats().offense_modifier_dict.stat_dict[modifier_name]
+	if is_stat_modification:
+		_modify_stats_with_status()
+	else:
+		pass
+		# TODO is there a status that is_on_apply but doesn't modify stats ?
+		# what do we do for a Status that reflects a part of the damage for example ?
+
+func _modify_stats_with_status() -> void:
 	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
-	var defense_modifier: StatModifiers = target_stats.defense_modifier_dict.stat_dict[modifier_name]
-	var new_modification: StatModifiers = _calculate_new_modification(offense_modifier, defense_modifier)
-	var targeted_modifier_dict = _return_targeted_modifier_dict()
-	target_stats.change_stat(targeted_modifier_dict, modifier_name, new_modification)
-	status_modifier = new_modification # store the value to revert when using on_remove()
+	target_stats.change_stat(targeted_modifier_dict, modifier_name, status_modifier_base_value)
+	status_modifier_storage = status_modifier_base_value # store the value to revert when using on_remove()
 
-
-func _calculate_new_modification(offense_modifier: StatModifiers, defense_modifier: StatModifiers) -> StatModifiers:
-	# TODO check if this works for a self cast (we don't want to defend against ourselves)
-	var new_modification: StatModifiers = StatModifiers.new()
-	new_modification["permanent_add"] = offense_modifier["permanent_add"] - defense_modifier["permanent_add"]
-	new_modification["permanent_multiply"] = offense_modifier["permanent_multiply"] / defense_modifier["permanent_multiply"]
-	new_modification["temporary_add"] = offense_modifier["temporary_add"] - defense_modifier["temporary_add"]
-	new_modification["temporary_multiply"] = offense_modifier["temporary_multiply"] / defense_modifier["temporary_multiply"]
-	# assuming that a better defense means a positive value for the add and value greater than 1 for the multiply
-
-	return new_modification
-
-# To be overriden by the status children which say which stat they are influencing
-func _return_modifier_name() -> int:
-	return -1
-
-# To be overriden by the status children which say which dictionary they influence (offense or defense)
-# for example, a buff strength affects the offense dictionary. A debuff vulnerability affects the defense
-func _return_targeted_modifier_dict() -> StatDictBase:
-	var modifier_dict: StatDictBase = StatDictBase.new()
-	return modifier_dict
 
 func _calculate_invert_modification(modifier: StatModifiers) -> StatModifiers:
 	var invert_modification: StatModifiers = StatModifiers.new()
