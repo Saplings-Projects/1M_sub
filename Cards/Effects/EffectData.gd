@@ -13,9 +13,9 @@ func _init(_effect: EffectBase = null, _caster: Entity = null, _list_targets: Ar
 	self.list_targets = _list_targets
 	self.value = _value
 
-func apply_effect_data(target: Entity) -> void:
+func apply_effect_data(_caster: Entity = caster, target: Entity = null) -> void:
 	# Help function to call more easily from the card point of view
 	list_targets = effect.build_target_list(target)
 	for list_targets_member: Entity in list_targets:
-		self.effect.apply_effect(self.caster, list_targets_member, self.value)
+		self.effect.apply_effect(_caster, list_targets_member, self.value)
 	list_targets = []
