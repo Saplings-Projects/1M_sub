@@ -63,12 +63,16 @@ func _calculate_invert_modification(modifier: StatModifiers) -> StatModifiers:
 	
 
 func on_remove() -> void:
-	var modifier_name: int = _return_modifier_name()
-	var targeted_modifier_dict = _return_targeted_modifier_dict()
+	if is_stat_modification:
+		_revert_stats_with_status()
+	else:
+		pass
+
+func _revert_stats_with_status() -> void:
 	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
-	var invert_modification: StatModifiers = _calculate_invert_modification(status_modifier)
+	var invert_modification: StatModifiers = _calculate_invert_modification(status_modifier_storage)
 	target_stats.change_stat(targeted_modifier_dict, modifier_name, invert_modification)
-	status_modifier = null # reset to original state
+	status_modifier_storage = null # reset to original state
 
 func on_turn_start() -> void:
 	pass
