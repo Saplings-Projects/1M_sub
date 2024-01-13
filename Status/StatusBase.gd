@@ -13,21 +13,30 @@ class_name StatusBase
 @export var infinite_duration: bool = false
 @export var status_turn_duration: int = 3
 @export var status_power: float = 1.0
+@export var status_modifier_base_value: StatModifiers = null
 
+var is_stat_modification: bool = false
+var is_on_apply: bool = false
+# assuming that status are not on_apply and on_turn_start for now
+# ie they don't have an effect at the start and also every turn
 
 var status_target: Entity = null
 var status_caster: Entity = null
 
-var is_on_apply: bool = false
-# assuming that status are not on_apply and on_turn_start for now
-# ie they don't have an effect at the start and also every turn
-var status_modifier: StatModifiers = null
+var status_modifier_storage: StatModifiers = null
+var modifier_name: int = -1 # to be overriden by the status children
+var targeted_modifier_dict: StatDictBase = null # to be overriden by the status children
 # this is only useful for status that modify stats
 
+# Useful for status that modify stats
+func _init() -> void:
+	pass
 
 func init_status(in_caster: Entity, in_target: Entity) -> void:
 	status_caster = in_caster
 	status_target = in_target
+	# status that change stat have to override this to set targeted_modifier_dict
+	# since it depends on the target, it can't be set in the _init()
 
 func on_apply() -> void:
 	var modifier_name: int = _return_modifier_name()
