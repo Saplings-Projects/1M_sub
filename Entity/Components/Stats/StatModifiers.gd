@@ -21,8 +21,8 @@ func _init( _permanent_add: int = permanent_add,
 # and via the constructor when calling new() in code
 
 func reset_temp_to_default() -> void:
-    modifiers["temporary_add"] = 0
-    modifiers["temporary_multiply"] = 1
+	modifiers["temporary_add"] = 0
+	modifiers["temporary_multiply"] = 1
 
 func change_modifier(new_modification: StatModifiers) -> void:
 	modifiers["permanent_add"] += new_modification.modifiers["permanent_add"]

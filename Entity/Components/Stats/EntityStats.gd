@@ -15,47 +15,47 @@ var offense_modifier_dict: StatDictBase = null
 var defense_modifier_dict: StatDictBase = null
 
 func _init() -> void:
-    offense_modifier_dict = StatDictBase.new()
-    defense_modifier_dict = StatDictBase.new()
+	offense_modifier_dict = StatDictBase.new()
+	defense_modifier_dict = StatDictBase.new()
 
 # to trigger on the combat end signal, do we have one yet ?
 # do we even have a condition for the end of a combat ?
 func reset_modifier_dict_temp_to_default() -> void:
-    offense_modifier_dict.reset_all_temp_to_default()
-    defense_modifier_dict.reset_all_temp_to_default()
+	offense_modifier_dict.reset_all_temp_to_default()
+	defense_modifier_dict.reset_all_temp_to_default()
 
 func change_stat(   modifier_dict: StatDictBase, 
-                    enum_name: int,
-                    new_modification: StatModifiers
-                    ) -> void:
-    modifier_dict.change_modifier_of_given_name(enum_name, new_modification)
-    modification_count += 1
+					enum_name: int,
+					new_modification: StatModifiers
+					) -> void:
+	modifier_dict.change_modifier_of_given_name(enum_name, new_modification)
+	modification_count += 1
 
 func _calculate_modified_value_offense(enum_name: int, base_value: int) -> int:
-    var modified_value: int = base_value
-    var modifier: StatModifiers = offense_modifier_dict.stat_dict[enum_name]
-    modified_value += modifier.add_to_temp
-    modified_value += modifier.add_to_permanent
-    modified_value *= modifier.mult_to_temp
-    modified_value *= modifier.mult_to_permanent
-    # a problem with this approach is that the heal which uses a negative value
-    # won't work anymore (we will basically reduce the heal instead of increasing it)
-    # this is only a problem with the heal, so I think the problem should be dealt with in the heal effect
+	var modified_value: int = base_value
+	var modifier: Dictionary = offense_modifier_dict.stat_dict[enum_name].modifiers
+	modified_value += modifier["temporary_add"]
+	modified_value += modifier["permanent_add"]
+	modified_value *= modifier["temporary_multiply"]
+	modified_value *= modifier["permanent_multiply"]
+	# a problem with this approach is that the heal which uses a negative value
+	# won't work anymore (we will basically reduce the heal instead of increasing it)
+	# this is only a problem with the heal, so I think the problem should be dealt with in the heal effect
 
-    return ceil(modified_value)
+	return ceil(modified_value)
 
 func _calculate_modified_value_defense(enum_name: int, base_value: int) -> int:
-    var modified_value: int = base_value
-    var modifier: StatModifiers = defense_modifier_dict.stat_dict[enum_name]
-    modified_value -= modifier.add_to_temp
-    modified_value -= modifier.add_to_permanent
-    modified_value /= modifier.mult_to_temp
-    modified_value /= modifier.mult_to_permanent
+	var modified_value: int = base_value
+	var modifier: Dictionary = defense_modifier_dict.stat_dict[enum_name].modifiers
+	modified_value -= modifier["temporary_add"]
+	modified_value -= modifier["permanent_add"]
+	modified_value /= modifier["temporary_multiply"]
+	modified_value /= modifier["permanent_multiply"]
 
-    return ceil(modified_value)
+	return ceil(modified_value)
 
 func calculate_modified_value(enum_name: int, base_value: int, is_offense: bool) -> int:
-    if is_offense:
-        return _calculate_modified_value_offense(enum_name, base_value)
-    else:
-        return _calculate_modified_value_defense(enum_name, base_value)
+	if is_offense:
+		return _calculate_modified_value_offense(enum_name, base_value)
+	else:
+		return _calculate_modified_value_defense(enum_name, base_value)
