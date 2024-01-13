@@ -31,9 +31,9 @@ func parse_card_data(card_data: Dictionary) -> void:
 	# TODO
 	pass
 
-func _apply_all_effects(target: Entity) -> void:
+func _apply_all_effects(caster: Entity, target: Entity) -> void:
 	for effect_data: EffectData in card_effects_data:
-		effect_data.apply_effect_data(target)
+		effect_data.apply_effect_data(caster, target)
 
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
@@ -41,6 +41,7 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 
 func on_card_play(caster: Entity, target: Entity) -> void:
-	_apply_all_effects(target)
+	_apply_all_effects(caster, target)
+	# TODO add caster as parameter to use stats
 	CardManager.on_card_action_finished.emit(self)
 	# TODO add other functionality that lots of cards may share (eg: restore AP)
