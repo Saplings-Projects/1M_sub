@@ -198,7 +198,7 @@ func test_card_poison():
 	# it deals only 1 damage per turn
 	assert_eq(_enemy_health_component.current_health, 99.0)
 
-# Test Card that deals 1 damage and applies poison to enemy and does poison damage on enemy turn
+# Test Card that deals 1 damage and applies 2 poison to enemy and does poison damage on enemy turn
 func test_card_damage_and_poison():
 	var card_damage_and_poison: CardBase = load("res://Cards/Resource/Card_damage_and_poison.tres")
 
