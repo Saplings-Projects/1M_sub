@@ -3,9 +3,13 @@ class_name Debuff_Weakness
 ## Vulnerability buff decreases the amount of damage that an Entity deals
 
 # @Override
-func _return_modifier_name() -> int:
-	return StatDictBase.POSSIBLE_MODIFIER_NAMES.damage
+func _init() -> void:
+	is_stat_modification = true
+	is_on_apply = true
+	modifier_name = StatDictBase.POSSIBLE_MODIFIER_NAMES.damage
 
 # @Override
-func _return_targeted_modifier_dict() -> StatDictBase:
-	return status_target.get_stat_component().get_stats().offense_modifier_dict
+func init_status(in_caster: Entity, in_target: Entity) -> void:
+	status_caster = in_caster
+	status_target = in_target
+	targeted_modifier_dict = in_target.get_stat_component().get_stats().offense_modifier_dict

@@ -3,7 +3,13 @@ class_name Buff_Strength
 ## Strength buff increases an Entity's damage stat
 
 # @Override
-func get_modified_stats(stats: EntityStats) -> EntityStats:
-	stats.damage_dealt_increase += status_power
-	# TODO change this to update to the new system
-	return stats
+func _init() -> void:
+	is_stat_modification = true
+	is_on_apply = true
+	modifier_name = StatDictBase.POSSIBLE_MODIFIER_NAMES.damage
+
+# @Override
+func init_status(in_caster: Entity, in_target: Entity) -> void:
+	status_caster = in_caster
+	status_target = in_target
+	targeted_modifier_dict = in_target.get_stat_component().get_stats().offense_modifier_dict
