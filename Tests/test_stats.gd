@@ -63,7 +63,7 @@ func test_strength_status():
 	# add 1 damage offense on the player
 	strength_status.status_modifier_base_value = StatModifiers.new(0,1,1,1)
 	_player.get_status_component().add_status(strength_status, _player)
-
+	
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.card_effects_data[0].value = 50 # modified for the test
 	card_damage.on_card_play(_player, _enemy)
@@ -76,7 +76,7 @@ func test_weakness_status():
 	# remove 1 damage offense on the player
 	weakness_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
 	_player.get_status_component().add_status(weakness_status, _player)
-
+	
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.card_effects_data[0].value = 50 # modified for the test
 	card_damage.on_card_play(_player, _enemy)
@@ -88,12 +88,12 @@ func test_vulnerability_status():
 	var vulnerability_status = Debuff_Vulnerability.new()
 	# remove 1 damage defense on the enemy
 	vulnerability_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
-	_player.get_status_component().add_status(vulnerability_status, _enemy)
-
+	_enemy.get_status_component().add_status(vulnerability_status, _player)
+	
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.card_effects_data[0].value = 50 # modified for the test
 	card_damage.on_card_play(_player, _enemy)
-	assert_eq(_enemy_health_component.current_health, 51.0)
+	assert_eq(_enemy_health_component.current_health, 49.0)
 
 
 func test_strength_weakness_vulnerability():
@@ -101,21 +101,21 @@ func test_strength_weakness_vulnerability():
 	# add 1 damage offense on the player
 	strength_status.status_modifier_base_value = StatModifiers.new(0,1,1,1)
 	_player.get_status_component().add_status(strength_status, _player)
-
+	
 	var weakness_status = Debuff_Weakness.new()
 	# remove 1 damage offense on the player
 	weakness_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
 	_player.get_status_component().add_status(weakness_status, _player)
-
+	
 	var vulnerability_status = Debuff_Vulnerability.new()
 	# remove 1 damage defense on the enemy
 	vulnerability_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
-	_player.get_status_component().add_status(vulnerability_status, _enemy)
-
+	_enemy.get_status_component().add_status(vulnerability_status, _player)
+	
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.card_effects_data[0].value = 50 # modified for the test
 	card_damage.on_card_play(_player, _enemy)
-	assert_eq(_enemy_health_component.current_health, 51.0)
-	# final health is 51 because original is 100, we do 50 damage
+	assert_eq(_enemy_health_component.current_health, 49.0)
+	# final health is 49 because original is 100, we do 50 damage
 	# we add 1 damage because of strength, remove 1 because of weakness
 	# and add 1 because of vulnerability (remove 1 defense on the enemy)
