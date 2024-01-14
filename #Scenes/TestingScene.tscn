@@ -19,20 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 
-[sub_resource type="Resource" id="Resource_82ci8"]
-script = ExtResource("10_qowiy")
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
-card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
-
-[sub_resource type="Resource" id="Resource_bjuo7"]
-script = ExtResource("10_qowiy")
-application_type = 1
-card_title = "NULL"
-card_description = "NULL"
-card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
-
 [node name="TestingScene" type="Node2D"]
 metadata/_edit_vertical_guides_ = [1216.0]
 
