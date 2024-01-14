@@ -59,7 +59,7 @@ func test_defense_dict_size():
 
 # apply strength to player and damage enemy
 func test_strength_status():
-	var strength_status = Buff_Strength.new()
+	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	strength_status.status_modifier_base_value = StatModifiers.new(0,1,1,1)
 	_player.get_status_component().add_status(strength_status, _player)
@@ -72,7 +72,7 @@ func test_strength_status():
 
 # apply weakness to player and damage enemy
 func test_weakness_status():
-	var weakness_status = Debuff_Weakness.new()
+	var weakness_status: Debuff_Weakness = Debuff_Weakness.new()
 	# remove 1 damage offense on the player
 	weakness_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
 	_player.get_status_component().add_status(weakness_status, _player)
@@ -85,7 +85,7 @@ func test_weakness_status():
 
 # apply vulnerability to enemy and damage enemy
 func test_vulnerability_status():
-	var vulnerability_status = Debuff_Vulnerability.new()
+	var vulnerability_status: Debuff_Vulnerability = Debuff_Vulnerability.new()
 	# remove 1 damage defense on the enemy
 	vulnerability_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
 	_enemy.get_status_component().add_status(vulnerability_status, _player)
@@ -97,17 +97,17 @@ func test_vulnerability_status():
 
 
 func test_strength_weakness_vulnerability():
-	var strength_status = Buff_Strength.new()
+	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	strength_status.status_modifier_base_value = StatModifiers.new(0,1,1,1)
 	_player.get_status_component().add_status(strength_status, _player)
 	
-	var weakness_status = Debuff_Weakness.new()
+	var weakness_status: Debuff_Weakness = Debuff_Weakness.new()
 	# remove 1 damage offense on the player
 	weakness_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
 	_player.get_status_component().add_status(weakness_status, _player)
 	
-	var vulnerability_status = Debuff_Vulnerability.new()
+	var vulnerability_status: Debuff_Vulnerability = Debuff_Vulnerability.new()
 	# remove 1 damage defense on the enemy
 	vulnerability_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
 	_enemy.get_status_component().add_status(vulnerability_status, _player)
