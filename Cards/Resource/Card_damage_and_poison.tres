@@ -25,7 +25,7 @@ target_type = 0
 
 [resource]
 script = ExtResource("1_h8l2w")
-application_type = null
+application_type = 1
 card_title = "Damage and poison"
 card_description = "Deals 1 damage and applies 2 poison"
 card_effects_data = Array[ExtResource("2_22qxd")]([SubResource("Resource_73uy7"), SubResource("Resource_tmm5r")])
