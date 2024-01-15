@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=2 format=3 uid="uid://bsc0ut0500ajg"]
+
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j02oq"]
+
+[resource]
+script = ExtResource("1_j02oq")
+application_type = 1
+card_title = "NULL"
+card_description = "NULL"
+card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
