@@ -11,6 +11,8 @@ var _enemy_2: Entity = null
 var _battler: Battler = null
 var _player_health_component: HealthComponent = null
 var _enemy_health_component: HealthComponent = null
+var _player_status_component: StatusComponent = null
+var _enemy_status_component: StatusComponent = null
 var _enemy_list: Array[Entity]
 
 
@@ -29,6 +31,8 @@ func before_each():
 	
 	_player_health_component = _player.get_health_component()
 	_enemy_health_component = _enemy.get_health_component()
+	_player_status_component = _player.get_status_component()
+	_enemy_status_component = _enemy.get_status_component()
 
 
 func after_each():
@@ -90,7 +94,7 @@ func test_poison_status():
 	poison_status.status_turn_duration = 3.0
 	poison_status.status_target = _enemy
 	poison_status.status_caster = _player
-	_enemy.get_status_component().add_status(poison_status, _player)
+	_enemy_status_component.add_status(poison_status, _player)
 
 	poison_status.on_turn_start()
 	assert_eq(_enemy_health_component.current_health, 99.0)
@@ -123,15 +127,15 @@ func test_card_damage_health():
 func test_card_poison():
 	var card_poison: CardBase = load("res://Cards/Resource/Card_Poison.tres")
 	
-	assert_eq(_enemy.get_status_component().current_status.size(), 0)
+	assert_eq(_enemy_status_component.current_status.size(), 0)
 	card_poison.on_card_play(_player, _enemy)
-	assert_eq(_enemy.get_status_component().current_status.size(), 1)
+	assert_eq(_enemy_status_component.current_status.size(), 1)
 	
-	var status = _enemy.get_status_component().current_status[0]
+	var status = _enemy_status_component.current_status[0]
 	assert_is(status, Debuff_Poison)
 	assert_eq(status.status_turn_duration, 3)
 	
-	_enemy.get_status_component().apply_turn_start_status()
+	_enemy_status_component.apply_turn_start_status()
 	# May need to update once we have a better direction of what to do for poison, currently
 	# it deals only 1 damage per turn
 	assert_eq(_enemy_health_component.current_health, 99.0)
@@ -140,16 +144,16 @@ func test_card_poison():
 func test_card_damage_and_poison():
 	var card_damage_and_poison: CardBase = load("res://Cards/Resource/Card_damage_and_poison.tres")
 
-	assert_eq(_enemy.get_status_component().current_status.size(), 0)
+	assert_eq(_enemy_status_component.current_status.size(), 0)
 	card_damage_and_poison.on_card_play(_player, _enemy)
-	assert_eq(_enemy.get_status_component().current_status.size(), 1)
+	assert_eq(_enemy_status_component.current_status.size(), 1)
 	assert_eq(_enemy_health_component.current_health, 99.0)
 	
-	var status = _enemy.get_status_component().current_status[0]
+	var status = _enemy_status_component.current_status[0]
 	assert_is(status, Debuff_Poison)
 	assert_eq(status.status_turn_duration, 2)
 	
-	_enemy.get_status_component().apply_turn_start_status()
+	_enemy_status_component.apply_turn_start_status()
 	# May need to update once we have a better direction of what to do for poison, currently
 	# it deals only 1 damage per turn
 	assert_eq(_enemy_health_component.current_health, 98.0)
