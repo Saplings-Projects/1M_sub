@@ -17,6 +17,7 @@ class_name StatusBase
 
 var is_stat_modification: bool = false
 var is_on_apply: bool = false
+var is_on_turn_start: bool = false
 # assuming that status are not on_apply and on_turn_start for now
 # ie they don't have an effect at the start and also every turn
 
@@ -28,7 +29,6 @@ var modifier_name: int = -1 # to be overriden by the status children
 var targeted_modifier_dict: StatDictBase = null # to be overriden by the status children
 # this is only useful for status that modify stats
 
-# Useful for status that modify stats
 func _init() -> void:
 	pass
 
