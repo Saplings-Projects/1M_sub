@@ -3,6 +3,10 @@ class_name Debuff_Poison
 ## Poison deals damage to the target Entity at the start of their turn
 
 # @Override
+func _init() -> void:
+	is_on_turn_start = true
+
+# @Override
 func on_turn_start() -> void:
 	var damage_data: DealDamageData = DealDamageData.new()
 	damage_data.damage = status_power
