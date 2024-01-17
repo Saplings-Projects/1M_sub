@@ -9,8 +9,8 @@ func test_map_gen():
 	var expected_exists_array: Array[Array] = [[0,2],[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[2,4],[3,1],[3,2],[3,3],[4,2]]
 	for couple: Array[int] in expected_null_array:
 		var _room = test_map.rooms[couple[0]][couple[1]]
-		assert_null(test_map.rooms[couple[0]][couple[1]], "Expected null at %s but got %s" % [couple, _room])
+		assert_null(_room, "Expected null at %s but got %s" % [couple, _room])
 
 	for couple: Array[int] in expected_exists_array:
 		var _room = test_map.rooms[couple[0]][couple[1]]
-		assert_not_null(test_map.rooms[couple[0]][couple[1]], "Expected not null at %s but got %s" % [couple, _room])
+		assert_not_null(_room, "Expected not null at %s but got %s" % [couple, _room])
