@@ -119,3 +119,22 @@ func test_strength_weakness_vulnerability():
 	# final health is 49 because original is 100, we do 50 damage
 	# we add 1 damage because of strength, remove 1 because of weakness
 	# and add 1 because of vulnerability (remove 1 defense on the enemy)
+
+func test_remove_one_status():
+	var strength_status: Buff_Strength = Buff_Strength.new()
+	# add 1 damage offense on the player
+	strength_status.status_modifier_base_value = StatModifiers.new(0,1,1,1)
+	_player.get_status_component().add_status(strength_status, _player)
+	
+	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 96.0) 
+	# 100 (base health) - (3 (base damage) + 1 (strength))
+	
+	_player.get_status_component().remove_status(strength_status)
+	
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 93.0)
+	# 96 (previous health) - 3 (base damage)
+	# we don't have the strength bonus of +1 damage anymore
+	
