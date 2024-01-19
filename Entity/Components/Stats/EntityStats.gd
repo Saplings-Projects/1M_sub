@@ -19,8 +19,7 @@ var _ENTITY_STAT_DICT_SELECTOR : Dictionary = {
 	1: _defense_modifier_dict,
 }
 
-# This structure allows to give the enum as a parameter to a function 
-# and to call the correct dictionary via _ENTITY_STAT_DICT_SELECTOR.entity_stat_dict_type
+# Don't forget to update ENTITY_STAT_DICT_TYPE in GLOBAL_VAR.gd if you modify this
 
 func _init() -> void:
 	_offense_modifier_dict = StatDictBase.new()
