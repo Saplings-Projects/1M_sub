@@ -11,29 +11,42 @@ class_name EntityStats
 ## The previous statement will probably change, since we want to modify stats at runtime and we revert the changes when effects are removed.
 
 var modification_count: int = 0
-var offense_modifier_dict: StatDictBase = null
-var defense_modifier_dict: StatDictBase = null
+var _offense_modifier_dict: StatDictBase = null
+var _defense_modifier_dict: StatDictBase = null
+
+enum ENTITY_STAT_DICT_TYPE {
+	OFFENSE,
+	DEFENSE
+}
+
+var _ENTITY_STAT_DICT_SELECTOR : Dictionary = {
+	0: _offense_modifier_dict,
+	1: _defense_modifier_dict,
+}
+
+# This structure allows to give the enum as a parameter to a function 
+# and to call the correct dictionary via _ENTITY_STAT_DICT_SELECTOR.entity_stat_dict_type
 
 func _init() -> void:
-	offense_modifier_dict = StatDictBase.new()
-	defense_modifier_dict = StatDictBase.new()
+	_offense_modifier_dict = StatDictBase.new()
+	_defense_modifier_dict = StatDictBase.new()
 
 # to trigger on the combat end signal, do we have one yet ?
 # do we even have a condition for the end of a combat ?
 func reset_modifier_dict_temp_to_default() -> void:
-	offense_modifier_dict.reset_all_temp_to_default()
-	defense_modifier_dict.reset_all_temp_to_default()
+	_offense_modifier_dict.reset_all_temp_to_default()
+	_defense_modifier_dict.reset_all_temp_to_default()
 
-func change_stat(   modifier_dict: StatDictBase, 
+func change_stat(   entity_stat_dict_type: ENTITY_STAT_DICT_TYPE, 
 					modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES,
 					new_modification: StatModifiers
 					) -> void:
-	modifier_dict.change_modifier_of_given_name(modifier_name, new_modification)
+	_ENTITY_STAT_DICT_SELECTOR.entity_stat_dict_type.change_modifier_of_given_name(modifier_name, new_modification)
 	modification_count += 1
 
 func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
-	var modifier: Dictionary = offense_modifier_dict.stat_dict[modifier_name].modifiers
+	var modifier: Dictionary = _offense_modifier_dict.stat_dict[modifier_name].modifiers
 	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
 	modified_value += modifier[MODIFIER_KEYS.TEMPORARY_ADD]
 	modified_value += modifier[MODIFIER_KEYS.PERMANENT_ADD]
@@ -47,7 +60,7 @@ func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIE
 
 func _calculate_modified_value_defense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
-	var modifier: Dictionary = defense_modifier_dict.stat_dict[modifier_name].modifiers
+	var modifier: Dictionary = _defense_modifier_dict.stat_dict[modifier_name].modifiers
 	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
 	modified_value -= modifier[MODIFIER_KEYS.TEMPORARY_ADD]
 	modified_value -= modifier[MODIFIER_KEYS.PERMANENT_ADD]
