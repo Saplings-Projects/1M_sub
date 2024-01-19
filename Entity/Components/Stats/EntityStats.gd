@@ -34,10 +34,11 @@ func change_stat(   modifier_dict: StatDictBase,
 func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
 	var modifier: Dictionary = offense_modifier_dict.stat_dict[modifier_name].modifiers
-	modified_value += modifier["temporary_add"]
-	modified_value += modifier["permanent_add"]
-	modified_value *= modifier["temporary_multiply"]
-	modified_value *= modifier["permanent_multiply"]
+	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
+	modified_value += modifier[MODIFIER_KEYS.TEMPORARY_ADD]
+	modified_value += modifier[MODIFIER_KEYS.PERMANENT_ADD]
+	modified_value *= modifier[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
+	modified_value *= modifier[MODIFIER_KEYS.PERMANENT_MULTIPLY]
 	# a problem with this approach is that the heal which uses a negative value
 	# won't work anymore (we will basically reduce the heal instead of increasing it)
 	# this is only a problem with the heal, so I think the problem should be dealt with in the heal effect
@@ -47,10 +48,11 @@ func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIE
 func _calculate_modified_value_defense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
 	var modifier: Dictionary = defense_modifier_dict.stat_dict[modifier_name].modifiers
-	modified_value -= modifier["temporary_add"]
-	modified_value -= modifier["permanent_add"]
-	modified_value /= modifier["temporary_multiply"]
-	modified_value /= modifier["permanent_multiply"]
+	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
+	modified_value -= modifier[MODIFIER_KEYS.TEMPORARY_ADD]
+	modified_value -= modifier[MODIFIER_KEYS.PERMANENT_ADD]
+	modified_value /= modifier[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
+	modified_value /= modifier[MODIFIER_KEYS.PERMANENT_MULTIPLY]
 
 	return ceil(modified_value)
 
