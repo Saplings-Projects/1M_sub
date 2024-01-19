@@ -69,7 +69,7 @@ func _calculate_modified_value_defense(modifier_name: GlobalVar.POSSIBLE_MODIFIE
 
 	return ceil(modified_value)
 		
-static func calculate_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
+static func get_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
 	var modified_value: int = value
 	var caster_stats: EntityStats = null
 	if caster != null:
