@@ -14,11 +14,6 @@ var modification_count: int = 0
 var _offense_modifier_dict: StatDictBase = null
 var _defense_modifier_dict: StatDictBase = null
 
-enum ENTITY_STAT_DICT_TYPE {
-	OFFENSE,
-	DEFENSE
-}
-
 var _ENTITY_STAT_DICT_SELECTOR : Dictionary = {
 	0: _offense_modifier_dict,
 	1: _defense_modifier_dict,
@@ -30,6 +25,11 @@ var _ENTITY_STAT_DICT_SELECTOR : Dictionary = {
 func _init() -> void:
 	_offense_modifier_dict = StatDictBase.new()
 	_defense_modifier_dict = StatDictBase.new()
+	
+	# Update selector dictionary
+	
+	_ENTITY_STAT_DICT_SELECTOR[0] = _offense_modifier_dict
+	_ENTITY_STAT_DICT_SELECTOR[1] = _defense_modifier_dict
 
 # to trigger on the combat end signal, do we have one yet ?
 # do we even have a condition for the end of a combat ?
@@ -37,11 +37,11 @@ func reset_modifier_dict_temp_to_default() -> void:
 	_offense_modifier_dict.reset_all_temp_to_default()
 	_defense_modifier_dict.reset_all_temp_to_default()
 
-func change_stat(   entity_stat_dict_type: ENTITY_STAT_DICT_TYPE, 
+func change_stat(   entity_stat_dict_type: GlobalVar.ENTITY_STAT_DICT_TYPE, 
 					modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES,
 					new_modification: StatModifiers
 					) -> void:
-	_ENTITY_STAT_DICT_SELECTOR.entity_stat_dict_type.change_modifier_of_given_name(modifier_name, new_modification)
+	_ENTITY_STAT_DICT_SELECTOR[entity_stat_dict_type].change_modifier_of_given_name(modifier_name, new_modification)
 	modification_count += 1
 
 func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
