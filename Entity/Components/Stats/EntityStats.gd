@@ -25,15 +25,15 @@ func reset_modifier_dict_temp_to_default() -> void:
 	defense_modifier_dict.reset_all_temp_to_default()
 
 func change_stat(   modifier_dict: StatDictBase, 
-					enum_name: int,
+					modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES,
 					new_modification: StatModifiers
 					) -> void:
-	modifier_dict.change_modifier_of_given_name(enum_name, new_modification)
+	modifier_dict.change_modifier_of_given_name(modifier_name, new_modification)
 	modification_count += 1
 
-func _calculate_modified_value_offense(enum_name: int, base_value: int) -> int:
+func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
-	var modifier: Dictionary = offense_modifier_dict.stat_dict[enum_name].modifiers
+	var modifier: Dictionary = offense_modifier_dict.stat_dict[modifier_name].modifiers
 	modified_value += modifier["temporary_add"]
 	modified_value += modifier["permanent_add"]
 	modified_value *= modifier["temporary_multiply"]
@@ -44,9 +44,9 @@ func _calculate_modified_value_offense(enum_name: int, base_value: int) -> int:
 
 	return ceil(modified_value)
 
-func _calculate_modified_value_defense(enum_name: int, base_value: int) -> int:
+func _calculate_modified_value_defense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
-	var modifier: Dictionary = defense_modifier_dict.stat_dict[enum_name].modifiers
+	var modifier: Dictionary = defense_modifier_dict.stat_dict[modifier_name].modifiers
 	modified_value -= modifier["temporary_add"]
 	modified_value -= modifier["permanent_add"]
 	modified_value /= modifier["temporary_multiply"]
@@ -54,8 +54,8 @@ func _calculate_modified_value_defense(enum_name: int, base_value: int) -> int:
 
 	return ceil(modified_value)
 
-func calculate_modified_value(enum_name: int, base_value: int, is_offense: bool) -> int:
+func calculate_modified_value(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int, is_offense: bool) -> int:
 	if is_offense:
-		return _calculate_modified_value_offense(enum_name, base_value)
+		return _calculate_modified_value_offense(modifier_name, base_value)
 	else:
-		return _calculate_modified_value_defense(enum_name, base_value)
+		return _calculate_modified_value_defense(modifier_name, base_value)
