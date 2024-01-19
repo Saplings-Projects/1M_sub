@@ -19,7 +19,7 @@ var _ENTITY_STAT_DICT_SELECTOR : Dictionary = {
 	1: _defense_modifier_dict,
 }
 
-# Don't forget to update ENTITY_STAT_DICT_TYPE in GLOBAL_VAR.gd if you modify this
+# ! Don't forget to update ENTITY_STAT_DICT_TYPE in GLOBAL_VAR.gd if you modify this
 
 func _init() -> void:
 	_offense_modifier_dict = StatDictBase.new()
@@ -51,9 +51,10 @@ func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIE
 	modified_value += modifier[MODIFIER_KEYS.PERMANENT_ADD]
 	modified_value *= modifier[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
 	modified_value *= modifier[MODIFIER_KEYS.PERMANENT_MULTIPLY]
-	# a problem with this approach is that the heal which uses a negative value
+	# TODO a problem with this approach is that the heal which uses a negative value
 	# won't work anymore (we will basically reduce the heal instead of increasing it)
 	# this is only a problem with the heal, so I think the problem should be dealt with in the heal effect
+	# TODO maybe change order of operations (multiply first, then add) ?
 
 	return ceil(modified_value)
 
@@ -67,25 +68,17 @@ func _calculate_modified_value_defense(modifier_name: GlobalVar.POSSIBLE_MODIFIE
 	modified_value /= modifier[MODIFIER_KEYS.PERMANENT_MULTIPLY]
 
 	return ceil(modified_value)
-
-func calculate_modified_value(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int, is_offense: bool) -> int:
-	if is_offense:
-		return _calculate_modified_value_offense(modifier_name, base_value)
-	else:
-		return _calculate_modified_value_defense(modifier_name, base_value)
 		
 static func calculate_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
 	var modified_value: int = value
 	var caster_stats: EntityStats = null
 	if caster != null:
 		caster_stats = caster.get_stat_component().get_stats()
-		modified_value = caster_stats.calculate_modified_value(modifier_name, modified_value, true) 
-	# is_offense = true, caster attacks
+		modified_value = caster_stats._calculate_modified_value_offense(modifier_name, modified_value)
 
 	var target_stats: EntityStats = null
 	if target != null:
 		target_stats = target.get_stat_component().get_stats()
-		modified_value = target_stats.calculate_modified_value(modifier_name, modified_value, false) 
-	# is_offense = false, target defends
+		modified_value = target_stats._calculate_modified_value_defense(modifier_name, modified_value) 
 
 	return modified_value
