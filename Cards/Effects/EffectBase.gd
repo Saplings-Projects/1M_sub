@@ -14,19 +14,3 @@ func build_target_list(target: Entity) -> Array[Entity]:
 # To be called by child classes through apply_effect. But since there might be multiple effects that need it, it's available in the parent class
 func _apply_status(status: StatusBase, caster: Entity, target: Entity) -> void:
 	target.get_status_component().add_status(status, caster)
-
-static func calculate_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
-	var modified_value: int = value
-	var caster_stats: EntityStats = null
-	if caster != null:
-		caster_stats = caster.get_stat_component().get_stats()
-		modified_value = caster_stats.calculate_modified_value(modifier_name, modified_value, true) 
-	# is_offense = true, caster attacks
-
-	var target_stats: EntityStats = null
-	if target != null:
-		target_stats = target.get_stat_component().get_stats()
-		modified_value = target_stats.calculate_modified_value(modifier_name, modified_value, false) 
-	# is_offense = false, target defends
-
-	return modified_value

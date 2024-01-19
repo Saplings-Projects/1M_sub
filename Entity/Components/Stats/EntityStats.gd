@@ -74,3 +74,19 @@ func calculate_modified_value(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, 
 		return _calculate_modified_value_offense(modifier_name, base_value)
 	else:
 		return _calculate_modified_value_defense(modifier_name, base_value)
+		
+static func calculate_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
+	var modified_value: int = value
+	var caster_stats: EntityStats = null
+	if caster != null:
+		caster_stats = caster.get_stat_component().get_stats()
+		modified_value = caster_stats.calculate_modified_value(modifier_name, modified_value, true) 
+	# is_offense = true, caster attacks
+
+	var target_stats: EntityStats = null
+	if target != null:
+		target_stats = target.get_stat_component().get_stats()
+		modified_value = target_stats.calculate_modified_value(modifier_name, modified_value, false) 
+	# is_offense = false, target defends
+
+	return modified_value
