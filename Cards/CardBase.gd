@@ -42,6 +42,5 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 func on_card_play(caster: Entity, target: Entity) -> void:
 	_apply_all_effects(caster, target)
-	# TODO add caster as parameter to use stats
 	CardManager.on_card_action_finished.emit(self)
 	# TODO add other functionality that lots of cards may share (eg: restore AP)
