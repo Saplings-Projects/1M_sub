@@ -12,4 +12,4 @@ func _init() -> void:
 func init_status(in_caster: Entity, in_target: Entity) -> void:
 	status_caster = in_caster
 	status_target = in_target
-	targeted_modifier_dict = in_target.get_stat_component().get_stats().offense_modifier_dict
+	entity_stat_dict_type = GlobalVar.ENTITY_STAT_DICT_TYPE.OFFENSE
