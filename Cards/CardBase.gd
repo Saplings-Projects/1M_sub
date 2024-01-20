@@ -64,7 +64,7 @@ func get_target_effects() -> Array[EffectData]:
 			
 	return target_effects
 
-func get_all_effects() -> Array[EffectData]:
+func get_effects_target_all() -> Array[EffectData]:
 	var All_effects: Array[EffectData] = []
 	
 	for effect_data: EffectData in card_effects_data:
