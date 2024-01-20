@@ -425,9 +425,7 @@ func _handle_queued_card():
 	if(queued_card == null):
 		return
 		
-	var rightMouseButtonIndex : int = 2
-	
 	#check if right button is pressed
-	if(Input.is_mouse_button_pressed(rightMouseButtonIndex)):
+	if(Input.is_action_just_pressed("cancel_queued_card_in_battle")):
 		un_queue_card(queued_card)
 	pass
