@@ -18,6 +18,10 @@ func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 	
 	# see if the status was already applied. If so, add to the duration instead of applying
 	var found_status = Helpers.find_first_from_array_by_type(current_status, status_copy.get_script())
+	
+	assert(entity_owner != null, "statusComponent has no owner. Please call init on Entity.")
+	status_copy.init_status(status_caster, entity_owner)
+	
 	if found_status != null:
 		found_status.status_turn_duration += status_copy.status_turn_duration
 		if found_status.status_power != status_copy.status_power:
@@ -29,9 +33,6 @@ func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 	else:
 		current_status.append(status_copy)
 		
-		assert(entity_owner != null, "statusComponent has no owner. Please call init on Entity.")
-		
-		status_copy.init_status(status_caster, entity_owner)
 		if status_copy.is_on_apply:
 			status_copy.on_apply()
 
