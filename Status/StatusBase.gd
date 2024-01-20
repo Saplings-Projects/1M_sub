@@ -55,10 +55,11 @@ func _modify_stats_with_status() -> void:
 func _calculate_invert_modification(modifier: StatModifiers) -> StatModifiers:
 	var invert_modification: StatModifiers = StatModifiers.new()
 	var _MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
-	invert_modification[_MODIFIER_KEYS.PERMANENT_ADD] = -modifier[_MODIFIER_KEYS.PERMANENT_ADD]
-	invert_modification[_MODIFIER_KEYS.PERMANENT_MULTIPLY] = 1 / modifier[_MODIFIER_KEYS.PERMANENT_MULTIPLY]
-	invert_modification[_MODIFIER_KEYS.TEMPORARY_ADD] = -modifier[_MODIFIER_KEYS.TEMPORARY_ADD]
-	invert_modification[_MODIFIER_KEYS.TEMPORARY_MULTIPLY] = 1 / modifier[_MODIFIER_KEYS.TEMPORARY_MULTIPLY]
+	var modifier_base_dict: Dictionary = modifier.modifier_base_dict
+	invert_modification.modifier_base_dict[_MODIFIER_KEYS.PERMANENT_ADD] = -modifier_base_dict[_MODIFIER_KEYS.PERMANENT_ADD]
+	invert_modification.modifier_base_dict[_MODIFIER_KEYS.PERMANENT_MULTIPLY] = 1 / modifier_base_dict[_MODIFIER_KEYS.PERMANENT_MULTIPLY]
+	invert_modification.modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_ADD] = -modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_ADD]
+	invert_modification.modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_MULTIPLY] = 1 / modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_MULTIPLY]
 
 	return invert_modification
 	

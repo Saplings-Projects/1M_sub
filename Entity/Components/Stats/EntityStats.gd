@@ -40,17 +40,18 @@ func change_stat(   entity_stat_dict_type: GlobalVar.ENTITY_STAT_DICT_TYPE,
 					modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES,
 					new_modification: StatModifiers
 					) -> void:
+	# TODO add boolean for add or remove stat (to know to increase or decrease the modification count)
 	_ENTITY_STAT_DICT_SELECTOR[entity_stat_dict_type].change_modifier_of_given_name(modifier_name, new_modification)
 	modification_count += 1
 
 func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
-	var modifier: Dictionary = _offense_modifier_dict.stat_dict[modifier_name].modifiers
+	var modifier_base_dict: Dictionary = _offense_modifier_dict.stat_dict[modifier_name].modifier_base_dict
 	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
-	modified_value += modifier[MODIFIER_KEYS.TEMPORARY_ADD]
-	modified_value += modifier[MODIFIER_KEYS.PERMANENT_ADD]
-	modified_value *= modifier[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
-	modified_value *= modifier[MODIFIER_KEYS.PERMANENT_MULTIPLY]
+	modified_value += modifier_base_dict[MODIFIER_KEYS.TEMPORARY_ADD]
+	modified_value += modifier_base_dict[MODIFIER_KEYS.PERMANENT_ADD]
+	modified_value *= modifier_base_dict[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
+	modified_value *= modifier_base_dict[MODIFIER_KEYS.PERMANENT_MULTIPLY]
 	# TODO a problem with this approach is that the heal which uses a negative value
 	# won't work anymore (we will basically reduce the heal instead of increasing it)
 	# this is only a problem with the heal, so I think the problem should be dealt with in the heal effect
@@ -60,12 +61,12 @@ func _calculate_modified_value_offense(modifier_name: GlobalVar.POSSIBLE_MODIFIE
 
 func _calculate_modified_value_defense(modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
-	var modifier: Dictionary = _defense_modifier_dict.stat_dict[modifier_name].modifiers
+	var modifier_base_dict: Dictionary = _defense_modifier_dict.stat_dict[modifier_name].modifier_base_dict
 	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
-	modified_value -= modifier[MODIFIER_KEYS.TEMPORARY_ADD]
-	modified_value -= modifier[MODIFIER_KEYS.PERMANENT_ADD]
-	modified_value /= modifier[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
-	modified_value /= modifier[MODIFIER_KEYS.PERMANENT_MULTIPLY]
+	modified_value -= modifier_base_dict[MODIFIER_KEYS.TEMPORARY_ADD]
+	modified_value -= modifier_base_dict[MODIFIER_KEYS.PERMANENT_ADD]
+	modified_value /= modifier_base_dict[MODIFIER_KEYS.TEMPORARY_MULTIPLY]
+	modified_value /= modifier_base_dict[MODIFIER_KEYS.PERMANENT_MULTIPLY]
 
 	return ceil(modified_value)
 		
