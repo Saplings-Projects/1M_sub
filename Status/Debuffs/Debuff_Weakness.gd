@@ -10,6 +10,5 @@ func _init() -> void:
 
 # @Override
 func init_status(in_caster: Entity, in_target: Entity) -> void:
-	status_caster = in_caster
-	status_target = in_target
+	super.init_status(in_caster,in_target)
 	entity_stat_dict_type = GlobalVar.ENTITY_STAT_DICT_TYPE.OFFENSE
