@@ -315,7 +315,7 @@ func _on_card_clicked(card: CardWorld) -> void:
 
 func _play_card():
 	var queued_card_data: CardBase = queued_card.card_data
-	var target : Array[Entity]
+	var list_target : Array[Entity]
 	
 	# remove queued card, then play the card
 	# This is so the queued card doesn't have any influence over our hand count
