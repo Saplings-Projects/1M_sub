@@ -84,3 +84,4 @@ func on_turn_start() -> void:
 # on_take_damage (eg: thorns effect)
 # on_application (eg: shield)
 # on_card_drawn
+# TODO make this using signals in child class instead
