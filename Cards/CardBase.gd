@@ -42,7 +42,7 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#Split up targeted attacks and all attacks
-	var effects_targeting_single: Array[EffectData] = get_target_effects()
+	var effects_targeting_single: Array[EffectData] = get_effects_targeting_single()
 	var effects_targeting_all: Array[EffectData] = get_effects_target_all()
 	
 	#Apply single target
@@ -55,7 +55,7 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	
 	CardManager.on_card_action_finished.emit(self)
 
-func get_target_effects() -> Array[EffectData]:
+func get_effects_targeting_single() -> Array[EffectData]:
 	var target_effects: Array[EffectData] = []
 	
 	for effect_data: EffectData in card_effects_data:
