@@ -119,6 +119,19 @@ func test_strength_weakness_vulnerability():
 	# final health is 49 because original is 100, we do 50 damage
 	# we add 1 damage because of strength, remove 1 because of weakness
 	# and add 1 because of vulnerability (remove 1 defense on the enemy)
+	
+	
+func test_strength_multiplier():
+	var strength_status: Buff_Strength = Buff_Strength.new()
+	# add 1 damage offense on the player
+	strength_status.status_modifier_base_value = StatModifiers.new(0,1,0,1.5)
+	_player.get_status_component().add_status(strength_status, _player)
+	
+	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
+	card_damage.card_effects_data[0].value = 50 # modified for the test
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 25.0)
+	# 100 (base health) - (50 (base damage) * 1.5 (strength multiplier))
 
 
 func test_remove_strength():
@@ -211,6 +224,57 @@ func test_remove_multiple_status():
 	card_damage.on_card_play(_player, _enemy)
 	assert_eq(_enemy_health_component.current_health, 93.0)
 	# 96 (previous health) - 3 (base damage)
+	
+	
+func test_reset_modifier_dict_temp_to_default():
+	var strength_status: Buff_Strength = Buff_Strength.new()
+	# add 1 damage offense on the player
+	strength_status.status_modifier_base_value = StatModifiers.new(0,1,1,1)
+	_player.get_status_component().add_status(strength_status, _player)
+	
+	var weakness_status: Debuff_Weakness = Debuff_Weakness.new()
+	# remove 1 damage offense on the player
+	weakness_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
+	_player.get_status_component().add_status(weakness_status, _player)
+	
+	var vulnerability_status: Debuff_Vulnerability = Debuff_Vulnerability.new()
+	# remove 1 damage defense on the enemy
+	vulnerability_status.status_modifier_base_value = StatModifiers.new(0,1,-1,1)
+	_enemy.get_status_component().add_status(vulnerability_status, _player)
+	
+	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 96.0)
+	# final health : 100 (base health) - (3 (base damage) + 1 (strength) - 1 (weakness) + 1 (vulnerability))
+	# = 96
+	
+	_player_stat_component.get_stats().reset_modifier_dict_temp_to_default()
+	_enemy_stat_component.get_stats().reset_modifier_dict_temp_to_default()
+	
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 93.0)
+	# 96 (previous health) - 3 (base damage)
+	
+
+func test_remove_strength_multiplier():
+	var strength_status: Buff_Strength = Buff_Strength.new()
+	# add 1 damage offense on the player
+	strength_status.status_modifier_base_value = StatModifiers.new(0,1,0,1.5)
+	_player.get_status_component().add_status(strength_status, _player)
+	
+	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
+	card_damage.card_effects_data[0].value = 10 # modified for the test
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 85.0)
+	# 100 (base health) - (10 (base damage) * 1.5 (strength multiplier))
+	
+	_player.get_status_component().remove_status(strength_status)
+	assert_eq(_player.get_status_component().current_status.size(), 0)
+	
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_health_component.current_health, 75.0)
+	# 85 (previous health) - 10 (base damage)
+	# we don't have the strength multiplier of *1.5 anymore
 
 
 func test_buff_poison_duration():
