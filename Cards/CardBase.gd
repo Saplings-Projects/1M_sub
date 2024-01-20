@@ -42,16 +42,16 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#Split up targeted attacks and all attacks
-	var target_effects: Array[EffectData] = get_target_effects()
-	var all_effects: Array[EffectData] = get_all_effects()
+	var effects_targeting_single: Array[EffectData] = get_target_effects()
+	var effects_targeting_all: Array[EffectData] = get_effects_target_all()
 	
 	#Apply single target
-	_apply_all_effects(targets, target_effects)
+	_apply_all_effects(targets, effects_targeting_single)
 	#Get every unit that is to be affected by card
-	var all_target : Array[Entity] = CardManager.card_container.battler_refrence.get_all_targets(application_type)
+	var all_targets : Array[Entity] = CardManager.card_container.battler_refrence.get_all_targets(application_type)
 
 	#apply effect to every target
-	_apply_all_effects(all_target, all_effects)
+	_apply_all_effects(all_targets, effects_targeting_all)
 	
 	CardManager.on_card_action_finished.emit(self)
 
