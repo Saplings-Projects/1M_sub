@@ -211,4 +211,46 @@ func test_remove_multiple_status():
 	card_damage.on_card_play(_player, _enemy)
 	assert_eq(_enemy_health_component.current_health, 93.0)
 	# 96 (previous health) - 3 (base damage)
+
+
+func test_buff_poison_duration():
+	var buff_poison_duration = Buff_Poison_Duration.new()
+	buff_poison_duration.status_modifier_base_value = StatModifiers.new(0,1,1,1)
+	_player.get_status_component().add_status(buff_poison_duration, _player)
+	
+	var debuff_poison = Debuff_Poison.new()
+	_enemy.get_status_component().add_status(debuff_poison, _player)
+	
+	assert_eq(_enemy.get_status_component().current_status.size(), 1)
+	assert_eq(_enemy.get_status_component().current_status[0].status_turn_duration, 4)
+	# base value is 3, +1 because of buff_poison_duration
+
+
+func test_buff_poison_duration_multiple_times():
+	var buff_poison_duration = Buff_Poison_Duration.new()
+	buff_poison_duration.status_modifier_base_value = StatModifiers.new(0,1,1,1)
+	_player.get_status_component().add_status(buff_poison_duration, _player)
+	
+	var debuff_poison = Debuff_Poison.new()
+	_enemy.get_status_component().add_status(debuff_poison, _player)
+	_enemy.get_status_component().add_status(debuff_poison, _player)
+	
+	assert_eq(_enemy.get_status_component().current_status.size(), 1)
+	assert_eq(_enemy.get_status_component().current_status[0].status_turn_duration, 8)
+	# base value is 3, +1 because of buff_poison_duration, *2 because of 2 debuff_poison
+
+
+func test_buff_poison_duration_removal():
+	var buff_poison_duration = Buff_Poison_Duration.new()
+	buff_poison_duration.status_modifier_base_value = StatModifiers.new(0,1,1,1)
+	_player.get_status_component().add_status(buff_poison_duration, _player)
+	
+	var debuff_poison = Debuff_Poison.new()
+	_enemy.get_status_component().add_status(debuff_poison, _player)
+	_player.get_status_component().remove_status(buff_poison_duration)
+	_enemy.get_status_component().add_status(debuff_poison, _player)
+	
+	assert_eq(_enemy.get_status_component().current_status.size(), 1)
+	assert_eq(_enemy.get_status_component().current_status[0].status_turn_duration, 7)
+	# base value is 3, +1 because of buff_poison_duration, and +3 because applied again without duration buff
 	
