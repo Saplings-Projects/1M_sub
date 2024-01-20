@@ -5,6 +5,16 @@ class_name Debuff_Poison
 # @Override
 func _init() -> void:
 	is_on_turn_start = true
+	
+# @Override
+
+func init_status(in_caster: Entity, in_target: Entity) -> void:
+	super.init_status(in_caster, in_target)
+	status_turn_duration = EntityStats.get_value_modified_by_stats(	GlobalVar.POSSIBLE_MODIFIER_NAMES.POISON, 
+																	in_caster, 
+																	in_target, 
+																	status_turn_duration)
+	
 
 # @Override
 func on_turn_start() -> void:
