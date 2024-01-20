@@ -92,7 +92,7 @@ You place one of your 3 torches, not feeling overconfident, and the next 3 level
 
 You now have only 1 torch left, which lets you continue up to node level 10 at normal difficulty, or less at easier difficulty. You can buy more at a shop, and combats have a chance to drop one. If you have torches remaining at the end of a map, you get a bonus.
 
-### How event changes are made
+### Image of the different levels of light on the map
 
 ![Light mechanic](documentation_images/light_mechanic_explanation.png)
 
