@@ -132,6 +132,7 @@ func test_remove_one_status():
 	# 100 (base health) - (3 (base damage) + 1 (strength))
 	
 	_player.get_status_component().remove_status(strength_status)
+	assert_eq(_player.get_status_component().current_status.size(), 0)
 	
 	card_damage.on_card_play(_player, _enemy)
 	assert_eq(_enemy_health_component.current_health, 93.0)

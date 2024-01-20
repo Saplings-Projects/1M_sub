@@ -37,9 +37,9 @@ func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 
 
 func remove_status(new_status: StatusBase) -> void:
-	new_status.on_remove()
-	var status_index: int = current_status.find(new_status)
-	current_status.remove_at(status_index)
+	var found_status: StatusBase = Helpers.find_first_from_array_by_type(current_status, new_status.get_script())
+	found_status.on_remove()
+	current_status.erase(found_status)
 
 
 func apply_turn_start_status() -> void:
@@ -52,3 +52,9 @@ func apply_turn_start_status() -> void:
 			status.status_turn_duration -= 1
 			if status.status_turn_duration <= 0:
 				remove_status(status)
+
+func remove_all_status() -> void:
+	for status: StatusBase in current_status:
+		status.on_remove()
+		# can't use remove_status here because it will modify the array we are iterating over
+	current_status.clear()
