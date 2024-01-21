@@ -54,8 +54,8 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 		_on_enemy_start_turn()
 
 func _on_player_finished_turn():
-	if (!CardManager.card_container.on_finished_discarding_hand.is_connected(_on_player_hand_discarded)):
-		CardManager.card_container.on_finished_discarding_hand.connect(_on_player_hand_discarded)
+	if (!CardManager.is_discard_hand_signal_connected(_on_player_hand_discarded)):
+		CardManager.connect_discard_hand_signal(_on_player_hand_discarded)
 
 func _on_player_hand_discarded():
 	PhaseManager.set_phase(Enums.Phase.ENEMY_ATTACKING)

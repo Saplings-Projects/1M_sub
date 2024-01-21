@@ -13,3 +13,9 @@ var card_container: CardContainer = null
 func set_card_container(in_card_container: CardContainer) -> void:
 	card_container = in_card_container
 	on_card_container_initialized.emit()
+	
+func is_discard_hand_signal_connected(callable: Callable) -> bool:
+	return card_container != null and card_container.on_finished_discarding_hand.is_connected(callable)
+	
+func connect_discard_hand_signal(callable: Callable):
+	card_container.on_finished_discarding_hand.connect(callable)
