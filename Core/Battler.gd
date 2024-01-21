@@ -46,10 +46,19 @@ func _on_player_initialized() -> void:
 func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	if new_phase == Enums.Phase.PLAYER_ATTACKING:
 		_on_player_start_turn()
+		
+	if new_phase == Enums.Phase.PLAYER_FINISHING:
+		_on_player_finished_turn()
 	
 	if new_phase == Enums.Phase.ENEMY_ATTACKING:
 		_on_enemy_start_turn()
 
+func _on_player_finished_turn():
+	if (!CardManager.card_container.on_finished_discarding_hand.is_connected(_on_player_hand_discarded)):
+		CardManager.card_container.on_finished_discarding_hand.connect(_on_player_hand_discarded)
+
+func _on_player_hand_discarded():
+	PhaseManager.set_phase(Enums.Phase.ENEMY_ATTACKING)
 
 # player start phase: apply status
 func _on_player_start_turn() -> void:
