@@ -48,7 +48,7 @@ var _discard_timer: SceneTreeTimer = null
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
-	CardManager.on_card_action_finished.connect(remove_active_card)
+	CardManager.on_card_action_finished.connect(finish_active_card_action)
 	
 	_init_default_draw_pile()
 
@@ -62,9 +62,15 @@ func set_queued_card(card: CardWorld) -> void:
 
 
 func remove_queued_card() -> void:
+	_cards_queued_for_discard.append(queued_card)
+	_remove_queued_card_from_hand()
 	_focused_card = null
-	discard_card(queued_card)
 	set_queued_card(null)
+
+
+func _remove_queued_card_from_hand() -> void:
+	var _index_to_remove = cards_in_hand.find(queued_card)
+	cards_in_hand.remove_at(_index_to_remove)
 
 
 func is_card_queued() -> bool:
@@ -75,9 +81,22 @@ func set_active_card(card: CardBase) -> void:
 	_active_card = card
 
 
-func remove_active_card(card: CardBase) -> void:
+func finish_active_card_action(card: CardBase) -> void:
+	_discard_active_card()
 	_active_card = null
+	
 
+
+func _discard_active_card() -> void:
+	var _card_to_discard = null
+	for card_index in _cards_queued_for_discard.size():
+		if (_cards_queued_for_discard[card_index].card_data == _active_card):
+			_card_to_discard = _cards_queued_for_discard[card_index]
+	
+	if _card_to_discard != null:
+		discard_pile.append(_card_to_discard.card_data)
+		_handle_discard_queue()
+		on_card_counts_updated.emit()
 
 func are_cards_active() -> bool:
 	return _active_card != null
