@@ -98,6 +98,6 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 		if can_play:
 			# remove queued card, then play the card
 			# This is so the queued card doesn't have any influence over our hand count
+			CardManager.card_container.remove_queued_card()
 			CardManager.card_container.set_active_card(queued_card_data)
 			queued_card_data.on_card_play(PlayerManager.player, entity)
-			CardManager.card_container.remove_queued_card()
