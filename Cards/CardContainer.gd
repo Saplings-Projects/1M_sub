@@ -67,11 +67,6 @@ func remove_queued_card() -> void:
 	set_queued_card(null)
 
 
-func _remove_queued_card_from_hand() -> void:
-	var _index_to_remove = cards_in_hand.find(queued_card)
-	cards_in_hand.remove_at(_index_to_remove)
-
-
 func is_card_queued() -> bool:
 	return queued_card != null
 
@@ -82,7 +77,6 @@ func set_active_card(card: CardBase) -> void:
 
 func remove_active_card(card: CardBase) -> void:
 	_active_card = null
-	
 
 
 func are_cards_active() -> bool:
