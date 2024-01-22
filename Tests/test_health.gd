@@ -5,6 +5,7 @@ extends GutTest
 var _player_scene: PackedScene = load("res://Entity/Player/Player.tscn")
 var _enemy_scene: PackedScene = load("res://Entity/Enemy/Enemy.tscn")
 var _battler_scene: PackedScene = load("res://Core/Battler.tscn")
+var _card_manager: PackedScene = load("res://Managers/CardManager.gd")
 var _player: Entity = null
 var _enemy: Entity = null
 var _enemy_2: Entity = null
@@ -19,6 +20,7 @@ func before_each():
 	_enemy = _enemy_scene.instantiate()
 	_enemy_2 = _enemy_scene.instantiate()
 	_battler = _battler_scene.instantiate()
+	_card_manager.instantiate()
 	
 	_enemy_list = [_enemy, _enemy_2]
 	
