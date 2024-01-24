@@ -65,11 +65,11 @@ func get_effects_targeting_single() -> Array[EffectData]:
 	return target_effects
 
 func get_effects_target_all() -> Array[EffectData]:
-	var All_effects: Array[EffectData] = []
+	var all_effects: Array[EffectData] = []
 	
 	for effect_data: EffectData in card_effects_data:
 		if(effect_data.target_type == Enums.TargetType.ALL_TARGETS):
-			All_effects.append(effect_data)
+			all_effects.append(effect_data)
 			
-	return All_effects
+	return all_effects
 
