@@ -290,7 +290,7 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 func _on_card_clicked(card: CardWorld) -> void:
 	if is_card_queued():
 		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && is_queued_card_in_play_area()):
-			_play_card()
+			play_card([])
 		else:
 		
 			var previously_queued_card: CardWorld = queued_card
@@ -313,15 +313,14 @@ func _on_card_clicked(card: CardWorld) -> void:
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
 		_focus_card(card)
 
-func _play_card():
+func play_card(list_target : Array[Entity] ):
 	var queued_card_data: CardBase = queued_card.card_data
-	var list_target : Array[Entity]
 	
 	# remove queued card, then play the card
 	# This is so the queued card doesn't have any influence over our hand count
 	CardManager.card_container.remove_queued_card()
 	CardManager.card_container.set_active_card(queued_card_data)
-	queued_card_data.on_card_play(PlayerManager.player, [])
+	queued_card_data.on_card_play(PlayerManager.player, list_target)
 	
 
 func _on_card_hovering(card: CardWorld) -> void:
