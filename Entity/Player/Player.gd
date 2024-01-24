@@ -17,11 +17,12 @@ func setup_player_health():
 	var health_comp: HealthComponent = get_health_component()
 	
 	# If there is no saved data, start with the max health
-	if PlayerManager.player_data == null:
+	if not SaveManager.has_save_data():
 		health_comp.set_health_to_max()
 	else:
-		var new_health: float = PlayerManager.player_data.saved_hp
+		var new_health: float = SaveManager.save_data.saved_hp
 		
-		assert(new_health > 0.0, "Created a player with 0 health!")
+		if new_health <= 0.0:
+			assert("Created a player with 0 health!")
 		
 		health_comp.set_health(new_health)

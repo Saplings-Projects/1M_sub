@@ -133,10 +133,10 @@ func get_discard_pile_size() -> int:
 
 func _init_default_draw_pile() -> void:
 	# load from save data. If we didn't find a saved deck, use the default
-	if CardManager.card_data == null:
+	if not SaveManager.has_save_data():
 		current_deck = default_deck.duplicate()
 	else:
-		current_deck = CardManager.card_data.saved_deck.duplicate()
+		current_deck.append_array(SaveManager.save_data.saved_deck)
 	
 	draw_pile = current_deck.duplicate()
 	draw_pile.shuffle()
