@@ -6,11 +6,12 @@ class_name HealthComponent
 signal on_health_changed(new_health: int)
 
 @export var max_health: float = 100
+@export var set_to_max_health_on_ready = true
 var current_health: float = 100
 
-
 func _ready() -> void:
-	_set_health(max_health)
+	if set_to_max_health_on_ready:
+		set_health_to_max()
 
 
 # Allow caster to be null, but not the target.
@@ -61,11 +62,15 @@ func deal_damage(damage_data: DealDamageData) -> void:
 
 	# apply damage to our health
 	var new_health: float = clampf(current_health - total_damage, 0, max_health)
-	_set_health(new_health)
+	set_health(new_health)
 
 
-func _set_health(new_health: float) -> void:
+func set_health(new_health: float) -> void:
 	if (new_health == current_health):
 		return
 	current_health = new_health
 	on_health_changed.emit(current_health)
+
+
+func set_health_to_max():
+	set_health(max_health)
