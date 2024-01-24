@@ -16,5 +16,6 @@ func set_player(in_player: Player) -> void:
 		on_player_initialized.emit()
 
 
-func save_player_data(save_data: SaveData):
-	save_data.saved_hp = player.get_health_component().current_health
+func save_player_data():
+	if player != null:
+		SaveManager.save_data.saved_hp = player.get_health_component().current_health

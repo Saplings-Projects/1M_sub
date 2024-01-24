@@ -4,7 +4,7 @@ var card_scene: PackedScene = preload("res://Cards/Card.tscn")
 
 var discard_pile: Array[CardBase] = CardManager.card_container.discard_pile
 var draw_pile: Array[CardBase] = CardManager.card_container.draw_pile
-var deck_pile: Array[CardBase]  = CardManager.card_container.current_deck
+var deck_pile: Array[CardBase]  = CardManager.current_deck
 var cards_to_display: Array[CardBase] = []
 var card_worlds: Array[CardWorld] = []
 var cardworld: CardWorld = null

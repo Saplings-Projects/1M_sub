@@ -9,6 +9,7 @@ signal on_health_changed(new_health: int)
 @export var set_to_max_health_on_ready = true
 var current_health: float = 100
 
+
 func _ready() -> void:
 	if set_to_max_health_on_ready:
 		set_health_to_max()

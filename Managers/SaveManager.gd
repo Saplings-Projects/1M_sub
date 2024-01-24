@@ -1,9 +1,12 @@
 extends Node
 ## Handles saving and loading of data.
+##
+## User path: <user>\AppData\Roaming\Fauna-RPG\save.json
 
 
 const SAVE_GAME_PATH: String = "user://save.json"
 
+# This is intended as the save data for a single run of the game
 var save_data: SaveData = null
 
 
@@ -15,18 +18,24 @@ func has_save_data() -> bool:
 	return save_data != null
 
 
+# Get all the data you want to save and modify save_data here.
+# NOTE: It's recommended to only save data in singletons that are always loaded,
+# to prevent errors where the node cannot save since it does not exist in the scene tree.
+func save_data_from_nodes():
+	PlayerManager.save_player_data()
+	CardManager.save_card_data()
+
+
+# Creates a JSON file with all the save data from save_data
 func save_game() -> void:
 	if save_data == null:
 		save_data = SaveData.new()
 	
-	PlayerManager.save_player_data(save_data)
-	CardManager.save_card_data(save_data)
+	save_data_from_nodes()
 	
 	# Convert save data to dictionary then write to JSON
 	var save_data_dictionary: Dictionary = Helpers.inst_to_dict_recursive(save_data)
-	if save_data_dictionary == null:
-		assert("Could not convert save data to dictionary!")
-		return
+	assert(save_data_dictionary != null, "Could not convert save data to dictionary!")
 	
 	var file: FileAccess = FileAccess.open(SAVE_GAME_PATH, FileAccess.WRITE)
 	if file == null:
@@ -38,10 +47,11 @@ func save_game() -> void:
 	file.close()
 
 
+# Loads the JSON file from the player's computer and converts it back to save_data
+# NOTE: We don't set up the loaded data on each Node here. Each Node is responsible for setting up
+# its saved data whenever it is spawned. Do this by getting a reference to SaveManager.save_data
 func load_game() -> void:
-	if save_data != null:
-		assert("Tried to load a game when one was already loaded!")
-		return
+	assert(save_data == null, "Tried to load a game when one was already loaded!")
 	
 	var file: FileAccess = FileAccess.open(SAVE_GAME_PATH, FileAccess.READ)
 	if file == null:
@@ -58,8 +68,4 @@ func load_game() -> void:
 	var loaded_dictionary: Dictionary = JSON.parse_string(file_content)
 	save_data = Helpers.dict_to_inst_recursive(loaded_dictionary) as SaveData
 	
-	if save_data == null:
-		assert("Could not convert save data to instance!")
-	
-	# NOTE: We don't set up the loaded data on each Node here. Each Node is responsible for setting up
-	# its saved data whenever it is spawned
+	assert(save_data != null, "Could not convert save data to a Resource!")

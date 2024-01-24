@@ -10,6 +10,8 @@ func _ready() -> void:
 	setup_player_health()
 
 func _exit_tree() -> void:
+	# Save player data when they are destroyed (combat end)
+	PlayerManager.save_player_data()
 	PlayerManager.set_player(null)
 
 
@@ -21,8 +23,6 @@ func setup_player_health():
 		health_comp.set_health_to_max()
 	else:
 		var new_health: float = SaveManager.save_data.saved_hp
-		
-		if new_health <= 0.0:
-			assert("Created a player with 0 health!")
-		
 		health_comp.set_health(new_health)
+	
+	assert(health_comp.current_health > 0.0, "Created a player with 0 health!")
