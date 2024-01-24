@@ -32,6 +32,7 @@ signal on_cards_finished_dealing
 @export var discard_pile_ui: DiscardPileUISetter = null
 
 var cards_in_hand: Array[CardWorld] = []
+var current_deck: Array[CardBase] = []
 var draw_pile: Array[CardBase] = []
 var discard_pile: Array[CardBase] = []
 var queued_card: CardWorld = null
@@ -131,7 +132,13 @@ func get_discard_pile_size() -> int:
 
 
 func _init_default_draw_pile() -> void:
-	draw_pile = default_deck.duplicate()
+	# load from save data. If we didn't find a saved deck, use the default
+	if CardManager.card_data == null:
+		current_deck = default_deck.duplicate()
+	else:
+		current_deck = CardManager.card_data.saved_deck.duplicate()
+	
+	draw_pile = current_deck.duplicate()
 	draw_pile.shuffle()
 
 
