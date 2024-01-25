@@ -4,6 +4,8 @@ extends Node
 ## User path: <user>\AppData\Roaming\Fauna-RPG\save.json
 
 
+signal on_pre_save
+
 const SAVE_GAME_PATH: String = "user://save.json"
 
 var save_data: SaveData = SaveData.new()
@@ -17,17 +19,10 @@ func _exit_tree() -> void:
 	save_game()
 
 
-func has_save_data() -> bool:
-	return save_data != null
-
-
-func is_first_time_initialization() -> bool:
-	var file: FileAccess = FileAccess.open(SAVE_GAME_PATH, FileAccess.READ)
-	return file == null
-
-
 # Creates a JSON file with all the save data from save_data
 func save_game() -> void:
+	on_pre_save.emit()
+	
 	# Convert save data to dictionary then write to JSON
 	var save_data_dictionary: Dictionary = Helpers.inst_to_dict_recursive(save_data)
 	assert(save_data_dictionary != null, "Could not convert save data to dictionary!")

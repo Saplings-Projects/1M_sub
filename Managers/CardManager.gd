@@ -11,8 +11,8 @@ var card_container: CardContainer = null
 var current_deck: Array[CardBase] = []
 
 
-func _exit_tree():
-	_save_persistent_data()
+func _ready():
+	SaveManager.on_pre_save.connect(_save_persistent_data)
 
 
 # Call this from CardContainer to initialize. This allows you to get the current CardContainer from
@@ -22,22 +22,22 @@ func set_card_container(in_card_container: CardContainer) -> void:
 	on_card_container_initialized.emit()
 	
 	if in_card_container != null:
-		_handle_load_defaults()
-		
-		on_deck_initialized.emit()
+		_initialize_deck()
 
 
-func _handle_load_defaults():
-	# If this is our first run, use the default deck and save
-	if SaveManager.is_first_time_initialization():
-		current_deck.clear()
-		current_deck = card_container.default_deck
-		_save_persistent_data()
-	else:
-		_load_persistent_data()
+func _initialize_deck():
+	# Set our default deck from the card container. Then we try to override the deck with save data
+	current_deck = card_container.default_deck.duplicate()
+	_load_persistent_data()
+	on_deck_initialized.emit()
 
 
 func _load_persistent_data():
+	# If the saved deck is empty, we assume there is no save data
+	# NOTE: This will not work if the player actually has 0 cards in their deck somehow.
+	if SaveManager.save_data.saved_deck.is_empty():
+		return
+	
 	current_deck.clear()
 	current_deck.append_array(SaveManager.save_data.saved_deck)
 
@@ -49,7 +49,8 @@ func _save_persistent_data():
 
 func is_discard_hand_signal_connected(callable: Callable) -> bool:
 	return card_container != null and card_container.on_finished_discarding_hand.is_connected(callable)
-	
+
+
 func connect_discard_hand_signal(callable: Callable):
 	card_container.on_finished_discarding_hand.connect(callable)
 

@@ -4,7 +4,7 @@ class_name SaveData
 
 
 # Player save data
-var saved_hp: float = 0
+var player_data: PlayerPersistentData = null
 
 # Card save data
 var saved_deck: Array[CardBase] = []
