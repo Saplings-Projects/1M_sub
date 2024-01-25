@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=18 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
@@ -8,19 +8,17 @@
 [ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Card_DrawCards.tres" id="7_smkw8"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
-[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="8_x6t2k"]
-[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="9_ojxic"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
+[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="10_uebx5"]
 [ext_resource type="Resource" uid="uid://3s4aet1ciesh" path="res://Cards/Resource/Card_damage_and_poison.tres" id="10_w0xgm"]
-[ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Card_EnemyAttack.tres" id="11_3k5t2"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
+[ext_resource type="Resource" uid="uid://uv2rili0xf3x" path="res://Cards/Resource/Card_Damage_EVERYTHING.tres" id="12_70k77"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 
 [node name="TestingScene" type="Node2D"]
-metadata/_edit_vertical_guides_ = [1216.0]
 
 [node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
 
@@ -38,7 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui") instance=ExtResource("3_e7sws")]
+[node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui", "battler_refrence") instance=ExtResource("3_e7sws")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -47,7 +45,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_wvn3v"), ExtResource("5_j1lqt"), ExtResource("6_4124l"), ExtResource("7_smkw8"), ExtResource("9_ojxic"), ExtResource("8_x6t2k"), ExtResource("10_w0xgm"), ExtResource("11_3k5t2")])
+default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_wvn3v"), ExtResource("5_j1lqt"), ExtResource("6_4124l"), ExtResource("10_w0xgm"), ExtResource("12_70k77"), ExtResource("7_smkw8"), ExtResource("10_uebx5")])
 starting_hand_size = 10
 max_hand_width = 900.0
 min_card_separation = 90.0
@@ -56,6 +54,8 @@ hover_offset_max = 100.0
 max_rotation = 40.0
 draw_pile_ui = NodePath("../DrawPile")
 discard_pile_ui = NodePath("../DiscardPile")
+play_at_height = 500.0
+battler_refrence = NodePath("../../../Battler")
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 1
