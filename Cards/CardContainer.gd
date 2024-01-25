@@ -51,15 +51,19 @@ var _discard_timer: SceneTreeTimer = null
 
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
-	CardManager.set_card_container(self)
 	CardManager.on_card_action_finished.connect(remove_active_card)
-	
-	_init_default_draw_pile()
+	CardManager.on_deck_initialized.connect(init_default_draw_pile)
+	CardManager.set_card_container(self)
 
 
 func _process(_delta: float) -> void:
 	_update_card_positions()
 	_handle_queued_card()
+
+
+func init_default_draw_pile() -> void:
+	draw_pile = CardManager.current_deck.duplicate()
+	draw_pile.shuffle()
 
 
 func set_queued_card(card: CardWorld) -> void:
@@ -134,16 +138,6 @@ func get_draw_pile_size() -> int:
 
 func get_discard_pile_size() -> int:
 	return discard_pile.size()
-
-
-func _init_default_draw_pile() -> void:
-	# If our CardManager's deck is empty, then we had no save data to load.
-	# So we're going to load the default deck
-	if CardManager.current_deck.is_empty():
-		CardManager.current_deck = default_deck.duplicate()
-	
-	draw_pile = CardManager.current_deck.duplicate()
-	draw_pile.shuffle()
 
 
 # This is where cards are removed from the draw pile.

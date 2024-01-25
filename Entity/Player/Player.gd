@@ -7,22 +7,37 @@ func _ready() -> void:
 	super()
 	PlayerManager.set_player(self)
 	
-	setup_player_health()
+	_handle_load_defaults()
+
+
 
 func _exit_tree() -> void:
 	# Save player data when they are destroyed (combat end)
-	PlayerManager.save_player_data()
 	PlayerManager.set_player(null)
+	
+	_save_persistent_data()
 
 
-func setup_player_health():
+func _handle_load_defaults():
+	# If this is our first run, then set all the defaults and save
+	if SaveManager.is_first_time_initialization():
+		var health_comp: HealthComponent = get_health_component()
+		health_comp.set_health_to_max()
+		_save_persistent_data()
+	else:
+		_load_persistent_data()
+
+
+# Set values from our saved persistent data
+func _load_persistent_data():
 	var health_comp: HealthComponent = get_health_component()
 	
-	# If there is no saved data, start with the max health
-	if not SaveManager.has_save_data():
-		health_comp.set_health_to_max()
-	else:
-		var new_health: float = SaveManager.save_data.saved_hp
-		health_comp.set_health(new_health)
+	var new_health: float = SaveManager.save_data.saved_hp
+	health_comp.set_health(new_health)
+
+
+# Update persistent data with our current values
+func _save_persistent_data():
+	var health_comp: HealthComponent = get_health_component()
 	
-	assert(health_comp.current_health > 0.0, "Created a player with 0 health!")
+	SaveManager.save_data.saved_hp = health_comp.current_health

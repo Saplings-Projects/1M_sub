@@ -6,33 +6,28 @@ extends Node
 
 const SAVE_GAME_PATH: String = "user://save.json"
 
-# This is intended as the save data for a single run of the game
-var save_data: SaveData = null
+var save_data: SaveData = SaveData.new()
 
 
 func _ready() -> void:
 	load_game()
 
 
+func _exit_tree() -> void:
+	save_game()
+
+
 func has_save_data() -> bool:
 	return save_data != null
 
 
-# Get all the data you want to save and modify save_data here.
-# NOTE: It's recommended to only save data in singletons that are always loaded,
-# to prevent errors where the node cannot save since it does not exist in the scene tree.
-func save_data_from_nodes():
-	PlayerManager.save_player_data()
-	CardManager.save_card_data()
+func is_first_time_initialization() -> bool:
+	var file: FileAccess = FileAccess.open(SAVE_GAME_PATH, FileAccess.READ)
+	return file == null
 
 
 # Creates a JSON file with all the save data from save_data
 func save_game() -> void:
-	if save_data == null:
-		save_data = SaveData.new()
-	
-	save_data_from_nodes()
-	
 	# Convert save data to dictionary then write to JSON
 	var save_data_dictionary: Dictionary = Helpers.inst_to_dict_recursive(save_data)
 	assert(save_data_dictionary != null, "Could not convert save data to dictionary!")
@@ -51,8 +46,10 @@ func save_game() -> void:
 # NOTE: We don't set up the loaded data on each Node here. Each Node is responsible for setting up
 # its saved data whenever it is spawned. Do this by getting a reference to SaveManager.save_data
 func load_game() -> void:
-	assert(save_data == null, "Tried to load a game when one was already loaded!")
-	
+	var file_exists = FileAccess.file_exists(SAVE_GAME_PATH)
+	if not file_exists:
+		return
+
 	var file: FileAccess = FileAccess.open(SAVE_GAME_PATH, FileAccess.READ)
 	if file == null:
 		push_error("Could not load save data: %s", FileAccess.get_open_error())
