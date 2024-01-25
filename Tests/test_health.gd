@@ -3,32 +3,37 @@ extends GutTest
 
 
 var _player_scene: PackedScene = load("res://Entity/Player/Player.tscn")
-var _enemy_scene: PackedScene = load("res://Entity/Enemy/Enemy.tscn")
 var _battler_scene: PackedScene = load("res://Core/Battler.tscn")
+var _card_container_scene: PackedScene = load("res://Cards/CardContainer.tscn")
 var _player: Entity = null
 var _enemy: Entity = null
 var _enemy_2: Entity = null
 var _battler: Battler = null
+var _card_container = null
 var _player_health_component: HealthComponent = null
 var _enemy_health_component: HealthComponent = null
+var _enemy_2_health_component: HealthComponent = null
 var _enemy_list: Array[Entity]
 
 
 func before_each():
 	_player = _player_scene.instantiate()
-	_enemy = _enemy_scene.instantiate()
-	_enemy_2 = _enemy_scene.instantiate()
 	_battler = _battler_scene.instantiate()
+	_card_container = _card_container_scene.instantiate()
+	_card_container.battler_refrence = _battler
 	
-	_enemy_list = [_enemy, _enemy_2]
 	
 	get_tree().root.add_child(_player)
-	get_tree().root.add_child(_enemy)
-	get_tree().root.add_child(_enemy_2)
 	get_tree().root.add_child(_battler)
+	get_tree().root.add_child(_card_container)
+	
+	_enemy_list = _battler._enemy_list
+	_enemy = _enemy_list[0] # enemy 1 has 100 HP
+	_enemy_2 = _enemy_list[1] # enemy 2 50 HP
 	
 	_player_health_component = _player.get_health_component()
 	_enemy_health_component = _enemy.get_health_component()
+	_enemy_2_health_component = _enemy_2.get_health_component()
 
 
 func after_each():
@@ -162,14 +167,14 @@ func test_card_damage_all():
 	_enemy.get_party_component().set_party(_enemy_list)
 	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAll.tres")
 	
-	card_damage_all.on_card_play(_player, _enemy)
+	card_damage_all.on_card_play(_player, _enemy_list)
 	assert_eq(_enemy_health_component.current_health, 98.0)
-	assert_eq(_enemy_2.get_health_component().current_health, 98.0)
+	assert_eq(_enemy_2_health_component.current_health, 48.0) # enemy 2 only has 50 HP
 
 # Test Card to Deal 3 damage to an enemy
 func test_card_damage():
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
-	card_damage.on_card_play(_player, _enemy)
+	card_damage.on_card_play(_player, [_enemy])
 	
 	assert_eq(_enemy_health_component.current_health, 97.0)
 
@@ -177,7 +182,7 @@ func test_card_damage():
 func test_card_damage_health():
 	_player.get_health_component().set_health(90.0)
 	var card_damage_health: CardBase = load("res://Cards/Resource/Card_DamageHealth.tres")
-	card_damage_health.on_card_play(_player, _enemy)
+	card_damage_health.on_card_play(_player, [_enemy])
 	
 	assert_eq(_enemy_health_component.current_health, 90.0)
 
@@ -186,7 +191,7 @@ func test_card_poison():
 	var card_poison: CardBase = load("res://Cards/Resource/Card_Poison.tres")
 	
 	assert_eq(_enemy.get_status_component().current_status.size(), 0)
-	card_poison.on_card_play(_player, _enemy)
+	card_poison.on_card_play(_player, [_enemy])
 	assert_eq(_enemy.get_status_component().current_status.size(), 1)
 	
 	var status = _enemy.get_status_component().current_status[0]
@@ -203,7 +208,7 @@ func test_card_damage_and_poison():
 	var card_damage_and_poison: CardBase = load("res://Cards/Resource/Card_damage_and_poison.tres")
 
 	assert_eq(_enemy.get_status_component().current_status.size(), 0)
-	card_damage_and_poison.on_card_play(_player, _enemy)
+	card_damage_and_poison.on_card_play(_player, [_enemy])
 	assert_eq(_enemy.get_status_component().current_status.size(), 1)
 	assert_eq(_enemy_health_component.current_health, 99.0)
 	
@@ -220,6 +225,6 @@ func test_card_damage_and_poison():
 func test_card_heal():
 	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
 	_player_health_component.set_health(95.0)
-	card_heal.on_card_play(_player, _player)
+	card_heal.on_card_play(_player, [_player])
 	
 	assert_eq(_player_health_component.current_health, 96.0)

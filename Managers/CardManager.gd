@@ -24,3 +24,10 @@ func set_card_container(in_card_container: CardContainer) -> void:
 
 func save_card_data():
 	SaveManager.save_data.saved_deck = current_deck
+	
+func is_discard_hand_signal_connected(callable: Callable) -> bool:
+	return card_container != null and card_container.on_finished_discarding_hand.is_connected(callable)
+	
+func connect_discard_hand_signal(callable: Callable):
+	card_container.on_finished_discarding_hand.connect(callable)
+
