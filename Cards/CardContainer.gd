@@ -61,6 +61,7 @@ func set_queued_card(card: CardWorld) -> void:
 
 
 func remove_queued_card() -> void:
+	_focused_card = null
 	_cards_queued_for_discard.append(queued_card)
 	_remove_queued_card_from_hand()
 	set_queued_card(null)
@@ -85,15 +86,18 @@ func finish_active_card_action(card: CardBase) -> void:
 
 
 func _discard_active_card() -> void:
-	var _card_to_discard = null
-	for card_index in _cards_queued_for_discard.size():
-		if (_cards_queued_for_discard[card_index].card_data == _active_card):
-			_card_to_discard = _cards_queued_for_discard[card_index]
+	var _card_to_discard = _find_active_card_in_queued_discard_list()
 
 	if _card_to_discard != null:
 		discard_pile.append(_card_to_discard.card_data)
 		_handle_discard_queue()
 		on_card_counts_updated.emit()
+
+func _find_active_card_in_queued_discard_list() -> CardWorld:
+	for card_index in _cards_queued_for_discard.size():
+		if (_cards_queued_for_discard[card_index].card_data == _active_card):
+			return _cards_queued_for_discard[card_index]
+	return null
 
 
 func are_cards_active() -> bool:
