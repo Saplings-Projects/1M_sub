@@ -11,6 +11,7 @@ script = ExtResource("1_tnci4")
 script = ExtResource("2_8c1ca")
 effect = SubResource("Resource_uik3s")
 value = 0
+target_type = 0
 
 [resource]
 script = ExtResource("1_ighm7")

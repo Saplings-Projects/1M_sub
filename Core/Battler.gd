@@ -72,7 +72,7 @@ func _on_enemy_start_turn() -> void:
 		assert(can_attack == true, "Enemy failed to attack.")
 		
 		if can_attack:
-			enemy_attack.on_card_play(enemy, PlayerManager.player)
+			enemy_attack.on_card_play(enemy, [PlayerManager.player])
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
@@ -96,14 +96,23 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 		var can_play: bool = queued_card_data.can_play_card(PlayerManager.player, entity)
 		
 		if can_play:
-			# remove queued card, then play the card
-			# This is so the queued card doesn't have any influence over our hand count
-			CardManager.card_container.remove_queued_card()
-			CardManager.card_container.set_active_card(queued_card_data)
-			queued_card_data.on_card_play(PlayerManager.player, entity)
-
+			CardManager.card_container.play_card([entity])
+			
+func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
+	var all_target : Array[Entity]
+	
+	match application_type:
+		Enums.ApplicationType.ALL:
+			all_target = _enemy_list
+			all_target += [PlayerManager.player]
+		Enums.ApplicationType.ENEMY_ONLY:
+			all_target = _enemy_list
+		Enums.ApplicationType.FRIENDLY_ONLY:
+			all_target = [PlayerManager.player]
+			
+	return all_target
+  
 # TODO condition check for killing enemies and removing them from the combat
 # TODO condition check for killing player and ending the combat
 # TODO condition check for killing all enemies and ending the combat
 # TODO reset temporary stats at the end of the combat using EntityStats.reset_modifier_dict_temp_to_default()
-
