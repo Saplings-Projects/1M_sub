@@ -35,7 +35,7 @@ func before_each():
 	
 	_player_health_component = _player.get_health_component()
 	_enemy_health_component = _enemy.get_health_component()
-  _enemy_2_health_component = _enemy_2.get_health_component()
+	_enemy_2_health_component = _enemy_2.get_health_component()
 	_player_status_component = _player.get_status_component()
 	_enemy_status_component = _enemy.get_status_component()
 	
