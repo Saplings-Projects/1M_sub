@@ -22,8 +22,8 @@ func before_each():
 	_card_container.battler_refrence = _battler
 	
 	get_tree().root.add_child(_player)
-	get_tree().root.add_child(_enemy)
 	get_tree().root.add_child(_battler)
+	get_tree().root.add_child(_card_container)
 	
 	_enemy_list = _battler._enemy_list
 	_enemy = _enemy_list[0] # enemy 1 has 100 HP
