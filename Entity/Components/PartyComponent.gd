@@ -15,16 +15,16 @@ func can_play_on_entity(application_type: Enums.ApplicationType, target: Entity)
 		return true
 	
 	var target_team: Enums.Team = target.get_party_component().team
-	var caster_team: Enums.Team = team
 	
-	if target_team == caster_team:
-		if application_type == Enums.ApplicationType.FRIENDLY_ONLY:
+	if 	target_team == Enums.Team.FRIENDLY \
+		and ( application_type == Enums.ApplicationType.FRIENDLY_ONLY \
+		or application_type == Enums.ApplicationType.ALL):
 			return true
-	else:
-		if application_type == Enums.ApplicationType.ENEMY_ONLY:
+	elif target_team == Enums.Team.ENEMY \
+		and (application_type == Enums.ApplicationType.ENEMY_ONLY \
+		or application_type == Enums.ApplicationType.ALL):
 			return true
-	
-	return false
+	return false 
 
 
 func set_party(in_party: Array[Entity]) -> void:
