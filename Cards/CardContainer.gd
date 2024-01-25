@@ -10,6 +10,7 @@ class_name CardContainer
 
 signal on_card_counts_updated
 signal on_cards_finished_dealing
+signal on_finished_discarding_hand
 
 @export var card_scene: PackedScene
 @export var total_hand_width: float = 100
@@ -278,12 +279,14 @@ func _handle_discard_queue() -> void:
 	
 	if _cards_queued_for_discard.size() > 0:
 		_handle_discard_queue()
+	elif PhaseManager.current_phase == Enums.Phase.PLAYER_FINISHING:
+		on_finished_discarding_hand.emit()
 
 
 func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	if new_phase == Enums.Phase.PLAYER_ATTACKING:
 		deal_to_starting_hand_size()
-	if new_phase == Enums.Phase.ENEMY_ATTACKING:
+	if new_phase == Enums.Phase.PLAYER_FINISHING:
 		discard_all_cards()
 
 
