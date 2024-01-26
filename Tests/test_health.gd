@@ -39,6 +39,10 @@ func before_each():
 	_player_status_component = _player.get_status_component()
 	_enemy_status_component = _enemy.get_status_component()
 	
+	_player.get_stat_component().get_stats().ready_entity_stats()
+	_enemy.get_stat_component().get_stats().ready_entity_stats()
+	_enemy_2.get_stat_component().get_stats().ready_entity_stats()
+	
 
 func after_each():
 	_player.queue_free()

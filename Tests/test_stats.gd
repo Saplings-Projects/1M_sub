@@ -34,12 +34,15 @@ func before_each():
 	_player_stat_component = _player.get_stat_component()
 	_enemy_stat_component = _enemy.get_stat_component()
 
+	_player_stat_component.get_stats().ready_entity_stats()
+	_enemy_stat_component.get_stats().ready_entity_stats()
 
 func after_each():
 	_player.queue_free()
 	_enemy.queue_free()
 	_enemy_2.queue_free()
 	_battler.queue_free()
+	_card_container.queue_free()
 
 
 func test_possible_modifier_size():
