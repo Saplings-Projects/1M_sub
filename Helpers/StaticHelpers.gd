@@ -59,6 +59,14 @@ static func dict_to_inst_recursive(dict : Dictionary) -> Object:
 			dict[key] = dict_to_inst(value)
 		elif typeof(value) == TYPE_ARRAY:
 			dict[key] = _dicts_to_insts(value)
+		# NOTE: This part addresses a bug with dict_to_int
+		# When an Enum is converted from dictionary, it will be considered a float.
+		# This makes comparisons with Enums fail, so we change all floats without a decimal
+		# to ints here.
+		if typeof(value) == TYPE_FLOAT:
+			if is_equal_approx(value, roundf(value)):
+				value = floori(value)
+				dict[key] = value
 		i+=1
 	var inst := dict_to_inst(dict)
 	var node : Node
