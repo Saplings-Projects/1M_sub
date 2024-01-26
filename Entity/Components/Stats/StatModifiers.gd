@@ -10,7 +10,11 @@ var modifier_base_dict: Dictionary = {}
 var _MODIFIER_KEYS : Dictionary = GlobalVar.MODIFIER_KEYS
 # shorter to write
 
-func _init( _permanent_add: int = permanent_add, 
+# to make sure export variables are initalized
+func _init() -> void:
+	call_deferred("ready")
+
+func ready(	_permanent_add: int = permanent_add, 
 			_permanent_multiply: float = permanent_multiply, 
 			_temporary_add: int = temporary_add, 
 			_temporary_multiply: float = temporary_multiply) -> void:
@@ -32,4 +36,5 @@ func change_modifier(new_modification: StatModifiers) -> void:
 	modifier_base_dict[_MODIFIER_KEYS.PERMANENT_MULTIPLY] *= new_modification.modifier_base_dict[_MODIFIER_KEYS.PERMANENT_MULTIPLY]
 	modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_ADD] += new_modification.modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_ADD]
 	modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_MULTIPLY] *= new_modification.modifier_base_dict[_MODIFIER_KEYS.TEMPORARY_MULTIPLY]
+	
 

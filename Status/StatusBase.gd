@@ -54,6 +54,7 @@ func _modify_stats_with_status() -> void:
 
 func _calculate_invert_modification(modifier: StatModifiers) -> StatModifiers:
 	var invert_modification: StatModifiers = StatModifiers.new()
+	invert_modification.ready()
 	var _MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
 	var modifier_base_dict: Dictionary = modifier.modifier_base_dict
 	invert_modification.modifier_base_dict[_MODIFIER_KEYS.PERMANENT_ADD] = -modifier_base_dict[_MODIFIER_KEYS.PERMANENT_ADD]
