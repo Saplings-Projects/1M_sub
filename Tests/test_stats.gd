@@ -124,7 +124,7 @@ func test_vulnerability_status():
 
 func test_vulnerability_card():
 	var card_vulnerability: CardBase = load("res://Cards/Resource/Card_Vulnerability.tres")
-	card_vulnerability.card_effects_data[0].effect.status_to_apply.status_modifier_base_value.ready()
+	StatModifiers.ready_card_modifier(card_vulnerability) # .card_effects_data[0].effect.status_to_apply.status_modifier_base_value.ready()
 	card_vulnerability.on_card_play(_player, [_enemy])
 	
 	assert_is(_enemy.get_status_component().current_status[0], Debuff_Vulnerability)
