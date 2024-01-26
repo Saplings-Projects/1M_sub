@@ -93,8 +93,7 @@ func finish_active_card_action(card: CardBase) -> void:
 func _discard_active_card() -> void:
 	if (_active_card != null):
 		# Add active_card to discard queued to trigger the discard animation
-		_cards_queued_for_discard.append(_active_card)
-		_handle_discard_queue()
+		_add_to_discard_queue(_active_card)
 		
 		# Add to the discard pile to update the counter
 		discard_pile.append(_active_card.card_data)
