@@ -44,15 +44,20 @@ func remove_status(new_status: StatusBase) -> void:
 
 
 func apply_turn_start_status() -> void:
+	var status_to_keep: Array[StatusBase] = []
 	for status: StatusBase in current_status:
 		if status.is_on_turn_start:
 			status.on_turn_start()
 		
-		# remove status if turn duration is depleted
+		# only keep status if their duration is not depleted
 		if not status.infinite_duration:
 			status.status_turn_duration -= 1
 			if status.status_turn_duration <= 0:
-				remove_status(status)
+				status.on_remove()
+			else:
+				status_to_keep.append(status)
+	current_status = status_to_keep
+
 
 func remove_all_status() -> void:
 	for status: StatusBase in current_status:
