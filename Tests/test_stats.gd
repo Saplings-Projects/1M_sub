@@ -120,6 +120,20 @@ func test_vulnerability_status():
 	card_damage.card_effects_data[0].value = 50 # modified for the test
 	card_damage.on_card_play(_player, [_enemy])
 	assert_eq(_enemy_health_component.current_health, 49.0)
+	
+
+func test_vulnerability_card():
+	var card_vulnerability: CardBase = load("res://Cards/Resource/Card_Vulnerability.tres")
+	card_vulnerability.card_effects_data[0].effect.status_to_apply.status_modifier_base_value.ready()
+	card_vulnerability.on_card_play(_player, [_enemy])
+	
+	assert_is(_enemy.get_status_component().current_status[0], Debuff_Vulnerability)
+	
+	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
+	card_damage.card_effects_data[0].value = 3
+	# due to the caching of Card_Damage.tres because we modified the value to be 50 in a previous test we modify it back to 3
+	card_damage.on_card_play(_player, [_enemy])
+	assert_eq(_enemy_health_component.current_health, 96.0)
 
 
 func test_strength_weakness_vulnerability():
