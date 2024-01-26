@@ -83,3 +83,10 @@ static func get_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFI
 		modified_value = target_stats._calculate_modified_value_defense(modifier_name, modified_value) 
 
 	return modified_value
+
+
+# This function is only used to setup the dictionary in tests
+# In play, the tree logic will already properly setup everything
+func ready_entity_stats() -> void:
+	_offense_modifier_dict.ready_stat_dict()
+	_defense_modifier_dict.ready_stat_dict()
