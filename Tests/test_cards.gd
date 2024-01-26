@@ -130,17 +130,20 @@ func test_play_card_action_flow():
 	assert_true(_card_container.is_card_queued(), "Card has not been queued yet.")
 
 	# Simulate removing queued card to set it to active
-	_card_container.remove_queued_card()
+	_card_container.queued_for_active()
 
 	assert_eq(_card_container.cards_in_hand.size(), 9, "Card has not been removed from hand")
-	assert_false(_card_container.is_card_queued(), "Card is still queued.")
-	assert_eq(_card_container._cards_queued_for_discard.size(), 1, "Card to remove from hand has not been queued for discard.")
 	assert_eq(_card_container.discard_pile.size(), 0, "Discard pile has been populated too early")
 
 	# Simulate setting active card to play
-	_card_container.set_active_card(_queued_card.card_data)
-
+	_card_container.set_active_card(_queued_card)
+	
 	assert_true(_card_container.are_cards_active(), "No card is currently active")
+	
+	# Removed the queued card
+	_card_container.set_queued_card(null)
+	
+	assert_false(_card_container.is_card_queued(), "Card is still queued.")
 
 	# Simulate finishing the card action
 	_card_container.finish_active_card_action(_queued_card.card_data)

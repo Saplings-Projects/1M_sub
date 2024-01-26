@@ -41,7 +41,7 @@ var draw_pile: Array[CardBase] = []
 var discard_pile: Array[CardBase] = []
 var queued_card: CardWorld = null
 
-var _active_card: CardBase = null
+var _active_card: CardWorld = null
 var _focused_card: CardWorld = null
 var _cards_queued_for_add: Array[CardBase] = []
 var _draw_timer: SceneTreeTimer = null
@@ -66,11 +66,10 @@ func set_queued_card(card: CardWorld) -> void:
 	queued_card = card
 
 
-func remove_queued_card() -> void:
+# Remove card from focused and queued and remove it from the hand to prepare it to be played
+func queued_for_active() -> void:
 	_focused_card = null
-	_cards_queued_for_discard.append(queued_card)
 	_remove_queued_card_from_hand()
-	set_queued_card(null)
 
 
 func _remove_queued_card_from_hand() -> void:
@@ -82,7 +81,7 @@ func is_card_queued() -> bool:
 	return queued_card != null
 
 
-func set_active_card(card: CardBase) -> void:
+func set_active_card(card: CardWorld) -> void:
 	_active_card = card
 
 
@@ -92,18 +91,14 @@ func finish_active_card_action(card: CardBase) -> void:
 
 
 func _discard_active_card() -> void:
-	var _card_to_discard = _find_active_card_in_queued_discard_list()
-
-	if _card_to_discard != null:
-		discard_pile.append(_card_to_discard.card_data)
+	if (_active_card != null):
+		# Add active_card to discard queued to trigger the discard animation
+		_cards_queued_for_discard.append(_active_card)
 		_handle_discard_queue()
+		
+		# Add to the discard pile to update the counter
+		discard_pile.append(_active_card.card_data)
 		on_card_counts_updated.emit()
-
-func _find_active_card_in_queued_discard_list() -> CardWorld:
-	for card_index in _cards_queued_for_discard.size():
-		if (_cards_queued_for_discard[card_index].card_data == _active_card):
-			return _cards_queued_for_discard[card_index]
-	return null
 
 
 func are_cards_active() -> bool:
@@ -309,7 +304,10 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	if new_phase == Enums.Phase.PLAYER_ATTACKING:
 		deal_to_starting_hand_size()
 	if new_phase == Enums.Phase.PLAYER_FINISHING:
-		discard_all_cards()
+		if (cards_in_hand.size() == 0):
+			on_finished_discarding_hand.emit()
+		else:
+			discard_all_cards()
 
 
 func _on_card_clicked(card: CardWorld) -> void:
@@ -338,14 +336,11 @@ func _on_card_clicked(card: CardWorld) -> void:
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
 		_focus_card(card)
 
-func play_card(list_target : Array[Entity] ):
-	var queued_card_data: CardBase = queued_card.card_data
-	
-	# remove queued card, then play the card
-	# This is so the queued card doesn't have any influence over our hand count
-	CardManager.card_container.remove_queued_card()
-	CardManager.card_container.set_active_card(queued_card_data)
-	queued_card_data.on_card_play(PlayerManager.player, list_target)
+func play_card(list_target : Array[Entity]):
+	queued_for_active()
+	set_active_card(queued_card)
+	set_queued_card(null)
+	_active_card.card_data.on_card_play(PlayerManager.player, list_target)
 	
 
 func _on_card_hovering(card: CardWorld) -> void:
