@@ -15,5 +15,6 @@ func _ready() -> void:
 														[],
 														1)
 	attack.card_effects_data.append(basic_effect_data)
+	attack.application_type = Enums.ApplicationType.FRIENDLY_ONLY
 	
 

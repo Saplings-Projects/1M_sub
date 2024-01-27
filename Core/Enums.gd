@@ -8,6 +8,7 @@ enum Phase
 	NONE,
 	GAME_STARTING,
 	PLAYER_ATTACKING,
+	PLAYER_FINISHING,
 	ENEMY_ATTACKING,
 }
 
@@ -22,6 +23,18 @@ enum ApplicationType
 	FRIENDLY_ONLY, 
 	ENEMY_ONLY,
 	ALL,
+}
+
+enum TargetType
+{
+	SINGLE_TARGET,
+	ALL_TARGETS,
+}
+
+enum CardCastType
+{
+	TARGET,
+	INSTA_CAST,
 }
 
 enum CardMovementState
