@@ -29,7 +29,8 @@ func before_each():
 
 func after_each():
 	_card_container.free()
-	_card_scroll.free()
+	#_card_scroll.free()
+	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 	
 func test_populate():
 	
