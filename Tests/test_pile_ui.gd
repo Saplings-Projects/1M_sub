@@ -29,7 +29,7 @@ func before_each():
 
 func after_each():
 	_card_container.free()
-	#_card_scroll.free()
+	_card_scroll.free()
 	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 	
 func test_populate():
@@ -37,7 +37,7 @@ func test_populate():
 	_card_scroll = _card_container_scroll_scene.instantiate()
 	_card_scroll.deck_pile = _card_container.default_deck.duplicate()
 
-	_card_scroll.populate("DeckPile")
+	 _card_scroll.populate("DeckPile")
 
 	var card_pile = _card_scroll.deck_pile
 	var grid: GridContainer = _card_scroll.get_child(SCROLL_CONTAINER_INDEX).get_child(GRID_CONTAINER_INDEX)
