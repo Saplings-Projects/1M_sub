@@ -5,12 +5,6 @@ class_name StatusComponent
 
 var current_status: Array[StatusBase] = []
 
-# func _select_storing_array_for_status(status: StatusBase) -> Array[StatusBase]:
-# 	if status.is_on_apply:
-# 		return current_on_apply_status
-# 	else:
-# 		return current_on_turn_start_status
-
 
 func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 	# duplicate the status so we aren't modifying the base
