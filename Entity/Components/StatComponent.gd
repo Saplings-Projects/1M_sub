@@ -9,6 +9,5 @@ class_name StatComponent
 var _stats: EntityStats = EntityStats.new()
 
 
-# we want to get a duplicate of stats so we aren't modifying the base.
-func get_stat_copy() -> EntityStats:
-	return _stats.duplicate()
+func get_stats() -> EntityStats:
+	return _stats

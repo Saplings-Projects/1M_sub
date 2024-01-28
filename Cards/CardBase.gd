@@ -31,10 +31,12 @@ func parse_card_data(card_data: Dictionary) -> void:
 	# TODO
 	pass
 
-func _apply_all_effects(targets: Array[Entity], effects: Array[EffectData]) -> void:
+
+func _apply_all_effects(caster: Entity, targets: Array[Entity], effects: Array[EffectData]) -> void:
 	for target : Entity in targets:
 		for effect : EffectData in effects:
-			effect.apply_effect_data(target)
+			effect.apply_effect_data(caster, target)
+
 
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
@@ -46,13 +48,14 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	var effects_targeting_all: Array[EffectData] = get_effects_target_all()
 	
 	#Apply single target
-	_apply_all_effects(targets, effects_targeting_single)
+	_apply_all_effects(caster, targets, effects_targeting_single)
 	#Get every unit that is to be affected by card
 	var all_targets : Array[Entity] = CardManager.card_container.battler_refrence.get_all_targets(application_type)
 
 	#apply effect to every target
-	_apply_all_effects(all_targets, effects_targeting_all)
+	_apply_all_effects(caster, all_targets, effects_targeting_all)
 	
+
 	CardManager.on_card_action_finished.emit(self)
 
 func get_effects_targeting_single() -> Array[EffectData]:

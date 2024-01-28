@@ -118,4 +118,8 @@ func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
 			all_target = [PlayerManager.player]
 			
 	return all_target
-	
+  
+# TODO condition check for killing enemies and removing them from the combat
+# TODO condition check for killing player and ending the combat
+# TODO condition check for killing all enemies and ending the combat
+# TODO reset temporary stats at the end of the combat using EntityStats.reset_modifier_dict_temp_to_default()
