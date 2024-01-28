@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=25 format=3 uid="uid://b60uabg68ra1l"]
 
+[ext_resource type="Script" path="res://Map/MapManager.gd" id="2_50npk"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
 [ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="4_wvn3v"]
@@ -19,6 +20,8 @@
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
+[ext_resource type="Texture2D" uid="uid://cjlatwiw7r80d" path="res://Map/map_icon.png" id="20_tiho6"]
+[ext_resource type="Script" path="res://UI/MapButton.gd" id="22_druf4"]
 
 [sub_resource type="Resource" id="Resource_82ci8"]
 script = ExtResource("10_qowiy")
@@ -38,6 +41,9 @@ card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
 metadata/_edit_vertical_guides_ = [1216.0]
 
 [node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
+
+[node name="TestMap" type="Node2D" parent="."]
+script = ExtResource("2_50npk")
 
 [node name="Player" parent="." instance=ExtResource("3_4psp7")]
 position = Vector2(595, 284)
@@ -168,5 +174,20 @@ texture_focused = ExtResource("18_b54hn")
 stretch_mode = 0
 script = ExtResource("19_ucc6f")
 metadata/_edit_use_anchors_ = true
+
+[node name="MapIcon" type="TextureButton" parent="CanvasLayer/UIControl"]
+layout_mode = 0
+offset_left = 1174.0
+offset_top = 31.0
+offset_right = 1214.0
+offset_bottom = 71.0
+texture_normal = ExtResource("20_tiho6")
+texture_pressed = ExtResource("20_tiho6")
+texture_hover = ExtResource("20_tiho6")
+texture_disabled = ExtResource("20_tiho6")
+texture_focused = ExtResource("20_tiho6")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("22_druf4")
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
