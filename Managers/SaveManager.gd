@@ -8,9 +8,9 @@ signal on_pre_save
 
 const SAVE_GAME_PATH: String = "user://save.json"
 const BACKUP_SAVE_GAME_PATH: String = "user://save_bak.json"
-const DO_SAVING: bool = true
 
 var save_data: SaveData = SaveData.new()
+var save_to_file: bool = false
 
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func _exit_tree() -> void:
 
 # Creates a JSON file with all the save data from save_data
 func save_game() -> void:
-	if not DO_SAVING:
+	if not save_to_file:
 		return
 	
 	on_pre_save.emit()
@@ -91,3 +91,8 @@ func clear_save() -> void:
 	var error: Error = DirAccess.remove_absolute(SAVE_GAME_PATH)
 	if error != OK:
 		push_error("Could not remove save file: ", error_string(error))
+	
+	error = DirAccess.remove_absolute(BACKUP_SAVE_GAME_PATH)
+	if error != OK:
+		push_error("Could not remove backup save file: ", error_string(error))
+	

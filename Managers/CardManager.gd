@@ -12,6 +12,7 @@ var current_deck: Array[CardBase] = []
 
 
 func _ready():
+	# Save data before the SaveManager is destroyed.
 	SaveManager.on_pre_save.connect(_save_persistent_data)
 
 
