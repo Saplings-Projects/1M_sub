@@ -13,7 +13,13 @@ signal on_unhover
 # emits any time the mouse moves in the area
 signal on_mouse_hovering
 
+# If greater than 0, then on_mouse_hovering will not trigger for the set time after an unhover event
+# NOTE: this is needed because InputEventMouseMotion will sometimes fire after mouse_exited events
+@export var lock_hover_time: float = 0.0
+
 var _is_interactable: bool = true
+var _lock_hover_timer: Timer = null
+var _hover_enabled = true
 
 
 func set_interactable(interactable: bool) -> void:
@@ -36,7 +42,8 @@ func _on_gui_input_event(event: InputEvent) -> void:
 		else:
 			on_right_click.emit()
 	if event is InputEventMouseMotion:
-		on_mouse_hovering.emit()
+		if _hover_enabled:
+			on_mouse_hovering.emit()
 
 
 func _on_mouse_entered() -> void:
@@ -49,5 +56,22 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if not _is_interactable:
 		return
-		
+	
+	_set_lock_hover_timer()
+	
 	on_unhover.emit()
+
+
+func _set_lock_hover_timer():
+	if lock_hover_time <= 0.0:
+		return
+	
+	if _lock_hover_timer != null:
+		_lock_hover_timer.stop()
+	
+	# Disable hovering, set timer. When timer expires, re-enable hovering
+	_hover_enabled = false
+	_lock_hover_timer = Timer.new()
+	add_child(_lock_hover_timer)
+	_lock_hover_timer.timeout.connect(func(): _hover_enabled = true)
+	_lock_hover_timer.start(lock_hover_time)
