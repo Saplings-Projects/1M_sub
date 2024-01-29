@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://ki060lfrgty4"]
+[gd_scene load_steps=2 format=3 uid="uid://ki060lfrgty4"]
+
+[ext_resource type="Script" path="res://UI/MapUI.gd" id="1_enf2f"]
 
 [node name="MapUi" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_enf2f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -17,16 +20,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.309804)
 
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 58.0
+offset_right = 924.0
+offset_bottom = 658.0
+
+[node name="RoomContainer" type="ColorRect" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="Button" type="Button" parent="."]
+layout_mode = 0
 offset_left = 4.0
 offset_top = 550.0
 offset_right = 65.0
 offset_bottom = 581.0
 text = "Return"
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 617.0
-offset_top = 333.0
-offset_right = 657.0
-offset_bottom = 373.0
+[connection signal="pressed" from="Button" to="." method="_on_return_button_press"]

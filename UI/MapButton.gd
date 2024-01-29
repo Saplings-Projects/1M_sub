@@ -8,5 +8,4 @@ func _pressed():
 	var parent: Control = $".."
 	var map: Control = map_scene.instantiate()
 	
-	#map.populate(get_name())
 	parent.add_child(map)
