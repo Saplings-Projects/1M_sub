@@ -15,6 +15,7 @@ var _enemy_list: Array[Entity]
 
 func _ready() -> void:
 	_summon_enemies()
+	EnemyManager.enemy_list = _enemy_list
 	
 	# check if our player has been initialized already. If not, wait for the signal
 	if (PlayerManager.player == null):
