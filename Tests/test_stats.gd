@@ -43,9 +43,9 @@ func before_each():
 
 func after_each():
 	_player.queue_free()
-	_enemy.queue_free()
-	_enemy_2.queue_free()
-	_battler.queue_free()
+	#_enemy.queue_free()
+	#_enemy_2.queue_free()
+	#_battler.queue_free()
 	#_card_container.queue_free()
 	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 
