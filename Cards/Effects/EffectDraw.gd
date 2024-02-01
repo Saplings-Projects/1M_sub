@@ -1,6 +1,6 @@
 class_name EffectDraw extends EffectBase
 
 # @Override
-@warning_ignore("unused_parameter")
 func apply_effect(caster: Entity, target: Entity, value: int) -> void:
-    CardManager.card_container.draw_cards(value)
+    var modified_value: int = EntityStats.get_value_modified_by_stats(GlobalVar.POSSIBLE_MODIFIER_NAMES.DRAW, caster, target, value)
+    CardManager.card_container.draw_cards(modified_value)
