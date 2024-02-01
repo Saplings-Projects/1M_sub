@@ -20,12 +20,10 @@ func _ready():
 	var color_rect = get_child(0)
 	var scroll_container = get_child(1)
 	var room_container = scroll_container.get_child(0)
-	print(color_rect.get_size())
 	var starting_map_node = Vector2(color_rect.get_size().x / 2, color_rect.get_size().y / 2)
 	
-	#TODO: Find the max rooms 
-	var start_position_for_next_room_x = room_container.position.x + room_container.get_size().x / 2 - ((new_room_size.x + _padding_offset) * MapManager.map_width_array.max()) / 2
-	var start_position_for_next_room_y = room_container.position.y + room_container.get_size().y - new_room_size.y - _padding_offset
+	var start_position_for_next_room_x = room_container.position.x + room_container.get_size().x / 2 - ((new_room_size.x + _padding_offset) * MapManager.map_width_array.max()) / 2 + _padding_offset
+	var start_position_for_next_room_y = scroll_container.position.y + scroll_container.get_size().y
 	var position_for_next_room = Vector2(start_position_for_next_room_x, start_position_for_next_room_y)
 	for width_array in current_map.rooms:
 		position_for_next_room.x = start_position_for_next_room_x
