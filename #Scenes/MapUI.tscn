@@ -23,14 +23,14 @@ color = Color(0, 0, 0, 0.309804)
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_left = 260.0
-offset_top = 37.0
+offset_top = 60.0
 offset_right = 1059.0
-offset_bottom = 637.0
+offset_bottom = 660.0
 follow_focus = true
 
 [node name="RoomContainer" type="ColorRect" parent="ScrollContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(799, 720)
+custom_minimum_size = Vector2(799, 600)
 layout_mode = 2
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
