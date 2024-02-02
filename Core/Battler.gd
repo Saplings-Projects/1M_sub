@@ -24,6 +24,7 @@ func _ready() -> void:
 		
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.on_card_container_initialized.connect(_on_card_container_initialized)
+	CardManager.on_card_action_finished.connect(_handle_enemy_deaths.unbind(1))
 
 
 func _summon_enemies() -> void:
@@ -51,12 +52,15 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 	if new_phase == Enums.Phase.ENEMY_ATTACKING:
 		_on_enemy_start_turn()
 
+
 func _on_card_container_initialized() -> void:
 	if (!CardManager.is_discard_hand_signal_connected(_on_player_hand_discarded)):
 		CardManager.connect_discard_hand_signal(_on_player_hand_discarded)
 
+
 func _on_player_hand_discarded() -> void:
 	PhaseManager.set_phase(Enums.Phase.ENEMY_ATTACKING)
+
 
 # player start phase: apply status
 func _on_player_start_turn() -> void:
@@ -104,7 +108,8 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 		
 		if can_play:
 			CardManager.card_container.play_card([entity])
-			
+
+
 func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
 	var all_target : Array[Entity]
 	
@@ -118,7 +123,21 @@ func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
 			all_target = [PlayerManager.player]
 			
 	return all_target
+
   
+func _handle_enemy_deaths() -> void:
+	var enemies_to_remove : Array[Entity] = []
+	for enemy in _enemy_list:
+		if enemy.get_health_component().current_health == 0:
+			enemies_to_remove.append(enemy)
+			
+	for enemy in enemies_to_remove:
+		_enemy_list.erase(enemy)
+		enemy.queue_free()
+		
+	for enemy in _enemy_list:
+		enemy.get_party_component().set_party(_enemy_list)
+
 # TODO condition check for killing enemies and removing them from the combat
 # TODO condition check for killing player and ending the combat
 # TODO condition check for killing all enemies and ending the combat
