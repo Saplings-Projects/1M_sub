@@ -46,3 +46,9 @@ enum CardMovementState
 	HOVERED,
 	QUEUED,
 }
+
+enum CombatResult
+{
+	VICTORY,
+	DEFEAT
+}

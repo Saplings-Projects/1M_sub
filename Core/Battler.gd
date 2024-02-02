@@ -5,6 +5,7 @@ class_name Battler
 ## This class holds a list of all the enemies, so it's a good central place to dispatch
 ## battle actions (player clicking on enemies, enemy attacks, applying status).
 
+signal battle_end(result)
 
 @export var enemies_to_summon: Array[PackedScene]
 @export var enemy_spacing: float = 50.0
@@ -24,7 +25,7 @@ func _ready() -> void:
 		
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.on_card_container_initialized.connect(_on_card_container_initialized)
-	CardManager.on_card_action_finished.connect(_handle_enemy_deaths.unbind(1))
+	CardManager.on_card_action_finished.connect(_handle_deaths.unbind(1))
 
 
 func _summon_enemies() -> void:
@@ -75,7 +76,7 @@ func _on_enemy_start_turn() -> void:
 	for enemy: Entity in _enemy_list:
 		enemy.get_status_component().apply_turn_start_status()
 		
-	_handle_enemy_deaths()
+	_handle_deaths()
 	
 	# generate list of enemy actions
 	var enemy_action_list: Array[EnemyAction] = []
@@ -88,7 +89,7 @@ func _on_enemy_start_turn() -> void:
 	# execute enemy actions
 	for enemy_action: EnemyAction in enemy_action_list:
 		enemy_action.execute()
-		_handle_enemy_deaths()
+		_handle_deaths()
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
@@ -143,7 +144,17 @@ func _handle_enemy_deaths() -> void:
 	for enemy in _enemy_list:
 		enemy.get_party_component().set_party(_enemy_list)
 
-# TODO condition check for killing enemies and removing them from the combat
-# TODO condition check for killing player and ending the combat
-# TODO condition check for killing all enemies and ending the combat
+
+func _check_and_handle_battle_end() -> void:
+	if PlayerManager.player.get_health_component().current_health == 0:
+		battle_end.emit(Enums.CombatResult.DEFEAT)
+	if _enemy_list.is_empty():
+		battle_end.emit(Enums.CombatResult.VICTORY)
+
+
+func _handle_deaths() -> void:
+	_handle_enemy_deaths()
+	_check_and_handle_battle_end()
+
+
 # TODO reset temporary stats at the end of the combat using EntityStats.reset_modifier_dict_temp_to_default()
