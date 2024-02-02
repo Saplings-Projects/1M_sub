@@ -74,16 +74,21 @@ func _on_enemy_start_turn() -> void:
 	# apply status
 	for enemy: Entity in _enemy_list:
 		enemy.get_status_component().apply_turn_start_status()
+		
+	_handle_enemy_deaths()
 	
-	# enemy attack
+	# generate list of enemy actions
+	var enemy_action_list: Array[EnemyAction] = []
+	
 	for enemy: Entity in _enemy_list:
 		var enemy_attack: CardBase = enemy.get_behavior_component().attack
-		var can_attack: bool = enemy_attack.can_play_card(enemy, PlayerManager.player)
+		var enemy_action = EnemyAction.new(enemy, enemy_attack, [PlayerManager.player])
+		enemy_action_list.append(enemy_action)
 		
-		assert(can_attack == true, "Enemy failed to attack.")
-		
-		if can_attack:
-			enemy_attack.on_card_play(enemy, [PlayerManager.player])
+	# execute enemy actions
+	for enemy_action: EnemyAction in enemy_action_list:
+		enemy_action.execute()
+		_handle_enemy_deaths()
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
