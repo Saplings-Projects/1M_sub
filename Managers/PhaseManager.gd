@@ -8,6 +8,8 @@ extends Node
 
 signal on_game_start
 signal on_phase_changed(new_phase: Enums.Phase, old_phase: Enums.Phase)
+signal on_combat_end(result: Enums.CombatResult)
+
 var current_phase: Enums.Phase = Enums.Phase.NONE
 
 

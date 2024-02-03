@@ -18,7 +18,7 @@ func execute() -> void:
 		return
 	
 	# Simplified for now, will need refactor once we have advanced enemy actions
-	if not is_instance_valid(self.target[0]): 
+	if not is_instance_valid(self.target[0]) or self.target[0].get_health_component().current_health == 0: 
 		print("Target died, skipping action")
 		return
 		

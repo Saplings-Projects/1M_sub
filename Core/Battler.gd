@@ -5,8 +5,6 @@ class_name Battler
 ## This class holds a list of all the enemies, so it's a good central place to dispatch
 ## battle actions (player clicking on enemies, enemy attacks, applying status).
 
-signal battle_end(result)
-
 @export var enemies_to_summon: Array[PackedScene]
 @export var enemy_spacing: float = 50.0
 @export var enemy_attack_time: float = 1.0
@@ -89,7 +87,7 @@ func _on_enemy_start_turn() -> void:
 	# execute enemy actions
 	for enemy_action: EnemyAction in enemy_action_list:
 		enemy_action.execute()
-		_handle_deaths()
+		#_handle_deaths()
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
@@ -147,9 +145,9 @@ func _handle_enemy_deaths() -> void:
 
 func _check_and_handle_battle_end() -> void:
 	if PlayerManager.player.get_health_component().current_health == 0:
-		battle_end.emit(Enums.CombatResult.DEFEAT)
+		PhaseManager.on_combat_end.emit(Enums.CombatResult.DEFEAT)
 	if _enemy_list.is_empty():
-		battle_end.emit(Enums.CombatResult.VICTORY)
+		PhaseManager.on_combat_end.emit(Enums.CombatResult.VICTORY)
 
 
 func _handle_deaths() -> void:
