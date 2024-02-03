@@ -87,7 +87,6 @@ func _on_enemy_start_turn() -> void:
 	# execute enemy actions
 	for enemy_action: EnemyAction in enemy_action_list:
 		enemy_action.execute()
-		#_handle_deaths()
 	
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
