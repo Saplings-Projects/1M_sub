@@ -22,6 +22,11 @@ var _lock_hover_timer: Timer = null
 var _hover_enabled = true
 
 
+func _ready():
+	if lock_hover_time > 0.0:
+		_create_lock_hover_timer()
+
+
 func set_interactable(interactable: bool) -> void:
 	if not interactable:
 		on_unhover.emit()
@@ -62,16 +67,19 @@ func _on_mouse_exited() -> void:
 	on_unhover.emit()
 
 
-func _set_lock_hover_timer():
-	if lock_hover_time <= 0.0:
-		return
-	
-	if _lock_hover_timer != null:
-		_lock_hover_timer.stop()
-	
-	# Disable hovering, set timer. When timer expires, re-enable hovering
-	_hover_enabled = false
+func _create_lock_hover_timer():
 	_lock_hover_timer = Timer.new()
 	add_child(_lock_hover_timer)
+	
+	# When timer expires, enable hovering
 	_lock_hover_timer.timeout.connect(func(): _hover_enabled = true)
+
+
+func _set_lock_hover_timer():
+	if _lock_hover_timer == null:
+		return
+	
+	# Disable hovering, set timer. When timer expires, hovering will re-enable.
+	_hover_enabled = false
+	_lock_hover_timer.stop()
 	_lock_hover_timer.start(lock_hover_time)
