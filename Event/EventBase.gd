@@ -15,3 +15,5 @@ func _load_scene() -> Node:
 	var loadScene: PackedScene = load(packedScene)
 	return loadScene.instantiate()
 	
+func get_room_abbreviation() -> String:
+	return ""

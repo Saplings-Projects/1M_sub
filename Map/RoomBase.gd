@@ -12,13 +12,4 @@ func _to_string() -> String:
 	return "RoomBase"
 
 func get_room_abbreviation() -> String:
-	if room_event is EventHeal:
-		return "H"
-	elif room_event is EventMob:
-		return "M"
-	elif room_event is EventRandom:
-		return "R"
-	elif room_event is EventShop:
-		return "S"
-	else:
-		return ""
+	return room_event.get_room_abbreviation()
