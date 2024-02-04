@@ -4,6 +4,10 @@ var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
 var _padding_offset = 20
 
+@export var color_rect: ColorRect
+@export var scroll_container: SmoothScrollContainer
+@export var room_container: ColorRect
+
 func _input(_inputevent: InputEvent) -> void:
 	if (_inputevent is InputEventKey and _inputevent.pressed and _inputevent.keycode == KEY_ESCAPE):
 		queue_free()
@@ -14,22 +18,14 @@ func _on_return_button_press():
 
 
 var _ROOM_TEXTURE_INDEX = 0
-var _COLOR_RECT_INDEX = 0
-var _SCROLL_CONTAINER_INDEX = 1
-var _ROOM_CONTAINER_INDEX = 0
 
 func _ready():
 	var current_map: MapBase = MapManager.current_map
 	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
-	var new_room_size: Vector2 = new_room.get_child(_ROOM_TEXTURE_INDEX).get_size()
-	
-	# Get the objets of the Map UI Scene
-	var color_rect: ColorRect = get_child(_COLOR_RECT_INDEX)
-	var scroll_container: SmoothScrollContainer = get_child(_SCROLL_CONTAINER_INDEX)
-	var vertical_scroll_bar: VScrollBar = scroll_container.get_v_scroll_bar()
-	var room_container: ColorRect = scroll_container.get_child(_ROOM_CONTAINER_INDEX)
+	var new_room_texture_rect = Helpers.get_first_child_node_of_type(new_room, TextureRect)
+	var new_room_size: Vector2 = new_room_texture_rect.get_size()
 	
 	# Get the width of the floor that has the most rooms, by getting the size of what a room is w/ some offset, then 
 	var room_container_width: float = ((new_room_size.x + _padding_offset) * MapManager.map_width_array.max()) + _padding_offset
@@ -38,10 +34,17 @@ func _ready():
 	# The array we have in MapManager, each element will increase the height of the map display, 
 	# multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.
 	var room_container_height: float = MapManager.map_width_array.size() * (new_room_size.y + _padding_offset)
+	
+	# Set the custom minimum size of the room container to allow scrolling
 	room_container.set_custom_minimum_size(Vector2(room_container_width, room_container_height))
+	
+	# Set the size of the scroll container to be dynamic to the max numbers of rooms of a floor
 	scroll_container.set_size(Vector2(room_container_width, scroll_container.get_size().y))
 	
-	var scroll_container_position_x = color_rect.get_size().x / 2 - scroll_container.get_size().x / 2
+	# We're dynamically sizing the width of the map, as such we need to position it to center it on the screen.
+	# X position is calculated by getting half the width of the game screen, then subtracting that from 
+	# half the width of the scroll_container 
+	var scroll_container_position_x: float = color_rect.get_size().x / 2 - scroll_container.get_size().x / 2
 	scroll_container.set_position(Vector2(scroll_container_position_x, scroll_container.position.y))
 	
 	var scroll_container_bottom_y_position: float = scroll_container.position.y + scroll_container.get_size().y
