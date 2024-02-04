@@ -17,8 +17,6 @@ func _on_return_button_press():
 	queue_free()
 
 
-var _ROOM_TEXTURE_INDEX = 0
-
 func _ready():
 	var current_map: MapBase = MapManager.current_map
 	

@@ -3,12 +3,13 @@
 [ext_resource type="Script" path="res://Map/RoomUI.gd" id="1_n442j"]
 [ext_resource type="Texture2D" uid="uid://dxpg0rdhgt587" path="res://Map/room_icon.png" id="2_mdfia"]
 
-[node name="RoomUI" type="Control"]
+[node name="RoomUI" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_n442j")
+label = NodePath("RoomEdge/Label")
 
 [node name="RoomEdge" type="TextureRect" parent="."]
 layout_mode = 0

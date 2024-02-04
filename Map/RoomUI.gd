@@ -1,10 +1,7 @@
 extends Control
 
 var room: RoomBase
-var label: Label
-
-func _ready():
-	label = get_child(0).get_child(0)
+@export var label: Label
 
 func set_label(title: String):
 	label.set_text(title)
