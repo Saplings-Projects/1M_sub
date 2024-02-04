@@ -17,7 +17,7 @@ script = ExtResource("1_4el5m")
 
 [node name="ClickHandler" type="Node" parent="."]
 script = ExtResource("3_du4nn")
-lock_hover_time = 0.3
+time_to_lock_hover = 0.3
 
 [node name="CardMovementComponent" type="Node" parent="."]
 script = ExtResource("6_qvt2l")
