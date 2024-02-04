@@ -79,7 +79,7 @@ func _on_enemy_start_turn() -> void:
 	# generate list of enemy actions
 	var enemy_action_list: Array[EnemyAction] = []
 	
-	for enemy: Entity in _enemy_list:
+	for enemy: Enemy in _enemy_list:
 		var enemy_attack: CardBase = enemy.get_behavior_component().attack
 		var enemy_action = EnemyAction.new(enemy, enemy_attack, [PlayerManager.player])
 		enemy_action_list.append(enemy_action)
@@ -130,15 +130,15 @@ func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
   
 func _handle_enemy_deaths() -> void:
 	var enemies_to_remove : Array[Entity] = []
-	for enemy in _enemy_list:
+	for enemy: Enemy in _enemy_list:
 		if enemy.get_health_component().current_health == 0:
 			enemies_to_remove.append(enemy)
 			
-	for enemy in enemies_to_remove:
+	for enemy: Enemy in enemies_to_remove:
 		_enemy_list.erase(enemy)
 		enemy.queue_free()
 		
-	for enemy in _enemy_list:
+	for enemy: Enemy in _enemy_list:
 		enemy.get_party_component().set_party(_enemy_list)
 
 

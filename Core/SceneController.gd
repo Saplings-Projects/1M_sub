@@ -1,15 +1,15 @@
 extends Node
 
 
-var current_scene = null
+var current_scene: Node = null
 
 func _ready():
-	var root = get_tree().root
+	var root: Window = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	PhaseManager.on_combat_end.connect(_combat_end_change_scene)
 
 
-func goto_scene(path):
+func goto_scene(path) -> void:
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -22,15 +22,15 @@ func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
 
 
-func _deferred_goto_scene(path):
+func _deferred_goto_scene(path) -> void:
 	# It is now safe to remove the current scene
 	current_scene.free()
 
 	# Load the new scene.
-	var s = ResourceLoader.load(path)
+	var new_scene: Resource = ResourceLoader.load(path)
 
 	# Instance the new scene.
-	current_scene = s.instantiate()
+	current_scene = new_scene.instantiate()
 
 	# Add it to the active scene, as child of root.
 	get_tree().root.add_child(current_scene)
@@ -39,7 +39,7 @@ func _deferred_goto_scene(path):
 	get_tree().current_scene = current_scene
 
 
-func _combat_end_change_scene(combat_result: Enums.CombatResult):
+func _combat_end_change_scene(combat_result: Enums.CombatResult) -> void:
 	PhaseManager.call_deferred("set_phase", Enums.Phase.GAME_STARTING)
 	if combat_result == Enums.CombatResult.DEFEAT:
 		print('Defeat')
