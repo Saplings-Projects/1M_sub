@@ -3,6 +3,11 @@ extends Node
 
 var current_scene: Node = null
 
+var SCENE_MAPPING: Dictionary = {
+	Enums.CombatResult.VICTORY: "res://#Scenes/TestingScene.tscn",
+	Enums.CombatResult.DEFEAT: "res://#Scenes/TestingScene.tscn",
+}
+
 func _ready():
 	var root: Window = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -43,8 +48,8 @@ func _combat_end_change_scene(combat_result: Enums.CombatResult) -> void:
 	PhaseManager.call_deferred("set_phase", Enums.Phase.GAME_STARTING)
 	if combat_result == Enums.CombatResult.DEFEAT:
 		print('Defeat')
-		goto_scene("res://#Scenes/TestingScene.tscn")
+		goto_scene(SCENE_MAPPING[Enums.CombatResult.DEFEAT])
 	elif combat_result == Enums.CombatResult.VICTORY:
 		print("Victory")
-		goto_scene("res://#Scenes/TestingScene.tscn")
+		goto_scene(SCENE_MAPPING[Enums.CombatResult.VICTORY])
 	PhaseManager.call_deferred("set_phase", Enums.Phase.PLAYER_ATTACKING)
