@@ -14,7 +14,7 @@ func _ready():
 	PhaseManager.on_combat_end.connect(_combat_end_change_scene)
 
 
-func goto_scene(path) -> void:
+func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -27,7 +27,7 @@ func goto_scene(path) -> void:
 	call_deferred("_deferred_goto_scene", path)
 
 
-func _deferred_goto_scene(path) -> void:
+func _deferred_goto_scene(path: String) -> void:
 	# It is now safe to remove the current scene
 	current_scene.free()
 
