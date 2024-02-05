@@ -9,7 +9,7 @@ var _padding_offset = 20
 @export var room_container: ColorRect
 
 func _input(_inputevent: InputEvent) -> void:
-	if (_inputevent is InputEventKey and _inputevent.pressed and _inputevent.keycode == KEY_ESCAPE):
+	if (_inputevent.is_action_pressed("cancel_action")):
 		queue_free()
 
 
@@ -22,7 +22,7 @@ func _ready():
 	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
-	var new_room_texture_rect = Helpers.get_first_child_node_of_type(new_room, TextureRect)
+	var new_room_texture_rect: TextureRect = Helpers.get_first_child_node_of_type(new_room, TextureRect)
 	var new_room_size: Vector2 = new_room_texture_rect.get_size()
 	
 	# Get the width of the floor that has the most rooms, by getting the size of what a room is w/ some offset, then 
