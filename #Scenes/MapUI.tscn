@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/MapUI.gd" id="1_enf2f"]
 [ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="2_2gata"]
 
-[node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container")]
+[node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container", "room_addition_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,7 @@ script = ExtResource("1_enf2f")
 color_rect = NodePath("ColorRect")
 scroll_container = NodePath("SmoothScrollContainer")
 room_container = NodePath("SmoothScrollContainer/RoomContainer")
+room_addition_node = NodePath("SmoothScrollContainer/RoomContainer/RoomAdditionNode")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -41,6 +42,12 @@ custom_minimum_size = Vector2(900, 600)
 layout_mode = 2
 mouse_filter = 1
 color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="RoomAdditionNode" type="Control" parent="SmoothScrollContainer/RoomContainer"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
