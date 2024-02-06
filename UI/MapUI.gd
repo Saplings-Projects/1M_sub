@@ -88,11 +88,11 @@ func _ready():
 	
 	# Calculate the position of where we should put the rooms. 
 	# This is to account for in case the size of the rooms is smaller than the container we put it in
-	var new_room_position_x = room_container.get_custom_minimum_size().x / 2 - room_container_width / 2
+	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - room_container_width / 2
 	
 	# If the room_container height is less than the minimum room height 
 	# then calculate the position for it to be centered in the middle of the map
-	var new_room_position_y = room_container.position.y
+	var new_room_position_y: float = room_container.position.y
 	if (room_container_height < _MINIMUM_ROOM_HEIGHT):
 		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + room_container_height / 2
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
