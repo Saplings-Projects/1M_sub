@@ -28,31 +28,20 @@ func _ready():
 	var new_room_texture_rect: TextureRect = Helpers.get_first_child_node_of_type(new_room, TextureRect)
 	var new_room_size: Vector2 = new_room_texture_rect.get_size()
 	
-	# Get the width of the floor that has the most rooms, by getting the size of what a room is w/ some offset
-	var room_container_width: float = ((new_room_size.x + _padding_offset) * MapManager.map_width_array.max()) + _padding_offset
 	
-	# Check if the room_container_width doesn't meet a certain threshold. If it doesn't set it to a new width, 
-	# but save whatever the current width was for positioning later
-	var new_room_container_width: float = room_container_width
-	if (room_container_width < _MINIMUM_ROOM_WIDTH):
-		new_room_container_width = _MINIMUM_ROOM_WIDTH
+	var room_container_width: float = _get_combined_room_width(new_room_texture_rect)
+	# Set the max width between what we calculated above and the minimum room width constant
+	room_container_width = max(room_container_width, _MINIMUM_ROOM_WIDTH)
 	
-	# Calculate the height of the container where the rooms will reside in. This will be dynamic based on the map array that we have.
-	# The array we have in MapManager, each element will increase the height of the map display, 
-	# multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.
-	var room_container_height: float = MapManager.map_width_array.size() * (new_room_size.y + _padding_offset)
-	
-	# Check if the room_container_height doesn't meet a certain threshold. If it doesn't meet the threshold theb set it to a new height,
-	# but save whatever the current height was for positioning later
-	var new_room_container_height: float = room_container_height
-	if (room_container_height < _MINIMUM_ROOM_HEIGHT):
-		new_room_container_height = _MINIMUM_ROOM_HEIGHT
+	var room_container_height = _get_combined_room_height(new_room_texture_rect)
+	# Set the max height between what we calculated above and the minimum room height constant
+	room_container_height = max(room_container_height, _MINIMUM_ROOM_HEIGHT)
 	
 	# Set the custom minimum size of the room container to allow scrolling
-	room_container.set_custom_minimum_size(Vector2(new_room_container_width, new_room_container_height))
+	room_container.set_custom_minimum_size(Vector2(room_container_width, room_container_height))
 	
 	# Set the size of the scroll container to be dynamic to the max numbers of rooms of a floor
-	scroll_container.set_size(Vector2(new_room_container_width, scroll_container.get_size().y))
+	scroll_container.set_size(Vector2(room_container_width, scroll_container.get_size().y))
 	
 	# We're dynamically sizing the width of the map, as such we need to position it to center it on the screen.
 	# X position is calculated by getting half the width of the game screen, then subtracting that from 
@@ -86,13 +75,30 @@ func _ready():
 		# so increase the Y position to the new area the room will be displayed on.
 		position_for_next_room.y -= new_room_size.y + _padding_offset
 	
-	# Calculate the position of where we should put the rooms. 
+	# Calculate the new position of where we should put the rooms after we populate the rooms out
+	# We want to position the rooms in the center of the room container, to do so:
+	# Get half the size of the room container and subtract it by half the size of the width of the combined rooms
 	# This is to account for in case the size of the rooms is smaller than the container we put it in
-	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - room_container_width / 2
+	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_rect) / 2
 	
-	# If the room_container height is less than the minimum room height 
-	# then calculate the position for it to be centered in the middle of the map
+	# If the height of the combined rooms is less than the minimum room height 
+	# then calculate the position for it to be centered in the middle of the map:
+	# We again want to place the rooms in the center of the container, but the y position of where the rooms are is relative to the container
+	# Hence we subtract half the size of the container from half the size of the height of the combined rooms to get the center point
+	# then subtract it from the position of the container
 	var new_room_position_y: float = room_container.position.y
-	if (room_container_height < _MINIMUM_ROOM_HEIGHT):
-		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + room_container_height / 2
+	if (_get_combined_room_height(new_room_texture_rect) < _MINIMUM_ROOM_HEIGHT):
+		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_rect) / 2
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
+
+# Get the width of room nodes, by getting the size of what a room is w/ some offset
+# multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
+# to account for the other end of the floor
+func _get_combined_room_width(texture_rect: TextureRect) -> float:
+	return ((texture_rect.get_size().x + _padding_offset) * MapManager.map_width_array.max()) + _padding_offset
+
+# Calculate the height of the container where the rooms will reside in. This will be dynamic based on the map array that we have.
+# The array we have in MapManager, each element will increase the height of the map display, 
+# multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.	
+func _get_combined_room_height(texture_rect: TextureRect) -> float:
+	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset)
