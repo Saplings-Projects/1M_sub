@@ -2,6 +2,7 @@ extends TestCardBase
 ## Tests for cards
 
 
+# @Override
 func before_each():
 	super()
 	

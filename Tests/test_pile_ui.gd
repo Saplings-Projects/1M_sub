@@ -5,6 +5,7 @@ var _card_container_scroll_scene: PackedScene  = load("res://#Scenes/CardScrollU
 var _card_scroll: Control = null
 
 
+# @Override
 func before_each():
 	super()
 	_card_scroll = _card_container_scroll_scene.instantiate()
@@ -12,6 +13,7 @@ func before_each():
 	_card_scroll.populate("DeckPile")
 
 
+# @Override
 func after_each():
 	_card_container.queue_free()
 	_card_scroll.free()
