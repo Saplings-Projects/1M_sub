@@ -47,6 +47,7 @@ func after_each():
 	_enemy_2.queue_free()
 	_battler.queue_free()
 	_card_container.queue_free()
+	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 
 
 func test_possible_modifier_size():
