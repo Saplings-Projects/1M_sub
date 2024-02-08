@@ -29,6 +29,7 @@ func before_each():
 
 func after_each():
 	_card_container.queue_free()
+	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 
 
 func test_draw_cards():
