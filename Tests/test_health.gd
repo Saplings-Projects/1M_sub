@@ -29,6 +29,7 @@ func after_each():
 	_player.queue_free()
 	_enemy.queue_free()
 	_battler.queue_free()
+	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 
 
 func test_take_damage():
