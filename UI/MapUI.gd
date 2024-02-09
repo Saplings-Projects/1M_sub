@@ -33,7 +33,7 @@ func _ready():
 	# Set the max width between what we calculated above and the minimum room width constant
 	room_container_width = max(room_container_width, _MINIMUM_ROOM_WIDTH)
 	
-	var room_container_height = _get_combined_room_height(new_room_texture_rect)
+	var room_container_height: float = _get_combined_room_height(new_room_texture_rect)
 	# Set the max height between what we calculated above and the minimum room height constant
 	room_container_height = max(room_container_height, _MINIMUM_ROOM_HEIGHT)
 	
@@ -59,10 +59,10 @@ func _ready():
 	var start_position_for_next_room_y: float = room_container.get_custom_minimum_size().y - (color_rect.get_size().y - scroll_container_bottom_y_position)
 	var position_for_next_room: Vector2 = Vector2(start_position_for_next_room_x, start_position_for_next_room_y)
 	
-	for floor: Array[RoomBase] in current_map.rooms:
+	for floor_array: Array[RoomBase] in current_map.rooms:
 		# When we're done populating a floor and we go to the next index, reset the X start position
 		position_for_next_room.x = start_position_for_next_room_x
-		for room: RoomBase in floor:
+		for room: RoomBase in floor_array:
 			if (room != null):
 				var room_display: Control = room_ui.instantiate()
 				room_addition_node.add_child(room_display)
@@ -99,6 +99,6 @@ func _get_combined_room_width(texture_rect: TextureRect) -> float:
 
 # Calculate the height of the container where the rooms will reside in. This will be dynamic based on the map array that we have.
 # The array we have in MapManager, each element will increase the height of the map display, 
-# multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.	
+# multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.
 func _get_combined_room_height(texture_rect: TextureRect) -> float:
-	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset)
+	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset) + _padding_offset
