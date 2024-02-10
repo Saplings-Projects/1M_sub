@@ -52,48 +52,48 @@ func after_each():
 
 
 func test_take_damage():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 5.0
-	deal_damage_data.caster = _player
+	 
+	var damage = 5.0
+	var caster = _player
 
-	_player_health_component.deal_damage(deal_damage_data)
+	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 95.0)
 
 
 func test_take_lots_of_damage():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 999999.0
-	deal_damage_data.caster = _player
+	 
+	var damage = 999999.0
+	var caster = _player
 
-	_player_health_component.deal_damage(deal_damage_data)
+	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 0.0)
 
 
 func test_null_caster():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 50.0
-	deal_damage_data.caster = null
+	 
+	var damage = 50.0
+	var caster = null
 
-	_player_health_component.deal_damage(deal_damage_data)
+	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 50.0)
 
 
 func test_heal():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = -50.0
-	deal_damage_data.caster = _player
+	 
+	var damage = -50.0
+	var caster = _player
 	
 	_player_health_component._set_health(50.0)
-	_player_health_component.deal_damage(deal_damage_data)
+	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 100.0)
 
 
 func test_attack_enemy():
-	var deal_damage_data = DealDamageData.new()
-	deal_damage_data.damage = 50.0
-	deal_damage_data.caster = _player
+	 
+	var damage = 50.0
+	var caster = _player
 
-	_enemy_health_component.deal_damage(deal_damage_data)
+	_enemy_health_component.deal_damage(damage, caster)
 	assert_eq(_enemy_health_component.current_health, 50.0)
 
 
