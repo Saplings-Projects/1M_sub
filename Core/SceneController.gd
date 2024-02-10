@@ -45,11 +45,11 @@ func _deferred_goto_scene(path: String) -> void:
 
 
 func _combat_end_change_scene(combat_result: Enums.CombatResult) -> void:
-	PhaseManager.call_deferred("set_phase", Enums.Phase.GAME_STARTING)
+	PhaseManager.call_deferred("set_phase", Enums.Phase.SCENE_END)
 	if combat_result == Enums.CombatResult.DEFEAT:
 		print('Defeat')
 		goto_scene(SCENE_MAPPING[Enums.CombatResult.DEFEAT])
 	elif combat_result == Enums.CombatResult.VICTORY:
 		print("Victory")
 		goto_scene(SCENE_MAPPING[Enums.CombatResult.VICTORY])
-	PhaseManager.call_deferred("set_phase", Enums.Phase.PLAYER_ATTACKING)
+		PhaseManager.call_deferred("initialize_game")
