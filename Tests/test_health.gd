@@ -53,8 +53,8 @@ func after_each():
 
 func test_take_damage():
 	 
-	var damage = 5.0
-	var caster = _player
+	var damage: float = 5.0
+	var caster: Entity = _player
 
 	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 95.0)
@@ -62,8 +62,8 @@ func test_take_damage():
 
 func test_take_lots_of_damage():
 	 
-	var damage = 999999.0
-	var caster = _player
+	var damage: float = 999999.0
+	var caster: Entity = _player
 
 	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 0.0)
@@ -71,8 +71,8 @@ func test_take_lots_of_damage():
 
 func test_null_caster():
 	 
-	var damage = 50.0
-	var caster = null
+	var damage: float = 50.0
+	var caster: Entity = null
 
 	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 50.0)
@@ -80,8 +80,8 @@ func test_null_caster():
 
 func test_heal():
 	 
-	var damage = -50.0
-	var caster = _player
+	var damage: float = -50.0
+	var caster: Entity = _player
 	
 	_player_health_component._set_health(50.0)
 	_player_health_component.deal_damage(damage, caster)
@@ -90,8 +90,8 @@ func test_heal():
 
 func test_attack_enemy():
 	 
-	var damage = 50.0
-	var caster = _player
+	var damage: float = 50.0
+	var caster: Entity = _player
 
 	_enemy_health_component.deal_damage(damage, caster)
 	assert_eq(_enemy_health_component.current_health, 50.0)
