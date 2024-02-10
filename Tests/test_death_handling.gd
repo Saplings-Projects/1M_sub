@@ -50,15 +50,15 @@ func before_each():
 		PhaseManager.disconnect("on_combat_end", SceneController._combat_end_change_scene)
 
 	
-func _free_if_valid(node: Node):
+func _free_if_valid(node):
 	if is_instance_valid(node):
-		node.queue_free()
+		node.free()
 
 func after_each():
 	_free_if_valid(_player)
 	_free_if_valid(_enemy)
 	_free_if_valid(_enemy_2)
-	_battler.queue_free()
+	_battler.free()
 	
 
 func test_player_death_during_enemy_turn():
@@ -96,6 +96,9 @@ func test_handle_enemy_deaths_single():
 	assert_eq(_enemy_list.size(), 2)
 	_battler._handle_enemy_deaths()
 	assert_eq(_enemy_list.size(), 1)
+	assert_true(_enemy.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
 	
 	
 func test_handle_enemy_deaths_all():
@@ -105,6 +108,11 @@ func test_handle_enemy_deaths_all():
 	assert_eq(_enemy_list.size(), 2)
 	_battler._handle_enemy_deaths()
 	assert_eq(_enemy_list.size(), 0)
+	assert_true(_enemy.is_queued_for_deletion())
+	assert_true(_enemy_2.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
+	assert_false(is_instance_valid(_enemy_2))
 
 
 func test_enemy_death_to_player_attack():
@@ -114,6 +122,9 @@ func test_enemy_death_to_player_attack():
 	assert_eq(_enemy_list.size(), 2)
 	card_damage.on_card_play(_player, [_enemy])
 	assert_eq(_enemy_list.size(), 1)
+	assert_true(_enemy.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
 
 
 func test_all_enemy_death_to_player_attack_all():
@@ -124,6 +135,12 @@ func test_all_enemy_death_to_player_attack_all():
 	assert_eq(_enemy_list.size(), 2)
 	card_damage_all.on_card_play(_player, [])
 	assert_eq(_enemy_list.size(), 0)
+	assert_true(_enemy.is_queued_for_deletion())
+	assert_true(_enemy_2.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
+	assert_false(is_instance_valid(_enemy_2))
+
 
 
 func test_enemy_death_to_poison():
@@ -134,6 +151,9 @@ func test_enemy_death_to_poison():
 	assert_eq(_enemy_list.size(), 2)
 	_battler._on_enemy_start_turn()
 	assert_eq(_enemy_list.size(), 1)
+	assert_true(_enemy.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
 
 
 func test_enemy_death_to_expiring_poison():
@@ -147,3 +167,6 @@ func test_enemy_death_to_expiring_poison():
 	_battler._on_enemy_start_turn()
 	assert_eq(_enemy.get_status_component().current_status.size(), 0)
 	assert_eq(_enemy_list.size(), 1)
+	assert_true(_enemy.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
