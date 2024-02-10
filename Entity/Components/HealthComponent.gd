@@ -17,16 +17,14 @@ func _ready() -> void:
 # If caster is null, we assume that the damage came from an unknown source,
 # so status won't calculate.
 # Use a negative damage value if you want to heal.
-func deal_damage(incoming_damage, by_caster) -> void:
-	var damage: float = incoming_damage
-
+func deal_damage(damage: float, caster: Entity) -> void:
+	
 	if damage == 0.0:
 		return
 	
 	assert(owner != null, "No owner was set. Please call init on the Entity.")
 	
 	var target: Entity = entity_owner
-	var caster: Entity = by_caster
 	
 	# if this was a self attack, ignore the caster
 	if caster == target: 
