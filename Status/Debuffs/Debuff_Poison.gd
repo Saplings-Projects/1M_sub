@@ -18,8 +18,4 @@ func init_status(in_caster: Entity, in_target: Entity) -> void:
 
 # @Override
 func on_turn_start() -> void:
-
-	var damage: float  = status_power
-	var caster: Entity = status_caster
-	
-	status_target.get_health_component().deal_damage(damage, caster)
+	status_target.get_health_component().deal_damage(status_power, status_caster)
