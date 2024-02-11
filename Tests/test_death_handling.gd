@@ -1,48 +1,10 @@
-extends GutTest
-## Tests for health related things
+extends TestBase
+## Tests for things relating to death handling things
 
 
-var _player_scene: PackedScene = load("res://Entity/Player/Player.tscn")
-var _battler_scene: PackedScene = load("res://Core/Battler.tscn")
-var _card_container_scene: PackedScene = load("res://Cards/CardContainer.tscn")
-var _player: Entity = null
-var _enemy: Entity = null
-var _enemy_2: Entity = null
-var _battler: Battler = null
-var _card_container = null
-var _player_health_component: HealthComponent = null
-var _enemy_health_component: HealthComponent = null
-var _enemy_2_health_component: HealthComponent = null
-var _player_status_component: StatusComponent = null
-var _enemy_status_component: StatusComponent = null
-var _enemy_list: Array[Entity]
-
-
+# @Override
 func before_each():
-	_player = _player_scene.instantiate()
-	_battler = _battler_scene.instantiate()
-	_card_container = _card_container_scene.instantiate()
-	_card_container.battler_refrence = _battler
-	
-	
-	get_tree().root.add_child(_player)
-	get_tree().root.add_child(_battler)
-	get_tree().root.add_child(_card_container)
-	
-	_enemy_list = _battler._enemy_list
-	_enemy = _enemy_list[0] # enemy 1 has 100 HP
-	_enemy_2 = _enemy_list[1] # enemy 2 50 HP
-	
-	_player_health_component = _player.get_health_component()
-	_enemy_health_component = _enemy.get_health_component()
-	_enemy_2_health_component = _enemy_2.get_health_component()
-	_player_status_component = _player.get_status_component()
-	_enemy_status_component = _enemy.get_status_component()
-	
-	_player.get_stat_component().get_stats().ready_entity_stats()
-	_enemy.get_stat_component().get_stats().ready_entity_stats()
-	_enemy_2.get_stat_component().get_stats().ready_entity_stats()
-	
+	super()	
 	# disconnecting signal as _combat_end_change_scene causes scene to be (re)loaded 
 	# which if called from test actually starts the game and the test doesnt end
 	watch_signals(PhaseManager)
@@ -50,15 +12,18 @@ func before_each():
 		PhaseManager.disconnect("on_combat_end", SceneController._combat_end_change_scene)
 
 	
+# No typing for argument as if it's already been freed it doesn't have one 
 func _free_if_valid(node):
 	if is_instance_valid(node):
 		node.free()
 
+# @Override
 func after_each():
 	_free_if_valid(_player)
 	_free_if_valid(_enemy)
 	_free_if_valid(_enemy_2)
 	_battler.free()
+	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 	
 
 func test_player_death_during_enemy_turn():
