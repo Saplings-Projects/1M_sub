@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://ctx8jsvac84so"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=10 format=3 uid="uid://ctx8jsvac84so"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_5lji7"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_u6k7h"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="2_6vdl1"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_omhae"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="4_2c1xc"]
 
 [sub_resource type="Resource" id="Resource_lnhao"]
 script = ExtResource("2_6vdl1")
@@ -15,11 +16,16 @@ status_power = 1.0
 script = ExtResource("1_5lji7")
 status_to_apply = SubResource("Resource_lnhao")
 
+[sub_resource type="Resource" id="Resource_owqag"]
+script = ExtResource("4_2c1xc")
+cast_type = 0
+application_type = 2
+
 [sub_resource type="Resource" id="Resource_bamld"]
 script = ExtResource("2_omhae")
 effect = SubResource("Resource_p8qns")
 value = 0
-target_type = 0
+targeting_function = SubResource("Resource_owqag")
 
 [resource]
 script = ExtResource("1_u6k7h")
