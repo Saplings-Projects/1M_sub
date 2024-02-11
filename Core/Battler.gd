@@ -113,21 +113,6 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 		if can_play:
 			CardManager.card_container.play_card(entity)
 
-
-func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
-	var all_target : Array[Entity]
-	
-	match application_type:
-		Enums.ApplicationType.ALL:
-			all_target = _enemy_list
-			all_target += [PlayerManager.player]
-		Enums.ApplicationType.ENEMY_ONLY:
-			all_target = _enemy_list
-		Enums.ApplicationType.FRIENDLY_ONLY:
-			all_target = [PlayerManager.player]
-			
-	return all_target
-
   
 func _handle_enemy_deaths() -> void:
 	var enemies_to_remove : Array[Entity] = []
