@@ -82,7 +82,7 @@ func _on_enemy_start_turn() -> void:
 	
 	for enemy: Enemy in _enemy_list:
 		var enemy_attack: CardBase = enemy.get_behavior_component().attack
-		var enemy_action = EnemyAction.new(enemy, enemy_attack, [PlayerManager.player])
+		var enemy_action = EnemyAction.new(enemy, enemy_attack, PlayerManager.player)
 		enemy_action_list.append(enemy_action)
 		
 	# execute enemy actions
@@ -111,7 +111,7 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 		var can_play: bool = queued_card_data.can_play_card(PlayerManager.player, entity)
 		
 		if can_play:
-			CardManager.card_container.play_card([entity])
+			CardManager.card_container.play_card(entity)
 
 
 func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:

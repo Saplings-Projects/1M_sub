@@ -64,14 +64,14 @@ func test_card_damage_all():
 	_enemy.get_party_component().set_party(_enemy_list)
 	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAll.tres")
 	
-	card_damage_all.on_card_play(_player, _enemy_list)
+	card_damage_all.on_card_play(_player, null)
 	assert_eq(_enemy_health_component.current_health, 98.0)
 	assert_eq(_enemy_2_health_component.current_health, 48.0) # enemy 2 only has 50 HP
 
 # Test Card to Deal 3 damage to an enemy
 func test_card_damage():
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
-	card_damage.on_card_play(_player, [_enemy])
+	card_damage.on_card_play(_player, _enemy)
 	
 	assert_eq(_enemy_health_component.current_health, 97.0)
 
@@ -79,7 +79,7 @@ func test_card_damage():
 func test_card_damage_health():
 	_player.get_health_component()._set_health(90.0)
 	var card_damage_health: CardBase = load("res://Cards/Resource/Card_DamageHealth.tres")
-	card_damage_health.on_card_play(_player, [_enemy])
+	card_damage_health.on_card_play(_player, _enemy)
 	
 	assert_eq(_enemy_health_component.current_health, 90.0)
 
@@ -88,7 +88,7 @@ func test_card_poison():
 	var card_poison: CardBase = load("res://Cards/Resource/Card_Poison.tres")
 	
 	assert_eq(_enemy_status_component.current_status.size(), 0)
-	card_poison.on_card_play(_player, [_enemy])
+	card_poison.on_card_play(_player, _enemy)
 	assert_eq(_enemy_status_component.current_status.size(), 1)
 
 	var status = _enemy_status_component.current_status[0]
@@ -105,7 +105,7 @@ func test_card_damage_and_poison():
 	var card_damage_and_poison: CardBase = load("res://Cards/Resource/Card_damage_and_poison.tres")
 
 	assert_eq(_enemy_status_component.current_status.size(), 0)
-	card_damage_and_poison.on_card_play(_player, [_enemy])
+	card_damage_and_poison.on_card_play(_player, _enemy)
 	assert_eq(_enemy_status_component.current_status.size(), 1)
 	assert_eq(_enemy_health_component.current_health, 99.0)
 	
@@ -122,6 +122,6 @@ func test_card_damage_and_poison():
 func test_card_heal():
 	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
 	_player_health_component._set_health(95.0)
-	card_heal.on_card_play(_player, [_player])
+	card_heal.on_card_play(_player, _player)
 	
 	assert_eq(_player_health_component.current_health, 96.0)
