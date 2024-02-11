@@ -51,6 +51,7 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	_apply_all_effects(caster, targets, effects_targeting_single)
 	#Get every unit that is to be affected by card
 	var all_targets : Array[Entity] = CardManager.card_container.battler_refrence.get_all_targets(application_type)
+	#TODO this needs to be changed because the targeting functions don't work like that anymore
 
 	#apply effect to every target
 	_apply_all_effects(caster, all_targets, effects_targeting_all)
@@ -63,6 +64,7 @@ func get_effects_targeting_single() -> Array[EffectData]:
 	
 	for effect_data: EffectData in card_effects_data:
 		if(effect_data.target_type == Enums.TargetType.SINGLE_TARGET):
+			#TODO Target change
 			target_effects.append(effect_data)
 			
 	return target_effects
@@ -72,6 +74,7 @@ func get_effects_target_all() -> Array[EffectData]:
 	
 	for effect_data: EffectData in card_effects_data:
 		if(effect_data.target_type == Enums.TargetType.ALL_TARGETS):
+			#TODO Target change
 			all_effects.append(effect_data)
 			
 	return all_effects

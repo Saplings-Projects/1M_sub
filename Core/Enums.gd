@@ -26,6 +26,7 @@ enum ApplicationType
 	ALL,
 }
 
+#TODO Target change
 enum TargetType
 {
 	SINGLE_TARGET,

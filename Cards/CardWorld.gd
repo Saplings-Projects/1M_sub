@@ -21,6 +21,7 @@ func init_card(in_card_data: CardBase) -> void:
 	
 	for effectData : EffectData in card_data.card_effects_data:
 		if(effectData.target_type == Enums.TargetType.SINGLE_TARGET):
+			#TODO Target change
 			card_cast_type = Enums.CardCastType.TARGET
 			break
 
