@@ -7,6 +7,6 @@ func _init():
 #@Override
 @warning_ignore("unused_parameter")
 func generate_target_list(targeted_entity:Entity) -> Array[Entity]:
-	var targets: Array[Entity] = EnemyManager.enemy_list
-	targets = targets + [PlayerManager.player]
+	var targets: Array[Entity] = EnemyManager.enemy_list.duplicate()
+	targets.append(PlayerManager.player)
 	return targets
