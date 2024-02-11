@@ -26,13 +26,6 @@ enum ApplicationType
 	ALL,
 }
 
-#TODO Target change
-enum TargetType
-{
-	SINGLE_TARGET,
-	ALL_TARGETS,
-}
-
 enum CardCastType
 {
 	TARGET,

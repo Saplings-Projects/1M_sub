@@ -6,7 +6,7 @@ class_name EffectData extends Resource
 var caster: Entity = null
 var list_targets: Array[Entity] = []
 @export var value: int = 0
-@export var target_type : Enums.TargetType = Enums.TargetType.ALL_TARGETS #TODO Target change
+# @export var target_type : Enums.TargetType = Enums.TargetType.ALL_TARGETS #TODO Target change
 # ? still needed given targeting function
 # ? or can remove since the targeting function includes the target_type
 @export var targeting_function: TargetingBase = null
