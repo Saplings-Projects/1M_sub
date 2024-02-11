@@ -1,8 +1,12 @@
 class_name TargetingBase extends Resource
 
-@export var cast_type: Enums.CardCastType = Enums.CardCastType.TARGET
+var cast_type: Enums.CardCastType
 # by default targeting is required but you can have an INSTA_CAST in children class
-@export var application_type: Enums.ApplicationType = Enums.ApplicationType.ALL
+var application_type: Enums.ApplicationType
+
+func _init():
+    cast_type = Enums.CardCastType.TARGET
+    application_type = Enums.ApplicationType.ALL
 
 
 func generate_target_list(targeted_entity: Entity) -> Array[Entity]:
