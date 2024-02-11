@@ -10,3 +10,6 @@ class_name RoomBase
 
 func _to_string() -> String:
 	return "RoomBase"
+
+func get_room_abbreviation() -> String:
+	return room_event.get_room_abbreviation()

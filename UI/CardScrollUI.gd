@@ -23,7 +23,7 @@ func _on_button_pressed() -> void:
 
 #deletes the root node CardScrollUI with the escape key
 func _input(_inputevent: InputEvent) -> void:
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if (_inputevent.is_action_pressed("cancel_action")):
 		queue_free()
 
 

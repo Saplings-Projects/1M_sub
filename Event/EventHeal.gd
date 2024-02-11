@@ -8,3 +8,7 @@ func _init() -> void:
 # @Override
 func _update_event() -> void:
 	print("Updating Heal Event")
+
+# @Override
+func get_room_abbreviation() -> String:
+	return "H"
