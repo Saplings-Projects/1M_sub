@@ -5,4 +5,4 @@ class_name EffectApplyStatus extends EffectBase
 # @Override
 @warning_ignore("unused_parameter")
 func apply_effect(caster: Entity, target: Entity, value: int) -> void:
-    target.get_status_component().add_status(status_to_apply, caster)
+	target.get_status_component().add_status(status_to_apply, caster)

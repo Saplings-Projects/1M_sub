@@ -8,10 +8,16 @@ extends Node
 
 signal on_game_start
 signal on_phase_changed(new_phase: Enums.Phase, old_phase: Enums.Phase)
+signal on_combat_end(result: Enums.CombatResult)
+
 var current_phase: Enums.Phase = Enums.Phase.NONE
 
 
 func _ready() -> void:
+	initialize_game()
+	
+
+func initialize_game():
 	set_phase(Enums.Phase.GAME_STARTING)
 	
 	# TODO give all objects some time to initialize. Kinda hacky

@@ -23,6 +23,7 @@ PhaseManager="*res://Managers/PhaseManager.gd"
 RandomGenerator="*res://Managers/RandomGenerator.gd"
 GlobalVar="*res://Global/GLOBAL_VAR.gd"
 EnemyManager="*res://Managers/EnemyManager.gd"
+SceneController="*res://Core/SceneController.gd"
 
 [display]
 
