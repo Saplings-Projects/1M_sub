@@ -8,16 +8,14 @@
 [sub_resource type="Resource" id="Resource_twrvn"]
 script = ExtResource("1_pferl")
 
-[sub_resource type="Resource" id="Resource_pwldx"]
+[sub_resource type="Resource" id="Resource_j8q37"]
 script = ExtResource("3_hv5rq")
-cast_type = 0
-application_type = 2
 
 [sub_resource type="Resource" id="Resource_8ifm0"]
 script = ExtResource("2_l5jxp")
 effect = SubResource("Resource_twrvn")
 value = 3
-targeting_function = SubResource("Resource_pwldx")
+targeting_function = SubResource("Resource_j8q37")
 
 [resource]
 script = ExtResource("1_44g0o")

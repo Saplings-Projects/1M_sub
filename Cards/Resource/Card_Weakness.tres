@@ -25,16 +25,14 @@ status_modifier_base_value = SubResource("Resource_fppy1")
 script = ExtResource("1_24klx")
 status_to_apply = SubResource("Resource_o2ren")
 
-[sub_resource type="Resource" id="Resource_7ujg4"]
+[sub_resource type="Resource" id="Resource_dtnir"]
 script = ExtResource("5_twoji")
-cast_type = 0
-application_type = 2
 
 [sub_resource type="Resource" id="Resource_e1gpi"]
 script = ExtResource("4_5u817")
 effect = SubResource("Resource_i0g8f")
 value = 0
-targeting_function = SubResource("Resource_7ujg4")
+targeting_function = SubResource("Resource_dtnir")
 
 [resource]
 script = ExtResource("5_ksxho")

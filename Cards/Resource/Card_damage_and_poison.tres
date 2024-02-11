@@ -10,16 +10,14 @@
 [sub_resource type="Resource" id="Resource_jtcab"]
 script = ExtResource("1_vf50y")
 
-[sub_resource type="Resource" id="Resource_a458g"]
+[sub_resource type="Resource" id="Resource_ojuu2"]
 script = ExtResource("3_0biqs")
-cast_type = 0
-application_type = 2
 
 [sub_resource type="Resource" id="Resource_73uy7"]
 script = ExtResource("2_22qxd")
 effect = SubResource("Resource_jtcab")
 value = 1
-targeting_function = SubResource("Resource_a458g")
+targeting_function = SubResource("Resource_ojuu2")
 
 [sub_resource type="Resource" id="Resource_nlhgr"]
 script = ExtResource("4_84i11")
@@ -31,16 +29,14 @@ status_power = 1.0
 script = ExtResource("3_l3hyf")
 status_to_apply = SubResource("Resource_nlhgr")
 
-[sub_resource type="Resource" id="Resource_b453x"]
+[sub_resource type="Resource" id="Resource_dso5d"]
 script = ExtResource("3_0biqs")
-cast_type = 0
-application_type = 2
 
 [sub_resource type="Resource" id="Resource_tmm5r"]
 script = ExtResource("2_22qxd")
 effect = SubResource("Resource_qxsxr")
 value = 0
-targeting_function = SubResource("Resource_b453x")
+targeting_function = SubResource("Resource_dso5d")
 
 [resource]
 script = ExtResource("1_h8l2w")

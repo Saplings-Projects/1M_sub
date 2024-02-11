@@ -8,16 +8,14 @@
 [sub_resource type="Resource" id="Resource_ssnwy"]
 script = ExtResource("1_v8nqe")
 
-[sub_resource type="Resource" id="Resource_aursa"]
+[sub_resource type="Resource" id="Resource_fdmh8"]
 script = ExtResource("3_6aswi")
-cast_type = 0
-application_type = 2
 
 [sub_resource type="Resource" id="Resource_ggt87"]
 script = ExtResource("2_v2ps8")
 effect = SubResource("Resource_ssnwy")
 value = 0
-targeting_function = SubResource("Resource_aursa")
+targeting_function = SubResource("Resource_fdmh8")
 
 [resource]
 script = ExtResource("3_bkc3b")
