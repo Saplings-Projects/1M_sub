@@ -5,9 +5,9 @@ var cast_type: Enums.CardCastType
 var application_type: Enums.ApplicationType
 
 func _init():
-    cast_type = Enums.CardCastType.TARGET
-    application_type = Enums.ApplicationType.ALL
+	cast_type = Enums.CardCastType.TARGET
+	application_type = Enums.ApplicationType.ALL
 
 
 func generate_target_list(targeted_entity: Entity) -> Array[Entity]:
-    return [targeted_entity]
+	return [targeted_entity]
