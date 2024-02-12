@@ -16,6 +16,7 @@ var _enemy_stat_component: StatComponent = null
 var _enemy_2_stat_component: StatComponent = null
 var _player_status_component: StatusComponent = null
 var _enemy_status_component: StatusComponent = null
+var _enemy_2_status_component: StatusComponent = null
 var _enemy_list: Array[Entity]
 
 
@@ -41,6 +42,7 @@ func before_each():
 	_enemy_2_health_component = _enemy_2.get_health_component()
 	_player_status_component = _player.get_status_component()
 	_enemy_status_component = _enemy.get_status_component()
+	_enemy_2_status_component = _enemy_2.get_status_component()
 	
 	_player_stat_component.get_stats().ready_entity_stats()
 	_enemy_stat_component.get_stats().ready_entity_stats()

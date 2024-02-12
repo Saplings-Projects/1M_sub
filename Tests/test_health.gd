@@ -140,3 +140,36 @@ func test_card_damage_everything():
 	assert_eq(_player_health_component.current_health, 90.0)
 	assert_eq(_enemy_health_component.current_health, 90.0)
 	assert_eq(_enemy_2_health_component.current_health, 40.0)
+	
+
+#Apply 3 poison effect randomly, each with 3 turns
+func test_card_random_poison():
+	var card_random_poison: CardBase = load("res://Cards/Resource/Card_PoisonRandom.tres")
+	
+	card_random_poison.on_card_play(_player, null)
+	
+	var poison_effect_turn_enemy_1 : int
+	var poison_effect_turn_enemy_2 : int
+	if _enemy_status_component.current_status.size() >= 1:
+		poison_effect_turn_enemy_1 = _enemy_status_component.current_status[0].status_turn_duration
+	if _enemy_2_status_component.current_status.size() >= 1:
+		poison_effect_turn_enemy_2 = _enemy_2_status_component.current_status[0].status_turn_duration
+	var total_turn_duration : int = poison_effect_turn_enemy_1 + poison_effect_turn_enemy_2
+	
+	assert_eq(total_turn_duration, 9)
+
+
+# Deal 4 damages to the targeted enemy and the one on its right	
+func test_card_fauna_sweep():
+	var card_fauna_sweep: CardBase = load("res://Cards/Resource/Card_FaunaSweep.tres")
+	
+	card_fauna_sweep.on_card_play(_player, _enemy)
+	
+	assert_eq(_enemy_health_component.current_health, 96.0)
+	assert_eq(_enemy_2_health_component.current_health, 46.0)
+	
+	card_fauna_sweep.on_card_play(_player, _enemy_2)
+	
+	assert_eq(_enemy_health_component.current_health, 96.0) 
+	# Enemy 1 is on the left, we target enemy_2 so enemy 1 not affected
+	assert_eq(_enemy_2_health_component.current_health, 42.0)
