@@ -16,6 +16,7 @@ target_type = 1
 [resource]
 script = ExtResource("1_bboy2")
 application_type = 0
+energy_cost = 0
 card_title = "Draw 2"
 card_description = "Draw 2 cards"
 card_effects_data = Array[ExtResource("2_acoim")]([SubResource("Resource_5ywer")])

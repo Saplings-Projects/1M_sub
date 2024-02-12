@@ -14,6 +14,7 @@ class_name CardBase
 ## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
 @export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
+@export var energy_cost: int = 0
 @export var card_title: String = "NULL"
 @export var card_key_art: ImageTexture = null
 @export var card_description: String = "NULL"
