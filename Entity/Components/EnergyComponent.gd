@@ -9,3 +9,10 @@ var energy = starting_energy
 func _ready():
 	pass
 
+
+func on_turn_end():
+	if energy > max_energy:
+		energy = max_energy
+
+	else:
+		energy += 1
