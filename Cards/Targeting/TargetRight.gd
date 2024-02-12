@@ -1,6 +1,6 @@
 class_name TargetRight extends TargetingBase
 
-func _init():
+func _init() -> void:
     application_type = Enums.ApplicationType.ENEMY_ONLY
     # ? this might change if the player can summon minions
     # ? and the enemies want to target right

@@ -1,6 +1,6 @@
 class_name TargetEverything extends TargetingBase
 
-func _init():
+func _init() -> void:
 	cast_type = Enums.CardCastType.INSTA_CAST
 	application_type = Enums.ApplicationType.ALL
 

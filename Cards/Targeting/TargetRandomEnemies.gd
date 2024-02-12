@@ -2,7 +2,7 @@ class_name TargetRandomEnemies extends TargetingBase
 
 @export var number_of_targets: int = 0
 
-func _init():
+func _init() -> void:
 	cast_type = Enums.CardCastType.INSTA_CAST
 	application_type = Enums.ApplicationType.ENEMY_ONLY
 	
