@@ -10,6 +10,7 @@ enum Phase
 	PLAYER_ATTACKING,
 	PLAYER_FINISHING,
 	ENEMY_ATTACKING,
+	SCENE_END,
 }
 
 enum Team
@@ -45,4 +46,10 @@ enum CardMovementState
 	DISCARDING,
 	HOVERED,
 	QUEUED,
+}
+
+enum CombatResult
+{
+	VICTORY,
+	DEFEAT
 }
