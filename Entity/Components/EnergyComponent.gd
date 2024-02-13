@@ -1,4 +1,4 @@
-extends Resource
+extends EntityComponent
 class_name EnergyComponent
 
 @export var max_energy: int = 4
