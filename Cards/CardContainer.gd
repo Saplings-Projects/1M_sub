@@ -52,7 +52,9 @@ var _discard_timer: SceneTreeTimer = null
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
-	CardManager.on_card_action_finished.connect(finish_active_card_action)
+	CardManager.on_card_action_finished.connect(finish_active_card_action.unbind(1))
+	# ? all calls functions connected to on_card_action_finished don't even use the data of the card passed with the signal
+	# ? does the signal even need to pass the card data since no function connected uses it ?
 	
 	_init_default_draw_pile()
 
@@ -85,7 +87,7 @@ func set_active_card(card: CardWorld) -> void:
 	_active_card = card
 
 
-func finish_active_card_action(card: CardBase) -> void:
+func finish_active_card_action() -> void:
 	_discard_active_card()
 	_active_card = null
 

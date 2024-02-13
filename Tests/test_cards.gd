@@ -126,7 +126,7 @@ func test_play_card_action_flow():
 	assert_false(_card_container.is_card_queued(), "Card is still queued.")
 
 	# Simulate finishing the card action
-	_card_container.finish_active_card_action(_queued_card.card_data)
+	_card_container.finish_active_card_action()
 
 	assert_eq(_card_container.cards_in_hand.size(), 9, "Card has not been removed from hand")
 	assert_false(_card_container.are_cards_active(), "Card is still currently active")
