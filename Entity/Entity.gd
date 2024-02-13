@@ -30,3 +30,4 @@ func get_party_component() -> PartyComponent:
 
 func get_click_handler() -> ClickHandler:
 	return Helpers.get_first_child_node_of_type(self, ClickHandler) as ClickHandler
+
