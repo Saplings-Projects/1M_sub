@@ -7,7 +7,7 @@ var _player: Entity = null
 var _enemy: Entity = null
 var _enemy_2: Entity = null
 var _battler: Battler = null
-var _card_container = null
+var _card_container: CardContainer = null
 var _player_health_component: HealthComponent = null
 var _enemy_health_component: HealthComponent = null
 var _enemy_2_health_component: HealthComponent = null
@@ -19,7 +19,7 @@ var _enemy_status_component: StatusComponent = null
 var _enemy_list: Array[Entity]
 
 
-func before_each():
+func before_each() -> void:
 	_player = _player_scene.instantiate()
 	_battler = _battler_scene.instantiate()
 	_card_container = _card_container_scene.instantiate()
@@ -47,7 +47,7 @@ func before_each():
 	_enemy_2_stat_component.get_stats().ready_entity_stats()
 	
 
-func after_each():
+func after_each() -> void:
 	_player.queue_free()
 	_enemy.queue_free()
 	_enemy_2.queue_free()
