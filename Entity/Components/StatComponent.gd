@@ -9,5 +9,9 @@ class_name StatComponent
 var _stats: EntityStats = EntityStats.new()
 
 
+func set_stats(new_stats: EntityStats) -> void:
+	_stats = new_stats
+
+
 func get_stats() -> EntityStats:
 	return _stats

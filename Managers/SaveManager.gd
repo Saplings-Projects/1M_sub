@@ -10,7 +10,7 @@ const SAVE_GAME_PATH: String = "user://save.json"
 const BACKUP_SAVE_GAME_PATH: String = "user://save_bak.json"
 
 var save_data: SaveData = SaveData.new()
-var save_to_file: bool = false
+var save_to_file: bool = true
 
 
 func _ready() -> void:

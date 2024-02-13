@@ -52,7 +52,7 @@ var _discard_timer: SceneTreeTimer = null
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.on_card_action_finished.connect(finish_active_card_action)
-	CardManager.on_deck_initialized.connect(init_default_draw_pile)
+	CardManager.on_deck_initialized.connect(_init_default_draw_pile)
 	CardManager.set_card_container(self)
 
 
@@ -61,7 +61,7 @@ func _process(_delta: float) -> void:
 	_handle_queued_card()
 
 
-func init_default_draw_pile() -> void:
+func _init_default_draw_pile() -> void:
 	draw_pile = CardManager.current_deck.duplicate()
 	draw_pile.shuffle()
 

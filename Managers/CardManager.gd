@@ -35,7 +35,7 @@ func _initialize_deck():
 
 func _load_persistent_data():
 	# If the saved deck is empty, we assume there is no save data
-	# NOTE: This will not work if the player has 0 cards in their deck somehow.
+	# NOTE: This means the default deck will load if the player has 0 cards in their deck somehow.
 	if SaveManager.save_data.saved_deck.is_empty():
 		return
 	
