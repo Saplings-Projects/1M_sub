@@ -11,7 +11,7 @@ func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 	var status_copy: StatusBase = new_status.duplicate()
 	
 	# see if the status was already applied. If so, add to the duration instead of applying
-	var found_status = Helpers.find_first_from_array_by_type(current_status, status_copy.get_script())
+	var found_status: StatusBase = Helpers.find_first_from_array_by_type(current_status, status_copy.get_script())
 	
 	assert(entity_owner != null, "statusComponent has no owner. Please call init on Entity.")
 	status_copy.init_status(status_caster, entity_owner)

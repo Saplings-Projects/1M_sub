@@ -81,7 +81,7 @@ func _on_enemy_start_turn() -> void:
 	
 	for enemy: Enemy in _enemy_list:
 		var enemy_attack: CardBase = enemy.get_behavior_component().attack
-		var enemy_action = EnemyAction.new(enemy, enemy_attack, [PlayerManager.player])
+		var enemy_action: EnemyAction = EnemyAction.new(enemy, enemy_attack, [PlayerManager.player])
 		enemy_action_list.append(enemy_action)
 		
 	# execute enemy actions

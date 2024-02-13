@@ -8,7 +8,7 @@ var SCENE_MAPPING: Dictionary = {
 	Enums.CombatResult.DEFEAT: "res://#Scenes/TestingScene.tscn",
 }
 
-func _ready():
+func _ready() -> void:
 	var root: Window = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	PhaseManager.on_combat_end.connect(_combat_end_change_scene)

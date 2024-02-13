@@ -6,7 +6,7 @@ var caster: Entity
 var action: CardBase
 var target_list: Array[Entity]
 	
-func _init(_caster: Entity, _action: CardBase, _target_list: Array[Entity]):
+func _init(_caster: Entity, _action: CardBase, _target_list: Array[Entity]) -> void:
 	self.caster = _caster
 	self.action = _action
 	self.target_list = _target_list
