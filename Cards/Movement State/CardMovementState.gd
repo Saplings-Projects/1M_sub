@@ -25,8 +25,8 @@ func on_state_enter() -> void:
 	pass
 
 
-@warning_ignore("unused_parameter") # to be overridden
-func on_state_process(delta: float) -> void:
+
+func on_state_process(_delta: float) -> void:
 	pass
 
 
@@ -34,6 +34,6 @@ func on_state_exit() -> void:
 	pass
 
 
-@warning_ignore("unused_parameter") # to be overridden
-func can_transition_from(new_state: Enums.CardMovementState) -> bool:
+
+func can_transition_from(_new_state: Enums.CardMovementState) -> bool:
 	return true

@@ -398,7 +398,6 @@ func _update_card_positions() -> void:
 	for card_index: int in amount_of_cards:
 		var card: CardWorld = cards_in_hand[card_index]
 		var movement_component: CardMovementComponent = card.get_card_movement_component()
-		var move_state: Enums.CardMovementState = movement_component.current_move_state
 		
 		var card_x: float = per_card_separation * card_index
 		var card_y: float = 0.0
