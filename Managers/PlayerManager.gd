@@ -21,5 +21,5 @@ func create_persistent_data():
 	PlayerManager.player_persistent_data = PlayerPersistentData.new()
 
 
-func try_load_persistent_data() -> PlayerPersistentData:
+func get_persistent_data() -> PlayerPersistentData:
 	return PlayerManager.player_persistent_data
