@@ -29,7 +29,7 @@ func _load_persistent_data() -> void:
 	# Load health data
 	var health_comp: HealthComponent = get_health_component()
 	var new_health: float = PlayerManager.player_persistent_data.saved_health
-	health_comp.set_health(new_health)
+	health_comp._set_health(new_health)
 	
 	# Load stat data
 	var loaded_stats: EntityStats = PlayerManager.player_persistent_data.saved_stats;

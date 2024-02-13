@@ -30,7 +30,7 @@ func test_heal():
 	var damage: float = -50.0
 	var caster: Entity = _player
 
-	_player_health_component.set_health(50.0)
+	_player_health_component._set_health(50.0)
 	_player_health_component.deal_damage(damage, caster)
 	assert_eq(_player_health_component.current_health, 100.0)
 
@@ -75,7 +75,7 @@ func test_card_damage():
 
 # Test Card to deal damage to enemy based on amount of player health lost
 func test_card_damage_health():
-	_player.get_health_component().set_health(90.0)
+	_player.get_health_component()._set_health(90.0)
 	var card_damage_health: CardBase = load("res://Cards/Resource/Card_DamageHealth.tres")
 	card_damage_health.on_card_play(_player, [_enemy])
 
@@ -122,7 +122,7 @@ func test_card_damage_and_poison():
 # Test Card that heals one HP to player
 func test_card_heal():
 	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
-	_player_health_component.set_health(95.0)
+	_player_health_component._set_health(95.0)
 	card_heal.on_card_play(_player, [_player])
 
 	assert_eq(_player_health_component.current_health, 96.0)

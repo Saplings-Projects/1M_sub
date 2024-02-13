@@ -10,7 +10,7 @@ var current_health: float = 100
 
 
 func _ready() -> void:
-	set_health(max_health)
+	_set_health(max_health)
 
 
 # Allow caster to be null, but not the target.
@@ -32,10 +32,10 @@ func deal_damage(damage: float, caster: Entity) -> void:
 
 	# apply damage to our health
 	var new_health: float = clampf(current_health - damage, 0, max_health)
-	set_health(new_health)
+	_set_health(new_health)
 
 
-func set_health(new_health: float) -> void:
+func _set_health(new_health: float) -> void:
 	if (new_health == current_health):
 		return
 	current_health = new_health
