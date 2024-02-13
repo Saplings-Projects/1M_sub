@@ -1,5 +1,5 @@
 extends Resource
-class_name Energy
+class_name EnergyComponent
 
 @export var max_energy: int = 4
 @export var starting_energy: int = 3
