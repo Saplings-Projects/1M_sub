@@ -34,7 +34,6 @@ signal on_finished_discarding_hand
 # Height at where cards gets played
 @export var play_at_height : float 
 
-@export var battler_refrence : Battler
 
 var cards_in_hand: Array[CardWorld] = []
 var draw_pile: Array[CardBase] = []
