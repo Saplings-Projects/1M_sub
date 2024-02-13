@@ -2,7 +2,7 @@ class_name TargetAllAllies extends TargetingBase
 
 func _init() -> void:
     cast_type = Enums.CardCastType.INSTA_CAST
-    application_type = Enums.ApplicationType.FRIENDLY_ONLY
+
     
 
 # @Override
