@@ -46,6 +46,9 @@ func before_each():
 	_enemy_stat_component.get_stats().ready_entity_stats()
 	_enemy_2_stat_component.get_stats().ready_entity_stats()
 	
+	# disable data saving so nothing is saved between tests
+	_player._should_save_persistent_data = false
+	
 
 func after_each():
 	_player.queue_free()

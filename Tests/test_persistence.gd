@@ -13,15 +13,12 @@ func _create_player():
 	#_player_stat_component.get_stats().ready_entity_stats()
 
 
-func after_each():
-	super.after_each()
-	pass
-
-
 func test_persist_player_health():
 	_player_health_component.deal_damage(5.0, _player)
 	
 	assert_eq(_player_health_component.current_health, 95.0)
+	
+	_player._should_save_persistent_data = true
 	
 	_player.free()
 	_create_player()
@@ -43,6 +40,8 @@ func test_persist_strength_status():
 	card_damage.on_card_play(_player, [_enemy])
 	assert_eq(_enemy_health_component.current_health, 96.0)
 	
+	_player._should_save_persistent_data = true
+	
 	_player.free()
 	_create_player()
 	
@@ -50,3 +49,30 @@ func test_persist_strength_status():
 	card_damage.card_effects_data[0].value = 2
 	card_damage.on_card_play(_player, [_enemy_2]) # enemy 2 has 50 health
 	assert_eq(_enemy_2_health_component.current_health, 46.0)
+
+
+func test_persist_cards():
+	CardManager.current_deck.clear()
+	CardManager.current_deck.append(CardBase.new())
+	CardManager.current_deck.append(CardBase.new())
+	CardManager.current_deck[0].card_title = "Card0"
+	CardManager.current_deck[1].card_title = "Card1"
+	
+	assert_eq(CardManager.current_deck.size(), 2)
+	
+	# Destroy the container
+	_card_container.free()
+	
+	# Modify the deck
+	CardManager.current_deck.clear()
+	CardManager.current_deck.append(CardBase.new())
+	CardManager.current_deck[0].card_title = "Card2"
+	
+	# Recreate the container
+	_card_container = _card_container_scene.instantiate()
+	get_tree().root.add_child(_card_container)
+	
+	# Make sure the data was loaded into the container
+	assert_eq(CardManager.current_deck.size(), 1)
+	assert_eq(_card_container.draw_pile.size(), 1)
+	assert_eq(_card_container.draw_pile[0].card_title, "Card2")

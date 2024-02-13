@@ -21,10 +21,12 @@ func set_card_container(in_card_container: CardContainer) -> void:
 		_initialize_deck()
 
 
-func _initialize_deck():
+func _initialize_deck() -> void:
 	# Set our default deck from the card container.
-	# TODO try to load the deck from our data saved on file
-	current_deck = card_container.default_deck.duplicate()
+	# NOTE: We assume that if the current_deck is empty, then this is the first time the game was loaded.
+	# So we load the default deck stored in the card container.
+	if current_deck.is_empty():
+		current_deck = card_container.default_deck.duplicate()
 	on_deck_initialized.emit()
 
 

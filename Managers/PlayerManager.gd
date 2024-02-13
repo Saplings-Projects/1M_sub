@@ -17,7 +17,7 @@ func set_player(in_player: Player) -> void:
 		on_player_initialized.emit()
 
 
-func create_persistent_data():
+func create_persistent_data() -> void:
 	PlayerManager.player_persistent_data = PlayerPersistentData.new()
 
 

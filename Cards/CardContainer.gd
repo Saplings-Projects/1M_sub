@@ -61,11 +61,6 @@ func _process(_delta: float) -> void:
 	_handle_queued_card()
 
 
-func _init_default_draw_pile() -> void:
-	draw_pile = CardManager.current_deck.duplicate()
-	draw_pile.shuffle()
-
-
 func set_queued_card(card: CardWorld) -> void:
 	queued_card = card
 
@@ -154,6 +149,11 @@ func get_draw_pile_size() -> int:
 
 func get_discard_pile_size() -> int:
 	return discard_pile.size()
+
+
+func _init_default_draw_pile() -> void:
+	draw_pile = CardManager.current_deck.duplicate()
+	draw_pile.shuffle()
 
 
 # This is where cards are removed from the draw pile.

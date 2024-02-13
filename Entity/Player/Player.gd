@@ -2,6 +2,8 @@ extends Entity
 class_name Player
 ## Base player Entity class.
 
+var _should_save_persistent_data: bool = true
+
 # @Override
 func _ready() -> void:
 	super()
@@ -14,11 +16,12 @@ func _exit_tree() -> void:
 	# Save player data when they are destroyed (combat end)
 	PlayerManager.set_player(null)
 	
-	_save_persistent_data()
+	if _should_save_persistent_data:
+		_save_persistent_data()
 
 
 # Set values from our saved persistent data
-func _load_persistent_data():
+func _load_persistent_data() -> void:
 	# If we don't have any persistent data, we will use the defaults
 	if PlayerManager.get_persistent_data() == null:
 		return
@@ -35,7 +38,7 @@ func _load_persistent_data():
 
 
 # Update persistent data with our current values
-func _save_persistent_data():
+func _save_persistent_data() -> void:
 	if PlayerManager.get_persistent_data() == null:
 		PlayerManager.create_persistent_data()
 	

@@ -9,7 +9,7 @@ var _card_scroll: Control = null
 func before_each():
 	super()
 	_card_scroll = _card_container_scroll_scene.instantiate()
-	_card_scroll.deck_pile = _card_container.default_deck.duplicate()
+	_card_scroll.deck_pile = CardManager.current_deck.duplicate()
 	_card_scroll.populate("DeckPile")
 
 

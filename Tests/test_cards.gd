@@ -8,7 +8,7 @@ func before_each():
 	
 	# set draw pile to default deck. This removes any randomness from shuffling on _ready()
 	# so each card will have a name Card1-Card50 in the draw pile
-	_card_container.draw_pile = _card_container.default_deck.duplicate()
+	_card_container.draw_pile = CardManager.current_deck.duplicate()
 
 
 func test_draw_cards():
