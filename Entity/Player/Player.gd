@@ -19,6 +19,7 @@ func _exit_tree() -> void:
 
 # Set values from our saved persistent data
 func _load_persistent_data():
+	# If we don't have any persistent data, we will use the defaults
 	if PlayerManager.try_load_persistent_data() == null:
 		return
 	

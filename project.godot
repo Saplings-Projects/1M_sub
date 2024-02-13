@@ -11,9 +11,7 @@ config_version=5
 [application]
 
 config/name="Fauna-RPG"
-config/version="1"
 run/main_scene="res://#Scenes/TestingScene.tscn"
-config/use_custom_user_dir=true
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,7 +21,6 @@ PlayerManager="*res://Managers/PlayerManager.gd"
 CardManager="*res://Managers/CardManager.gd"
 PhaseManager="*res://Managers/PhaseManager.gd"
 RandomGenerator="*res://Managers/RandomGenerator.gd"
-SaveManager="*res://Managers/SaveManager.gd"
 GlobalVar="*res://Global/GLOBAL_VAR.gd"
 SceneController="*res://Core/SceneController.gd"
 
