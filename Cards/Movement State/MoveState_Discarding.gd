@@ -33,6 +33,7 @@ func on_state_process(delta: float) -> void:
 
 
 # @Override
+@warning_ignore("unused_parameter")
 func can_transition_from(new_state: Enums.CardMovementState) -> bool:
 	# Once you discard, you can't exit this state
 	return false
