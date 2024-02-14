@@ -46,7 +46,6 @@ func test_persist_strength_status():
 	_create_player()
 	
 	# player should still have their permanent buff after being destroyed and recreated
-	card_damage.card_effects_data[0].value = 2
 	card_damage.on_card_play(_player, [_enemy_2]) # enemy 2 has 50 health
 	assert_eq(_enemy_2_health_component.current_health, 46.0)
 
