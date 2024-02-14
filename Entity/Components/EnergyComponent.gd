@@ -5,9 +5,7 @@ class_name EnergyComponent
 @export var starting_energy: int = 3
 var energy = starting_energy
 
-
-func _ready():
-	pass
+signal on_energy_changed(new_energy: int)
 
 
 func use_energy(energy_cost) -> bool:
@@ -16,7 +14,7 @@ func use_energy(energy_cost) -> bool:
 		return true
 	else:
 		return false
-
+	
 
 func on_turn_end():
 	if energy > max_energy:
@@ -24,3 +22,5 @@ func on_turn_end():
 
 	else:
 		energy += 1
+	
+	on_energy_changed.emit()
