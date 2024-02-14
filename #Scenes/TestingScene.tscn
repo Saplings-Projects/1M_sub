@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=20 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
+[ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Cards/energy_count.png" id="19_spyxg"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 
 [node name="TestingScene" type="Node2D"]
@@ -154,5 +155,20 @@ texture_focused = ExtResource("18_b54hn")
 stretch_mode = 0
 script = ExtResource("19_ucc6f")
 metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/UIControl"]
+position = Vector2(64, 592)
+scale = Vector2(0.2895, 0.356145)
+texture = ExtResource("19_spyxg")
+
+[node name="Label" type="Label" parent="CanvasLayer/UIControl/Sprite2D"]
+offset_left = -41.5141
+offset_top = -25.2209
+offset_right = -31.5141
+offset_bottom = -2.22091
+scale = Vector2(3.93058, 3.1094)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]

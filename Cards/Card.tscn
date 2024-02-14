@@ -22,7 +22,7 @@ time_to_lock_hover = 0.3
 [node name="CardMovementComponent" type="Node" parent="."]
 script = ExtResource("6_qvt2l")
 
-[node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "key_art")]
+[node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("title_label", "description_label", "energy_label", "key_art")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,6 +39,7 @@ mouse_filter = 2
 script = ExtResource("5_hkyxd")
 title_label = NodePath("VerticalLayout/Title")
 description_label = NodePath("VerticalLayout/Description")
+energy_label = NodePath("Energy")
 key_art = NodePath("VerticalLayout/KeyArt")
 
 [node name="SelectionButton" type="TextureButton" parent="CardUI"]
@@ -86,6 +87,13 @@ label_settings = SubResource("LabelSettings_ooxvf")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Energy" type="Label" parent="CardUI"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 44.0
+offset_bottom = 50.0
 
 [connection signal="gui_input" from="CardUI/SelectionButton" to="ClickHandler" method="_on_gui_input_event"]
 [connection signal="mouse_entered" from="CardUI/SelectionButton" to="ClickHandler" method="_on_mouse_entered"]

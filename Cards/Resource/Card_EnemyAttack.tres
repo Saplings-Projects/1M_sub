@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_5s3qc")
 application_type = 1
+energy_cost = 0
 card_title = "NULL"
 card_description = "NULL"
 card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
