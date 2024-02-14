@@ -16,7 +16,7 @@ target_type = 1
 [resource]
 script = ExtResource("1_y1itd")
 application_type = 0
-energy_cost = 0
+energy_cost = 3
 card_title = "Heal"
 card_description = "Heal 1 damage"
 card_effects_data = Array[ExtResource("2_y7dlo")]([SubResource("Resource_amxgq")])
