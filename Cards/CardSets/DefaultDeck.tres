@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardSet" load_steps=14 format=3 uid="uid://d0s7vtq3bgpvg"]
+
+[ext_resource type="Resource" uid="uid://dam752rc15nu5" path="res://Cards/Resource/Card_Buff_Poison_Duration.tres" id="1_3gsqr"]
+[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="2_wit2j"]
+[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="3_7yl7v"]
+[ext_resource type="Resource" uid="uid://boodcfdepyk5i" path="res://Cards/Resource/Card_DamageHealth.tres" id="4_7dnqs"]
+[ext_resource type="Resource" uid="uid://3s4aet1ciesh" path="res://Cards/Resource/Card_damage_and_poison.tres" id="5_tyiiw"]
+[ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Card_DrawCards.tres" id="6_ipljk"]
+[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="7_mltiu"]
+[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="8_mkujf"]
+[ext_resource type="Resource" uid="uid://btj36bhn3n2tr" path="res://Cards/Resource/Card_Strength.tres" id="9_uxo7x"]
+[ext_resource type="Resource" uid="uid://b4kmg3lm0e45q" path="res://Cards/Resource/Card_Vulnerability.tres" id="10_rmtjw"]
+[ext_resource type="Resource" uid="uid://bobfsmcwcgsbb" path="res://Cards/Resource/Card_Weakness.tres" id="11_fyqgv"]
+[ext_resource type="Resource" uid="uid://uv2rili0xf3x" path="res://Cards/Resource/Card_Damage_EVERYTHING.tres" id="12_kpknn"]
+[ext_resource type="Script" path="res://Cards/CardSet.gd" id="13_pft8g"]
+
+[resource]
+script = ExtResource("13_pft8g")
+card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("1_3gsqr"), ExtResource("2_wit2j"), ExtResource("3_7yl7v"), ExtResource("4_7dnqs"), ExtResource("5_tyiiw"), ExtResource("6_ipljk"), ExtResource("7_mltiu"), ExtResource("8_mkujf"), ExtResource("9_uxo7x"), ExtResource("10_rmtjw"), ExtResource("11_fyqgv"), ExtResource("12_kpknn")])

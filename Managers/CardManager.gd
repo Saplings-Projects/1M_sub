@@ -9,6 +9,11 @@ signal on_deck_initialized
 var card_container: CardContainer = null
 # We store the current deck in CardManager because we may want to access it outside of battle.
 var current_deck: Array[CardBase] = []
+var default_deck: CardSet = null
+
+
+func _ready():
+	default_deck = load("res://Cards/CardSets/DefaultDeck.tres")
 
 
 # Call this from CardContainer to initialize. This allows you to get the current CardContainer from
@@ -22,13 +27,10 @@ func set_card_container(in_card_container: CardContainer) -> void:
 
 
 func _initialize_deck() -> void:
-	# Set our default deck from the card container.
+	# Set our default deck.
 	# NOTE: We assume that if the current_deck is empty, then this is the first time the game was loaded.
-	# So we load the default deck stored in the card container.
-	# TODO: It would be better to store default_deck in a separate Resource file
-	# so we don't rely on the card_container here.
 	if current_deck.is_empty():
-		current_deck = card_container.default_deck.duplicate()
+		current_deck = default_deck.card_set.duplicate()
 	on_deck_initialized.emit()
 
 

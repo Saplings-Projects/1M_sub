@@ -16,7 +16,6 @@ signal on_finished_discarding_hand
 @export var total_hand_width: float = 100
 @export var card_hovered_offset: float = 100
 @export var card_queued_offset: float = 100
-@export var default_deck: Array[CardBase]
 @export var starting_hand_size: int = 5
 @export var max_hand_size: int = 10
 @export var card_draw_time: float = 0.2
