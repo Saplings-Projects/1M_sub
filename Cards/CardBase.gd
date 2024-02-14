@@ -47,6 +47,9 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	#Split up targeted attacks and all attacks
 	var effects_targeting_single: Array[EffectData] = get_effects_targeting_single()
 	var effects_targeting_all: Array[EffectData] = get_effects_target_all()
+
+	#uses the energy asocieted with the card
+	PlayerManager.player.get_energy_component().use_energy(self)	
 	
 	#Apply single target
 	_apply_all_effects(caster, targets, effects_targeting_single)
@@ -55,7 +58,7 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 
 	#apply effect to every target
 	_apply_all_effects(caster, all_targets, effects_targeting_all)
-	
+
 
 	CardManager.on_card_action_finished.emit(self)
 
