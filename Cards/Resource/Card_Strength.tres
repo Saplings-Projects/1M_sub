@@ -33,7 +33,7 @@ target_type = 0
 [resource]
 script = ExtResource("5_e4pqm")
 application_type = 0
-energy_cost = 0
+energy_cost = 3
 card_title = "Strength"
 card_description = "Targeted entity deals one more damage for 2 turns"
 card_effects_data = Array[ExtResource("4_8rg8k")]([SubResource("Resource_ucd6r")])
