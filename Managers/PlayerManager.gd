@@ -18,8 +18,8 @@ func set_player(in_player: Player) -> void:
 
 
 func create_persistent_data() -> void:
-	PlayerManager.player_persistent_data = PlayerPersistentData.new()
+	player_persistent_data = PlayerPersistentData.new()
 
 
 func get_persistent_data() -> PlayerPersistentData:
-	return PlayerManager.player_persistent_data
+	return player_persistent_data
