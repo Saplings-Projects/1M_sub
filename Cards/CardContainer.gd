@@ -47,13 +47,11 @@ var _cards_queued_for_add: Array[CardBase] = []
 var _draw_timer: SceneTreeTimer = null
 var _cards_queued_for_discard: Array[CardWorld] = []
 var _discard_timer: SceneTreeTimer = null
-var energy_component: EnergyComponent
 
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
 	CardManager.on_card_action_finished.connect(finish_active_card_action)
-	energy_component = PlayerManager.player.get_energy_component()
 	_init_default_draw_pile()
 
 
@@ -331,7 +329,7 @@ func _on_card_clicked(card: CardWorld) -> void:
 				_on_card_clicked(card)
 	else:
 		# If we click a card with no card queued, queue it
-		if energy_component.is_playable(card):
+		if PlayerManager.player.get_energy_component().is_playable(card):
 			set_queued_card(card)
 
 			card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
