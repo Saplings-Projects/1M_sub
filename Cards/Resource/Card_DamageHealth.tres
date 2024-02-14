@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://boodcfdepyk5i"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://boodcfdepyk5i"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamageHealth.gd" id="1_v8nqe"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_v2ps8"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="3_b6h5g"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="3_bkc3b"]
 
 [sub_resource type="Resource" id="Resource_ssnwy"]
@@ -13,10 +14,14 @@ effect = SubResource("Resource_ssnwy")
 value = 0
 target_type = 0
 
+[sub_resource type="Resource" id="Resource_vm20g"]
+script = ExtResource("3_b6h5g")
+energy_cost = 7
+
 [resource]
 script = ExtResource("3_bkc3b")
 application_type = 1
-energy_cost = 8
 card_title = "Damage Health"
 card_description = "Deals damage equal to health lost"
 card_effects_data = Array[ExtResource("2_v2ps8")]([SubResource("Resource_ggt87")])
+energy = SubResource("Resource_vm20g")

@@ -27,7 +27,7 @@ func _ready() -> void:
 func _on_card_initialized(in_card_data: CardBase) -> void:
 	title_label.text = in_card_data.card_title
 	description_label.text = in_card_data.card_description
-	energy_label.text = "E: " + str(in_card_data.energy_cost)
+	energy_label.text = "E: " + str(in_card_data.energy.energy_cost)
 	if in_card_data.card_key_art:
 		key_art.texture = in_card_data.card_key_art
 	else:

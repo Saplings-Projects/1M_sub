@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://0x385c3nuq8f"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://0x385c3nuq8f"]
 
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j02oq"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_ktww3"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_ar7ey"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="3_4ylaw"]
 
 [sub_resource type="Resource" id="Resource_f6djy"]
 script = ExtResource("1_ktww3")
@@ -13,10 +14,14 @@ effect = SubResource("Resource_f6djy")
 value = 2
 target_type = 1
 
+[sub_resource type="Resource" id="Resource_iu8pb"]
+script = ExtResource("3_4ylaw")
+energy_cost = 2
+
 [resource]
 script = ExtResource("1_j02oq")
 application_type = 1
-energy_cost = 1
 card_title = "Damage All"
 card_description = "Deal 2 to all enemies"
 card_effects_data = Array[ExtResource("2_ar7ey")]([SubResource("Resource_cwhuj")])
+energy = SubResource("Resource_iu8pb")

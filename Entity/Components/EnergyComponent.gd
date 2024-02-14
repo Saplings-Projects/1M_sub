@@ -14,13 +14,13 @@ func is_playable(card: CardWorld) -> bool:
 		return true
 
 	if card != null:
-		return energy >= card.card_data.energy_cost
+		return energy >= card.card_data.energy.energy_cost
 
 	return true
 
 
 func use_energy(card: CardBase) -> void:
-	energy -= card.energy_cost
+	energy -= card.energy.energy_cost
 
 	if energy < 0:
 		push_error("energy cannot be negative")

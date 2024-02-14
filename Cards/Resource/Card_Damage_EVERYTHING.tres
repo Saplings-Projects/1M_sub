@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://uv2rili0xf3x"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://uv2rili0xf3x"]
 
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_lia0m"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_nff2i"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_581pa"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="3_d6arn"]
 
 [sub_resource type="Resource" id="Resource_16eay"]
 script = ExtResource("1_nff2i")
@@ -13,10 +14,14 @@ effect = SubResource("Resource_16eay")
 value = 10
 target_type = 1
 
+[sub_resource type="Resource" id="Resource_qe0xq"]
+script = ExtResource("3_d6arn")
+energy_cost = 2
+
 [resource]
 script = ExtResource("1_lia0m")
 application_type = 2
-energy_cost = 2
 card_title = "Damage EVERYTHING"
 card_description = "Deal 10 to EVERYTHING"
 card_effects_data = Array[ExtResource("2_581pa")]([SubResource("Resource_4ktkc")])
+energy = SubResource("Resource_qe0xq")
