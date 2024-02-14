@@ -47,13 +47,13 @@ var _cards_queued_for_add: Array[CardBase] = []
 var _draw_timer: SceneTreeTimer = null
 var _cards_queued_for_discard: Array[CardWorld] = []
 var _discard_timer: SceneTreeTimer = null
-
+var energy_component: EnergyComponent
 
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
 	CardManager.on_card_action_finished.connect(finish_active_card_action)
-	
+	energy_component = PlayerManager.player.get_energy_component()
 	_init_default_draw_pile()
 
 
@@ -64,6 +64,7 @@ func _process(_delta: float) -> void:
 
 func set_queued_card(card: CardWorld) -> void:
 	queued_card = card
+
 
 
 # Remove card from focused and queued and remove it from the hand to prepare it to be played
@@ -184,7 +185,7 @@ func _discard_card_at_index(card_index: int) -> void:
 	
 	# add to discard pile
 	discard_pile.append(card.card_data)
-	
+
 	# remove from hand and add to discard queue
 	cards_in_hand.remove_at(card_index)
 	_add_to_discard_queue(card)
@@ -330,10 +331,13 @@ func _on_card_clicked(card: CardWorld) -> void:
 				_on_card_clicked(card)
 	else:
 		# If we click a card with no card queued, queue it
-		set_queued_card(card)
+		if energy_component.is_playable(card):
+			set_queued_card(card)
 
-		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
-		_focus_card(card)
+			card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
+			_focus_card(card)
+		else:
+			set_queued_card(null)
 
 func play_card(list_target : Array[Entity]):
 	queued_for_active()
@@ -355,6 +359,7 @@ func _on_card_unhovered(card: CardWorld) -> void:
 
 
 func _focus_card(card: CardWorld) -> void:
+
 	_focused_card = card
 	
 	# children at the top of the hierarchy will render in front

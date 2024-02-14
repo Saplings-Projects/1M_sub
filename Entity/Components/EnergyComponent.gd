@@ -7,6 +7,10 @@ var energy = starting_energy
 
 signal on_energy_changed(new_energy: int)
 
+func is_playable(card: CardWorld) -> bool:
+	if card != null:
+		return energy >= card.card_data.energy_cost
+	return true
 
 func use_energy(energy_cost) -> bool:
 	if energy >= energy_cost:
