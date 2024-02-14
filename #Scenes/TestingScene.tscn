@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=22 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
+[ext_resource type="Resource" uid="uid://ckaua56xmrxib" path="res://Cards/Resource/Card_Energy.tres" id="4_krnn7"]
 [ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="4_ol33a"]
 [ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="5_icdnp"]
 [ext_resource type="Resource" uid="uid://boodcfdepyk5i" path="res://Cards/Resource/Card_DamageHealth.tres" id="6_qsijp"]
@@ -48,7 +49,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_ol33a"), ExtResource("5_icdnp"), ExtResource("6_qsijp"), ExtResource("7_pyrgi"), ExtResource("8_4qeej"), ExtResource("9_g2pug"), ExtResource("10_bsfis"), ExtResource("11_lk3kc")])
+default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_ol33a"), ExtResource("5_icdnp"), ExtResource("6_qsijp"), ExtResource("7_pyrgi"), ExtResource("8_4qeej"), ExtResource("9_g2pug"), ExtResource("10_bsfis"), ExtResource("11_lk3kc"), ExtResource("4_krnn7")])
 starting_hand_size = 10
 max_hand_width = 900.0
 min_card_separation = 90.0

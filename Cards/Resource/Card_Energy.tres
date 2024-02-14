@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://ckaua56xmrxib"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectAddEnergy.gd" id="1_3yh17"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_dr7f0"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="3_opvsg"]
+
+[sub_resource type="Resource" id="Resource_jur0i"]
+script = ExtResource("1_3yh17")
+
+[sub_resource type="Resource" id="Resource_6gvxm"]
+script = ExtResource("2_dr7f0")
+effect = SubResource("Resource_jur0i")
+value = 70
+target_type = 0
+
+[resource]
+script = ExtResource("3_opvsg")
+application_type = 0
+energy_cost = 1
+card_title = "Gain 70 energy"
+card_description = "Gain 70 energy"
+card_effects_data = Array[ExtResource("2_dr7f0")]([SubResource("Resource_6gvxm")])

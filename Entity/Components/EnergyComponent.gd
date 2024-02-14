@@ -7,7 +7,7 @@ class_name EnergyComponent
 @export var ignore_cost: bool = false
 var energy = starting_energy
 
-signal on_energy_changed(new_energy: int)
+signal on_energy_changed
 
 func is_playable(card: CardWorld) -> bool:
 	if ignore_cost:
@@ -25,7 +25,7 @@ func use_energy(card: CardBase) -> void:
 	if energy < 0:
 		energy = 0
 
-	on_energy_changed.emit(energy)
+	on_energy_changed.emit()
 
 
 func on_turn_end() -> void:
@@ -35,4 +35,8 @@ func on_turn_end() -> void:
 	else:
 		energy += energy_generation
 	
-	on_energy_changed.emit(energy)
+	on_energy_changed.emit()
+
+func add_energy(value: int) -> void:
+	energy += value
+	print(energy)
