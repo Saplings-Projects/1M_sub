@@ -5,11 +5,17 @@ var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
 var _padding_offset = 20
 var _MINIMUM_ROOM_WIDTH = 510
 var _MINIMUM_ROOM_HEIGHT = 490
+var _LIGHT_FLOOR_RANGE = 3
 
 @export var color_rect: ColorRect
 @export var scroll_container: SmoothScrollContainer
 @export var room_container: ColorRect
 @export var room_addition_node: Control
+@export var torch_confirmation_dialog: ConfirmationDialog
+@export var test_torch_indices: Dictionary
+
+var room_ui_array: Array[Array]
+var current_player_room: RoomUI
 
 func _input(_inputevent: InputEvent) -> void:
 	if (_inputevent.is_action_pressed("cancel_action")):
@@ -18,6 +24,59 @@ func _input(_inputevent: InputEvent) -> void:
 
 func _on_return_button_press():
 	queue_free()
+	
+
+func _on_add_torch_pressed():
+	torch_confirmation_dialog.show()
+
+func _close_torch_placement_dialog():
+	torch_confirmation_dialog.hide()
+
+func _add_torch_to_current_location():
+	var current_player_floor_index = current_player_room.floor_index
+	var current_player_room_index = current_player_room.room_index
+	
+	var room_light_range = 1
+	var max_light_index = current_player_floor_index + _LIGHT_FLOOR_RANGE + 1 
+	
+	if current_player_floor_index + _LIGHT_FLOOR_RANGE + 1 > MapManager.map_width_array.size():
+		max_light_index = MapManager.map_width_array.size() 
+	
+	for floor_light_index: int in range(current_player_floor_index + 1, max_light_index):
+		var minimum_room_light_index: int = current_player_room_index - room_light_range
+		if current_player_room_index - room_light_range <= 0:
+			minimum_room_light_index = 0
+		var maximum_room_light_index: int = current_player_room_index + room_light_range + 1
+		if current_player_room_index + room_light_range + 1 > MapManager.map_width_array.max():
+			maximum_room_light_index = MapManager.map_width_array.max()
+		for room_light_index: int in range(minimum_room_light_index, maximum_room_light_index):
+			var room_ui: RoomUI = room_ui_array[floor_light_index][room_light_index]
+			if room_ui != null:
+				if floor_light_index == current_player_floor_index + 1 and room_ui.room.light_level == Enums.LightLevel.DIMLY_LIT:
+					room_ui.room.set_light_level(Enums.LightLevel.BRIGHTLY_LIT)
+				else:
+					room_ui.room.set_light_level(Enums.LightLevel.DIMLY_LIT)
+		room_light_range += 1
+	current_player_room.room.set_torch_active()
+
+# Test function
+func _add_light_to_rooms(floor_index: int, room_index: int) -> void:
+	var room_light_range = 1
+	var max_light_index = floor_index + _LIGHT_FLOOR_RANGE + 1 
+	if floor_index + _LIGHT_FLOOR_RANGE + 1 > MapManager.map_width_array.size():
+		max_light_index = MapManager.map_width_array.size() 
+	for floor_light_index: int in range(floor_index + 1, max_light_index):
+		var minimum_room_light_index: int = room_index - room_light_range
+		if room_index - room_light_range <= 0:
+			minimum_room_light_index = 0
+		var maximum_room_light_index: int = room_index + room_light_range + 1
+		if room_index + room_light_range + 1 > MapManager.map_width_array.max():
+			maximum_room_light_index = MapManager.map_width_array.max()
+		for room_light_index: int in range(minimum_room_light_index, maximum_room_light_index):
+			var room_ui: RoomUI = room_ui_array[floor_light_index][room_light_index]
+			if (room_ui != null):
+				room_ui.room.set_light_level(Enums.LightLevel.DIMLY_LIT)
+		room_light_range += 1
 
 
 func _ready():
@@ -59,15 +118,30 @@ func _ready():
 	var start_position_for_next_room_y: float = room_container.get_custom_minimum_size().y - (color_rect.get_size().y - scroll_container_bottom_y_position)
 	var position_for_next_room: Vector2 = Vector2(start_position_for_next_room_x, start_position_for_next_room_y)
 	
-	for floor_array: Array[RoomBase] in current_map.rooms:
+	var max_floor_width: int = MapManager.map_width_array.max()
+	room_ui_array.resize(MapManager.map_width_array.size())
+	
+	for floor_index: int in range(current_map.rooms.size()):
+		var floor_array: Array = current_map.rooms[floor_index]
 		# When we're done populating a floor and we go to the next index, reset the X start position
 		position_for_next_room.x = start_position_for_next_room_x
-		for room: RoomBase in floor_array:
-			if (room != null):
-				var room_display: Control = room_ui.instantiate()
+		for room_index: int in range(floor_array.size()):
+			var room: RoomBase = floor_array[room_index]
+		#for room: RoomBase in floor_array:
+			if room != null:
+				var room_display: RoomUI = room_ui.instantiate()
+				room_display.room = room
 				room_addition_node.add_child(room_display)
 				room_display.set_label(room.get_room_abbreviation())
 				room_display.position = position_for_next_room
+				room_display.floor_index = floor_index
+				room_display.room_index = room_index
+				if (MapManager.current_room == room):
+					current_player_room = room_display
+					room_display.set_player_icon(true)
+				room_ui_array[floor_index].append(room_display)
+			else:
+				room_ui_array[floor_index].append(null)
 			# When we go through the array of a floor to put a room down, 
 			# increase the X position to the new potential area the room will be displayed on.
 			position_for_next_room.x += new_room_size.x + _padding_offset
@@ -90,6 +164,9 @@ func _ready():
 	if (_get_combined_room_height(new_room_texture_rect) < _MINIMUM_ROOM_HEIGHT):
 		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_rect) / 2
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
+	
+	#room_ui_array[0][2].room.set_torch_active()
+	#_add_light_to_rooms(0, 5)
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 

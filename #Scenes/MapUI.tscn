@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/MapUI.gd" id="1_enf2f"]
 [ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="2_2gata"]
 
-[node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container", "room_addition_node")]
+[node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container", "room_addition_node", "torch_confirmation_dialog")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,10 @@ color_rect = NodePath("ColorRect")
 scroll_container = NodePath("SmoothScrollContainer")
 room_container = NodePath("SmoothScrollContainer/RoomContainer")
 room_addition_node = NodePath("SmoothScrollContainer/RoomContainer/RoomAdditionNode")
+torch_confirmation_dialog = NodePath("TorchPlacementConfirmationDialog")
+test_torch_indices = {
+0: 3
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -49,7 +53,16 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="AddTorch" type="Button" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 505.0
+offset_right = 65.0
+offset_bottom = 536.0
+text = "Add Torch
+"
+
+[node name="Return" type="Button" parent="."]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 550.0
@@ -57,4 +70,15 @@ offset_right = 65.0
 offset_bottom = 581.0
 text = "Return"
 
-[connection signal="pressed" from="Button" to="." method="_on_return_button_press"]
+[node name="TorchPlacementConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = ""
+initial_position = 4
+size = Vector2i(300, 106)
+ok_button_text = "Yes"
+dialog_text = "Would you like to place a torch on your current location?"
+dialog_autowrap = true
+cancel_button_text = "No"
+
+[connection signal="pressed" from="AddTorch" to="." method="_on_add_torch_pressed"]
+[connection signal="pressed" from="Return" to="." method="_on_return_button_press"]
+[connection signal="confirmed" from="TorchPlacementConfirmationDialog" to="." method="_add_torch_to_current_location"]
