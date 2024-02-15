@@ -16,3 +16,15 @@ static func get_accessible_room_positions_by_player(position: Vector2i) -> Array
 	
 	return accessible_room_positions
 	
+static func get_all_accessible_room_positions_in_range(position: Vector2i, remaining_range: int) -> Array[Vector2i]:
+	var accessible_room_positions_in_range: Array[Vector2i] = []
+	var accessible_room_positions_by_player: Array[Vector2i] = get_accessible_room_positions_by_player(position)
+	accessible_room_positions_in_range.append_array(accessible_room_positions_by_player)
+	if remaining_range == 1:
+		return Helpers.remove_duplicate_in_array(accessible_room_positions_in_range)
+		
+	for next_position: Vector2i in accessible_room_positions_by_player:
+		accessible_room_positions_in_range.append_array(get_all_accessible_room_positions_in_range(next_position, remaining_range - 1))
+	
+	return Helpers.remove_duplicate_in_array(accessible_room_positions_in_range)
+	
