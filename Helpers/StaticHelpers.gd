@@ -32,3 +32,11 @@ static func convert_from_range(value: float, from_min: float, from_max: float, t
 		to_value = (((value - from_min) * to_range) / from_range) + to_min
 	
 	return to_value
+
+
+static func remove_duplicate_in_array(array: Array[Variant]) -> Array[Variant]:
+	var dict: Dictionary = {}
+	for value: Variant in array:
+		dict[value] = 1 # value doesn't matter, we just need the keys
+	var new_array: Array[Variant] = dict.keys()
+	return new_array
