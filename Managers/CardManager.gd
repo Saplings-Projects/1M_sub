@@ -9,7 +9,7 @@ signal on_deck_initialized
 var card_container: CardContainer = null
 # We store the current deck in CardManager because we may want to access it outside of battle.
 var current_deck: Array[CardBase] = []
-var default_deck: CardSet = null
+var default_deck: CardSetBase = null
 
 
 func _ready():

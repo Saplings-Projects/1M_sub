@@ -8,7 +8,9 @@ extends Node
 signal on_player_initialized
 
 var player: Player
-var player_persistent_data: PlayerPersistentData = null
+var player_persistent_data: PlayerPersistentData = null:
+	get:
+		return player_persistent_data
 
 
 func set_player(in_player: Player) -> void:
@@ -19,7 +21,3 @@ func set_player(in_player: Player) -> void:
 
 func create_persistent_data() -> void:
 	player_persistent_data = PlayerPersistentData.new()
-
-
-func get_persistent_data() -> PlayerPersistentData:
-	return player_persistent_data

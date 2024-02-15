@@ -23,7 +23,7 @@ func _exit_tree() -> void:
 # Set values from our saved persistent data
 func _load_persistent_data() -> void:
 	# If we don't have any persistent data, we will use the defaults
-	if PlayerManager.get_persistent_data() == null:
+	if PlayerManager.player_persistent_data == null:
 		return
 	
 	# Load health data
@@ -34,12 +34,12 @@ func _load_persistent_data() -> void:
 	# Load stat data
 	var loaded_stats: EntityStats = PlayerManager.player_persistent_data.saved_stats;
 	var stat_comp: StatComponent = get_stat_component()
-	stat_comp.set_stats(loaded_stats)
+	stat_comp.stats = loaded_stats
 
 
 # Update persistent data with our current values
 func _save_persistent_data() -> void:
-	if PlayerManager.get_persistent_data() == null:
+	if PlayerManager.player_persistent_data == null:
 		PlayerManager.create_persistent_data()
 	
 	# Save health data
