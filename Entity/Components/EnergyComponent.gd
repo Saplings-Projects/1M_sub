@@ -2,7 +2,7 @@ extends EntityComponent
 class_name EnergyComponent
 
 @export var Max_energy: int = 4
-@export var starting_energy: int = 0
+@export var starting_energy: int = 3
 @export var energy_generation: int = 3
 @export var ignore_cost: bool = false
 var energy = starting_energy
@@ -22,7 +22,8 @@ func is_playable(card: CardWorld) -> bool:
 func use_energy(card: CardBase) -> void:
 	energy -= card.energy.energy_cost
 
-	if energy < 0:
+	if energy < 0 and !ignore_cost:
+		print_stack()
 		push_error("energy cannot be negative")
 
 	on_energy_changed.emit()

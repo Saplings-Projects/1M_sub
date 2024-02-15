@@ -49,6 +49,8 @@ func before_each():
 	_enemy_stat_component.get_stats().ready_entity_stats()
 	_enemy_2_stat_component.get_stats().ready_entity_stats()
 
+	_player_energy_component.ignore_cost = true
+
 func after_each():
 	_player.queue_free()
 	_enemy.queue_free()
