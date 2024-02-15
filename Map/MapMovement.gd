@@ -15,7 +15,8 @@ static func get_accessible_room_positions_by_player(position: Vector2i) -> Array
 					accessible_room_positions.append(Vector2i(new_room_index, new_floor_index))
 	
 	return accessible_room_positions
-	
+
+
 static func get_all_accessible_room_positions_in_range(position: Vector2i, remaining_range: int) -> Array[Vector2i]:
 	var accessible_room_positions_in_range: Array[Vector2i] = []
 	var accessible_room_positions_by_player: Array[Vector2i] = get_accessible_room_positions_by_player(position)
@@ -28,3 +29,16 @@ static func get_all_accessible_room_positions_in_range(position: Vector2i, remai
 	
 	return Helpers.remove_duplicate_in_array(accessible_room_positions_in_range)
 	
+	
+static func get_all_accessible_rooms_in_range(position: Vector2i, remaining_range: int, current_map: Array[Array]) -> Array[Variant]:
+	var accessible_positions_in_range: Array[Vector2i] = get_all_accessible_room_positions_in_range(position, remaining_range)
+	var accessible_rooms_in_range: Array[Variant] = []
+	for current_position: Vector2i in accessible_positions_in_range:
+		accessible_rooms_in_range.append(current_map[current_position.y][current_position.x])
+	
+	return accessible_rooms_in_range
+
+
+# Helper function to be able to call without any parameters
+static func get_accessible_rooms_by_player(position: Vector2i = PlayerManager.current_position, remaining_range: int = 1, current_map: Array[Array] = MapManager.current_map.rooms) -> Array[RoomBase]:
+	return get_all_accessible_rooms_in_range(position, remaining_range, current_map)
