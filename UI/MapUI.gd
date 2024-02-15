@@ -2,9 +2,9 @@ extends Control
 
 var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
-var _padding_offset = 20
-var _MINIMUM_ROOM_WIDTH = 510
-var _MINIMUM_ROOM_HEIGHT = 490
+var _padding_offset: int = 20
+var _MINIMUM_ROOM_WIDTH: int = 510
+var _MINIMUM_ROOM_HEIGHT: int = 490
 
 @export var color_rect: ColorRect
 @export var scroll_container: SmoothScrollContainer
@@ -16,11 +16,11 @@ func _input(_inputevent: InputEvent) -> void:
 		queue_free()
 
 
-func _on_return_button_press():
+func _on_return_button_press() -> void:
 	queue_free()
 
 
-func _ready():
+func _ready() -> void:
 	var current_map: MapBase = MapManager.current_map
 	
 	# Create New Room Object to append to the room container
