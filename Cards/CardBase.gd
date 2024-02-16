@@ -32,12 +32,6 @@ func parse_card_data(card_data: Dictionary) -> void:
 	pass
 
 
-# func _apply_all_effects(caster: Entity, targets: Array[Entity], effects: Array[EffectData]) -> void:
-# 	for target : Entity in targets:
-# 		for effect : EffectData in effects:
-# 			effect.apply_effect_data(caster, target)
-
-
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
