@@ -21,3 +21,5 @@ func test_accessible_positions_by_player() -> void:
 		var accessible_positions: Array[Vector2i]  = MapMovement.get_accessible_room_positions_by_player(current_player_position)
 		for position: Vector2i in expected_accessible_positions[i]:
 			assert_has(accessible_positions,position)
+			accessible_positions.erase(position)
+		assert_eq(accessible_positions,[])
