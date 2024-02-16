@@ -14,5 +14,4 @@ func _process(delta: float) -> void:
 
 func _on_pressed() -> void:
 	PhaseManager.set_phase(Enums.Phase.PLAYER_FINISHING)
-	PlayerManager.player.get_energy_component().on_turn_end()
 	

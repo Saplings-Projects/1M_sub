@@ -77,16 +77,24 @@ grow_vertical = 0
 text = "end turn"
 script = ExtResource("14_dpe64")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/UIControl"]
-position = Vector2(64, 592)
-scale = Vector2(0.2895, 0.356145)
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -159.0
+offset_right = 257.0
+offset_bottom = 32.0
+scale = Vector2(0.38, 0.38)
 texture = ExtResource("19_spyxg")
 
-[node name="EnergyLabel" type="Label" parent="CanvasLayer/UIControl/Sprite2D"]
-offset_left = -41.5141
-offset_top = -25.2209
-offset_right = -31.5141
-offset_bottom = -2.22091
+[node name="EnergyLabel" type="Label" parent="CanvasLayer/UIControl/TextureRect"]
+layout_mode = 0
+offset_left = 82.1705
+offset_top = 72.8682
+offset_right = 92.1705
+offset_bottom = 95.8682
 scale = Vector2(3.93058, 3.1094)
 text = "0"
 horizontal_alignment = 1

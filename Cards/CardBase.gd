@@ -20,7 +20,7 @@ class_name CardBase
 
 @export var card_effects_data: Array[EffectData] = []
 
-@export var energy: EnergyData = EnergyData.new()
+@export var energy_info: EnergyData = EnergyData.new()
 
 func _ready() -> void:
 	card_effects_data = []
@@ -50,7 +50,8 @@ func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
 	var effects_targeting_all: Array[EffectData] = get_effects_target_all()
 
 	#uses the energy asocieted with the card
-	PlayerManager.player.get_energy_component().use_energy(self)	
+	if caster is Player:
+		PlayerManager.player.get_energy_component().use_energy(self)	
 	
 	#Apply single target
 	_apply_all_effects(caster, targets, effects_targeting_single)

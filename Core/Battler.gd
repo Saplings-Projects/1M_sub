@@ -64,6 +64,7 @@ func _on_player_hand_discarded() -> void:
 # player start phase: apply status
 func _on_player_start_turn() -> void:
 	PlayerManager.player.get_status_component().apply_turn_start_status()
+	PlayerManager.player.get_energy_component().on_turn_start()
 
 
 # enemy start phase: apply status and attack player. Afterwards, set phase to player phase
