@@ -7,10 +7,12 @@ var caster: Entity = null
 @export var value: int = 0
 @export var targeting_function: TargetingBase = null
 
-func _init(	_effect: EffectBase = null,
-			_caster: Entity = null, 
-			_value: int = 0, 
-			_targeting_function: TargetingBase = null) -> void:
+func _init(
+	_effect: EffectBase = null,
+	_caster: Entity = null, 
+	_value: int = 0, 
+	_targeting_function: TargetingBase = null
+	) -> void:
 	self.effect = _effect
 	self.caster = _caster
 	self.value = _value
