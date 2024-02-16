@@ -48,4 +48,4 @@ func _save_persistent_data() -> void:
 	
 	# Save stat data
 	var stat_comp: StatComponent = get_stat_component()
-	PlayerManager.player_persistent_data.saved_stats = stat_comp.get_stats()
+	PlayerManager.player_persistent_data.saved_stats = stat_comp.stats

@@ -10,7 +10,7 @@ func _create_player():
 	
 	# NOTE: This resets the stats, so we don't want to call it when we're creating a player
 	# for persistence testing.
-	#_player_stat_component.get_stats().ready_entity_stats()
+	#_player_stat_component.stats.ready_entity_stats()
 
 
 func test_persist_player_health():

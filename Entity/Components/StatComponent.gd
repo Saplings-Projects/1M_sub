@@ -11,7 +11,3 @@ var stats: EntityStats = EntityStats.new():
 		stats = value
 	get:
 		return stats
-
-
-func get_stats() -> EntityStats:
-	return stats

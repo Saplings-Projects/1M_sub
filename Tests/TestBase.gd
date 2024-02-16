@@ -42,9 +42,9 @@ func before_each():
 	_player_status_component = _player.get_status_component()
 	_enemy_status_component = _enemy.get_status_component()
 	
-	_player_stat_component.get_stats().ready_entity_stats()
-	_enemy_stat_component.get_stats().ready_entity_stats()
-	_enemy_2_stat_component.get_stats().ready_entity_stats()
+	_player_stat_component.stats.ready_entity_stats()
+	_enemy_stat_component.stats.ready_entity_stats()
+	_enemy_2_stat_component.stats.ready_entity_stats()
 	
 	# disable data saving so nothing is saved between tests
 	_player._should_save_persistent_data = false
