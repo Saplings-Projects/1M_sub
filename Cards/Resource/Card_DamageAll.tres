@@ -1,17 +1,21 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=6 format=3 uid="uid://0x385c3nuq8f"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://0x385c3nuq8f"]
 
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j02oq"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_ktww3"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_ar7ey"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="3_qkswr"]
 
 [sub_resource type="Resource" id="Resource_f6djy"]
 script = ExtResource("1_ktww3")
+
+[sub_resource type="Resource" id="Resource_4lyyh"]
+script = ExtResource("3_qkswr")
 
 [sub_resource type="Resource" id="Resource_cwhuj"]
 script = ExtResource("2_ar7ey")
 effect = SubResource("Resource_f6djy")
 value = 2
-target_type = 1
+targeting_function = SubResource("Resource_4lyyh")
 
 [resource]
 script = ExtResource("1_j02oq")

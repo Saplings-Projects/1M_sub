@@ -34,7 +34,6 @@ signal on_finished_discarding_hand
 # Height at where cards gets played
 @export var play_at_height : float 
 
-@export var battler_refrence : Battler
 
 var cards_in_hand: Array[CardWorld] = []
 var draw_pile: Array[CardBase] = []
@@ -312,7 +311,7 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 func _on_card_clicked(card: CardWorld) -> void:
 	if is_card_queued():
 		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && is_queued_card_in_play_area()):
-			play_card([])
+			play_card()
 		else:
 		
 			var previously_queued_card: CardWorld = queued_card
@@ -335,11 +334,11 @@ func _on_card_clicked(card: CardWorld) -> void:
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
 		_focus_card(card)
 
-func play_card(list_target : Array[Entity]):
+func play_card(target : Entity = null) -> void:
 	queued_for_active()
 	set_active_card(queued_card)
 	set_queued_card(null)
-	_active_card.card_data.on_card_play(PlayerManager.player, list_target)
+	_active_card.card_data.on_card_play(PlayerManager.player, target)
 	
 
 func _on_card_hovering(card: CardWorld) -> void:

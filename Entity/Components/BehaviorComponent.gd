@@ -12,8 +12,8 @@ func _ready() -> void:
 	attack = CardBase.new()
 	var basic_effect_data: EffectData = EffectData.new( EffectDamage.new(),
 														null,
-														[],
-														1)
+														1,
+														TargetingBase.new())
 	attack.card_effects_data.append(basic_effect_data)
 	attack.application_type = Enums.ApplicationType.FRIENDLY_ONLY
 	

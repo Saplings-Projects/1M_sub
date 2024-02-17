@@ -85,7 +85,7 @@ func test_enemy_death_to_player_attack():
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	
 	assert_eq(_enemy_list.size(), 2)
-	card_damage.on_card_play(_player, [_enemy])
+	card_damage.on_card_play(_player, _enemy)
 	assert_eq(_enemy_list.size(), 1)
 	assert_true(_enemy.is_queued_for_deletion())
 	await get_tree().process_frame
@@ -98,7 +98,7 @@ func test_all_enemy_death_to_player_attack_all():
 	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAll.tres")
 	
 	assert_eq(_enemy_list.size(), 2)
-	card_damage_all.on_card_play(_player, [])
+	card_damage_all.on_card_play(_player, null)
 	assert_eq(_enemy_list.size(), 0)
 	assert_true(_enemy.is_queued_for_deletion())
 	assert_true(_enemy_2.is_queued_for_deletion())
@@ -111,7 +111,7 @@ func test_all_enemy_death_to_player_attack_all():
 func test_enemy_death_to_poison():
 	_enemy_health_component._set_health(1.0)
 	var card_poison: CardBase = load("res://Cards/Resource/Card_Poison.tres")
-	card_poison.on_card_play(_player, [_enemy])
+	card_poison.on_card_play(_player, _enemy)
 
 	assert_eq(_enemy_list.size(), 2)
 	_battler._on_enemy_start_turn()
@@ -124,7 +124,7 @@ func test_enemy_death_to_poison():
 func test_enemy_death_to_expiring_poison():
 	_enemy_health_component._set_health(1.0)
 	var card_poison: CardBase = load("res://Cards/Resource/Card_Poison.tres")
-	card_poison.on_card_play(_player, [_enemy])
+	card_poison.on_card_play(_player, _enemy)
 	_enemy.get_status_component().current_status[0].status_turn_duration = 1
 
 	assert_eq(_enemy_list.size(), 2)
@@ -132,6 +132,20 @@ func test_enemy_death_to_expiring_poison():
 	_battler._on_enemy_start_turn()
 	assert_eq(_enemy.get_status_component().current_status.size(), 0)
 	assert_eq(_enemy_list.size(), 1)
+	assert_true(_enemy.is_queued_for_deletion())
+	await get_tree().process_frame
+	assert_false(is_instance_valid(_enemy))
+	
+	
+func test_enemy_list_size_enemy_manager() -> void:
+	_enemy_health_component._set_health(1.0)
+	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
+	
+	assert_eq(_enemy_list.size(), 2)
+	assert_eq(EnemyManager.enemy_list.size(), 2)
+	card_damage.on_card_play(_player, _enemy)
+	assert_eq(_enemy_list.size(), 1)
+	assert_eq(EnemyManager.enemy_list.size(), 1)
 	assert_true(_enemy.is_queued_for_deletion())
 	await get_tree().process_frame
 	assert_false(is_instance_valid(_enemy))
