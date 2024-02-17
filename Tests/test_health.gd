@@ -133,7 +133,7 @@ func test_card_heal() -> void:
 	
 
 # Test card that deals 10 damage to every entity (player and enemies)
-func test_card_damage_everything():
+func test_card_damage_everything() -> void:
 	var card_damage_everything: CardBase = load("res://Cards/Resource/Card_Damage_EVERYTHING.tres")
 	card_damage_everything.on_card_play(_player, null)
 	
@@ -143,7 +143,7 @@ func test_card_damage_everything():
 	
 
 #Apply 3 poison effect randomly, each with 3 turns
-func test_card_random_poison():
+func test_card_random_poison() -> void:
 	var card_random_poison: CardBase = load("res://Cards/Resource/Card_PoisonRandom.tres")
 	
 	card_random_poison.on_card_play(_player, null)
@@ -160,7 +160,7 @@ func test_card_random_poison():
 
 
 # Deal 4 damages to the targeted enemy and the one on its right	
-func test_card_fauna_sweep():
+func test_card_fauna_sweep() -> void:
 	var card_fauna_sweep: CardBase = load("res://Cards/Resource/Card_FaunaSweep.tres")
 	
 	card_fauna_sweep.on_card_play(_player, _enemy)
