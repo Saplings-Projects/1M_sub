@@ -22,7 +22,6 @@ var _enemy_list: Array[Entity]
 
 func before_each():
 	_player = _player_scene.instantiate()
-	PlayerManager.set_player(_player)
 	_battler = _battler_scene.instantiate()
 	_card_container = _card_container_scene.instantiate()
 	_card_container.battler_refrence = _battler
