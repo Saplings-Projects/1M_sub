@@ -26,12 +26,6 @@ enum ApplicationType
 	ALL,
 }
 
-enum TargetType
-{
-	SINGLE_TARGET,
-	ALL_TARGETS,
-}
-
 enum CardCastType
 {
 	TARGET,

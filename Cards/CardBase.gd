@@ -34,51 +34,15 @@ func parse_card_data(card_data: Dictionary) -> void:
 	pass
 
 
-func _apply_all_effects(caster: Entity, targets: Array[Entity], effects: Array[EffectData]) -> void:
-	for target : Entity in targets:
-		for effect : EffectData in effects:
-			effect.apply_effect_data(caster, target)
-
-
 func can_play_card(caster: Entity, target: Entity) -> bool:
 	return caster.get_party_component().can_play_on_entity(application_type, target)
 
 
-func on_card_play(caster: Entity, targets: Array[Entity]) -> void:
-	#Split up targeted attacks and all attacks
-	var effects_targeting_single: Array[EffectData] = get_effects_targeting_single()
-	var effects_targeting_all: Array[EffectData] = get_effects_target_all()
-
-	#uses the energy asocieted with the card
+func on_card_play(caster: Entity, base_target: Entity) -> void:
 	if caster is Player:
 		PlayerManager.player.get_energy_component().use_energy(self)	
-	
-	#Apply single target
-	_apply_all_effects(caster, targets, effects_targeting_single)
-	#Get every unit that is to be affected by card
-	var all_targets : Array[Entity] = CardManager.card_container.battler_refrence.get_all_targets(application_type)
-
-	#apply effect to every target
-	_apply_all_effects(caster, all_targets, effects_targeting_all)
-
-
+	for effect_data: EffectData in card_effects_data:
+		var list_targets: Array[Entity] = effect_data.targeting_function.generate_target_list(base_target)
+		for current_target in list_targets:
+			effect_data.apply_effect_data(caster, current_target)
 	CardManager.on_card_action_finished.emit(self)
-
-func get_effects_targeting_single() -> Array[EffectData]:
-	var target_effects: Array[EffectData] = []
-	
-	for effect_data: EffectData in card_effects_data:
-		if(effect_data.target_type == Enums.TargetType.SINGLE_TARGET):
-			target_effects.append(effect_data)
-			
-	return target_effects
-
-func get_effects_target_all() -> Array[EffectData]:
-	var all_effects: Array[EffectData] = []
-	
-	for effect_data: EffectData in card_effects_data:
-		if(effect_data.target_type == Enums.TargetType.ALL_TARGETS):
-			all_effects.append(effect_data)
-			
-	return all_effects
-
