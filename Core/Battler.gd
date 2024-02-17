@@ -14,6 +14,7 @@ var _enemy_list: Array[Entity]
 
 func _ready() -> void:
 	_summon_enemies()
+	EnemyManager.enemy_list = _enemy_list
 	
 	# check if our player has been initialized already. If not, wait for the signal
 	if (PlayerManager.player == null):
@@ -81,7 +82,7 @@ func _on_enemy_start_turn() -> void:
 	
 	for enemy: Enemy in _enemy_list:
 		var enemy_attack: CardBase = enemy.get_behavior_component().attack
-		var enemy_action: EnemyAction = EnemyAction.new(enemy, enemy_attack, [PlayerManager.player])
+		var enemy_action: EnemyAction = EnemyAction.new(enemy, enemy_attack, PlayerManager.player)
 		enemy_action_list.append(enemy_action)
 		
 	# execute enemy actions
@@ -110,22 +111,7 @@ func _try_player_play_card_on_entity(entity: Entity) -> void:
 		var can_play: bool = queued_card_data.can_play_card(PlayerManager.player, entity)
 		
 		if can_play:
-			CardManager.card_container.play_card([entity])
-
-
-func get_all_targets(application_type : Enums.ApplicationType) -> Array[Entity]:
-	var all_target : Array[Entity]
-	
-	match application_type:
-		Enums.ApplicationType.ALL:
-			all_target = _enemy_list
-			all_target += [PlayerManager.player]
-		Enums.ApplicationType.ENEMY_ONLY:
-			all_target = _enemy_list
-		Enums.ApplicationType.FRIENDLY_ONLY:
-			all_target = [PlayerManager.player]
-			
-	return all_target
+			CardManager.card_container.play_card(entity)
 
   
 func _handle_enemy_deaths() -> void:
