@@ -5,7 +5,7 @@ extends Node
 var is_dragging: bool = false
 var dragging_object: Node2D = null
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if dragging_object != null:
 		dragging_object.global_position = dragging_object.get_global_mouse_position()
 		if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):

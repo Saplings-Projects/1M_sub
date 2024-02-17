@@ -19,7 +19,7 @@ signal on_mouse_hovering
 
 var _is_interactable: bool = true
 var _lock_hover_timer: Timer = null
-var _hover_enabled = true
+var _hover_enabled: bool = true
 
 
 func _ready() -> void:
@@ -72,7 +72,7 @@ func _create_lock_hover_timer() -> void:
 	add_child(_lock_hover_timer)
 	
 	# When timer expires, enable hovering
-	_lock_hover_timer.timeout.connect(func(): _hover_enabled = true)
+	_lock_hover_timer.timeout.connect(func() -> void: _hover_enabled = true)
 
 
 func _set_lock_hover_timer() -> void:

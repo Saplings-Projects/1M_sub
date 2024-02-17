@@ -6,7 +6,7 @@ var caster: Entity
 var action: CardBase
 var target: Entity
 	
-func _init(_caster: Entity, _action: CardBase, _target: Entity):
+func _init(_caster: Entity, _action: CardBase, _target: Entity) -> void:
 	self.caster = _caster
 	self.action = _action
 	self.target = _target

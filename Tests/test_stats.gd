@@ -1,13 +1,13 @@
 extends TestBase
 
 
-func test_possible_modifier_size():
+func test_possible_modifier_size() -> void:
 	var expected_size: int = 4
 	var actual_size: int = GlobalVar.POSSIBLE_MODIFIER_NAMES.size()
 	assert_eq(actual_size, expected_size, "Expected %s possible modifiers but got %s instead" % [expected_size, actual_size])
 
 
-func test_offense_dict_size():
+func test_offense_dict_size() -> void:
 	var offense_dict_size_player: int = _player_stat_component.get_stats()._offense_modifier_dict.stat_dict.size()
 	var offense_dict_size_enemy: int = _enemy_stat_component.get_stats()._offense_modifier_dict.stat_dict.size()
 	var modifier_dict_size: int = GlobalVar.POSSIBLE_MODIFIER_NAMES.size()
@@ -16,7 +16,7 @@ func test_offense_dict_size():
 	assert_eq(offense_dict_size_enemy, modifier_dict_size, assert_false_string % [modifier_dict_size, offense_dict_size_enemy, "enemy"])
 
 
-func test_defense_dict_size():
+func test_defense_dict_size() -> void:
 	var defense_dict_size_player: int = _player_stat_component.get_stats()._defense_modifier_dict.stat_dict.size()
 	var defense_dict_size_enemy: int = _enemy_stat_component.get_stats()._defense_modifier_dict.stat_dict.size()
 	var modifier_dict_size: int = GlobalVar.POSSIBLE_MODIFIER_NAMES.size()
@@ -26,7 +26,7 @@ func test_defense_dict_size():
 
 
 # apply strength to player and damage enemy
-func test_strength_status():
+func test_strength_status() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -41,7 +41,7 @@ func test_strength_status():
 	assert_eq(_enemy_health_component.current_health, 49.0)
 	
 
-func test_strength_card():
+func test_strength_card() -> void:
 	var card_strength: CardBase = load("res://Cards/Resource/Card_Strength.tres")
 	StatModifiers.ready_card_modifier(card_strength) 
 	card_strength.on_card_play(_player, _player)
@@ -55,7 +55,7 @@ func test_strength_card():
 	
 
 # apply weakness to player and damage enemy
-func test_weakness_status():
+func test_weakness_status() -> void:
 	var weakness_status: Debuff_Weakness = Debuff_Weakness.new()
 	# remove 1 damage offense on the player
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -70,7 +70,7 @@ func test_weakness_status():
 	assert_eq(_enemy_health_component.current_health, 51.0)
 	
 
-func test_weakness_card():
+func test_weakness_card() -> void:
 	var card_weakness: CardBase = load("res://Cards/Resource/Card_Weakness.tres")
 	StatModifiers.ready_card_modifier(card_weakness) 
 	card_weakness.on_card_play(_player, _player)
@@ -84,7 +84,7 @@ func test_weakness_card():
 
 
 # apply vulnerability to enemy and damage enemy
-func test_vulnerability_status():
+func test_vulnerability_status() -> void:
 	var vulnerability_status: Debuff_Vulnerability = Debuff_Vulnerability.new()
 	# remove 1 damage defense on the enemy
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -100,7 +100,7 @@ func test_vulnerability_status():
 	assert_eq(_enemy_health_component.current_health, 49.0)
 	
 
-func test_vulnerability_card():
+func test_vulnerability_card() -> void:
 	var card_vulnerability: CardBase = load("res://Cards/Resource/Card_Vulnerability.tres")
 	StatModifiers.ready_card_modifier(card_vulnerability) 
 	card_vulnerability.on_card_play(_player, _enemy)
@@ -114,7 +114,7 @@ func test_vulnerability_card():
 	assert_eq(_enemy_health_component.current_health, 96.0)
 
 
-func test_multiple_status_modifying_stats():
+func test_multiple_status_modifying_stats() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	var stat_modifer_strength: StatModifiers = StatModifiers.new()
@@ -148,7 +148,7 @@ func test_multiple_status_modifying_stats():
 	# and add 1 because of vulnerability (remove 1 defense on the enemy)
 	
 	
-func test_strength_multiplier():
+func test_strength_multiplier() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -164,7 +164,7 @@ func test_strength_multiplier():
 	# 100 (base health) - (50 (base damage) * 1.5 (strength multiplier))
 
 
-func test_remove_strength():
+func test_remove_strength() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -188,7 +188,7 @@ func test_remove_strength():
 	# we don't have the strength bonus of +1 damage anymore
 
 
-func test_remove_weakness():
+func test_remove_weakness() -> void:
 	var weakness_status: Debuff_Weakness = Debuff_Weakness.new()
 	# remove 1 damage offense on the player
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -211,7 +211,7 @@ func test_remove_weakness():
 	# we don't have the weakness malus of -1 damage anymore
 
 
-func test_remove_vulnerability():
+func test_remove_vulnerability() -> void:
 	var vulnerability_status: Debuff_Vulnerability = Debuff_Vulnerability.new()
 	# remove 1 damage defense on the enemy
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -234,7 +234,7 @@ func test_remove_vulnerability():
 	# enemy doesn't have the vulnerability malus of -1 defense anymore
 
 
-func test_remove_multiple_status():
+func test_remove_multiple_status() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	var stat_modifer_strength: StatModifiers = StatModifiers.new()
@@ -275,7 +275,7 @@ func test_remove_multiple_status():
 	# 96 (previous health) - 3 (base damage)
 	
 	
-func test_reset_modifier_dict_temp_to_default():
+func test_reset_modifier_dict_temp_to_default() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# add 1 damage offense on the player
 	var stat_modifer_strength: StatModifiers = StatModifiers.new()
@@ -314,7 +314,7 @@ func test_reset_modifier_dict_temp_to_default():
 	# 96 (previous health) - 3 (base damage)
 	
 
-func test_remove_strength_multiplier():
+func test_remove_strength_multiplier() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	# multiply offense damage by 1.5 from the player
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -338,15 +338,15 @@ func test_remove_strength_multiplier():
 	# we don't have the strength multiplier of *1.5 anymore
 
 
-func test_buff_poison_duration_status():
-	var buff_poison_duration = Buff_Poison_Duration.new()
+func test_buff_poison_duration_status() -> void:
+	var buff_poison_duration: StatusBase = Buff_Poison_Duration.new()
 	var stat_modifer: StatModifiers = StatModifiers.new()
 	stat_modifer.temporary_add = 1
 	stat_modifer.ready()
 	buff_poison_duration.status_modifier_base_value = stat_modifer
 	_player.get_status_component().add_status(buff_poison_duration, _player)
 	
-	var debuff_poison = Debuff_Poison.new()
+	var debuff_poison: StatusBase = Debuff_Poison.new()
 	_enemy.get_status_component().add_status(debuff_poison, _player)
 	
 	assert_eq(_enemy.get_status_component().current_status.size(), 1)
@@ -354,7 +354,7 @@ func test_buff_poison_duration_status():
 	# base value is 3, +1 because of buff_poison_duration
 	
 	
-func test_buff_poison_duration_card():
+func test_buff_poison_duration_card() -> void:
 	var card_buff_poison_duration: CardBase = load("res://Cards/Resource/Card_Buff_Poison_Duration.tres")
 	# buff duration by 2
 	StatModifiers.ready_card_modifier(card_buff_poison_duration) 
@@ -369,15 +369,15 @@ func test_buff_poison_duration_card():
 	# base value is 3, +2 because of buff_poison_duration
 
 
-func test_buff_poison_duration_multiple_times():
-	var buff_poison_duration = Buff_Poison_Duration.new()
+func test_buff_poison_duration_multiple_times() -> void:
+	var buff_poison_duration: StatusBase = Buff_Poison_Duration.new()
 	var stat_modifer: StatModifiers = StatModifiers.new()
 	stat_modifer.temporary_add = 1
 	stat_modifer.ready()
 	buff_poison_duration.status_modifier_base_value = stat_modifer
 	_player.get_status_component().add_status(buff_poison_duration, _player)
 	
-	var debuff_poison = Debuff_Poison.new()
+	var debuff_poison: StatusBase = Debuff_Poison.new()
 	_enemy.get_status_component().add_status(debuff_poison, _player)
 	_enemy.get_status_component().add_status(debuff_poison, _player)
 	
@@ -386,15 +386,15 @@ func test_buff_poison_duration_multiple_times():
 	# base value is 3, +1 because of buff_poison_duration, *2 because of 2 debuff_poison
 
 
-func test_buff_poison_duration_removal():
-	var buff_poison_duration = Buff_Poison_Duration.new()
+func test_buff_poison_duration_removal() -> void:
+	var buff_poison_duration: StatusBase = Buff_Poison_Duration.new()
 	var stat_modifer: StatModifiers = StatModifiers.new()
 	stat_modifer.temporary_add = 1
 	stat_modifer.ready()
 	buff_poison_duration.status_modifier_base_value = stat_modifer
 	_player.get_status_component().add_status(buff_poison_duration, _player)
 	
-	var debuff_poison = Debuff_Poison.new()
+	var debuff_poison: StatusBase = Debuff_Poison.new()
 	_enemy.get_status_component().add_status(debuff_poison, _player)
 	_player.get_status_component().remove_status(buff_poison_duration)
 	_enemy.get_status_component().add_status(debuff_poison, _player)
