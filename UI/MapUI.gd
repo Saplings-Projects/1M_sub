@@ -2,17 +2,18 @@ extends Control
 
 var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
-var _padding_offset = 20
-var _MINIMUM_ROOM_WIDTH = 510
-var _MINIMUM_ROOM_HEIGHT = 490
-var _LIGHT_FLOOR_RANGE = 3
+var _padding_offset: float = 25
+var _MINIMUM_ROOM_WIDTH: float = 510
+var _MINIMUM_ROOM_HEIGHT: float = 490
+var _LIGHT_FLOOR_RANGE: int = 3
 
 @export var color_rect: ColorRect
 @export var scroll_container: SmoothScrollContainer
 @export var room_container: ColorRect
 @export var room_addition_node: Control
 @export var torch_confirmation_dialog: ConfirmationDialog
-@export var test_torch_indices: Dictionary
+@export var test_torch_indices: Array[Vector2]
+@export var test_player_position: Vector2
 
 var room_ui_array: Array[Array]
 var current_player_room: RoomUI
@@ -22,17 +23,17 @@ func _input(_inputevent: InputEvent) -> void:
 		queue_free()
 
 
-func _on_return_button_press():
+func _on_return_button_press() -> void:
 	queue_free()
 	
 
-func _on_add_torch_pressed():
+func _on_add_torch_pressed() -> void:
 	torch_confirmation_dialog.show()
 
-func _close_torch_placement_dialog():
+func _close_torch_placement_dialog() -> void:
 	torch_confirmation_dialog.hide()
 
-func _add_torch_to_current_location():
+func _add_torch_to_current_location() -> void:
 	var current_player_floor_index = current_player_room.floor_index
 	var current_player_room_index = current_player_room.room_index
 	
@@ -60,7 +61,7 @@ func _add_torch_to_current_location():
 	current_player_room.room.set_torch_active()
 
 # Test function
-func _add_light_to_rooms(floor_index: int, room_index: int) -> void:
+func _test_add_light_to_rooms(floor_index: int, room_index: int) -> void:
 	var room_light_range = 1
 	var max_light_index = floor_index + _LIGHT_FLOOR_RANGE + 1 
 	if floor_index + _LIGHT_FLOOR_RANGE + 1 > MapManager.map_width_array.size():
@@ -100,13 +101,15 @@ func _ready():
 	room_container.set_custom_minimum_size(Vector2(room_container_width, room_container_height))
 	
 	# Set the size of the scroll container to be dynamic to the max numbers of rooms of a floor
-	scroll_container.set_size(Vector2(room_container_width, scroll_container.get_size().y))
+	var container_size: Vector2 = Vector2(room_container_width, scroll_container.get_size().y)
+	scroll_container.set_size(container_size)
 	
 	# We're dynamically sizing the width of the map, as such we need to position it to center it on the screen.
 	# X position is calculated by getting half the width of the game screen, then subtracting that from 
 	# half the width of the scroll_container 
 	var scroll_container_position_x: float = color_rect.get_size().x / 2 - scroll_container.get_size().x / 2
-	scroll_container.set_position(Vector2(scroll_container_position_x, scroll_container.position.y))
+	var container_position: Vector2 = Vector2(scroll_container_position_x, scroll_container.position.y)
+	scroll_container.set_position(container_position)
 	
 	var scroll_container_bottom_y_position: float = scroll_container.position.y + scroll_container.get_size().y
 	
@@ -121,6 +124,7 @@ func _ready():
 	var max_floor_width: int = MapManager.map_width_array.max()
 	room_ui_array.resize(MapManager.map_width_array.size())
 	
+	var test_light_node: Array[LightNode]
 	for floor_index: int in range(current_map.rooms.size()):
 		var floor_array: Array = current_map.rooms[floor_index]
 		# When we're done populating a floor and we go to the next index, reset the X start position
@@ -136,10 +140,13 @@ func _ready():
 				room_display.position = position_for_next_room
 				room_display.floor_index = floor_index
 				room_display.room_index = room_index
-				if (MapManager.current_room == room):
+				if test_player_position != null and test_player_position.x == floor_index and test_player_position.y == room_index:
 					current_player_room = room_display
-					room_display.set_player_icon(true)
+					room_display.toggle_player_icon(true)
 				room_ui_array[floor_index].append(room_display)
+				var light_node_position: Vector2 = Vector2(position_for_next_room.x + new_room_size.x / 2, position_for_next_room.y + new_room_size.y / 2)
+				var light: LightNode = LightNode.new(light_node_position, room_display)
+				room_addition_node.add_child(light)
 			else:
 				room_ui_array[floor_index].append(null)
 			# When we go through the array of a floor to put a room down, 
@@ -165,8 +172,12 @@ func _ready():
 		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_rect) / 2
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
 	
-	#room_ui_array[0][2].room.set_torch_active()
-	#_add_light_to_rooms(0, 5)
+	if test_torch_indices.size() > 0:
+		for test_torch: Vector2 in test_torch_indices:
+			var room_ui: RoomUI = room_ui_array[test_torch.x][test_torch.y]
+			if room_ui != null:
+				room_ui.room.set_torch_active()
+				_test_add_light_to_rooms(test_torch.x, test_torch.y)
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 

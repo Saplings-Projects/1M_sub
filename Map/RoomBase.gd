@@ -18,7 +18,7 @@ func get_room_abbreviation() -> String:
 
 func set_torch_active() -> void:
 	has_torch = true
-	if light_level == Enums.LightLevel.DIMLY_LIT or light_level == Enums.LightLevel.LIT:
+	if light_level == Enums.LightLevel.LIT:
 		light_level = Enums.LightLevel.BRIGHTLY_LIT
 	else:
 		light_level = Enums.LightLevel.LIT

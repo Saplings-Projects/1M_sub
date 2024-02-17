@@ -1,17 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://ck87o46d1kvpu"]
 
 [ext_resource type="Script" path="res://Map/RoomUI.gd" id="1_n442j"]
-[ext_resource type="Texture2D" uid="uid://dxpg0rdhgt587" path="res://Map/room_icon.png" id="2_mdfia"]
+[ext_resource type="Texture2D" uid="uid://dxpg0rdhgt587" path="res://Map/Room_Images/room_icon.png" id="2_mdfia"]
 [ext_resource type="Texture2D" uid="uid://cq1ii3ed6oels" path="res://Entity/Player/fauna.png" id="3_c1g4p"]
 
-[node name="RoomUI" type="Control" node_paths=PackedStringArray("label", "color_rect", "player_icon")]
+[node name="RoomUI" type="Control" node_paths=PackedStringArray("label", "player_icon")]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_n442j")
 label = NodePath("RoomEdge/RoomLabel")
-color_rect = NodePath("RoomEdge/ColorRect")
 player_icon = NodePath("PlayerIcon")
 
 [node name="RoomEdge" type="TextureRect" parent="."]
@@ -29,12 +28,6 @@ text = "A"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="RoomEdge"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 50.0
-color = Color(0, 0, 0, 1)
-
 [node name="PlayerIcon" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
@@ -44,5 +37,3 @@ offset_right = 46.0
 offset_bottom = 46.0
 texture = ExtResource("3_c1g4p")
 expand_mode = 1
-
-[connection signal="gui_input" from="RoomEdge/ColorRect" to="." method="_on_rect_gui_input"]
