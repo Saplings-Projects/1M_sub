@@ -9,7 +9,7 @@ func _init() -> void:
 # maybe the name could be a bit more unique compared to `reset_temp_to_default`?
 # so we don't confuse them
 func reset_all_temp_to_default() -> void:
-	for modifier_name in GlobalVar.POSSIBLE_MODIFIER_NAMES.values():
+	for modifier_name: int in GlobalVar.POSSIBLE_MODIFIER_NAMES.values():
 		stat_dict[modifier_name].reset_temp_to_default()
 
 func change_modifier_of_given_name( modifier_name: GlobalVar.POSSIBLE_MODIFIER_NAMES, new_modification: StatModifiers) -> void:

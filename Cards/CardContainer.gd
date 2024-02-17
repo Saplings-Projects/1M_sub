@@ -51,7 +51,9 @@ var _discard_timer: SceneTreeTimer = null
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
 	CardManager.set_card_container(self)
-	CardManager.on_card_action_finished.connect(finish_active_card_action)
+	CardManager.on_card_action_finished.connect(finish_active_card_action.unbind(1))
+	# ? all calls functions connected to on_card_action_finished don't even use the data of the card passed with the signal
+	# ? does the signal even need to pass the card data since no function connected uses it ?
 	
 	_init_default_draw_pile()
 
@@ -72,7 +74,7 @@ func queued_for_active() -> void:
 
 
 func _remove_queued_card_from_hand() -> void:
-	var _index_to_remove = cards_in_hand.find(queued_card)
+	var _index_to_remove: int = cards_in_hand.find(queued_card)
 	cards_in_hand.remove_at(_index_to_remove)
 
 
@@ -84,7 +86,7 @@ func set_active_card(card: CardWorld) -> void:
 	_active_card = card
 
 
-func finish_active_card_action(card: CardBase) -> void:
+func finish_active_card_action() -> void:
 	_discard_active_card()
 	_active_card = null
 
@@ -395,7 +397,6 @@ func _update_card_positions() -> void:
 	for card_index: int in amount_of_cards:
 		var card: CardWorld = cards_in_hand[card_index]
 		var movement_component: CardMovementComponent = card.get_card_movement_component()
-		var move_state: Enums.CardMovementState = movement_component.current_move_state
 		
 		var card_x: float = per_card_separation * card_index
 		var card_y: float = 0.0
@@ -430,7 +431,7 @@ func _update_card_positions() -> void:
 		movement_component.state_properties.desired_position = Vector2(card_x, card_y)
 		movement_component.state_properties.desired_rotation = rotation_amount
 
-func un_queue_card(card : CardWorld):
+func un_queue_card(card : CardWorld) -> void:
 	set_queued_card(null)
 	_unfocus_card(card)
 	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.IN_HAND)
@@ -438,7 +439,7 @@ func un_queue_card(card : CardWorld):
 func is_queued_card_in_play_area() -> bool:
 	return get_global_mouse_position().y < play_at_height 
 
-func _handle_queued_card():
+func _handle_queued_card() -> void:
 	if(queued_card == null):
 		return
 		
