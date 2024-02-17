@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=14 format=3 uid="uid://3s4aet1ciesh"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=13 format=3 uid="uid://3s4aet1ciesh"]
 
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_h8l2w"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_vf50y"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_22qxd"]
-[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="3_0biqs"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="3_l3hyf"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="4_84i11"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_ajuey"]
@@ -11,14 +10,11 @@
 [sub_resource type="Resource" id="Resource_jtcab"]
 script = ExtResource("1_vf50y")
 
-[sub_resource type="Resource" id="Resource_ojuu2"]
-script = ExtResource("3_0biqs")
-
 [sub_resource type="Resource" id="Resource_73uy7"]
 script = ExtResource("2_22qxd")
 effect = SubResource("Resource_jtcab")
 value = 1
-targeting_function = SubResource("Resource_ojuu2")
+target_type = 0
 
 [sub_resource type="Resource" id="Resource_nlhgr"]
 script = ExtResource("4_84i11")
@@ -30,14 +26,11 @@ status_power = 1.0
 script = ExtResource("3_l3hyf")
 status_to_apply = SubResource("Resource_nlhgr")
 
-[sub_resource type="Resource" id="Resource_dso5d"]
-script = ExtResource("3_0biqs")
-
 [sub_resource type="Resource" id="Resource_tmm5r"]
 script = ExtResource("2_22qxd")
 effect = SubResource("Resource_qxsxr")
 value = 0
-targeting_function = SubResource("Resource_dso5d")
+target_type = 0
 
 [sub_resource type="Resource" id="Resource_noiey"]
 script = ExtResource("5_ajuey")

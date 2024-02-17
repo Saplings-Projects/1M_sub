@@ -20,7 +20,7 @@ func init_card(in_card_data: CardBase) -> void:
 	card_cast_type = Enums.CardCastType.INSTA_CAST
 	
 	for effectData : EffectData in card_data.card_effects_data:
-		if(effectData.targeting_function.cast_type == Enums.CardCastType.TARGET):
+		if(effectData.target_type == Enums.TargetType.SINGLE_TARGET):
 			card_cast_type = Enums.CardCastType.TARGET
 			break
 
