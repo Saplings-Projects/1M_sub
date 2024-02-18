@@ -12,7 +12,7 @@ var player_position: Vector2i
 
 func _ready() -> void:
 	player = null
-	player_position = Vector2i(0, 0)
+	player_position = Vector2i(5, 0)
 
 
 func set_player(in_player: Player) -> void:
