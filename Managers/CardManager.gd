@@ -12,7 +12,7 @@ var current_deck: Array[CardBase] = []
 var default_deck: CardSetBase = null
 
 
-func _ready():
+func _ready() -> void:
 	default_deck = load("res://Cards/CardSets/DefaultDeck.tres")
 
 

@@ -8,8 +8,8 @@ func test_possible_modifier_size() -> void:
 
 
 func test_offense_dict_size() -> void:
-	var offense_dict_size_player: int = _player_stat_component.get_stats()._offense_modifier_dict.stat_dict.size()
-	var offense_dict_size_enemy: int = _enemy_stat_component.get_stats()._offense_modifier_dict.stat_dict.size()
+	var offense_dict_size_player: int = _player_stat_component.stats._offense_modifier_dict.stat_dict.size()
+	var offense_dict_size_enemy: int = _enemy_stat_component.stats._offense_modifier_dict.stat_dict.size()
 	var modifier_dict_size: int = GlobalVar.POSSIBLE_MODIFIER_NAMES.size()
 	var assert_false_string: String = "Expected offense_dict_size to be %s (POSSIBLE_MODIFIER_NAMES.size()) but got %s instead for entity %s"
 	assert_eq(offense_dict_size_player, modifier_dict_size, assert_false_string % [modifier_dict_size, offense_dict_size_player, "player"])
@@ -17,8 +17,8 @@ func test_offense_dict_size() -> void:
 
 
 func test_defense_dict_size() -> void:
-	var defense_dict_size_player: int = _player_stat_component.get_stats()._defense_modifier_dict.stat_dict.size()
-	var defense_dict_size_enemy: int = _enemy_stat_component.get_stats()._defense_modifier_dict.stat_dict.size()
+	var defense_dict_size_player: int = _player_stat_component.stats._defense_modifier_dict.stat_dict.size()
+	var defense_dict_size_enemy: int = _enemy_stat_component.stats._defense_modifier_dict.stat_dict.size()
 	var modifier_dict_size: int = GlobalVar.POSSIBLE_MODIFIER_NAMES.size()
 	var assert_false_string: String = "Expected defense_dict_size to be %s (POSSIBLE_MODIFIER_NAMES.size()) but got %s instead for entity %s"
 	assert_eq(defense_dict_size_player, modifier_dict_size, assert_false_string % [modifier_dict_size, defense_dict_size_player, "player"])

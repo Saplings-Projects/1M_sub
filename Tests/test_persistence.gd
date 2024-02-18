@@ -1,7 +1,7 @@
 extends TestBase
 
 
-func _create_player():
+func _create_player() -> void:
 	_player = _player_scene.instantiate()
 	get_tree().root.add_child(_player)
 	
@@ -13,7 +13,7 @@ func _create_player():
 	#_player_stat_component.stats.ready_entity_stats()
 
 
-func test_persist_player_health():
+func test_persist_player_health() -> void:
 	_player_health_component.deal_damage(5.0, _player)
 	
 	assert_eq(_player_health_component.current_health, 95.0)
@@ -26,7 +26,7 @@ func test_persist_player_health():
 	assert_eq(_player_health_component.current_health, 95.0)
 
 
-func test_persist_strength_status():
+func test_persist_strength_status() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	
 	var stat_modifer: StatModifiers = StatModifiers.new()
@@ -37,7 +37,7 @@ func test_persist_strength_status():
 	
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.card_effects_data[0].value = 2
-	card_damage.on_card_play(_player, [_enemy])
+	card_damage.on_card_play(_player, _enemy)
 	assert_eq(_enemy_health_component.current_health, 96.0)
 	
 	_player._should_save_persistent_data = true
@@ -46,11 +46,11 @@ func test_persist_strength_status():
 	_create_player()
 	
 	# player should still have their permanent buff after being destroyed and recreated
-	card_damage.on_card_play(_player, [_enemy_2]) # enemy 2 has 50 health
+	card_damage.on_card_play(_player, _enemy_2) # enemy 2 has 50 health
 	assert_eq(_enemy_2_health_component.current_health, 46.0)
 
 
-func test_persist_cards():
+func test_persist_cards() -> void:
 	CardManager.current_deck.clear()
 	CardManager.current_deck.append(CardBase.new())
 	CardManager.current_deck.append(CardBase.new())
