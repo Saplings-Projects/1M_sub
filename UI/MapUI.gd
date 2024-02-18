@@ -23,17 +23,19 @@ func _on_return_button_press() -> void:
 func _ready() -> void:
 	var current_map: MapBase = MapManager.current_map
 	
+	var accessible_rooms_by_player: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
+	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
-	var new_room_texture_rect: TextureRect = Helpers.get_first_child_node_of_type(new_room, TextureRect)
-	var new_room_size: Vector2 = new_room_texture_rect.get_size()
+	var new_room_texture_button: TextureButton = Helpers.get_first_child_node_of_type(new_room, TextureButton)
+	var new_room_size: Vector2 = new_room_texture_button.get_size()
 	
 	
-	var room_container_width: float = _get_combined_room_width(new_room_texture_rect)
+	var room_container_width: float = _get_combined_room_width(new_room_texture_button)
 	# Set the max width between what we calculated above and the minimum room width constant
 	room_container_width = max(room_container_width, _MINIMUM_ROOM_WIDTH)
 	
-	var room_container_height: float = _get_combined_room_height(new_room_texture_rect)
+	var room_container_height: float = _get_combined_room_height(new_room_texture_button)
 	# Set the max height between what we calculated above and the minimum room height constant
 	room_container_height = max(room_container_height, _MINIMUM_ROOM_HEIGHT)
 	
@@ -65,6 +67,9 @@ func _ready() -> void:
 		for room: RoomBase in floor_array:
 			if (room != null):
 				var room_display: Control = room_ui.instantiate()
+				var texture_button: TextureButton = Helpers.get_first_child_node_of_type(room_display, TextureButton)
+				# disable the button if the player can't access the room
+				texture_button.disabled = not accessible_rooms_by_player.has(room)
 				room_addition_node.add_child(room_display)
 				room_display.set_label(room.get_room_abbreviation())
 				room_display.position = position_for_next_room
@@ -79,7 +84,7 @@ func _ready() -> void:
 	# We want to position the rooms in the center of the room container, to do so:
 	# Get half the size of the room container and subtract it by half the size of the width of the combined rooms
 	# This is to account for in case the size of the rooms is smaller than the container we put it in
-	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_rect) / 2
+	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_button) / 2
 	
 	# If the height of the combined rooms is less than the minimum room height 
 	# then calculate the position for it to be centered in the middle of the map:
@@ -87,18 +92,18 @@ func _ready() -> void:
 	# Hence we subtract half the size of the container from half the size of the height of the combined rooms to get the center point
 	# then subtract it from the position of the container
 	var new_room_position_y: float = room_container.position.y
-	if (_get_combined_room_height(new_room_texture_rect) < _MINIMUM_ROOM_HEIGHT):
-		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_rect) / 2
+	if (_get_combined_room_height(new_room_texture_button) < _MINIMUM_ROOM_HEIGHT):
+		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_button) / 2
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
 # to account for the other end of the floor
-func _get_combined_room_width(texture_rect: TextureRect) -> float:
+func _get_combined_room_width(texture_rect: TextureButton) -> float:
 	return ((texture_rect.get_size().x + _padding_offset) * MapManager.map_width_array.max()) + _padding_offset
 
 # Calculate the height of the container where the rooms will reside in. This will be dynamic based on the map array that we have.
 # The array we have in MapManager, each element will increase the height of the map display, 
 # multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.
-func _get_combined_room_height(texture_rect: TextureRect) -> float:
+func _get_combined_room_height(texture_rect: TextureButton) -> float:
 	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset) + _padding_offset
