@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=22 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
+[ext_resource type="Resource" uid="uid://ckaua56xmrxib" path="res://Cards/Resource/Card_Energy.tres" id="4_krnn7"]
 [ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="4_ol33a"]
 [ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="5_icdnp"]
 [ext_resource type="Resource" uid="uid://boodcfdepyk5i" path="res://Cards/Resource/Card_DamageHealth.tres" id="6_qsijp"]
@@ -16,7 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
+[ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="14_nckre"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
+[ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Cards/energy_count.png" id="19_spyxg"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 
 [node name="TestingScene" type="Node2D"]
@@ -46,7 +49,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_ol33a"), ExtResource("5_icdnp"), ExtResource("6_qsijp"), ExtResource("7_pyrgi"), ExtResource("8_4qeej"), ExtResource("9_g2pug"), ExtResource("10_bsfis"), ExtResource("11_lk3kc")])
+default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_ol33a"), ExtResource("5_icdnp"), ExtResource("6_qsijp"), ExtResource("7_pyrgi"), ExtResource("8_4qeej"), ExtResource("9_g2pug"), ExtResource("10_bsfis"), ExtResource("11_lk3kc"), ExtResource("4_krnn7")])
 starting_hand_size = 10
 max_hand_width = 900.0
 min_card_separation = 90.0
@@ -72,6 +75,30 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "end turn"
 script = ExtResource("14_dpe64")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -159.0
+offset_right = 257.0
+offset_bottom = 32.0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("19_spyxg")
+
+[node name="EnergyLabel" type="Label" parent="CanvasLayer/UIControl/TextureRect"]
+layout_mode = 0
+offset_left = 82.1705
+offset_top = 72.8682
+offset_right = 92.1705
+offset_bottom = 95.8682
+scale = Vector2(3.93058, 3.1094)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_nckre")
 
 [node name="DrawPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
 layout_mode = 1

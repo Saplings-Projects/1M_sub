@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="4_y13fe"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="5_8k4sy"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_n2tug"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_ywuis"]
 
 [sub_resource type="Resource" id="Resource_h6yd6"]
 script = ExtResource("3_euw63")
@@ -34,9 +35,14 @@ effect = SubResource("Resource_gd8uo")
 value = 0
 targeting_function = SubResource("Resource_5w54v")
 
+[sub_resource type="Resource" id="Resource_noiey"]
+script = ExtResource("5_ywuis")
+energy_cost = 1
+
 [resource]
 script = ExtResource("5_n2tug")
 application_type = 0
 card_title = "Buff poison duration"
 card_description = "Add 2 to the duration of poison applied by targeted entity for 6 turns"
 card_effects_data = Array[ExtResource("4_y13fe")]([SubResource("Resource_chqbm")])
+energy_info = SubResource("Resource_noiey")

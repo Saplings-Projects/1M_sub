@@ -14,3 +14,4 @@ func _process(_delta: float) -> void:
 
 func _on_pressed() -> void:
 	PhaseManager.set_phase(Enums.Phase.PLAYER_FINISHING)
+	

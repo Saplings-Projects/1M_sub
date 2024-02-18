@@ -8,6 +8,7 @@ class_name CardUISetter
 
 @export var title_label: Label
 @export var description_label: Label
+@export var energy_label: Label
 @export var key_art: TextureRect
 
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 func _on_card_initialized(in_card_data: CardBase) -> void:
 	title_label.text = in_card_data.card_title
 	description_label.text = in_card_data.card_description
+	energy_label.text = "E: " + str(in_card_data.energy_info.energy_cost)
 	if in_card_data.card_key_art:
 		key_art.texture = in_card_data.card_key_art
 	else:

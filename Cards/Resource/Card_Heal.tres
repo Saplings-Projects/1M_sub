@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_wmkvt"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_y1itd"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_y7dlo"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="3_ufppv"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="3_ctdsn"]
 
 [sub_resource type="Resource" id="Resource_hnan1"]
@@ -17,9 +18,14 @@ effect = SubResource("Resource_hnan1")
 value = -1
 targeting_function = SubResource("Resource_njmsu")
 
+[sub_resource type="Resource" id="Resource_1hn6q"]
+script = ExtResource("3_ufppv")
+energy_cost = 2
+
 [resource]
 script = ExtResource("1_y1itd")
 application_type = 0
 card_title = "Heal"
 card_description = "Heal 1 damage"
 card_effects_data = Array[ExtResource("2_y7dlo")]([SubResource("Resource_amxgq")])
+energy_info = SubResource("Resource_1hn6q")
