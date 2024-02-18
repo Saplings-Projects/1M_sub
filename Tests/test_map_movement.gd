@@ -21,17 +21,17 @@ func _check_accessible_rooms(
 
 func test_accessible_positions_by_player() -> void:
 	var player_position_array: Array[Vector2i] = [
-		Vector2i(2,4), 
+		Vector2i(2,0), 
 		Vector2i(4,2),
 		Vector2i(0,2),
 		Vector2i(1,2),
-		Vector2i(2,0)
+		Vector2i(2,4)
 	]
 	var expected_accessible_positions: Array[Array] = [
-		[Vector2i(1,3), Vector2i(2,3), Vector2i(3,3)],
-		[Vector2i(3,1)],
-		[Vector2i(1,1)],
-		[Vector2i(1,1), Vector2i(2,1)],
+		[Vector2i(1,1), Vector2i(2,1), Vector2i(3,1)],
+		[Vector2i(3,3)],
+		[Vector2i(1,3)],
+		[Vector2i(1,3), Vector2i(2,3)],
 		[]
 	]
 	var callable_to_test: Callable = Callable(MapMovement, "get_accessible_room_positions_by_player")
@@ -40,21 +40,21 @@ func test_accessible_positions_by_player() -> void:
 
 func test_accessible_positions_by_player_in_range() -> void:
 	var player_position_array: Array[Vector2i] = [
-		Vector2i(2,4), 
+		Vector2i(2,0), 
 		Vector2i(4,2),
 		Vector2i(0,2),
 		Vector2i(1,2),
-		Vector2i(2,0)
+		Vector2i(2,4)
 	]
 	var expected_accessible_positions: Array[Array] = [
 		[
-			Vector2i(1,3), Vector2i(2,3), Vector2i(3,3), 
+			Vector2i(1,1), Vector2i(2,1), Vector2i(3,1), 
 			Vector2i(0,2), Vector2i(1,2), Vector2i(2,2), 
 			Vector2i(3,2), Vector2i(4,2)
 		],
-		[Vector2i(3,1), Vector2i(2,0)],
-		[Vector2i(1,1), Vector2i(2,0)],
-		[Vector2i(1,1), Vector2i(2,1), Vector2i(2,0)],
+		[Vector2i(3,3), Vector2i(2,4)],
+		[Vector2i(1,3), Vector2i(2,4)],
+		[Vector2i(1,3), Vector2i(2,3), Vector2i(2,4)],
 		[]
 	]
 	var callable_to_test: Callable = Callable(MapMovement, "get_all_accessible_room_positions_in_range")
