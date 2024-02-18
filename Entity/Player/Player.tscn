@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://clmg3l3n28x38"]
+[gd_scene load_steps=12 format=3 uid="uid://clmg3l3n28x38"]
 
 [ext_resource type="Script" path="res://Entity/Player/Player.gd" id="1_4qbo7"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_cf8lx"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="6_kgqto"]
 [ext_resource type="Script" path="res://UI/HealthLabel.gd" id="7_1hqya"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_mmgs7"]
+[ext_resource type="Script" path="res://Entity/Components/EnergyComponent.gd" id="9_5kwft"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8bva"]
 size = Vector2(104, 93)
@@ -53,6 +54,9 @@ health_component = NodePath("../HealthComponent")
 [node name="PartyComponent" type="Node" parent="."]
 script = ExtResource("8_mmgs7")
 team = 1
+
+[node name="EnergyComponent" type="Node" parent="."]
+script = ExtResource("9_5kwft")
 
 [connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]

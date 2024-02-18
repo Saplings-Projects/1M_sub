@@ -15,7 +15,7 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	# Save player data when they are destroyed (combat end)
 	PlayerManager.set_player(null)
-	
+
 	if _should_save_persistent_data:
 		_save_persistent_data()
 
@@ -49,3 +49,7 @@ func _save_persistent_data() -> void:
 	# Save stat data
 	var stat_comp: StatComponent = get_stat_component()
 	PlayerManager.player_persistent_data.saved_stats = stat_comp.stats
+
+
+func get_energy_component() -> EnergyComponent:
+	return Helpers.get_first_child_node_of_type(self, EnergyComponent) as EnergyComponent

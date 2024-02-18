@@ -20,6 +20,8 @@ class_name CardBase
 
 @export var card_effects_data: Array[EffectData] = []
 
+@export var energy_info: EnergyData = EnergyData.new()
+
 func _ready() -> void:
 	card_effects_data = []
 
@@ -37,6 +39,9 @@ func can_play_card(caster: Entity, target: Entity) -> bool:
 
 
 func on_card_play(caster: Entity, base_target: Entity) -> void:
+	if caster is Player:
+		PlayerManager.player.get_energy_component().use_energy(self)	
+	
 	for effect_data: EffectData in card_effects_data:
 		var list_targets: Array[Entity] = effect_data.targeting_function.generate_target_list(base_target)
 		for current_target in list_targets:
