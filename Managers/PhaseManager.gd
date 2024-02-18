@@ -17,7 +17,7 @@ func _ready() -> void:
 	initialize_game()
 	
 
-func initialize_game():
+func initialize_game() -> void:
 	set_phase(Enums.Phase.GAME_STARTING)
 	
 	# TODO give all objects some time to initialize. Kinda hacky

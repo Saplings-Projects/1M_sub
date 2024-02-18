@@ -2,7 +2,7 @@ extends Button
 ## Ends the player's turn when clicked.
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# disable button during enemy attack phase
 	disabled = Enums.Phase.ENEMY_ATTACKING == PhaseManager.current_phase\
 				or PhaseManager.current_phase == Enums.Phase.PLAYER_FINISHING\

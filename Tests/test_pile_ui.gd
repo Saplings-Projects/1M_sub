@@ -6,7 +6,7 @@ var _card_scroll: Control = null
 
 
 # @Override
-func before_each():
+func before_each() -> void:
 	super()
 	_card_scroll = _card_container_scroll_scene.instantiate()
 	_card_scroll.deck_pile = CardManager.current_deck.duplicate()
@@ -14,13 +14,13 @@ func before_each():
 
 
 # @Override
-func after_each():
+func after_each() -> void:
 	_card_container.queue_free()
 	_card_scroll.free()
 	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 
 
-func test_populate():
+func test_populate() -> void:
 	var card_pile: Array[CardBase] = _card_scroll.deck_pile
 	var grid: GridContainer = _card_scroll.get_child(SCROLL_CONTAINER_INDEX).get_child(GRID_CONTAINER_INDEX)
 

@@ -36,7 +36,8 @@ func _ready() -> void:
 	set_movement_state(current_move_state)
 
 
-func _process(delta: float) -> void:
+# @Override
+func _process(_delta: float) -> void:
 	_on_state_process(current_move_state)
 
 

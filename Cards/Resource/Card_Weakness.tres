@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=10 format=3 uid="uid://bobfsmcwcgsbb"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://bobfsmcwcgsbb"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_24klx"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Weakness.gd" id="2_nfouc"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="3_npk78"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="4_5u817"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_ksxho"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="5_twoji"]
 
 [sub_resource type="Resource" id="Resource_fppy1"]
 script = ExtResource("3_npk78")
@@ -24,11 +25,14 @@ status_modifier_base_value = SubResource("Resource_fppy1")
 script = ExtResource("1_24klx")
 status_to_apply = SubResource("Resource_o2ren")
 
+[sub_resource type="Resource" id="Resource_dtnir"]
+script = ExtResource("5_twoji")
+
 [sub_resource type="Resource" id="Resource_e1gpi"]
 script = ExtResource("4_5u817")
 effect = SubResource("Resource_i0g8f")
 value = 0
-target_type = 0
+targeting_function = SubResource("Resource_dtnir")
 
 [resource]
 script = ExtResource("5_ksxho")

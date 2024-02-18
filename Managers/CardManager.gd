@@ -38,6 +38,6 @@ func is_discard_hand_signal_connected(callable: Callable) -> bool:
 	return card_container != null and card_container.on_finished_discarding_hand.is_connected(callable)
 
 
-func connect_discard_hand_signal(callable: Callable):
+func connect_discard_hand_signal(callable: Callable) -> void:
 	card_container.on_finished_discarding_hand.connect(callable)
 
