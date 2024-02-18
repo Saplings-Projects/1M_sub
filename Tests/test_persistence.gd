@@ -33,7 +33,7 @@ func test_persist_strength_status() -> void:
 	var strength_status: Buff_Strength = Buff_Strength.new()
 	
 	var stat_modifer: StatModifiers = StatModifiers.new()
-	stat_modifer.permanent_add = 2.0
+	stat_modifer.permanent_add = 2
 	stat_modifer.ready()
 	strength_status.status_modifier_base_value = stat_modifer
 	_player.get_status_component().add_status(strength_status, _player)
