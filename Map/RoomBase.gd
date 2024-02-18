@@ -7,6 +7,7 @@ class_name RoomBase
 @export var light_level: int = 0
 @export var has_torch: bool = false
 @export var room_event: EventBase
+var room_position: Vector2i
 
 func _to_string() -> String:
 	return "RoomBase"

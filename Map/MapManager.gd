@@ -25,6 +25,7 @@ func create_map(map_floors_width: Array[int]) -> MapBase: ## Generates and Popul
 			var _room_event: EventBase = GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
 			var _generated_room: RoomBase = RoomBase.new()
 			_generated_room.room_event = _room_event
+			_generated_room.room_position = Vector2i(index_width + _padding_size, index_height)
 			_grid[index_height].append(_generated_room as RoomBase)
 		_grid[index_height].append_array(_padding)
 	_map.rooms = _grid
