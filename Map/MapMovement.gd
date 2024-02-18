@@ -35,9 +35,13 @@ static func get_all_accessible_room_positions_in_range(position: Vector2i, remai
 	return accessible_room_positions_in_range
 	
 	
-static func get_all_accessible_rooms_in_range(position: Vector2i, remaining_range: int, current_map: Array[Array]) -> Array[Variant]:
+static func get_all_accessible_rooms_in_range(
+	position: Vector2i, 
+	remaining_range: int, 
+	current_map: Array[Array]
+	) -> Array[RoomBase]:
 	var accessible_positions_in_range: Array[Vector2i] = get_all_accessible_room_positions_in_range(position, remaining_range)
-	var accessible_rooms_in_range: Array[Variant] = []
+	var accessible_rooms_in_range: Array[RoomBase] = []
 	for current_position: Vector2i in accessible_positions_in_range:
 		accessible_rooms_in_range.append(current_map[current_position.y][current_position.x])
 	
@@ -45,5 +49,9 @@ static func get_all_accessible_rooms_in_range(position: Vector2i, remaining_rang
 
 
 # Helper function to be able to call without any parameters
-static func get_accessible_rooms_by_player(position: Vector2i = PlayerManager.current_position, remaining_range: int = 1, current_map: Array[Array] = MapManager.current_map.rooms) -> Array[RoomBase]:
+static func get_accessible_rooms_by_player(
+	position: Vector2i = PlayerManager.player_position, 
+	remaining_range: int = 1, 
+	current_map: Array[Array] = MapManager.current_map.rooms
+	) -> Array[RoomBase]:
 	return get_all_accessible_rooms_in_range(position, remaining_range, current_map)
