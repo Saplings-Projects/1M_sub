@@ -7,6 +7,9 @@ func _create_player() -> void:
 	
 	_player_health_component = _player.get_health_component()
 	_player_stat_component = _player.get_stat_component()
+	_player_energy_component = _player.get_energy_component()
+	
+	_player_energy_component.ignore_cost = true
 	
 	# NOTE: This resets the stats, so we don't want to call it when we're creating a player
 	# for persistence testing.
