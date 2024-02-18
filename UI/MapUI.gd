@@ -70,6 +70,7 @@ func _ready() -> void:
 				var texture_button: TextureButton = Helpers.get_first_child_node_of_type(room_display, TextureButton)
 				# disable the button if the player can't access the room
 				texture_button.disabled = not accessible_rooms_by_player.has(room)
+				room_display.room = room
 				room_addition_node.add_child(room_display)
 				room_display.set_label(room.get_room_abbreviation())
 				room_display.position = position_for_next_room
