@@ -16,7 +16,7 @@ scroll_container = NodePath("SmoothScrollContainer")
 room_container = NodePath("SmoothScrollContainer/RoomContainer")
 room_addition_node = NodePath("SmoothScrollContainer/RoomContainer/RoomAdditionNode")
 torch_confirmation_dialog = NodePath("TorchPlacementConfirmationDialog")
-test_player_position = Vector2(0, 3)
+test_player_position = Vector2(0, 2)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -28,6 +28,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.309804)
 
 [node name="SmoothScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
 offset_left = 223.0
 offset_top = 60.0
 offset_right = 1123.0
@@ -45,12 +46,14 @@ mouse_filter = 1
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
 [node name="RoomAdditionNode" type="Control" parent="SmoothScrollContainer/RoomContainer"]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
 
 [node name="AddTorch" type="Button" parent="."]
+layout_mode = 0
 offset_left = 4.0
 offset_top = 505.0
 offset_right = 65.0
@@ -59,6 +62,7 @@ text = "Add Torch
 "
 
 [node name="Return" type="Button" parent="."]
+layout_mode = 0
 offset_left = 4.0
 offset_top = 550.0
 offset_right = 65.0

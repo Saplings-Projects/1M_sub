@@ -2,7 +2,7 @@ extends Node2D
 ## Class to manage backend for rooms (generation and such)
 
 var current_map: MapBase
-var map_width_array: Array[int] = [1, 3, 5, 7, 7, 7, 7, 5, 3, 1]
+var map_width_array: Array[int] = [1, 3, 5, 3, 1]
 var current_room: RoomBase
  
 #map_floors_width changes the width of the map's floors

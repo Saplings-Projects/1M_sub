@@ -17,6 +17,7 @@ var _LIGHT_FLOOR_RANGE: int = 3
 
 var room_ui_array: Array[Array]
 var current_player_room: RoomUI
+var light_overlay: LightOverlay
 
 func _input(_inputevent: InputEvent) -> void:
 	if (_inputevent.is_action_pressed("cancel_action")):
@@ -59,6 +60,7 @@ func _add_torch_to_current_location() -> void:
 					room_ui.room.set_light_level(Enums.LightLevel.DIMLY_LIT)
 		room_light_range += 1
 	current_player_room.room.set_torch_active()
+	light_overlay.queue_redraw()
 
 # Test function
 func _test_add_light_to_rooms(floor_index: int, room_index: int) -> void:
@@ -124,14 +126,12 @@ func _ready():
 	var max_floor_width: int = MapManager.map_width_array.max()
 	room_ui_array.resize(MapManager.map_width_array.size())
 	
-	var test_light_node: Array[LightNode]
 	for floor_index: int in range(current_map.rooms.size()):
 		var floor_array: Array = current_map.rooms[floor_index]
 		# When we're done populating a floor and we go to the next index, reset the X start position
 		position_for_next_room.x = start_position_for_next_room_x
 		for room_index: int in range(floor_array.size()):
 			var room: RoomBase = floor_array[room_index]
-		#for room: RoomBase in floor_array:
 			if room != null:
 				var room_display: RoomUI = room_ui.instantiate()
 				room_display.room = room
@@ -144,9 +144,6 @@ func _ready():
 					current_player_room = room_display
 					room_display.toggle_player_icon(true)
 				room_ui_array[floor_index].append(room_display)
-				var light_node_position: Vector2 = Vector2(position_for_next_room.x + new_room_size.x / 2, position_for_next_room.y + new_room_size.y / 2)
-				var light: LightNode = LightNode.new(light_node_position, room_display)
-				room_addition_node.add_child(light)
 			else:
 				room_ui_array[floor_index].append(null)
 			# When we go through the array of a floor to put a room down, 
@@ -178,6 +175,8 @@ func _ready():
 			if room_ui != null:
 				room_ui.room.set_torch_active()
 				_test_add_light_to_rooms(test_torch.x, test_torch.y)
+	light_overlay = LightOverlay.new(room_container, room_ui_array)
+	room_container.add_child(light_overlay)
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
