@@ -1,10 +1,17 @@
 class_name MapMovement extends Resource
 
 
-static func get_accessible_room_positions_by_player(position: Vector2i) -> Array[Vector2i]:
-	var _max_floor_size: int = MapManager.map_width_array.max()
-	var accessible_room_positions: Array[Vector2i] = []
+static func get_accessible_room_positions_by_given_position(position: Vector2i) -> Array[Vector2i]:
+	var map_rooms = MapManager.current_map.rooms
 	var map_width_array: Array[int] = MapManager.map_width_array
+	var _max_floor_size: int = map_width_array.max()
+	var accessible_room_positions: Array[Vector2i] = []
+	# if position is out of bounds or current room is null, return empty array
+	if (position.y < 0 or position.y > map_rooms.size() - 1) \
+		or  position.x < 0 or position.x > _max_floor_size - 1 \
+		or map_rooms[position.y][position.x] == null:
+		return []
+	
 	for movement: Vector2i in GlobalVar.POSSIBLE_MOVEMENTS.values():
 		var new_floor_index: int = position.y + movement.y
 		var new_room_index: int = position.x + movement.x
@@ -12,7 +19,7 @@ static func get_accessible_room_positions_by_player(position: Vector2i) -> Array
 			var _floor_width : int = map_width_array[new_floor_index]
 			var _padding_size : int = (_max_floor_size - _floor_width)/2
 			if new_room_index >= 0 and new_room_index <= _padding_size + map_width_array[new_floor_index] - 1:
-				var room: RoomBase = MapManager.current_map.rooms[new_floor_index][new_room_index]
+				var room: RoomBase = map_rooms[new_floor_index][new_room_index]
 				# assuming all maps whatever the type are based on the same width array
 				if room != null:
 					accessible_room_positions.append(Vector2i(new_room_index, new_floor_index))
@@ -22,7 +29,7 @@ static func get_accessible_room_positions_by_player(position: Vector2i) -> Array
 
 static func get_all_accessible_room_positions_in_range(position: Vector2i, remaining_range: int) -> Array[Vector2i]:
 	var accessible_room_positions_in_range: Array[Vector2i] = []
-	var accessible_room_positions_by_player: Array[Vector2i] = get_accessible_room_positions_by_player(position)
+	var accessible_room_positions_by_player: Array[Vector2i] = get_accessible_room_positions_by_given_position(position)
 	accessible_room_positions_in_range.append_array(accessible_room_positions_by_player)
 	if remaining_range == 1:
 		Helpers.remove_duplicate_in_array(accessible_room_positions_in_range)
