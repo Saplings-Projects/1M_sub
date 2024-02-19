@@ -12,10 +12,25 @@ var player_position: Vector2i
 
 func _ready() -> void:
 	player = null
-	player_position = Vector2i(5, 0)
+	MapManager.map_initialized.connect(_set_starting_position)
+	
+
+func _set_starting_position() -> void:
+	player_position = _get_starting_position()
 
 
 func set_player(in_player: Player) -> void:
 	player = in_player
 	if player != null:
 		on_player_initialized.emit()
+		
+
+func _get_starting_position() -> Vector2i:
+	var current_map_width_array: Array[int] = MapManager.map_width_array
+	var starting_position: Vector2i = Vector2i(0,0)
+	
+	var padding_size_first_floor: int = (current_map_width_array.max() - current_map_width_array[0])/2
+	
+	starting_position.x = padding_size_first_floor
+	
+	return starting_position
