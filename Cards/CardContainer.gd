@@ -16,7 +16,6 @@ signal on_finished_discarding_hand
 @export var total_hand_width: float = 100
 @export var card_hovered_offset: float = 100
 @export var card_queued_offset: float = 100
-@export var default_deck: Array[CardBase]
 @export var starting_hand_size: int = 5
 @export var max_hand_size: int = 10
 @export var card_draw_time: float = 0.2
@@ -49,12 +48,11 @@ var _discard_timer: SceneTreeTimer = null
 
 func _ready() -> void:
 	PhaseManager.on_phase_changed.connect(_on_phase_changed)
+	CardManager.on_deck_initialized.connect(_init_default_draw_pile)
 	CardManager.set_card_container(self)
 	CardManager.on_card_action_finished.connect(finish_active_card_action.unbind(1))
 	# ? all calls functions connected to on_card_action_finished don't even use the data of the card passed with the signal
 	# ? does the signal even need to pass the card data since no function connected uses it ?
-	
-	_init_default_draw_pile()
 
 
 func _process(_delta: float) -> void:
@@ -154,7 +152,7 @@ func get_discard_pile_size() -> int:
 
 
 func _init_default_draw_pile() -> void:
-	draw_pile = default_deck.duplicate()
+	draw_pile = CardManager.current_deck.duplicate()
 	draw_pile.shuffle()
 
 

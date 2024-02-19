@@ -74,12 +74,12 @@ static func get_value_modified_by_stats(modifier_name: GlobalVar.POSSIBLE_MODIFI
 	var modified_value: int = value
 	var caster_stats: EntityStats = null
 	if caster != null:
-		caster_stats = caster.get_stat_component().get_stats()
+		caster_stats = caster.get_stat_component().stats
 		modified_value = caster_stats._calculate_modified_value_offense(modifier_name, modified_value)
 
 	var target_stats: EntityStats = null
 	if target != null:
-		target_stats = target.get_stat_component().get_stats()
+		target_stats = target.get_stat_component().stats
 		modified_value = target_stats._calculate_modified_value_defense(modifier_name, modified_value) 
 
 	return modified_value

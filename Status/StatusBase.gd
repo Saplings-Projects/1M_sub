@@ -47,7 +47,7 @@ func on_apply() -> void:
 		# what do we do for a Status that reflects a part of the damage for example ?
 
 func _modify_stats_with_status() -> void:
-	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
+	var target_stats: EntityStats = status_target.get_stat_component().stats
 	target_stats.change_stat(entity_stat_dict_type, modifier_name, status_modifier_base_value)
 	status_modifier_storage = status_modifier_base_value # store the value to revert when using on_remove()
 
@@ -72,7 +72,7 @@ func on_remove() -> void:
 		pass
 
 func _revert_stats_with_status() -> void:
-	var target_stats: EntityStats = status_target.get_stat_component().get_stats()
+	var target_stats: EntityStats = status_target.get_stat_component().stats
 	var invert_modification: StatModifiers = _calculate_invert_modification(status_modifier_storage)
 	target_stats.change_stat(entity_stat_dict_type, modifier_name, invert_modification)
 	status_modifier_storage = null # reset to original state
