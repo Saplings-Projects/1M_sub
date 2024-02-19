@@ -47,3 +47,10 @@ enum CombatResult
 	VICTORY,
 	DEFEAT
 }
+
+
+enum CardAnimationTransformType
+{
+	NONE,
+	TARGET_POSITION,
+}
