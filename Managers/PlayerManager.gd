@@ -34,3 +34,12 @@ func _get_starting_position() -> Vector2i:
 	starting_position.x = padding_size_first_floor
 	
 	return starting_position
+	
+
+func is_player_in_room(room: RoomBase) -> bool:
+	if room == null:
+		return false
+		
+	var map_rooms: Array[Array] = MapManager.current_map.rooms
+	
+	return room == map_rooms[player_position.y][player_position.x]

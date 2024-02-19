@@ -2,6 +2,7 @@ extends Control
 
 var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
+var room_with_player_texture: Texture2D = load("res://Map/room_icon_with_player.png")
 var _padding_offset: int = 20
 var _MINIMUM_ROOM_WIDTH: int = 510
 var _MINIMUM_ROOM_HEIGHT: int = 490
@@ -71,6 +72,9 @@ func _ready() -> void:
 				# disable the button if the player can't access the room
 				texture_button.disabled = not accessible_rooms_by_player.has(room)
 				room_display.room = room
+				if (PlayerManager.is_player_in_room(room)):
+					texture_button.texture_disabled = room_with_player_texture
+				
 				room_addition_node.add_child(room_display)
 				room_display.set_label(room.get_room_abbreviation())
 				room_display.position = position_for_next_room
