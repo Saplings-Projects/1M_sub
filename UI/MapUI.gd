@@ -22,6 +22,9 @@ func _on_return_button_press() -> void:
 
 
 func _ready() -> void:
+	# allows map to be closed if any of the room button on the map is pressed
+	SignalBus.clicked_next_room_on_map.connect(func() -> void: queue_free())
+	
 	var current_map: MapBase = MapManager.current_map
 	
 	var accessible_rooms_by_player: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
