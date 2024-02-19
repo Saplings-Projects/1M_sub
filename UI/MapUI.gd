@@ -73,9 +73,10 @@ func _ready() -> void:
 				var room_display: Control = room_ui.instantiate()
 				var texture_button: TextureButton = Helpers.get_first_child_node_of_type(room_display, TextureButton)
 				# disable the button if the player can't access the room
-				texture_button.disabled = not accessible_rooms_by_player.has(room)
+				texture_button.disabled = not (DebugVar.DEBUG_free_movement or accessible_rooms_by_player.has(room))
 				room_display.room = room
 				if (PlayerManager.is_player_in_room(room)):
+					texture_button.disabled = true
 					texture_button.texture_disabled = room_with_player_texture
 				
 				room_addition_node.add_child(room_display)
