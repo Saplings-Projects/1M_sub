@@ -30,3 +30,6 @@ func get_center_Y() -> float:
 	
 func get_room_rect() -> Rect2:
 	return Rect2(position.x, position.y, texture_rect.get_size().x, texture_rect.get_size().y)
+
+func get_center_point() -> Vector2:
+	return Vector2(get_center_X(), get_center_Y())

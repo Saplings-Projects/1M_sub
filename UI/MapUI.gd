@@ -92,10 +92,12 @@ func _ready():
 	
 	
 	var room_container_width: float = _get_combined_room_width(new_room_texture_rect)
+	var room_container_offset_x: float = max(0, _MINIMUM_ROOM_WIDTH - _get_combined_room_width(new_room_texture_rect))
 	# Set the max width between what we calculated above and the minimum room width constant
 	room_container_width = max(room_container_width, _MINIMUM_ROOM_WIDTH)
 	
 	var room_container_height: float = _get_combined_room_height(new_room_texture_rect)
+	var room_container_offset_y: float = max(0, _MINIMUM_ROOM_HEIGHT - _get_combined_room_height(new_room_texture_rect))
 	# Set the max height between what we calculated above and the minimum room height constant
 	room_container_height = max(room_container_height, _MINIMUM_ROOM_HEIGHT)
 	
@@ -158,15 +160,17 @@ func _ready():
 	# Get half the size of the room container and subtract it by half the size of the width of the combined rooms
 	# This is to account for in case the size of the rooms is smaller than the container we put it in
 	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_rect) / 2
-	
+	var offset_x = room_addition_node.position.x - new_room_position_x
 	# If the height of the combined rooms is less than the minimum room height 
 	# then calculate the position for it to be centered in the middle of the map:
 	# We again want to place the rooms in the center of the container, but the y position of where the rooms are is relative to the container
 	# Hence we subtract half the size of the container from half the size of the height of the combined rooms to get the center point
 	# then subtract it from the position of the container
 	var new_room_position_y: float = room_container.position.y
+	var offset_y: float = 0
 	if (_get_combined_room_height(new_room_texture_rect) < _MINIMUM_ROOM_HEIGHT):
 		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_rect) / 2
+		offset_y = room_addition_node.position.y - new_room_position_y
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
 	
 	if test_torch_indices.size() > 0:
@@ -175,7 +179,7 @@ func _ready():
 			if room_ui != null:
 				room_ui.room.set_torch_active()
 				_test_add_light_to_rooms(test_torch.x, test_torch.y)
-	light_overlay = LightOverlay.new(room_container, room_ui_array)
+	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
 	room_container.add_child(light_overlay)
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
