@@ -311,6 +311,9 @@ func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
 
 
 func _on_card_clicked(card: CardWorld) -> void:
+	if are_cards_active():
+		return
+	
 	if is_card_queued():
 		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && is_queued_card_in_play_area()):
 			play_card()
@@ -347,13 +350,13 @@ func play_card(target : Entity = null) -> void:
 	
 
 func _on_card_hovering(card: CardWorld) -> void:
-	if !is_card_queued():
+	if !is_card_queued() and !are_cards_active():
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.HOVERED)
 		_focus_card(card)
 
 
 func _on_card_unhovered(card: CardWorld) -> void:
-	if !is_card_queued():
+	if !is_card_queued() and !are_cards_active():
 		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.IN_HAND)
 		_unfocus_card(card)
 
@@ -441,7 +444,7 @@ func un_queue_card(card : CardWorld) -> void:
 	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.IN_HAND)
 
 func is_queued_card_in_play_area() -> bool:
-	return get_global_mouse_position().y < play_at_height 
+	return get_global_mouse_position().y < play_at_height or are_cards_active()
 
 func _handle_queued_card() -> void:
 	if(queued_card == null):
