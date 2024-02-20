@@ -2,7 +2,7 @@ extends Node2D
 ## Class to manage backend for rooms (generation and such)
 
 var current_map: MapBase
-var map_width_array: Array[int] = [1, 3, 5, 5, 7, 7, 5, 5, 3, 1]
+var map_width_array: Array[int] = [1, 3, 5, 7, 7, 7, 5, 3, 1]
 var current_room: RoomBase
  
 #map_floors_width changes the width of the map's floors
@@ -24,7 +24,7 @@ func create_map(map_floors_width: Array[int]) -> MapBase: ## Generates and Popul
 		for index_width: int in range(map_floors_width[index_height]):## loop through elements of the grid and assign a room type
 			var _rand_type_index: int = randi_range(0, GlobalVar.EVENTS_CLASSIFICATION.size() - 1)
 			var _room_event: EventBase = GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
-			var _generated_room: RoomBase = RoomBase.new()
+			var _generated_room: RoomBase = RoomBase.new(Enums.LightLevel.UNLIT)
 			_generated_room.room_event = _room_event
 			_grid[index_height].append(_generated_room as RoomBase)
 		_grid[index_height].append_array(_padding)

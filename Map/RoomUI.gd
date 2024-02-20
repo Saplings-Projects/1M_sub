@@ -14,7 +14,7 @@ func set_label(title: String) -> void:
 
 func toggle_player_icon(enabled: bool) -> void:
 	player_icon.visible = enabled
-	room.set_light_level(Enums.LightLevel.DIMLY_LIT)
+	room.light_level = Enums.LightLevel.DIMLY_LIT
 
 func has_player() -> bool:
 	return player_icon.visible

@@ -12,8 +12,8 @@ var _LIGHT_FLOOR_RANGE: int = 3
 @export var room_container: ColorRect
 @export var room_addition_node: Control
 @export var torch_confirmation_dialog: ConfirmationDialog
-@export var test_torch_indices: Array[Vector2]
-@export var test_player_position: Vector2
+@export var test_torch_indices: Array[Vector2i]
+@export var test_player_position: Vector2i
 
 var room_ui_array: Array[Array]
 var current_player_room: RoomUI
@@ -38,6 +38,7 @@ func _add_torch_to_current_location() -> void:
 	var current_player_floor_index = current_player_room.floor_index
 	var current_player_room_index = current_player_room.room_index
 	
+	# TODO: Merge this in with the changes from Turtyo to figure out adjacent rooms and rooms in range
 	var room_light_range = 1
 	var max_light_index = current_player_floor_index + _LIGHT_FLOOR_RANGE + 1 
 	
@@ -55,14 +56,14 @@ func _add_torch_to_current_location() -> void:
 			var room_ui: RoomUI = room_ui_array[floor_light_index][room_light_index]
 			if room_ui != null:
 				if floor_light_index == current_player_floor_index + 1 and room_ui.room.light_level == Enums.LightLevel.DIMLY_LIT:
-					room_ui.room.set_light_level(Enums.LightLevel.BRIGHTLY_LIT)
+					room_ui.room.light_level = Enums.LightLevel.BRIGHTLY_LIT
 				else:
-					room_ui.room.set_light_level(Enums.LightLevel.DIMLY_LIT)
+					room_ui.room.light_level = Enums.LightLevel.DIMLY_LIT
 		room_light_range += 1
 	current_player_room.room.set_torch_active()
 	light_overlay.queue_redraw()
 
-# Test function
+# Test function, Move this to test file
 func _test_add_light_to_rooms(floor_index: int, room_index: int) -> void:
 	var room_light_range = 1
 	var max_light_index = floor_index + _LIGHT_FLOOR_RANGE + 1 
@@ -78,8 +79,9 @@ func _test_add_light_to_rooms(floor_index: int, room_index: int) -> void:
 		for room_light_index: int in range(minimum_room_light_index, maximum_room_light_index):
 			var room_ui: RoomUI = room_ui_array[floor_light_index][room_light_index]
 			if (room_ui != null):
-				room_ui.room.set_light_level(Enums.LightLevel.DIMLY_LIT)
+				room_ui.room.light_level = Enums.LightLevel.DIMLY_LIT
 		room_light_range += 1
+	light_overlay.queue_redraw()
 
 
 func _ready():
@@ -160,18 +162,25 @@ func _ready():
 	# Get half the size of the room container and subtract it by half the size of the width of the combined rooms
 	# This is to account for in case the size of the rooms is smaller than the container we put it in
 	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_rect) / 2
+	
+	# Get the offset if we had to adjust the X position due to having to set a minimum width if the map is too small.
 	var offset_x = room_addition_node.position.x - new_room_position_x
+	
 	# If the height of the combined rooms is less than the minimum room height 
 	# then calculate the position for it to be centered in the middle of the map:
 	# We again want to place the rooms in the center of the container, but the y position of where the rooms are is relative to the container
 	# Hence we subtract half the size of the container from half the size of the height of the combined rooms to get the center point
 	# then subtract it from the position of the container
 	var new_room_position_y: float = room_container.position.y
+	# Get the offset if we had to adjust the Y position due to having to set a minimum height if the map is too small.
 	var offset_y: float = 0
 	if (_get_combined_room_height(new_room_texture_rect) < _MINIMUM_ROOM_HEIGHT):
 		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_rect) / 2
 		offset_y = room_addition_node.position.y - new_room_position_y
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
+	
+	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
+	room_container.add_child(light_overlay)
 	
 	if test_torch_indices.size() > 0:
 		for test_torch: Vector2 in test_torch_indices:
@@ -179,8 +188,6 @@ func _ready():
 			if room_ui != null:
 				room_ui.room.set_torch_active()
 				_test_add_light_to_rooms(test_torch.x, test_torch.y)
-	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
-	room_container.add_child(light_overlay)
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
