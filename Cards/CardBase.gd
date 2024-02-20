@@ -22,6 +22,9 @@ class_name CardBase
 
 @export var energy_info: EnergyData = EnergyData.new()
 
+var _card_effects_queue: Array[EffectData] = []
+
+
 func _ready() -> void:
 	card_effects_data = []
 
@@ -42,8 +45,42 @@ func on_card_play(caster: Entity, base_target: Entity) -> void:
 	if caster is Player:
 		PlayerManager.player.get_energy_component().use_energy(self)	
 	
-	for effect_data: EffectData in card_effects_data:
-		var list_targets: Array[Entity] = effect_data.targeting_function.generate_target_list(base_target)
-		for current_target in list_targets:
-			effect_data.apply_effect_data(caster, current_target)
-	CardManager.on_card_action_finished.emit(self)
+	if _card_effects_queue.size() > 0:
+		push_error("Tried to play more card animations while some are already playing!")
+		return
+	
+	_card_effects_queue = card_effects_data.duplicate()
+	_handle_effects_queue(caster, base_target)
+
+
+func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
+	var card_effect: EffectData = _card_effects_queue[0]
+	var animation_scene: PackedScene = card_effect.cast_animation
+	var list_targets: Array[Entity] = card_effect.targeting_function.generate_target_list(base_target)
+	if animation_scene != null:
+		var animation: CastAnimation = animation_scene.instantiate()
+		if animation.create_for_each_target:
+			for current_target in list_targets:
+				current_target.get_tree().root.add_child(animation)
+				animation.play_animation(current_target)
+		else:
+			base_target.get_tree().root.add_child(animation)
+			animation.play_animation(base_target)
+		
+		# Wait for animation to complete
+		# NOTE: We may be playing multiple animations at the same time. They should all be in sync
+		# though, so we can just wait for the signal on the first one.
+		await animation.on_animation_cast_complete
+	else:
+		push_warning("No animation set in effect data. Skipping animation.")
+	
+	# Apply effects to all targets
+	for current_target in list_targets:
+		card_effect.apply_effect_data(caster, current_target)
+	
+	_card_effects_queue.remove_at(0)
+	
+	if _card_effects_queue.size() > 0:
+		_handle_effects_queue(caster, base_target)
+	else:
+		CardManager.on_card_action_finished.emit(self)
