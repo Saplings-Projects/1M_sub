@@ -1,6 +1,8 @@
 class_name MapMovement extends Resource
 
 
+## Return the list of the accessible positions given the position and the possible movements
+## For example, if you have a room UP and UP_LEFT but not UP_RIGHT, this function returns the positions of the room being UP and UP_LEFT of position
 static func get_accessible_room_positions_by_given_position(position: Vector2i) -> Array[Vector2i]:
 	var map_rooms = MapManager.current_map.rooms
 	var map_width_array: Array[int] = MapManager.map_width_array
@@ -27,6 +29,8 @@ static func get_accessible_room_positions_by_given_position(position: Vector2i) 
 	return accessible_room_positions
 
 
+## Same as get_accessible_room_positions_by_given_position, but it will do as if it was moving in the possible rooms, within a certain range
+## Basically if you have a range of 3, it will return the position of all the rooms you can access from position with 3 movements or less
 static func get_all_accessible_room_positions_in_range(position: Vector2i, remaining_range: int) -> Array[Vector2i]:
 	var accessible_room_positions_in_range: Array[Vector2i] = []
 	var accessible_room_positions_by_player: Array[Vector2i] = get_accessible_room_positions_by_given_position(position)
@@ -41,7 +45,9 @@ static func get_all_accessible_room_positions_in_range(position: Vector2i, remai
 	Helpers.remove_duplicate_in_array(accessible_room_positions_in_range)
 	return accessible_room_positions_in_range
 	
-	
+
+## Return the list of the accessible rooms given the position and the possible movements
+## This is different from get_accessible_room_positions_by_given_position because it returns the rooms themselves, not their positions
 static func get_all_accessible_rooms_in_range(
 	position: Vector2i, 
 	remaining_range: int, 
@@ -55,7 +61,7 @@ static func get_all_accessible_rooms_in_range(
 	return accessible_rooms_in_range
 
 
-# Helper function to be able to call without any parameters
+## Helper function to be able to call without any parameters when wanting to do it from the player point of view
 static func get_accessible_rooms_by_player(
 	position: Vector2i = PlayerManager.player_position, 
 	remaining_range: int = 1, 
