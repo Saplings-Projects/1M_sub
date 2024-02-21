@@ -1,8 +1,6 @@
 extends Node2D
 ## Class to manage backend for rooms (generation and such)
 
-signal map_initialized
-
 var current_map: MapBase
 var map_width_array: Array[int]
  
@@ -32,11 +30,12 @@ func create_map(map_floors_width: Array[int]) -> MapBase: ## Generates and Popul
 		_grid[index_height].append_array(_padding)
 	_map.rooms = _grid
 	return _map as MapBase
+
 	
 func _ready():
 	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map(map_width_array)
-	map_initialized.emit()
+
 	
 func is_map_initialized() -> bool:
 	return current_map != null
