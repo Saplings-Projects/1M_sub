@@ -6,4 +6,4 @@ extends Node
 ### All variable names should start with DEBUG_
 
 # Player can move freely on the map without having to finish the current event or move in the range of its normal movement
-var DEBUG_free_movement: bool = false
+const DEBUG_FREE_MOVEMENT: bool = false
