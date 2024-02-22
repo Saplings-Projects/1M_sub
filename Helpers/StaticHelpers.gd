@@ -32,3 +32,12 @@ static func convert_from_range(value: float, from_min: float, from_max: float, t
 		to_value = (((value - from_min) * to_range) / from_range) + to_min
 	
 	return to_value
+
+
+static func get_mean_vector(positions: Array[Vector2]) -> Vector2:
+	if positions.size() <= 0:
+		return Vector2.ZERO
+	var mean_vector: Vector2 = Vector2.ZERO
+	for position in positions:
+		mean_vector += position
+	return mean_vector / positions.size()

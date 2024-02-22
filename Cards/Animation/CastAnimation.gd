@@ -2,31 +2,35 @@ extends Node2D
 class_name CastAnimation
 
 
+signal on_animation_hit_triggered
 signal on_animation_cast_complete
 
 
 @export var animation: AnimationPlayer = null
-@export var transform_type: Enums.CardAnimationTransformType = Enums.CardAnimationTransformType.TARGET_POSITION
-@export var position_offset: Vector2
-@export var cast_on_complete: bool = false
 
+var _was_animation_hit_triggered: bool = false
 
-func play_animation(target: Entity) -> void:
-	match transform_type:
-		Enums.CardAnimationTransformType.TARGET_POSITION:
-			global_position = target.global_position
-	
-	global_position += position_offset
-	
+func _ready() -> void:
 	animation.animation_finished.connect(_finish_casting)
 
 
-func trigger_finish_cast() -> void:
-	on_animation_cast_complete.emit()
+func play_animation(_targets: Array[Entity]) -> void:
+	pass
+
+
+func trigger_cast_hit() -> void:
+	if _was_animation_hit_triggered:
+		push_error("Tried to trigger multiple hits in CastAnimation " + get_name())
+		return
+	
+	on_animation_hit_triggered.emit()
+	_was_animation_hit_triggered = true
 
 
 func _finish_casting(_anim_name: StringName) -> void:
-	if cast_on_complete:
-		trigger_finish_cast()
+	# If the animation didn't trigger a hit, then trigger when the animation is complete.
+	if not _was_animation_hit_triggered:
+		trigger_cast_hit()
 	
+	on_animation_cast_complete.emit()
 	queue_free()
