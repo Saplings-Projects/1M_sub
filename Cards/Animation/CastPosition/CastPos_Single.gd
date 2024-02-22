@@ -26,3 +26,4 @@ func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array
 	cast_animation.global_position += offset
 	
 	cast_animation.on_animation_hit_triggered.connect(func() -> void: on_animation_hit_triggered.emit())
+	cast_animation.on_animation_cast_complete.connect(func() -> void: on_animation_cast_complete.emit())

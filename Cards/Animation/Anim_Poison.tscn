@@ -26,7 +26,6 @@ _data = {
 [node name="Poison" type="Node2D" node_paths=PackedStringArray("animation")]
 script = ExtResource("1_0ht1k")
 animation = NodePath("AnimationPlayer")
-cast_on_complete = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 scale = Vector2(5, 5)

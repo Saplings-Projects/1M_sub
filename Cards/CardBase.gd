@@ -58,7 +58,11 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	var animation_data: CastAnimationBase = card_effect.cast_animation
 	var list_targets: Array[Entity] = card_effect.targeting_function.generate_target_list(base_target)
 	
-	if animation_data != null and animation_data.cast_animation_scene != null and animation_data.cast_position != null:
+	var can_use_animation: bool = animation_data != null and\
+		animation_data.cast_animation_scene != null and\
+		animation_data.cast_position != null
+	
+	if can_use_animation:
 		animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)
 		
 		# Wait for animation to complete
@@ -71,6 +75,9 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	# Apply effects to all targets
 	for current_target in list_targets:
 		card_effect.apply_effect_data(caster, current_target)
+	
+	if can_use_animation:
+		await animation_data.cast_position.on_animation_cast_complete
 	
 	if _card_effects_queue.size() > 0:
 		_handle_effects_queue(caster, base_target)
