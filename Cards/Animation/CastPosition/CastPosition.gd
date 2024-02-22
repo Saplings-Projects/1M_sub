@@ -1,11 +1,8 @@
 extends Resource
 class_name CastPosition
-
-
-signal on_animation_hit_triggered
-signal on_animation_cast_complete
+## CastPosition handles creating the CastAnimation scene and setting its initial position.
 
 
 @warning_ignore("unused_parameter")
-func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> void:
-	pass
+func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> CastAnimation:
+	return null

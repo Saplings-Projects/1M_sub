@@ -7,7 +7,7 @@ class_name CastPos_All
 
 
 # @Override
-func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> void:
+func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> CastAnimation:
 	var await_cast_animation: CastAnimation = null
 	
 	for target in list_targets:
@@ -18,6 +18,7 @@ func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array
 		
 		target.add_child(cast_animation)
 		cast_animation.position += offset
+		
+		cast_animation.play_animation(list_targets)
 	
-	await_cast_animation.on_animation_hit_triggered.connect(func() -> void: on_animation_hit_triggered.emit())
-	await_cast_animation.on_animation_cast_complete.connect(func() -> void: on_animation_cast_complete.emit())
+	return await_cast_animation

@@ -1,5 +1,6 @@
 extends Node2D
 class_name CastAnimation
+## Base cast animation that should be on the root of all card animation scenes
 
 
 signal on_animation_hit_triggered
@@ -10,11 +11,13 @@ signal on_animation_cast_complete
 
 var _was_animation_hit_triggered: bool = false
 
+
 func _ready() -> void:
 	animation.animation_finished.connect(_finish_casting)
 
 
-func play_animation(_targets: Array[Entity]) -> void:
+@warning_ignore("unused_parameter")
+func play_animation(targets: Array[Entity]) -> void:
 	pass
 
 

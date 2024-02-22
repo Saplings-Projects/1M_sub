@@ -62,11 +62,13 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 		animation_data.cast_animation_scene != null and\
 		animation_data.cast_position != null
 	
+	var created_cast_animation: CastAnimation = null
+	
 	if can_use_animation:
-		animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)
+		created_cast_animation = animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)
 		
-		# Wait for animation to complete
-		await animation_data.cast_position.on_animation_hit_triggered
+		# Wait for animation hit to complete
+		await created_cast_animation.on_animation_hit_triggered
 	else:
 		push_warning("No animation set in effect data for card " + resource_path + ". Skipping animation.")
 	
@@ -76,9 +78,11 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	for current_target in list_targets:
 		card_effect.apply_effect_data(caster, current_target)
 	
-	if can_use_animation:
-		await animation_data.cast_position.on_animation_cast_complete
+	# Wait for animation to complete
+	if created_cast_animation != null:
+		await created_cast_animation.on_animation_cast_complete
 	
+	# Handle next effect in the queue or finish casting
 	if _card_effects_queue.size() > 0:
 		_handle_effects_queue(caster, base_target)
 	else:
