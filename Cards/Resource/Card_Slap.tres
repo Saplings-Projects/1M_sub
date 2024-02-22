@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=13 format=3 uid="uid://dans622owjixj"]
+
+[ext_resource type="PackedScene" uid="uid://bbseovtwsgegg" path="res://Cards/Animation/Anim_Slap.tscn" id="1_48p54"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j33rb"]
+[ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_All.gd" id="2_d7bnp"]
+[ext_resource type="Script" path="res://Cards/Animation/CastAnimationBase.gd" id="3_25557"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_vf582"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_n1vj7"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="6_e7rmt"]
+
+[sub_resource type="Resource" id="Resource_nph5w"]
+script = ExtResource("2_d7bnp")
+offset = Vector2(0, 50)
+
+[sub_resource type="Resource" id="Resource_h6uye"]
+script = ExtResource("3_25557")
+cast_animation_scene = ExtResource("1_48p54")
+cast_position = SubResource("Resource_nph5w")
+
+[sub_resource type="Resource" id="Resource_hsf7j"]
+script = ExtResource("4_vf582")
+
+[sub_resource type="Resource" id="Resource_nkw52"]
+script = ExtResource("6_e7rmt")
+
+[sub_resource type="Resource" id="Resource_5b3is"]
+script = ExtResource("5_n1vj7")
+effect = SubResource("Resource_hsf7j")
+value = 2
+targeting_function = SubResource("Resource_nkw52")
+cast_animation = SubResource("Resource_h6uye")
+
+[resource]
+script = ExtResource("1_j33rb")
+application_type = 1
+card_title = "Slap"
+card_description = "Deal 2 damage to target."
+card_effects_data = Array[ExtResource("5_n1vj7")]([SubResource("Resource_5b3is")])
