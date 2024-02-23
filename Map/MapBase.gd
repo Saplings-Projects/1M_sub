@@ -6,3 +6,4 @@ class_name MapBase
 
 @export var rooms: Array[Array] = [] ## 2D array of rooms on the map. this will be assigned when generating rooms
 @export var floors_width: Array[int] = [1, 3, 5, 7, 5, 3, 1] ## array for variable map width, each element is the width of a floor
+# ? why have this here if we have map_width_array in MapManager ?

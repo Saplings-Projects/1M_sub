@@ -73,6 +73,7 @@ Events can change depending on the level of light in the room. The distribution 
 ## Moving on the map
 
 Players will move once the event in the room they are in is over. They must go up one floor when going in a new room. The player can go to the room directly above them or the ones on the sides. This movement pattern may change due to some relics.
+The first array of the map array is the first floor, and the last array is the last floor (meaning when looking at the matrix representation of the map, the first floor is at the top and the last floor is at the bottom, matrix is upside down compared to the actual visual of the map). This makes it easier to work with indexes. 
 
 ## Light mechanic
 
