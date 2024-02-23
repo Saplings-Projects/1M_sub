@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c13302ahcfpuy" path="res://Cards/Animation/Anim_Poison.tscn" id="4_vlagw"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_ajuey"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_All.gd" id="5_rlt1d"]
-[ext_resource type="Script" path="res://Cards/Animation/CastAnimationBase.gd" id="6_0uuxe"]
+[ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="6_0uuxe"]
 
 [sub_resource type="Resource" id="Resource_jtcab"]
 script = ExtResource("1_vf50y")
@@ -23,14 +23,14 @@ effect = SubResource("Resource_jtcab")
 value = 1
 targeting_function = SubResource("Resource_ojuu2")
 
-[sub_resource type="Resource" id="Resource_0jn5k"]
+[sub_resource type="Resource" id="Resource_g3aqa"]
 script = ExtResource("5_rlt1d")
 offset = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_c57fh"]
+[sub_resource type="Resource" id="Resource_8bkbn"]
 script = ExtResource("6_0uuxe")
 cast_animation_scene = ExtResource("4_vlagw")
-cast_position = SubResource("Resource_0jn5k")
+cast_position = SubResource("Resource_g3aqa")
 
 [sub_resource type="Resource" id="Resource_nlhgr"]
 script = ExtResource("4_84i11")
@@ -50,7 +50,7 @@ script = ExtResource("2_22qxd")
 effect = SubResource("Resource_qxsxr")
 value = 0
 targeting_function = SubResource("Resource_dso5d")
-cast_animation = SubResource("Resource_c57fh")
+animation_data = SubResource("Resource_8bkbn")
 
 [sub_resource type="Resource" id="Resource_noiey"]
 script = ExtResource("5_ajuey")

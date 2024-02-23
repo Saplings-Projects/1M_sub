@@ -5,18 +5,18 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_5nlri"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_Single.gd" id="2_xd6a0"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetRight.gd" id="3_qvjvu"]
-[ext_resource type="Script" path="res://Cards/Animation/CastAnimationBase.gd" id="3_rhb6y"]
+[ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_rhb6y"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="4_ur7t3"]
 
-[sub_resource type="Resource" id="Resource_5wsa7"]
+[sub_resource type="Resource" id="Resource_8yepq"]
 script = ExtResource("2_xd6a0")
 use_central_position = true
 offset = Vector2(0, -100)
 
-[sub_resource type="Resource" id="Resource_a2fun"]
+[sub_resource type="Resource" id="Resource_hig8o"]
 script = ExtResource("3_rhb6y")
 cast_animation_scene = ExtResource("1_gkkm6")
-cast_position = SubResource("Resource_5wsa7")
+cast_position = SubResource("Resource_8yepq")
 
 [sub_resource type="Resource" id="Resource_o3g2m"]
 script = ExtResource("1_cecc2")
@@ -29,7 +29,7 @@ script = ExtResource("2_5nlri")
 effect = SubResource("Resource_o3g2m")
 value = 4
 targeting_function = SubResource("Resource_8531g")
-cast_animation = SubResource("Resource_a2fun")
+animation_data = SubResource("Resource_hig8o")
 
 [resource]
 script = ExtResource("4_ur7t3")

@@ -6,18 +6,18 @@
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="2_6vdl1"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_All.gd" id="2_no1pw"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_omhae"]
-[ext_resource type="Script" path="res://Cards/Animation/CastAnimationBase.gd" id="3_5tld6"]
+[ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_5tld6"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="4_2c1xc"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="4_ux0cs"]
 
-[sub_resource type="Resource" id="Resource_ttte4"]
+[sub_resource type="Resource" id="Resource_4k6wv"]
 script = ExtResource("2_no1pw")
 offset = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_yjoia"]
+[sub_resource type="Resource" id="Resource_61w07"]
 script = ExtResource("3_5tld6")
 cast_animation_scene = ExtResource("1_bv4kp")
-cast_position = SubResource("Resource_ttte4")
+cast_position = SubResource("Resource_4k6wv")
 
 [sub_resource type="Resource" id="Resource_lnhao"]
 script = ExtResource("2_6vdl1")
@@ -37,7 +37,7 @@ script = ExtResource("2_omhae")
 effect = SubResource("Resource_p8qns")
 value = 0
 targeting_function = SubResource("Resource_oq1u4")
-cast_animation = SubResource("Resource_yjoia")
+animation_data = SubResource("Resource_61w07")
 
 [sub_resource type="Resource" id="Resource_1hn6q"]
 script = ExtResource("4_ux0cs")

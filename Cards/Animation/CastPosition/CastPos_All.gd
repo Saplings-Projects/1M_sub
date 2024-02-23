@@ -1,6 +1,6 @@
 extends CastPosition
-class_name CastPos_All
-## CastPos_All creates an animation for each target
+class_name CastPos_AllTargets
+## CastPos_AllTargets creates an animation for each target
 
 
 @export var offset: Vector2 = Vector2.ZERO

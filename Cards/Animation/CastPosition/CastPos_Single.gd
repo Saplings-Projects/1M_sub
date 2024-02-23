@@ -1,5 +1,5 @@
 extends CastPosition
-class_name CastPos_Single
+class_name CastPos_CentralPosition
 ## Creates a single animation at a central position between all targets
 
 
