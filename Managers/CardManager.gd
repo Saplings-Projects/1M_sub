@@ -11,6 +11,8 @@ var card_container: CardContainer = null
 var current_deck: Array[CardBase] = []
 var default_deck: CardSetBase = null
 
+var disable_card_animations: bool = false
+
 
 func _ready() -> void:
 	default_deck = load("res://Cards/CardSets/DefaultDeck.tres")

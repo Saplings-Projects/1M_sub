@@ -52,6 +52,7 @@ func before_each() -> void:
 	# disable data saving so nothing is saved between tests
 	_player._should_save_persistent_data = false
 	_player_energy_component.ignore_cost = true
+	CardManager.disable_card_animations = true
 
 func after_each() -> void:
 	_player.queue_free()
