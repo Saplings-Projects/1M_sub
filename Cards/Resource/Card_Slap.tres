@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bbseovtwsgegg" path="res://Cards/Animation/Anim_Slap.tscn" id="1_48p54"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_j33rb"]
-[ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_All.gd" id="2_d7bnp"]
+[ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_AllTargets.gd" id="2_d7bnp"]
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_25557"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_vf582"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_n1vj7"]
