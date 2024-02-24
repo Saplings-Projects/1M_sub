@@ -77,13 +77,14 @@ var room_circle_radius: int = 40
 func _draw_room_circle(room: RoomUI):
 	var center_point_with_offset: Vector2 = Vector2(room.get_center_X() - offset_position_x, room.get_center_Y() - offset_position_y)
 	if room.get_light_level() == Enums.LightLevel.DIMLY_LIT:
-		draw_circle(center_point_with_offset, room_circle_radius, Color(0, 0, 0, 0.5))
+		draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 0, 0, 0.1), 3)
+		draw_circle(center_point_with_offset, room_circle_radius, Color(0, 0, 0, 0.1))
 	elif room.get_light_level() == Enums.LightLevel.LIT:
 		draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
-		draw_circle(center_point_with_offset, room_circle_radius - 1, Color(1, 1, 0, 0.1))
+		draw_circle(center_point_with_offset, room_circle_radius - 1, Color(1, 1, 0, 0.01))
 	elif room.get_light_level() == Enums.LightLevel.BRIGHTLY_LIT:
 		draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 1, 1, 1), 3)
-		draw_circle(center_point_with_offset, room_circle_radius - 1, Color(0, 1, 1, 0.1))
+		draw_circle(center_point_with_offset, room_circle_radius - 1, Color(0, 1, 1, 0.01))
 
 var outer_circle_radius: int = 60
 # Function to get the points of a circle and return it as a PackedVector2Array

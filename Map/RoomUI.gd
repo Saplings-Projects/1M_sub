@@ -32,4 +32,4 @@ func get_center_point() -> Vector2:
 	
 func _set_player_position_based_on_room():
 	PlayerManager.player_position = room.room_position
-	SignalBus.clicked_next_room_on_map.emit()
+	SignalBus.clicked_next_room_on_map.emit(self)
