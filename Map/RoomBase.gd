@@ -10,6 +10,7 @@ class_name RoomBase
 		on_light_level_changed.emit(light_level)
 @export var has_torch: bool = false
 @export var room_event: EventBase
+var room_position: Vector2i
 
 signal on_light_level_changed
 

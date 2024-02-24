@@ -17,12 +17,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+DebugVar="*res://Global/DEBUG_VAR.gd"
 PlayerManager="*res://Managers/PlayerManager.gd"
 CardManager="*res://Managers/CardManager.gd"
 PhaseManager="*res://Managers/PhaseManager.gd"
 RandomGenerator="*res://Managers/RandomGenerator.gd"
 GlobalVar="*res://Global/GLOBAL_VAR.gd"
 MapManager="*res://Map/MapManager.gd"
+SignalBus="*res://Global/SignalBus.gd"
 
 [display]
 

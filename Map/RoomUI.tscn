@@ -1,27 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck87o46d1kvpu"]
+[gd_scene load_steps=5 format=3 uid="uid://ck87o46d1kvpu"]
 
 [ext_resource type="Script" path="res://Map/RoomUI.gd" id="1_n442j"]
+[ext_resource type="Texture2D" uid="uid://be7gf1yhnurd3" path="res://Map/room_icon_accessible.png" id="2_eehdg"]
 [ext_resource type="Texture2D" uid="uid://dxpg0rdhgt587" path="res://Map/Room_Images/room_icon.png" id="2_mdfia"]
-[ext_resource type="Texture2D" uid="uid://cq1ii3ed6oels" path="res://Entity/Player/fauna.png" id="3_c1g4p"]
+[ext_resource type="Texture2D" uid="uid://bge578pqjb258" path="res://Map/room_icon_hovered.png" id="3_jtdh6"]
 
-[node name="RoomUI" type="Control" node_paths=PackedStringArray("label", "texture_rect", "player_icon")]
+[node name="RoomUI" type="Control" node_paths=PackedStringArray("label", "button")]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_n442j")
-label = NodePath("RoomEdge/RoomLabel")
-texture_rect = NodePath("RoomEdge")
-player_icon = NodePath("PlayerIcon")
+label = NodePath("Label")
+button = NodePath("TextureButton")
 
-[node name="RoomEdge" type="TextureRect" parent="."]
-layout_mode = 2
-offset_right = 50.0
-offset_bottom = 50.0
-texture = ExtResource("2_mdfia")
-expand_mode = 1
-
-[node name="RoomLabel" type="Label" parent="RoomEdge"]
+[node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_right = 50.0
 offset_bottom = 50.0
@@ -29,12 +22,13 @@ text = "A"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerIcon" type="TextureRect" parent="."]
-visible = false
+[node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 31.0
-offset_right = 46.0
-offset_bottom = 46.0
-texture = ExtResource("3_c1g4p")
-expand_mode = 1
+offset_right = 50.0
+offset_bottom = 50.0
+texture_normal = ExtResource("2_eehdg")
+texture_pressed = ExtResource("3_jtdh6")
+texture_hover = ExtResource("3_jtdh6")
+texture_disabled = ExtResource("2_mdfia")
+ignore_texture_size = true
+stretch_mode = 5
