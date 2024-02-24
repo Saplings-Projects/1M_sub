@@ -13,7 +13,7 @@ class_name RoomBase
 
 signal on_light_level_changed
 
-func _init(_light_level: Enums.LightLevel):
+func _init(_light_level: Enums.LightLevel = Enums.LightLevel.UNLIT):
 	light_level = _light_level
 
 func _to_string() -> String:
@@ -21,6 +21,10 @@ func _to_string() -> String:
 
 func get_room_abbreviation() -> String:
 	return room_event.get_room_abbreviation()
+
+func increase_light_level() -> void:
+	if light_level != Enums.LightLevel.BRIGHTLY_LIT:
+		light_level += 1
 
 func set_torch_active() -> void:
 	has_torch = true

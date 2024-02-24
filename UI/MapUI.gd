@@ -1,4 +1,5 @@
 extends Control
+class_name MapUI
 
 var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
@@ -39,12 +40,14 @@ func _add_torch_to_current_location() -> void:
 	var current_player_room_index = current_player_room.room_index
 	
 	# TODO: Merge this in with the changes from Turtyo to figure out adjacent rooms and rooms in range
+	# TODO: Set light level when dimly lit and near player
 	var room_light_range = 1
 	var max_light_index = current_player_floor_index + _LIGHT_FLOOR_RANGE + 1 
 	
 	if current_player_floor_index + _LIGHT_FLOOR_RANGE + 1 > MapManager.map_width_array.size():
 		max_light_index = MapManager.map_width_array.size() 
 	
+	current_player_room.room.set_torch_active()
 	for floor_light_index: int in range(current_player_floor_index + 1, max_light_index):
 		var minimum_room_light_index: int = current_player_room_index - room_light_range
 		if current_player_room_index - room_light_range <= 0:
@@ -55,12 +58,8 @@ func _add_torch_to_current_location() -> void:
 		for room_light_index: int in range(minimum_room_light_index, maximum_room_light_index):
 			var room_ui: RoomUI = room_ui_array[floor_light_index][room_light_index]
 			if room_ui != null:
-				if floor_light_index == current_player_floor_index + 1 and room_ui.room.light_level == Enums.LightLevel.DIMLY_LIT:
-					room_ui.room.light_level = Enums.LightLevel.BRIGHTLY_LIT
-				else:
-					room_ui.room.light_level = Enums.LightLevel.DIMLY_LIT
+				room_ui.room.increase_light_level()
 		room_light_range += 1
-	current_player_room.room.set_torch_active()
 	light_overlay.queue_redraw()
 
 # Test function, Move this to test file

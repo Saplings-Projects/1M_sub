@@ -15,31 +15,28 @@ func _init(_room_container: ColorRect, _room_ui_array: Array[Array], _offset_pos
 	offset_position_y = _offset_position_y
 
 func _draw():
-	var map_upper_half: PackedVector2Array
-	var map_bottom_half: PackedVector2Array
 	var room_circles: Array[PackedVector2Array]
 	var lit_rooms_to_draw: Array[RoomUI]
 	var first_room_rect: Rect2
 	
 	# Iterating through the room array, if there is a lit room create a circular polygon PackedVector2 array
-	for floor_index: int in range(room_ui_array.size()):
-		var floor_array: Array = room_ui_array[floor_index]
-		var _first_room_in_array: bool = false
-		
+	for floor_array: Array[RoomUI] in room_ui_array:
 		for room: RoomUI in floor_array:
 			if room != null:
 				if (room.get_light_level() != Enums.LightLevel.UNLIT):
 					room_circles.append(_calculate_points_for_circle(room))
 					lit_rooms_to_draw.append(room)
 				# Save the first room in the map, to help with the calculations of the darkness overlay
-				if floor_index == 0:
+				if first_room_rect == null:
 					first_room_rect = room.get_room_rect()
 					
 	# Geometry2D.clip_polygons will only work if there are overlapping polygons, then we can get the inverse.
 	# In the case where a room's radius fully encompasses then  we will get a fully black screen.
-	# To remedy that, we break the darkness into two halves: first half is a rectangle from the top of the map container
-	# First half is a rectangle from the top of the map container to the position of the very first room node created.
-	# Second half is a rectangle that starts from the position of very first room node to the bottom of the map container
+	# To remedy that, we break the darkness into two halves:
+	# First half (map_upper_half) is a rectangle from the top of the map container to the position of the very first room node created.
+	# Second half (map_bottom_half) is a rectangle that starts from the position of very first room node to the bottom of the map container
+	var map_upper_half: PackedVector2Array
+	var map_bottom_half: PackedVector2Array
 	map_upper_half.append(Vector2(0, 0))
 	map_upper_half.append(Vector2(0, first_room_rect.position.y - offset_position_y))
 	map_upper_half.append(Vector2(room_container.get_size().x, first_room_rect.position.y - offset_position_y))
@@ -66,10 +63,10 @@ func _draw():
 		
 		# From the finished merged polygon blob from the lit room circles we created above, 
 		# Get the polygon inverse of the black overlay with the merged polygon blob we created above then draw them out.
-		var outer_polygons_upper_half = Geometry2D.clip_polygons(map_upper_half, current_lit_room_polygon)
+		var outer_polygons_upper_half: Array[PackedVector2Array] = Geometry2D.clip_polygons(map_upper_half, current_lit_room_polygon)
 		for outer: PackedVector2Array in outer_polygons_upper_half:
 			draw_polygon(outer, [Color(0, 0, 0, 1)])
-		var outer_polygons_bottom_half = Geometry2D.clip_polygons(map_bottom_half, current_lit_room_polygon)
+		var outer_polygons_bottom_half: Array[PackedVector2Array] = Geometry2D.clip_polygons(map_bottom_half, current_lit_room_polygon)
 		for outer: PackedVector2Array in outer_polygons_bottom_half:
 			draw_polygon(outer, [Color(0, 0, 0, 1)])
 	

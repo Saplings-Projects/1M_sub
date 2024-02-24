@@ -16,7 +16,7 @@ scroll_container = NodePath("SmoothScrollContainer")
 room_container = NodePath("SmoothScrollContainer/RoomContainer")
 room_addition_node = NodePath("SmoothScrollContainer/RoomContainer/RoomAdditionNode")
 torch_confirmation_dialog = NodePath("TorchPlacementConfirmationDialog")
-test_player_position = Vector2i(0, 3)
+test_player_position = Vector2i(0, 2)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
