@@ -20,10 +20,9 @@ func _to_string() -> String:
 func get_room_abbreviation() -> String:
 	return room_event.get_room_abbreviation()
 
-func increase_light_level() -> void:
-	if light_level != Enums.LightLevel.BRIGHTLY_LIT:
-		light_level += 1
-
 func set_torch_active() -> void:
 	has_torch = true
-	increase_light_level()
+	if light_level == Enums.LightLevel.LIT:
+		light_level = Enums.LightLevel.BRIGHTLY_LIT
+	else:
+		light_level = Enums.LightLevel.LIT

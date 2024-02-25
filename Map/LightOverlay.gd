@@ -76,15 +76,24 @@ func _draw():
 var room_circle_radius: int = 40
 func _draw_room_circle(room: RoomUI):
 	var center_point_with_offset: Vector2 = Vector2(room.get_center_X() - offset_position_x, room.get_center_Y() - offset_position_y)
-	if room.get_light_level() == Enums.LightLevel.DIMLY_LIT:
-		draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 0, 0, 0.1), 3)
-		draw_circle(center_point_with_offset, room_circle_radius, Color(0, 0, 0, 0.1))
-	elif room.get_light_level() == Enums.LightLevel.LIT:
-		draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
-		draw_circle(center_point_with_offset, room_circle_radius - 1, Color(1, 1, 0, 0.01))
-	elif room.get_light_level() == Enums.LightLevel.BRIGHTLY_LIT:
-		draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 1, 1, 1), 3)
-		draw_circle(center_point_with_offset, room_circle_radius - 1, Color(0, 1, 1, 0.01))
+	# Discussions on customization with adding gradient to be done here. Currently we draw a circle around
+	# rooms that have a torch, and a rect around rooms that are lit from a torch
+	if room.has_torch():
+		# These draw calls draw an unfilled circle around the room with with a thicker width, 
+		# then a filled circle on the inside that's filled in, with small transparency
+		if room.get_light_level() == Enums.LightLevel.LIT:
+			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
+			draw_circle(center_point_with_offset, room_circle_radius - 1, Color(1, 1, 0, 0.01))
+		elif room.get_light_level() == Enums.LightLevel.BRIGHTLY_LIT:
+			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 1, 1, 1), 3)
+			draw_circle(center_point_with_offset, room_circle_radius - 1, Color(0, 1, 1, 0.01))
+	else:
+		if room.get_light_level() == Enums.LightLevel.DIMLY_LIT:
+			draw_rect(room.get_room_rect().grow(-3), Color(0, 0, 0, 0.5), true)
+		elif room.get_light_level() == Enums.LightLevel.LIT:
+			draw_rect(room.get_room_rect().grow(3), Color(1, 1, 0, 1), false)
+		elif room.get_light_level() == Enums.LightLevel.BRIGHTLY_LIT:
+			draw_rect(room.get_room_rect().grow(3), Color(0, 1, 1, 1), false)
 
 var outer_circle_radius: int = 60
 # Function to get the points of a circle and return it as a PackedVector2Array

@@ -18,6 +18,9 @@ func set_label(title: String) -> void:
 func get_light_level() -> Enums.LightLevel:
 	return room.light_level
 
+func has_torch() -> bool:
+	return room.has_torch
+
 func get_center_X() -> float:
 	return position.x + button.get_size().x / 2
 	
@@ -33,3 +36,11 @@ func get_center_point() -> Vector2:
 func _set_player_position_based_on_room():
 	PlayerManager.player_position = room.room_position
 	SignalBus.clicked_next_room_on_map.emit(self)
+
+func get_room_rect_packed_array() -> PackedVector2Array:
+	var packed_array: PackedVector2Array
+	packed_array.append(Vector2(position.x, position.y))
+	packed_array.append(Vector2(position.x, position.y + button.get_size().y))
+	packed_array.append(Vector2(position.x + button.get_size().x, position.y + button.get_size().y))
+	packed_array.append(Vector2(position.x + button.get_size().x, position.y))
+	return packed_array
