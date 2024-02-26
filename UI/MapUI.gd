@@ -156,6 +156,8 @@ func _ready() -> void:
 		offset_y = room_addition_node.position.y - new_room_position_y
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
 	
+	new_room.free()
+	
 	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
 	room_container.add_child(light_overlay)
 
