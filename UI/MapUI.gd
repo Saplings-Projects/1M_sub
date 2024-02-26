@@ -40,16 +40,12 @@ func _close_torch_placement_dialog() -> void:
 func _add_torch_to_current_location() -> void:
 	var accessible_room_positions: Array[RoomBase] = MapMovement.get_all_accessible_rooms_in_range(PlayerManager.player_position, _LIGHT_FLOOR_RANGE, MapManager.current_map.rooms)
 	for room: RoomBase in accessible_room_positions:
-		if room.light_level >= Enums.LightLevel.LIT:
-			room.light_level = Enums.LightLevel.BRIGHTLY_LIT
-		else:
-			room.light_level = Enums.LightLevel.LIT
+		room.light_data.increase_light_by_torch()
 	current_player_room.room.set_torch_active()
 	light_overlay.queue_redraw()
 
 func _ready() -> void:
 	# allows map to be closed if any of the room button on the map is pressed
-	#SignalBus.clicked_next_room_on_map.connect(func() -> void: queue_free())
 	SignalBus.clicked_next_room_on_map.connect(_on_room_clicked)
 	
 	var current_map: MapBase = MapManager.current_map
@@ -61,9 +57,11 @@ func _ready() -> void:
 	if PlayerManager.is_player_initial_position_set:
 		accessible_rooms_by_player = MapMovement.get_accessible_rooms_by_player()
 	else:
+		# If the player hasn't selected a room yet, take the currently accessible rooms 
+		# (basically the rooms on the first floor) and increase the light on those rooms.
 		for room: RoomBase in accessible_rooms_by_player:
 			if room != null:
-				room.light_level = Enums.LightLevel.DIMLY_LIT
+				room.light_data.increase_light_by_room_movement()
 	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
@@ -177,10 +175,8 @@ func _get_combined_room_height(texture_rect: TextureButton) -> float:
 # If the room hasn't been lit when we navigate there, then set it to dimly lit
 func _on_room_clicked(clicked_room: RoomUI) -> void:
 	current_player_room = clicked_room
-	if clicked_room.room.light_level == Enums.LightLevel.UNLIT:
-		clicked_room.room.light_level = Enums.LightLevel.DIMLY_LIT
+	clicked_room.room.light_data.increase_light_by_room_movement()
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
-		if room.light_level == Enums.LightLevel.UNLIT:
-			room.light_level = Enums.LightLevel.DIMLY_LIT
+		room.light_data.increase_light_by_room_movement()
 	queue_free()

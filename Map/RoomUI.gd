@@ -16,10 +16,10 @@ func set_label(title: String) -> void:
 	label.set_text(title)
 
 func get_light_level() -> Enums.LightLevel:
-	return room.light_level
+	return room.light_data.light_level
 
 func has_torch() -> bool:
-	return room.has_torch
+	return room.light_data.has_torch
 
 func get_center_X() -> float:
 	return position.x + button.get_size().x / 2

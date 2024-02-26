@@ -4,15 +4,15 @@ class_name RoomBase
 ##
 ## Holds basic functionality for a room on the map
 
-@export var light_level: Enums.LightLevel:
+@export var light_data: LightData:
 	set(value):
-		light_level = value
-@export var has_torch: bool = false
+		light_data = value
+#@export var has_torch: bool = false
 @export var room_event: EventBase
 var room_position: Vector2i
 
-func _init(_light_level: Enums.LightLevel = Enums.LightLevel.UNLIT):
-	light_level = _light_level
+func _init():
+	light_data = LightData.new()
 
 func _to_string() -> String:
 	return "RoomBase"
@@ -21,8 +21,5 @@ func get_room_abbreviation() -> String:
 	return room_event.get_room_abbreviation()
 
 func set_torch_active() -> void:
-	has_torch = true
-	if light_level == Enums.LightLevel.LIT:
-		light_level = Enums.LightLevel.BRIGHTLY_LIT
-	else:
-		light_level = Enums.LightLevel.LIT
+	light_data.has_torch = true
+	light_data.increase_light_by_torch()

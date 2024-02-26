@@ -79,7 +79,7 @@ func _draw_room_circle(room: RoomUI):
 	# Discussions on customization with adding gradient to be done here. Currently we draw a circle around
 	# rooms that have a torch, and a rect around rooms that are lit from a torch
 	if room.has_torch():
-		# These draw calls draw an unfilled circle around the room with with a thicker width, 
+		# These draw calls draw an unfilled circle around the room with a thicker width, 
 		# then a filled circle on the inside that's filled in, with small transparency
 		if room.get_light_level() == Enums.LightLevel.LIT:
 			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
