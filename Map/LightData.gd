@@ -11,7 +11,7 @@ func _init(_light_level: Enums.LightLevel = Enums.LightLevel.UNLIT, _has_torch: 
 func increase_light_by_torch() -> void:
 	if light_level == Enums.LightLevel.LIT:
 		light_level = Enums.LightLevel.BRIGHTLY_LIT
-	else:
+	elif light_level < Enums.LightLevel.LIT:
 		light_level = Enums.LightLevel.LIT
 	
 func increase_light_by_room_movement() -> void:
