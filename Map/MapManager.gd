@@ -32,7 +32,7 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase: ## G
 	return _map as MapBase
 
 	
-func _ready():
+func _ready() -> void:
 	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map()
 

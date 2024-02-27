@@ -1,22 +1,22 @@
-extends GutTest
+extends TestMapBase
 
 var map_ui_scene: PackedScene = load("res://#Scenes/MapUI.tscn")
 var map_ui: MapUI
 var test_map_array: Array[int] = [1, 3, 5, 3, 1]
 
-func before_all():
+func before_all() -> void:
 	MapManager.map_width_array = test_map_array
 	MapManager.current_map = MapManager.create_map()
 	map_ui = map_ui_scene.instantiate()
 
-func before_each():
+func before_each() -> void:
 	get_tree().root.add_child(map_ui)
 	
-func after_each():
+func after_each() -> void:
 	map_ui.queue_free()
 	assert_no_new_orphans("Orphans still exist, please free up test resources.")
 	
-func test_map_initialize():
+func test_map_initialize() -> void:
 	assert_not_null(map_ui.color_rect, "Color Rect is not set")
 	assert_not_null(map_ui.room_container, "Room Container is not set")
 	assert_not_null(map_ui.scroll_container, "Scroll Container is not set")
@@ -25,16 +25,16 @@ func test_map_initialize():
 	
 	assert_eq(map_ui.room_ui_array[0][2].room.light_data.light_level, Enums.LightLevel.DIMLY_LIT)
 
-func test_player_placement():
+func test_player_placement() -> void:
 	PlayerManager.player_position = Vector2i(2, 0)
 	map_ui._on_room_clicked(map_ui.room_ui_array[0][2])
 	get_tree().root.add_child(map_ui)
 	
-	assert_eq(map_ui.room_ui_array[1][1].room.light_data.light_level, Enums.LightLevel.DIMLY_LIT, "Adjacent room should be dimly lit")
-	assert_eq(map_ui.room_ui_array[1][2].room.light_data.light_level, Enums.LightLevel.DIMLY_LIT, "Adjacent room should be dimly lit")
-	assert_eq(map_ui.room_ui_array[1][3].room.light_data.light_level, Enums.LightLevel.DIMLY_LIT, "Adjacent room should be dimly lit")
+	for room_ui: RoomUI in map_ui.room_ui_array[1]:
+		if room_ui != null:
+			assert_eq(room_ui.room.light_data.light_level, Enums.LightLevel.DIMLY_LIT, "Adjacent room should be dimly lit")
 
-func test_torch_placements():
+func test_torch_placements() -> void:
 	map_ui.room_ui_array[0][2]._set_player_position_based_on_room()
 	get_tree().root.add_child(map_ui)
 	
@@ -47,7 +47,7 @@ func test_torch_placements():
 	for room: RoomBase in rooms_in_range:
 		assert_eq(room.light_data.light_level, Enums.LightLevel.LIT, str("Room position ", room.room_position.y, ",", room.room_position.x, " should be lit"))
 
-func test_torch_placement_then_movement():
+func test_movement_and_placing_two_torches() -> void:
 	map_ui.room_ui_array[0][2]._set_player_position_based_on_room()
 	get_tree().root.add_child(map_ui)
 	

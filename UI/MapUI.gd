@@ -61,7 +61,7 @@ func _ready() -> void:
 		# (basically the rooms on the first floor) and increase the light on those rooms.
 		for room: RoomBase in accessible_rooms_by_player:
 			if room != null:
-				room.light_data.increase_light_by_room_movement()
+				room.light_data.increase_light_by_player_movement()
 	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
@@ -69,12 +69,10 @@ func _ready() -> void:
 	var new_room_size: Vector2 = new_room_texture_button.get_size()
 	
 	var room_container_width: float = _get_combined_room_width(new_room_texture_button)
-	var room_container_offset_x: float = max(0, _MINIMUM_ROOM_WIDTH - _get_combined_room_width(new_room_texture_button))
 	# Set the max width between what we calculated above and the minimum room width constant
 	room_container_width = max(room_container_width, _MINIMUM_ROOM_WIDTH)
 	
 	var room_container_height: float = _get_combined_room_height(new_room_texture_button)
-	var room_container_offset_y: float = max(0, _MINIMUM_ROOM_HEIGHT - _get_combined_room_height(new_room_texture_button))
 	# Set the max height between what we calculated above and the minimum room height constant
 	room_container_height = max(room_container_height, _MINIMUM_ROOM_HEIGHT)
 	
@@ -102,7 +100,6 @@ func _ready() -> void:
 	var start_position_for_next_room_y: float = room_container.get_custom_minimum_size().y - (color_rect.get_size().y - scroll_container_bottom_y_position)
 	var position_for_next_room: Vector2 = Vector2(start_position_for_next_room_x, start_position_for_next_room_y)
 	
-	var max_floor_width: int = MapManager.map_width_array.max()
 	room_ui_array.resize(MapManager.map_width_array.size())
 	
 	for floor_index: int in range(current_map.rooms.size()):
@@ -141,7 +138,7 @@ func _ready() -> void:
 	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_button) / 2
 	
 	# Get the offset if we had to adjust the X position due to having to set a minimum width if the map is too small.
-	var offset_x = room_addition_node.position.x - new_room_position_x
+	var offset_x: float = room_addition_node.position.x - new_room_position_x
 	
 	# If the height of the combined rooms is less than the minimum room height 
 	# then calculate the position for it to be centered in the middle of the map:
@@ -177,8 +174,8 @@ func _get_combined_room_height(texture_rect: TextureButton) -> float:
 # If the room hasn't been lit when we navigate there, then set it to dimly lit
 func _on_room_clicked(clicked_room: RoomUI) -> void:
 	current_player_room = clicked_room
-	clicked_room.room.light_data.increase_light_by_room_movement()
+	clicked_room.room.light_data.increase_light_by_player_movement()
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
-		room.light_data.increase_light_by_room_movement()
+		room.light_data.increase_light_by_player_movement()
 	queue_free()
