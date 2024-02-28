@@ -24,3 +24,11 @@ enum ENTITY_STAT_DICT_TYPE {
 
 # used to select the offfense or defense dictionary for the stats of an entity
 # ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd if you modify this
+
+var EVENTS_CLASSIFICATION: Array[Resource] = [EventMob, EventRandom, EventShop, EventHeal]
+
+var POSSIBLE_MOVEMENTS: Dictionary = {
+	"UP": Vector2i(0,1),
+	"LEFT": Vector2i(-1,1),
+	"RIGHT": Vector2i(1,1)
+}

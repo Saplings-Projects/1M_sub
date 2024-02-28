@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh60lnh0ckuxe"
-path="res://.godot/imported/light_mechanic_explanation.png-9dba15fc2c07fc347a7adb37c161c5d9.ctex"
+uid="uid://vfnib7v01ajm"
+path="res://.godot/imported/light_level_flow_chart.png-8622eecc74e52da0d0e8bc10137374db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://documentation_images/light_mechanic_explanation.png"
-dest_files=["res://.godot/imported/light_mechanic_explanation.png-9dba15fc2c07fc347a7adb37c161c5d9.ctex"]
+source_file="res://documentation_images/light_level_flow_chart.png"
+dest_files=["res://.godot/imported/light_level_flow_chart.png-8622eecc74e52da0d0e8bc10137374db.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh60lnh0ckuxe"
-path="res://.godot/imported/light_mechanic_explanation.png-9dba15fc2c07fc347a7adb37c161c5d9.ctex"
+uid="uid://dxpg0rdhgt587"
+path="res://.godot/imported/room_icon.png-2d870492fb6ea014926ba51e654ac62f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://documentation_images/light_mechanic_explanation.png"
-dest_files=["res://.godot/imported/light_mechanic_explanation.png-9dba15fc2c07fc347a7adb37c161c5d9.ctex"]
+source_file="res://Map/Room_Images/room_icon.png"
+dest_files=["res://.godot/imported/room_icon.png-2d870492fb6ea014926ba51e654ac62f.ctex"]
 
 [params]
 
