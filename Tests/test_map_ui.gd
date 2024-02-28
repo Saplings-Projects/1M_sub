@@ -63,3 +63,4 @@ func test_movement_and_placing_two_torches() -> void:
 			assert_eq(room.light_data.light_level, Enums.LightLevel.LIT, "This room was out of range of the previous torch put down, should be lit")
 		else:
 			assert_eq(room.light_data.light_level, Enums.LightLevel.BRIGHTLY_LIT, "This room was in range of the previous torch put down, should be brightly lit")
+
