@@ -24,7 +24,6 @@ func test_map_initialize() -> void:
 func test_player_placement() -> void:
 	PlayerManager.player_position = Vector2i(2, 0)
 	map_ui._on_room_clicked(map_ui.room_ui_array[0][2])
-	get_tree().root.add_child(map_ui)
 	
 	for room_ui: RoomUI in map_ui.room_ui_array[1]:
 		if room_ui != null:
@@ -32,7 +31,6 @@ func test_player_placement() -> void:
 
 func test_torch_placements() -> void:
 	map_ui.room_ui_array[0][2]._set_player_position_based_on_room()
-	get_tree().root.add_child(map_ui)
 	
 	assert_eq(map_ui.current_player_room.room.room_position, Vector2i(2, 0), "Player is in the wrong position")
 	
@@ -45,12 +43,10 @@ func test_torch_placements() -> void:
 
 func test_movement_and_placing_two_torches() -> void:
 	map_ui.room_ui_array[0][2]._set_player_position_based_on_room()
-	get_tree().root.add_child(map_ui)
 	
 	map_ui._add_torch_to_current_location()
 	
 	map_ui.room_ui_array[1][1]._set_player_position_based_on_room()
-	get_tree().root.add_child(map_ui)
 	
 	assert_eq(map_ui.current_player_room.room.room_position, Vector2i(1, 1), "Player is in the wrong position")
 	
