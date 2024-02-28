@@ -1,19 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=16 format=3 uid="uid://b60uabg68ra1l"]
 
+[ext_resource type="Script" path="res://Map/MapManager.gd" id="2_50npk"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
-[ext_resource type="Resource" uid="uid://ckaua56xmrxib" path="res://Cards/Resource/Card_Energy.tres" id="4_krnn7"]
-[ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="4_ol33a"]
-[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="5_icdnp"]
-[ext_resource type="Resource" uid="uid://boodcfdepyk5i" path="res://Cards/Resource/Card_DamageHealth.tres" id="6_qsijp"]
-[ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Card_DrawCards.tres" id="7_pyrgi"]
-[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="8_4qeej"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
-[ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Card_Poison.tres" id="9_g2pug"]
-[ext_resource type="Resource" uid="uid://uv2rili0xf3x" path="res://Cards/Resource/Card_Damage_EVERYTHING.tres" id="10_bsfis"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
-[ext_resource type="Resource" uid="uid://b4kmg3lm0e45q" path="res://Cards/Resource/Card_Vulnerability.tres" id="11_lk3kc"]
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Cards/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Cards/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
@@ -21,10 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Cards/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Cards/energy_count.png" id="19_spyxg"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
+[ext_resource type="Texture2D" uid="uid://cjlatwiw7r80d" path="res://Map/map_icon.png" id="20_tiho6"]
+[ext_resource type="Script" path="res://UI/MapButton.gd" id="22_druf4"]
 
 [node name="TestingScene" type="Node2D"]
+metadata/_edit_vertical_guides_ = [1216.0]
 
 [node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
+
+[node name="TestMap" type="Node2D" parent="."]
+script = ExtResource("2_50npk")
 
 [node name="Player" parent="." instance=ExtResource("3_4psp7")]
 position = Vector2(595, 284)
@@ -49,7 +47,6 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-default_deck = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("4_ol33a"), ExtResource("5_icdnp"), ExtResource("6_qsijp"), ExtResource("7_pyrgi"), ExtResource("8_4qeej"), ExtResource("9_g2pug"), ExtResource("10_bsfis"), ExtResource("11_lk3kc"), ExtResource("4_krnn7")])
 starting_hand_size = 10
 max_hand_width = 900.0
 min_card_separation = 90.0
@@ -180,5 +177,20 @@ texture_focused = ExtResource("18_b54hn")
 stretch_mode = 0
 script = ExtResource("19_ucc6f")
 metadata/_edit_use_anchors_ = true
+
+[node name="MapIcon" type="TextureButton" parent="CanvasLayer/UIControl"]
+layout_mode = 0
+offset_left = 1174.0
+offset_top = 31.0
+offset_right = 1214.0
+offset_bottom = 71.0
+texture_normal = ExtResource("20_tiho6")
+texture_pressed = ExtResource("20_tiho6")
+texture_hover = ExtResource("20_tiho6")
+texture_disabled = ExtResource("20_tiho6")
+texture_focused = ExtResource("20_tiho6")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("22_druf4")
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
