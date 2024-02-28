@@ -2,14 +2,10 @@ extends TestMapBase
 
 var map_ui_scene: PackedScene = load("res://#Scenes/MapUI.tscn")
 var map_ui: MapUI
-var test_map_array: Array[int] = [1, 3, 5, 3, 1]
-
-func before_all() -> void:
-	MapManager.map_width_array = test_map_array
-	MapManager.current_map = MapManager.create_map()
-	map_ui = map_ui_scene.instantiate()
 
 func before_each() -> void:
+	super()
+	map_ui = map_ui_scene.instantiate()
 	get_tree().root.add_child(map_ui)
 	
 func after_each() -> void:
