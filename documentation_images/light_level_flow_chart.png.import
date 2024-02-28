@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxpg0rdhgt587"
-path="res://.godot/imported/room_icon.png-92b66821e87e400c614959fc9bbfa774.ctex"
+uid="uid://vfnib7v01ajm"
+path="res://.godot/imported/light_level_flow_chart.png-8622eecc74e52da0d0e8bc10137374db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/room_icon.png"
-dest_files=["res://.godot/imported/room_icon.png-92b66821e87e400c614959fc9bbfa774.ctex"]
+source_file="res://documentation_images/light_level_flow_chart.png"
+dest_files=["res://.godot/imported/light_level_flow_chart.png-8622eecc74e52da0d0e8bc10137374db.ctex"]
 
 [params]
 

@@ -33,3 +33,11 @@ enum CardMovementState
 	HOVERED,
 	QUEUED,
 }
+
+enum LightLevel
+{
+	UNLIT,
+	DIMLY_LIT,
+	LIT,
+	BRIGHTLY_LIT
+}
