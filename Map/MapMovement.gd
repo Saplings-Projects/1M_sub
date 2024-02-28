@@ -4,7 +4,7 @@ class_name MapMovement extends Resource
 ## Return the list of the accessible positions given the position and the possible movements
 ## For example, if you have a room UP and UP_LEFT but not UP_RIGHT, this function returns the positions of the room being UP and UP_LEFT of position
 static func get_accessible_room_positions_by_given_position(position: Vector2i) -> Array[Vector2i]:
-	var map_rooms = MapManager.current_map.rooms
+	var map_rooms: Array[Array] = MapManager.current_map.rooms
 	var map_width_array: Array[int] = MapManager.map_width_array
 	var _max_floor_size: int = map_width_array.max()
 	var accessible_room_positions: Array[Vector2i] = []
