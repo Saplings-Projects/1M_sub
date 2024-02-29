@@ -55,3 +55,20 @@ enum LightLevel
 	LIT,
 	BRIGHTLY_LIT
 }
+
+enum ENTITY_STAT_DICT_TYPE {
+	OFFENSE,
+	DEFENSE
+}
+
+# used to select the offense or defense dictionary for the stats of an entity
+# ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd if you modify this
+
+enum POSSIBLE_MODIFIER_NAMES {
+	DAMAGE,
+	POISON,
+	DRAW,
+	CARD_REWARD_NUMBER
+}
+
+
