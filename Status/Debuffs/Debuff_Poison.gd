@@ -10,7 +10,7 @@ func _init() -> void:
 
 func init_status(in_caster: Entity, in_target: Entity) -> void:
 	super.init_status(in_caster, in_target)
-	status_turn_duration = EntityStats.get_value_modified_by_stats(	GlobalEnum.POSSIBLE_MODIFIER_NAMES.POISON, 
+	status_turn_duration = EntityStats.get_value_modified_by_stats(	GlobalEnums.POSSIBLE_MODIFIER_NAMES.POISON, 
 																	in_caster, 
 																	in_target, 
 																	status_turn_duration)

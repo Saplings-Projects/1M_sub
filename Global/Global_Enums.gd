@@ -1,5 +1,5 @@
 extends Node
-class_name GlobalEnum
+class_name GlobalEnums
 ## Global enums list
 
 

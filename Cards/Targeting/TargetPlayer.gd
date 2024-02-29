@@ -1,7 +1,7 @@
 class_name TargetPlayer extends TargetingBase
 
 func _init() -> void:
-	cast_type = GlobalEnum.CardCastType.INSTA_CAST
+	cast_type = GlobalEnums.CardCastType.INSTA_CAST
 
 	
 # @Override

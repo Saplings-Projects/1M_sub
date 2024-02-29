@@ -36,15 +36,15 @@ func reset_modifier_dict_temp_to_default() -> void:
 	_offense_modifier_dict.reset_all_temp_to_default()
 	_defense_modifier_dict.reset_all_temp_to_default()
 
-func change_stat(   entity_stat_dict_type: GlobalEnum.ENTITY_STAT_DICT_TYPE, 
-					modifier_name: GlobalEnum.POSSIBLE_MODIFIER_NAMES,
+func change_stat(   entity_stat_dict_type: GlobalEnums.ENTITY_STAT_DICT_TYPE, 
+					modifier_name: GlobalEnums.POSSIBLE_MODIFIER_NAMES,
 					new_modification: StatModifiers
 					) -> void:
 	# TODO add boolean for add or remove stat (to know to increase or decrease the modification count)
 	_ENTITY_STAT_DICT_SELECTOR[entity_stat_dict_type].change_modifier_of_given_name(modifier_name, new_modification)
 	modification_count += 1
 
-func _calculate_modified_value_offense(modifier_name: GlobalEnum.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
+func _calculate_modified_value_offense(modifier_name: GlobalEnums.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
 	var modifier_base_dict: Dictionary = _offense_modifier_dict.stat_dict[modifier_name].modifier_base_dict
 	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
@@ -59,7 +59,7 @@ func _calculate_modified_value_offense(modifier_name: GlobalEnum.POSSIBLE_MODIFI
 
 	return ceil(modified_value)
 
-func _calculate_modified_value_defense(modifier_name: GlobalEnum.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
+func _calculate_modified_value_defense(modifier_name: GlobalEnums.POSSIBLE_MODIFIER_NAMES, base_value: int) -> int:
 	var modified_value: int = base_value
 	var modifier_base_dict: Dictionary = _defense_modifier_dict.stat_dict[modifier_name].modifier_base_dict
 	var MODIFIER_KEYS: Dictionary = GlobalVar.MODIFIER_KEYS
@@ -70,7 +70,7 @@ func _calculate_modified_value_defense(modifier_name: GlobalEnum.POSSIBLE_MODIFI
 
 	return ceil(modified_value)
 		
-static func get_value_modified_by_stats(modifier_name: GlobalEnum.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
+static func get_value_modified_by_stats(modifier_name: GlobalEnums.POSSIBLE_MODIFIER_NAMES, caster: Entity, target: Entity, value: int) -> int:
 	var modified_value: int = value
 	var caster_stats: EntityStats = null
 	if caster != null:

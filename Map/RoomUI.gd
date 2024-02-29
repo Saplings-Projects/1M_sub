@@ -15,7 +15,7 @@ var room_index: int = 0
 func set_label(title: String) -> void:
 	label.set_text(title)
 
-func get_light_level() -> GlobalEnum.LightLevel:
+func get_light_level() -> GlobalEnums.LightLevel:
 	return room.light_data.light_level
 
 func has_torch() -> bool:
