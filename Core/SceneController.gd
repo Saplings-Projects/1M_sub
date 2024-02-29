@@ -4,8 +4,8 @@ extends Node
 var current_scene: Node = null
 
 var SCENE_MAPPING: Dictionary = {
-	Enums.CombatResult.VICTORY: "res://#Scenes/TestingScene.tscn",
-	Enums.CombatResult.DEFEAT: "res://#Scenes/TestingScene.tscn",
+	GlobalEnum.CombatResult.VICTORY: "res://#Scenes/TestingScene.tscn",
+	GlobalEnum.CombatResult.DEFEAT: "res://#Scenes/TestingScene.tscn",
 }
 
 func _ready() -> void:
@@ -44,12 +44,12 @@ func _deferred_goto_scene(path: String) -> void:
 	get_tree().current_scene = current_scene
 
 
-func _combat_end_change_scene(combat_result: Enums.CombatResult) -> void:
-	PhaseManager.call_deferred("set_phase", Enums.Phase.SCENE_END)
-	if combat_result == Enums.CombatResult.DEFEAT:
+func _combat_end_change_scene(combat_result: GlobalEnum.CombatResult) -> void:
+	PhaseManager.call_deferred("set_phase", GlobalEnum.Phase.SCENE_END)
+	if combat_result == GlobalEnum.CombatResult.DEFEAT:
 		print('Defeat')
-		goto_scene(SCENE_MAPPING[Enums.CombatResult.DEFEAT])
-	elif combat_result == Enums.CombatResult.VICTORY:
+		goto_scene(SCENE_MAPPING[GlobalEnum.CombatResult.DEFEAT])
+	elif combat_result == GlobalEnum.CombatResult.VICTORY:
 		print("Victory")
-		goto_scene(SCENE_MAPPING[Enums.CombatResult.VICTORY])
+		goto_scene(SCENE_MAPPING[GlobalEnum.CombatResult.VICTORY])
 		PhaseManager.call_deferred("initialize_game")

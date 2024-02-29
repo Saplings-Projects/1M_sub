@@ -31,7 +31,7 @@ func test_player_death_during_enemy_turn() -> void:
 	_player.get_health_component()._set_health(1.0)
 	_battler._on_enemy_start_turn()
 	assert_eq(_player.get_health_component().current_health, 0.)
-	assert_signal_emitted_with_parameters(PhaseManager, "on_combat_end", [Enums.CombatResult.DEFEAT])
+	assert_signal_emitted_with_parameters(PhaseManager, "on_combat_end", [GlobalEnum.CombatResult.DEFEAT])
 
 
 func test_check_and_handle_battle_end_player_death() -> void:
@@ -39,7 +39,7 @@ func test_check_and_handle_battle_end_player_death() -> void:
 		
 	_battler._check_and_handle_battle_end()
 
-	assert_signal_emitted_with_parameters(PhaseManager, "on_combat_end", [Enums.CombatResult.DEFEAT])
+	assert_signal_emitted_with_parameters(PhaseManager, "on_combat_end", [GlobalEnum.CombatResult.DEFEAT])
 	
 
 func test_check_and_handle_battle_end_enemy_death() -> void:
@@ -47,7 +47,7 @@ func test_check_and_handle_battle_end_enemy_death() -> void:
 	
 	_battler._check_and_handle_battle_end()
 
-	assert_signal_emitted_with_parameters(PhaseManager, "on_combat_end", [Enums.CombatResult.VICTORY])
+	assert_signal_emitted_with_parameters(PhaseManager, "on_combat_end", [GlobalEnum.CombatResult.VICTORY])
 	
 	
 func test_handle_enemy_deaths_none() -> void:

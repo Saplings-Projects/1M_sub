@@ -23,7 +23,7 @@ func _draw() -> void:
 	for floor_array: Array[RoomUI] in room_ui_array:
 		for room: RoomUI in floor_array:
 			if room != null:
-				if (room.get_light_level() != Enums.LightLevel.UNLIT):
+				if (room.get_light_level() != GlobalEnum.LightLevel.UNLIT):
 					room_circles.append(_calculate_points_for_circle(room))
 					lit_rooms_to_draw.append(room)
 				# Save the first room in the map, to help with the calculations of the darkness overlay
@@ -81,18 +81,18 @@ func _draw_room_circle(room: RoomUI) -> void:
 	if room.has_torch():
 		# These draw calls draw an unfilled circle around the room with a thicker width, 
 		# then a filled circle on the inside that's filled in, with small transparency
-		if room.get_light_level() == Enums.LightLevel.LIT:
+		if room.get_light_level() == GlobalEnum.LightLevel.LIT:
 			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
 			draw_circle(center_point_with_offset, room_circle_radius - 1, Color(1, 1, 0, 0.01))
-		elif room.get_light_level() == Enums.LightLevel.BRIGHTLY_LIT:
+		elif room.get_light_level() == GlobalEnum.LightLevel.BRIGHTLY_LIT:
 			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 1, 1, 1), 3)
 			draw_circle(center_point_with_offset, room_circle_radius - 1, Color(0, 1, 1, 0.01))
 	else:
-		if room.get_light_level() == Enums.LightLevel.DIMLY_LIT:
+		if room.get_light_level() == GlobalEnum.LightLevel.DIMLY_LIT:
 			draw_rect(room.get_room_rect().grow(-3), Color(0, 0, 0, 0.5), true)
-		elif room.get_light_level() == Enums.LightLevel.LIT:
+		elif room.get_light_level() == GlobalEnum.LightLevel.LIT:
 			draw_rect(room.get_room_rect().grow(3), Color(1, 1, 0, 1), false)
-		elif room.get_light_level() == Enums.LightLevel.BRIGHTLY_LIT:
+		elif room.get_light_level() == GlobalEnum.LightLevel.BRIGHTLY_LIT:
 			draw_rect(room.get_room_rect().grow(3), Color(0, 1, 1, 1), false)
 
 var outer_circle_radius: int = 60

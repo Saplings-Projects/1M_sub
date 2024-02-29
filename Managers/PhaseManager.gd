@@ -7,10 +7,10 @@ extends Node
 
 
 signal on_game_start
-signal on_phase_changed(new_phase: Enums.Phase, old_phase: Enums.Phase)
-signal on_combat_end(result: Enums.CombatResult)
+signal on_phase_changed(new_phase: GlobalEnum.Phase, old_phase: GlobalEnum.Phase)
+signal on_combat_end(result: GlobalEnum.CombatResult)
 
-var current_phase: Enums.Phase = Enums.Phase.NONE
+var current_phase: GlobalEnum.Phase = GlobalEnum.Phase.NONE
 
 
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 
 func initialize_game() -> void:
-	set_phase(Enums.Phase.GAME_STARTING)
+	set_phase(GlobalEnum.Phase.GAME_STARTING)
 	
 	# TODO give all objects some time to initialize. Kinda hacky
 	await get_tree().create_timer(.1).timeout
@@ -26,13 +26,13 @@ func initialize_game() -> void:
 
 
 func _start_game() -> void:
-	set_phase(Enums.Phase.PLAYER_ATTACKING)
+	set_phase(GlobalEnum.Phase.PLAYER_ATTACKING)
 	on_game_start.emit()
 
 
-func set_phase(phase: Enums.Phase) -> void:
+func set_phase(phase: GlobalEnum.Phase) -> void:
 	if (current_phase == phase):
 		return
-	var old_phase: Enums.Phase = current_phase
+	var old_phase: GlobalEnum.Phase = current_phase
 	current_phase = phase
 	on_phase_changed.emit(current_phase, old_phase)

@@ -12,7 +12,7 @@ class_name CardMovementState
 
 # This is meant to be called from child states if you wish to enter another state from within
 # that state.
-signal trigger_exit_state(next_state: Enums.CardMovementState)
+signal trigger_exit_state(next_state: GlobalEnum.CardMovementState)
 
 var _state: CardStateProperties
 
@@ -35,5 +35,5 @@ func on_state_exit() -> void:
 
 
 
-func can_transition_from(_new_state: Enums.CardMovementState) -> bool:
+func can_transition_from(_new_state: GlobalEnum.CardMovementState) -> bool:
 	return true

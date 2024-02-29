@@ -31,7 +31,7 @@ func on_state_process(delta: float) -> void:
 	offset_desired_position += OFFSET_FROM_MOUSE
 	
 	var is_in_play_area : bool = CardManager.card_container.is_queued_card_in_play_area()
-	var is_insta_cast : bool = _state.card.card_cast_type != Enums.CardCastType.INSTA_CAST
+	var is_insta_cast : bool = _state.card.card_cast_type != GlobalEnum.CardCastType.INSTA_CAST
 	
 	if(is_in_play_area && is_insta_cast):
 		_state.card.position = _state.card.position.lerp(TARGET_CARD_POS, delta * MOVE_SPEED)

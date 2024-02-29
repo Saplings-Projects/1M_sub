@@ -32,4 +32,4 @@ func on_state_process(delta: float) -> void:
 
 func _on_easing_finished() -> void:
 	# Fire off this signal, which should exit this state and enter the IN_HAND state
-	trigger_exit_state.emit(Enums.CardMovementState.IN_HAND)
+	trigger_exit_state.emit(GlobalEnum.CardMovementState.IN_HAND)
