@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_cf8lx"]
 [ext_resource type="Script" path="res://Entity/Components/StatusComponent.gd" id="3_l5gfj"]
 [ext_resource type="Script" path="res://Entity/Components/HealthComponent.gd" id="4_8ip81"]
-[ext_resource type="Texture2D" uid="uid://cq1ii3ed6oels" path="res://Entity/Player/fauna.png" id="5_ygjep"]
+[ext_resource type="Texture2D" uid="uid://cq1ii3ed6oels" path="res://Art/Character/default.png" id="5_ygjep"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="6_kgqto"]
 [ext_resource type="Script" path="res://UI/HealthLabel.gd" id="7_1hqya"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_mmgs7"]

@@ -13,8 +13,8 @@ config_version=5
 config/name="Fauna-RPG"
 run/main_scene="res://#Scenes/TestingScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-boot_splash/image="res://loading_splash_art.png"
-config/icon="res://fauna_icon.png"
+boot_splash/image="res://Art/Menus/loading_splash_art.png"
+config/icon="res://Art/Menus/fauna_icon.png"
 
 [autoload]
 

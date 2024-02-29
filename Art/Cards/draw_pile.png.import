@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjlatwiw7r80d"
-path="res://.godot/imported/map_icon.png-ca4387eafbb70e74b0ffbb41a9cb9905.ctex"
+uid="uid://caemucaya30wh"
+path="res://.godot/imported/draw_pile.png-6604a2c1b38d3768df2dec5533af3fb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/map_icon.png"
-dest_files=["res://.godot/imported/map_icon.png-ca4387eafbb70e74b0ffbb41a9cb9905.ctex"]
+source_file="res://Art/Cards/draw_pile.png"
+dest_files=["res://.godot/imported/draw_pile.png-6604a2c1b38d3768df2dec5533af3fb1.ctex"]
 
 [params]
 

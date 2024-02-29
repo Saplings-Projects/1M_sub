@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl5v3bgnntoc5"
-path="res://.godot/imported/energy_count.png-d7504cb45fded26ce7c6e976afb8239b.ctex"
+uid="uid://nheutko3fha3"
+path="res://.godot/imported/card_border.png-2e6f3784dbb004d3ddfc24edab34317d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/energy_count.png"
-dest_files=["res://.godot/imported/energy_count.png-d7504cb45fded26ce7c6e976afb8239b.ctex"]
+source_file="res://Art/Cards/card_border.png"
+dest_files=["res://.godot/imported/card_border.png-2e6f3784dbb004d3ddfc24edab34317d.ctex"]
 
 [params]
 

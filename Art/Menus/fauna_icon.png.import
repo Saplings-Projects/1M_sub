@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq1ii3ed6oels"
-path="res://.godot/imported/fauna.png-79bafd19d6aff47e5b504f14c7b9c81c.ctex"
+uid="uid://dcbe2iblhp5sa"
+path="res://.godot/imported/fauna_icon.png-9c46334921252e918d6be0e61e344b0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entity/Player/fauna.png"
-dest_files=["res://.godot/imported/fauna.png-79bafd19d6aff47e5b504f14c7b9c81c.ctex"]
+source_file="res://Art/Menus/fauna_icon.png"
+dest_files=["res://.godot/imported/fauna_icon.png-9c46334921252e918d6be0e61e344b0a.ctex"]
 
 [params]
 

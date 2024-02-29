@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxpg0rdhgt587"
-path="res://.godot/imported/room_icon.png-2d870492fb6ea014926ba51e654ac62f.ctex"
+uid="uid://bmno324u2v60w"
+path="res://.godot/imported/red_sapling-default.png-8e4369fa1f6006b070992bbfed9fe03c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/Room_Images/room_icon.png"
-dest_files=["res://.godot/imported/room_icon.png-2d870492fb6ea014926ba51e654ac62f.ctex"]
+source_file="res://Art/Enemies/red_sapling-default.png"
+dest_files=["res://.godot/imported/red_sapling-default.png-8e4369fa1f6006b070992bbfed9fe03c.ctex"]
 
 [params]
 

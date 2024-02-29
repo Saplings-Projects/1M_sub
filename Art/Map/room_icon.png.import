@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be7gf1yhnurd3"
-path="res://.godot/imported/room_icon_accessible.png-1d99bca6d66a349a3ac7f37d69d2f889.ctex"
+uid="uid://dxpg0rdhgt587"
+path="res://.godot/imported/room_icon.png-879f2a1b5ef819beaa44f3748e63959f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/room_icon_accessible.png"
-dest_files=["res://.godot/imported/room_icon_accessible.png-1d99bca6d66a349a3ac7f37d69d2f889.ctex"]
+source_file="res://Art/Map/room_icon.png"
+dest_files=["res://.godot/imported/room_icon.png-879f2a1b5ef819beaa44f3748e63959f.ctex"]
 
 [params]
 

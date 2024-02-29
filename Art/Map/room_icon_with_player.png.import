@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caemucaya30wh"
-path="res://.godot/imported/draw_pile.png-663d17b0c66a0931574e4b958b3e4580.ctex"
+uid="uid://c73bts0oimblj"
+path="res://.godot/imported/room_icon_with_player.png-437126f8bd890dd4c191a59b24ed892c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/draw_pile.png"
-dest_files=["res://.godot/imported/draw_pile.png-663d17b0c66a0931574e4b958b3e4580.ctex"]
+source_file="res://Art/Map/room_icon_with_player.png"
+dest_files=["res://.godot/imported/room_icon_with_player.png-437126f8bd890dd4c191a59b24ed892c.ctex"]
 
 [params]
 

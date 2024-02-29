@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcbe2iblhp5sa"
-path="res://.godot/imported/fauna_icon.png-75e5632b87e12e428e034739b7e303c7.ctex"
+uid="uid://bu626jwgp3r5x"
+path="res://.godot/imported/green_sapling-default.png-c8e0136e3dcb093310576f174adc0ffd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fauna_icon.png"
-dest_files=["res://.godot/imported/fauna_icon.png-75e5632b87e12e428e034739b7e303c7.ctex"]
+source_file="res://Art/Enemies/green_sapling-default.png"
+dest_files=["res://.godot/imported/green_sapling-default.png-c8e0136e3dcb093310576f174adc0ffd.ctex"]
 
 [params]
 
