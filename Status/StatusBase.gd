@@ -26,7 +26,7 @@ var status_caster: Entity = null
 
 var status_modifier_storage: StatModifiers = null
 var modifier_name: int = -1 # to be overriden by the status children
-var entity_stat_dict_type: GlobalVar.ENTITY_STAT_DICT_TYPE # to be overriden by the status children
+var entity_stat_dict_type: GlobalEnum.ENTITY_STAT_DICT_TYPE # to be overriden by the status children
 # this is only useful for status that modify stats
 
 func _init() -> void:
