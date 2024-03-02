@@ -3,11 +3,17 @@ it should be written_like_this and not "like this"
 use .png for images
 chroma key videos using color #FC00FF (should be a bright pink / violet)
 
-Background : <area_number>-<number>
-Cards : <name>
+The following section is used as a standard formatting for automated tests
+You should only modify this if you know what you are doing
+
+## START
+Background : <area_number>-<number> ;
+Cards : <name> ;
 Character : <pose> ; default, hurt, took damage, defeated, etc...
-Items : <type>-<name> with type being either accessory or consumable
-Map : <name>
-Menus : <name>-<number>
-Mob :<name>-<pose>
-NPC : <name>-<pose>
+Items : <type?accessory/consumable>-<name> ; type is either accessory or consumable
+Map : <name> ;
+Menus : <name>-<number> ;
+Enemies : <name>-<pose> ;
+NPC : <name>-<pose> ;
+## END
+
