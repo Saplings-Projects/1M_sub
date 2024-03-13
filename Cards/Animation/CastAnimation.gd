@@ -16,6 +16,7 @@ func _ready() -> void:
 	animation.animation_finished.connect(_finish_casting)
 
 
+# Does nothing in the base. Override in children if you want complicated effects
 @warning_ignore("unused_parameter")
 func play_animation(targets: Array[Entity]) -> void:
 	pass
