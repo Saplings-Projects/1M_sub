@@ -1,23 +1,11 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=17 format=3 uid="uid://ctx8jsvac84so"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://ctx8jsvac84so"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_5lji7"]
-[ext_resource type="PackedScene" uid="uid://c13302ahcfpuy" path="res://Cards/Animation/Anim_Poison.tscn" id="1_bv4kp"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_u6k7h"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="2_6vdl1"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_omhae"]
-[ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_AllTargets.gd" id="2_x53h2"]
-[ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_qptot"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="4_2c1xc"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="4_ux0cs"]
-[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="7_xqpf6"]
-
-[sub_resource type="Resource" id="Resource_4k6wv"]
-script = ExtResource("2_x53h2")
-offset = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_61w07"]
-script = ExtResource("3_qptot")
-cast_animation_scene = ExtResource("1_bv4kp")
-cast_position = SubResource("Resource_4k6wv")
 
 [sub_resource type="Resource" id="Resource_lnhao"]
 script = ExtResource("2_6vdl1")
@@ -29,15 +17,14 @@ status_power = 1.0
 script = ExtResource("1_5lji7")
 status_to_apply = SubResource("Resource_lnhao")
 
-[sub_resource type="Resource" id="Resource_rpw7c"]
-script = ExtResource("7_xqpf6")
+[sub_resource type="Resource" id="Resource_oq1u4"]
+script = ExtResource("4_2c1xc")
 
 [sub_resource type="Resource" id="Resource_bamld"]
 script = ExtResource("2_omhae")
 effect = SubResource("Resource_p8qns")
 value = 0
-targeting_function = SubResource("Resource_rpw7c")
-animation_data = SubResource("Resource_61w07")
+targeting_function = SubResource("Resource_oq1u4")
 
 [sub_resource type="Resource" id="Resource_1hn6q"]
 script = ExtResource("4_ux0cs")

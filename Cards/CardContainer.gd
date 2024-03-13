@@ -183,7 +183,6 @@ func _discard_card_at_index(card_index: int) -> void:
 	
 	# add to discard pile
 	discard_pile.append(card.card_data)
-
 	# remove from hand and add to discard queue
 	cards_in_hand.remove_at(card_index)
 	_add_to_discard_queue(card)
@@ -360,7 +359,6 @@ func _on_card_unhovered(card: CardWorld) -> void:
 
 
 func _focus_card(card: CardWorld) -> void:
-
 	_focused_card = card
 	
 	# children at the top of the hierarchy will render in front

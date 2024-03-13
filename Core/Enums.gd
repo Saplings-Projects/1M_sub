@@ -47,3 +47,11 @@ enum CombatResult
 	VICTORY,
 	DEFEAT
 }
+
+enum LightLevel
+{
+	UNLIT,
+	DIMLY_LIT,
+	LIT,
+	BRIGHTLY_LIT
+}

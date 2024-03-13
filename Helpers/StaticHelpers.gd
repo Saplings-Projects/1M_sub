@@ -41,3 +41,10 @@ static func get_mean_vector(positions: Array[Vector2]) -> Vector2:
 	for position in positions:
 		mean_vector += position
 	return mean_vector / positions.size()
+
+# ! works in place
+static func remove_duplicate_in_array(array: Array) -> void:
+	var dict: Dictionary = {}
+	for value: Variant in array:
+		dict[value] = 1 # value doesn't matter, we just need the keys
+	array.assign(dict.keys())
