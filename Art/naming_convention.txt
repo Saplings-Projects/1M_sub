@@ -8,7 +8,8 @@ You should only modify this if you know what you are doing
 
 ## START
 Background : <area_number>-<number> ;
-Cards : <name> ;
+Card_art : <name> ;
+Card_layout : <name> ;
 Character : <pose> ; default, hurt, took damage, defeated, etc...
 Items : <type?accessory/consumable>-<name> ; type is either accessory or consumable
 Map : <name> ;

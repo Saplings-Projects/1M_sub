@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://caxbd2ppk3ans"]
 
 [ext_resource type="Script" path="res://Cards/CardWorld.gd" id="1_4el5m"]
-[ext_resource type="Texture2D" uid="uid://nheutko3fha3" path="res://Art/Cards/card_border.png" id="2_k6rq5"]
+[ext_resource type="Texture2D" uid="uid://nheutko3fha3" path="res://Art/Card_layout/card_border.png" id="2_k6rq5"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="3_du4nn"]
 [ext_resource type="Script" path="res://UI/CardUISetter.gd" id="5_hkyxd"]
-[ext_resource type="Texture2D" uid="uid://bdc5r0w6lyh34" path="res://Art/Cards/default_art.png" id="6_p357x"]
+[ext_resource type="Texture2D" uid="uid://bdc5r0w6lyh34" path="res://Art/Card_art/default_art.png" id="6_p357x"]
 [ext_resource type="Script" path="res://Cards/CardMovementComponent.gd" id="6_qvt2l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ooxvf"]
