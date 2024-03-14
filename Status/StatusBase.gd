@@ -26,7 +26,7 @@ var status_caster: Entity = null
 
 var status_modifier_storage: StatModifiers = null
 var modifier_name: int = -1 # to be overriden by the status children
-var entity_stat_dict_type: GlobalEnums.ENTITY_STAT_DICT_TYPE # to be overriden by the status children
+var EntityStatDictType: GlobalEnums.EntityStatDictType # to be overriden by the status children
 # this is only useful for status that modify stats
 
 func _init() -> void:
@@ -48,7 +48,7 @@ func on_apply() -> void:
 
 func _modify_stats_with_status() -> void:
 	var target_stats: EntityStats = status_target.get_stat_component().stats
-	target_stats.change_stat(entity_stat_dict_type, modifier_name, status_modifier_base_value)
+	target_stats.change_stat(EntityStatDictType, modifier_name, status_modifier_base_value)
 	status_modifier_storage = status_modifier_base_value # store the value to revert when using on_remove()
 
 
@@ -74,7 +74,7 @@ func on_remove() -> void:
 func _revert_stats_with_status() -> void:
 	var target_stats: EntityStats = status_target.get_stat_component().stats
 	var invert_modification: StatModifiers = _calculate_invert_modification(status_modifier_storage)
-	target_stats.change_stat(entity_stat_dict_type, modifier_name, invert_modification)
+	target_stats.change_stat(EntityStatDictType, modifier_name, invert_modification)
 	status_modifier_storage = null # reset to original state
 
 func on_turn_start() -> void:
