@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=13 format=3 uid="uid://c4nm7mbdlsf6r"]
+
+[ext_resource type="PackedScene" uid="uid://dicabrkoa6bvl" path="res://Cards/Animation/Anim_Banana.tscn" id="1_ggtdb"]
+[ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_Caster.gd" id="2_ntgql"]
+[ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_83qul"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_xup0k"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_gk4p6"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="6_o562p"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="7_wyv0k"]
+
+[sub_resource type="Resource" id="Resource_hxttn"]
+script = ExtResource("2_ntgql")
+offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_uhx7l"]
+script = ExtResource("3_83qul")
+cast_animation_scene = ExtResource("1_ggtdb")
+cast_position = SubResource("Resource_hxttn")
+
+[sub_resource type="Resource" id="Resource_hsf7j"]
+script = ExtResource("4_xup0k")
+
+[sub_resource type="Resource" id="Resource_st2iw"]
+script = ExtResource("6_o562p")
+
+[sub_resource type="Resource" id="Resource_5b3is"]
+script = ExtResource("5_gk4p6")
+effect = SubResource("Resource_hsf7j")
+value = 5
+targeting_function = SubResource("Resource_st2iw")
+animation_data = SubResource("Resource_uhx7l")
+
+[resource]
+script = ExtResource("7_wyv0k")
+application_type = 1
+card_title = "Throw Banana"
+card_description = "Deals 5 damage to all targets."
+card_effects_data = Array[ExtResource("5_gk4p6")]([SubResource("Resource_5b3is")])
