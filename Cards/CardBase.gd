@@ -57,13 +57,9 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	var card_effect: EffectData = _card_effects_queue[0]
 	var animation_data: CastAnimationData = card_effect.animation_data
 	var list_targets: Array[Entity] = card_effect.targeting_function.generate_target_list(base_target)
-	
-	var can_use_animation: bool = animation_data != null and\
-		animation_data.cast_animation_scene != null and\
-		animation_data.cast_position != null and\
-		!CardManager.disable_card_animations
-	
 	var created_cast_animation: CastAnimation = null
+	
+	var can_use_animation: bool = animation_data != null and animation_data.can_use_animation()
 	
 	if can_use_animation:
 		created_cast_animation = animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)

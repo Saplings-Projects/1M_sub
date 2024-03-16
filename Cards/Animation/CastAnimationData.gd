@@ -5,3 +5,9 @@ class_name CastAnimationData
 
 @export var cast_animation_scene: PackedScene = null
 @export var cast_position: CastPosition = null
+
+
+func can_use_animation() -> bool:
+	return cast_animation_scene != null and\
+			cast_position != null and\
+			!CardManager.disable_card_animations
