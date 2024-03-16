@@ -1,11 +1,11 @@
 class_name TargetingBase extends Resource
 
-var cast_type: Enums.CardCastType
+var cast_type: GlobalEnums.CardCastType
 # by default targeting is required but you can have an INSTA_CAST in children class
 
 
 func _init() -> void:
-	cast_type = Enums.CardCastType.TARGET
+	cast_type = GlobalEnums.CardCastType.TARGET
 
 
 func generate_target_list(targeted_entity: Entity) -> Array[Entity]:

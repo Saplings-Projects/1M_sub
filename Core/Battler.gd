@@ -45,11 +45,11 @@ func _on_player_initialized() -> void:
 	PlayerManager.player.get_party_component().add_party_member(PlayerManager.player)
 
 
-func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
-	if new_phase == Enums.Phase.PLAYER_ATTACKING:
+func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
+	if new_phase == GlobalEnums.Phase.PLAYER_ATTACKING:
 		_on_player_start_turn()
 	
-	if new_phase == Enums.Phase.ENEMY_ATTACKING:
+	if new_phase == GlobalEnums.Phase.ENEMY_ATTACKING:
 		_on_enemy_start_turn()
 
 
@@ -59,7 +59,7 @@ func _on_card_container_initialized() -> void:
 
 
 func _on_player_hand_discarded() -> void:
-	PhaseManager.set_phase(Enums.Phase.ENEMY_ATTACKING)
+	PhaseManager.set_phase(GlobalEnums.Phase.ENEMY_ATTACKING)
 
 
 # player start phase: apply status
@@ -93,7 +93,7 @@ func _on_enemy_start_turn() -> void:
 	# TODO: temporary delay so we can see the draw pile and discard pile working
 	await get_tree().create_timer(enemy_attack_time).timeout
 	
-	PhaseManager.set_phase(Enums.Phase.PLAYER_ATTACKING)
+	PhaseManager.set_phase(GlobalEnums.Phase.PLAYER_ATTACKING)
 
 
 # when player clicks themselves (eg: healing card)
@@ -131,9 +131,9 @@ func _handle_enemy_deaths() -> void:
 
 func _check_and_handle_battle_end() -> void:
 	if PlayerManager.player.get_health_component().current_health == 0:
-		PhaseManager.on_combat_end.emit(Enums.CombatResult.DEFEAT)
+		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.DEFEAT)
 	if _enemy_list.is_empty():
-		PhaseManager.on_combat_end.emit(Enums.CombatResult.VICTORY)
+		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.VICTORY)
 
 
 func _handle_deaths() -> void:

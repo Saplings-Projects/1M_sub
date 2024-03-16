@@ -13,7 +13,7 @@ class_name CardBase
 ## wish to take damage in some contexts.
 ## For example, consider the card: "Deal 10 damage to all enemies, but take 3 damage"
 
-@export var application_type: Enums.ApplicationType = Enums.ApplicationType.ENEMY_ONLY
+@export var application_type: GlobalEnums.ApplicationType = GlobalEnums.ApplicationType.ENEMY_ONLY
 @export var card_title: String = "NULL"
 @export var card_key_art: ImageTexture = null
 @export var card_description: String = "NULL"
