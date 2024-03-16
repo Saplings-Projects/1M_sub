@@ -7,18 +7,17 @@ class_name CastPos_AllTargets
 
 
 # @Override
-func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> CastAnimation:
-	var await_cast_animation: CastAnimation = null
+func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> Array[CastAnimation]:
+	var cast_animations: Array[CastAnimation] = []
 	
 	for target in list_targets:
-		var cast_animation: CastAnimation = cast_animation_scene.instantiate()
+		var cast_animation: CastAnimation = cast_animation_scene.duplicate().instantiate()
 		
-		if await_cast_animation == null:
-			await_cast_animation = cast_animation
+		cast_animations.append(cast_animation)
 		
 		target.add_child(cast_animation)
 		cast_animation.position += offset
 		
-		cast_animation.play_animation(list_targets)
+		cast_animation.play_animation([target])
 	
-	return await_cast_animation
+	return cast_animations

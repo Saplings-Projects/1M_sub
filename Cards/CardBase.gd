@@ -57,30 +57,35 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	var card_effect: EffectData = _card_effects_queue[0]
 	var animation_data: CastAnimationData = card_effect.animation_data
 	var list_targets: Array[Entity] = card_effect.targeting_function.generate_target_list(base_target)
-	var created_cast_animation: CastAnimation = null
+	var created_cast_animations: Array[CastAnimation] = []
 	
 	var can_use_animation: bool = animation_data != null and animation_data.can_use_animation()
 	
 	if can_use_animation:
-		created_cast_animation = animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)
+		created_cast_animations = animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)
 		
-		# Wait for animation hit to complete
-		await created_cast_animation.on_animation_hit_triggered
+		# Wait for animation to trigger hits
+		for cast_animation in created_cast_animations:
+			cast_animation.on_animation_hit_triggered.connect(animation_hit.bind(card_effect, caster))
 	else:
 		push_warning("No animation set in effect data for card " + resource_path + ". Skipping animation.")
+		
+		# Apply effects to all targets instantly if there is no animation
+		for current_target in list_targets:
+			card_effect.apply_effect_data(caster, current_target)
+	
+	# Wait for last animation to complete
+	if not created_cast_animations.is_empty():
+		await created_cast_animations[created_cast_animations.size() - 1].on_animation_cast_complete
 	
 	_card_effects_queue.remove_at(0)
-	
-	# Apply effects to all targets
-	for current_target in list_targets:
-		card_effect.apply_effect_data(caster, current_target)
-	
-	# Wait for animation to complete
-	if created_cast_animation != null:
-		await created_cast_animation.on_animation_cast_complete
 	
 	# Handle next effect in the queue or finish casting
 	if _card_effects_queue.size() > 0:
 		_handle_effects_queue(caster, base_target)
 	else:
 		CardManager.on_card_action_finished.emit(self)
+
+
+func animation_hit(hit_target: Entity, card_effect: EffectData, caster: Entity) -> void:
+	card_effect.apply_effect_data(caster, hit_target)
