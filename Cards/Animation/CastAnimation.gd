@@ -13,7 +13,7 @@ var _was_animation_hit_triggered: bool = false
 
 
 func _ready() -> void:
-	animation.animation_finished.connect(_finish_casting)
+	animation.animation_finished.connect(_finish_casting.unbind(1))
 
 
 # Does nothing in the base. Override in children if you want complicated effects
@@ -31,7 +31,7 @@ func trigger_cast_hit() -> void:
 	_was_animation_hit_triggered = true
 
 
-func _finish_casting(_anim_name: StringName) -> void:
+func _finish_casting() -> void:
 	# If the animation didn't trigger a hit, then trigger when the animation is complete.
 	if not _was_animation_hit_triggered:
 		trigger_cast_hit()
