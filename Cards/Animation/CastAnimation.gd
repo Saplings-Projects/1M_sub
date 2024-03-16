@@ -17,8 +17,14 @@ func _ready() -> void:
 	animation.animation_finished.connect(_finish_casting.unbind(1))
 
 
-func play_animation(targets: Array[Entity]) -> void:
+func init_animation(_caster: Entity, targets: Array[Entity]) -> void:
 	_current_targets = targets.duplicate()
+
+
+# At this point it is safe to call on_animation_hit_triggered
+# Override in children
+func play_animation() -> void:
+	pass
 
 
 # Base functionality triggers the hit on all targets
@@ -40,3 +46,4 @@ func _finish_casting() -> void:
 	
 	on_animation_cast_complete.emit()
 	queue_free()
+

@@ -9,7 +9,7 @@ class_name CastPos_CentralPosition
 
 
 # @Override
-func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> Array[CastAnimation]:
+func initialize_animation(cast_animation_scene: PackedScene, caster: Entity, list_targets: Array[Entity]) -> Array[CastAnimation]:
 	var cast_animation: CastAnimation = cast_animation_scene.instantiate()
 	
 	assert(list_targets.size() > 0, "Tried to create a CastPos_CentralPosition with no targets")
@@ -25,6 +25,6 @@ func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array
 	
 	cast_animation.global_position += offset
 	
-	cast_animation.play_animation(list_targets)
+	cast_animation.init_animation(caster, list_targets)
 	
 	return [cast_animation]

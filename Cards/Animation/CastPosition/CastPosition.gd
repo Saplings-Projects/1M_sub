@@ -4,5 +4,5 @@ class_name CastPosition
 
 
 @warning_ignore("unused_parameter")
-func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> Array[CastAnimation]:
+func initialize_animation(cast_animation_scene: PackedScene, caster: Entity, list_targets: Array[Entity]) -> Array[CastAnimation]:
 	return []

@@ -62,11 +62,12 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	var can_use_animation: bool = animation_data != null and animation_data.can_use_animation()
 	
 	if can_use_animation:
-		created_cast_animations = animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, list_targets)
+		created_cast_animations = animation_data.cast_position.initialize_animation(animation_data.cast_animation_scene, caster, list_targets)
 		
 		# Wait for animation to trigger hits
 		for cast_animation in created_cast_animations:
 			cast_animation.on_animation_hit_triggered.connect(animation_hit.bind(card_effect, caster))
+			cast_animation.play_animation()
 	else:
 		push_warning("No animation set in effect data for card " + resource_path + ". Skipping animation.")
 		

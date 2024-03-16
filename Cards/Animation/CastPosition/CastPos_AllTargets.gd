@@ -7,7 +7,7 @@ class_name CastPos_AllTargets
 
 
 # @Override
-func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array[Entity]) -> Array[CastAnimation]:
+func initialize_animation(cast_animation_scene: PackedScene, caster: Entity, list_targets: Array[Entity]) -> Array[CastAnimation]:
 	var cast_animations: Array[CastAnimation] = []
 	
 	for target in list_targets:
@@ -18,6 +18,6 @@ func initialize_animation(cast_animation_scene: PackedScene, list_targets: Array
 		target.add_child(cast_animation)
 		cast_animation.position += offset
 		
-		cast_animation.play_animation([target])
+		cast_animation.init_animation(caster, [target])
 	
 	return cast_animations
