@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_hhhei"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_gehp1"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_ipfy3"]
-[ext_resource type="Script" path="res://Cards/Targeting/TargetRandomEnemies.gd" id="6_6b00i"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="6_kxvg4"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="7_hdjv3"]
 
 [sub_resource type="Resource" id="Resource_x0fd8"]
@@ -20,15 +20,14 @@ cast_position = SubResource("Resource_x0fd8")
 [sub_resource type="Resource" id="Resource_hsf7j"]
 script = ExtResource("4_gehp1")
 
-[sub_resource type="Resource" id="Resource_rfmpu"]
-script = ExtResource("6_6b00i")
-number_of_targets = 2
+[sub_resource type="Resource" id="Resource_bi1fs"]
+script = ExtResource("6_kxvg4")
 
 [sub_resource type="Resource" id="Resource_5b3is"]
 script = ExtResource("5_ipfy3")
 effect = SubResource("Resource_hsf7j")
 value = 2
-targeting_function = SubResource("Resource_rfmpu")
+targeting_function = SubResource("Resource_bi1fs")
 animation_data = SubResource("Resource_uhx7l")
 
 [resource]
