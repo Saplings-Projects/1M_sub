@@ -3,13 +3,14 @@ class_name MapUI
 
 var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
-var room_with_player_texture: Texture2D = load("res://Map/room_icon_with_player.png")
+
 var _padding_offset: int = 20
 var _MINIMUM_ROOM_WIDTH: int = 510
 var _MINIMUM_ROOM_HEIGHT: int = 490
 
 var _LIGHT_FLOOR_RANGE: int = 3
 
+@export var room_with_player_texture: Texture2D
 @export var color_rect: ColorRect
 @export var scroll_container: SmoothScrollContainer
 @export var room_container: ColorRect

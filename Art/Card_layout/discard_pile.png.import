@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxpg0rdhgt587"
-path="res://.godot/imported/room_icon.png-2d870492fb6ea014926ba51e654ac62f.ctex"
+uid="uid://d4muqvs3etnr8"
+path="res://.godot/imported/discard_pile.png-bc445105a1f1eb8b3668f75cab756c88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/Room_Images/room_icon.png"
-dest_files=["res://.godot/imported/room_icon.png-2d870492fb6ea014926ba51e654ac62f.ctex"]
+source_file="res://Art/Card_layout/discard_pile.png"
+dest_files=["res://.godot/imported/discard_pile.png-bc445105a1f1eb8b3668f75cab756c88.ctex"]
 
 [params]
 

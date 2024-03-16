@@ -1,0 +1,20 @@
+name, pose or anything that can be written with a space should be written using underscore (_)
+it should be written_like_this and not "like this"
+use .png for images
+chroma key videos using color #FC00FF (should be a bright pink / violet)
+
+The following section is used as a standard formatting for automated tests
+You should only modify this if you know what you are doing
+
+## START
+Background : <area_number>-<number> ;
+Card_art : <name> ;
+Card_layout : <name> ;
+Character : <pose> ; default, hurt, took damage, defeated, etc...
+Items : <type?accessory/consumable>-<name> ; type is either accessory or consumable
+Map : <name> ;
+Menus : <name>-<number> ;
+Enemies : <name>-<pose> ;
+NPC : <name>-<pose> ;
+## END
+
