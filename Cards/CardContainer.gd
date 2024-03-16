@@ -81,7 +81,7 @@ func is_card_queued() -> bool:
 
 
 func set_active_card(card: CardWorld) -> void:
-	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.PLAYING)
+	card.get_card_movement_component().set_movement_state(GlobalEnums.CardMovementState.PLAYING)
 	_active_card = card
 
 
@@ -349,13 +349,13 @@ func play_card(target : Entity = null) -> void:
 
 func _on_card_hovering(card: CardWorld) -> void:
 	if !is_card_queued() and !are_cards_active():
-		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.HOVERED)
+		card.get_card_movement_component().set_movement_state(GlobalEnums.CardMovementState.HOVERED)
 		_focus_card(card)
 
 
 func _on_card_unhovered(card: CardWorld) -> void:
 	if !is_card_queued() and !are_cards_active():
-		card.get_card_movement_component().set_movement_state(Enums.CardMovementState.IN_HAND)
+		card.get_card_movement_component().set_movement_state(GlobalEnums.CardMovementState.IN_HAND)
 		_unfocus_card(card)
 
 

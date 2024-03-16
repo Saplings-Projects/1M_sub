@@ -14,13 +14,13 @@ var state_properties: CardStateProperties = CardStateProperties.new()
 
 # Map each enum to a CardMovementState Resource
 var _state_mapping: Dictionary = {
-	Enums.CardMovementState.NONE: null,
-	Enums.CardMovementState.MOVING_TO_HAND: MoveState_MovingToHand.new(),
-	Enums.CardMovementState.IN_HAND: MoveState_InHand.new(),
-	Enums.CardMovementState.DISCARDING: MoveState_Discarding.new(),
-	Enums.CardMovementState.HOVERED: MoveState_Hovered.new(),
-	Enums.CardMovementState.QUEUED: MoveState_Queued.new(),
-	Enums.CardMovementState.PLAYING: MoveState_Playing.new(),
+	GlobalEnums.CardMovementState.NONE: null,
+	GlobalEnums.CardMovementState.MOVING_TO_HAND: MoveState_MovingToHand.new(),
+	GlobalEnums.CardMovementState.IN_HAND: MoveState_InHand.new(),
+	GlobalEnums.CardMovementState.DISCARDING: MoveState_Discarding.new(),
+	GlobalEnums.CardMovementState.HOVERED: MoveState_Hovered.new(),
+	GlobalEnums.CardMovementState.QUEUED: MoveState_Queued.new(),
+	GlobalEnums.CardMovementState.PLAYING: MoveState_Playing.new(),
 }
 
 
