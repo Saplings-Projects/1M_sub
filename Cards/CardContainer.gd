@@ -81,6 +81,7 @@ func is_card_queued() -> bool:
 
 
 func set_active_card(card: CardWorld) -> void:
+	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.PLAYING)
 	_active_card = card
 
 

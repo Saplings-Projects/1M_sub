@@ -40,6 +40,7 @@ enum CardMovementState
 	DISCARDING,
 	HOVERED,
 	QUEUED,
+	PLAYING,
 }
 
 enum CombatResult
