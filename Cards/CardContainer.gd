@@ -240,15 +240,15 @@ func _create_card_in_world(card_data: CardBase) -> void:
 	_update_card_positions()
 	
 	var card_movement: CardMovementComponent = card.get_card_movement_component()
-	card_movement.set_movement_state(Enums.CardMovementState.MOVING_TO_HAND)
+	card_movement.set_movement_state(GlobalEnums.CardMovementState.MOVING_TO_HAND)
 	
 	# Wait for card to finish moving, then bind input
 	card_movement.on_movement_state_update.connect(_on_card_change_state.bind(card))
 
 
-func _on_card_change_state(new_state: Enums.CardMovementState, card: CardWorld) -> void:
+func _on_card_change_state(new_state: GlobalEnums.CardMovementState, card: CardWorld) -> void:
 	# once we enter IN_HAND state, bind input
-	if new_state == Enums.CardMovementState.IN_HAND:
+	if new_state == GlobalEnums.CardMovementState.IN_HAND:
 		_bind_card_input(card)
 		
 		# unbind movement signal so it doesn't keep firing for every state
@@ -285,7 +285,7 @@ func _handle_discard_queue() -> void:
 	var movement: CardMovementComponent = card.get_card_movement_component()
 	if discard_pile_ui:
 		movement.state_properties.desired_position = discard_pile_ui.global_position
-	movement.set_movement_state(Enums.CardMovementState.DISCARDING)
+	movement.set_movement_state(GlobalEnums.CardMovementState.DISCARDING)
 	
 	# Wait for timer to expire before discarding another card
 	_discard_timer = get_tree().create_timer(card_discard_time)
@@ -294,14 +294,14 @@ func _handle_discard_queue() -> void:
 	
 	if _cards_queued_for_discard.size() > 0:
 		_handle_discard_queue()
-	elif PhaseManager.current_phase == Enums.Phase.PLAYER_FINISHING:
+	elif PhaseManager.current_phase == GlobalEnums.Phase.PLAYER_FINISHING:
 		on_finished_discarding_hand.emit()
 
 
-func _on_phase_changed(new_phase: Enums.Phase, _old_phase: Enums.Phase) -> void:
-	if new_phase == Enums.Phase.PLAYER_ATTACKING:
+func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
+	if new_phase == GlobalEnums.Phase.PLAYER_ATTACKING:
 		deal_to_starting_hand_size()
-	if new_phase == Enums.Phase.PLAYER_FINISHING:
+	if new_phase == GlobalEnums.Phase.PLAYER_FINISHING:
 		if (cards_in_hand.size() == 0):
 			on_finished_discarding_hand.emit()
 		else:
@@ -313,7 +313,7 @@ func _on_card_clicked(card: CardWorld) -> void:
 		return
 	
 	if is_card_queued():
-		if(queued_card.card_cast_type == Enums.CardCastType.INSTA_CAST && is_queued_card_in_play_area()):
+		if(queued_card.card_cast_type == GlobalEnums.CardCastType.INSTA_CAST && is_queued_card_in_play_area()):
 			play_card()
 		else:
 		
@@ -335,7 +335,7 @@ func _on_card_clicked(card: CardWorld) -> void:
 		if PlayerManager.player.get_energy_component().is_playable(card):
 			set_queued_card(card)
 
-			card.get_card_movement_component().set_movement_state(Enums.CardMovementState.QUEUED)
+			card.get_card_movement_component().set_movement_state(GlobalEnums.CardMovementState.QUEUED)
 			_focus_card(card)
 		else:
 			set_queued_card(null)
@@ -438,7 +438,7 @@ func _update_card_positions() -> void:
 func un_queue_card(card : CardWorld) -> void:
 	set_queued_card(null)
 	_unfocus_card(card)
-	card.get_card_movement_component().set_movement_state(Enums.CardMovementState.IN_HAND)
+	card.get_card_movement_component().set_movement_state(GlobalEnums.CardMovementState.IN_HAND)
 
 func is_queued_card_in_play_area() -> bool:
 	return get_global_mouse_position().y < play_at_height or are_cards_active()

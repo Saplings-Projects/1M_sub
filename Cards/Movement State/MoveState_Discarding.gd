@@ -33,7 +33,7 @@ func on_state_process(delta: float) -> void:
 
 
 # @Override
-func can_transition_from(_new_state: Enums.CardMovementState) -> bool:
+func can_transition_from(_new_state: GlobalEnums.CardMovementState) -> bool:
 	# Once you discard, you can't exit this state
 	return false
 

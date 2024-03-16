@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
 [ext_resource type="Script" path="res://Entity/Components/StatusComponent.gd" id="3_7qc0d"]
 [ext_resource type="Script" path="res://Entity/Components/HealthComponent.gd" id="4_t7jp6"]
-[ext_resource type="Texture2D" uid="uid://bu626jwgp3r5x" path="res://Entity/Enemy/sapling.png" id="5_dxya8"]
+[ext_resource type="Texture2D" uid="uid://bu626jwgp3r5x" path="res://Art/Enemies/green_sapling-default.png" id="5_dxya8"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="6_m32ri"]
 [ext_resource type="Script" path="res://UI/HealthLabel.gd" id="7_tofxs"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_yr066"]

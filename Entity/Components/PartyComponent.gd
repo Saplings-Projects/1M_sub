@@ -5,24 +5,24 @@ class_name PartyComponent
 ## An entity's party also contains the owning entity.
 
 
-@export var team: Enums.Team = Enums.Team.ENEMY
+@export var team: GlobalEnums.Team = GlobalEnums.Team.ENEMY
 
 var party: Array[Entity] = []
 
 
-func can_play_on_entity(application_type: Enums.ApplicationType, target: Entity) -> bool:
-	if application_type == Enums.ApplicationType.ALL:
+func can_play_on_entity(application_type: GlobalEnums.ApplicationType, target: Entity) -> bool:
+	if application_type == GlobalEnums.ApplicationType.ALL:
 		return true
 	
-	var target_team: Enums.Team = target.get_party_component().team
+	var target_team: GlobalEnums.Team = target.get_party_component().team
 	
-	if 	target_team == Enums.Team.FRIENDLY \
-		and ( application_type == Enums.ApplicationType.FRIENDLY_ONLY \
-		or application_type == Enums.ApplicationType.ALL):
+	if 	target_team == GlobalEnums.Team.FRIENDLY \
+		and ( application_type == GlobalEnums.ApplicationType.FRIENDLY_ONLY \
+		or application_type == GlobalEnums.ApplicationType.ALL):
 			return true
-	elif target_team == Enums.Team.ENEMY \
-		and (application_type == Enums.ApplicationType.ENEMY_ONLY \
-		or application_type == Enums.ApplicationType.ALL):
+	elif target_team == GlobalEnums.Team.ENEMY \
+		and (application_type == GlobalEnums.ApplicationType.ENEMY_ONLY \
+		or application_type == GlobalEnums.ApplicationType.ALL):
 			return true
 	return false 
 

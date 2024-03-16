@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxgvbltw03uda"]
 
 [ext_resource type="PackedScene" uid="uid://bpgsmfprnm2kk" path="res://Entity/Enemy/Enemy.tscn" id="1_ayq70"]
-[ext_resource type="Texture2D" uid="uid://bmno324u2v60w" path="res://Entity/Enemy/sapling2.png" id="2_qypjd"]
+[ext_resource type="Texture2D" uid="uid://bmno324u2v60w" path="res://Art/Enemies/red_sapling-default.png" id="2_qypjd"]
 
 [node name="Enemy" instance=ExtResource("1_ayq70")]
 

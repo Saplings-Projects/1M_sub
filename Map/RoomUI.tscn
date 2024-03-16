@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ck87o46d1kvpu"]
 
 [ext_resource type="Script" path="res://Map/RoomUI.gd" id="1_n442j"]
-[ext_resource type="Texture2D" uid="uid://be7gf1yhnurd3" path="res://Map/room_icon_accessible.png" id="2_eehdg"]
-[ext_resource type="Texture2D" uid="uid://dxpg0rdhgt587" path="res://Map/Room_Images/room_icon.png" id="2_mdfia"]
-[ext_resource type="Texture2D" uid="uid://bge578pqjb258" path="res://Map/room_icon_hovered.png" id="3_jtdh6"]
+[ext_resource type="Texture2D" uid="uid://be7gf1yhnurd3" path="res://Art/Map/room_icon_accessible.png" id="2_eehdg"]
+[ext_resource type="Texture2D" uid="uid://dxpg0rdhgt587" path="res://Art/Map/room_icon.png" id="2_mdfia"]
+[ext_resource type="Texture2D" uid="uid://bge578pqjb258" path="res://Art/Map/room_icon_hovered.png" id="3_jtdh6"]
 
 [node name="RoomUI" type="Control" node_paths=PackedStringArray("label", "button")]
 layout_mode = 3

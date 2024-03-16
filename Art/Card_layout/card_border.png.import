@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4muqvs3etnr8"
-path="res://.godot/imported/discard_pile.png-ebd3c4fe4ffa26066a761b17f617851d.ctex"
+uid="uid://nheutko3fha3"
+path="res://.godot/imported/card_border.png-c0a71a1d73e965099029981c2e85c7d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/discard_pile.png"
-dest_files=["res://.godot/imported/discard_pile.png-ebd3c4fe4ffa26066a761b17f617851d.ctex"]
+source_file="res://Art/Card_layout/card_border.png"
+dest_files=["res://.godot/imported/card_border.png-c0a71a1d73e965099029981c2e85c7d6.ctex"]
 
 [params]
 

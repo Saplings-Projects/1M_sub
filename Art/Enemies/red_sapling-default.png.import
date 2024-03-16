@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl5v3bgnntoc5"
-path="res://.godot/imported/energy_count.png-d7504cb45fded26ce7c6e976afb8239b.ctex"
+uid="uid://bmno324u2v60w"
+path="res://.godot/imported/red_sapling-default.png-8e4369fa1f6006b070992bbfed9fe03c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/energy_count.png"
-dest_files=["res://.godot/imported/energy_count.png-d7504cb45fded26ce7c6e976afb8239b.ctex"]
+source_file="res://Art/Enemies/red_sapling-default.png"
+dest_files=["res://.godot/imported/red_sapling-default.png-8e4369fa1f6006b070992bbfed9fe03c.ctex"]
 
 [params]
 

@@ -5,9 +5,9 @@ class_name CardMovementComponent
 ## To make a new state, derive from CardMovementState. Then add it to the mapping via _state_mapping
 
 
-signal on_movement_state_update(new_state: Enums.CardMovementState)
+signal on_movement_state_update(new_state: GlobalEnums.CardMovementState)
 
-var current_move_state: Enums.CardMovementState = Enums.CardMovementState.NONE
+var current_move_state: GlobalEnums.CardMovementState = GlobalEnums.CardMovementState.NONE
 # This is meant to be updated by CardContainer. This property Resource is sent to the state when
 # it is initialized, so it will update in the state whenever it is updated in here. 
 var state_properties: CardStateProperties = CardStateProperties.new()
@@ -30,7 +30,7 @@ func _ready() -> void:
 	state_properties.card = get_parent()
 	
 	# bind exit state events
-	for state: Enums.CardMovementState in _state_mapping:
+	for state: GlobalEnums.CardMovementState in _state_mapping:
 		if _state_not_null(state):
 			_state_mapping[state].trigger_exit_state.connect(_on_state_triggered_exit)
 	
@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 	_on_state_process(current_move_state)
 
 
-func set_movement_state(new_state: Enums.CardMovementState) -> void:
+func set_movement_state(new_state: GlobalEnums.CardMovementState) -> void:
 	if new_state == current_move_state:
 		return
 	
@@ -60,27 +60,27 @@ func set_movement_state(new_state: Enums.CardMovementState) -> void:
 	on_movement_state_update.emit(current_move_state)
 
 
-func _on_state_enter(state: Enums.CardMovementState) -> void:
+func _on_state_enter(state: GlobalEnums.CardMovementState) -> void:
 	if _state_not_null(state):
 		# Send the properties to the state and start it
 		_state_mapping[state].init_state(state_properties)
 		_state_mapping[state].on_state_enter()
 
 
-func _on_state_process(state: Enums.CardMovementState) -> void:
+func _on_state_process(state: GlobalEnums.CardMovementState) -> void:
 	if _state_not_null(state):
 		var delta: float = get_process_delta_time()
 		_state_mapping[state].on_state_process(delta)
 
 
-func _on_state_exit(state: Enums.CardMovementState) -> void:
+func _on_state_exit(state: GlobalEnums.CardMovementState) -> void:
 	if _state_not_null(state):
 		_state_mapping[state].on_state_exit()
 
 
-func _state_not_null(state: Enums.CardMovementState) -> bool:
+func _state_not_null(state: GlobalEnums.CardMovementState) -> bool:
 	return _state_mapping[state] != null
 
 
-func _on_state_triggered_exit(state: Enums.CardMovementState) -> void:
+func _on_state_triggered_exit(state: GlobalEnums.CardMovementState) -> void:
 	set_movement_state(state)

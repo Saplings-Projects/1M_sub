@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ki060lfrgty4"]
+[gd_scene load_steps=4 format=3 uid="uid://ki060lfrgty4"]
 
 [ext_resource type="Script" path="res://UI/MapUI.gd" id="1_enf2f"]
 [ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="2_2gata"]
+[ext_resource type="Texture2D" uid="uid://c73bts0oimblj" path="res://Art/Map/room_icon_with_player.png" id="2_rl2ub"]
 
 [node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container", "room_addition_node", "torch_confirmation_dialog")]
 layout_mode = 3
@@ -11,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_enf2f")
+room_with_player_texture = ExtResource("2_rl2ub")
 color_rect = NodePath("ColorRect")
 scroll_container = NodePath("SmoothScrollContainer")
 room_container = NodePath("SmoothScrollContainer/RoomContainer")

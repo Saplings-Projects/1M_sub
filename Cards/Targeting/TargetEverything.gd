@@ -1,7 +1,7 @@
 class_name TargetEverything extends TargetingBase
 
 func _init() -> void:
-	cast_type = Enums.CardCastType.INSTA_CAST
+	cast_type = GlobalEnums.CardCastType.INSTA_CAST
 
 #@Override
 @warning_ignore("unused_parameter")

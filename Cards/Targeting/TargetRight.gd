@@ -1,7 +1,7 @@
 class_name TargetRight extends TargetingBase
 
 func _init() -> void:
-    cast_type = Enums.CardCastType.TARGET
+    cast_type = GlobalEnums.CardCastType.TARGET
 
     
 # ! This class assumes that enemies are in the same order on the screen than the order of the enemy list

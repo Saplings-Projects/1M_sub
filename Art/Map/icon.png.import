@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmno324u2v60w"
-path="res://.godot/imported/sapling2.png-13335e5e26bbb56056860d423efa91d6.ctex"
+uid="uid://cjlatwiw7r80d"
+path="res://.godot/imported/icon.png-52cee81854fd88eebbf4b8704f4d6a86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entity/Enemy/sapling2.png"
-dest_files=["res://.godot/imported/sapling2.png-13335e5e26bbb56056860d423efa91d6.ctex"]
+source_file="res://Art/Map/icon.png"
+dest_files=["res://.godot/imported/icon.png-52cee81854fd88eebbf4b8704f4d6a86.ctex"]
 
 [params]
 

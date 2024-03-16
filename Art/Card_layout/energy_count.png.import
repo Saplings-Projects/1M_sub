@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caemucaya30wh"
-path="res://.godot/imported/draw_pile.png-663d17b0c66a0931574e4b958b3e4580.ctex"
+uid="uid://bl5v3bgnntoc5"
+path="res://.godot/imported/energy_count.png-374a831acc6d31ebdd10ce821e8b850f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/draw_pile.png"
-dest_files=["res://.godot/imported/draw_pile.png-663d17b0c66a0931574e4b958b3e4580.ctex"]
+source_file="res://Art/Card_layout/energy_count.png"
+dest_files=["res://.godot/imported/energy_count.png-374a831acc6d31ebdd10ce821e8b850f.ctex"]
 
 [params]
 
