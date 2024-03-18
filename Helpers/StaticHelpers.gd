@@ -10,6 +10,14 @@ static func get_first_child_node_of_type(node: Node, type: Variant) -> Variant:
 	return null
 
 
+static func get_all_children_nodes_of_type(node: Node, type: Variant) -> Array[Variant]:
+	var children: Array[Variant] = []
+	for child: Variant in node.get_children():
+		if is_instance_of(child, type):
+			children.append(child)
+	return children
+
+
 static func find_first_from_array_by_type(array: Array[Variant], type: Variant) -> Variant:
 	for value: Variant in array:
 		if is_instance_of(value, type):
