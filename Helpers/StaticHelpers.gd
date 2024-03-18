@@ -38,7 +38,7 @@ static func get_mean_vector(positions: Array[Vector2]) -> Vector2:
 	if positions.size() <= 0:
 		return Vector2.ZERO
 	var mean_vector: Vector2 = Vector2.ZERO
-	for position in positions:
+	for position: Vector2 in positions:
 		mean_vector += position
 	return mean_vector / positions.size()
 
