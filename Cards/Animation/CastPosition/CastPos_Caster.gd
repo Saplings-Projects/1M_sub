@@ -9,7 +9,10 @@ class_name CastPos_Caster
 # @Override
 func initialize_animation(cast_animation_scene: PackedScene, caster: Entity, list_targets: Array[Entity]) -> Array[CastAnimation]:
 	var cast_animation: CastAnimation = cast_animation_scene.instantiate()
-
+	
+	if list_targets.size() <= 0:
+		push_error("Tried to create a CastPos_Caster with no targets")
+	
 	caster.add_child(cast_animation)
 	cast_animation.position += offset
 	

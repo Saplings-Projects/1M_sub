@@ -12,7 +12,8 @@ class_name CastPos_CentralPosition
 func initialize_animation(cast_animation_scene: PackedScene, caster: Entity, list_targets: Array[Entity]) -> Array[CastAnimation]:
 	var cast_animation: CastAnimation = cast_animation_scene.instantiate()
 	
-	assert(list_targets.size() > 0, "Tried to create a CastPos_CentralPosition with no targets")
+	if list_targets.size() <= 0:
+		push_error("Tried to create a CastPos_CentralPosition with no targets")
 	
 	list_targets[0].get_tree().root.add_child(cast_animation)
 	

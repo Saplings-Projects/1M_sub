@@ -10,6 +10,7 @@ var _caster: Entity = null
 # can be inaccurate due to division
 const ANIMATION_LENGTH_BUFFER: float = 0.05
 
+
 # @Override
 func init_animation(caster: Entity, targets: Array[Entity]) -> void:
 	_bounce_targets = targets.duplicate()

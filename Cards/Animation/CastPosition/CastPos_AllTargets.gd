@@ -10,6 +10,9 @@ class_name CastPos_AllTargets
 func initialize_animation(cast_animation_scene: PackedScene, caster: Entity, list_targets: Array[Entity]) -> Array[CastAnimation]:
 	var cast_animations: Array[CastAnimation] = []
 	
+	if list_targets.size() <= 0:
+		push_error("Tried to create a CastPos_Caster with no targets")
+	
 	for target in list_targets:
 		var cast_animation: CastAnimation = cast_animation_scene.duplicate().instantiate()
 		
