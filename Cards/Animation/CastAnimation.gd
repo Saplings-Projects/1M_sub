@@ -8,7 +8,6 @@ signal on_animation_cast_complete
 
 
 @export var animation: AnimationPlayer = null
-@export var animation_name: String = ""
 
 var _was_animation_hit_triggered: bool = false
 var _current_targets: Array[Entity] = []
