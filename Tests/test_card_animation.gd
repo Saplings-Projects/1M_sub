@@ -72,8 +72,6 @@ func test_cast_position_all() -> void:
 	
 	# CastPos_AllTargets should create an animation for all enemies
 	var created_cast_nodes_enemy_1: Array[Variant] = Helpers.get_all_children_nodes_of_type(_enemy, CastAnimation)
+	assert_eq(created_cast_nodes_enemy_1.size(), 1)
 	var created_cast_nodes_enemy_2: Array[Variant] = Helpers.get_all_children_nodes_of_type(_enemy_2, CastAnimation)
-	created_cast_nodes.append_array(created_cast_nodes_enemy_1)
-	created_cast_nodes.append_array(created_cast_nodes_enemy_2)
-	
-	assert_eq(created_cast_nodes.size(), 2)
+	assert_eq(created_cast_nodes_enemy_2.size(), 1)
