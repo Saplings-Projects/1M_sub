@@ -23,7 +23,7 @@ class_name CardBase
 @export var energy_info: EnergyData = EnergyData.new()
 
 var _card_effects_queue: Array[EffectData] = []
-
+var _targets_triggered_hits: Array[Entity] = []
 
 func _ready() -> void:
 	card_effects_data = []
@@ -50,6 +50,7 @@ func on_card_play(caster: Entity, base_target: Entity) -> void:
 		return
 	
 	_card_effects_queue = card_effects_data.duplicate()
+	_targets_triggered_hits.clear()
 	_handle_effects_queue(caster, base_target)
 
 
@@ -78,6 +79,9 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	# Wait for last animation to complete
 	if not created_cast_animations.is_empty():
 		await created_cast_animations[created_cast_animations.size() - 1].on_animation_cast_complete
+		
+		if list_targets != _targets_triggered_hits:
+			push_error("Did not trigger a hit on all targets for effect " + card_effect.resource_path)
 	
 	_card_effects_queue.remove_at(0)
 	
@@ -89,4 +93,9 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 
 
 func animation_hit(hit_target: Entity, card_effect: EffectData, caster: Entity) -> void:
+	if _targets_triggered_hits.has(hit_target):
+		push_error("Hit was triggered on " + hit_target.name + " more than once! Skipping effects")
+		return
+	
+	_targets_triggered_hits.append(hit_target)
 	card_effect.apply_effect_data(caster, hit_target)
