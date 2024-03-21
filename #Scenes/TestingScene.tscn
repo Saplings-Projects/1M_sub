@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=17 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="Script" path="res://Map/MapManager.gd" id="2_50npk"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene_UIcontrol.gd" id="4_h8431"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
 [ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
@@ -37,6 +38,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("4_h8431")
 
 [node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui") instance=ExtResource("3_e7sws")]
 layout_mode = 1
@@ -193,4 +195,15 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("22_druf4")
 
+[node name="back_to_main_menu" type="Button" parent="CanvasLayer/UIControl"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 22.0
+offset_right = 148.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 20
+text = "Go back to 
+main menu"
+
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIControl/back_to_main_menu" to="CanvasLayer/UIControl" method="_on_back_to_main_menu_pressed"]
