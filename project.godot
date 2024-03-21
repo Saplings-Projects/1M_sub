@@ -18,6 +18,7 @@ config/icon="res://Art/Menus/fauna_icon-1.png"
 
 [autoload]
 
+SceneManager="*res://Managers/SceneManager.gd"
 SignalBus="*res://Global/SignalBus.gd"
 DebugVar="*res://Global/DEBUG_VAR.gd"
 PlayerManager="*res://Managers/PlayerManager.gd"
