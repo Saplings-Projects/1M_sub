@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2tlt1lmprhfe"
-path="res://.godot/imported/slapping_hand.png-6d53d4e144451ade99c490bad4893003.ctex"
+path="res://.godot/imported/slapping_hand.png-322af52df19df8c32f2233870724bb53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/slapping_hand.png"
-dest_files=["res://.godot/imported/slapping_hand.png-6d53d4e144451ade99c490bad4893003.ctex"]
+source_file="res://Art/Animation/slapping_hand.png"
+dest_files=["res://.godot/imported/slapping_hand.png-322af52df19df8c32f2233870724bb53.ctex"]
 
 [params]
 

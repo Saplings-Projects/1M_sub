@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbseovtwsgegg"]
 
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimation.gd" id="1_pda6u"]
-[ext_resource type="Texture2D" uid="uid://c2tlt1lmprhfe" path="res://Cards/slapping_hand.png" id="2_w8ctb"]
+[ext_resource type="Texture2D" uid="uid://c2tlt1lmprhfe" path="res://Art/Animation/slapping_hand.png" id="2_w8ctb"]
 
 [sub_resource type="Animation" id="Animation_4yitn"]
 resource_name = "Slap"

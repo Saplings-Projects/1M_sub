@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5ob6ye7i8lj4"
-path="res://.godot/imported/fauna_sweep_broom.png-06537c4c4c093d5e96b5db1ba00e95f0.ctex"
+uid="uid://b1h653qubxomj"
+path="res://.godot/imported/banana.png-9e294d89b0b8ecea8ef0cc462ff4e37d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/fauna_sweep_broom.png"
-dest_files=["res://.godot/imported/fauna_sweep_broom.png-06537c4c4c093d5e96b5db1ba00e95f0.ctex"]
+source_file="res://Art/Animation/banana.png"
+dest_files=["res://.godot/imported/banana.png-9e294d89b0b8ecea8ef0cc462ff4e37d.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardBase" load_steps=13 format=3 uid="uid://vydmm1p103mg"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_cecc2"]
-[ext_resource type="PackedScene" uid="uid://eimptoraq7pn" path="res://Cards/Animation/Anim_FaunaSweep.tscn" id="1_gkkm6"]
+[ext_resource type="PackedScene" uid="uid://eimptoraq7pn" path="res://Cards/Animation/Scene/Anim_FaunaSweep.tscn" id="1_gkkm6"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_5nlri"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_CentralPosition.gd" id="2_gi41k"]
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="3_6orhl"]

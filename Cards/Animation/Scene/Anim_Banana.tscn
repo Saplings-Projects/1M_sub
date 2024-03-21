@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dicabrkoa6bvl"]
 
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimation/CastAnim_Bounce.gd" id="1_c72rm"]
-[ext_resource type="Texture2D" uid="uid://b1h653qubxomj" path="res://Cards/banana.png" id="2_u7bid"]
+[ext_resource type="Texture2D" uid="uid://b1h653qubxomj" path="res://Art/Animation/banana.png" id="2_u7bid"]
 
 [sub_resource type="Animation" id="Animation_4yitn"]
 resource_name = "Slap"

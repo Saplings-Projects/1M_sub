@@ -18,7 +18,7 @@ func after_each() -> void:
 func test_player_animation_created() -> void:
 	var card: CardBase = CardBase.new()
 	var cast_anim: CastAnimationData = CastAnimationData.new()
-	cast_anim.cast_animation_scene = load("res://Cards/Animation/Anim_Slap.tscn")
+	cast_anim.cast_animation_scene = load("res://Cards/Animation/Scene/Anim_Slap.tscn")
 	cast_anim.cast_position = CastPos_Caster.new()
 	
 	card.application_type = GlobalEnums.ApplicationType.ENEMY_ONLY
@@ -38,7 +38,7 @@ func test_player_animation_created() -> void:
 func test_enemy_animation_created() -> void:
 	var card: CardBase = CardBase.new()
 	var cast_anim: CastAnimationData = CastAnimationData.new()
-	cast_anim.cast_animation_scene = load("res://Cards/Animation/Anim_Slap.tscn")
+	cast_anim.cast_animation_scene = load("res://Cards/Animation/Scene/Anim_Slap.tscn")
 	cast_anim.cast_position = CastPos_Caster.new()
 	
 	card.application_type = GlobalEnums.ApplicationType.FRIENDLY_ONLY
@@ -59,7 +59,7 @@ func test_cast_position_all() -> void:
 	# Create CardBase with CastPos_AllTargets and ensure one is created for each target
 	var card: CardBase = CardBase.new()
 	var cast_anim: CastAnimationData = CastAnimationData.new()
-	cast_anim.cast_animation_scene = load("res://Cards/Animation/Anim_Slap.tscn")
+	cast_anim.cast_animation_scene = load("res://Cards/Animation/Scene/Anim_Slap.tscn")
 	cast_anim.cast_position = CastPos_AllTargets.new()
 	
 	card.application_type = GlobalEnums.ApplicationType.ENEMY_ONLY

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://eimptoraq7pn"]
 
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimation.gd" id="1_t516j"]
-[ext_resource type="Texture2D" uid="uid://c5ob6ye7i8lj4" path="res://Cards/fauna_sweep_broom.png" id="2_gs6u3"]
+[ext_resource type="Texture2D" uid="uid://c5ob6ye7i8lj4" path="res://Art/Animation/fauna_sweep_broom.png" id="2_gs6u3"]
 
 [sub_resource type="Animation" id="Animation_4yitn"]
 resource_name = "Slap"
