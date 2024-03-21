@@ -16,6 +16,8 @@ var _LIGHT_FLOOR_RANGE: int = 3
 @export var room_container: ColorRect
 @export var room_addition_node: Control
 @export var torch_confirmation_dialog: ConfirmationDialog
+@export var cant_set_torch_dialog: AcceptDialog
+@export var player_position_not_set_text: String
 
 var room_ui_array: Array[Array]
 var current_player_room: RoomUI
@@ -31,7 +33,12 @@ func _on_return_button_press() -> void:
 	
 
 func _on_add_torch_pressed() -> void:
-	torch_confirmation_dialog.show()
+	if !PlayerManager.is_player_initial_position_set:
+		cant_set_torch_dialog.dialog_text = player_position_not_set_text
+		cant_set_torch_dialog.show()
+	#TODO: Add in torch count here
+	else:
+		torch_confirmation_dialog.show()
 
 func _close_torch_placement_dialog() -> void:
 	torch_confirmation_dialog.hide()
@@ -158,6 +165,7 @@ func _ready() -> void:
 	
 	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
 	room_container.add_child(light_overlay)
+	scroll_container.scroll_to_bottom()
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
