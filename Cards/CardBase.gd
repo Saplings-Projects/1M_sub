@@ -50,7 +50,6 @@ func on_card_play(caster: Entity, base_target: Entity) -> void:
 		return
 	
 	_card_effects_queue = card_effects_data.duplicate()
-	_targets_triggered_hits.clear()
 	_handle_effects_queue(caster, base_target)
 
 
@@ -84,6 +83,7 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 			push_error("Did not trigger a hit on all targets for effect " + card_effect.resource_path)
 	
 	_card_effects_queue.remove_at(0)
+	_targets_triggered_hits.clear()
 	
 	# Handle next effect in the queue or finish casting
 	if _card_effects_queue.size() > 0:
