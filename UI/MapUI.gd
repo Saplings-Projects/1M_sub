@@ -16,6 +16,8 @@ var _LIGHT_FLOOR_RANGE: int = 3
 @export var room_container: ColorRect
 @export var room_addition_node: Control
 @export var torch_confirmation_dialog: ConfirmationDialog
+@export var cant_set_torch_dialog: AcceptDialog
+@export var player_position_not_set_text: String
 
 var room_ui_array: Array[Array]
 var current_player_room: RoomUI
@@ -31,7 +33,12 @@ func _on_return_button_press() -> void:
 	
 
 func _on_add_torch_pressed() -> void:
-	torch_confirmation_dialog.show()
+	if !PlayerManager.is_player_initial_position_set:
+		cant_set_torch_dialog.dialog_text = player_position_not_set_text
+		cant_set_torch_dialog.show()
+	#TODO: Add in torch count here
+	else:
+		torch_confirmation_dialog.show()
 
 func _close_torch_placement_dialog() -> void:
 	torch_confirmation_dialog.hide()
