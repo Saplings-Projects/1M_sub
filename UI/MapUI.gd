@@ -165,6 +165,11 @@ func _ready() -> void:
 	
 	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
 	room_container.add_child(light_overlay)
+	
+	if(!PlayerManager.is_player_initial_position_set):
+		scroll_container.scroll_to_bottom()
+	else:
+		scroll_container.scroll_to_fauna()
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
