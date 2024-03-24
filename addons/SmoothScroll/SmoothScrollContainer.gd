@@ -645,7 +645,7 @@ func scroll_to_fauna(duration:float=0.5) -> void:
 	
 	scroll_to_pos += room_distance * (PlayerManager.player_position.y - rooms_behind_seen)
 	
-	scroll_y_to(scroll_to_pos)
+	scroll_y_to(scroll_to_pos, duration)
 
 
 func is_outside_top_boundary(y_pos: float = pos.y) -> bool:
