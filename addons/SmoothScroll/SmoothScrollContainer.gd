@@ -635,7 +635,7 @@ func scroll_to_fauna(duration:float=0.5) -> void:
 		return
 	
 	var map_UI : MapUI = get_parent()
-	var current_map_texure_button : TextureButton = Helpers.get_first_child_node_of_type(map_UI.current_player_room, TextureButton)
+	var current_map_texure_button : TextureButton = map_UI.current_player_room.button
 	
 	var max_scroll = content_node.size.y - self.size.y
 	var room_distance : float = map_UI.get_combined_room_height(current_map_texure_button) / MapManager.current_map.rooms.size()
