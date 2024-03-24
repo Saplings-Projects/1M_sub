@@ -636,13 +636,11 @@ func scroll_to_fauna(duration:float=0.5) -> void:
 	
 	var room_distance: float = 66
 	var scroll_to_pos:float = -room_distance
-	var rooms_between_fauna_and_top = MapManager.map_width_array.size() - 8
+	var rooms_between_fauna_and_top : int = MapManager.map_width_array.size() - 8
 	
 	scroll_to_pos -= (rooms_between_fauna_and_top - PlayerManager.player_position.y) * room_distance 
 	
 	scroll_y_to(scroll_to_pos)
-	
-	pass
 
 
 func is_outside_top_boundary(y_pos: float = pos.y) -> bool:
