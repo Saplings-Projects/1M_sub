@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://chw8kc2q4o3pi"]
+[gd_scene load_steps=3 format=3 uid="uid://chw8kc2q4o3pi"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/MainMenu.gd" id="1_mwp8y"]
+[ext_resource type="Texture2D" uid="uid://u5naod8gur3m" path="res://Art/Menus/main_menu_bg-1.png" id="2_v07no"]
 
 [node name="Main menu" type="Control"]
 layout_mode = 3
@@ -11,6 +12,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mwp8y")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_v07no")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
@@ -20,13 +28,16 @@ text = "This is the main menu"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = -245.0
-offset_right = 199.0
-offset_bottom = -47.9991
+offset_left = -180.0
+offset_top = -230.0
+offset_right = -21.0
+offset_bottom = -27.0
+grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 7
 
