@@ -14,7 +14,8 @@ var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
 
 
 func _ready() -> void:
-	initialize_game()
+	# initialize_game()
+	return
 	
 
 func initialize_game() -> void:
