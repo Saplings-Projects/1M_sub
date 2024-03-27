@@ -10,6 +10,14 @@ static func get_first_child_node_of_type(node: Node, type: Variant) -> Variant:
 	return null
 
 
+static func get_all_children_nodes_of_type(node: Node, type: Variant) -> Array[Variant]:
+	var children: Array[Variant] = []
+	for child: Variant in node.get_children():
+		if is_instance_of(child, type):
+			children.append(child)
+	return children
+
+
 static func find_first_from_array_by_type(array: Array[Variant], type: Variant) -> Variant:
 	for value: Variant in array:
 		if is_instance_of(value, type):
@@ -33,6 +41,14 @@ static func convert_from_range(value: float, from_min: float, from_max: float, t
 	
 	return to_value
 
+
+static func get_mean_vector(positions: Array[Vector2]) -> Vector2:
+	if positions.size() <= 0:
+		return Vector2.ZERO
+	var mean_vector: Vector2 = Vector2.ZERO
+	for position: Vector2 in positions:
+		mean_vector += position
+	return mean_vector / positions.size()
 
 # ! works in place
 static func remove_duplicate_in_array(array: Array) -> void:

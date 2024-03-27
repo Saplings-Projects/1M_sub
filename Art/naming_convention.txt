@@ -7,6 +7,7 @@ The following section is used as a standard formatting for automated tests
 You should only modify this if you know what you are doing
 
 ## START
+Animation : <name> ;
 Background : <area_number>-<number> ;
 Card_art : <name> ;
 Card_layout : <name> ;
