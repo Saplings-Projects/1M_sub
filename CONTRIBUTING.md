@@ -39,3 +39,7 @@ As of the writing of this CONTRIBUTING.md there is no code formatter for Godot, 
 - Write the parent class name as SomethingBase (for example, the base of the cards is `CardBase`)
 - If you have C child of B and B child of A, B should not follow the previous convention, only A should. This rule may have exceptions.
 - Writing multiple smaller lines is better than writing one big line.
+
+## Documentation
+
+Always write documentation for your code. Check how it's done in other files if you don't know how to write it. Check [Godot's page about documentation](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html) comments for syntax related information.
