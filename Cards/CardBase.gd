@@ -33,7 +33,11 @@ class_name CardBase
 ## How much energy is needed to play this card
 @export var energy_info: EnergyData = EnergyData.new()
 
+## Used to check the order in which effects and related animations are played
 var _card_effects_queue: Array[EffectData] = []
+
+## Used to check which targets have been hit by an effect [br]
+## TODO this needs better phrasing
 var _targets_triggered_hits: Array[Entity] = []
 
 
@@ -62,6 +66,7 @@ func on_card_play(caster: Entity, base_target: Entity) -> void:
 	_handle_effects_queue(caster, base_target)
 
 
+## Applies effects of the card sequentially, to ensure proper animation display
 func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	var card_effect: EffectData = _card_effects_queue[0]
 	var animation_data: CastAnimationData = card_effect.animation_data
@@ -101,6 +106,9 @@ func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 		CardManager.on_card_action_finished.emit(self)
 
 
+## Check whether or not a target has already been hit by an effect or not [br]
+## @experimental
+## This might change later for effects that can target the same entity multiple times
 func animation_hit(hit_target: Entity, card_effect: EffectData, caster: Entity) -> void:
 	if _targets_triggered_hits.has(hit_target):
 		push_error("Hit was triggered on " + hit_target.name + " more than once! Skipping effects")
