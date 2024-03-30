@@ -20,6 +20,7 @@ var _state_mapping: Dictionary = {
 	GlobalEnums.CardMovementState.DISCARDING: MoveState_Discarding.new(),
 	GlobalEnums.CardMovementState.HOVERED: MoveState_Hovered.new(),
 	GlobalEnums.CardMovementState.QUEUED: MoveState_Queued.new(),
+	GlobalEnums.CardMovementState.PLAYING: MoveState_Playing.new(),
 }
 
 

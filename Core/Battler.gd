@@ -7,10 +7,10 @@ class_name Battler
 
 @export var enemies_to_summon: Array[PackedScene]
 @export var enemy_spacing: float = 50.0
-@export var enemy_attack_time: float = 1.0
+@export var enemy_attack_delay: float = 0.3
 
 var _enemy_list: Array[Entity]
-
+var _enemy_action_list: Array[EnemyAction] = []
 
 func _ready() -> void:
 	_summon_enemies()
@@ -79,21 +79,35 @@ func _on_enemy_start_turn() -> void:
 	_handle_deaths()
 	
 	# generate list of enemy actions
-	var enemy_action_list: Array[EnemyAction] = []
-	
 	for enemy: Enemy in _enemy_list:
 		var enemy_attack: CardBase = enemy.get_behavior_component().attack
 		var enemy_action: EnemyAction = EnemyAction.new(enemy, enemy_attack, PlayerManager.player)
-		enemy_action_list.append(enemy_action)
-		
-	# execute enemy actions
-	for enemy_action: EnemyAction in enemy_action_list:
-		enemy_action.execute()
+		_enemy_action_list.append(enemy_action)
 	
-	# TODO: temporary delay so we can see the draw pile and discard pile working
-	await get_tree().create_timer(enemy_attack_time).timeout
+	# start the attack queue
+	assert(_enemy_action_list.size() >= 0, "Enemy tried to attack while there were attacks queued!")
+	_handle_enemy_attack_queue()
+
+
+func _handle_enemy_attack_queue() -> void:
+	var enemy_action: EnemyAction = _enemy_action_list[0]
+	_enemy_action_list.remove_at(0)
 	
-	PhaseManager.set_phase(GlobalEnums.Phase.PLAYER_ATTACKING)
+	CardManager.on_card_action_finished.connect(_try_finish_enemy_attacks.unbind(1))
+	enemy_action.execute()
+
+
+# Called when an enemy action is finished.
+# Tries to queue the next enemy action in the list if it exists.
+func _try_finish_enemy_attacks() -> void:
+	CardManager.on_card_action_finished.disconnect(_try_finish_enemy_attacks)
+	
+	await get_tree().create_timer(enemy_attack_delay).timeout
+	
+	if _enemy_action_list.size() > 0:
+		_handle_enemy_attack_queue()
+	else:
+		PhaseManager.set_phase(GlobalEnums.Phase.PLAYER_ATTACKING)
 
 
 # when player clicks themselves (eg: healing card)

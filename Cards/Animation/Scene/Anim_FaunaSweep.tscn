@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://eimptoraq7pn"]
+
+[ext_resource type="Script" path="res://Cards/Animation/CastAnimation.gd" id="1_t516j"]
+[ext_resource type="Texture2D" uid="uid://c5ob6ye7i8lj4" path="res://Art/Animation/fauna_sweep_broom.png" id="2_gs6u3"]
+
+[sub_resource type="Animation" id="Animation_4yitn"]
+resource_name = "Slap"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Broom:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.20253, 0.0, -1.09956, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_cast_hit"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0fegm"]
+_data = {
+"Slap": SubResource("Animation_4yitn")
+}
+
+[node name="FaunaSweep" type="Node2D" node_paths=PackedStringArray("animation")]
+scale = Vector2(2, 2)
+script = ExtResource("1_t516j")
+animation = NodePath("SweepAnimation")
+
+[node name="Broom" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_gs6u3")
+offset = Vector2(0, 16)
+
+[node name="SweepAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0fegm")
+}
+autoplay = "Slap"
