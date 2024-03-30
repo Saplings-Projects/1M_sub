@@ -1,3 +1,12 @@
+# Table of contents
+
+- [Contributing : how to ?](#contributing--how-to-)
+- [Commits](#commits)
+- [Pull requests](#pull-requests)
+- [Tests](#tests)
+- [Code formatting](#code-formatting)
+- [Documentation](#documentation)
+
 # Contributing : how to ?
 
 If you want to help with code, first check that there is no issue already opened about the thing you want to work on. 
@@ -43,3 +52,4 @@ As of the writing of this CONTRIBUTING.md there is no code formatter for Godot, 
 ## Documentation
 
 Always write documentation for your code. Check how it's done in other files if you don't know how to write it. Check [Godot's page about documentation](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html) comments for syntax related information.
+Code inside functions should also be commented (but using normal comments, not documentation comments). This doesn't exempt you from using explicit variable names and function names.
