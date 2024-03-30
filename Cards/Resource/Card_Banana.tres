@@ -34,5 +34,5 @@ animation_data = SubResource("Resource_uhx7l")
 script = ExtResource("7_wyv0k")
 application_type = 1
 card_title = "Throw Banana"
-card_description = "Deals 5 damage to all targets."
+card_description = "Deals 5 damage to all enemies."
 card_effects_data = Array[ExtResource("5_gk4p6")]([SubResource("Resource_5b3is")])
