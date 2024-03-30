@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=14 format=3 uid="uid://3s4aet1ciesh"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=16 format=3 uid="uid://3s4aet1ciesh"]
 
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_h8l2w"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_vf50y"]
