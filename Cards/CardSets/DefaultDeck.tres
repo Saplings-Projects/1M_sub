@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Cards/CardSetBase.gd" id="1_pnxc0"]
 [ext_resource type="Resource" uid="uid://dam752rc15nu5" path="res://Cards/Resource/Card_Buff_Poison_Duration.tres" id="1_to4gc"]
 [ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="2_q7qqo"]
-[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="3_pvtk1"]
+[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAllEnemies.tres" id="3_v5ynn"]
 [ext_resource type="Resource" uid="uid://boodcfdepyk5i" path="res://Cards/Resource/Card_DamageHealth.tres" id="4_es3ma"]
 [ext_resource type="Resource" uid="uid://3s4aet1ciesh" path="res://Cards/Resource/Card_damage_and_poison.tres" id="5_giy28"]
 [ext_resource type="Resource" uid="uid://uv2rili0xf3x" path="res://Cards/Resource/Card_Damage_EVERYTHING.tres" id="6_gr534"]
@@ -16,4 +16,4 @@
 
 [resource]
 script = ExtResource("1_pnxc0")
-card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("1_to4gc"), ExtResource("2_q7qqo"), ExtResource("3_pvtk1"), ExtResource("4_es3ma"), ExtResource("5_giy28"), ExtResource("6_gr534"), ExtResource("7_y1gya"), ExtResource("8_haia1"), ExtResource("9_1tkbv"), ExtResource("10_7m46u"), ExtResource("11_0eivv"), ExtResource("12_lo5f6")])
+card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("1_to4gc"), ExtResource("2_q7qqo"), ExtResource("3_v5ynn"), ExtResource("4_es3ma"), ExtResource("5_giy28"), ExtResource("6_gr534"), ExtResource("7_y1gya"), ExtResource("8_haia1"), ExtResource("9_1tkbv"), ExtResource("10_7m46u"), ExtResource("11_0eivv"), ExtResource("12_lo5f6")])
