@@ -3,6 +3,9 @@ class_name MapUI
 
 var map_scene: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")
 var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
+var balloon_scene: PackedScene = load("res://Dialog/balloon.tscn")
+
+var test_dialog: DialogueResource = load("res://Dialog/test.dialogue")
 
 var _padding_offset: int = 20
 var _MINIMUM_ROOM_WIDTH: int = 510
@@ -186,4 +189,7 @@ func _on_room_clicked(clicked_room: RoomUI) -> void:
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
 		room.light_data.increase_light_by_player_movement()
+	# Add customization
+	#DialogueManager.show_dialogue_balloon(test_dialog, "test")
+	DialogueManager.show_dialogue_balloon_scene(balloon_scene, test_dialog, "test")
 	queue_free()
