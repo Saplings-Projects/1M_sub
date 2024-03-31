@@ -1,6 +1,6 @@
 extends Node
-
 ## Use this file to set variables that will basically give you god mode [br]
+##
 ## This is useful for testing and debugging [br]
 ## ! Nothing in this file should be set to true for the release [br]
 ## All variable names should start with DEBUG_ [br]
