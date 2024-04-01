@@ -630,6 +630,24 @@ func scroll_to_left(duration:float=0.5) -> void:
 func scroll_to_right(duration:float=0.5) -> void:
 	scroll_x_to(self.size.x - content_node.size.x, duration)
 
+func scroll_to_fauna(duration:float=0.5) -> void:
+	if(!PlayerManager.is_player_initial_position_set):
+		return
+	
+	var map_UI : MapUI = get_parent()
+	var current_map_texure_button : TextureButton = map_UI.current_player_room.button
+	
+	var max_scroll = content_node.size.y - self.size.y
+	var room_distance : float = map_UI.get_combined_room_height(current_map_texure_button) / MapManager.current_map.rooms.size()
+	var scroll_to_pos : float = -max_scroll
+	
+	var rooms_behind_seen : int = 1
+	
+	scroll_to_pos += room_distance * (PlayerManager.player_position.y - rooms_behind_seen)
+	
+	scroll_y_to(scroll_to_pos, duration)
+
+
 func is_outside_top_boundary(y_pos: float = pos.y) -> bool:
 	return y_pos > 0.0
 

@@ -80,7 +80,7 @@ func _ready() -> void:
 	# Set the max width between what we calculated above and the minimum room width constant
 	room_container_width = max(room_container_width, _MINIMUM_ROOM_WIDTH)
 	
-	var room_container_height: float = _get_combined_room_height(new_room_texture_button)
+	var room_container_height: float = get_combined_room_height(new_room_texture_button)
 	# Set the max height between what we calculated above and the minimum room height constant
 	room_container_height = max(room_container_height, _MINIMUM_ROOM_HEIGHT)
 	
@@ -156,8 +156,8 @@ func _ready() -> void:
 	var new_room_position_y: float = room_container.position.y
 	# Get the offset if we had to adjust the Y position due to having to set a minimum height if the map is too small.
 	var offset_y: float = 0
-	if (_get_combined_room_height(new_room_texture_button) < _MINIMUM_ROOM_HEIGHT):
-		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + _get_combined_room_height(new_room_texture_button) / 2
+	if (get_combined_room_height(new_room_texture_button) < _MINIMUM_ROOM_HEIGHT):
+		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + get_combined_room_height(new_room_texture_button) / 2
 		offset_y = room_addition_node.position.y - new_room_position_y
 	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
 	
@@ -165,6 +165,11 @@ func _ready() -> void:
 	
 	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
 	room_container.add_child(light_overlay)
+	
+	if(!PlayerManager.is_player_initial_position_set):
+		scroll_container.scroll_to_bottom(0)
+	else:
+		scroll_container.scroll_to_fauna(0)
 
 # Get the width of room nodes, by getting the size of what a room is w/ some offset
 # multiplying that by the max number in the map_width_array to get the width of the largest floor then add offset 
@@ -175,7 +180,7 @@ func _get_combined_room_width(texture_rect: TextureButton) -> float:
 # Calculate the height of the container where the rooms will reside in. This will be dynamic based on the map array that we have.
 # The array we have in MapManager, each element will increase the height of the map display, 
 # multiply by the size of a room w/ some offset to dynamically set the size of the container of which we will be scrolling.
-func _get_combined_room_height(texture_rect: TextureButton) -> float:
+func get_combined_room_height(texture_rect: TextureButton) -> float:
 	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset) + _padding_offset
 
 # Callback function for when a player selects a room
