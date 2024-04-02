@@ -18,9 +18,8 @@ static func get_accessible_room_positions_by_given_position(position: Vector2i) 
 		var new_floor_index: int = position.y + movement.y
 		var new_room_index: int = position.x + movement.x
 		if new_floor_index >= 0 and new_floor_index <= map_width_array.size() - 1:
-			var _floor_width : int = map_width_array[new_floor_index]
-			var _padding_size : int = (_max_floor_size - _floor_width)/2
 			if new_room_index >= 0 and new_room_index <= _padding_size + map_width_array[new_floor_index] - 1:
+			if new_room_index >= 0 and new_room_index <= _max_floor_size - 1:
 				var room: RoomBase = map_rooms[new_floor_index][new_room_index]
 				# assuming all maps whatever the type are based on the same width array
 				if room != null:
