@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
+@onready var portrait: TextureRect = %Balloon/Panel/HBoxContainer/Control/Portrait
 
 ## The dialogue resource
 var resource: DialogueResource
@@ -43,6 +44,7 @@ var dialogue_line: DialogueLine:
 
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
+		#portrait.texture = load("res://Art/Event/test_event_bg.jpg")
 
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
@@ -136,6 +138,8 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(next_action) and get_viewport().gui_get_focus_owner() == balloon:
 		next(dialogue_line.next_id)
 
+func add_portrait(art_name: String) -> void:
+	portrait.texture = load("res://Art/Event/%s.png" % art_name)
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
