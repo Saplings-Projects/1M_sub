@@ -1,5 +1,5 @@
 extends TestBase
-## Tests for health related things
+## Tests for health related things (dealing, taking damage, status dealing damage, etc...)
 
 
 func test_take_damage() -> void:

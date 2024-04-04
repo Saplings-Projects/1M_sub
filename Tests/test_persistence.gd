@@ -1,4 +1,5 @@
 extends TestBase
+## Test that the data of the player stays between fights
 
 
 func _create_player() -> void:

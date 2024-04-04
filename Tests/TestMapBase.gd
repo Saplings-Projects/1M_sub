@@ -1,4 +1,5 @@
 class_name TestMapBase extends GutTest
+## Common test setup for Map related tests
 
 var test_width: Array[int] = [1,3,5,3,1]
 

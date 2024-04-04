@@ -1,4 +1,5 @@
 class_name TestCardBase extends GutTest
+## Common test setup for CardManager related tests
 
 var _card_container_scene: PackedScene = load("res://Cards/CardContainer.tscn")
 var _card_container: CardContainer = null

@@ -1,4 +1,5 @@
 class_name TestBase extends GutTest
+## Common test setup to be used by other tests
 
 var _player_scene: PackedScene = load("res://Entity/Player/Player.tscn")
 var _battler_scene: PackedScene = load("res://Core/Battler.tscn")
