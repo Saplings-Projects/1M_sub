@@ -7,3 +7,6 @@ extends Node
 
 # Player can move freely on the map without having to finish the current event or move in the range of its normal movement
 const DEBUG_FREE_MOVEMENT: bool = false
+
+# Clicking on any room will show the test dialog script, check res://Dialog/test.dialogue
+const DEBUG_TEST_DIALOGUE: bool = true
