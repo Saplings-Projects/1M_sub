@@ -151,11 +151,11 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 # Custom function that is interacted via the .dialogue file to add a portrait to the scene
 func add_portrait(art_name: String) -> void:
-	portrait.texture = load("res://Art/Event/%s.png" % art_name)
+	portrait.texture = load("res://Art/%s.png" % art_name)
 
 # Custom function that is interacted via the .dialogue file to add some flavor image based on the index passed in
 func add_flavor_image(image_name: String, flavor_number: int) -> void:
-	var flavor_image: Texture2D = load("res://Art/Event/%s.png" % image_name)
+	var flavor_image: Texture2D = load("res://Art/%s.png" % image_name)
 	if (flavor_number == 1):
 		flavor_image_1.texture = flavor_image
 	elif (flavor_number == 2):

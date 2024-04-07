@@ -178,6 +178,7 @@ rotation = 0.324631
 expand_mode = 1
 
 [node name="FlavorImage2" type="TextureRect" parent="Balloon/Panel/FlavorNode"]
+layout_mode = 0
 offset_left = 515.0
 offset_top = 512.0
 offset_right = 555.0
@@ -187,6 +188,7 @@ scale = Vector2(2, 2)
 expand_mode = 1
 
 [node name="FlavorImage3" type="TextureRect" parent="Balloon/Panel/FlavorNode"]
+layout_mode = 0
 offset_left = 23.0
 offset_top = -5.0
 offset_right = 63.0
@@ -206,6 +208,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 scroll_active = false
 
 [node name="FlavorText2" type="RichTextLabel" parent="Balloon/Panel/FlavorNode"]
+layout_mode = 0
 offset_left = 43.0
 offset_top = 504.0
 offset_right = 163.0
@@ -216,6 +219,7 @@ text = "
 "
 
 [node name="FlavorText3" type="RichTextLabel" parent="Balloon/Panel/FlavorNode"]
+layout_mode = 0
 offset_left = 626.0
 offset_top = 243.0
 offset_right = 746.0

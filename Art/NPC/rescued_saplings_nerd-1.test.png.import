@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnnelgrlm6grx"
-path="res://.godot/imported/rescued_saplings_nerd.png-eb8fdde44e1705cbc7b2969cec538d3a.ctex"
+path="res://.godot/imported/rescued_saplings_nerd-1.test.png-aed7cd7ec416325aa101246a37df79b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Event/rescued_saplings_nerd.png"
-dest_files=["res://.godot/imported/rescued_saplings_nerd.png-eb8fdde44e1705cbc7b2969cec538d3a.ctex"]
+source_file="res://Art/NPC/rescued_saplings_nerd-1.test.png"
+dest_files=["res://.godot/imported/rescued_saplings_nerd-1.test.png-aed7cd7ec416325aa101246a37df79b7.ctex"]
 
 [params]
 
