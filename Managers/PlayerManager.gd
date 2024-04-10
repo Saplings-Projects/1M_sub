@@ -17,6 +17,11 @@ var player_position: Vector2i = Vector2i(-1,-1):
 
 var is_player_initial_position_set: bool
 
+## A flag to check if the player is allowed to move on the map. [br]
+## This is set to false at the start of an event, and set to true once the event ends [br]
+## This is set to true by default as it allows the player to move to the first floor of the map
+var is_map_movement_allowed: bool = true
+
 var player_persistent_data: PlayerPersistentData = null:
 	get:
 		return player_persistent_data

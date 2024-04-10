@@ -61,15 +61,17 @@ func _ready() -> void:
 	var accessible_rooms_by_player: Array[RoomBase] = []
 	# Godot not happy and telling me current_map.rooms is an Array and not an Array[RoomBase]
 	# because we can't have nested typing in array, so need to use assign for type conversion
-	accessible_rooms_by_player.assign(current_map.rooms[0])
-	if PlayerManager.is_player_initial_position_set:
-		accessible_rooms_by_player = MapMovement.get_accessible_rooms_by_player()
-	else:
-		# If the player hasn't selected a room yet, take the currently accessible rooms 
-		# (basically the rooms on the first floor) and increase the light on those rooms.
-		for room: RoomBase in accessible_rooms_by_player:
-			if room != null:
-				room.light_data.increase_light_by_player_movement()
+	accessible_rooms_by_player = []
+	if PlayerManager.is_map_movement_allowed:
+		if PlayerManager.is_player_initial_position_set:
+			accessible_rooms_by_player = MapMovement.get_accessible_rooms_by_player()
+		else:
+			# If the player hasn't selected a room yet, take the currently accessible rooms 
+			# (basically the rooms on the first floor) and increase the light on those rooms.
+			accessible_rooms_by_player.assign(current_map.rooms[0])
+			for room: RoomBase in current_map.rooms[0]:
+				if room != null:
+					room.light_data.increase_light_by_player_movement()
 	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
