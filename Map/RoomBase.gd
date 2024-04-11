@@ -14,7 +14,7 @@ class_name RoomBase
 ## See [MapMovement] for more information [br]
 var room_position: Vector2i
 
-## Init the light data
+## Init the light data [br]
 func _init() -> void:
 	light_data = LightData.new()
 
