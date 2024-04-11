@@ -156,21 +156,23 @@ func add_portrait(art_name: String) -> void:
 # Custom function that is interacted via the .dialogue file to add some flavor image based on the index passed in
 func add_flavor_image(image_name: String, flavor_number: int) -> void:
 	var flavor_image: Texture2D = load("res://Art/%s.png" % image_name)
-	if (flavor_number == 1):
-		flavor_image_1.texture = flavor_image
-	elif (flavor_number == 2):
-		flavor_image_2.texture = flavor_image
-	elif (flavor_number == 3):
-		flavor_image_3.texture = flavor_image
+	match flavor_number:
+		1:
+			flavor_image_1.texture = flavor_image
+		2:
+			flavor_image_2.texture = flavor_image
+		3:
+			flavor_image_3.texture = flavor_image
 
 # Custom function that is interacted via the .dialogue file to add some flavor text based on the index passed in
 func add_flavor_text(flavor_text: String, flavor_number: int) -> void:
-	if (flavor_number == 1):
-		flavor_text_1.add_text(flavor_text)
-	elif (flavor_number == 2):
-		flavor_text_2.add_text(flavor_text)
-	elif (flavor_number == 3):
-		flavor_text_3.add_text(flavor_text)
+	match flavor_number:
+		1:
+			flavor_text_1.add_text(flavor_text)
+		2:
+			flavor_text_2.add_text(flavor_text)
+		3:
+			flavor_text_3.add_text(flavor_text)
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
