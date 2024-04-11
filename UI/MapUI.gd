@@ -189,6 +189,7 @@ func get_combined_room_height(texture_rect: TextureButton) -> float:
 # If the room hasn't been lit when we navigate there, then set it to dimly lit
 func _on_room_clicked(clicked_room: RoomUI) -> void:
 	current_player_room = clicked_room
+	# TODO MAP load the event of the new room here
 	clicked_room.room.light_data.increase_light_by_player_movement()
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
