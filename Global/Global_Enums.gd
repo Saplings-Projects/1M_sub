@@ -72,4 +72,9 @@ enum PossibleModifierNames {
 	CARD_REWARD_NUMBER
 }
 
-
+enum EventType {
+	Heal,
+	Mob,
+	Random,
+	Shop,
+}
