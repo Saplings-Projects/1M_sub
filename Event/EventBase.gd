@@ -26,3 +26,7 @@ func on_event_started() -> void:
 func on_event_ended() -> void:
 	PlayerManager.is_map_movement_allowed = true
 
+## Checks the condition for ending the event [br]
+## To be overwritten by the child class
+func check_event_end_condition() -> bool:
+	return false

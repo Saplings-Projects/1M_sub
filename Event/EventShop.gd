@@ -12,3 +12,8 @@ func _update_event() -> void:
 # @Override
 func get_room_abbreviation() -> String:
 	return "S"
+	
+## @Override
+func check_event_end_condition() -> bool:
+	# You can leave the shop as soon as you enter it
+	return true
