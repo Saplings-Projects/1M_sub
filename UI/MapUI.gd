@@ -7,8 +7,10 @@ var room_ui: PackedScene = load("res://Map/RoomUI.tscn")
 # DialogueManager add works essentially as a new packed scene with some extra functionality.
 # Load up the dialog screen scene like we're switching to any normal scene.
 # Then grab the dialog resource.
-var balloon_scene: PackedScene = load("res://Dialog/balloon.tscn")
-var test_dialog: DialogueResource = load("res://Dialog/test.dialogue")
+# We can pass in any .dialogue script here as long as it exists and it will work with the EventDialogueWindow.
+# For testing, you replace test.dialogue or test2.dialogue and either one will work with the EventDialogueWindow scene.
+var balloon_scene: PackedScene = load("res://Dialog/EventDialogueWindow.tscn")
+var test_dialog: DialogueResource = load("res://Dialog/test2.dialogue")
 
 var _padding_offset: int = 20
 var _MINIMUM_ROOM_WIDTH: int = 510
@@ -196,5 +198,5 @@ func _on_room_clicked(clicked_room: RoomUI) -> void:
 	# If the debug flag to show the dialog screen is on, call the DialogueManager and show our dialogue.
 	# The "test" refers to the chunk of dialog script we want the dialog to start at.
 	if (DebugVar.DEBUG_TEST_DIALOGUE):
-		DialogueManager.show_dialogue_balloon_scene(balloon_scene, test_dialog, "test")
+		DialogueManager.show_dialogue_balloon_scene(balloon_scene, test_dialog, "test2")
 	queue_free()
