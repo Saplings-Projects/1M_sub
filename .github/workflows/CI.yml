@@ -20,11 +20,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v2
     - uses: Tysterman74/godot-tester@master
       with:
         # required
-        version: "4.0.3"
+        version: "4.2.1"
         # the type of release of godot that the tests should be run with
         release_type: "stable"
         is-mono: "false"
