@@ -20,13 +20,13 @@ func _ready() -> void:
 	_set_health(max_health)
 
 
-# Allow caster to be null, but not the target.
-# If caster is null, we assume that the damage came from an unknown source,
-# so status won't calculate.
 ## Deal damage to the entity [br]
 ## Use a negative damage value if you want to heal. [br]
 ## Caster can be null [br]
 func deal_damage(damage: float, caster: Entity) -> void:
+	# Allow caster to be null, but not the target.
+	# If caster is null, we assume that the damage came from an unknown source,
+	# so status won't calculate.
 	
 	if damage == 0.0:
 		return
