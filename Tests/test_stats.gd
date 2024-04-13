@@ -1,4 +1,5 @@
 extends TestBase
+## Test the stats
 
 
 func test_possible_modifier_size() -> void:

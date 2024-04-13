@@ -1,10 +1,15 @@
 class_name EffectData extends Resource
+## Wrapper around the effect class to store the data of the effect
+##
+## This is a convenient way to apply effect while holding all the necessary information in a single class.
 
-# Effect data is a wrapper for the Effect class. It contains an effect, a caster, a target and a value (which will be applied by the effect)
-
+## The effect to apply
 @export var effect: EffectBase = null
+## The entity that cast the effect (depends on the context).
 var caster: Entity = null
+## The value of the effect, see [EffectBase] for more information.
 @export var value: int = 0
+## The targeting function to use. This will give the list of all the targets that the effect is cast on, see [TargetingBase] for more information.
 @export var targeting_function: TargetingBase = null
 @export var animation_data: CastAnimationData = null
 
@@ -21,6 +26,6 @@ func _init(
 	self.targeting_function = _targeting_function
 	self.animation_data = _animation_data
 
+## Help function to call more easily from the card point of view
 func apply_effect_data(_caster: Entity = caster, target: Entity = null) -> void:
-	# Help function to call more easily from the card point of view
 	self.effect.apply_effect(_caster, target, self.value)

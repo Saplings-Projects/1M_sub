@@ -1,5 +1,5 @@
 extends TestCardBase
-## Tests for cards
+## Tests drawing and discarding cards from the card container
 
 
 # @Override

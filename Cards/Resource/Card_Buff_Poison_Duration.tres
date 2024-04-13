@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://dam752rc15nu5"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=14 format=3 uid="uid://dam752rc15nu5"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_2mdel"]
 [ext_resource type="Script" path="res://Status/Buffs/Buff_Poison_Duration.gd" id="2_3gm2g"]

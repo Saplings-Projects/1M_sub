@@ -1,14 +1,20 @@
 extends EventBase
 class_name EventMob
+## Fight event
+##
+##
 
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func _init() -> void:
 	pass
 	
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func _update_event() -> void:
 	print("Update Mob")
 
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func get_room_abbreviation() -> String:
 	return "M"

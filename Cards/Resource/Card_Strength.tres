@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://btj36bhn3n2tr"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=14 format=3 uid="uid://btj36bhn3n2tr"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_k0qgj"]
 [ext_resource type="Script" path="res://Status/Buffs/Buff_Strength.gd" id="2_lq0xl"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="3_q4cd0"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="4_8rg8k"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_e4pqm"]
-[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_xufij"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="5_pg6gn"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_xufij"]
 
 [sub_resource type="Resource" id="Resource_jxq2s"]
 script = ExtResource("3_q4cd0")
