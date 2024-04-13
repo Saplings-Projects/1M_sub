@@ -14,7 +14,8 @@ signal on_health_changed(new_health: int)
 var current_health: float = 100 # ? change this to max health, or just unset since it's init by the ready
 
 ## Initialize the health component, putting health to max health
-## This only happens at game start, because this is globally loaded
+## This only happens at game start for the player, the value is then tracked inside the [PlayerManager] singleton [br]
+## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
 	_set_health(max_health)
 
