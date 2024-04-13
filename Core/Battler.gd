@@ -145,9 +145,9 @@ func _handle_enemy_deaths() -> void:
 
 func _check_and_handle_battle_end() -> void:
 	if PlayerManager.player.get_health_component().current_health == 0:
-		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.DEFEAT)
+		PhaseManager.on_event_end.emit(GlobalEnums.EventResult.DEFEAT)
 	if _enemy_list.is_empty():
-		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.VICTORY)
+		PhaseManager.on_event_end.emit(GlobalEnums.EventResult.VICTORY)
 
 
 func _handle_deaths() -> void:

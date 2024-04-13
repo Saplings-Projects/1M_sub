@@ -43,7 +43,7 @@ enum CardMovementState
 	PLAYING,
 }
 
-enum CombatResult
+enum EventResult
 {
 	VICTORY,
 	DEFEAT
@@ -73,8 +73,8 @@ enum PossibleModifierNames {
 }
 
 enum EventType {
+	Random, # ! Random should always be the first element (see EventRandom)
 	Heal,
 	Mob,
-	Random,
 	Shop,
 }
