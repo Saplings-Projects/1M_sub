@@ -9,7 +9,7 @@ extends Node
 const DEBUG_FREE_MOVEMENT: bool = false
 
 # Clicking on any room will show the test dialog script, check res://Dialog/test.dialogue
-const DEBUG_TEST_DIALOGUE: bool = true
+const DEBUG_TEST_DIALOGUE: bool = false
 
 ## List of all debug variables [br]
 ## This is used to run the tests checking that every DEBUG is set to false
