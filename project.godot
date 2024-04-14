@@ -28,7 +28,7 @@ RandomGenerator="*res://Managers/RandomGenerator.gd"
 GlobalVar="*res://Global/GLOBAL_VAR.gd"
 EnemyManager="*res://Managers/EnemyManager.gd"
 SceneController="*res://Core/SceneController.gd"
-MapManager="*res://Map/MapManager.gd"
+MapManager="*res://Managers/MapManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]

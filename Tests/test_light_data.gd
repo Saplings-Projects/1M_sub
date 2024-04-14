@@ -1,4 +1,8 @@
 extends GutTest
+## Test the LightData class
+##
+## This checks that the light level in rooms works as expected
+
 var light_data: LightData
 
 func before_each() -> void:

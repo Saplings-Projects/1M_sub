@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://bobfsmcwcgsbb"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=14 format=3 uid="uid://bobfsmcwcgsbb"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_24klx"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Weakness.gd" id="2_nfouc"]

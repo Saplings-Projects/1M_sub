@@ -8,6 +8,7 @@ signal on_player_initialized
 
 var player: Player
 
+## The position of the player on the map (by default, a position that doesn't exist)
 var player_position: Vector2i = Vector2i(-1,-1):
 	set(position):
 		player_position = position
@@ -15,6 +16,7 @@ var player_position: Vector2i = Vector2i(-1,-1):
 	get:
 		return player_position
 
+## Check if the player has selected a starting position
 var is_player_initial_position_set: bool
 
 var player_persistent_data: PlayerPersistentData = null:
@@ -39,6 +41,7 @@ func create_persistent_data() -> void:
 	player_persistent_data = PlayerPersistentData.new()
 	
 
+## Checks if the player is in a given room
 func is_player_in_room(room: RoomBase) -> bool:
 	if room == null:
 		return false

@@ -1,5 +1,5 @@
 extends TestBase
-## Tests for health related things
+## Tests for health related things (dealing, taking damage, status dealing damage, etc...)
 
 
 func test_take_damage() -> void:
@@ -58,7 +58,7 @@ func test_poison_status() -> void:
 # Test Card to Deal 2 damage to all enemies
 func test_card_damage_all() -> void:
 	_enemy.get_party_component().set_party(_enemy_list)
-	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAll.tres")
+	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAllEnemies.tres")
 	
 	card_damage_all.on_card_play(_player, null)
 

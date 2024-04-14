@@ -1,6 +1,9 @@
 extends RefCounted
 
 class_name EnemyAction
+## ? is this needed anymore
+## ? does it need to be global
+## ? what is the link with the behaviour component
 
 var caster: Entity
 var action: CardBase

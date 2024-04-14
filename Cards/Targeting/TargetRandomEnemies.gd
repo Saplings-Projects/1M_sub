@@ -1,13 +1,20 @@
 class_name TargetRandomEnemies extends TargetingBase
+## Target [param number_of_targets] enemies selected randomly [br]
+##
+## Note that the same enemy may be targeted multiple times [br]
 
+## The number of targets to select [br]
 @export var number_of_targets: int = 0
 
+
+## @Override [br]
+## See [TargetingBase] for more information [br]
 func _init() -> void:
 	cast_type = GlobalEnums.CardCastType.INSTA_CAST
 
-	
 
-# @Override
+## @Override [br]
+## See [TargetingBase] for more information [br]
 @warning_ignore("unused_parameter")
 func generate_target_list(targeted_entity: Entity) -> Array[Entity]:
 	var target_list: Array[Entity] = []

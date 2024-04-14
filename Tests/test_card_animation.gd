@@ -1,4 +1,5 @@
 extends TestBase
+## Test for the card movements animations
 
 
 var created_cast_nodes: Array[Variant] = []

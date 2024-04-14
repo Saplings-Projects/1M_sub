@@ -1,4 +1,5 @@
 extends TestMapBase
+## Test the MapMovement class
 
 func _check_accessible_rooms(
 	player_position_array: Array[Vector2i], 

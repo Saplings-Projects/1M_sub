@@ -17,7 +17,7 @@
 
 This documentation is not meant as an in-depth explanation of every function. It is meant as a general overview of the classes, their functions and how they interact. 
 
-For more information, please refer to the source code.
+For more information, please refer to the source code and use the built-in documentation viewer (every code should be commented).
 
 # Cards
 
