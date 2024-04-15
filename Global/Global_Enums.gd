@@ -43,12 +43,6 @@ enum CardMovementState
 	PLAYING,
 }
 
-enum EventResult
-{
-	VICTORY,
-	DEFEAT
-}
-
 enum LightLevel
 {
 	UNLIT,

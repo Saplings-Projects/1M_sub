@@ -8,7 +8,8 @@ extends Node
 
 signal on_game_start
 signal on_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Phase)
-signal on_event_end(result: GlobalEnums.EventResult)
+signal on_event_win
+signal on_defeat
 
 var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
 
