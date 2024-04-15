@@ -18,6 +18,10 @@ func _load_scene() -> Node:
 func get_room_abbreviation() -> String:
 	return ""
 
+## The name used to identify the event in the filesystem (scenes and such)
+func get_event_name() -> String:
+	return "base"
+
 ## What to do once the event starts
 func on_event_started() -> void:
 	PlayerManager.is_map_movement_allowed = false
@@ -26,7 +30,3 @@ func on_event_started() -> void:
 func on_event_ended() -> void:
 	PlayerManager.is_map_movement_allowed = true
 
-## Checks the condition for ending the event [br]
-## To be overwritten by the child class
-func check_event_end_condition() -> bool:
-	return false

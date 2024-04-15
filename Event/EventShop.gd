@@ -12,6 +12,12 @@ func _update_event() -> void:
 # @Override
 func get_room_abbreviation() -> String:
 	return "S"
+
+	
+## @Override	
+## The name used to identify the event in the filesystem (scenes and such)
+func get_event_name() -> String:
+	return "shop"
 	
 ## @Override
 func check_event_end_condition() -> bool:
