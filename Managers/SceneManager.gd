@@ -5,6 +5,7 @@ var current_scene: Node = null
 func _ready() -> void:
 	var root: Node = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
+	PhaseManager.on_defeat.connect(on_defeat)
 
 func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback,
@@ -36,7 +37,9 @@ func _deferred_goto_scene(path: String) -> void:
 	get_tree().current_scene = current_scene
 	
 
-func goto_scene_map(event_type: GlobalEnums.EventType, selection: int) -> void:
+## Used to go to a scene of the given [param event_type], with a sub-selection with [param selection] [br]
+## The sub-selection is used if we have multiple scenes for the same event type
+func goto_scene_map(event: EventBase, selection: int) -> void:
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -45,8 +48,19 @@ func goto_scene_map(event_type: GlobalEnums.EventType, selection: int) -> void:
 
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
-		
-	var event_type_name: String = GlobalEnums.EventType.keys()[event_type]
-	var path: String = "res://Scenes/Events/%s_%d.tscn" % [event_type_name, selection] 
+	
+	# select the name corresponding to the event type
+	var actual_event: EventBase = event
+	if actual_event == EventRandom:
+		actual_event = EventRandom.choose_other_event()
+	var event_type_name: String = actual_event.get_event_name()
+	# go search the scene of the given event with the given selection
+	var path: String = "res://#Scenes/Events/%s/%d.tscn" % [event_type_name, selection] 
 
 	call_deferred("_deferred_goto_scene", path)
+
+
+## Shows the defeat scene
+func on_defeat() -> void:
+	# TODO show defeat screen
+	pass
