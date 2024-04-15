@@ -3,7 +3,7 @@ extends Node
 var gold_component : InventoryGoldComponent = InventoryGoldComponent.new()
 var torch_component : InventoryTorchComponent = InventoryTorchComponent.new()
 var consumable_component : InventoryConsumablesComponent = InventoryConsumablesComponent.new()
-@export var relicComponent : InventoryRelicComponent = InventoryRelicComponent.new()
+var relicComponent : InventoryRelicComponent = InventoryRelicComponent.new()
 
 var inventory_HUD : PackedScene = preload("res://InventoryComponents/inventory_hud.tscn")
 var instanced_inventory_HUD : Node
@@ -23,3 +23,10 @@ func toggle_inventory_HUD() -> void:
 		instance_inventory_HUD()
 	else:
 		close_inventory_HUD()
+
+func reset_inventory() -> void:
+	close_inventory_HUD()
+	gold_component = InventoryGoldComponent.new()
+	torch_component = InventoryTorchComponent.new()
+	consumable_component = InventoryConsumablesComponent.new()
+	relicComponent = InventoryRelicComponent.new()
