@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmgnk6io32bb"]
+
+[ext_resource type="Script" path="res://InventoryComponents/RelicDisplay.gd" id="1_d2is1"]
+[ext_resource type="Texture2D" uid="uid://rxkwjoukig2y" path="res://icon.svg" id="2_8c5um"]
+
+[node name="RelicDisplay" type="Control" node_paths=PackedStringArray("textureRect")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = -8.0
+offset_right = 41.0
+offset_bottom = 32.0
+script = ExtResource("1_d2is1")
+textureRect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_8c5um")
+expand_mode = 1

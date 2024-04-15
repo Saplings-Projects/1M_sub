@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=19 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_ji0t8"]
 [ext_resource type="Script" path="res://Map/MapManager.gd" id="2_50npk"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="14_nckre"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Art/Card_layout/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Script" path="res://#Scenes/InventoryTester.gd" id="18_duj0f"]
-[ext_resource type="Resource" uid="uid://c5fh7bnfh3l4u" path="res://Items/test_relic.tres" id="19_prw12"]
 [ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Art/Card_layout/energy_count.png" id="19_spyxg"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 [ext_resource type="Texture2D" uid="uid://cjlatwiw7r80d" path="res://Art/Map/icon.png" id="20_tiho6"]
@@ -210,16 +209,12 @@ text = "Go back to
 main menu"
 
 [node name="Button" type="Button" parent="."]
-offset_left = 30.0
-offset_top = 108.0
-offset_right = 436.0
-offset_bottom = 204.0
-scale = Vector2(0.308897, 0.681828)
-theme_override_font_sizes/font_size = 31
-text = "Toggle
- Inventory HUD"
+offset_left = 138.0
+offset_top = 257.0
+offset_right = 146.0
+offset_bottom = 265.0
+scale = Vector2(22.96, 18.44)
 script = ExtResource("18_duj0f")
-con = ExtResource("19_prw12")
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIControl/back_to_main_menu" to="CanvasLayer/UIControl" method="_on_back_to_main_menu_pressed"]
