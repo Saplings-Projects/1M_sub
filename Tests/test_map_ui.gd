@@ -23,14 +23,14 @@ func test_map_initialize() -> void:
 
 func test_player_placement() -> void:
 	PlayerManager.player_position = Vector2i(2, 0)
-	map_ui._on_room_clicked(map_ui.room_ui_array[0][2])
+	map_ui._increase_light_after_movement(map_ui.room_ui_array[0][2])
 	
 	for room_ui: RoomUI in map_ui.room_ui_array[1]:
 		if room_ui != null:
 			assert_eq(room_ui.room.light_data.light_level, GlobalEnums.LightLevel.DIMLY_LIT, "Adjacent room should be dimly lit")
 
 func test_torch_placements() -> void:
-	map_ui.room_ui_array[0][2]._set_player_position_based_on_room()
+	map_ui.room_ui_array[0][2]._set_player_position_based_on_room(false)
 	
 	assert_eq(map_ui.current_player_room.room.room_position, Vector2i(2, 0), "Player is in the wrong position")
 	
@@ -42,11 +42,11 @@ func test_torch_placements() -> void:
 		assert_eq(room.light_data.light_level, GlobalEnums.LightLevel.LIT, str("Room position ", room.room_position.y, ",", room.room_position.x, " should be lit"))
 
 func test_movement_and_placing_two_torches() -> void:
-	map_ui.room_ui_array[0][2]._set_player_position_based_on_room()
+	map_ui.room_ui_array[0][2]._set_player_position_based_on_room(false)
 	
 	map_ui._add_torch_to_current_location()
 	
-	map_ui.room_ui_array[1][1]._set_player_position_based_on_room()
+	map_ui.room_ui_array[1][1]._set_player_position_based_on_room(false)
 	
 	assert_eq(map_ui.current_player_room.room.room_position, Vector2i(1, 1), "Player is in the wrong position")
 	

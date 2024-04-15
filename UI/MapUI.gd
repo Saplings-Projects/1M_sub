@@ -187,11 +187,18 @@ func get_combined_room_height(texture_rect: TextureButton) -> float:
 
 # Callback function for when a player selects a room
 # If the room hasn't been lit when we navigate there, then set it to dimly lit
-func _on_room_clicked(clicked_room: RoomUI) -> void:
+func _on_room_clicked(clicked_room: RoomUI, switch_scene: bool) -> void:
 	current_player_room = clicked_room
-	# TODO MAP load the event of the new room here
-	clicked_room.room.light_data.increase_light_by_player_movement()
+	var room_event: EventBase = current_player_room.room.room_event
+	var selected_scene_index: int = 0
+	if switch_scene:
+		SceneManager.goto_scene_map(room_event, selected_scene_index)
+	_increase_light_after_movement(current_player_room)
+	queue_free()
+
+## Increase the light in the player room and the room around him if no other source of light is present
+func _increase_light_after_movement(roomUI: RoomUI) -> void:
+	roomUI.room.light_data.increase_light_by_player_movement()
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
 		room.light_data.increase_light_by_player_movement()
-	queue_free()
