@@ -7,6 +7,8 @@ class_name Relic
 
 func on_get() -> void:
 	print("got " + name)
+	#TODO
 
 func on_lose() -> void:
 	print("lost " + name)
+	#TODO

@@ -8,3 +8,4 @@ class_name Consumable
 
 func on_consume() -> void:
 	print("consumed " + name)
+	#TODO
