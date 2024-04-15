@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://celgn3jmlrix0"]
 
-[ext_resource type="Script" path="res://InventoryComponents/ConsumableSlot.gd" id="1_d2qy8"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/ConsumableSlot.gd" id="1_d2qy8"]
 [ext_resource type="Texture2D" uid="uid://cdax6fkgolhd2" path="res://Art/Items/Empty_consumable.png" id="2_l7ybg"]
 
 [node name="ConsumableSlot" type="Control" node_paths=PackedStringArray("texture_rect")]

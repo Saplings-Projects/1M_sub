@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5ohit6tyjm3i"]
 
-[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD.gd" id="1_iitqt"]
-[ext_resource type="Script" path="res://InventoryComponents/ConsumableSlotComponent.gd" id="2_6waf7"]
-[ext_resource type="Script" path="res://InventoryComponents/InventoryHudRelicComponent.gd" id="3_e2s4v"]
-[ext_resource type="Script" path="res://InventoryComponents/InventoryHUDButtons.gd" id="4_r0xxk"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUD.gd" id="1_iitqt"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/ConsumableSlotComponent.gd" id="2_6waf7"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHudRelicComponent.gd" id="3_e2s4v"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDButtons.gd" id="4_r0xxk"]
 
 [node name="InventoryHUD" type="Control" node_paths=PackedStringArray("gold_text", "torch_text", "consumableComponent", "relicComponent")]
 top_level = true
