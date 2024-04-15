@@ -8,6 +8,8 @@ signal on_player_initialized
 
 var player: Player
 
+## This is updated when a room button on the MapUI is clicked. [br]
+## The actual connection is done via the ready function that sends a signal in the [RoomUI] [br]
 var player_position: Vector2i = Vector2i(-1,-1):
 	set(position):
 		player_position = position
