@@ -3,7 +3,7 @@ class_name ConsumableSlotCompoent
 
 var consumable_slots : Array[ConsumableSlot]
 @export var consumable_slots_start_pos : Node
-var consumable_slot : PackedScene = preload("res://InventoryComponents/consumable_slot.tscn")
+var consumable_slot : PackedScene = preload("res://InventoryComponents/InventoryHUD/consumable_slot.tscn")
 @export var consumable_slot_space : float
 
 func prepare_consumable_slots()-> void:

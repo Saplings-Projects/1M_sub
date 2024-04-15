@@ -90,6 +90,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Add Gold Button" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1126.0
 offset_top = 404.0
 offset_right = 1202.0
@@ -98,6 +99,7 @@ scale = Vector2(0.84, 0.84)
 text = "Add gold"
 
 [node name="Lose Gold Button" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1207.0
 offset_top = 407.0
 offset_right = 1288.0
@@ -106,6 +108,7 @@ scale = Vector2(0.78002, 0.780245)
 text = "Lose gold"
 
 [node name="Get torch" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1129.0
 offset_top = 375.0
 offset_right = 1210.0
@@ -114,6 +117,7 @@ scale = Vector2(0.704469, 0.8)
 text = "Get torch"
 
 [node name="Lose torch" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1208.0
 offset_top = 382.0
 offset_right = 1297.0
@@ -122,6 +126,7 @@ scale = Vector2(0.72, 0.72)
 text = "Lose torch"
 
 [node name="Get relic" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1130.0
 offset_top = 351.0
 offset_right = 1211.0
@@ -130,6 +135,7 @@ scale = Vector2(0.719995, 0.719995)
 text = "Get relic"
 
 [node name="Lose relic" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1205.0
 offset_top = 355.0
 offset_right = 1286.0
@@ -138,6 +144,7 @@ scale = Vector2(0.719995, 0.719995)
 text = "Lose relic"
 
 [node name="Lose Consumable slot" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1205.0
 offset_top = 326.0
 offset_right = 1286.0
@@ -146,6 +153,7 @@ scale = Vector2(0.719995, 0.719995)
 text = "Lose CS"
 
 [node name="Get Consumable Slot" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1127.0
 offset_top = 328.0
 offset_right = 1208.0
@@ -154,6 +162,7 @@ scale = Vector2(0.719995, 0.719995)
 text = "Get CS"
 
 [node name="Get consumable" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
 offset_left = 1131.0
 offset_top = 291.0
 offset_right = 1262.0

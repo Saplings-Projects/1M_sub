@@ -1,7 +1,7 @@
 extends Control
 class_name InventoryHUDRelicComponent
 
-var relic_display : PackedScene = preload("res://InventoryComponents/relic_display.tscn")
+var relic_display : PackedScene = preload("res://InventoryComponents/InventoryHUD/relic_display.tscn")
 var relic_display_array : Array[RelicDisplay]
 @export var relic_start_pos : Node
 @export var relic_space : float

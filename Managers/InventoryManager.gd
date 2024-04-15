@@ -5,7 +5,7 @@ var torch_component : InventoryTorchComponent = InventoryTorchComponent.new()
 var consumable_component : InventoryConsumablesComponent = InventoryConsumablesComponent.new()
 var relicComponent : InventoryRelicComponent = InventoryRelicComponent.new()
 
-var inventory_HUD : PackedScene = preload("res://InventoryComponents/inventory_hud.tscn")
+var inventory_HUD : PackedScene = preload("res://InventoryComponents/InventoryHUD/inventory_hud.tscn")
 var instanced_inventory_HUD : Node
 
 func instance_inventory_HUD() -> void:
