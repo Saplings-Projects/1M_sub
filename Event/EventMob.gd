@@ -1,20 +1,26 @@
 extends EventBase
 class_name EventMob
+## Fight event
+##
+##
 
 # ? Should the list of mobs be stored in the event
 
 # For later
 # var reward: Item = None
 
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func _init() -> void:
 	pass
 	
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func _update_event() -> void:
 	print("Update Mob")
 
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func get_room_abbreviation() -> String:
 	return "M"
 	

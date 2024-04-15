@@ -1,4 +1,5 @@
-extends TestMapBase ## Tests for MapManager, more will be added in the future
+extends TestMapBase 
+## Tests for MapManager, more will be added in the future
 
 
 func test_map_gen() -> void:

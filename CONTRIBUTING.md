@@ -1,3 +1,12 @@
+# Table of contents
+
+- [Contributing : how to ?](#contributing--how-to-)
+	- [Commits](#commits)
+	- [Pull requests](#pull-requests)
+- [Tests](#tests)
+- [Code formatting](#code-formatting)
+- [Documentation](#documentation)
+
 # Contributing : how to ?
 
 If you want to help with code, first check that there is no issue already opened about the thing you want to work on. 
@@ -24,11 +33,11 @@ Here is a (non exhaustive) list of reasons for which your pull request can be cl
 
 If you are the last one to approve a pull request, there are no unresolved conversations and the tests are passing, you can merge the pull request yourself.
 
-## Tests
+# Tests
 
 If you are writing code that implements something new, please provide test files written in GDScript (that can be run on GUT), as they will be useful to test future PR. If you do not know what to write tests on, don't hesitate to ask.
 
-## Code formatting
+# Code formatting
 
 As of the writing of this CONTRIBUTING.md there is no code formatter for Godot, even though it might come later. Try to follow the code conventions of the [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
 
@@ -39,3 +48,8 @@ As of the writing of this CONTRIBUTING.md there is no code formatter for Godot, 
 - Write the parent class name as SomethingBase (for example, the base of the cards is `CardBase`)
 - If you have C child of B and B child of A, B should not follow the previous convention, only A should. This rule may have exceptions.
 - Writing multiple smaller lines is better than writing one big line.
+
+# Documentation
+
+Always write documentation for your code. Check how it's done in other files if you don't know how to write it. Check [Godot's page about documentation](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html) comments for syntax related information.
+Code inside functions should also be commented (but using normal comments, not documentation comments). This doesn't exempt you from using explicit variable names and function names.

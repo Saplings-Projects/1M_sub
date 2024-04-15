@@ -1,7 +1,11 @@
 extends EventBase
 class_name EventHeal
+## Heal your character in this event
+##
+## 
 
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func _init() -> void:
 	pass
 
@@ -10,10 +14,12 @@ func _init() -> void:
 func get_event_name() -> String:
 	return "heal"
 	
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func _update_event() -> void:
 	print("Updating Heal Event")
 
-# @Override
+## @Override [br]
+## See [EventBase] for more information [br]
 func get_room_abbreviation() -> String:
 	return "H"

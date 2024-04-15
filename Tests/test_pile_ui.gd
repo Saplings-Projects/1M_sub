@@ -1,5 +1,5 @@
 extends TestCardBase
-#test for ui pop up
+## Test the deck pile
 
 var _card_container_scroll_scene: PackedScene  = load("res://#Scenes/CardScrollUI.tscn")
 var _card_scroll: Control = null

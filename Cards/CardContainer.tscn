@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Cards/CardContainer.gd" id="1_8wctf"]
 [ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_ytmtr"]
 [ext_resource type="Resource" uid="uid://dxgoopi1roxu4" path="res://Cards/Resource/Card_Damage.tres" id="3_bi3df"]
-[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAll.tres" id="4_14cb3"]
+[ext_resource type="Resource" uid="uid://0x385c3nuq8f" path="res://Cards/Resource/Card_DamageAllEnemies.tres" id="4_14cb3"]
 [ext_resource type="Resource" uid="uid://boodcfdepyk5i" path="res://Cards/Resource/Card_DamageHealth.tres" id="5_dugjd"]
 [ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Card_DrawCards.tres" id="6_56fxe"]
 [ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="7_6wjqi"]

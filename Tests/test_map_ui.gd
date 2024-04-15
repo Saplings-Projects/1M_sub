@@ -1,4 +1,5 @@
 extends TestMapBase
+## Test the Map UI (that we correctly spawn things and can places torches and player)
 
 var map_ui_scene: PackedScene = load("res://#Scenes/MapUI.tscn")
 var map_ui: MapUI

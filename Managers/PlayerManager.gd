@@ -8,8 +8,10 @@ signal on_player_initialized
 
 var player: Player
 
+
 ## This is updated when a room button on the MapUI is clicked. [br]
 ## The actual connection is done via the ready function that sends a signal in the [RoomUI] [br]
+## The position of the player on the map (by default, a position that doesn't exist)
 var player_position: Vector2i = Vector2i(-1,-1):
 	set(position):
 		player_position = position
@@ -17,6 +19,7 @@ var player_position: Vector2i = Vector2i(-1,-1):
 	get:
 		return player_position
 
+## Check if the player has selected a starting position
 var is_player_initial_position_set: bool
 
 ## A flag to check if the player is allowed to move on the map. [br]
@@ -46,6 +49,7 @@ func create_persistent_data() -> void:
 	player_persistent_data = PlayerPersistentData.new()
 	
 
+## Checks if the player is in a given room
 func is_player_in_room(room: RoomBase) -> bool:
 	if room == null:
 		return false
