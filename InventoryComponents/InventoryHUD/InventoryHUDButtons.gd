@@ -1,7 +1,5 @@
 extends Control
 
-
-
 func _on_add_gold_button_pressed() -> void:
 	InventoryManager.gold_component.add_gold(10)
 
