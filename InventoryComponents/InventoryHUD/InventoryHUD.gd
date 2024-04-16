@@ -11,7 +11,7 @@ func _ready() -> void:
 	update_torch_text(InventoryManager.torch_component.current_torches)
 	InventoryManager.gold_component.gold_updated.connect(update_gold_text)
 	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
-	InventoryManager.relic_component.held_relics_update.connect(_relic_component.update_relic_displays)
+	InventoryManager.relic_component.held_relics_update.connect(_relic_component.update_relic_display)
 	if(!_activate_debug_buttons):
 		_debug_buttons.queue_free()
 
