@@ -26,7 +26,6 @@ func set_consumable(consumable : Consumable, pos : int) -> void:
 func remove_consumable_at_place(pos : int) -> void:
 	held_consumables[pos] = null
 	held_consumable_update.emit(null, pos)
-	pass
 
 func consume_consumable_at_place(pos : int) -> void:
 	if(held_consumables[pos] == null):
@@ -34,7 +33,6 @@ func consume_consumable_at_place(pos : int) -> void:
 	
 	held_consumables[pos].on_consume()
 	remove_consumable_at_place(pos)
-	pass
 
 func _update_consumable_limit(new_amount : int = max_consumable_number) -> void:
 	while(held_consumables.size() < new_amount):
