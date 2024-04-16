@@ -34,8 +34,8 @@ func _on_lose_relic_pressed() -> void:
 
 
 func _on_lose_consumable_slot_pressed() -> void:
-	InventoryManager.consumable_component.lose_consumable_slot(1)
+	InventoryManager.consumable_component.lose_consumable_max_amount(1)
 
 
 func _on_get_consumable_slot_pressed() -> void:
-	InventoryManager.consumable_component.get_consumable_slot(1)
+	InventoryManager.consumable_component.add_consumable_max_amount(1)

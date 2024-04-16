@@ -14,5 +14,5 @@ func set_consumable(new_consumable : Consumable) -> void:
 
 
 func _on_button_pressed() -> void:
-	InventoryManager.consumable_component.consume_consumable_at_place(pos)
+	InventoryManager.consumable_component.use_consumable_at_place(pos)
 	pass # Replace with function body.

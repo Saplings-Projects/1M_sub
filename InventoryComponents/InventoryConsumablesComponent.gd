@@ -27,7 +27,7 @@ func remove_consumable_at_place(pos : int) -> void:
 	held_consumables[pos] = null
 	held_consumable_update.emit(null, pos)
 
-func consume_consumable_at_place(pos : int) -> void:
+func use_consumable_at_place(pos : int) -> void:
 	if(held_consumables[pos] == null):
 		return
 	
@@ -41,13 +41,13 @@ func _update_consumable_limit(new_amount : int = max_consumable_number) -> void:
 	while(held_consumables.size() > new_amount):
 		held_consumables.pop_back()
 
-func get_consumable_slot(amount : int) -> void:
+func add_consumable_max_amount(amount : int) -> void:
 	if(amount <= 0):
 		return
 	max_consumable_number += amount
 	consumable_slot_update.emit(max_consumable_number)
 
-func lose_consumable_slot(amount : int) -> void:
+func lose_consumable_max_amount(amount : int) -> void:
 	if(amount <= 0):
 		return
 	
