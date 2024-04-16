@@ -1,5 +1,5 @@
 extends Control
-class_name RelicDisplay
+class_name InventoryHUDRelicDisplay
 
 @export var textureRect : TextureRect
 
