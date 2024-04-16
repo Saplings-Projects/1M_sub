@@ -10,7 +10,6 @@ func _ready() -> void:
 	update_torch_text(InventoryManager.torch_component.current_torches)
 	InventoryManager.gold_component.gold_updated.connect(update_gold_text)
 	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
-	consumableComponent.prepare_consumable_slots()
 	InventoryManager.relicComponent.held_relics_update.connect(relicComponent.update_relic_displays)
 
 func update_gold_text(new_gold:int) -> void:

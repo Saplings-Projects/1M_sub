@@ -6,7 +6,10 @@ var consumable_slots : Array[ConsumableSlot]
 var consumable_slot : PackedScene = preload("res://InventoryComponents/InventoryHUD/consumable_slot.tscn")
 @export var consumable_slot_space : float
 
-func prepare_consumable_slots()-> void:
+func _ready() -> void:
+	_prepare_consumable_slots()
+
+func _prepare_consumable_slots()-> void:
 	InventoryManager.consumable_component.consumable_slot_update.connect(set_consumable_slots)
 	InventoryManager.consumable_component.held_consumable_update.connect(set_consumable_in_consumable_slot)
 	set_consumable_slots(InventoryManager.consumable_component.max_consumable_number)
