@@ -1,5 +1,5 @@
 extends Control
-class_name InventoryHUDConsumableSlotCompoent
+class_name InventoryHUDConsumableSlotComponent
 
 var consumable_slots : Array[ConsumableSlot]
 @export var consumable_slots_start_pos : Node
