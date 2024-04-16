@@ -1,14 +1,15 @@
 extends TestBase
 ## Tests for things relating to death handling things
 
+## Watch signals and disconnect functions to ensure that nothing irrelevant is called
+func before_all() -> void:
+	PhaseManager.on_event_win.disconnect(SceneManager.on_event_win)
+	PhaseManager.on_defeat.disconnect(SceneManager.on_defeat)
 
-# @Override
+## @Override
 func before_each() -> void:
-	super()	
-	# disconnecting signal as _combat_end_change_scene causes scene to be (re)loaded 
-	# which if called from test actually starts the game and the test doesnt end
+	super()
 	watch_signals(PhaseManager)
-
 	
 # No typing for argument as if it's already been freed it doesn't have one
 @warning_ignore("untyped_declaration")
