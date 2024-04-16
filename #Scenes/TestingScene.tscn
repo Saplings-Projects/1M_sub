@@ -13,12 +13,23 @@
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 [ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="14_nckre"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Art/Card_layout/deck_pile.png" id="18_b54hn"]
-[ext_resource type="Script" path="res://#Scenes/InventoryTester.gd" id="18_duj0f"]
 [ext_resource type="Resource" uid="uid://c5fh7bnfh3l4u" path="res://Items/test_relic.tres" id="19_prw12"]
 [ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Art/Card_layout/energy_count.png" id="19_spyxg"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
 [ext_resource type="Texture2D" uid="uid://cjlatwiw7r80d" path="res://Art/Map/icon.png" id="20_tiho6"]
 [ext_resource type="Script" path="res://UI/MapButton.gd" id="22_druf4"]
+
+[sub_resource type="GDScript" id="GDScript_g5yv1"]
+script/source = "extends Button
+
+@export var con : Relic
+
+
+func _on_pressed() -> void:
+	InventoryManager.toggle_inventory_HUD()
+	pass # Replace with function body.
+
+"
 
 [node name="TestingScene" type="Node2D"]
 script = ExtResource("1_ji0t8")
@@ -218,7 +229,7 @@ scale = Vector2(0.308897, 0.681828)
 theme_override_font_sizes/font_size = 31
 text = "Toggle
  Inventory HUD"
-script = ExtResource("18_duj0f")
+script = SubResource("GDScript_g5yv1")
 con = ExtResource("19_prw12")
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
