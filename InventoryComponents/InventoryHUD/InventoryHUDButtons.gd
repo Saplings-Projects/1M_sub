@@ -2,7 +2,6 @@ extends Control
 
 
 
-
 func _on_add_gold_button_pressed() -> void:
 	InventoryManager.gold_component.add_gold(10)
 
@@ -22,7 +21,7 @@ func _on_lose_torch_pressed()-> void:
 
 
 func _on_get_relic_pressed()-> void:
-	InventoryManager.relicComponent.get_relic(load("res://Items/test_relic.tres"))
+	InventoryManager.relic_component.get_relic(load("res://Items/test_relic.tres"))
 
 
 func _on_get_consumable_pressed()-> void:
@@ -30,7 +29,7 @@ func _on_get_consumable_pressed()-> void:
 
 
 func _on_lose_relic_pressed() -> void:
-	InventoryManager.relicComponent.lose_relic(load("res://Items/test_relic.tres"))
+	InventoryManager.relic_component.lose_relic(load("res://Items/test_relic.tres"))
 
 
 func _on_lose_consumable_slot_pressed() -> void:
