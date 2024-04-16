@@ -7,8 +7,8 @@ extends Control
 @export var _activate_debug_buttons : bool
 
 func _ready() -> void:
-	update_gold_text(InventoryManager.gold_component.current_gold)
-	update_torch_text(InventoryManager.torch_component.torch_amount)
+	update_gold_text(InventoryManager.gold_component.get_gold_amount())
+	update_torch_text(InventoryManager.torch_component.get_torch_amount())
 	InventoryManager.gold_component.gold_updated.connect(update_gold_text)
 	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
 	InventoryManager.relic_component.held_relics_update.connect(_relic_component.update_relic_display)

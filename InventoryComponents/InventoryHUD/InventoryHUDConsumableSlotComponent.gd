@@ -12,7 +12,7 @@ func _ready() -> void:
 func _prepare_consumable_slots()-> void:
 	InventoryManager.consumable_component.consumable_slot_update.connect(set_consumable_slots)
 	InventoryManager.consumable_component.held_consumable_update.connect(set_consumable_in_consumable_slot)
-	set_consumable_slots(InventoryManager.consumable_component.max_consumable_number)
+	set_consumable_slots(InventoryManager.consumable_component.get_max_consumable_amount())
 
 func set_consumable_slots(amount : int) -> void:
 	for slot in consumable_slots:
@@ -22,14 +22,15 @@ func set_consumable_slots(amount : int) -> void:
 	var consumable_slot_amount : int = amount
 	var i : int = 0
 	var pos : Vector2 = consumable_slots_start_pos.position
+	var player_held_consumables : Array[Consumable] = InventoryManager.consumable_component.get_held_consumables()
 	for slot in consumable_slot_amount:
 		var current_consumable_slot : InventoryHUDConsumableSlot = consumable_slot.instantiate() 
 		add_child(current_consumable_slot)
 		current_consumable_slot.pos = i
 		current_consumable_slot.position = pos
 		consumable_slots.append(current_consumable_slot)
-		if(InventoryManager.consumable_component.held_consumables.size() > i):
-			current_consumable_slot.set_consumable(InventoryManager.consumable_component.held_consumables[i])
+		if(player_held_consumables.size() > i):
+			current_consumable_slot.set_consumable(player_held_consumables[i])
 		if(i % 2):
 			pos += Vector2.DOWN * consumable_slot_space
 			pos.x = consumable_slots_start_pos.position.x
