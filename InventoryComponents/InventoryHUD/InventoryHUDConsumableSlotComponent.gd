@@ -36,7 +36,6 @@ func set_consumable_slots(amount : int) -> void:
 		else:
 			pos += Vector2.RIGHT * consumable_slot_space
 		i += 1
-	pass
 
 func set_consumable_in_consumable_slot(consumable : Consumable, pos : int = -1) -> void:
 	if(pos < 0):
