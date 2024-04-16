@@ -1,5 +1,5 @@
 extends Control
-class_name ConsumableSlotCompoent
+class_name InventoryHUDConsumableSlotCompoent
 
 var consumable_slots : Array[ConsumableSlot]
 @export var consumable_slots_start_pos : Node
@@ -9,7 +9,7 @@ var consumable_slot : PackedScene = preload("res://InventoryComponents/Inventory
 func prepare_consumable_slots()-> void:
 	InventoryManager.consumable_component.consumable_slot_update.connect(set_consumable_slots)
 	InventoryManager.consumable_component.held_consumable_update.connect(set_consumable_in_consumable_slot)
-	set_consumable_slots(InventoryManager.consumable_component.consumables_limit)
+	set_consumable_slots(InventoryManager.consumable_component.max_consumable_number)
 
 func set_consumable_slots(amount : int) -> void:
 	for slot in consumable_slots:

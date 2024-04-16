@@ -2,7 +2,7 @@ extends Control
 
 @export var gold_text : Label
 @export var torch_text : Label
-@export var consumableComponent : ConsumableSlotCompoent
+@export var consumableComponent : InventoryHUDConsumableSlotCompoent
 @export var relicComponent : InventoryHUDRelicComponent
 
 func _ready() -> void:

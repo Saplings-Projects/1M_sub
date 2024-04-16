@@ -1,14 +1,16 @@
 class_name InventoryConsumablesComponent
 
 var held_consumables : Array[Consumable]
-var consumables_limit : int = 4
+var max_consumable_number : int = 4
 
 signal held_consumable_update(new_consumable : Consumable, pos : int)
 signal consumable_slot_update(new_amount : int)
 
+func _init() -> void:
+	_update_consumable_limit()
+	consumable_slot_update.connect(_update_consumable_limit)
+
 func get_consumable(consumable : Consumable) -> void:
-	prepare_consumable_array()
-	
 	var i : int = 0
 	
 	for consumable_slot in held_consumables:
@@ -27,8 +29,6 @@ func remove_consumable_at_place(pos : int) -> void:
 	pass
 
 func consume_consumable_at_place(pos : int) -> void:
-	prepare_consumable_array()
-	
 	if(held_consumables[pos] == null):
 		return
 	
@@ -36,28 +36,26 @@ func consume_consumable_at_place(pos : int) -> void:
 	remove_consumable_at_place(pos)
 	pass
 
-func prepare_consumable_array() -> void:
-	while(held_consumables.size() < consumables_limit):
+func _update_consumable_limit(new_amount : int = max_consumable_number) -> void:
+	while(held_consumables.size() < new_amount):
 		held_consumables.append(null)
 	
-	while(held_consumables.size() > consumables_limit):
+	while(held_consumables.size() > new_amount):
 		held_consumables.pop_back()
 
 func get_consumable_slot(amount : int) -> void:
 	if(amount <= 0):
 		return
-	consumables_limit += amount
-	prepare_consumable_array()
-	consumable_slot_update.emit(consumables_limit)
+	max_consumable_number += amount
+	consumable_slot_update.emit(max_consumable_number)
 
 func lose_consumable_slot(amount : int) -> void:
 	if(amount <= 0):
 		return
 	
-	consumables_limit -= amount
+	max_consumable_number -= amount
 	
-	if(consumables_limit < 0):
-		consumables_limit = 0
+	if(max_consumable_number < 0):
+		max_consumable_number = 0
 	
-	prepare_consumable_array()
-	consumable_slot_update.emit(consumables_limit)
+	consumable_slot_update.emit(max_consumable_number)
