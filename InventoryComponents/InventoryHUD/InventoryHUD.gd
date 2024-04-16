@@ -11,8 +11,8 @@ func _ready() -> void:
 	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
 	InventoryManager.relic_component.held_relics_update.connect(_relic_component.update_relic_displays)
 
-func update_gold_text(new_gold:int) -> void:
-	_gold_text.text = "Gold : " + str(new_gold)
+func update_gold_text(new_gold_amount : int) -> void:
+	_gold_text.text = "Gold : " + str(new_gold_amount)
 
-func update_torch_text(new_torch:int) -> void:
-	_torch_text.text = "Torches : " + str(new_torch)
+func update_torch_text(new_torch_amount : int) -> void:
+	_torch_text.text = "Torches : " + str(new_torch_amount)
