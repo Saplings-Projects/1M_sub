@@ -1,9 +1,9 @@
 extends Control
 
+## This script holds a lot of debug buttons for easy testing
+
 func _on_add_gold_button_pressed() -> void:
 	InventoryManager.gold_component.add_gold(10)
-
-
 
 func _on_lose_gold_button_pressed() -> void:
 	InventoryManager.gold_component.lose_gold(10)

@@ -1,6 +1,8 @@
 extends Control
 class_name InventoryHUDConsumableSlot
 
+## This script handles the visual consumables in the InvHUD
+
 var consumable : Consumable = null
 var pos : int 
 @export var texture_rect : TextureRect

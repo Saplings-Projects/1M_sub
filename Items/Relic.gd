@@ -1,6 +1,8 @@
 extends Resource
 class_name Relic
 
+## placeholder class, will need to be fleshed out later
+
 @export var name : String
 @export var description : String
 @export var sprite_path : String

@@ -6,12 +6,16 @@ extends Control
 @onready var _debug_buttons : Control = $CanvasLayer/Buttons
 @export var _activate_debug_buttons : bool
 
+## sets the inventory values to display the items in the player inventory 
+## as well as conects to signals so that they update  as the inventory does
 func _ready() -> void:
 	update_gold_text(InventoryManager.gold_component.get_gold_amount())
 	update_torch_text(InventoryManager.torch_component.get_torch_amount())
 	InventoryManager.gold_component.gold_updated.connect(update_gold_text)
 	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
 	InventoryManager.relic_component.held_relics_update.connect(_relic_component.update_relic_display)
+	
+	## removes debug buttons if the bool is set false
 	if(!_activate_debug_buttons):
 		_debug_buttons.queue_free()
 

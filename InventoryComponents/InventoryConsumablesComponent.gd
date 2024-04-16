@@ -33,6 +33,7 @@ func remove_consumable_at_place(pos : int) -> void:
 	_held_consumables[pos] = null
 	held_consumable_update.emit(null, pos)
 
+## calls the on_consume of the item in the slot and then removes it
 func use_consumable_at_place(pos : int) -> void:
 	if(_held_consumables[pos] == null):
 		return
@@ -40,6 +41,8 @@ func use_consumable_at_place(pos : int) -> void:
 	_held_consumables[pos].on_consume()
 	remove_consumable_at_place(pos)
 
+## fills the _held_consumables array with empty slots or removes slots if there are too many
+## If there is a consumable in the slot that wil be removed it wil dissapear
 func _update_consumable_limit(new_amount : int = _max_consumable_number) -> void:
 	while(_held_consumables.size() < new_amount):
 		_held_consumables.append(null)
