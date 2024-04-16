@@ -37,5 +37,6 @@ func on_event_started() -> void:
 ## @Override
 func on_event_ended() -> void:
 	super()
+	print("Mob event ended")
 	# TODO show reward screen
 	

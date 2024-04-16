@@ -29,7 +29,6 @@ GlobalVar="*res://Global/GLOBAL_VAR.gd"
 EnemyManager="*res://Managers/EnemyManager.gd"
 MapManager="*res://Managers/MapManager.gd"
 
-
 [debug]
 
 gdscript/warnings/unused_variable=2

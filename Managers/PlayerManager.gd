@@ -22,6 +22,13 @@ var player_position: Vector2i = Vector2i(-1,-1):
 ## Check if the player has selected a starting position
 var is_player_initial_position_set: bool
 
+## The actual room the player is in. [br]
+var player_room: RoomBase = null:
+	get:
+		if player_position.x == -1 or player_position.y == -1:
+			return null
+		return MapManager.current_map.rooms[player_position.y][player_position.x]
+
 ## A flag to check if the player is allowed to move on the map. [br]
 ## This is set to false at the start of an event, and set to true once the event ends [br]
 ## This is set to true by default as it allows the player to move to the first floor of the map

@@ -6,6 +6,7 @@ func _ready() -> void:
 	var root: Node = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	PhaseManager.on_defeat.connect(on_defeat)
+	PhaseManager.on_event_win.connect(on_event_win)
 
 func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback,
@@ -57,10 +58,18 @@ func goto_scene_map(event: EventBase, selection: int) -> void:
 	# go search the scene of the given event with the given selection
 	var path: String = "res://#Scenes/Events/%s/%d.tscn" % [event_type_name, selection] 
 
-	call_deferred("_deferred_goto_scene", path)
+	call_deferred("_deferred_goto_scene_map", actual_event, path)
+	
+## Load the scene and start the event	
+func _deferred_goto_scene_map(event: EventBase, path: String) -> void:
+	_deferred_goto_scene(path)
+	event.on_event_started()
 
 
 ## Shows the defeat scene
 func on_defeat() -> void:
 	# TODO show defeat screen
 	pass
+	
+func on_event_win() -> void:
+	PlayerManager.player_room.room_event.on_event_ended()
