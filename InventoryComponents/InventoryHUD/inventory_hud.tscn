@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5ohit6tyjm3i"]
 
 [ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUD.gd" id="1_iitqt"]
-[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDConsumableSlotComponent.gd" id="2_bubfm"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDConsumableSlotComponent.gd" id="2_l7yju"]
 [ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHudRelicComponent.gd" id="3_e2s4v"]
 [ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDButtons.gd" id="4_r0xxk"]
 
@@ -55,7 +55,7 @@ offset_left = 15.0
 offset_top = 139.0
 offset_right = 25.0
 offset_bottom = 149.0
-script = ExtResource("2_bubfm")
+script = ExtResource("2_l7yju")
 consumable_slots_start_pos = NodePath("StartPos")
 consumable_slot_space = 50.0
 

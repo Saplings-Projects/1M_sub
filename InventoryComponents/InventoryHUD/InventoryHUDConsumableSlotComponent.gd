@@ -1,7 +1,7 @@
 extends Control
 class_name InventoryHUDConsumableSlotComponent
 
-var consumable_slots : Array[ConsumableSlot]
+var consumable_slots : Array[InventoryHUDConsumableSlot]
 @export var consumable_slots_start_pos : Node
 var consumable_slot : PackedScene = preload("res://InventoryComponents/InventoryHUD/consumable_slot.tscn")
 @export var consumable_slot_space : float
@@ -23,7 +23,7 @@ func set_consumable_slots(amount : int) -> void:
 	var i : int = 0
 	var pos : Vector2 = consumable_slots_start_pos.position
 	for slot in consumable_slot_amount:
-		var current_consumable_slot : ConsumableSlot = consumable_slot.instantiate() 
+		var current_consumable_slot : InventoryHUDConsumableSlot = consumable_slot.instantiate() 
 		add_child(current_consumable_slot)
 		current_consumable_slot.pos = i
 		current_consumable_slot.position = pos

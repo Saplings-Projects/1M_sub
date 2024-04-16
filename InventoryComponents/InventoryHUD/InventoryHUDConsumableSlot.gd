@@ -1,5 +1,5 @@
 extends Control
-class_name ConsumableSlot
+class_name InventoryHUDConsumableSlot
 
 var consumable : Consumable = null
 var pos : int 
