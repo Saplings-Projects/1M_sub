@@ -90,6 +90,10 @@ func _on_enemy_start_turn() -> void:
 
 
 func _handle_enemy_attack_queue() -> void:
+	# don't do anything if there are no attacks in queue
+	if _enemy_action_list.is_empty():
+		return
+		
 	var enemy_action: EnemyAction = _enemy_action_list[0]
 	_enemy_action_list.remove_at(0)
 	
