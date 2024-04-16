@@ -11,7 +11,7 @@ func _on_lose_gold_button_pressed() -> void:
 
 
 func _on_get_torch_pressed()-> void:
-	InventoryManager.torch_component.get_torches(1)
+	InventoryManager.torch_component.add_torches(1)
 
 
 func _on_lose_torch_pressed()-> void:
@@ -19,11 +19,11 @@ func _on_lose_torch_pressed()-> void:
 
 
 func _on_get_relic_pressed()-> void:
-	InventoryManager.relic_component.get_relic(load("res://Items/test_relic.tres"))
+	InventoryManager.relic_component.add_relic(load("res://Items/test_relic.tres"))
 
 
 func _on_get_consumable_pressed()-> void:
-	InventoryManager.consumable_component.get_consumable(load("res://Items/test_consumable.tres"))
+	InventoryManager.consumable_component.add_consumable(load("res://Items/test_consumable.tres"))
 
 
 func _on_lose_relic_pressed() -> void:

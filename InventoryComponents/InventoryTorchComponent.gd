@@ -3,7 +3,7 @@ class_name InventoryTorchComponent
 var torch_amount : int = 0
 signal torches_updated(new_amount : int)
 
-func get_torches(amount : int) -> void:
+func add_torches(amount : int) -> void:
 	if(amount <= 0):
 		return
 	

@@ -10,7 +10,7 @@ func _init() -> void:
 	_update_consumable_limit()
 	consumable_slot_update.connect(_update_consumable_limit)
 
-func get_consumable(consumable : Consumable) -> void:
+func add_consumable(consumable : Consumable) -> void:
 	var i : int = 0
 	
 	for consumable_slot in held_consumables:
