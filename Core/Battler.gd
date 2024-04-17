@@ -76,7 +76,9 @@ func _on_enemy_start_turn() -> void:
 	for enemy: Entity in _enemy_list:
 		enemy.get_status_component().apply_turn_start_status()
 		
-	_handle_deaths()
+	# if battle have ended, skip the rest of code
+	if _handle_deaths():
+		return
 	
 	# generate list of enemy actions
 	for enemy: Enemy in _enemy_list:
@@ -146,17 +148,21 @@ func _handle_enemy_deaths() -> void:
 	for enemy: Enemy in _enemy_list:
 		enemy.get_party_component().set_party(_enemy_list)
 
-
-func _check_and_handle_battle_end() -> void:
+# return TRUE if battle have ended either with victory or defeat
+func _check_and_handle_battle_end() -> bool:
 	if PlayerManager.player.get_health_component().current_health == 0:
 		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.DEFEAT)
-	if _enemy_list.is_empty():
+		return true
+	elif _enemy_list.is_empty():
 		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.VICTORY)
+		return true
+	
+	return false
 
-
-func _handle_deaths() -> void:
+# return TRUE if battle have ended
+func _handle_deaths() -> bool:
 	_handle_enemy_deaths()
-	_check_and_handle_battle_end()
+	return _check_and_handle_battle_end()
 
 
 # TODO reset temporary stats at the end of the combat using EntityStats.reset_modifier_dict_temp_to_default()
