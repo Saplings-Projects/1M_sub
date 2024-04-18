@@ -1,4 +1,5 @@
 extends GutTest
+## Test that all art files are named following the convention
 
 const ART_DIR_PATH: String = "res://Art/"
 var line_regex: String = r'.*;'

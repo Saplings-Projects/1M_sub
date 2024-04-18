@@ -96,7 +96,7 @@ func test_enemy_death_to_player_attack() -> void:
 func test_all_enemy_death_to_player_attack_all() -> void:
 	_enemy_health_component._set_health(1.0)
 	_enemy_2_health_component._set_health(1.0)
-	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAll.tres")
+	var card_damage_all: CardBase = load("res://Cards/Resource/Card_DamageAllEnemies.tres")
 	
 	assert_eq(_enemy_list.size(), 2)
 	card_damage_all.on_card_play(_player, null)

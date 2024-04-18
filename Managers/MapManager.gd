@@ -1,17 +1,45 @@
 extends Node2D
 ## Class to manage backend for rooms (generation and such)
 
+##
+## With the map width array being [code][1,3,5,3,1][/code], the map looks like that (O are accessible positions, X are null): [br]
+## [codeblock]
+## X  X  O  X  X
+## X  O  O  O  X
+## O  O  O  O  O
+## X  O  O  O  X
+## X  X  O  X  X
+## [/codeblock]
+## if the map width array is [code][3,3,5,3,1][/code], the map looks like that (O are accessible positions, X are null): [br]
+## [codeblock]
+## X  X  O  X  X
+## X  O  O  O  X
+## O  O  O  O  O
+## X  O  O  O  X
+## X  O  O  O  X
+
+## The map we are on
 var current_map: MapBase
+## The width of all the map's floors [br]
+## Starts with width of first floor
+## Width should follow the following rules: [br]
+## - Width should be odd (for symmetry + padding reason) [br]
+## - Width should not increase or decrease by more than 2 per floor (this makes it certain all rooms on the map are accessible [br]
 var map_width_array: Array[int]
  
 #map_floors_width changes the width of the map's floors
-func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase: ## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
+## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
+func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase: 
 	var _map: MapBase = MapBase.new()
-	var _grid: Array[Array] = [] ## 2d array to return. this will be populated with rooms
+	# 2d array to return. this will be populated with rooms
+	var _grid: Array[Array] = [] 
 	var _max_floor_size: int = map_floors_width.max()
-	for index_height: int in range(map_floors_width.size()): ## loop through the floor and append null to create a square grid
+	# loop through the floor, add padding, rooms and padding again
+	for index_height: int in range(map_floors_width.size()): 
 		
 		var _floor_width : int = map_floors_width[index_height]
+		# ! only works if the size of the floor is odd
+
 		var _padding_size : int = (_max_floor_size - _floor_width)/2
 		
 		var _padding:Array = []
@@ -20,22 +48,32 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase: ## G
 		_grid.append([])
 		_grid[index_height].append_array(_padding)
 		
-		for index_width: int in range(map_floors_width[index_height]):## loop through elements of the grid and assign a room type
+
+		# loop through positions of the grid and assign a room type
+		for index_width: int in range(map_floors_width[index_height]):
+			# randomly choose a room type
 			var _rand_type_index: int = randi_range(0, GlobalVar.EVENTS_CLASSIFICATION.size() - 1)
 			var _room_event: EventBase = GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
+			# create a new room with the room type and give it its position
 			var _generated_room: RoomBase = RoomBase.new()
 			_generated_room.room_event = _room_event
 			_generated_room.room_position = Vector2i(index_width + _padding_size, index_height)
+			# put the new room on the grid
+
 			_grid[index_height].append(_generated_room as RoomBase)
 		_grid[index_height].append_array(_padding)
 	_map.rooms = _grid
 	return _map as MapBase
 
-	
+
+## Create a map with a width array
+
 func _ready() -> void:
 	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map()
 
-	
+
+## checks if the map exists
+
 func is_map_initialized() -> bool:
 	return current_map != null

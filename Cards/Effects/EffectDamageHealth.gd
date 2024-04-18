@@ -1,6 +1,11 @@
 class_name EffectDamageHealth extends EffectDamage
+## Deal damage to target equal to amount of health lost by caster (up to max health). [br]
+##
+## @experimental [br]
+## This is not to be used in the real game but is more meant as a testing tool. [br]
 
-# @Override
+## @Override [br]
+## Refer to [EffectBase]
 @warning_ignore("unused_parameter")
 func apply_effect(caster: Entity, target: Entity, value: int) -> void:
 	var _amount_of_health_lost: int = 0
