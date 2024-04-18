@@ -62,21 +62,23 @@ func _on_player_hand_discarded() -> void:
 	PhaseManager.set_phase(GlobalEnums.Phase.ENEMY_ATTACKING)
 
 
-# player start phase: apply status
+## player start phase: apply status
 func _on_player_start_turn() -> void:
 	PlayerManager.player.get_status_component().apply_turn_start_status()
 	PlayerManager.player.get_energy_component().on_turn_start()
 
 
-# enemy start phase: apply status and attack player. Afterwards, set phase to player phase
-# NOTE: these are applied in two separate loops just encase an enemy affects another member of their
-# party with a status during their attack
+## enemy start phase: apply status and attack player. Afterwards, set phase to player phase
+## NOTE: these are applied in two separate loops just encase an enemy affects another member of their
+## party with a status during their attack
 func _on_enemy_start_turn() -> void:
 	# apply status
 	for enemy: Entity in _enemy_list:
 		enemy.get_status_component().apply_turn_start_status()
 		
-	_handle_deaths()
+	# if battle have ended, skip the rest of code
+	if _handle_deaths():
+		return
 	
 	# generate list of enemy actions
 	for enemy: Enemy in _enemy_list:
@@ -90,6 +92,10 @@ func _on_enemy_start_turn() -> void:
 
 
 func _handle_enemy_attack_queue() -> void:
+	# don't do anything if there are no attacks in queue
+	if _enemy_action_list.is_empty():
+		return
+		
 	var enemy_action: EnemyAction = _enemy_action_list[0]
 	_enemy_action_list.remove_at(0)
 	
@@ -97,8 +103,8 @@ func _handle_enemy_attack_queue() -> void:
 	enemy_action.execute()
 
 
-# Called when an enemy action is finished.
-# Tries to queue the next enemy action in the list if it exists.
+## Called when an enemy action is finished.
+## Tries to queue the next enemy action in the list if it exists.
 func _try_finish_enemy_attacks() -> void:
 	CardManager.on_card_action_finished.disconnect(_try_finish_enemy_attacks)
 	
@@ -110,12 +116,12 @@ func _try_finish_enemy_attacks() -> void:
 		PhaseManager.set_phase(GlobalEnums.Phase.PLAYER_ATTACKING)
 
 
-# when player clicks themselves (eg: healing card)
+## when player clicks themselves (eg: healing card)
 func _on_player_clicked() -> void:
 	_try_player_play_card_on_entity(PlayerManager.player)
 
 
-# when player clicks an enemy (eg: damage card)
+## when player clicks an enemy (eg: damage card)
 func _on_enemy_clicked(enemy: Enemy) -> void:
 	_try_player_play_card_on_entity(enemy)
 
@@ -142,17 +148,21 @@ func _handle_enemy_deaths() -> void:
 	for enemy: Enemy in _enemy_list:
 		enemy.get_party_component().set_party(_enemy_list)
 
-
-func _check_and_handle_battle_end() -> void:
+## return TRUE if battle have ended either with victory or defeat
+func _check_and_handle_battle_end() -> bool:
 	if PlayerManager.player.get_health_component().current_health == 0:
 		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.DEFEAT)
-	if _enemy_list.is_empty():
+		return true
+	elif _enemy_list.is_empty():
 		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.VICTORY)
+		return true
+	
+	return false
 
-
-func _handle_deaths() -> void:
+## return TRUE if battle have ended
+func _handle_deaths() -> bool:
 	_handle_enemy_deaths()
-	_check_and_handle_battle_end()
+	return _check_and_handle_battle_end()
 
 
 # TODO reset temporary stats at the end of the combat using EntityStats.reset_modifier_dict_temp_to_default()
