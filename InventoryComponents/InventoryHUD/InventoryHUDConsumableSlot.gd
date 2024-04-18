@@ -12,7 +12,7 @@ func set_consumable(new_consumable : Consumable) -> void:
 	if(consumable != null):
 		texture_rect.texture = load(consumable.image_path)
 	else:
-		texture_rect.texture = load("res://Art/Items/Empty_consumable.png")
+		texture_rect.texture = load("res://Art/Items/empty_consumable.png")
 
 
 func _on_button_pressed() -> void:

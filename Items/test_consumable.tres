@@ -7,4 +7,4 @@ resource_name = "Amoogus"
 script = ExtResource("1_o8k2m")
 name = "Golden apple"
 description = "yum :3"
-image_path = "res://Art/Items/GoldenApple.png"
+image_path = "res://Art/Items/golden_apple.png"

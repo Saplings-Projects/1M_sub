@@ -8,7 +8,7 @@ var relic_display_array : Array[InventoryHUDRelicDisplay]
 var _relic_array : Array[Relic] = []
 
 func _ready() -> void:
-	_relic_array += InventoryManager.relic_component.held_relics
+	_relic_array += InventoryManager.relic_component.get_held_relics()
 	update_relic_display(null, true)
 
 
