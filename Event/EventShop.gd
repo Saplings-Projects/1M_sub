@@ -24,6 +24,6 @@ func get_event_name() -> String:
 	return "shop"
 	
 ## @Override
-func check_event_end_condition() -> bool:
-	# You can leave the shop as soon as you enter it
-	return true
+func on_event_ended() -> void:
+	super()
+	print("Shop event ended")

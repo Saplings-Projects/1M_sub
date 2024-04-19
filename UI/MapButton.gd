@@ -1,5 +1,5 @@
 extends TextureButton
-# Button to bring up the map UI
+## Button to bring up the map UI
 
 @onready var map_scene: PackedScene = preload("res://#Scenes/MapUI.tscn")
 

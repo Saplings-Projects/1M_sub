@@ -3,7 +3,11 @@ extends Control
 
 
 func _on_start_pressed() -> void:
-	SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
+	if not PlayerManager.is_player_initial_position_set:
+		SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
+	else:
+		# TODO : load the last scene the player was in
+		pass
 
 
 func _on_options_pressed() -> void:

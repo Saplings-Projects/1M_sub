@@ -23,3 +23,8 @@ func _update_event() -> void:
 ## See [EventBase] for more information [br]
 func get_room_abbreviation() -> String:
 	return "H"
+
+## @Override
+func on_event_ended() -> void:
+	super()
+	print("Heal event ended")
