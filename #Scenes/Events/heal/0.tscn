@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://lsl3jisfwkv3"]
+[gd_scene load_steps=2 format=3 uid="uid://lsl3jisfwkv3"]
+
+[ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="1_cp1mw"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,3 +17,6 @@ offset_bottom = 715.0
 theme_override_font_sizes/font_size = 100
 placeholder_text = "This is a placeholder
 heal event"
+
+[node name="TopBarOverlay" parent="." instance=ExtResource("1_cp1mw")]
+layout_mode = 1

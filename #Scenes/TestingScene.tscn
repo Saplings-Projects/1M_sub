@@ -161,6 +161,9 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_e54tj")]
+layout_mode = 1
+
 [node name="back_to_main_menu" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 0
 offset_left = 29.0
@@ -170,9 +173,6 @@ offset_bottom = 86.0
 theme_override_font_sizes/font_size = 20
 text = "Go back to 
 main menu"
-
-[node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_e54tj")]
-layout_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIControl/back_to_main_menu" to="CanvasLayer/UIControl" method="_on_back_to_main_menu_pressed"]
