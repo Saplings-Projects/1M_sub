@@ -52,7 +52,7 @@ func goto_scene_map(event: EventBase, selection: int) -> void:
 	
 	# select the name corresponding to the event type
 	var actual_event: EventBase = event
-	if actual_event == EventRandom:
+	if actual_event.get_script() == EventRandom:
 		actual_event = EventRandom.choose_other_event()
 	var event_type_name: String = actual_event.get_event_name()
 	# go search the scene of the given event with the given selection
