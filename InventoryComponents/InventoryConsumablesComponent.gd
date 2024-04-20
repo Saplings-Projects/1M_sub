@@ -16,7 +16,7 @@ func _init() -> void:
 func add_consumable(consumable : Consumable) -> void:
 	var i : int = 0
 	
-	##This sycles through the slots and inserts a consumable into the first open slot it can find
+	#This cycles through the slots and inserts a consumable into the first open slot it can find
 	for consumable_slot in _held_consumables:
 		if(consumable_slot == null):
 			_set_consumable(consumable, i)
@@ -24,11 +24,13 @@ func add_consumable(consumable : Consumable) -> void:
 		i += 1
 
 ##sets a given slot to the given consumable
+
 func _set_consumable(consumable : Consumable, pos : int) -> void:
 	_held_consumables[pos] = consumable
 	held_consumable_update.emit(consumable, pos)
 
-##empties out the consumable in given slot
+## Sets the array of consumable to null at the given position, [br]
+## effectively removing the consumable at this position
 func remove_consumable_at_place(pos : int) -> void:
 	_held_consumables[pos] = null
 	held_consumable_update.emit(null, pos)
@@ -42,7 +44,7 @@ func use_consumable_at_place(pos : int) -> void:
 	remove_consumable_at_place(pos)
 
 ## fills the _held_consumables array with empty slots or removes slots if there are too many
-## If there is a consumable in the slot that wil be removed it wil dissapear
+## If there is a consumable in the slot that wil be removed it will dissapear
 func _update_consumable_limit(new_amount : int = _max_consumable_number) -> void:
 	while(_held_consumables.size() < new_amount):
 		_held_consumables.append(null)

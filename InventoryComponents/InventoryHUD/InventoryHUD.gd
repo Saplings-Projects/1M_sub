@@ -14,7 +14,7 @@ func _ready() -> void:
 	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
 	InventoryManager.relic_component.held_relics_update.connect(_relic_component.add_relic_to_display)
 	
-	## removes debug buttons if the bool is set false
+	# removes debug buttons if the bool is set false
 	if(!DebugVar.DEBUG_ACTIVE_INVENTORY_DEBUG_BUTTONS):
 		_debug_buttons.queue_free()
 

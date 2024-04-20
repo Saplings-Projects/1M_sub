@@ -2,7 +2,7 @@ class_name InventoryRelicComponent
 
 var _held_relics : Array[Relic]
 
-#is_added bool wil be true if you're adding the relic and false if you're removing it
+#is_added bool will be true if you're adding the relic and false if you're removing it
 signal held_relics_update(relic : Relic, is_added : bool)
 
 func add_relic(relic : Relic) -> void:

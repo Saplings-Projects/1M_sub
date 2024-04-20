@@ -24,7 +24,7 @@ func _set_consumable_slots(amount : int) -> void:
 	
 	var consumable_slot_amount : int = amount
 	var i : int = 0
-	## pos is the position in the world the Consumable display wil be places
+	# pos is the position in the world the Consumable display wil be places
 	var pos : Vector2 = consumable_slots_start_pos.position
 	var player_held_consumables : Array[Consumable] = InventoryManager.consumable_component.get_held_consumables()
 	
@@ -39,7 +39,7 @@ func _set_consumable_slots(amount : int) -> void:
 		if(player_held_consumables.size() > i):
 			current_consumable_slot.set_consumable(player_held_consumables[i])
 			
-		## moves where the display is drawn, every other wil be placed down
+		# moves where the display is drawn, every other wil be placed down
 		if(i % 2):
 			pos += Vector2.DOWN * consumable_slot_space
 			pos.x = consumable_slots_start_pos.position.x
