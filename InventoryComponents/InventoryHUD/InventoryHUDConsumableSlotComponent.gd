@@ -12,8 +12,8 @@ func _ready() -> void:
 	_prepare_consumable_slots()
 
 func _prepare_consumable_slots()-> void:
-	InventoryManager.consumable_component.consumable_slot_update.connect(_set_consumable_slots)
-	InventoryManager.consumable_component.held_consumable_update.connect(set_consumable_in_consumable_slot)
+	InventoryManager.consumable_component.consumable_max_number_changed.connect(_set_consumable_slots)
+	InventoryManager.consumable_component.held_consumable_changed.connect(set_consumable_in_consumable_slot)
 	_set_consumable_slots(InventoryManager.consumable_component.get_max_consumable_amount())
 
 ## Instanciates the visual consumable slots in the InvHUD

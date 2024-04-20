@@ -5,12 +5,12 @@ var _held_consumables : Array[Consumable]
 var _max_consumable_number : int = 4
 
 ##remove consumable from slot by using null as new_consumable
-signal held_consumable_update(new_consumable : Consumable, pos : int)
-signal consumable_slot_update(new_amount : int)
+signal held_consumable_changed(new_consumable : Consumable, pos : int)
+signal consumable_max_number_changed(new_amount : int)
 
 func _init() -> void:
 	_update_consumable_limit()
-	consumable_slot_update.connect(_update_consumable_limit)
+	consumable_max_number_changed.connect(_update_consumable_limit)
 
 ##adds a consumable to the first open slot
 func add_consumable(consumable : Consumable) -> void:
@@ -27,13 +27,13 @@ func add_consumable(consumable : Consumable) -> void:
 
 func _set_consumable(consumable : Consumable, pos : int) -> void:
 	_held_consumables[pos] = consumable
-	held_consumable_update.emit(consumable, pos)
+	held_consumable_changed.emit(consumable, pos)
 
 ## Sets the array of consumable to null at the given position, [br]
 ## effectively removing the consumable at this position
 func remove_consumable_at_place(pos : int) -> void:
 	_held_consumables[pos] = null
-	held_consumable_update.emit(null, pos)
+	held_consumable_changed.emit(null, pos)
 
 ## calls the on_consume of the item in the slot and then removes it
 func use_consumable_at_place(pos : int) -> void:
@@ -58,7 +58,7 @@ func add_consumable_max_amount(amount : int) -> void:
 	if(amount <= 0):
 		return
 	_max_consumable_number += amount
-	consumable_slot_update.emit(_max_consumable_number)
+	consumable_max_number_changed.emit(_max_consumable_number)
 
 func lose_consumable_max_amount(amount : int) -> void:
 	if(amount <= 0):
@@ -69,7 +69,15 @@ func lose_consumable_max_amount(amount : int) -> void:
 	if(_max_consumable_number < 0):
 		_max_consumable_number = 0
 	
-	consumable_slot_update.emit(_max_consumable_number)
+	consumable_max_number_changed.emit(_max_consumable_number)
+
+func set_consumable_max_amount_to_num(new_amount : int) -> void:
+	_max_consumable_number = new_amount
+	
+	if(_max_consumable_number < 0):
+		_max_consumable_number = 0
+	
+	consumable_max_number_changed.emit(_max_consumable_number)
 
 func get_max_consumable_amount() -> int:
 	return _max_consumable_number

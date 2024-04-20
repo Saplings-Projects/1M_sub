@@ -10,9 +10,9 @@ extends Control
 func _ready() -> void:
 	update_gold_text(InventoryManager.gold_component.get_gold_amount())
 	update_torch_text(InventoryManager.torch_component.get_torch_amount())
-	InventoryManager.gold_component.gold_updated.connect(update_gold_text)
-	InventoryManager.torch_component.torches_updated.connect(update_torch_text)
-	InventoryManager.relic_component.held_relics_update.connect(_relic_component.add_relic_to_display)
+	InventoryManager.gold_component.gold_changed.connect(update_gold_text)
+	InventoryManager.torch_component.torches_changed.connect(update_torch_text)
+	InventoryManager.relic_component.held_relics_changed.connect(_relic_component.add_relic_to_display)
 	
 	# removes debug buttons if the bool is set false
 	if(!DebugVar.DEBUG_ACTIVE_INVENTORY_DEBUG_BUTTONS):

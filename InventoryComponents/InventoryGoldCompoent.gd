@@ -1,21 +1,21 @@
 class_name InventoryGoldComponent
 
 var _current_gold : int = 0
-signal gold_updated(new_amount : int)
+signal gold_changed(new_amount : int)
 
 func add_gold(amount : int) -> void:
 	if(amount <= 0):
 		return
 	
 	_current_gold += amount
-	gold_updated.emit(_current_gold)
+	gold_changed.emit(_current_gold)
 	pass
 
 func lose_gold(amount : int) -> void:
 	if(amount <= 0):
 		return
 	_current_gold -= amount
-	gold_updated.emit(_current_gold)
+	gold_changed.emit(_current_gold)
 	pass
 
 func can_afford(amount : int) -> bool:
