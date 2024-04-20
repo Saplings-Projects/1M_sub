@@ -11,7 +11,7 @@ const DEBUG_FREE_MOVEMENT: bool = false
 ## Allow player to add and remove items from the inventory with buttons [br]
 ## in the inventory UI
 
-const DEBUG_ACTIVE_INVENTORY_DEBUG_BUTTONS : bool = true
+const DEBUG_ACTIVE_INVENTORY_DEBUG_BUTTONS : bool = false
 
 ## List of all debug variables [br]
 ## This is used to run the tests checking that every DEBUG is set to false
