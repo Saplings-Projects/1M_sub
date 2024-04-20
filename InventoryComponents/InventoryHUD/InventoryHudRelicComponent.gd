@@ -9,23 +9,24 @@ var _relic_array : Array[Relic] = []
 
 func _ready() -> void:
 	_relic_array += InventoryManager.relic_component.get_held_relics()
-	update_relic_display(null, true)
+	update_relic_display()
 
-
-func update_relic_display(relic : Relic, is_added : bool) -> void:
-	for relic_display_instance in relic_display_array:
-		relic_display_instance.queue_free()
-	
-	relic_display_array.clear()
-	
+func add_relic_to_display(relic : Relic, is_added : bool) -> void:
 	if(relic != null):
 		if(is_added):
 			_relic_array.append(relic)
 		else:
 			_relic_array.erase(relic)
+	update_relic_display()
+
+func update_relic_display() -> void:
+	for relic_display_instance in relic_display_array:
+		relic_display_instance.queue_free()
+	
+	relic_display_array.clear()
 	
 	var pos : Vector2 = relic_start_pos.position
-
+	
 	for relic_instance in _relic_array:
 		var relic_display_instance : InventoryHUDRelicDisplay = relic_display.instantiate()
 		relic_display_array.append(relic_display_instance)
