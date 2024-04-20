@@ -43,14 +43,16 @@ func use_consumable_at_place(pos : int) -> void:
 	_held_consumables[pos].on_consume()
 	remove_consumable_at_place(pos)
 
-## fills the _held_consumables array with empty slots or removes slots if there are too many
-## If there is a consumable in the slot that wil be removed it will dissapear
+## fills the _held_consumables array with empty slots or removes slots if there are too many [br]
+## If there is a consumable in the slot that wil be removed the game will try to give it to the player [br]
+## as if it was a new item, but if there are no open slots it will dissapear
 func _update_consumable_limit(new_amount : int = _max_consumable_number) -> void:
 	while(_held_consumables.size() < new_amount):
 		_held_consumables.append(null)
 	
 	while(_held_consumables.size() > new_amount):
-		_held_consumables.pop_back()
+		var poped_consumable : Consumable = _held_consumables.pop_back()
+		add_consumable(poped_consumable)
 
 func add_consumable_max_amount(amount : int) -> void:
 	if(amount <= 0):
