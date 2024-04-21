@@ -1,8 +1,11 @@
 extends Node
 class_name CardPileUISetter
+## Controls what happens when clicking on a card pile
+##
+## Will load all the cards in the given pile and put them in a grid format
 
+## Which scene to instantiate the grid in, this is important for positioning
 @onready var parent: Control
-
 
 @export var pile_count_label: Label = null
 @onready var cardUI: PackedScene = preload("res://#Scenes/CardScrollUI.tscn")

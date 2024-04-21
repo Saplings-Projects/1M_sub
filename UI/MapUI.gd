@@ -123,14 +123,19 @@ func _ready() -> void:
 				# disable the button if the player can't access the room
 				texture_button.disabled = not (DebugVar.DEBUG_FREE_MOVEMENT or accessible_rooms_by_player.has(room))
 				room_display.room = room
+				# Show the player on map by checking the room he is in
 				if (PlayerManager.is_player_in_room(room)):
 					current_player_room = room_display
 					texture_button.disabled = true
 					texture_button.texture_disabled = room_with_player_texture
+				# Add a room as a child of room_addition_node	
 				room_addition_node.add_child(room_display)
+				# Name to be shown on the map for the current room
 				room_display.set_label(room.get_room_abbreviation())
+				# Progress through the map by incrementing the position to show the next room
 				room_display.position = position_for_next_room
 				room_display.floor_index = floor_index
+				# Add the room to the array of rooms for the floor
 				room_ui_array[floor_index].append(room_display)
 			else:
 				room_ui_array[floor_index].append(null)
@@ -185,11 +190,15 @@ func _get_combined_room_width(texture_rect: TextureButton) -> float:
 func get_combined_room_height(texture_rect: TextureButton) -> float:
 	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset) + _padding_offset
 
-# Callback function for when a player selects a room
-# If the room hasn't been lit when we navigate there, then set it to dimly lit
+## Callback function for when a player selects a room
+## If the room hasn't been lit when we navigate there, then set it to dimly lit
+## Load the scene of the room that the player has selected
 func _on_room_clicked(clicked_room: RoomUI, switch_scene: bool) -> void:
 	current_player_room = clicked_room
 	var room_event: EventBase = current_player_room.room.room_event
+	# TODO choose a proper way to select scenes
+	# * This might be done by adding a selection index to rooms that have events to load the specific event
+	# * This would need to be set when the map is first created probably, to ensure a proper distribution
 	var selected_scene_index: int = 0
 	if switch_scene:
 		SceneManager.goto_scene_map(room_event, selected_scene_index)

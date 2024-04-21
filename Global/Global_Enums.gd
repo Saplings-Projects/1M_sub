@@ -78,6 +78,8 @@ enum PossibleModifierNames {
 }
 # ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd if you modify this
 
+## All the possible types of events
+## @experimental
 enum EventType {
 	Random, # ! Random should always be the first element (see EventRandom)
 	Heal,

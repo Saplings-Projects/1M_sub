@@ -71,5 +71,7 @@ func on_defeat() -> void:
 	# TODO show defeat screen
 	pass
 	
+## Finish the event [br]
+## Give rewards, allow player to move on the map
 func on_event_win() -> void:
 	PlayerManager.player_room.room_event.on_event_ended()

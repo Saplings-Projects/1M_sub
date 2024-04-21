@@ -8,7 +8,9 @@ extends Node
 
 signal on_game_start
 signal on_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Phase)
+## When a player wins the event
 signal on_event_win
+## When the player is dead (reduced to 0 health)
 signal on_defeat
 
 var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
@@ -32,6 +34,7 @@ func _start_game() -> void:
 	on_game_start.emit()
 
 
+## Change phases in the game (mainly used in combat for now)
 func set_phase(phase: GlobalEnums.Phase) -> void:
 	if (current_phase == phase):
 		return

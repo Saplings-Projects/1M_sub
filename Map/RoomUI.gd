@@ -1,8 +1,12 @@
 extends Control
 class_name RoomUI
+## Holds the information about the visual of the room on the map display
 
+## The actual room object
 var room: RoomBase
+## The text to display for the room
 @export var label: Label
+## The button linked to the room on the map
 @export var button: TextureButton
 
 
@@ -33,6 +37,7 @@ func get_room_rect() -> Rect2:
 func get_center_point() -> Vector2:
 	return Vector2(get_center_X(), get_center_Y())
 	
+## Change the player position to match the position of the room he is in, load the scene related to the room if [param switch_scene] is true
 func _set_player_position_based_on_room(switch_scene: bool = true) -> void:
 	PlayerManager.player_position = room.room_position
 	SignalBus.clicked_next_room_on_map.emit(self, switch_scene)
