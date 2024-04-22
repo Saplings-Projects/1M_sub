@@ -1,0 +1,16 @@
+~ test2
+
+do add_flavor_text("Flavor Text~!", 1)
+do add_flavor_image("Animation/banana", 2)
+This is showcasing a second dialogue file to show\nThe versatility of the Dialogue Manager add-on.
+We can simply call show_dialogue_balloon_scene(), pass in the EventDialogueWindow scene and whichever .dialogue file and then specify the starting point
+
+=> END
+
+~ test2Secret
+
+If you got here from the game, you probably modified the show_dialogue_balloon_scene() to get here. Well done.
+do add_portrait("NPC/rescued_saplings_comfy_sleepy-1.test")
+Have a sleepy sapling!
+
+=> END
