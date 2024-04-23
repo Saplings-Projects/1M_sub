@@ -1,5 +1,7 @@
 class_name InventoryRelicComponent
 
+## Inventory component responisble fro relics
+
 var _held_relics : Array[Relic]
 
 #is_added bool will be true if you're adding the relic and false if you're removing it

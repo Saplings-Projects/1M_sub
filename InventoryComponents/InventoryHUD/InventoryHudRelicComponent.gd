@@ -1,6 +1,8 @@
 extends Control
 class_name InventoryHUDRelicComponent
 
+## HUD component which deals with the relics
+
 var relic_display : PackedScene = preload("res://InventoryComponents/InventoryHUD/relic_display.tscn")
 var relic_display_array : Array[InventoryHUDRelicDisplay]
 @onready var relic_start_pos : Node = $StartPos
@@ -19,6 +21,8 @@ func add_relic_to_display(relic : Relic, is_added : bool) -> void:
 			_relic_array.erase(relic)
 	update_relic_display()
 
+
+## updateds the shown relics 
 func update_relic_display() -> void:
 	for relic_display_instance in relic_display_array:
 		relic_display_instance.queue_free()

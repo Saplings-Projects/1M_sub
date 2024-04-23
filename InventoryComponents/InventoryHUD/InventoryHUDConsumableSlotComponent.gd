@@ -11,6 +11,7 @@ var consumable_slot : PackedScene = preload("res://InventoryComponents/Inventory
 func _ready() -> void:
 	_prepare_consumable_slots()
 
+## simple function called in _ready which connects the necessary signals
 func _prepare_consumable_slots()-> void:
 	InventoryManager.consumable_component.consumable_max_number_changed.connect(_set_consumable_slots)
 	InventoryManager.consumable_component.held_consumable_changed.connect(set_consumable_in_consumable_slot)

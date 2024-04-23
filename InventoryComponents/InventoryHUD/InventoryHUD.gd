@@ -1,12 +1,13 @@
 extends Control
 
+## Simple script to deal with the temporary InventoryHUD
+
 @onready var _gold_text : Label = $CanvasLayer/ColorRect/GoldText
 @onready var _torch_text : Label = $CanvasLayer/ColorRect/TorchText
 @onready var _relic_component : InventoryHUDRelicComponent = $CanvasLayer/ColorRect/Relics
 @onready var _debug_buttons : Control = $CanvasLayer/Buttons
 
-## sets the inventory values to display the items in the player inventory [br]
-## as well as conects to signals so that they update  as the inventory does
+## sets the inventory values to display the items in the player inventory as well as conects to signals so that they update  as the inventory does
 func _ready() -> void:
 	update_gold_text(InventoryManager.gold_component.get_gold_amount())
 	update_torch_text(InventoryManager.torch_component.get_torch_amount())

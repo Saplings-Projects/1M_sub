@@ -1,5 +1,7 @@
 extends Control
 class_name InventoryHUDRelicDisplay
+  
+## an item instanced for the iventoryHUD
 
 @export var textureRect : TextureRect
 

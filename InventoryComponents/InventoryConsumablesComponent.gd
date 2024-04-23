@@ -1,7 +1,9 @@
 class_name InventoryConsumablesComponent
 
-##The held_consumables array has slots with the value null so that we can [br]
-## have item in for exsample slot 1 and 3 but nothing in slot 2
+## Inventory Component resposible for Consumables [br]
+## There is a set amount of slots the player has and each of them can have one item, if any items are given to the player when all slots are full then they dissapear
+
+## The held_consumables array has slots with the value null so that we can have item in for example slot 1 and 3 but nothing in slot 2
 var _held_consumables : Array[Consumable]
 var _max_consumable_number : int = 4
 
@@ -85,3 +87,10 @@ func get_max_consumable_amount() -> int:
 
 func get_held_consumables() -> Array[Consumable]:
 	return _held_consumables
+
+func has_open_slots() -> bool:
+	for consumable_slot in _held_consumables:
+		if(consumable_slot == null):
+			return true
+	
+	return false

@@ -1,5 +1,7 @@
 class_name InventoryTorchComponent
 
+## Inventory component responsible for torches
+ 
 var _torch_amount : int = 0
 signal torches_changed(new_amount : int)
 
