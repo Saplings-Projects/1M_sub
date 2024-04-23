@@ -1,0 +1,43 @@
+~ test
+# Any line that starts with the "do" keyword will be used to call the function specified in balloon.gd
+# If the function does not exist, it WILL throw an error.
+# Adds a flavor image to the indexed flavor object in the dialog scene. All art assets are being read from res://Art/ and must be .png
+do add_flavor_image("NPC/rescued_saplings_nerd-1.test", 1)
+do add_flavor_image("NPC/rescued_saplings_comfy_sleepy-1.test", 2)
+do add_flavor_image("NPC/rescued_saplings_nerd-1.test", 3)
+
+# Adds flavor text to the indexed flavor object in the dialog scene.
+do add_flavor_text("Squeeb~!", 1)
+do add_flavor_text("KonFauna!!", 2)
+do add_flavor_text("Uuuuuu~!", 3)
+
+# Adds a portrait to the main portrait object. Calling add_portrait() again with a different asset will replace the current one.
+# All art assets are being read from res://Art/ and must be .png
+do add_portrait("Background/0-0.test")
+
+# Dialog Manager reads it line by line, do not put line breaks in your dialog if you want this all to be show in one text box
+# If we want to have the text be on separate lines but on the same box of dialog, use a newline \n
+# This example will add a new line while having it be part of one dialog entry.
+# Ex. You run into a sapling!\nWhat do you do?
+You run into a sapling! What do you do?
+# Putting the - on a line will indicate to the system the player will need to make a choice.
+# When resolving what will happen to a choice, indentation matters! 
+# Everything that's indented after each choice will display if the player selects that choice.
+- Pat
+	do add_portrait("NPC/rescued_saplings_comfy_sleepy-1.test")
+	# We can surround text with square brackets [[]] to define random text to be selected. In this case you can either get
+	# "It smiles." or "It's sleepy"
+	You pat the sapling gentle on its' head. [[It smiles|It's sleepy]].
+# We can use the following => syntax to jump to another flow. We just need to ensure that the title exists within the .dialogue file.
+- Punch => punch
+- Slap
+	do add_portrait("NPC/rescued_saplings_comfy_sleepy-1.test")
+	With an open hand, you muster the strength and slap the sapling across the face. It... blushes?
+
+=> END
+
+# To start new flows, it must start with the ~ and end with => END. A title must also be provided so it can be referenced.
+~ punch
+do add_portrait("NPC/rescued_saplings_comfy_sleepy-1.test")
+You wind up your fist and whack the sapling right in the face. It's just happy to be here.
+=> END

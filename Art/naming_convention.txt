@@ -12,6 +12,7 @@ Background : <area_number>-<number> ;
 Card_art : <name> ;
 Card_layout : <name> ;
 Character : <pose> ; default, hurt, took damage, defeated, etc...
+Event : <name> ;
 Items : <type?accessory/consumable>-<name> ; type is either accessory or consumable
 Map : <name> ;
 Menus : <name>-<number> ;
