@@ -15,6 +15,10 @@ func lose_gold(amount : int) -> void:
 	if(amount <= 0):
 		return
 	_current_gold -= amount
+	
+	if(_current_gold < 0):
+		_current_gold = 0
+	
 	gold_changed.emit(_current_gold)
 	pass
 

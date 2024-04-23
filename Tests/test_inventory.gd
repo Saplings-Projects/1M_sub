@@ -8,12 +8,14 @@ func test_add_gold() -> void:
 	assert_eq(InventoryManager.gold_component.get_gold_amount(), 10)
 
 func test_lose_gold() -> void:
-	InventoryManager.gold_component.lose_gold(10)
-	assert_eq(InventoryManager.gold_component.get_gold_amount(), -10)
+	InventoryManager.gold_component.add_gold(10)
+	InventoryManager.gold_component.lose_gold(5)
+	assert_eq(InventoryManager.gold_component.get_gold_amount(), 5)
 
 func test_lose_torch() -> void:
-	InventoryManager.torch_component.lose_torches(10)
-	assert_eq(InventoryManager.torch_component.get_torch_amount(), -10)
+	InventoryManager.torch_component.add_torches(10)
+	InventoryManager.torch_component.lose_torches(5)
+	assert_eq(InventoryManager.torch_component.get_torch_amount(), 5)
 
 func test_add_torch() -> void:
 	InventoryManager.torch_component.add_torches(10)
