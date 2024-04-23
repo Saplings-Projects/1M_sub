@@ -85,4 +85,5 @@ enum EventType {
 	Heal,
 	Mob,
 	Shop,
+	Dialogue,
 }
