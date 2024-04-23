@@ -5,7 +5,7 @@ extends Control
 @onready var _relic_component : InventoryHUDRelicComponent = $CanvasLayer/ColorRect/Relics
 @onready var _debug_buttons : Control = $CanvasLayer/Buttons
 
-## sets the inventory values to display the items in the player inventory 
+## sets the inventory values to display the items in the player inventory [br]
 ## as well as conects to signals so that they update  as the inventory does
 func _ready() -> void:
 	update_gold_text(InventoryManager.gold_component.get_gold_amount())

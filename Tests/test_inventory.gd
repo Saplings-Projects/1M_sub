@@ -31,10 +31,17 @@ func test_remove_relic() -> void:
 	var test_relic_2 : Relic = load("res://Items/test_relic_2.tres")
 	InventoryManager.relic_component.add_relic(test_relic)
 	InventoryManager.relic_component.add_relic(test_relic_2)
-	InventoryManager.relic_component.add_relic(test_relic)
-	InventoryManager.relic_component.lose_relic(test_relic_2)
 	InventoryManager.relic_component.lose_relic(test_relic)
+	assert_eq(InventoryManager.relic_component.get_held_relics(), [test_relic_2])
+
+func test_remove_relic_2() -> void: 
+	var test_relic : Relic = load("res://Items/test_relic.tres")
+	var test_relic_2 : Relic = load("res://Items/test_relic_2.tres")
+	InventoryManager.relic_component.add_relic(test_relic)
+	InventoryManager.relic_component.add_relic(test_relic_2)
+	InventoryManager.relic_component.lose_relic(test_relic_2)
 	assert_eq(InventoryManager.relic_component.get_held_relics(), [test_relic])
+
 
 func test_add_consumable() -> void:
 	var test_consumable : Consumable = load("res://Items/test_consumable.tres")

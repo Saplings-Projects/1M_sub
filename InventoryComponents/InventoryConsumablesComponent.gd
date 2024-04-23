@@ -1,6 +1,7 @@
 class_name InventoryConsumablesComponent
 
-##The held_consumables array has slots with the value null so that we can have item in for exsample slot 1 and 3 but nothing in slot 2
+##The held_consumables array has slots with the value null so that we can [br]
+## have item in for exsample slot 1 and 3 but nothing in slot 2
 var _held_consumables : Array[Consumable]
 var _max_consumable_number : int = 4
 
