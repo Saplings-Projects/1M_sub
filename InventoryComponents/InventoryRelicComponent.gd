@@ -1,6 +1,5 @@
 class_name InventoryRelicComponent
-
-## Inventory component responisble fro relics
+## Inventory component responsible for relics
 
 var _held_relics : Array[Relic]
 

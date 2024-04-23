@@ -22,7 +22,7 @@ func add_relic_to_display(relic : Relic, is_added : bool) -> void:
 	update_relic_display()
 
 
-## updateds the shown relics 
+## updates the relics that are displayed
 func update_relic_display() -> void:
 	for relic_display_instance in relic_display_array:
 		relic_display_instance.queue_free()

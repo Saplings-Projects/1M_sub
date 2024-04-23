@@ -1,6 +1,5 @@
 class_name InventoryGoldComponent
-
-##Inventory component respisible for gold
+##Inventory component responsible for gold
 
 var _current_gold : int = 0
 signal gold_changed(new_amount : int)
@@ -20,7 +19,7 @@ func lose_gold(amount : int) -> void:
 	
 	if(_current_gold < 0):
 		_current_gold = 0
-		push_warning("Gold tried to go bellow 0")
+		push_warning("Gold tried to go below 0")
 	
 	gold_changed.emit(_current_gold)
 	pass
