@@ -20,6 +20,7 @@ func lose_torches(amount : int) -> void:
 	#set torch amount to 0 if it's bellow
 	if(_torch_amount < 0):
 		_torch_amount = 0
+		push_warning("torches tried to go bellow 0")
 	
 	torches_changed.emit(_torch_amount)
 	pass

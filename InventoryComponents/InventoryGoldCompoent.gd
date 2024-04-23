@@ -18,6 +18,7 @@ func lose_gold(amount : int) -> void:
 	
 	if(_current_gold < 0):
 		_current_gold = 0
+		push_warning("Gold tried to go bellow 0")
 	
 	gold_changed.emit(_current_gold)
 	pass
