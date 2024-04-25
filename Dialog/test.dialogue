@@ -29,10 +29,12 @@ You run into a sapling! What do you do?
 	# "It smiles." or "It's sleepy"
 	You pat the sapling gentle on its' head. [[It smiles|It's sleepy]].
 # We can use the following => syntax to jump to another flow. We just need to ensure that the title exists within the .dialogue file.
-- Punch => punch
+- Punch =>< punch
 - Slap
 	do add_portrait("NPC/rescued_saplings_comfy_sleepy-1.test")
 	With an open hand, you muster the strength and slap the sapling across the face. It... blushes?
+	
+do PlayerManager.player_room.room_event.on_event_ended()
 
 => END
 
