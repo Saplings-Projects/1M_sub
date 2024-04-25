@@ -1,5 +1,6 @@
 extends Node2D
 ## Class to manage backend for rooms (generation and such)
+
 ##
 ## With the map width array being [code][1,3,5,3,1][/code], the map looks like that (O are accessible positions, X are null): [br]
 ## [codeblock]
@@ -38,6 +39,7 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 		
 		var _floor_width : int = map_floors_width[index_height]
 		# ! only works if the size of the floor is odd
+
 		var _padding_size : int = (_max_floor_size - _floor_width)/2
 		
 		var _padding:Array = []
@@ -46,6 +48,7 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 		_grid.append([])
 		_grid[index_height].append_array(_padding)
 		
+
 		# loop through positions of the grid and assign a room type
 		for index_width: int in range(map_floors_width[index_height]):
 			# randomly choose a room type
@@ -56,6 +59,7 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 			_generated_room.room_event = _room_event
 			_generated_room.room_position = Vector2i(index_width + _padding_size, index_height)
 			# put the new room on the grid
+
 			_grid[index_height].append(_generated_room as RoomBase)
 		_grid[index_height].append_array(_padding)
 	_map.rooms = _grid
@@ -63,11 +67,13 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 
 
 ## Create a map with a width array
+
 func _ready() -> void:
 	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map()
 
 
 ## checks if the map exists
+
 func is_map_initialized() -> bool:
 	return current_map != null

@@ -1,0 +1,182 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ohit6tyjm3i"]
+
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUD.gd" id="1_iitqt"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDConsumableSlotComponent.gd" id="2_l7yju"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHudRelicComponent.gd" id="3_e2s4v"]
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDButtons.gd" id="4_r0xxk"]
+
+[node name="InventoryHUD" type="Control"]
+top_level = true
+z_index = 521
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iitqt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1120.0
+offset_right = 1280.0
+offset_bottom = 432.0
+
+[node name="GoldText" type="Label" parent="CanvasLayer/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 59.0
+offset_right = 88.0
+offset_bottom = 114.0
+text = "Gold : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TorchText" type="Label" parent="CanvasLayer/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 109.0
+offset_right = 128.0
+offset_bottom = 140.0
+text = "Torches : 1"
+autowrap_mode = 2
+
+[node name="Consumables" type="Control" parent="CanvasLayer/ColorRect" node_paths=PackedStringArray("consumable_slots_start_pos")]
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 139.0
+offset_right = 25.0
+offset_bottom = 149.0
+script = ExtResource("2_l7yju")
+consumable_slots_start_pos = NodePath("StartPos")
+consumable_slot_space = 50.0
+
+[node name="StartPos" type="Control" parent="CanvasLayer/ColorRect/Consumables"]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 47.0
+offset_bottom = 44.0
+
+[node name="Relics" type="Control" parent="CanvasLayer/ColorRect"]
+anchors_preset = 0
+offset_left = 27.0
+offset_top = 88.0
+offset_right = 67.0
+offset_bottom = 128.0
+script = ExtResource("3_e2s4v")
+relic_space = 50.0
+
+[node name="StartPos" type="Control" parent="CanvasLayer/ColorRect/Relics"]
+anchors_preset = 0
+offset_left = -79.0
+offset_top = -77.0
+offset_right = -39.0
+offset_bottom = -37.0
+
+[node name="Buttons" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Add Gold Button" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1126.0
+offset_top = 404.0
+offset_right = 1202.0
+offset_bottom = 435.0
+scale = Vector2(0.84, 0.84)
+text = "Add gold"
+
+[node name="Lose Gold Button" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1207.0
+offset_top = 407.0
+offset_right = 1288.0
+offset_bottom = 438.0
+scale = Vector2(0.78002, 0.780245)
+text = "Lose gold"
+
+[node name="Get torch" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1129.0
+offset_top = 375.0
+offset_right = 1210.0
+offset_bottom = 406.0
+scale = Vector2(0.704469, 0.8)
+text = "Get torch"
+
+[node name="Lose torch" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1208.0
+offset_top = 382.0
+offset_right = 1297.0
+offset_bottom = 413.0
+scale = Vector2(0.72, 0.72)
+text = "Lose torch"
+
+[node name="Get relic" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1130.0
+offset_top = 351.0
+offset_right = 1211.0
+offset_bottom = 382.0
+scale = Vector2(0.719995, 0.719995)
+text = "Get relic"
+
+[node name="Lose relic" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1205.0
+offset_top = 355.0
+offset_right = 1286.0
+offset_bottom = 386.0
+scale = Vector2(0.719995, 0.719995)
+text = "Lose relic"
+
+[node name="Lose Consumable slot" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1205.0
+offset_top = 326.0
+offset_right = 1286.0
+offset_bottom = 357.0
+scale = Vector2(0.719995, 0.719995)
+text = "Lose CS"
+
+[node name="Get Consumable Slot" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1127.0
+offset_top = 328.0
+offset_right = 1208.0
+offset_bottom = 359.0
+scale = Vector2(0.719995, 0.719995)
+text = "Get CS"
+
+[node name="Get consumable" type="Button" parent="CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 1131.0
+offset_top = 291.0
+offset_right = 1262.0
+offset_bottom = 322.0
+text = "get consumable"
+
+[node name="Buttons" type="Control" parent="CanvasLayer/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_r0xxk")
+
+[connection signal="pressed" from="CanvasLayer/Buttons/Add Gold Button" to="CanvasLayer/Buttons/Buttons" method="_on_add_gold_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Lose Gold Button" to="CanvasLayer/Buttons/Buttons" method="_on_lose_gold_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Get torch" to="CanvasLayer/Buttons/Buttons" method="_on_get_torch_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Lose torch" to="CanvasLayer/Buttons/Buttons" method="_on_lose_torch_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Get relic" to="CanvasLayer/Buttons/Buttons" method="_on_get_relic_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Lose relic" to="CanvasLayer/Buttons/Buttons" method="_on_lose_relic_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Lose Consumable slot" to="CanvasLayer/Buttons/Buttons" method="_on_lose_consumable_slot_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Get Consumable Slot" to="CanvasLayer/Buttons/Buttons" method="_on_get_consumable_slot_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Get consumable" to="CanvasLayer/Buttons/Buttons" method="_on_get_consumable_pressed"]

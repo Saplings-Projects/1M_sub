@@ -28,6 +28,7 @@ RandomGenerator="*res://Managers/RandomGenerator.gd"
 GlobalVar="*res://Global/GLOBAL_VAR.gd"
 EnemyManager="*res://Managers/EnemyManager.gd"
 MapManager="*res://Managers/MapManager.gd"
+InventoryManager="*res://Managers/InventoryManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]

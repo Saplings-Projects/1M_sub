@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=19 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_ji0t8"]
-[ext_resource type="Script" path="res://Managers/MapManager.gd" id="2_50npk"]
+[ext_resource type="Script" path="res://Map/MapManager.gd" id="2_50npk"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene_UIcontrol.gd" id="4_h8431"]
@@ -11,23 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Art/Card_layout/draw_pile.png" id="11_pw70x"]
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Art/Card_layout/discard_pile.png" id="12_kxw48"]
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
-[ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="14_e54tj"]
 [ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="14_nckre"]
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Art/Card_layout/deck_pile.png" id="18_b54hn"]
-[ext_resource type="Resource" uid="uid://c5fh7bnfh3l4u" path="res://Items/test_relic.tres" id="19_prw12"]
+[ext_resource type="Script" path="res://#Scenes/InventoryTester.gd" id="18_duj0f"]
 [ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Art/Card_layout/energy_count.png" id="19_spyxg"]
-
-[sub_resource type="GDScript" id="GDScript_g5yv1"]
-script/source = "extends Button
-
-@export var con : Relic
-
-
-func _on_pressed() -> void:
-	InventoryManager.toggle_inventory_HUD()
-	pass # Replace with function body.
-
-"
+[ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="19_ucc6f"]
+[ext_resource type="Texture2D" uid="uid://cjlatwiw7r80d" path="res://Art/Map/icon.png" id="20_tiho6"]
+[ext_resource type="Script" path="res://UI/MapButton.gd" id="22_druf4"]
 
 [node name="TestingScene" type="Node2D"]
 script = ExtResource("1_ji0t8")
@@ -175,8 +165,38 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_e54tj")]
+[node name="DeckPile" type="TextureButton" parent="CanvasLayer/UIControl"]
 layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.00078
+anchor_right = 1.00078
+offset_left = -62.0
+offset_top = 35.0
+offset_right = -22.0
+offset_bottom = 75.0
+texture_normal = ExtResource("18_b54hn")
+texture_pressed = ExtResource("18_b54hn")
+texture_hover = ExtResource("18_b54hn")
+texture_disabled = ExtResource("18_b54hn")
+texture_focused = ExtResource("18_b54hn")
+stretch_mode = 0
+script = ExtResource("19_ucc6f")
+metadata/_edit_use_anchors_ = true
+
+[node name="MapIcon" type="TextureButton" parent="CanvasLayer/UIControl"]
+layout_mode = 0
+offset_left = 1174.0
+offset_top = 31.0
+offset_right = 1214.0
+offset_bottom = 71.0
+texture_normal = ExtResource("20_tiho6")
+texture_pressed = ExtResource("20_tiho6")
+texture_hover = ExtResource("20_tiho6")
+texture_disabled = ExtResource("20_tiho6")
+texture_focused = ExtResource("20_tiho6")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("22_druf4")
 
 [node name="back_to_main_menu" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 0
@@ -189,16 +209,12 @@ text = "Go back to
 main menu"
 
 [node name="Button" type="Button" parent="."]
-offset_left = 30.0
-offset_top = 108.0
-offset_right = 436.0
-offset_bottom = 204.0
-scale = Vector2(0.308897, 0.681828)
-theme_override_font_sizes/font_size = 31
-text = "Toggle
- Inventory HUD"
-script = SubResource("GDScript_g5yv1")
-con = ExtResource("19_prw12")
+offset_left = 138.0
+offset_top = 257.0
+offset_right = 146.0
+offset_bottom = 265.0
+scale = Vector2(22.96, 18.44)
+script = ExtResource("18_duj0f")
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIControl/back_to_main_menu" to="CanvasLayer/UIControl" method="_on_back_to_main_menu_pressed"]

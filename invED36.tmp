@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ohit6tyjm3i"]
+
+[ext_resource type="Script" path="res://InventoryHUD.gd" id="1_8kps2"]
+[ext_resource type="Script" path="res://ConsumableSlotComponent.gd" id="2_6r37t"]
+[ext_resource type="Script" path="res://InventoryHudRelicComponent.gd" id="3_8v8rw"]
+
+[node name="InventoryHUD" type="Control" node_paths=PackedStringArray("gold_text", "torch_text", "consumableComponent", "relicComponent")]
+top_level = true
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8kps2")
+gold_text = NodePath("ColorRect/GoldText")
+torch_text = NodePath("ColorRect/TorchText")
+consumableComponent = NodePath("ColorRect/Consumables")
+relicComponent = NodePath("ColorRect/Relics")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1275.0
+offset_bottom = 57.0
+
+[node name="GoldText" type="Label" parent="ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 8.0
+offset_right = 1198.0
+offset_bottom = 51.0
+text = "Gold : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TorchText" type="Label" parent="ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 863.0
+offset_top = 14.0
+offset_right = 1006.0
+offset_bottom = 45.0
+text = "Torches : 1"
+
+[node name="Consumables" type="Control" parent="ColorRect" node_paths=PackedStringArray("consumable_slots_start_pos")]
+anchors_preset = 0
+offset_left = 441.0
+offset_top = 9.0
+offset_right = 451.0
+offset_bottom = 19.0
+script = ExtResource("2_6r37t")
+consumable_slots_start_pos = NodePath("StartPos")
+consumable_slot_space = 50.0
+
+[node name="StartPos" type="Control" parent="ColorRect/Consumables"]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 47.0
+offset_bottom = 44.0
+
+[node name="Relics" type="Control" parent="ColorRect" node_paths=PackedStringArray("relic_start_pos")]
+anchors_preset = 0
+offset_left = 27.0
+offset_top = 88.0
+offset_right = 67.0
+offset_bottom = 128.0
+script = ExtResource("3_8v8rw")
+relic_start_pos = NodePath("StartPos")
+relic_space = 50.0
+
+[node name="StartPos" type="Control" parent="ColorRect/Relics"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
