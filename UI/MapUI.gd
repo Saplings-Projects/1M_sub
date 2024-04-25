@@ -219,11 +219,5 @@ func _increase_light_after_movement(roomUI: RoomUI) -> void:
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
 		room.light_data.increase_light_by_player_movement()
-
-	# TODO change this to use the map switching
-	# If the debug flag to show the dialog screen is on, call the DialogueManager and show our dialogue.
-	# The "test" refers to the chunk of dialog script we want the dialog to start at.
-	if (DebugVar.DEBUG_TEST_DIALOGUE):
-		DialogueManager.show_dialogue_balloon_scene(balloon_scene, test_dialog, "test")
 	queue_free()
 

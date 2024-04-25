@@ -11,6 +11,3 @@ const DEBUG_FREE_MOVEMENT: bool = false
 
 ## Player can skip the placeholder events by pressing on the skip button
 const DEBUG_SKIP_EVENT: bool = false
-
-## Clicking on any room will show the test dialog script, check res://Dialog/test.dialogue
-const DEBUG_TEST_DIALOGUE: bool = false
