@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Relic" load_steps=2 format=3 uid="uid://cu4gaxrv2jn81"]
+
+[ext_resource type="Script" path="res://Items/Relic.gd" id="1_2mcbl"]
+
+[resource]
+script = ExtResource("1_2mcbl")
+name = "Golden apple relic"
+description = "She made you a golden apple"
+sprite_path = "res://Art/Items/consumable-golden_apple.png"

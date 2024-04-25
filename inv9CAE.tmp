@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ohit6tyjm3i"]
+
+[ext_resource type="Script" path="res://InventoryHUD.gd" id="1_8kps2"]
+[ext_resource type="Script" path="res://ConsumableSlotComponent.gd" id="2_6r37t"]
+[ext_resource type="Script" path="res://InventoryHudRelicComponent.gd" id="3_8v8rw"]
+
+[node name="InventoryHUD" type="Control" node_paths=PackedStringArray("gold_text", "torch_text", "consumableComponent", "relicComponent")]
+top_level = true
+z_index = 521
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8kps2")
+gold_text = NodePath("CanvasLayer/ColorRect/GoldText")
+torch_text = NodePath("CanvasLayer/ColorRect/TorchText")
+consumableComponent = NodePath("CanvasLayer/ColorRect/Consumables")
+relicComponent = NodePath("CanvasLayer/ColorRect/Relics")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1120.0
+offset_right = 1280.0
+offset_bottom = 432.0
+
+[node name="GoldText" type="Label" parent="CanvasLayer/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 93.0
+offset_right = 89.0
+offset_bottom = 148.0
+text = "Gold : 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TorchText" type="Label" parent="CanvasLayer/ColorRect"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 141.0
+offset_right = 96.0
+offset_bottom = 172.0
+text = "Torches : 1"
+autowrap_mode = 2
+
+[node name="Consumables" type="Control" parent="CanvasLayer/ColorRect" node_paths=PackedStringArray("consumable_slots_start_pos")]
+anchors_preset = 0
+offset_left = 18.0
+offset_top = 200.0
+offset_right = 28.0
+offset_bottom = 210.0
+script = ExtResource("2_6r37t")
+consumable_slots_start_pos = NodePath("StartPos")
+consumable_slot_space = 50.0
+
+[node name="StartPos" type="Control" parent="CanvasLayer/ColorRect/Consumables"]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 47.0
+offset_bottom = 44.0
+
+[node name="Relics" type="Control" parent="CanvasLayer/ColorRect" node_paths=PackedStringArray("relic_start_pos")]
+anchors_preset = 0
+offset_left = 27.0
+offset_top = 88.0
+offset_right = 67.0
+offset_bottom = 128.0
+script = ExtResource("3_8v8rw")
+relic_start_pos = NodePath("StartPos")
+relic_space = 50.0
+
+[node name="StartPos" type="Control" parent="CanvasLayer/ColorRect/Relics"]
+anchors_preset = 0
+offset_left = -79.0
+offset_top = -77.0
+offset_right = -39.0
+offset_bottom = -37.0

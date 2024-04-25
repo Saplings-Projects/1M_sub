@@ -2,13 +2,13 @@
 
 - [Disclaimer](#disclaimer)
 - [Cards](#cards)
-    - [Effects](#effects)
-    - [Status](#status)
+	- [Effects](#effects)
+	- [Status](#status)
 - [Entity](#entity)
 - [Map](#map)
-    - [Rooms](#rooms)
-    - [Events](#events)
-    - [Light mechanic](#light-mechanic)
+	- [Rooms](#rooms)
+	- [Events](#events)
+	- [Light mechanic](#light-mechanic)
 - [Animation](#animation)
 
 # Disclaimer

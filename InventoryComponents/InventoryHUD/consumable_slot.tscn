@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://celgn3jmlrix0"]
+
+[ext_resource type="Script" path="res://InventoryComponents/InventoryHUD/InventoryHUDConsumableSlot.gd" id="1_jopaa"]
+[ext_resource type="Texture2D" uid="uid://cdax6fkgolhd2" path="res://Art/Items/consumable-empty_consumable.png" id="2_4qyr4"]
+
+[node name="ConsumableSlot" type="Control" node_paths=PackedStringArray("texture_rect")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jopaa")
+texture_rect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_4qyr4")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 41.0
+offset_bottom = 38.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
