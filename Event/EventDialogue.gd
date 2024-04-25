@@ -1,6 +1,11 @@
 class_name EventDialogue extends EventBase
 ## Dialogue event
 
+## The dialogue resource to use
+@export var dialog: DialogueResource = load("res://Dialog/test.dialogue")
+## Event title
+@export var title: String = "test"
+
 ## @Override [br]
 ## See [EventBase] for more information [br]
 func _init() -> void:
@@ -24,6 +29,7 @@ func get_event_name() -> String:
 ## @Override
 func on_event_started() -> void:
 	super()
+	DialogueManager.show_dialogue_balloon(dialog, title)
 	
 ## @Override
 func on_event_ended() -> void:
