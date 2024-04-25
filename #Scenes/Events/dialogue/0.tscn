@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvgmldqlys8fr"]
+[gd_scene load_steps=11 format=3 uid="uid://bvgmldqlys8fr"]
 
 [ext_resource type="Script" path="res://Dialog/EventDialogueWindow.gd" id="1_y8x42"]
 [ext_resource type="Texture2D" uid="uid://ube4dr03nn7e" path="res://Art/NPC/example-default.png" id="2_vyxv5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_sq1s4"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_2ecgp"]
+[ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="5_wppna"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -70,6 +71,24 @@ Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 [node name="EventDialog" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_y8x42")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBarOverlay" parent="Control" instance=ExtResource("5_wppna")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
