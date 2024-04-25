@@ -31,6 +31,8 @@ static func choose_other_event() -> EventBase:
 			return EventMob.new()
 		GlobalEnums.EventType.Shop:
 			return EventShop.new()
+		GlobalEnums.EventType.Dialogue:
+			return EventDialogue.new()
 	# this way even if the random is not in position 0 and we end up selecting it due to unluck, it will continue to try selecting another event
 	return EventRandom.new() 
 	
