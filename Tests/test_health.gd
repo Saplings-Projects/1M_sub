@@ -130,7 +130,18 @@ func test_card_heal() -> void:
 	card_heal.on_card_play(_player, _player)
 	
 	assert_eq(_player_health_component.current_health, 96.0)
+
+func test_card_heal_with_buffs() -> void:
+	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
+	var buff: CardBase = load("red://cards/resource/Card_Strength.tres")
+
+
+	_player_health_component._set_health(99.0)
+
+	buff.on_card_play(_player, _player)
+	card_heal.on_card_play(_player, _player)
 	
+	assert_eq(_player_health_component.current_health, 100.0)
 
 # Test card that deals 10 damage to every entity (player and enemies)
 func test_card_damage_everything() -> void:

@@ -78,6 +78,7 @@ enum EntityStatDictType {
 ## A value of 1 on the DAMAGE of DEFENSE means you take one less damage [br]
 enum PossibleModifierNames {
 	DAMAGE,
+	HEAL,
 	POISON,
 	DRAW,
 	CARD_REWARD_NUMBER
