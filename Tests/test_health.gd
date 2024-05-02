@@ -133,7 +133,7 @@ func test_card_heal() -> void:
 
 func test_card_heal_with_buffs() -> void:
 	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
-	var buff: CardBase = load("red://cards/resource/Card_Strength.tres")
+	var buff: CardBase = load("res://Cards/Resource/Card_Strength.tres")
 
 
 	_player_health_component._set_health(99.0)

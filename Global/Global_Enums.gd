@@ -83,6 +83,5 @@ enum PossibleModifierNames {
 	DRAW,
 	CARD_REWARD_NUMBER
 }
-# ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd if you modify this
-
-
+# ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd, the test_possible_modifier_size(especifically expected_size)
+# in test_stats.gd if you modify this 
