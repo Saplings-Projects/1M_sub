@@ -151,7 +151,7 @@ func _handle_enemy_deaths() -> void:
 
 ## return TRUE if battle have ended either with victory or defeat
 func _check_and_handle_battle_end() -> bool:
-	if PlayerManager.player.get_health_component().current_health == 0: # ? change this to <= 0
+	if PlayerManager.player.get_health_component().current_health <= 0:
 		PhaseManager.on_defeat.emit()
 		return true
 	if _enemy_list.is_empty():
