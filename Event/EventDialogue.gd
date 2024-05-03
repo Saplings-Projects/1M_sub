@@ -1,13 +1,10 @@
-extends EventBase
-class_name EventMob
-## Fight event
-##
-##
+class_name EventDialogue extends EventBase
+## Dialogue event
 
-# ? Should the list of mobs be stored in the event
-
-# For later
-# var reward: Item = None
+## The dialogue resource to use
+@export var dialog: DialogueResource = load("res://Dialog/test.dialogue")
+## Event title
+@export var title: String = "test"
 
 ## @Override [br]
 ## See [EventBase] for more information [br]
@@ -17,26 +14,24 @@ func _init() -> void:
 ## @Override [br]
 ## See [EventBase] for more information [br]
 func _update_event() -> void:
-	print("Update Mob")
+	print("Update Dialogue")
 
 ## @Override [br]
 ## See [EventBase] for more information [br]
 func get_room_abbreviation() -> String:
-	return "M"
+	return "D"
 	
 ## @Override	
 ## The name used to identify the event in the filesystem (scenes and such)
 func get_event_name() -> String:
-	return "mob"
+	return "dialogue"
 	
 ## @Override
 func on_event_started() -> void:
 	super()
-	# TODO spawn mobs
+	DialogueManager.show_dialogue_balloon(dialog, title)
 	
 ## @Override
 func on_event_ended() -> void:
 	super()
-	print("Mob event ended")
-	# TODO show reward screen
-	
+	print("Dialogue event ended")

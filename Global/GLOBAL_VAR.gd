@@ -14,7 +14,7 @@ var MODIFIER_KEYS: Dictionary = {
 # this is useful if we need to change the reference value in multiple places
 
 ## A list of all the possible events
-var EVENTS_CLASSIFICATION: Array[Resource] = [EventMob, EventRandom, EventShop, EventHeal]
+var EVENTS_CLASSIFICATION: Array[Resource] = [EventMob, EventRandom, EventShop, EventHeal, EventDialogue]
 
 ## A list of all the possible movements on the map
 var POSSIBLE_MOVEMENTS: Dictionary = {

@@ -69,15 +69,17 @@ func _ready() -> void:
 	var accessible_rooms_by_player: Array[RoomBase] = []
 	# Godot not happy and telling me current_map.rooms is an Array and not an Array[RoomBase]
 	# because we can't have nested typing in array, so need to use assign for type conversion
-	accessible_rooms_by_player.assign(current_map.rooms[0])
-	if PlayerManager.is_player_initial_position_set:
-		accessible_rooms_by_player = MapMovement.get_accessible_rooms_by_player()
-	else:
-		# If the player hasn't selected a room yet, take the currently accessible rooms 
-		# (basically the rooms on the first floor) and increase the light on those rooms.
-		for room: RoomBase in accessible_rooms_by_player:
-			if room != null:
-				room.light_data.increase_light_by_player_movement()
+	accessible_rooms_by_player = []
+	if PlayerManager.is_map_movement_allowed:
+		if PlayerManager.is_player_initial_position_set:
+			accessible_rooms_by_player = MapMovement.get_accessible_rooms_by_player()
+		else:
+			# If the player hasn't selected a room yet, take the currently accessible rooms 
+			# (basically the rooms on the first floor) and increase the light on those rooms.
+			accessible_rooms_by_player.assign(current_map.rooms[0])
+			for room: RoomBase in current_map.rooms[0]:
+				if room != null:
+					room.light_data.increase_light_by_player_movement()
 	
 	# Create New Room Object to append to the room container
 	var new_room: Control = room_ui.instantiate()
@@ -129,14 +131,19 @@ func _ready() -> void:
 				# disable the button if the player can't access the room
 				texture_button.disabled = not (DebugVar.DEBUG_FREE_MOVEMENT or accessible_rooms_by_player.has(room))
 				room_display.room = room
+				# Show the player on map by checking the room he is in
 				if (PlayerManager.is_player_in_room(room)):
 					current_player_room = room_display
 					texture_button.disabled = true
 					texture_button.texture_disabled = room_with_player_texture
+				# Add a room as a child of room_addition_node	
 				room_addition_node.add_child(room_display)
+				# Name to be shown on the map for the current room
 				room_display.set_label(room.get_room_abbreviation())
+				# Progress through the map by incrementing the position to show the next room
 				room_display.position = position_for_next_room
 				room_display.floor_index = floor_index
+				# Add the room to the array of rooms for the floor
 				room_ui_array[floor_index].append(room_display)
 			else:
 				room_ui_array[floor_index].append(null)
@@ -191,17 +198,26 @@ func _get_combined_room_width(texture_rect: TextureButton) -> float:
 func get_combined_room_height(texture_rect: TextureButton) -> float:
 	return MapManager.map_width_array.size() * (texture_rect.get_size().y + _padding_offset) + _padding_offset
 
-# Callback function for when a player selects a room
-# If the room hasn't been lit when we navigate there, then set it to dimly lit
-func _on_room_clicked(clicked_room: RoomUI) -> void:
+## Callback function for when a player selects a room
+## If the room hasn't been lit when we navigate there, then set it to dimly lit
+## Load the scene of the room that the player has selected
+func _on_room_clicked(clicked_room: RoomUI, switch_scene: bool) -> void:
 	current_player_room = clicked_room
-	clicked_room.room.light_data.increase_light_by_player_movement()
+	var room_event: EventBase = current_player_room.room.room_event
+	# TODO choose a proper way to select scenes
+	# * This might be done by adding a selection index to rooms that have events to load the specific event
+	# * This would need to be set when the map is first created probably, to ensure a proper distribution
+	var selected_scene_index: int = 0
+	if switch_scene:
+		SceneManager.goto_scene_map(room_event, selected_scene_index)
+	_increase_light_after_movement(current_player_room)
+	queue_free()
+
+## Increase the light in the player room and the room around him if no other source of light is present
+func _increase_light_after_movement(roomUI: RoomUI) -> void:
+	roomUI.room.light_data.increase_light_by_player_movement()
 	var player_adjacent_rooms: Array[RoomBase] = MapMovement.get_accessible_rooms_by_player()
 	for room: RoomBase in player_adjacent_rooms:
 		room.light_data.increase_light_by_player_movement()
-		
-	# If the debug flag to show the dialog screen is on, call the DialogueManager and show our dialogue.
-	# The "test" refers to the chunk of dialog script we want the dialog to start at.
-	if (DebugVar.DEBUG_TEST_DIALOGUE):
-		DialogueManager.show_dialogue_balloon_scene(balloon_scene, test_dialog, "test")
 	queue_free()
+
