@@ -148,16 +148,18 @@ func _handle_enemy_deaths() -> void:
 	for enemy: Enemy in _enemy_list:
 		enemy.get_party_component().set_party(_enemy_list)
 
+
 ## return TRUE if battle have ended either with victory or defeat
 func _check_and_handle_battle_end() -> bool:
-	if PlayerManager.player.get_health_component().current_health == 0:
-		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.DEFEAT)
+	if PlayerManager.player.get_health_component().current_health <= 0:
+		PhaseManager.on_defeat.emit()
 		return true
-	elif _enemy_list.is_empty():
-		PhaseManager.on_combat_end.emit(GlobalEnums.CombatResult.VICTORY)
+	if _enemy_list.is_empty():
+		PhaseManager.on_event_win.emit()
 		return true
-	
-	return false
+    
+	return false    
+
 
 ## return TRUE if battle have ended
 func _handle_deaths() -> bool:

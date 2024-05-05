@@ -1,44 +1,30 @@
-[gd_scene load_steps=20 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=15 format=3 uid="uid://sg1wi7uqvv25"]
 
-[ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_ji0t8"]
-[ext_resource type="Script" path="res://Managers/MapManager.gd" id="2_50npk"]
-[ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="3_4psp7"]
-[ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="3_e7sws"]
-[ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene_UIcontrol.gd" id="4_h8431"]
-[ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="8_qtw1k"]
-[ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="8_voref"]
-[ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="10_pqly7"]
-[ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Art/Card_layout/draw_pile.png" id="11_pw70x"]
-[ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Art/Card_layout/discard_pile.png" id="12_kxw48"]
-[ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
-[ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="14_e54tj"]
-[ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="14_nckre"]
-[ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Art/Card_layout/deck_pile.png" id="18_b54hn"]
-[ext_resource type="Resource" uid="uid://c5fh7bnfh3l4u" path="res://Items/test_relic.tres" id="19_prw12"]
-[ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Art/Card_layout/energy_count.png" id="19_spyxg"]
-
-[sub_resource type="GDScript" id="GDScript_g5yv1"]
-script/source = "extends Button
-
-@export var con : Relic
-
-
-func _on_pressed() -> void:
-	InventoryManager.toggle_inventory_HUD()
-	pass # Replace with function body.
-
-"
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_nmgwp"]
+[ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="2_e6pjn"]
+[ext_resource type="Script" path="res://Managers/MapManager.gd" id="3_fnmf8"]
+[ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="4_ss8ob"]
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene_UIcontrol.gd" id="5_8ejph"]
+[ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="6_dwemq"]
+[ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="7_sxid7"]
+[ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Art/Card_layout/energy_count.png" id="8_tfcxf"]
+[ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="9_nw86y"]
+[ext_resource type="Texture2D" uid="uid://caemucaya30wh" path="res://Art/Card_layout/draw_pile.png" id="10_ebsh6"]
+[ext_resource type="Script" path="res://UI/DrawPileUISetter.gd" id="11_l52d7"]
+[ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Art/Card_layout/discard_pile.png" id="12_0nlrw"]
+[ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="13_8nsar"]
+[ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="14_os5i4"]
 
 [node name="TestingScene" type="Node2D"]
-script = ExtResource("1_ji0t8")
+script = ExtResource("1_nmgwp")
 metadata/_edit_vertical_guides_ = [1216.0]
 
-[node name="Battler" parent="." instance=ExtResource("8_qtw1k")]
+[node name="Battler" parent="." instance=ExtResource("2_e6pjn")]
 
 [node name="TestMap" type="Node2D" parent="."]
-script = ExtResource("2_50npk")
+script = ExtResource("3_fnmf8")
 
-[node name="Player" parent="." instance=ExtResource("3_4psp7")]
+[node name="Player" parent="." instance=ExtResource("4_ss8ob")]
 position = Vector2(595, 284)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -51,9 +37,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("4_h8431")
+script = ExtResource("5_8ejph")
 
-[node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui") instance=ExtResource("3_e7sws")]
+[node name="CardContainer" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("draw_pile_ui", "discard_pile_ui") instance=ExtResource("6_dwemq")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -86,7 +72,7 @@ offset_bottom = -109.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "end turn"
-script = ExtResource("14_dpe64")
+script = ExtResource("7_sxid7")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIControl"]
 layout_mode = 1
@@ -98,7 +84,7 @@ offset_top = -159.0
 offset_right = 257.0
 offset_bottom = 32.0
 scale = Vector2(0.38, 0.38)
-texture = ExtResource("19_spyxg")
+texture = ExtResource("8_tfcxf")
 
 [node name="EnergyLabel" type="Label" parent="CanvasLayer/UIControl/TextureRect"]
 layout_mode = 0
@@ -110,7 +96,7 @@ scale = Vector2(3.93058, 3.1094)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("14_nckre")
+script = ExtResource("9_nw86y")
 
 [node name="DrawPile" type="TextureButton" parent="CanvasLayer/UIControl" node_paths=PackedStringArray("pile_count_label")]
 layout_mode = 1
@@ -122,13 +108,13 @@ offset_top = -69.0
 offset_right = 70.0
 offset_bottom = -29.0
 grow_vertical = 0
-texture_normal = ExtResource("11_pw70x")
-texture_pressed = ExtResource("11_pw70x")
-texture_hover = ExtResource("11_pw70x")
-texture_disabled = ExtResource("11_pw70x")
-texture_focused = ExtResource("11_pw70x")
+texture_normal = ExtResource("10_ebsh6")
+texture_pressed = ExtResource("10_ebsh6")
+texture_hover = ExtResource("10_ebsh6")
+texture_disabled = ExtResource("10_ebsh6")
+texture_focused = ExtResource("10_ebsh6")
 stretch_mode = 0
-script = ExtResource("8_voref")
+script = ExtResource("11_l52d7")
 pile_count_label = NodePath("DrawPileCount")
 
 [node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DrawPile"]
@@ -155,13 +141,13 @@ offset_right = -24.0
 offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("12_kxw48")
-texture_pressed = ExtResource("12_kxw48")
-texture_hover = ExtResource("12_kxw48")
-texture_disabled = ExtResource("12_kxw48")
-texture_focused = ExtResource("12_kxw48")
+texture_normal = ExtResource("12_0nlrw")
+texture_pressed = ExtResource("12_0nlrw")
+texture_hover = ExtResource("12_0nlrw")
+texture_disabled = ExtResource("12_0nlrw")
+texture_focused = ExtResource("12_0nlrw")
 stretch_mode = 0
-script = ExtResource("10_pqly7")
+script = ExtResource("13_8nsar")
 pile_count_label = NodePath("DrawPileCount")
 
 [node name="DrawPileCount" type="Label" parent="CanvasLayer/UIControl/DiscardPile"]
@@ -175,9 +161,6 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_e54tj")]
-layout_mode = 1
-
 [node name="back_to_main_menu" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 0
 offset_left = 29.0
@@ -188,18 +171,8 @@ theme_override_font_sizes/font_size = 20
 text = "Go back to 
 main menu"
 
-[node name="Button" type="Button" parent="."]
-offset_left = 30.0
-offset_top = 108.0
-offset_right = 436.0
-offset_bottom = 204.0
-scale = Vector2(0.308897, 0.681828)
-theme_override_font_sizes/font_size = 31
-text = "Toggle
- Inventory HUD"
-script = SubResource("GDScript_g5yv1")
-con = ExtResource("19_prw12")
+[node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_os5i4")]
+layout_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIControl/back_to_main_menu" to="CanvasLayer/UIControl" method="_on_back_to_main_menu_pressed"]
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

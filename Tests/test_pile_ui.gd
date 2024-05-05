@@ -9,7 +9,6 @@ var _card_scroll: Control = null
 func before_each() -> void:
 	super()
 	_card_scroll = _card_container_scroll_scene.instantiate()
-	_card_scroll.deck_pile = CardManager.current_deck.duplicate()
 	_card_scroll.populate("DeckPile")
 
 
@@ -21,7 +20,7 @@ func after_each() -> void:
 
 
 func test_populate() -> void:
-	var card_pile: Array[CardBase] = _card_scroll.deck_pile
+	var card_pile: Array[CardBase] = CardManager.current_deck.duplicate()
 	var grid: GridContainer = _card_scroll.get_child(SCROLL_CONTAINER_INDEX).get_child(GRID_CONTAINER_INDEX)
 
 	for card_index: int in len(card_pile):
