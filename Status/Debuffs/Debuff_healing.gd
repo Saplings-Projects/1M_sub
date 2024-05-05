@@ -4,7 +4,7 @@ class_name Debuff_Healing
 
 ## @Override
 func _init() -> void:
-	is_on_turn_start = true
+	is_stat_modification = true
 	is_on_apply = true
 	modifier_name = GlobalEnums.PossibleModifierNames.HEAL
 	
