@@ -43,6 +43,6 @@ energy_cost = 0
 script = ExtResource("5_8c6ak")
 application_type = 2
 card_title = "debuff healing"
-card_description = "Debuffs you capacity to heal by 1 for 3 turns"
+card_description = "Debuffs your capacity to heal by 1 for 3 turns"
 card_effects_data = Array[ExtResource("4_hb64u")]([SubResource("Resource_8p0l4")])
 energy_info = SubResource("Resource_mrt6b")
