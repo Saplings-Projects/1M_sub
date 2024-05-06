@@ -4,7 +4,7 @@ class_name EffectHeal extends EffectBase
 ## This effect will heal the target entity. The healing is calculated based on the value of the effect and the caster stats. [br]
 ## Modifier key is HEAL. [br]
 
-var HEAL_MODIFIER = -1  
+var HEAL_MODIFIER: int = -1  
 
 ## @Override [br]
 ## Refer to [EffectBase]
