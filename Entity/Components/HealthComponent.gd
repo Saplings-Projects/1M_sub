@@ -30,7 +30,7 @@ func modify_health(amount: float, caster: Entity, is_healing: bool = false) -> v
 	# so status won't calculate.
 	var new_health: float
 
-	if amount == 0.0:
+	if amount <= 0.0:
 		return
 	
 	assert(owner != null, "No owner was set. Please call init on the Entity.")
