@@ -20,6 +20,12 @@ func _ready() -> void:
 	_set_health(max_health)
 
 
+## Used to emit the specific signal for this class [br]
+## Useful for classes that inherit from this one but want a different signal [br]
+func _emit_class_signal() -> void:
+	on_health_changed.emit(current_health)
+
+
 ## Deal damage to the entity [br]
 ## Use a negative damage value if you want to heal. [br]
 ## Caster can be null [br]
@@ -49,4 +55,4 @@ func _set_health(new_health: float) -> void:
 	if (new_health == current_health):
 		return
 	current_health = new_health
-	on_health_changed.emit(current_health)
+	_emit_class_signal()
