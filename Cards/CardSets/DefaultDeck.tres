@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardSetBase" load_steps=18 format=3 uid="uid://cda81lacxt2ai"]
+[gd_resource type="Resource" script_class="CardSetBase" load_steps=20 format=3 uid="uid://cda81lacxt2ai"]
 
 [ext_resource type="Script" path="res://Cards/CardSetBase.gd" id="1_pnxc0"]
 [ext_resource type="Resource" uid="uid://dam752rc15nu5" path="res://Cards/Resource/Card_Buff_Poison_Duration.tres" id="1_to4gc"]
@@ -17,7 +17,9 @@
 [ext_resource type="Resource" uid="uid://vydmm1p103mg" path="res://Cards/Resource/Card_FaunaSweep.tres" id="14_ghttq"]
 [ext_resource type="Resource" uid="uid://dans622owjixj" path="res://Cards/Resource/Card_Slap.tres" id="15_ie3pe"]
 [ext_resource type="Resource" uid="uid://yc2ns5s0qask" path="res://Cards/Resource/Card_SuperSlap.tres" id="16_jluts"]
+[ext_resource type="Resource" uid="uid://c787doijq7xg2" path="res://Cards/Resource/Card_Buff_healing.tres" id="17_0kgrg"]
+[ext_resource type="Resource" uid="uid://bek3vbtsf3x2l" path="res://Cards/Resource/Card_Debuff_healing.tres" id="18_uj8io"]
 
 [resource]
 script = ExtResource("1_pnxc0")
-card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("1_to4gc"), ExtResource("2_q7qqo"), ExtResource("3_4ka0y"), ExtResource("4_es3ma"), ExtResource("5_giy28"), ExtResource("6_gr534"), ExtResource("7_y1gya"), ExtResource("8_haia1"), ExtResource("9_1tkbv"), ExtResource("10_7m46u"), ExtResource("11_0eivv"), ExtResource("12_lo5f6"), ExtResource("13_v3qs7"), ExtResource("14_ghttq"), ExtResource("15_ie3pe"), ExtResource("16_jluts")])
+card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("1_to4gc"), ExtResource("2_q7qqo"), ExtResource("3_4ka0y"), ExtResource("4_es3ma"), ExtResource("5_giy28"), ExtResource("6_gr534"), ExtResource("7_y1gya"), ExtResource("8_haia1"), ExtResource("9_1tkbv"), ExtResource("10_7m46u"), ExtResource("11_0eivv"), ExtResource("12_lo5f6"), ExtResource("13_v3qs7"), ExtResource("14_ghttq"), ExtResource("15_ie3pe"), ExtResource("16_jluts"), ExtResource("17_0kgrg"), ExtResource("18_uj8io")])

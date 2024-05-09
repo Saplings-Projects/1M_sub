@@ -6,7 +6,7 @@ func test_take_damage() -> void:
 	var damage: float = 5.0
 	var caster: Entity = _player
 
-	_player_health_component.deal_damage(damage, caster)
+	_player_health_component.modify_health(damage, caster)
 	assert_eq(_player_health_component.current_health, 95.0)
 
 
@@ -14,7 +14,7 @@ func test_take_lots_of_damage() -> void:
 	var damage: float = 999999.0
 	var caster: Entity = _player
 
-	_player_health_component.deal_damage(damage, caster)
+	_player_health_component.modify_health(damage, caster)
 	assert_eq(_player_health_component.current_health, 0.0)
 
 
@@ -22,16 +22,16 @@ func test_null_caster() -> void:
 	var damage: float = 50.0
 	var caster: Entity = null
 
-	_player_health_component.deal_damage(damage, caster)
+	_player_health_component.modify_health(damage, caster)
 	assert_eq(_player_health_component.current_health, 50.0)
 
 
 func test_heal() -> void:
-	var damage: float = -50.0
+	var heal: float = 50.0
 	var caster: Entity = _player
 
 	_player_health_component._set_health(50.0)
-	_player_health_component.deal_damage(damage, caster)
+	_player_health_component.modify_health(heal, caster, true)
 	assert_eq(_player_health_component.current_health, 100.0)
 
 
@@ -39,7 +39,7 @@ func test_attack_enemy() -> void:
 	var damage: float = 50.0
 	var caster: Entity = _player
 
-	_enemy_health_component.deal_damage(damage, caster)
+	_enemy_health_component.modify_health(damage, caster)
 	assert_eq(_enemy_health_component.current_health, 50.0)
 
 
@@ -130,7 +130,43 @@ func test_card_heal() -> void:
 	card_heal.on_card_play(_player, _player)
 	
 	assert_eq(_player_health_component.current_health, 96.0)
+
+func test_card_heal_with_strength_buff() -> void:
+	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
+	var buff: CardBase = load("res://Cards/Resource/Card_Strength.tres")
+
+
+	_player_health_component._set_health(90.0)
+
+	buff.on_card_play(_player, _player)
+	card_heal.on_card_play(_player, _player)
 	
+	assert_eq(_player_health_component.current_health, 91.0)
+
+func test_card_heal_with_heal_buff() -> void:
+	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
+	var buff: CardBase = load("res://Cards/Resource/Card_Buff_healing.tres")
+
+	_player_health_component._set_health(90.0)
+
+	buff.on_card_play(_player, _player)
+	
+	card_heal.on_card_play(_player, _player)
+
+	assert_eq(_player_health_component.current_health, 92.0)
+
+
+func test_card_heal_with_heal_debuff() -> void:
+	var card_heal: CardBase = load("res://Cards/Resource/Card_Heal.tres")
+	var debuff: CardBase = load("res://Cards/Resource/Card_Debuff_healing.tres")
+
+	_player_health_component._set_health(90.0)
+
+	debuff.on_card_play(_player, _player)
+	
+	card_heal.on_card_play(_player, _player)
+
+	assert_eq(_player_health_component.current_health, 90.0)
 
 # Test card that deals 10 damage to every entity (player and enemies)
 func test_card_damage_everything() -> void:

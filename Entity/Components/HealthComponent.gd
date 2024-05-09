@@ -20,27 +20,33 @@ func _ready() -> void:
 	_set_health(max_health)
 
 
-## Deal damage to the entity [br]
-## Use a negative damage value if you want to heal. [br]
+## Modify the health of the entity [br]
+## Use the is_healing boolean if you want to heal. [br]
+## If the amount is negative, nothing will change. [br]
 ## Caster can be null [br]
-func deal_damage(damage: float, caster: Entity) -> void:
+func modify_health(amount: float, caster: Entity, is_healing: bool = false) -> void:
 	# Allow caster to be null, but not the target.
-	# If caster is null, we assume that the damage came from an unknown source,
+	# If caster is null, we assume that the modification came from an unknown source,
 	# so status won't calculate.
-	
-	if damage == 0.0:
+	var new_health: float
+
+	if amount <= 0.0:
 		return
 	
 	assert(owner != null, "No owner was set. Please call init on the Entity.")
 	
 	var target: Entity = entity_owner # TODO change this name entity_owner to make it clearer
 	
-	# if this was a self attack, ignore the caster
+	# if the entity calls the function on itself then ignore the caster
 	if caster == target: 
 		caster = null
 
-	# apply damage to our health
-	var new_health: float = clampf(current_health - damage, 0, max_health)
+	# apply modification to our health
+	if is_healing:
+		new_health = clampf(current_health + amount, 0, max_health)
+	else:
+		new_health = clampf(current_health - amount, 0, max_health)
+		
 	_set_health(new_health)
 
 
