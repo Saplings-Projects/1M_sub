@@ -20,7 +20,6 @@ func _ready() -> void:
 	_set_health(max_health)
 
 
-
 ## Used to emit the specific signal for this class [br]
 ## Useful for classes that inherit from this one but want a different signal [br]
 func _emit_class_signal() -> void:

@@ -41,7 +41,10 @@ func _emit_class_signal() -> void:
 ## To be called on combat turn start [br]
 ## Add the stress generation to the current stress
 func on_turn_start() -> void:
-	pass
+	if stress_buildup:
+		current_stress += stress_generation
+		current_stress = clamp(current_stress, 0, max_stress)
+		_emit_class_signal()
 	
 
 ## Puts back the stress to the default value of max / 2
