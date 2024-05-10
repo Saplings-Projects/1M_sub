@@ -12,10 +12,6 @@ signal on_stress_changed(new_stress: int)
 ## The amount of stress the entity generates at the start of each turn
 @export var stress_generation: int = 5
 
-## Used to tell if an entity will add stress_generation to its current_stress on the start of the turn [br]
-## This is generally true, but is put to false whenever the entity is in a calm (state ie, stress reduced to 0)
-var stress_buildup: bool = true
-
 ## Know if an entity has been calmed already or not [br]
 ## This is used to not distribute XP twice for the same entity, even if it is calmed multiple times [br]
 var has_been_calmed: bool = false
@@ -41,7 +37,8 @@ func _emit_class_signal() -> void:
 ## To be called on combat turn start [br]
 ## Add the stress generation to the current stress
 func on_turn_start() -> void:
-	if stress_buildup:
+	# If the entity is not calmed, continue generating stress
+	if current_stress >= 1:
 		current_stress += stress_generation
 		current_stress = clamp(current_stress, 0, max_stress)
 		_emit_class_signal()
@@ -49,14 +46,17 @@ func on_turn_start() -> void:
 
 ## Puts back the stress to the default value of max / 2
 func _reset_stress() -> void:
-	pass
+	current_stress = floor(max_stress / 2.)
+	_emit_class_signal()
 
 
 ## Rewards XP for calming the entity, stops stress generation	
 func on_calmed() -> void:
 	pass
+	#TODO reward XP
 
 
 ## Makes the entity execute a powerful attack and resets the stress to its default value
 func on_overstress() -> void:
-	pass
+	# TODO make the powerful attack
+	_reset_stress()
