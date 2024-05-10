@@ -72,11 +72,13 @@ enum EntityStatDictType {
 ## A value of 1 on the DAMAGE of DEFENSE means you take one less damage [br]
 enum PossibleModifierNames {
 	DAMAGE,
+	HEAL,
 	POISON,
 	DRAW,
 	CARD_REWARD_NUMBER
 }
-# ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd if you modify this
+# ! don't forget to update _ENTITY_STAT_DICT_SELECTOR in EntityStats.gd, the test_possible_modifier_size(especifically expected_size)
+# in test_stats.gd if you modify this 
 
 ## All the possible types of events [br]
 ## @experimental

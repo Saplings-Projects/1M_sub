@@ -18,7 +18,7 @@ func _create_player() -> void:
 
 
 func test_persist_player_health() -> void:
-	_player_health_component.deal_damage(5.0, _player)
+	_player_health_component.modify_health(5.0, _player)
 	
 	assert_eq(_player_health_component.current_health, 95.0)
 	

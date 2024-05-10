@@ -3,6 +3,9 @@ class_name StatDictBase extends Resource
 ##
 ## This allows to modify all the stats of a character in a single place
 
+## to add a new modifier/stat, you need to:
+##	Add a new entry in the [enum GlobalEnums.PossibleModifierNames]
+
 ## The dictionary of [StatModifiers]
 var stat_dict: Dictionary = {}
 
