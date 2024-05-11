@@ -157,7 +157,7 @@ func _check_and_handle_battle_end() -> bool:
 	if _enemy_list.is_empty():
 		PhaseManager.on_event_win.emit()
 		return true
-    
+	
 	return false    
 
 

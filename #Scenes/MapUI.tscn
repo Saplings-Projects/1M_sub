@@ -33,10 +33,10 @@ color = Color(0, 0, 0, 0.309804)
 
 [node name="SmoothScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 60.0
-offset_right = 1123.0
-offset_bottom = 660.0
+offset_left = 547.0
+offset_top = 203.0
+offset_right = 1447.0
+offset_bottom = 803.0
 script = ExtResource("2_2gata")
 speed = 1.0
 hide_scrollbar_over_time = true

@@ -108,14 +108,12 @@ func _ready() -> void:
 	var container_position: Vector2 = Vector2(scroll_container_position_x, scroll_container.position.y)
 	scroll_container.set_position(container_position)
 	
-	var scroll_container_bottom_y_position: float = scroll_container.position.y + scroll_container.get_size().y
-	
 	# Starting positions for the next room to be generated
 	# X = the Halfway position of room container - half the size of the longest floor to account for centering all of the rooms. 
 	#	  Add a little padding to push it away from the right edge.
 	# Y = Height of the Room Container that was calculated in new_room_container_height - (Screen Height - scroll container's bottom y position)
 	var start_position_for_next_room_x: float = room_container.position.x + _padding_offset
-	var start_position_for_next_room_y: float = room_container.get_custom_minimum_size().y - (color_rect.get_size().y - scroll_container_bottom_y_position)
+	var start_position_for_next_room_y: float = room_container.position.y + room_container.get_custom_minimum_size().y - new_room_size.y - _padding_offset
 	var position_for_next_room: Vector2 = Vector2(start_position_for_next_room_x, start_position_for_next_room_y)
 	
 	room_ui_array.resize(MapManager.map_width_array.size())
