@@ -91,7 +91,10 @@ func on_turn_start() -> void:
 	# If the entity is not calmed, continue generating stress
 	if current_stress >= 1:
 		modify_stress(stress_generation, null)
-	
+
+func checked_reset_stress() -> void:
+	if has_hit_overstress:
+		_reset_stress()
 
 ## Puts back the stress to the default value of max / 2
 func _reset_stress() -> void:
@@ -106,7 +109,13 @@ func on_calmed() -> void:
 	#TODO reward XP
 
 
-## Makes the entity execute a powerful attack and resets the stress to its default value
-func on_overstress() -> void:
-	# TODO make the powerful attack
-	_reset_stress()
+## Makes the entity execute a powerful attack
+func on_overstress() -> CardBase:
+	var attack: CardBase = CardBase.new()
+	var basic_effect_data: EffectData = EffectData.new( EffectDamage.new(),
+														null,
+														5,
+														TargetingBase.new())
+	attack.card_effects_data.append(basic_effect_data)
+	attack.application_type = GlobalEnums.ApplicationType.FRIENDLY_ONLY
+	return attack
