@@ -10,3 +10,7 @@ max_health = 50.0
 
 [node name="Sprite2D" parent="." index="3"]
 texture = ExtResource("2_qypjd")
+
+[node name="StressComponent" parent="." index="10"]
+max_stress = 30
+stress_generation = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpgsmfprnm2kk"]
+[gd_scene load_steps=16 format=3 uid="uid://bpgsmfprnm2kk"]
 
 [ext_resource type="Script" path="res://Entity/Enemy/Enemy.gd" id="1_ya6nf"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bu626jwgp3r5x" path="res://Art/Enemies/green_sapling-default.png" id="5_dxya8"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="6_m32ri"]
 [ext_resource type="Script" path="res://UI/HealthLabel.gd" id="7_tofxs"]
+[ext_resource type="Script" path="res://UI/StressLabel.gd" id="8_w2u2o"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_yr066"]
 [ext_resource type="Script" path="res://Entity/Components/BehaviorComponent.gd" id="9_kvor6"]
 [ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Card_EnemyAttack.tres" id="10_l5325"]
@@ -58,15 +59,15 @@ label_settings = SubResource("LabelSettings_urr12")
 script = ExtResource("7_tofxs")
 health_component = NodePath("../HealthComponent")
 
-[node name="StressLabel" type="Label" parent="." node_paths=PackedStringArray("health_component")]
+[node name="StressLabel" type="Label" parent="." node_paths=PackedStringArray("stress_component")]
 offset_left = -48.0
 offset_top = -109.005
 offset_right = 52.0
 offset_bottom = -70.005
 text = "100/100"
 label_settings = SubResource("LabelSettings_3exsi")
-script = ExtResource("7_tofxs")
-health_component = NodePath("../HealthComponent")
+script = ExtResource("8_w2u2o")
+stress_component = NodePath("../StressComponent")
 
 [node name="PartyComponent" type="Node" parent="."]
 script = ExtResource("8_yr066")
@@ -77,6 +78,8 @@ attack = ExtResource("10_l5325")
 
 [node name="StressComponent" type="Node" parent="."]
 script = ExtResource("11_qf75g")
+max_stress = 75
+stress_generation = 3
 
 [connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]
