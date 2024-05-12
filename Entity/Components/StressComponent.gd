@@ -90,9 +90,7 @@ func _set_stress(new_stress: int) -> void:
 func on_turn_start() -> void:
 	# If the entity is not calmed, continue generating stress
 	if current_stress >= 1:
-		current_stress += stress_generation
-		current_stress = clamp(current_stress, 0, max_stress)
-		_emit_class_signal()
+		modify_stress(stress_generation, null)
 	
 
 ## Puts back the stress to the default value of max / 2
