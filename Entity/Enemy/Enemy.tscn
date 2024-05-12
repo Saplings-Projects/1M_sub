@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpgsmfprnm2kk"]
+[gd_scene load_steps=14 format=3 uid="uid://bpgsmfprnm2kk"]
 
 [ext_resource type="Script" path="res://Entity/Enemy/Enemy.gd" id="1_ya6nf"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_yr066"]
 [ext_resource type="Script" path="res://Entity/Components/BehaviorComponent.gd" id="9_kvor6"]
 [ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Card_EnemyAttack.tres" id="10_l5325"]
+[ext_resource type="Script" path="res://Entity/Components/StressComponent.gd" id="11_qf75g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8bva"]
 size = Vector2(104, 93)
@@ -58,6 +59,9 @@ script = ExtResource("8_yr066")
 [node name="BehaviorComponent" type="Node" parent="."]
 script = ExtResource("9_kvor6")
 attack = ExtResource("10_l5325")
+
+[node name="StressComponent" type="Node" parent="."]
+script = ExtResource("11_qf75g")
 
 [connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]
