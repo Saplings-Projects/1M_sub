@@ -25,7 +25,7 @@ metadata/_edit_vertical_guides_ = [1216.0]
 script = ExtResource("3_fnmf8")
 
 [node name="Player" parent="." instance=ExtResource("4_ss8ob")]
-position = Vector2(595, 284)
+position = Vector2(595, 350)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

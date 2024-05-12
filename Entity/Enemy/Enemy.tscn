@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bpgsmfprnm2kk"]
+[gd_scene load_steps=15 format=3 uid="uid://bpgsmfprnm2kk"]
 
 [ext_resource type="Script" path="res://Entity/Enemy/Enemy.gd" id="1_ya6nf"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
@@ -18,7 +18,12 @@ size = Vector2(104, 93)
 [sub_resource type="LabelSettings" id="LabelSettings_urr12"]
 font_size = 26
 
+[sub_resource type="LabelSettings" id="LabelSettings_3exsi"]
+font_size = 26
+font_color = Color(0.435294, 0.67451, 0.815686, 1)
+
 [node name="Enemy" type="Node2D"]
+position = Vector2(0, 50)
 script = ExtResource("1_ya6nf")
 
 [node name="StatComponent" type="Node" parent="."]
@@ -50,6 +55,16 @@ offset_right = 52.0
 offset_bottom = -45.0
 text = "100/100"
 label_settings = SubResource("LabelSettings_urr12")
+script = ExtResource("7_tofxs")
+health_component = NodePath("../HealthComponent")
+
+[node name="StressLabel" type="Label" parent="." node_paths=PackedStringArray("health_component")]
+offset_left = -48.0
+offset_top = -109.005
+offset_right = 52.0
+offset_bottom = -70.005
+text = "100/100"
+label_settings = SubResource("LabelSettings_3exsi")
 script = ExtResource("7_tofxs")
 health_component = NodePath("../HealthComponent")
 
