@@ -18,6 +18,10 @@ var default_stress: int = floor(max_stress / 2.)
 ## This is used to not distribute XP twice for the same entity, even if it is calmed multiple times [br]
 var has_been_calmed: bool = false
 
+## Know if an entity has hit the overstress threshold [br]
+## This prevents the player from hitting the threshold during its turn and then calming the entity to avoid the attack [br]
+var has_hit_overstress: bool = false
+
 ## The current stress the entity has [br]
 ## Between 0 and [member StressComponent.max_stress]
 var current_stress: int
@@ -42,6 +46,12 @@ func modify_stress(amount: int, caster: Entity, is_sooth: bool = false) -> void:
 	# Allow caster to be null, but not the target.
 	# If caster is null, we assume that the modification came from an unknown source,
 	# so status won't calculate.
+	
+	# Prevent further stress modification if the entity has hit the overstress threshold
+	# This will go back to normal after the entity turn start
+	if has_hit_overstress:
+		return
+	
 	var new_stress: int
 
 	if amount <= 0.0:
@@ -60,6 +70,9 @@ func modify_stress(amount: int, caster: Entity, is_sooth: bool = false) -> void:
 		new_stress = clamp(current_stress + amount, 0, max_stress)
 	else:
 		new_stress = clamp(current_stress - amount, 0, max_stress)
+		
+	if new_stress == max_stress:
+		has_hit_overstress = true
 		
 	_set_stress(new_stress)
 
@@ -85,6 +98,7 @@ func on_turn_start() -> void:
 ## Puts back the stress to the default value of max / 2
 func _reset_stress() -> void:
 	current_stress = default_stress
+	has_hit_overstress = false
 	_emit_class_signal()
 
 
