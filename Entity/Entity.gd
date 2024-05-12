@@ -10,6 +10,7 @@ func _ready() -> void:
 	get_health_component().init_entity_component(self)
 	get_party_component().init_entity_component(self)
 	get_stat_component().init_entity_component(self)
+	get_stress_component().init_entity_component(self)
 
 
 func get_status_component() -> StatusComponent:
@@ -30,4 +31,8 @@ func get_party_component() -> PartyComponent:
 
 func get_click_handler() -> ClickHandler:
 	return Helpers.get_first_child_node_of_type(self, ClickHandler) as ClickHandler
+	
+
+func get_stress_component() -> StressComponent:
+	return Helpers.get_first_child_node_of_type(self, StressComponent) as StressComponent
 
