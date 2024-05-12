@@ -40,7 +40,7 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 		var _floor_width : int = map_floors_width[index_height]
 		# ! only works if the size of the floor is odd
 
-		var _padding_size : int = (_max_floor_size - _floor_width)/2
+		var _padding_size : int = floor((_max_floor_size - _floor_width)/2.)
 		
 		var _padding:Array = []
 		_padding.resize(_padding_size)
