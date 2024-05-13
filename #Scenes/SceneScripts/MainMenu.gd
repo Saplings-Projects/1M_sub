@@ -1,6 +1,11 @@
 extends Control
 ## Control the flow from the main menu
 
+#on opening the main menu we grab the focus of the start button
+func _ready() -> void:
+	get_node("button container/Start").grab_focus()
+
+
 ## What happens when the start button is pressed
 func _on_start_pressed() -> void:
 	if not PlayerManager.is_player_initial_position_set:
