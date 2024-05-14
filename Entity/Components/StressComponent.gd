@@ -91,7 +91,7 @@ func _set_stress(new_stress: int) -> void:
 func on_turn_start() -> void:
 	# If the entity is not calmed, continue generating stress
 	if current_stress >= 1:
-		modify_stress(stress_generation, null)
+		modify_stress(stress_generation, null, true)
 
 func checked_reset_stress() -> void:
 	if has_hit_overstress:

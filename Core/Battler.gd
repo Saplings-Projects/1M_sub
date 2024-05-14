@@ -74,6 +74,7 @@ func _on_player_start_turn() -> void:
 func _on_enemy_start_turn() -> void:
 	# apply status
 	for enemy: Entity in _enemy_list:
+		enemy.get_stress_component().on_turn_start()
 		enemy.get_status_component().apply_turn_start_status()
 		
 	# if battle have ended, skip the rest of code
