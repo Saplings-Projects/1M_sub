@@ -10,5 +10,5 @@ func _ready() -> void:
 	_set_stress(stress_component.current_stress)
 
 
-func _set_stress(_new_stress: float) -> void:
-	text = str(stress_component.current_stress) + " / " + str(stress_component.max_stress)
+func _set_stress(new_stress: float) -> void:
+	text = str(new_stress) + " / " + str(stress_component.max_stress)

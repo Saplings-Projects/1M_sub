@@ -9,7 +9,7 @@ signal on_stress_changed(new_stress: int)
 ## The maximum stress the entity can have. This is a hard limit
 @export var max_stress: int = 100
 
-var default_stress: int = floor(max_stress / 2.)
+var default_stress: int
 
 ## The amount of stress the entity generates at the start of each turn
 @export var stress_generation: int = 5
@@ -31,6 +31,7 @@ var current_stress: int
 ## This does not happen at game start for the player, as only enemies have a stress component [br]
 ## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
+	default_stress = floor(max_stress / 2.)
 	_set_stress(default_stress)
 
 
