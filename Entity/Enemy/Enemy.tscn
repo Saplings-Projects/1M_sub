@@ -50,22 +50,24 @@ position = Vector2(5, 2.5)
 shape = SubResource("RectangleShape2D_b8bva")
 
 [node name="HealthLabel" type="Label" parent="." node_paths=PackedStringArray("health_component")]
-offset_left = -48.0
-offset_top = -84.0
-offset_right = 52.0
-offset_bottom = -45.0
-text = "100/100"
+offset_left = -57.0
+offset_top = -83.0
+offset_right = 57.0
+offset_bottom = -44.0
+text = "100 / 100"
 label_settings = SubResource("LabelSettings_urr12")
+horizontal_alignment = 1
 script = ExtResource("7_tofxs")
 health_component = NodePath("../HealthComponent")
 
 [node name="StressLabel" type="Label" parent="." node_paths=PackedStringArray("stress_component")]
-offset_left = -48.0
-offset_top = -109.005
-offset_right = 52.0
-offset_bottom = -70.005
-text = "100/100"
+offset_left = -57.0
+offset_top = -109.0
+offset_right = 57.0
+offset_bottom = -70.0
+text = "100 / 100"
 label_settings = SubResource("LabelSettings_3exsi")
+horizontal_alignment = 1
 script = ExtResource("8_w2u2o")
 stress_component = NodePath("../StressComponent")
 
@@ -78,8 +80,8 @@ attack = ExtResource("10_l5325")
 
 [node name="StressComponent" type="Node" parent="."]
 script = ExtResource("11_qf75g")
-max_stress = 75
-stress_generation = 3
+max_stress = 80
+stress_generation = 20
 
 [connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]
