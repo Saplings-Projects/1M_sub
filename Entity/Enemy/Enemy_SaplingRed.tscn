@@ -16,3 +16,4 @@ text = "40/80"
 
 [node name="StressComponent" parent="." index="10"]
 max_stress = 30
+stress_generation = 3

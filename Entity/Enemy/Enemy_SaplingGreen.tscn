@@ -4,8 +4,8 @@
 
 [node name="Enemy" instance=ExtResource("1_klc51")]
 
-[node name="HealthLabel" parent="." index="6"]
-horizontal_alignment = 1
-
 [node name="StressLabel" parent="." index="7"]
 text = "10/20"
+
+[node name="StressComponent" parent="." index="10"]
+stress_generation = 5
