@@ -31,6 +31,10 @@ var _player_stat_component: StatComponent = null
 var _enemy_stat_component: StatComponent = null
 ## Enemy 2 stat component
 var _enemy_2_stat_component: StatComponent = null
+## Enemy stress component
+var _enemy_stress_component: StressComponent = null
+## Enemy 2 stress component
+var _enemy_2_stress_component: StressComponent = null
 ## Player status component
 var _player_status_component: StatusComponent = null
 ## Enemy status component
@@ -67,6 +71,8 @@ func before_each() -> void:
 	_player_stat_component = _player.get_stat_component()
 	_enemy_stat_component = _enemy.get_stat_component()
 	_enemy_2_stat_component = _enemy_2.get_stat_component()
+	_enemy_stress_component = _enemy.get_stress_component()
+	_enemy_2_stress_component = _enemy_2.get_stress_component()
 	_enemy_2_health_component = _enemy_2.get_health_component()
 	_player_status_component = _player.get_status_component()
 	_enemy_status_component = _enemy.get_status_component()
