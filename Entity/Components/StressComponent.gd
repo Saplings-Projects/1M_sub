@@ -68,9 +68,9 @@ func modify_stress(amount: int, caster: Entity, is_sooth: bool = false) -> void:
 
 	# apply modification to our stress
 	if is_sooth:
-		new_stress = clamp(current_stress + amount, 0, max_stress)
-	else:
 		new_stress = clamp(current_stress - amount, 0, max_stress)
+	else:
+		new_stress = clamp(current_stress + amount, 0, max_stress)
 		
 	if new_stress == max_stress:
 		has_hit_overstress = true
@@ -91,7 +91,7 @@ func _set_stress(new_stress: int) -> void:
 func on_turn_start() -> void:
 	# If the entity is not calmed, continue generating stress
 	if current_stress >= 1:
-		modify_stress(stress_generation, null, true)
+		modify_stress(stress_generation, null)
 
 func checked_reset_stress() -> void:
 	if has_hit_overstress:
