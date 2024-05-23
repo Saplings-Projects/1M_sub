@@ -11,4 +11,7 @@ func _ready() -> void:
 
 
 func _set_stress(new_stress: float) -> void:
-	text = str(new_stress) + " / " + str(stress_component.max_stress)
+	if new_stress >= 1:
+		text = str(new_stress) + " / " + str(stress_component.max_stress)
+	else:
+		text = "Soothed"
