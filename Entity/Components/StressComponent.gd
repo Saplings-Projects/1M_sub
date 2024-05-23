@@ -40,7 +40,7 @@ func _emit_class_signal() -> void:
 	on_stress_changed.emit(current_stress)
 	
 ## Modify the stress of the entity [br]
-## Use the is_healing boolean if you want to heal. [br]
+## Use the is_sooth boolean if you want to sooth. [br]
 ## If the amount is negative, nothing will change. [br]
 ## Caster can be null [br]
 func modify_stress(amount: int, caster: Entity, is_sooth: bool = false) -> void:
