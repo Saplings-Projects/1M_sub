@@ -109,10 +109,10 @@ layout_mode = 2
 [node name="Portrait" type="TextureRect" parent="Balloon/Panel/HBoxContainer/Control"]
 custom_minimum_size = Vector2(300, 210)
 layout_mode = 0
-offset_left = 83.0
-offset_top = 74.0
-offset_right = 783.0
-offset_bottom = 574.0
+offset_left = 64.0
+offset_top = 104.0
+offset_right = 864.0
+offset_bottom = 704.0
 texture = ExtResource("2_rsxwm")
 expand_mode = 1
 
@@ -171,60 +171,56 @@ offset_bottom = 40.0
 
 [node name="FlavorImage1" type="TextureRect" parent="Balloon/Panel/FlavorNode"]
 layout_mode = 0
-offset_left = 1810.0
-offset_top = 9.00003
-offset_right = 1850.0
-offset_bottom = 49.0
+offset_left = 287.0
+offset_top = 833.0
+offset_right = 367.0
+offset_bottom = 913.0
 rotation = 0.324631
 expand_mode = 1
 
 [node name="FlavorImage2" type="TextureRect" parent="Balloon/Panel/FlavorNode"]
 layout_mode = 0
-offset_left = 588.0
-offset_top = 624.0
-offset_right = 628.0
-offset_bottom = 664.0
+offset_left = 746.0
+offset_top = 764.0
+offset_right = 826.0
+offset_bottom = 844.0
 rotation = -0.575959
-scale = Vector2(2, 2)
 expand_mode = 1
 
 [node name="FlavorImage3" type="TextureRect" parent="Balloon/Panel/FlavorNode"]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 12.0
-offset_right = 71.0
-offset_bottom = 52.0
+offset_left = 16.0
+offset_top = -3.0
+offset_right = 96.0
+offset_bottom = 77.0
 rotation = 0.179769
-scale = Vector2(2, 2)
 expand_mode = 1
 
 [node name="FlavorText1" type="RichTextLabel" parent="Balloon/Panel/FlavorNode"]
 layout_mode = 0
-offset_left = 753.0
-offset_top = 6.0
-offset_right = 873.0
-offset_bottom = 46.0
+offset_left = 495.0
+offset_top = 787.0
+offset_right = 615.0
+offset_bottom = 827.0
 rotation = 0.324631
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 scroll_active = false
 
 [node name="FlavorText2" type="RichTextLabel" parent="Balloon/Panel/FlavorNode"]
 layout_mode = 0
-offset_left = 69.0
-offset_top = 610.0
-offset_right = 189.0
-offset_bottom = 710.0
+offset_left = 67.0
+offset_top = 721.0
+offset_right = 187.0
+offset_bottom = 821.0
 rotation = -0.179769
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "
-"
 
 [node name="FlavorText3" type="RichTextLabel" parent="Balloon/Panel/FlavorNode"]
 layout_mode = 0
-offset_left = 779.0
-offset_top = 159.0
-offset_right = 899.0
-offset_bottom = 259.0
+offset_left = 538.0
+offset_top = 38.0001
+offset_right = 658.0
+offset_bottom = 138.0
 rotation = -0.251327
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 fit_content = true
