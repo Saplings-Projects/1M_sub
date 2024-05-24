@@ -16,6 +16,8 @@ var default_stress: int
 
 ## Know if an entity has been calmed already or not [br]
 ## This is used to not distribute XP twice for the same entity, even if it is calmed multiple times [br]
+## An enemy can be calmed multiple times if the player uses an effect that stresses the enemy, even
+## if the enemies don't generate stress naturally when they are soothed.
 var has_been_calmed: bool = false
 
 ## Know if an entity has hit the overstress threshold [br]
