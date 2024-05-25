@@ -113,7 +113,7 @@ func on_calmed() -> void:
 
 
 ## Makes the entity execute a powerful attack
-func on_overstress() -> CardBase:
+static func on_overstress() -> CardBase:
 	var attack: CardBase = CardBase.new()
 	var basic_effect_data: EffectData = EffectData.new( EffectDamage.new(),
 														null,
