@@ -1,6 +1,12 @@
 extends TestBase
 ## Test the stress mechanic
 
+var _enemy_behavior_component: BehaviorComponent = null
+
+func before_each() -> void:
+	super()
+	_enemy_behavior_component = _enemy.get_behavior_component()
+
 func test_stress_generation() -> void:
 	var previous_stress: int = _enemy_stress_component.current_stress
 	var stress_generation: int = 5
@@ -41,3 +47,23 @@ func test_sooth_debuff() -> void:
 	var card_sooth: CardBase = load("res://Cards/Resource/Card_sooth.tres")
 	card_sooth.on_card_play(_player, _enemy)
 	assert_eq(_enemy_stress_component.current_stress, previous_stress - 9)
+	
+
+func test_enemy_stays_soothed() -> void:
+	_enemy_stress_component.current_stress = 2
+	var card_sooth: CardBase = load("res://Cards/Resource/Card_sooth.tres")
+	card_sooth.on_card_play(_player, _enemy)
+	assert_eq(_enemy_stress_component.current_stress, 0)
+	_enemy_stress_component.on_turn_start()
+	assert_eq(_enemy_stress_component.current_stress, 0)
+	
+	
+func test_enemy_overstress() -> void:
+	_enemy_stress_component.current_stress = 75 # max stress is 80
+	var card_stress: CardBase = load("res://Cards/Resource/Card_Stress_Damage.tres")
+	card_stress.on_card_play(_player, _enemy)
+	assert_eq(_enemy_stress_component.current_stress, 80)
+	assert_true(_enemy_stress_component.has_hit_overstress)
+	var expected_damage_val: int = StressComponent.on_overstress().card_effects_data[0].value
+	var actual_damage_val: int = _enemy_behavior_component.get_attack(_enemy_stress_component.has_hit_overstress).card_effects_data[0].value
+	assert_eq(actual_damage_val, expected_damage_val)
