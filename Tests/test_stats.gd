@@ -3,7 +3,7 @@ extends TestBase
 
 
 func test_possible_modifier_size() -> void:
-	var expected_size: int = 5
+	var expected_size: int = 7
 	var actual_size: int = GlobalEnums.PossibleModifierNames.size()
 	assert_eq(actual_size, expected_size, "Expected %s possible modifiers but got %s instead" % [expected_size, actual_size])
 

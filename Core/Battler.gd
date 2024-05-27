@@ -74,6 +74,7 @@ func _on_player_start_turn() -> void:
 func _on_enemy_start_turn() -> void:
 	# apply status
 	for enemy: Entity in _enemy_list:
+		enemy.get_stress_component().on_turn_start()
 		enemy.get_status_component().apply_turn_start_status()
 		
 	# if battle have ended, skip the rest of code
@@ -82,7 +83,9 @@ func _on_enemy_start_turn() -> void:
 	
 	# generate list of enemy actions
 	for enemy: Enemy in _enemy_list:
-		var enemy_attack: CardBase = enemy.get_behavior_component().attack
+		var stress_comp: StressComponent = enemy.get_stress_component()
+		var enemy_attack: CardBase = enemy.get_behavior_component().get_attack(stress_comp.has_hit_overstress)
+		
 		var enemy_action: EnemyAction = EnemyAction.new(enemy, enemy_attack, PlayerManager.player)
 		_enemy_action_list.append(enemy_action)
 	
@@ -101,6 +104,9 @@ func _handle_enemy_attack_queue() -> void:
 	
 	CardManager.on_card_action_finished.connect(_try_finish_enemy_attacks.unbind(1))
 	enemy_action.execute()
+	# Potentially reset enemy stress after attack if they were overstressed
+	enemy_action.caster.get_stress_component().checked_reset_stress()
+		
 
 
 ## Called when an enemy action is finished.
