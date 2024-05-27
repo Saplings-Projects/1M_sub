@@ -8,6 +8,7 @@ class_name BehaviorComponent
 
 ## The attack that the enemy will do
 @export var attack: CardBase = null
+@export var overstress_attack: CardBase = null
 
 
 ## Setup the attack of the enemy [br]
@@ -23,4 +24,11 @@ func _ready() -> void:
 	attack.card_effects_data.append(basic_effect_data)
 	attack.application_type = GlobalEnums.ApplicationType.FRIENDLY_ONLY
 	
-
+	overstress_attack = StressComponent.on_overstress()
+	
+	
+func get_attack(has_hit_overstress: bool) -> CardBase:
+	if has_hit_overstress:
+		return overstress_attack
+	else:
+		return attack
