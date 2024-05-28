@@ -22,7 +22,7 @@ func increase(amount: int = 1) -> void:
 	if amount >= 1:
 		current_xp += amount
 	else:
-		push_warning("XP has been tried to be modified with a negative or zero value, amount was: %s" % amount)
+		push_warning("Tried to modify the XP with a negative or zero value, amount was: %s" % amount)
 	
 
 ## Returns the list of buffs to be applied to the player at the start of a combat,
