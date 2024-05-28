@@ -43,6 +43,10 @@ func _summon_enemies() -> void:
 func _on_player_initialized() -> void:
 	PlayerManager.player.get_click_handler().on_click.connect(_on_player_clicked)
 	PlayerManager.player.get_party_component().add_party_member(PlayerManager.player)
+	var list_of_xp_buff: Array[BuffBase] = XpManager.get_buff_list()
+	var player_status_comp: StatusComponent = PlayerManager.player.get_status_component()
+	for buff: BuffBase in list_of_xp_buff:
+		player_status_comp.add_status(buff, PlayerManager.player)
 
 
 func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
