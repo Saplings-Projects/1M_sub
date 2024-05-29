@@ -4,20 +4,14 @@ class_name LightOverlay
 var room_container: ColorRect
 var room_ui_array: Array[Array]
 
-# Save an offset when the rooms generated are too small and we have to set a minimum width/height to position the lit rooms properly
-var offset_position_y: float
-var offset_position_x: float
-
-func _init(_room_container: ColorRect, _room_ui_array: Array[Array], _offset_position_x: float, _offset_position_y: float) -> void:
+func _init(_room_container: ColorRect, _room_ui_array: Array[Array]) -> void:
 	room_container = _room_container
 	room_ui_array = _room_ui_array
-	offset_position_x = _offset_position_x
-	offset_position_y = _offset_position_y
 
 func _draw() -> void:
 	var room_circles: Array[PackedVector2Array] = []
 	var lit_rooms_to_draw: Array[RoomUI] = []
-	var first_room_rect: Rect2
+	var first_room_rect: RoomUI
 	
 	# Iterating through the room array, if there is a lit room create a circular polygon PackedVector2 array
 	for floor_array: Array[RoomUI] in room_ui_array:
@@ -28,7 +22,7 @@ func _draw() -> void:
 					lit_rooms_to_draw.append(room)
 				# Save the first room in the map, to help with the calculations of the darkness overlay
 				if first_room_rect == null:
-					first_room_rect = room.get_room_rect()
+					first_room_rect = room
 					
 	# Geometry2D.clip_polygons will only work if there are overlapping polygons, then we can get the inverse.
 	# In the case where a room's radius fully encompasses then  we will get a fully black screen.
@@ -38,14 +32,14 @@ func _draw() -> void:
 	var map_upper_half: PackedVector2Array = []
 	var map_bottom_half: PackedVector2Array = []
 	map_upper_half.append(Vector2(0, 0))
-	map_upper_half.append(Vector2(0, first_room_rect.position.y - offset_position_y))
-	map_upper_half.append(Vector2(room_container.get_size().x, first_room_rect.position.y - offset_position_y))
+	map_upper_half.append(Vector2(0, first_room_rect.position.y))
+	map_upper_half.append(Vector2(room_container.get_size().x, first_room_rect.position.y))
 	map_upper_half.append(Vector2(room_container.get_size().x, 0))
 	
-	map_bottom_half.append(Vector2(0, first_room_rect.position.y - offset_position_y))
+	map_bottom_half.append(Vector2(0, first_room_rect.position.y))
 	map_bottom_half.append(Vector2(0, room_container.get_size().y))
 	map_bottom_half.append(Vector2(room_container.get_size().x, room_container.get_size().y))
-	map_bottom_half.append(Vector2(room_container.get_size().x, first_room_rect.position.y - offset_position_y))
+	map_bottom_half.append(Vector2(room_container.get_size().x, first_room_rect.position.y))
 	
 	# If we got room circles to draw, then draw em. 
 	# This will not draw anything if we don't have a torch or a player position put down anywhere.
@@ -75,18 +69,18 @@ func _draw() -> void:
 
 var room_circle_radius: int = 40
 func _draw_room_circle(room: RoomUI) -> void:
-	var center_point_with_offset: Vector2 = Vector2(room.get_center_X() - offset_position_x, room.get_center_Y() - offset_position_y)
+	#var center_point: Vector2 = Vector2(room.get_center_X(), room.get_center_Y())
 	# Discussions on customization with adding gradient to be done here. Currently we draw a circle around
 	# rooms that have a torch, and a rect around rooms that are lit from a torch
 	if room.has_torch():
 		# These draw calls draw an unfilled circle around the room with a thicker width, 
 		# then a filled circle on the inside that's filled in, with small transparency
 		if room.get_light_level() == GlobalEnums.LightLevel.LIT:
-			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
-			draw_circle(center_point_with_offset, room_circle_radius - 1, Color(1, 1, 0, 0.01))
+			draw_arc(room.get_center_point(), room_circle_radius, 0, TAU, 20, Color(1, 1, 0, 1), 3)
+			draw_circle(room.get_center_point(), room_circle_radius - 1, Color(1, 1, 0, 0.01))
 		elif room.get_light_level() == GlobalEnums.LightLevel.BRIGHTLY_LIT:
-			draw_arc(center_point_with_offset, room_circle_radius, 0, TAU, 20, Color(0, 1, 1, 1), 3)
-			draw_circle(center_point_with_offset, room_circle_radius - 1, Color(0, 1, 1, 0.01))
+			draw_arc(room.get_center_point(), room_circle_radius, 0, TAU, 20, Color(0, 1, 1, 1), 3)
+			draw_circle(room.get_center_point(), room_circle_radius - 1, Color(0, 1, 1, 0.01))
 	else:
 		if room.get_light_level() == GlobalEnums.LightLevel.DIMLY_LIT:
 			draw_rect(room.get_room_rect().grow(-3), Color(0, 0, 0, 0.5), true)
@@ -115,7 +109,7 @@ func _calculate_points_for_circle(room: RoomUI) -> PackedVector2Array:
 		var y: float = outer_circle_radius * sin(point_angle)
 		
 		# Get the point of the circle, based off of the center point of where the room is, and the offset we need to take into account.
-		var circle_point: Vector2 = Vector2(x + room.get_center_X() - offset_position_x, y + room.get_center_Y() - offset_position_y)
+		var circle_point: Vector2 = Vector2(x + room.get_center_X(), y + room.get_center_Y())
 		circle_points.append(circle_point)
 	return circle_points
 

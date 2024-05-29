@@ -13,8 +13,8 @@ var balloon_scene: PackedScene = load("res://Dialog/EventDialogueWindow.tscn")
 var test_dialog: DialogueResource = load("res://Dialog/test.dialogue")
 
 var _padding_offset: int = 20
-var _MINIMUM_ROOM_WIDTH: int = 510
-var _MINIMUM_ROOM_HEIGHT: int = 490
+var _MINIMUM_ROOM_WIDTH: int = 910
+var _MINIMUM_ROOM_HEIGHT: int = 890
 
 var _LIGHT_FLOOR_RANGE: int = 3
 
@@ -22,7 +22,6 @@ var _LIGHT_FLOOR_RANGE: int = 3
 @export var color_rect: ColorRect
 @export var scroll_container: SmoothScrollContainer
 @export var room_container: ColorRect
-@export var room_addition_node: Control
 @export var torch_confirmation_dialog: ConfirmationDialog
 @export var cant_set_torch_dialog: AcceptDialog
 @export var player_position_not_set_text: String
@@ -118,6 +117,16 @@ func _ready() -> void:
 	
 	room_ui_array.resize(MapManager.map_width_array.size())
 	
+	# Get the offset if we had to adjust the X position due to having to set a minimum width if the map is too small.
+	var offset_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_button) / 2
+	
+	# If the height of the combined rooms is less than the minimum room height 
+	# then calculate the position for it to be centered in the middle of the map:
+	# Get half of the size of the room container and subtract it by half the size of the rooms combined
+	var offset_y: float = 0
+	if (get_combined_room_height(new_room_texture_button) < _MINIMUM_ROOM_HEIGHT):
+		offset_y = room_container.get_custom_minimum_size().y / 2 - get_combined_room_height(new_room_texture_button) / 2
+	
 	for floor_index: int in range(current_map.rooms.size()):
 		var floor_array: Array = current_map.rooms[floor_index]
 		# When we're done populating a floor and we go to the next index, reset the X start position
@@ -134,12 +143,12 @@ func _ready() -> void:
 					current_player_room = room_display
 					texture_button.disabled = true
 					texture_button.texture_disabled = room_with_player_texture
-				# Add a room as a child of room_addition_node	
-				room_addition_node.add_child(room_display)
+				# Add a room as a child of room_addition_node
+				room_container.add_child(room_display)
 				# Name to be shown on the map for the current room
 				room_display.set_label(room.get_room_abbreviation())
 				# Progress through the map by incrementing the position to show the next room
-				room_display.position = position_for_next_room
+				room_display.position = Vector2(position_for_next_room.x + offset_x, position_for_next_room.y - offset_y)
 				room_display.floor_index = floor_index
 				# Add the room to the array of rooms for the floor
 				room_ui_array[floor_index].append(room_display)
@@ -152,31 +161,9 @@ func _ready() -> void:
 		# so increase the Y position to the new area the room will be displayed on.
 		position_for_next_room.y -= new_room_size.y + _padding_offset
 	
-	# Calculate the new position of where we should put the rooms after we populate the rooms out
-	# We want to position the rooms in the center of the room container, to do so:
-	# Get half the size of the room container and subtract it by half the size of the width of the combined rooms
-	# This is to account for in case the size of the rooms is smaller than the container we put it in
-	var new_room_position_x: float = room_container.get_custom_minimum_size().x / 2 - _get_combined_room_width(new_room_texture_button) / 2
-	
-	# Get the offset if we had to adjust the X position due to having to set a minimum width if the map is too small.
-	var offset_x: float = room_addition_node.position.x - new_room_position_x
-	
-	# If the height of the combined rooms is less than the minimum room height 
-	# then calculate the position for it to be centered in the middle of the map:
-	# We again want to place the rooms in the center of the container, but the y position of where the rooms are is relative to the container
-	# Hence we subtract half the size of the container from half the size of the height of the combined rooms to get the center point
-	# then subtract it from the position of the container
-	var new_room_position_y: float = room_container.position.y
-	# Get the offset if we had to adjust the Y position due to having to set a minimum height if the map is too small.
-	var offset_y: float = 0
-	if (get_combined_room_height(new_room_texture_button) < _MINIMUM_ROOM_HEIGHT):
-		new_room_position_y = room_container.position.y - room_container.get_custom_minimum_size().y / 2 + get_combined_room_height(new_room_texture_button) / 2
-		offset_y = room_addition_node.position.y - new_room_position_y
-	room_addition_node.set_position(Vector2(new_room_position_x, new_room_position_y))
-	
 	new_room.free()
 	
-	light_overlay = LightOverlay.new(room_container, room_ui_array, offset_x, offset_y)
+	light_overlay = LightOverlay.new(room_container, room_ui_array)
 	room_container.add_child(light_overlay)
 	
 	if(!PlayerManager.is_player_initial_position_set):
