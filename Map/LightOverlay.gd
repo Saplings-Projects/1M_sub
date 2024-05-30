@@ -89,7 +89,7 @@ func _draw_room_circle(room: RoomUI) -> void:
 		elif room.get_light_level() == GlobalEnums.LightLevel.BRIGHTLY_LIT:
 			draw_rect(room.get_room_rect().grow(3), Color(0, 1, 1, 1), false)
 
-var outer_circle_radius: int = 60
+var outer_circle_radius: int = 90
 # Function to get the points of a circle and return it as a PackedVector2Array
 # This is needed to create the overall polygon for showing the rooms
 func _calculate_points_for_circle(room: RoomUI) -> PackedVector2Array:

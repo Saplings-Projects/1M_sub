@@ -13,7 +13,7 @@ var balloon_scene: PackedScene = load("res://Dialog/EventDialogueWindow.tscn")
 var test_dialog: DialogueResource = load("res://Dialog/test.dialogue")
 
 var _padding_offset: int = 20
-var _MINIMUM_ROOM_WIDTH: int = 910
+var _MINIMUM_ROOM_WIDTH: int = 1200
 var _MINIMUM_ROOM_HEIGHT: int = 890
 
 var _LIGHT_FLOOR_RANGE: int = 3

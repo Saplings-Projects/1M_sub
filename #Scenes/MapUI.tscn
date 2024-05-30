@@ -33,9 +33,9 @@ color = Color(0, 0, 0, 0.309804)
 [node name="SmoothScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_left = 367.0
-offset_top = 166.0
+offset_top = 132.0
 offset_right = 1567.0
-offset_bottom = 916.0
+offset_bottom = 982.0
 script = ExtResource("2_2gata")
 speed = 1.0
 hide_scrollbar_over_time = true
@@ -43,7 +43,7 @@ scrollbar_hide_time = 0.5
 
 [node name="RoomContainer" type="ColorRect" parent="SmoothScrollContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(1200, 750)
+custom_minimum_size = Vector2(1200, 850)
 layout_mode = 2
 mouse_filter = 1
 color = Color(0.498039, 0.498039, 0.498039, 1)
