@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c73bts0oimblj" path="res://Art/Map/room_icon_with_player.png" id="2_rl2ub"]
 [ext_resource type="Script" path="res://#Scenes/mapReturnButton.gd" id="4_pgiix"]
 
-[node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container", "room_addition_node", "torch_confirmation_dialog", "cant_set_torch_dialog")]
+[node name="MapUi" type="Control" node_paths=PackedStringArray("color_rect", "scroll_container", "room_container", "torch_confirmation_dialog", "cant_set_torch_dialog")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,6 @@ room_with_player_texture = ExtResource("2_rl2ub")
 color_rect = NodePath("ColorRect")
 scroll_container = NodePath("SmoothScrollContainer")
 room_container = NodePath("SmoothScrollContainer/RoomContainer")
-room_addition_node = NodePath("SmoothScrollContainer/RoomContainer/RoomAdditionNode")
 torch_confirmation_dialog = NodePath("TorchPlacementConfirmationDialog2")
 cant_set_torch_dialog = NodePath("CantSetTorchDialog")
 player_position_not_set_text = "Fauna doko? Set Fauna in a room before placing a torch."
@@ -33,10 +32,10 @@ color = Color(0, 0, 0, 0.309804)
 
 [node name="SmoothScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 60.0
-offset_right = 1123.0
-offset_bottom = 660.0
+offset_left = 367.0
+offset_top = 132.0
+offset_right = 1567.0
+offset_bottom = 982.0
 script = ExtResource("2_2gata")
 speed = 1.0
 hide_scrollbar_over_time = true
@@ -44,7 +43,7 @@ scrollbar_hide_time = 0.5
 
 [node name="RoomContainer" type="ColorRect" parent="SmoothScrollContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(900, 600)
+custom_minimum_size = Vector2(1200, 850)
 layout_mode = 2
 mouse_filter = 1
 color = Color(0.498039, 0.498039, 0.498039, 1)
@@ -58,19 +57,19 @@ mouse_filter = 1
 
 [node name="AddTorch" type="Button" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 505.0
-offset_right = 65.0
-offset_bottom = 536.0
+offset_left = 33.0
+offset_top = 635.0
+offset_right = 153.0
+offset_bottom = 695.0
 text = "Add Torch
 "
 
 [node name="Return" type="Button" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 550.0
-offset_right = 65.0
-offset_bottom = 581.0
+offset_left = 33.0
+offset_top = 735.0
+offset_right = 153.0
+offset_bottom = 795.0
 text = "Return"
 script = ExtResource("4_pgiix")
 
