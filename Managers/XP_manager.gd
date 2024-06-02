@@ -4,9 +4,18 @@ extends Node
 ## This will count the XP of the player, update it when enemies are calmed 
 ## and give buffs at combat start depending on the level of the XP bar that was reached
 
+signal new_xp_level_reached
+
 ## Current XP of the player
-var current_xp: int = 0;
-		
+var current_xp: int = 0
+
+## Next amount of XP to reach to get the next buff
+var next_xp_level: int
+
+## The last amount of XP that gave a buff
+var previous_xp_level: int	
+
+var current_list_of_buffs: Array[BuffBase] = []
 
 ## Number of XP point to gather for each level, andd the related buff to apply [br]
 ## @experimental The buffs will most certainly change to become with infinite duration
@@ -17,20 +26,25 @@ var current_xp: int = 0;
 	37: ["Sooth", Buff_Sooth.new()],
 }
 
-## Add one to the XP (default to one, could be more for mini-bosses or bosses)
+
+func _ready() -> void:
+	next_xp_level = xp_levels.keys()[0]
+	previous_xp_level = 0
+
+
+## Add XP (default to one, could be more for mini-bosses or bosses)
+## Also checks if the player reached a new level of XP
 func increase(amount: int = 1) -> void:
 	if amount >= 1:
 		current_xp += amount
 	else:
 		push_warning("Tried to modify the XP with a negative or zero value, amount was: %s" % amount)
+		
+	if current_xp >= next_xp_level:
+		current_list_of_buffs.append(xp_levels[next_xp_level][1].duplicate())
+		previous_xp_level = next_xp_level
+		for level: int in xp_levels:
+			if current_xp < level:
+				next_xp_level = level
+				break
 	
-
-## Returns the list of buffs to be applied to the player at the start of a combat,
-## depending on [param current_xp]
-func get_buff_list() -> Array[BuffBase]:
-	var buff_list: Array[BuffBase] = []
-	for level: Array in xp_levels:
-		if current_xp >= level[0]:
-			var buff: BuffBase = level[1].duplicate()
-			buff_list.append(buff)
-	return buff_list
