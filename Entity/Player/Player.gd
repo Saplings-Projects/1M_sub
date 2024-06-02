@@ -11,9 +11,9 @@ var _should_save_persistent_data: bool = true
 ## Also loads the player's persistent data.
 func _ready() -> void:
 	super()
+	_load_persistent_data()
 	PlayerManager.set_player(self)
 	
-	_load_persistent_data()
 
 
 ## Call when the player is destroyed. [br]
