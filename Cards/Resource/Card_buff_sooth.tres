@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://cuv4xnxuo5v4e"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_048dj"]
+[ext_resource type="Script" path="res://Status/Buffs/Buff_Sooth.gd" id="2_wmqv4"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="3_lj874"]
+[ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="3_ugr2k"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="4_xotqq"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_73bhc"]
+
+[sub_resource type="Resource" id="Resource_3cfuw"]
+script = ExtResource("3_ugr2k")
+permanent_add = 0
+permanent_multiply = 1.0
+temporary_add = 1
+temporary_multiply = 1.0
+
+[sub_resource type="Resource" id="Resource_6mgrq"]
+script = ExtResource("2_wmqv4")
+infinite_duration = false
+status_turn_duration = 5
+status_power = 1.0
+status_modifier_base_value = SubResource("Resource_3cfuw")
+
+[sub_resource type="Resource" id="Resource_ond7c"]
+script = ExtResource("1_048dj")
+status_to_apply = SubResource("Resource_6mgrq")
+
+[sub_resource type="Resource" id="Resource_3w608"]
+script = ExtResource("4_xotqq")
+
+[sub_resource type="Resource" id="Resource_62w63"]
+script = ExtResource("3_lj874")
+effect = SubResource("Resource_ond7c")
+value = 0
+targeting_function = SubResource("Resource_3w608")
+
+[resource]
+script = ExtResource("5_73bhc")
+application_type = 0
+card_title = "Buff Sooth"
+card_description = "Player can sooth by 1 more for 5 turns"
+card_effects_data = Array[ExtResource("3_lj874")]([SubResource("Resource_62w63")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpgsmfprnm2kk"]
+[gd_scene load_steps=16 format=3 uid="uid://bpgsmfprnm2kk"]
 
 [ext_resource type="Script" path="res://Entity/Enemy/Enemy.gd" id="1_ya6nf"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
@@ -7,9 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://bu626jwgp3r5x" path="res://Art/Enemies/green_sapling-default.png" id="5_dxya8"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="6_m32ri"]
 [ext_resource type="Script" path="res://UI/HealthLabel.gd" id="7_tofxs"]
+[ext_resource type="Script" path="res://UI/StressLabel.gd" id="8_w2u2o"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_yr066"]
 [ext_resource type="Script" path="res://Entity/Components/BehaviorComponent.gd" id="9_kvor6"]
 [ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Card_EnemyAttack.tres" id="10_l5325"]
+[ext_resource type="Script" path="res://Entity/Components/StressComponent.gd" id="11_qf75g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8bva"]
 size = Vector2(104, 93)
@@ -17,7 +19,12 @@ size = Vector2(104, 93)
 [sub_resource type="LabelSettings" id="LabelSettings_urr12"]
 font_size = 26
 
+[sub_resource type="LabelSettings" id="LabelSettings_3exsi"]
+font_size = 26
+font_color = Color(0.435294, 0.67451, 0.815686, 1)
+
 [node name="Enemy" type="Node2D"]
+position = Vector2(0, 50)
 script = ExtResource("1_ya6nf")
 
 [node name="StatComponent" type="Node" parent="."]
@@ -43,14 +50,26 @@ position = Vector2(5, 2.5)
 shape = SubResource("RectangleShape2D_b8bva")
 
 [node name="HealthLabel" type="Label" parent="." node_paths=PackedStringArray("health_component")]
-offset_left = -48.0
-offset_top = -84.0
-offset_right = 52.0
-offset_bottom = -45.0
-text = "100/100"
+offset_left = -57.0
+offset_top = -83.0
+offset_right = 57.0
+offset_bottom = -44.0
+text = "100 / 100"
 label_settings = SubResource("LabelSettings_urr12")
+horizontal_alignment = 1
 script = ExtResource("7_tofxs")
 health_component = NodePath("../HealthComponent")
+
+[node name="StressLabel" type="Label" parent="." node_paths=PackedStringArray("stress_component")]
+offset_left = -57.0
+offset_top = -109.0
+offset_right = 57.0
+offset_bottom = -70.0
+text = "100 / 100"
+label_settings = SubResource("LabelSettings_3exsi")
+horizontal_alignment = 1
+script = ExtResource("8_w2u2o")
+stress_component = NodePath("../StressComponent")
 
 [node name="PartyComponent" type="Node" parent="."]
 script = ExtResource("8_yr066")
@@ -58,6 +77,11 @@ script = ExtResource("8_yr066")
 [node name="BehaviorComponent" type="Node" parent="."]
 script = ExtResource("9_kvor6")
 attack = ExtResource("10_l5325")
+
+[node name="StressComponent" type="Node" parent="."]
+script = ExtResource("11_qf75g")
+max_stress = 80
+stress_generation = 20
 
 [connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]

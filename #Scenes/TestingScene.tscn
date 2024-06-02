@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b60uabg68ra1l"]
+[gd_scene load_steps=17 format=3 uid="uid://b60uabg68ra1l"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_ji0t8"]
 [ext_resource type="Script" path="res://Managers/MapManager.gd" id="2_50npk"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://UI/EndTurnButton.gd" id="14_dpe64"]
 [ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="14_e54tj"]
 [ext_resource type="Script" path="res://UI/EnergyLabel.gd" id="14_nckre"]
-[ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Art/Card_layout/deck_pile.png" id="18_b54hn"]
 [ext_resource type="Resource" uid="uid://c5fh7bnfh3l4u" path="res://Items/test_relic.tres" id="19_prw12"]
 [ext_resource type="Texture2D" uid="uid://bl5v3bgnntoc5" path="res://Art/Card_layout/energy_count.png" id="19_spyxg"]
 
