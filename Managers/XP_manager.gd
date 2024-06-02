@@ -4,7 +4,9 @@ extends Node
 ## This will count the XP of the player, update it when enemies are calmed 
 ## and give buffs at combat start depending on the level of the XP bar that was reached
 
-signal new_xp_level_reached
+signal new_xp_level_reached(previous_xp: int, next_xp: int)
+
+signal xp_changed(new_xp: int)
 
 ## Current XP of the player
 var current_xp: int = 0
@@ -37,6 +39,7 @@ func _ready() -> void:
 func increase(amount: int = 1) -> void:
 	if amount >= 1:
 		current_xp += amount
+		xp_changed.emit(current_xp)
 	else:
 		push_warning("Tried to modify the XP with a negative or zero value, amount was: %s" % amount)
 		
@@ -46,5 +49,6 @@ func increase(amount: int = 1) -> void:
 		for level: int in xp_levels:
 			if current_xp < level:
 				next_xp_level = level
+				new_xp_level_reached.emit(previous_xp_level, next_xp_level)
 				break
 	
