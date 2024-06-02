@@ -11,6 +11,10 @@ class_name StatusComponent
 var current_status: Array[StatusBase] = []
 
 
+func _ready() -> void:
+	PhaseManager.on_event_win.connect(remove_all_status)
+
+
 ## Add a new status to the entity [br]
 ## The status caster is the one applying the status. [br]
 ## If the target entity already has the status, the duration of the new status is added to the existing one. [br]
