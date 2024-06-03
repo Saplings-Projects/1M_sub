@@ -8,7 +8,10 @@ class_name StatusComponent
 
 
 ## List of all the status currently applied on the entity
-var current_status: Array[StatusBase] = []
+var current_status: Array[StatusBase]
+
+func _init() -> void:
+	current_status = []
 
 
 ## Add a new status to the entity [br]
@@ -70,6 +73,9 @@ func apply_turn_start_status() -> void:
 				# * we can't remove the status as we are iterating over it
 				# so we create a list of the status that are to keep
 				status_to_keep.append(status) 
+		else:
+			# keep the status if it has infinite duration
+			status_to_keep.append(status)
 	current_status = status_to_keep
 
 ## Remove all status from the entity [br]
