@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://sg1wi7uqvv25"]
+[gd_scene load_steps=16 format=3 uid="uid://sg1wi7uqvv25"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_nmgwp"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="2_e6pjn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Art/Card_layout/discard_pile.png" id="12_0nlrw"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="13_8nsar"]
 [ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="14_os5i4"]
+[ext_resource type="PackedScene" uid="uid://ruwidm3egyrx" path="res://#Scenes/xp_bar.tscn" id="15_r7cr8"]
 
 [node name="TestingScene" type="Node2D"]
 script = ExtResource("1_nmgwp")
@@ -174,6 +175,13 @@ main menu"
 
 [node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_os5i4")]
 layout_mode = 1
+
+[node name="XP progress" parent="CanvasLayer/UIControl" instance=ExtResource("15_r7cr8")]
+layout_mode = 1
+offset_left = 1794.0
+offset_top = 175.0
+offset_right = -51.0
+offset_bottom = -224.0
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIControl/back_to_main_menu" to="CanvasLayer/UIControl" method="_on_back_to_main_menu_pressed"]
