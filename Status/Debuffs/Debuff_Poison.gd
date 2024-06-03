@@ -18,3 +18,4 @@ func init_status(in_caster: Entity, in_target: Entity) -> void:
 ## Apply damage at turn start
 func on_turn_start() -> void:
 	status_target.get_health_component().modify_health(status_power, status_caster)
+	

@@ -11,8 +11,14 @@ func _init() -> void:
     # one problem with this approach is that the POISON effect could have both
     # its duration and damage modified by the same modifier, which could lead to some problem
     # TODO solution : make a modifier for poison duration and another for poison damage
-    
-## @Override
-func init_status(in_caster:Entity,in_target:Entity) -> void:
-    super.init_status(in_caster,in_target)
     EntityStatDictType = GlobalEnums.EntityStatDictType.OFFENSE
+    
+## Default poison duration buff which adds 1 to the poison stat
+static func default() -> BuffBase:
+    var buff: Buff_Poison_Duration = Buff_Poison_Duration.new()
+    var stat_modifier : StatModifiers = StatModifiers.new()
+    stat_modifier.temporary_add = 1
+    stat_modifier.ready()
+    buff.status_modifier_base_value = stat_modifier
+    return buff
+    
