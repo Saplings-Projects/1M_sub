@@ -22,16 +22,18 @@ var current_list_of_buffs: Array[BuffBase] = []
 ## Number of XP point to gather for each level, andd the related buff to apply [br]
 ## @experimental The buffs will most certainly change to become with infinite duration
 @export var xp_levels: Dictionary = {
-	5: 	["Strength", Buff_Strength.new()],
-	12: ["Healing", Buff_Healing.new()], 
-	22: ["Poison duration", Buff_Poison_Duration.new()], 
-	37: ["Sooth", Buff_Sooth.new()],
+	5: 	["Strength", Buff_Strength.default()],
+	12: ["Healing", Buff_Healing.default()], 
+	22: ["Poison duration", Buff_Poison_Duration.default()], 
+	37: ["Sooth", Buff_Sooth.default()],
 }
 
 
 func _ready() -> void:
 	next_xp_level = xp_levels.keys()[0]
 	previous_xp_level = 0
+	for level: int in xp_levels:
+		xp_levels[level][1].infinite_duration = true
 
 
 ## Add XP (default to one, could be more for mini-bosses or bosses)
