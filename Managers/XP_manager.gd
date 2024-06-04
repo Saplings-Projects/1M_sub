@@ -4,9 +4,11 @@ extends Node
 ## This will count the XP of the player, update it when enemies are calmed 
 ## and give buffs at combat start depending on the level of the XP bar that was reached
 
-signal new_xp_level_reached(previous_xp: int, next_xp: int)
-
-signal xp_changed(new_xp: int)
+## Emitted when the XP is changed. [br]
+## Previous and next reference the XP levels after calculating if the player went over next
+## For example, we could 4 XP, gain 3 and the levels were 0 and 5, updated to 5 and 12,
+# the signal would emit (7, 5, 12, true)
+signal xp_changed(new_xp: int, previous_level_xp: int, next_level_xp: int, level_up: bool)
 
 ## Current XP of the player
 var current_xp: int = 0
@@ -41,16 +43,20 @@ func _ready() -> void:
 func increase(amount: int = 1) -> void:
 	if amount >= 1:
 		current_xp += amount
-		xp_changed.emit(current_xp)
+		
 	else:
 		push_warning("Tried to modify the XP with a negative or zero value, amount was: %s" % amount)
+		return
 		
 	if current_xp >= next_xp_level:
 		current_list_of_buffs.append(xp_levels[next_xp_level][1].duplicate())
 		previous_xp_level = next_xp_level
 		for level: int in xp_levels:
+			# update the next_xp by searching the first level that's more than current_xp
 			if current_xp < level:
 				next_xp_level = level
-				new_xp_level_reached.emit(previous_xp_level, next_xp_level)
+				xp_changed.emit(current_xp, previous_xp_level, next_xp_level, true)
 				break
+	else:
+		xp_changed.emit(current_xp, previous_xp_level, next_xp_level, false)
 	
