@@ -49,14 +49,19 @@ func increase(amount: int = 1) -> void:
 		return
 		
 	if current_xp >= next_xp_level:
-		current_list_of_buffs.append(xp_levels[next_xp_level][1].duplicate())
-		previous_xp_level = next_xp_level
+		var new_list_of_buffs: Array[BuffBase] = []
 		for level: int in xp_levels:
+			new_list_of_buffs.append(xp_levels[level][1].duplicate())
+			# do it this way in case we jump multiple levels at once
+			previous_xp_level = next_xp_level
+			next_xp_level = level
 			# update the next_xp by searching the first level that's more than current_xp
 			if current_xp < level:
-				next_xp_level = level
-				xp_changed.emit(current_xp, previous_xp_level, next_xp_level, true)
+				
 				break
+		# we took the last buff when we shouldn't keep it, remove it
+		current_list_of_buffs = new_list_of_buffs.slice(0, new_list_of_buffs.size() - 1)
+		xp_changed.emit(current_xp, previous_xp_level, next_xp_level, true)
 	else:
 		xp_changed.emit(current_xp, previous_xp_level, next_xp_level, false)
 	
