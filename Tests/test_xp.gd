@@ -10,4 +10,7 @@ func test_xp_buff_list() -> void:
 	var second_lvl_xp: int = XpManager.xp_levels.keys()[1]
 	XpManager.increase(second_lvl_xp)
 	var first_two_buffs: Array = XpManager.xp_levels.values().slice(0,2).map(func(tuple: Array) -> BuffBase: return tuple[1])
-	assert_eq_deep(XpManager.current_list_of_buffs, first_two_buffs)
+	assert_eq(first_two_buffs.size(), XpManager.current_list_of_buffs.size())
+	for i in range(2):
+		assert_true(XpManager.current_list_of_buffs[i].infinite_duration)
+		assert_eq(first_two_buffs[i].get_script(), XpManager.current_list_of_buffs[i].get_script())
