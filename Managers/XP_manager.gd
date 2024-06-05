@@ -34,6 +34,8 @@ var current_list_of_buffs: Array[BuffBase] = []
 func _ready() -> void:
 	next_xp_level = xp_levels.keys()[0]
 	previous_xp_level = 0
+	current_xp = 0
+	current_list_of_buffs = []
 	for level: int in xp_levels:
 		xp_levels[level][1].infinite_duration = true
 

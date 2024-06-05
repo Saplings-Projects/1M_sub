@@ -1,5 +1,11 @@
 extends TestBase
 
+## @Override
+func before_each() -> void:
+	# reset the XpManager since it's not killed between tests (singleton)
+	XpManager._ready()
+	super()
+
 func test_xp_increase() -> void:
 	var current_xp: int = XpManager.current_xp
 	var increase_amount: int = 3
@@ -16,7 +22,7 @@ func test_xp_buff_list() -> void:
 		assert_eq(first_two_buffs[i].get_script(), XpManager.current_list_of_buffs[i].get_script())
 		
 func test_previous_next_level() -> void:
-	var xp_lvl: Array[int] = XpManager.xp_levels.keys()
+	var xp_lvl: Array = XpManager.xp_levels.keys()
 	var third_lvl_xp: int = xp_lvl[2]
 	XpManager.increase(third_lvl_xp)
 	assert_eq(XpManager.previous_xp_level, third_lvl_xp)
