@@ -4,6 +4,12 @@ extends TextureProgressBar
 @onready var next_buff_label: Label = $"Next buff"
 @onready var current_xp_label: Label = $"Current XP"
 
+## The filling of the bar will not go above 90%
+const MAX_BAR_VALUE_VISUAL: float = 90
+
+## The filling of the bar will not go below 10%
+const MIN_BAR_VALUE_VISUAL: float = 10
+
 ## The text to display for the previously reached buff
 var previous_buff_string: String = ""
 
@@ -27,23 +33,21 @@ func _choose_update_method(current_xp: int, previous_xp: int, next_xp: int, leve
 		_update_progress_bar_text_on_new_level(current_xp, previous_xp, next_xp, level_up)
 	else:
 		var bar_transition_duration: float = 1 
-		_change_progress_bar_value(current_xp, bar_transition_duration, previous_xp, next_xp, level_up)
+		_change_progress_bar_value(current_xp, bar_transition_duration, previous_xp, level_up)
 
 ## Update the value of the progress bar to fill it
-func _change_progress_bar_value(new_xp: int, max_duration: float, previous_xp: int, next_xp: int, level_up: bool) -> void:
+func _change_progress_bar_value(new_xp: int, max_duration: float, previous_xp: int, level_up: bool) -> void:
 	# first 10% are always filled
 	current_xp_label.text = "%s XP" % new_xp
 	var tween: Tween = create_tween()
-	var final_value: float = 90
+	var final_value: float = MAX_BAR_VALUE_VISUAL
 	if not level_up:
-		final_value = 10 + (new_xp - XpManager.previous_xp_level) * xp_delta
+		final_value = MIN_BAR_VALUE_VISUAL + (new_xp - previous_xp) * xp_delta
 	var duration: float = max_duration
-	var xp_level_size: int = next_xp - previous_xp
-	if xp_level_size > 0:
-		if not level_up:
-			duration = max_duration * max((new_xp - previous_xp), (next_xp - new_xp))/xp_level_size
-		else:
-			duration = max_duration * (90 - self.value)/80
+	if not level_up:
+		duration = max_duration * abs(final_value - self.value)/(MAX_BAR_VALUE_VISUAL - MIN_BAR_VALUE_VISUAL)
+	else:
+		duration = max_duration * (90 - self.value)/80
 	tween.tween_property(self, "value", final_value, duration)
 	await tween.finished
 
@@ -55,7 +59,7 @@ func _update_progress_bar_text_on_new_level(current_xp: int, previous_xp: int, n
 	var bar_transition_max_duration: float = 1
 	if not level_up:
 		bar_transition_max_duration = 0
-	await _change_progress_bar_value(previous_xp, bar_transition_max_duration, previous_xp, next_xp, level_up)
+	await _change_progress_bar_value(previous_xp, bar_transition_max_duration, previous_xp, level_up)
 	xp_delta = 80 / (next_xp - previous_xp)
 	# change opacity to transparent over 1s
 	if level_up:
@@ -67,7 +71,7 @@ func _update_progress_bar_text_on_new_level(current_xp: int, previous_xp: int, n
 	previous_buff_label.text = previous_buff_string
 	next_buff_label.text = next_buff_string
 	
-	_change_progress_bar_value(current_xp, bar_transition_max_duration, previous_xp, next_xp, false)
+	_change_progress_bar_value(current_xp, bar_transition_max_duration, previous_xp, false)
 	
 	# change opacity back to fully opaque
 	if level_up:
