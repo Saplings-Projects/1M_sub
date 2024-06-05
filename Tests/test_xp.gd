@@ -14,3 +14,10 @@ func test_xp_buff_list() -> void:
 	for i in range(2):
 		assert_true(XpManager.current_list_of_buffs[i].infinite_duration)
 		assert_eq(first_two_buffs[i].get_script(), XpManager.current_list_of_buffs[i].get_script())
+		
+func test_previous_next_level() -> void:
+	var xp_lvl: Array[int] = XpManager.xp_levels.keys()
+	var third_lvl_xp: int = xp_lvl[2]
+	XpManager.increase(third_lvl_xp)
+	assert_eq(XpManager.previous_xp_level, third_lvl_xp)
+	assert_eq(XpManager.next_xp_level, xp_lvl[3])
