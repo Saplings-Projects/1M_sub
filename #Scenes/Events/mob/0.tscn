@@ -177,11 +177,12 @@ main menu"
 layout_mode = 1
 
 [node name="SkipEventButton" type="Button" parent="CanvasLayer/UIControl"]
-offset_left = 1676.0
+layout_mode = 0
+offset_left = 1597.0
 offset_top = 30.0
-offset_right = 1717.0
-offset_bottom = 61.0
-text = "Skip"
+offset_right = 1741.0
+offset_bottom = 68.0
+text = "Skip this event"
 script = ExtResource("15_ucp4y")
 
 [connection signal="pressed" from="CanvasLayer/UIControl/EndTurnButton" to="CanvasLayer/UIControl/EndTurnButton" method="_on_pressed"]

@@ -251,10 +251,10 @@ autowrap_mode = 2
 
 [node name="SkipEventButton" type="Button" parent="."]
 offset_left = 64.0
-offset_top = 987.0
-offset_right = 111.0
+offset_top = 983.0
+offset_right = 208.0
 offset_bottom = 1021.0
-text = "Skip
+text = "Skip this event
 "
 script = ExtResource("6_p63fb")
 
