@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://6thyux8u44dk"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectSooth.gd" id="1_40224"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_rs3h8"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="3_fedpo"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="4_aws21"]
+
+[sub_resource type="Resource" id="Resource_4m74w"]
+script = ExtResource("1_40224")
+
+[sub_resource type="Resource" id="Resource_o7c6r"]
+script = ExtResource("3_fedpo")
+
+[sub_resource type="Resource" id="Resource_ucbco"]
+script = ExtResource("2_rs3h8")
+effect = SubResource("Resource_4m74w")
+value = 1000
+targeting_function = SubResource("Resource_o7c6r")
+
+[resource]
+script = ExtResource("4_aws21")
+application_type = 1
+card_title = "Insta Sooth"
+card_description = "Applies 1000 sooth to all enemies"
+card_effects_data = Array[ExtResource("2_rs3h8")]([SubResource("Resource_ucbco")])

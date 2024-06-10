@@ -20,6 +20,10 @@ var default_stress: int
 ## if the enemies don't generate stress naturally when they are soothed.
 var has_been_calmed: bool = false
 
+## The amount of XP the player gets when calming the entity [br]
+## 1 for most enemies, but it can be changed for mini-boss and boss [br]
+@export var xp_reward: int = 1
+
 ## Know if an entity has hit the overstress threshold [br]
 ## This prevents the player from hitting the threshold during its turn and then calming the entity to avoid the attack [br]
 var has_hit_overstress: bool = false
@@ -76,6 +80,8 @@ func modify_stress(amount: int, caster: Entity, is_sooth: bool = false) -> void:
 		
 	if new_stress == max_stress:
 		has_hit_overstress = true
+	elif new_stress == 0 and not has_been_calmed:
+		on_calmed()
 		
 	_set_stress(new_stress)
 
@@ -108,8 +114,10 @@ func _reset_stress() -> void:
 
 ## Rewards XP for calming the entity, stops stress generation	
 func on_calmed() -> void:
-	pass
-	#TODO reward XP
+	# prevent the XP from being awarded multiple times
+	has_been_calmed = true
+	XpManager.increase(xp_reward)
+	
 
 
 ## Makes the entity execute a powerful attack

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=8 format=3 uid="uid://dliguwgspqyx0"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_x1diw"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_ovjct"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="3_je37t"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="4_arvwe"]
+
+[sub_resource type="Resource" id="Resource_byd8o"]
+script = ExtResource("1_x1diw")
+
+[sub_resource type="Resource" id="Resource_5gkxu"]
+script = ExtResource("3_je37t")
+
+[sub_resource type="Resource" id="Resource_dii3b"]
+script = ExtResource("2_ovjct")
+effect = SubResource("Resource_byd8o")
+value = 1000
+targeting_function = SubResource("Resource_5gkxu")
+
+[resource]
+script = ExtResource("4_arvwe")
+application_type = 1
+card_title = "Insta Kill"
+card_description = "Does 1000 damage to all enemies"
+card_effects_data = Array[ExtResource("2_ovjct")]([SubResource("Resource_dii3b")])

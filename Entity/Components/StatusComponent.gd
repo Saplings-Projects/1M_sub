@@ -8,7 +8,10 @@ class_name StatusComponent
 
 
 ## List of all the status currently applied on the entity
-var current_status: Array[StatusBase] = []
+var current_status: Array[StatusBase]
+
+func _init() -> void:
+	current_status = []
 
 
 func _ready() -> void:
@@ -18,6 +21,7 @@ func _ready() -> void:
 ## Add a new status to the entity [br]
 ## The status caster is the one applying the status. [br]
 ## If the target entity already has the status, the duration of the new status is added to the existing one. [br]
+##! @deprecated this needs to be reworked to properly stack status
 func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 	# duplicate the status so we aren't modifying the base
 	var status_copy: StatusBase = new_status.duplicate()
@@ -29,6 +33,7 @@ func add_status(new_status: StatusBase, status_caster: Entity) -> void:
 	status_copy.init_status(status_caster, entity_owner)
 	
 	if found_status != null:
+		#! this does not work if the status has infinite duration
 		found_status.status_turn_duration += status_copy.status_turn_duration
 		if found_status.status_power != status_copy.status_power:
 			found_status.status_power = status_copy.status_power
@@ -72,6 +77,9 @@ func apply_turn_start_status() -> void:
 				# * we can't remove the status as we are iterating over it
 				# so we create a list of the status that are to keep
 				status_to_keep.append(status) 
+		else:
+			# keep the status if it has infinite duration
+			status_to_keep.append(status)
 	current_status = status_to_keep
 
 ## Remove all status from the entity [br]
