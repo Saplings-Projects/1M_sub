@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://0uuiv6n1s26t"]
+
+[ext_resource type="Texture2D" uid="uid://b5yppwmgeuuat" path="res://Art/Menus/loading_splash_art-1.png" id="1_7smrv"]
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/SplashScene.gd" id="1_pnbb4"]
+
+[node name="SplashScene" type="Control" node_paths=PackedStringArray("timer")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_pnbb4")
+timer = NodePath("Timer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 478.0
+offset_right = 1896.0
+offset_bottom = 1581.0
+scale = Vector2(0.68, 0.68)
+texture = ExtResource("1_7smrv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
