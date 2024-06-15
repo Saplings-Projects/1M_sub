@@ -51,12 +51,9 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 
 		# loop through positions of the grid and assign a room type
 		for index_width: int in range(map_floors_width[index_height]):
-			# randomly choose a room type
-			var _rand_type_index: int = randi_range(0, GlobalVar.EVENTS_CLASSIFICATION.size() - 1)
-			var _room_event: EventBase = GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
-			# create a new room with the room type and give it its position
+			# create a new room with the null type and give it its position
 			var _generated_room: RoomBase = RoomBase.new()
-			_generated_room.room_event = _room_event
+			_generated_room.room_event = null
 			_generated_room.room_position = Vector2i(index_width + _padding_size, index_height)
 			# put the new room on the grid
 
@@ -65,12 +62,31 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 	_map.rooms = _grid
 	return _map as MapBase
 
+## Assign events to existing rooms with same probabilities.
+func assign_events(current_map: MapBase = current_map) -> void:
+	var _rooms: Array[Array] = current_map.rooms
+	# print(current_map.rooms.size())
+	
+	# scan the whole map 
+	# We could make it more efficient by using map_width_array but it is independent of it in case we change it in the future.
+	for index_height: int in range(current_map.rooms.size()):
+		for index_width: int in range(current_map.rooms[index_height].size()):
+			# If not a room, ignore
+			if current_map.rooms[index_height][index_width] == null:
+				continue
+			
+			var _current_room: RoomBase = current_map.rooms[index_height][index_width]
+			# randomly choose a room type
+			var _rand_type_index: int = randi_range(0, GlobalVar.EVENTS_CLASSIFICATION.size() - 1)
+			var _room_event: EventBase = GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
+			_current_room.room_event = _room_event
 
 ## Create a map with a width array
 
 func _ready() -> void:
 	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map()
+	assign_events(current_map)
 
 
 ## checks if the map exists
