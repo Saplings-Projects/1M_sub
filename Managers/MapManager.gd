@@ -80,7 +80,7 @@ func draw_room_type() -> EventBase:
 	# This shouldn't be reached
 	return null
 
-## Assign events to existing rooms with same probabilities.
+## Assign events to existing rooms with set probabilities.
 func assign_events(current_map: MapBase = current_map) -> void:
 	# Scan the whole map, assign events to valid rooms
 	for index_height: int in range(current_map.rooms.size()):
@@ -90,7 +90,17 @@ func assign_events(current_map: MapBase = current_map) -> void:
 				continue
 			
 			var _current_room: RoomBase = current_map.rooms[index_height][index_width]
-			_current_room.room_event = draw_room_type()
+
+			if index_height == current_map.rooms.size() - 2:
+				# Rooms before boss are Heal rooms
+				_current_room.room_event = EventHeal.new()
+
+			elif index_height == current_map.rooms.size() - 1:
+				# Boss room, TO BE ASSIGNED
+				_current_room.room_event = EventMob.new()
+
+			else:
+				_current_room.room_event = draw_room_type()
 
 ## Create a map with a width array
 
