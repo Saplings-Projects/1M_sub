@@ -16,3 +16,6 @@ const DEBUG_SKIP_EVENT: bool = false
 ## in the inventory UI
 const DEBUG_ACTIVE_INVENTORY_DEBUG_BUTTONS : bool = false
 
+## Temporary debug option to print the number of each generated event type [br]
+## TO BE REMOVED after implmentation
+const DEBUG_PRINT_EVENT_COUNT : bool = true
