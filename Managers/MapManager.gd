@@ -56,19 +56,33 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 			_generated_room.room_event = null
 			_generated_room.room_position = Vector2i(index_width + _padding_size, index_height)
 			# put the new room on the grid
-
 			_grid[index_height].append(_generated_room as RoomBase)
 		_grid[index_height].append_array(_padding)
 	_map.rooms = _grid
+
+	# Assign room type to all rooms
+	assign_events(_map)
+
 	return _map as MapBase
+
+## Draws room type randomly, with each type having a set probability
+## Algorithm taken from this: https://stackoverflow.com/a/1761646
+func draw_room_type() -> EventBase:
+	# Assumes probabilities add up to 100
+	var _rand_type_number: int = randi_range(0, 99)
+
+	for _rand_type_index: int in range(GlobalVar.EVENTS_CLASSIFICATION.size()):
+		if _rand_type_number < GlobalVar.EVENTS_PROBABILITIES[_rand_type_index]:
+			return GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
+
+		_rand_type_number -= GlobalVar.EVENTS_PROBABILITIES[_rand_type_index]
+	
+	# This shouldn't be reached
+	return null
 
 ## Assign events to existing rooms with same probabilities.
 func assign_events(current_map: MapBase = current_map) -> void:
-	var _rooms: Array[Array] = current_map.rooms
-	# print(current_map.rooms.size())
-	
-	# scan the whole map 
-	# We could make it more efficient by using map_width_array but it is independent of it in case we change it in the future.
+	# Scan the whole map, assign events to valid rooms
 	for index_height: int in range(current_map.rooms.size()):
 		for index_width: int in range(current_map.rooms[index_height].size()):
 			# If not a room, ignore
@@ -76,17 +90,13 @@ func assign_events(current_map: MapBase = current_map) -> void:
 				continue
 			
 			var _current_room: RoomBase = current_map.rooms[index_height][index_width]
-			# randomly choose a room type
-			var _rand_type_index: int = randi_range(0, GlobalVar.EVENTS_CLASSIFICATION.size() - 1)
-			var _room_event: EventBase = GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
-			_current_room.room_event = _room_event
+			_current_room.room_event = draw_room_type()
 
 ## Create a map with a width array
 
 func _ready() -> void:
 	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map()
-	assign_events(current_map)
 
 
 ## checks if the map exists

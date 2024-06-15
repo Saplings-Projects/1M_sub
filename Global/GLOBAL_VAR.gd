@@ -17,7 +17,7 @@ var MODIFIER_KEYS: Dictionary = {
 var EVENTS_CLASSIFICATION: Array[Resource] = [EventMob, EventRandom, EventShop, EventHeal, EventDialogue]
 
 ## A list of the probabilities of all possible events
-var EVENTS_PROBABILITIES: Array[float] = [45.0, 16.0, 5.0, 12.0, 22.0]
+var EVENTS_PROBABILITIES: Array[int] = [45, 16, 5, 12, 22]
 
 ## A list of all the possible movements on the map
 var POSSIBLE_MOVEMENTS: Dictionary = {
