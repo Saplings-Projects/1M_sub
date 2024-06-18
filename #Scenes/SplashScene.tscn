@@ -4,13 +4,14 @@
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/SplashScene.gd" id="1_pnbb4"]
 [ext_resource type="AudioStream" uid="uid://c0l2ntm2m8esq" path="res://Audio/fauna_uuu_test.mp3" id="3_uytcb"]
 
-[node name="SplashScene" type="Control" node_paths=PackedStringArray("splash_image", "uuuu_sfx")]
+[node name="SplashScene" type="Control" node_paths=PackedStringArray("splash_image", "color_rect", "uuuu_sfx")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 script = ExtResource("1_pnbb4")
 splash_image = NodePath("TextureRect")
+color_rect = NodePath("ColorRect")
 uuuu_sfx = NodePath("AudioStreamPlayer2D")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -21,14 +22,19 @@ color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 244.0
-offset_top = -224.0
-offset_right = 1662.0
-offset_bottom = 1357.0
-scale = Vector2(0.68, 0.68)
-pivot_offset = Vector2(713.235, 708.823)
+offset_right = 1418.0
+offset_bottom = 1581.0
+scale = Vector2(0.682, 0.682)
+pivot_offset = Vector2(709, 1581)
 texture = ExtResource("1_7smrv")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_uytcb")
 volume_db = 3.043
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+offset_right = 1418.0
+offset_bottom = 1581.0
+scale = Vector2(0.684, 0.684)
+texture = ExtResource("1_7smrv")
