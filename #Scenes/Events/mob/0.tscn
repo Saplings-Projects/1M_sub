@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://sg1wi7uqvv25"]
+[gd_scene load_steps=15 format=3 uid="uid://sg1wi7uqvv25"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene.gd" id="1_nmgwp"]
 [ext_resource type="PackedScene" uid="uid://bcpmrmofcilbn" path="res://Core/Battler.tscn" id="2_e6pjn"]
-[ext_resource type="Script" path="res://Managers/MapManager.gd" id="3_fnmf8"]
 [ext_resource type="PackedScene" uid="uid://clmg3l3n28x38" path="res://Entity/Player/Player.tscn" id="4_ss8ob"]
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/TestingScene_UIcontrol.gd" id="5_8ejph"]
 [ext_resource type="PackedScene" uid="uid://dpjfy4pv0vxst" path="res://Cards/CardContainer.tscn" id="6_dwemq"]
@@ -22,9 +21,6 @@ metadata/_edit_vertical_guides_ = [1216.0]
 
 [node name="Battler" parent="." instance=ExtResource("2_e6pjn")]
 position = Vector2(896, 364)
-
-[node name="TestMap" type="Node2D" parent="."]
-script = ExtResource("3_fnmf8")
 
 [node name="Player" parent="." instance=ExtResource("4_ss8ob")]
 position = Vector2(986, 631)
