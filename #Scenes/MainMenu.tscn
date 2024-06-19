@@ -36,7 +36,7 @@ offset_top = 1037.0
 offset_right = 345.0
 offset_bottom = 1084.0
 theme_override_font_sizes/font_size = 24
-text = "v1.0-alpha (Jun 2024)"
+text = "Version"
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
@@ -47,7 +47,7 @@ offset_bottom = 274.0
 theme_override_font_sizes/font_size = 100
 text = "Title place holder"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="Menu buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 509.0
@@ -57,7 +57,7 @@ focus_mode = 2
 theme_override_constants/separation = -195
 alignment = 1
 
-[node name="Continue" type="TextureButton" parent="VBoxContainer2"]
+[node name="Continue" type="TextureButton" parent="Menu buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Quit")
@@ -70,7 +70,7 @@ texture_focused = ExtResource("4_ero0m")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="New game" type="TextureButton" parent="VBoxContainer2"]
+[node name="New game" type="TextureButton" parent="Menu buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Continue")
@@ -82,7 +82,7 @@ texture_focused = ExtResource("6_8cfnl")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="Options" type="TextureButton" parent="VBoxContainer2"]
+[node name="Options" type="TextureButton" parent="Menu buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../New game")
@@ -95,7 +95,7 @@ texture_focused = ExtResource("8_hfkh5")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="Credits" type="TextureButton" parent="VBoxContainer2"]
+[node name="Credits" type="TextureButton" parent="Menu buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Options")
@@ -108,7 +108,7 @@ texture_focused = ExtResource("10_4jvwa")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="Quit" type="TextureButton" parent="VBoxContainer2"]
+[node name="Quit" type="TextureButton" parent="Menu buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Credits")
@@ -120,6 +120,6 @@ texture_focused = ExtResource("10_rs280")
 ignore_texture_size = true
 stretch_mode = 4
 
-[connection signal="pressed" from="VBoxContainer2/New game" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer2/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer2/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Menu buttons/New game" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu buttons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu buttons/Quit" to="." method="_on_quit_pressed"]

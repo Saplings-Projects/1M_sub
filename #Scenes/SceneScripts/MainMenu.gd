@@ -3,8 +3,8 @@ extends Control
 
 #on opening the main menu we grab the focus of the start button
 func _ready() -> void:
-	$"VBoxContainer2/Continue".grab_focus()
-
+	$"Menu buttons/Continue".grab_focus()
+	$"game version".text = ProjectSettings.get_setting("application/config/version")
 
 ## What happens when the start button is pressed
 func _on_start_pressed() -> void:
