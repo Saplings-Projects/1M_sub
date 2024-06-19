@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://chw8kc2q4o3pi"]
+[gd_scene load_steps=13 format=3 uid="uid://chw8kc2q4o3pi"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/MainMenu.gd" id="1_mwp8y"]
-[ext_resource type="Texture2D" uid="uid://u5naod8gur3m" path="res://Art/Menus/main_menu_bg-1.png" id="2_v07no"]
+[ext_resource type="Texture2D" uid="uid://dnbmjftura7ij" path="res://Art/Menus/main_menu_bg-2.png" id="2_00vte"]
+[ext_resource type="Texture2D" uid="uid://b0qf2xlgmuhxo" path="res://Art/Menus/normal button/continue.png" id="3_cyfby"]
+[ext_resource type="Texture2D" uid="uid://drawyashi8bx0" path="res://Art/Menus/button lighted/continue.png" id="4_ero0m"]
+[ext_resource type="Texture2D" uid="uid://ck042otua8tmp" path="res://Art/Menus/normal button/new_game.png" id="5_pjmgu"]
+[ext_resource type="Texture2D" uid="uid://dqwvbpqsi6i5t" path="res://Art/Menus/button lighted/new_game.png" id="6_8cfnl"]
+[ext_resource type="Texture2D" uid="uid://bhvskryq17bd2" path="res://Art/Menus/normal button/options.png" id="7_xg0pw"]
+[ext_resource type="Texture2D" uid="uid://dp0sfj3tdor8w" path="res://Art/Menus/button lighted/options.png" id="8_hfkh5"]
+[ext_resource type="Texture2D" uid="uid://2hmlylb45gfa" path="res://Art/Menus/normal button/credits.png" id="9_2idf7"]
+[ext_resource type="Texture2D" uid="uid://bfy3htfthvnvb" path="res://Art/Menus/normal button/quit.png" id="9_a6gfb"]
+[ext_resource type="Texture2D" uid="uid://cg7x1jklsh8pn" path="res://Art/Menus/button lighted/credits.png" id="10_4jvwa"]
+[ext_resource type="Texture2D" uid="uid://cxnt3pjokwbjy" path="res://Art/Menus/button lighted/quit.png" id="10_rs280"]
 
 [node name="Main menu" type="Control"]
 layout_mode = 3
@@ -16,52 +26,100 @@ script = ExtResource("1_mwp8y")
 layout_mode = 2
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = ExtResource("2_v07no")
+texture = ExtResource("2_00vte")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
+[node name="game version" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 34
-text = "This is the main menu"
+offset_left = 9.0
+offset_top = 1037.0
+offset_right = 345.0
+offset_bottom = 1084.0
+theme_override_font_sizes/font_size = 24
+text = "v1.0-alpha (Jun 2024)"
 
-[node name="button container" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 3.0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1030.0
+offset_top = 137.0
+offset_right = 1863.0
+offset_bottom = 274.0
+theme_override_font_sizes/font_size = 100
+text = "Title place holder"
 
-[node name="Start" type="Button" parent="button container"]
-offset_left = 1100.0
-offset_top = 484.0
-offset_right = 1259.0
-offset_bottom = 547.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 509.0
+offset_right = 465.0
+offset_bottom = 1196.0
+focus_mode = 2
+theme_override_constants/separation = -195
+alignment = 1
+
+[node name="Continue" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Quit")
-theme_override_font_sizes/font_size = 40
-text = "Start"
+focus_neighbor_bottom = NodePath("../New game")
+disabled = true
+texture_normal = ExtResource("3_cyfby")
+texture_pressed = ExtResource("4_ero0m")
+texture_hover = ExtResource("4_ero0m")
+texture_focused = ExtResource("4_ero0m")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Options" type="Button" parent="button container"]
-offset_left = 1100.0
-offset_top = 549.0
-offset_right = 1259.0
-offset_bottom = 612.0
-theme_override_font_sizes/font_size = 40
-text = "Options"
+[node name="New game" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../Continue")
+focus_neighbor_bottom = NodePath("../Options")
+texture_normal = ExtResource("5_pjmgu")
+texture_pressed = ExtResource("6_8cfnl")
+texture_hover = ExtResource("6_8cfnl")
+texture_focused = ExtResource("6_8cfnl")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Quit" type="Button" parent="button container"]
-offset_left = 1100.0
-offset_top = 615.0
-offset_right = 1259.0
-offset_bottom = 678.0
-focus_neighbor_bottom = NodePath("../Start")
-theme_override_font_sizes/font_size = 40
-text = "Quit"
+[node name="Options" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../New game")
+focus_neighbor_bottom = NodePath("../Credits")
+disabled = true
+texture_normal = ExtResource("7_xg0pw")
+texture_pressed = ExtResource("8_hfkh5")
+texture_hover = ExtResource("8_hfkh5")
+texture_focused = ExtResource("8_hfkh5")
+ignore_texture_size = true
+stretch_mode = 4
 
-[connection signal="focus_entered" from="button container/Start" to="." method="_on_start_focus_entered"]
-[connection signal="pressed" from="button container/Start" to="." method="_on_start_pressed"]
-[connection signal="focus_entered" from="button container/Options" to="." method="_on_options_focus_entered"]
-[connection signal="pressed" from="button container/Options" to="." method="_on_options_pressed"]
-[connection signal="focus_entered" from="button container/Quit" to="." method="_on_quit_focus_entered"]
-[connection signal="pressed" from="button container/Quit" to="." method="_on_quit_pressed"]
+[node name="Credits" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Quit")
+disabled = true
+texture_normal = ExtResource("9_2idf7")
+texture_pressed = ExtResource("10_4jvwa")
+texture_hover = ExtResource("10_4jvwa")
+texture_focused = ExtResource("10_4jvwa")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../Continue")
+texture_normal = ExtResource("9_a6gfb")
+texture_pressed = ExtResource("10_rs280")
+texture_hover = ExtResource("10_rs280")
+texture_focused = ExtResource("10_rs280")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="pressed" from="VBoxContainer2/New game" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

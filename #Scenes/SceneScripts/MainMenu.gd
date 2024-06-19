@@ -3,7 +3,7 @@ extends Control
 
 #on opening the main menu we grab the focus of the start button
 func _ready() -> void:
-	get_node("button container/Start").grab_focus()
+	$"VBoxContainer2/Continue".grab_focus()
 
 
 ## What happens when the start button is pressed
