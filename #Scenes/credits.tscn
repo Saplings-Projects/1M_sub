@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://ch8qid26mt5fs"]
+
+[ext_resource type="Texture2D" uid="uid://dxkon0ylsye4v" path="res://Art/Background/0-1.credits.png" id="1_4ctv3"]
+[ext_resource type="Texture2D" uid="uid://cbg6dn7qw5pfy" path="res://Art/NPC/rescued_saplings_comfy_sleepy.png" id="2_y4lop"]
+[ext_resource type="Texture2D" uid="uid://dk4m7alds0v51" path="res://Art/NPC/rescued_saplings_cool.png" id="3_ij6vd"]
+[ext_resource type="Texture2D" uid="uid://dkcbfi6iaeeir" path="res://Art/NPC/rescued_saplings_emo.png" id="4_bi1w0"]
+[ext_resource type="Texture2D" uid="uid://b6lam85b6kin7" path="res://Art/NPC/rescued_saplings_gamer.png" id="5_po57g"]
+[ext_resource type="Texture2D" uid="uid://cwqwgrrwq5phb" path="res://Art/NPC/rescued_saplings_maid.png" id="6_en7ht"]
+[ext_resource type="Texture2D" uid="uid://dq8xrca05abuq" path="res://Art/NPC/rescued_saplings_milf.png" id="7_h4sv1"]
+[ext_resource type="Texture2D" uid="uid://bvolhkcto8xef" path="res://Art/NPC/rescued_saplings_nerd.png" id="8_xvqp0"]
+[ext_resource type="Texture2D" uid="uid://dhi45aff4o0ia" path="res://Art/NPC/rescued_saplings_old.png" id="9_n610m"]
+[ext_resource type="Texture2D" uid="uid://b2648vdvobbt" path="res://Art/NPC/rescued_saplings_snow.png" id="10_unw81"]
+
+[sub_resource type="Animation" id="Animation_5ed2o"]
+resource_name = "sleepy_1"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RescuedSaplingsComfySleepy:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5708, -1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RescuedSaplingsComfySleepy:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.256741, 0.394757), Vector2(0.256741, 0.394757), Vector2(0.286282, 0.304486)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RescuedSaplingsComfySleepy:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(2097, -0.25, 0, 0.25, 0, 1105, -0.1, 23.559, 0.1, -42.5566, 996, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RescuedSaplingsComfySleepy:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(739, -0.25, 0, 0.25, 0, 821.024, -0.25, 0, 0.25, 0, 817, -0.25, 0, 0.25, 0, 813, -0.25, 0, 0.25, 0, 809, -0.25, 0, 0.25, 0, 806, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ovav8"]
+_data = {
+"sleepy_1": SubResource("Animation_5ed2o")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_4ctv3")
+
+[node name="RescuedSaplingsComfySleepy" type="Sprite2D" parent="."]
+position = Vector2(996, 806)
+rotation = -1.5708
+scale = Vector2(0.286282, 0.304486)
+texture = ExtResource("2_y4lop")
+
+[node name="RescuedSaplingsCool" type="Sprite2D" parent="."]
+position = Vector2(5741, 2874)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_ij6vd")
+
+[node name="RescuedSaplingsEmo" type="Sprite2D" parent="."]
+position = Vector2(4205, 2834)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_bi1w0")
+
+[node name="RescuedSaplingsGamer" type="Sprite2D" parent="."]
+position = Vector2(2733, 2890)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_po57g")
+
+[node name="RescuedSaplingsMaid" type="Sprite2D" parent="."]
+position = Vector2(5729, 1766)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_en7ht")
+
+[node name="RescuedSaplingsMilf" type="Sprite2D" parent="."]
+position = Vector2(4176, 1816)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_h4sv1")
+
+[node name="RescuedSaplingsNerd" type="Sprite2D" parent="."]
+position = Vector2(2665, 1809)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_xvqp0")
+
+[node name="RescuedSaplingsOld" type="Sprite2D" parent="."]
+position = Vector2(5637, 562)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_n610m")
+
+[node name="RescuedSaplingsSnow" type="Sprite2D" parent="."]
+position = Vector2(4168, 598)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_unw81")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ovav8")
+}
