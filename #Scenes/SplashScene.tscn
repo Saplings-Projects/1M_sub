@@ -22,8 +22,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1418.0
-offset_bottom = 1581.0
+offset_left = -709.0
+offset_top = -1581.0
+offset_right = 709.0
 scale = Vector2(0.682, 0.682)
 pivot_offset = Vector2(709, 1581)
 texture = ExtResource("1_7smrv")
@@ -34,6 +35,7 @@ volume_db = 3.043
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 1418.0
 offset_bottom = 1581.0
 scale = Vector2(0.684, 0.684)
