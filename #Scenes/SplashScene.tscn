@@ -32,11 +32,3 @@ texture = ExtResource("1_7smrv")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_uytcb")
 volume_db = 3.043
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 1418.0
-offset_bottom = 1581.0
-scale = Vector2(0.684, 0.684)
-texture = ExtResource("1_7smrv")
