@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ch8qid26mt5fs"]
+[gd_scene load_steps=21 format=3 uid="uid://ch8qid26mt5fs"]
 
 [ext_resource type="Texture2D" uid="uid://dxkon0ylsye4v" path="res://Art/Background/0-1.credits.png" id="1_4ctv3"]
 [ext_resource type="Texture2D" uid="uid://cbg6dn7qw5pfy" path="res://Art/NPC/rescued_saplings_comfy_sleepy.png" id="2_y4lop"]
@@ -10,6 +10,31 @@
 [ext_resource type="Texture2D" uid="uid://bvolhkcto8xef" path="res://Art/NPC/rescued_saplings_nerd.png" id="8_xvqp0"]
 [ext_resource type="Texture2D" uid="uid://dhi45aff4o0ia" path="res://Art/NPC/rescued_saplings_old.png" id="9_n610m"]
 [ext_resource type="Texture2D" uid="uid://b2648vdvobbt" path="res://Art/NPC/rescued_saplings_snow.png" id="10_unw81"]
+
+[sub_resource type="Animation" id="Animation_2v08l"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RescuedSaplingsSnow:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RescuedSaplingsSnow:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(842, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_5ed2o"]
 resource_name = "sleepy_in_1"
@@ -133,11 +158,85 @@ tracks/4/keys = {
 "values": [1.5]
 }
 
+[sub_resource type="Animation" id="Animation_5wswy"]
+resource_name = "snow_in_1"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RescuedSaplingsSnow:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(2098, 0, 0, 0, 0, 959.998, -0.25, 0, 0.25, 0, 939, -0.25, 0, 0.25, 0, 929, -0.25, 0, 0.25, 0, 928, -0.25, 0, 0.25, 0, 929, -0.25, 0, 0.25, 0, 933, -0.25, 0, 0.25, 0, 938, -0.25, 0, 0.25, 0, 945, -0.25, 0, 0.25, 0, 952, -0.25, 0, 0.25, 0, 959.626, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RescuedSaplingsSnow:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(831, -0.25, 0, 0.25, 0, 830.998, -0.25, 0, 0.25, 0, 813, -0.25, 0, 0.25, 0, 806, -0.25, 0, 0.25, 0, 805, -0.25, 0, 0.25, 0, 806, -0.25, 0, 0.25, 0, 809, -0.25, 0, 0.25, 0, 813, -0.25, 0, 0.25, 0, 819, -0.25, 0, 0.25, 0, 825, -0.25, 0, 0.25, 0, 830, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RescuedSaplingsSnow:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 1, 0, 0),
+"points": PackedFloat32Array(0.104095, -0.25, 0, 0.25, 0, 0.104095, 0, 0, 0, 0, -0.127415, -0.25, 0, 0.25, 0, 0.104095, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.7, 1, 1.6)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RescuedSaplingsSnow:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ovav8"]
 _data = {
+"RESET": SubResource("Animation_2v08l"),
 "sleepy_in_1": SubResource("Animation_5ed2o"),
-"sleepy_out_1": SubResource("Animation_kj4kf")
+"sleepy_out_1": SubResource("Animation_kj4kf"),
+"snow_in_1": SubResource("Animation_5wswy")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqgas"]
+animation = &"sleepy_out_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_81twr"]
+animation = &"sleepy_in_1"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ybwof"]
+sync = true
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_y2rfc"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jw1t1"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_81twr")
+nodes/Animation/position = Vector2(-100, 100)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_gqgas")
+"nodes/Animation 2/position" = Vector2(-100, 280)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_ybwof")
+nodes/Blend2/position = Vector2(120, 160)
+nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_y2rfc")
+nodes/TimeSeek/position = Vector2(340, 140)
+nodes/output/position = Vector2(720, 140)
+node_connections = [&"Blend2", 0, &"Animation", &"Blend2", 1, &"Animation 2", &"TimeSeek", 0, &"Blend2", &"output", 0, &"TimeSeek"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -172,8 +271,10 @@ Role 1 Role 2
 horizontal_alignment = 1
 
 [node name="RescuedSaplingsComfySleepy" type="Sprite2D" parent="."]
-position = Vector2(-260, 855)
-scale = Vector2(0.35, 0.227)
+visible = false
+position = Vector2(2097, 739)
+rotation = -1.5708
+scale = Vector2(0.256741, 0.394757)
 texture = ExtResource("2_y4lop")
 
 [node name="RescuedSaplingsCool" type="Sprite2D" parent="."]
@@ -212,7 +313,8 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_n610m")
 
 [node name="RescuedSaplingsSnow" type="Sprite2D" parent="."]
-position = Vector2(4168, 598)
+position = Vector2(960, 842)
+rotation = 0.104095
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("10_unw81")
 
@@ -220,4 +322,14 @@ texture = ExtResource("10_unw81")
 libraries = {
 "": SubResource("AnimationLibrary_ovav8")
 }
-speed_scale = 1.5
+speed_scale = 3.0
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+libraries = {
+"": SubResource("AnimationLibrary_ovav8")
+}
+tree_root = SubResource("AnimationNodeBlendTree_jw1t1")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 0.5
+parameters/TimeSeek/seek_request = -1.0
