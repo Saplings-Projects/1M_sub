@@ -27,9 +27,6 @@ var current_map: MapBase
 ## - Width should not increase or decrease by more than 2 per floor (this makes it certain all rooms on the map are accessible [br]
 var map_width_array: Array[int]
 
-## Room events that we do not want to be consecutive
-var no_consecutive_room_event: Array[String] = ["shop", "heal"]
- 
 #map_floors_width changes the width of the map's floors
 ## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
 func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase: 
@@ -82,26 +79,30 @@ func is_room_event_correct(current_room: RoomBase, map: MapBase = current_map) -
 
 
 	## Rule 2: Cannot have 2 consecutive Heal or Shop rooms
-	# Get the parent rooms' types
-	var _parent_events: Array[String] = []
-	for delta_x: int in [-1, 0, 1]:
-		var _parent_x: int = current_room.room_position.x + delta_x
-		var _parent_y: int = current_room.room_position.y - 1
-		if _parent_y >= 0 && _parent_x >= 0 && _parent_x < map.rooms[_parent_y].size() && map.rooms[_parent_y][_parent_x] != null:
-			_parent_events.append(map.rooms[_parent_y][_parent_x].room_event.get_event_name())
+	# Room events that we do not want to be consecutive
+	const no_consecutive_room_event: Array[String] = ["shop", "heal"]
+	
+	# We need to check the parents if current room event is shop or heal
+	if current_room_event_name in no_consecutive_room_event:
+		# Get the parent rooms' types
+		var _parent_events: Array[String] = []
+		for delta_x: int in [-1, 0, 1]:
+			var _parent_x: int = current_room.room_position.x + delta_x
+			var _parent_y: int = current_room.room_position.y - 1
+			if _parent_y >= 0 && _parent_x >= 0 && _parent_x < map.rooms[_parent_y].size() && map.rooms[_parent_y][_parent_x] != null:
+				_parent_events.append(map.rooms[_parent_y][_parent_x].room_event.get_event_name())
 
-	# Check if current room has the same type as one of its parent room
-	if current_room_event_name in no_consecutive_room_event && current_room_event_name in _parent_events:
-		return false
+		# Check if current room has the same type as one of its parent room
+		if current_room_event_name in _parent_events:
+			return false
 
 
-	## Rule 3: There must be at least 2 room types among destinations of Rooms that have 2 or more Paths going out.
+	## Rule 3: There must be at least 2 room types among destinations of Rooms that have 2 or more Paths going out. [br]
 	## Since the events of the rooms on the right of current room ((x+i,y), i=1,2,...) have not been generated yet, [br]
-	## we don't need to take them into account. We only check neighbors on the left: (x-2,y), (x-1,y) and (x,y)
+	## we don't need to take them into account. We only check neighbors on the left: (x-2,y), (x-1,y) and (x,y) [br]
 	## Note: We make sure the two leftmost and rightmost rooms of the floor have different events, [br]
 	## since they could be the only destinations of a room from the previous floor (happens when current floor's size [br]
 	## is smaller or equal than previous)
-
 	var _neighbors_events: Array[String] = []
 	var delta_xs: Array[int] = []
 
@@ -111,7 +112,7 @@ func is_room_event_correct(current_room: RoomBase, map: MapBase = current_map) -
 	else:
 		delta_xs = [-2, -1, 0]
 		
-	# Get the neighbor rooms' types
+	# Get the neighbor and current rooms types
 	for delta_x: int in delta_xs:
 		var _neighbor_x: int = current_room.room_position.x + delta_x
 		var _neighbor_y: int = current_room.room_position.y
