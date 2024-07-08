@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ch8qid26mt5fs"]
+[gd_scene load_steps=17 format=3 uid="uid://ch8qid26mt5fs"]
 
 [ext_resource type="Texture2D" uid="uid://dxkon0ylsye4v" path="res://Art/Background/0-1.credits.png" id="1_4ctv3"]
 [ext_resource type="Texture2D" uid="uid://cbg6dn7qw5pfy" path="res://Art/NPC/rescued_saplings_comfy_sleepy.png" id="2_y4lop"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bvolhkcto8xef" path="res://Art/NPC/rescued_saplings_nerd.png" id="8_xvqp0"]
 [ext_resource type="Texture2D" uid="uid://dhi45aff4o0ia" path="res://Art/NPC/rescued_saplings_old.png" id="9_n610m"]
 [ext_resource type="Texture2D" uid="uid://b2648vdvobbt" path="res://Art/NPC/rescued_saplings_snow.png" id="10_unw81"]
+[ext_resource type="AnimationLibrary" uid="uid://dfkng08hfjpdv" path="res://Art/Animation/credits/In.res" id="11_xdj82"]
+[ext_resource type="AnimationLibrary" uid="uid://jlt8btc7fx2j" path="res://Art/Animation/credits/Out.res" id="12_8iix6"]
 
 [sub_resource type="Animation" id="Animation_2v08l"]
 length = 0.001
@@ -153,7 +155,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("AnimationPlayer:speed_scale")
+tracks/12/path = NodePath("AnimationPlayerIn:speed_scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -162,496 +164,53 @@ tracks/12/keys = {
 "update": 0,
 "values": [1.2]
 }
-
-[sub_resource type="Animation" id="Animation_iy3ai"]
-resource_name = "milf_in_1"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsMilf:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.2, 1.5, 1.8, 3, 3.3, 3.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.14), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.14), Vector2(0.3, 0.3)]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsMilf:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(2043, -0.25, 0, 0.25, 0, 1486, -0.25, 0, 0.25, 0, 1486, -0.25, 0, 0.25, 0, 1486, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1.2, 1.5, 1.8, 3, 3.3, 3.6)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsMilf:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(840, -0.25, 0, 0.1, -166.907, 473.429, -0.25, 0, 0.25, 0, 840, -0.1, -145.685, 0.0999999, 19.3711, 860, 0, 0, 0, 0, 880, 0, 0, 0, 0, 900, 0, 0, 0, 0, 880, 0, 0, 0, 0, 860, 0, 0, 0, 0, 840, 0, 0, 0, 0, 473.429, -0.25, 0, 0.25, 0, 840, -0.1, -145.685, 0.0999999, 19.3711, 860, 0, 0, 0, 0, 880, 0, 0, 0, 0, 900, 0, 0, 0, 0, 880, 0, 0, 0, 0, 860, 0, 0, 0, 0, 840, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2.4, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationPlayer:speed_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.0]
-}
-
-[sub_resource type="Animation" id="Animation_0nia3"]
-resource_name = "nerd_in_1"
-length = 2.5
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsNerd:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 2, 2, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(2051, 0, 0, 0.0666667, 0, 1876, -0.0666667, 0, 0.0666667, 0, 1701, -0.0666667, 0, 0, 0, 1701, -0.0666667, 0, 0, 0, 1526, -0.0666667, 0, 0.0666667, 0, 1351, -0.0666667, 0, 0, 0, 1351, -0.0666667, 0, 0, 0, 1156, -0.0666667, 0, 0.0666667, 0, 960, -0.0666667, 0, 0, 0, 960, -0.0666667, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.8, 1, 1.2, 1.6, 1.8, 2, 2.4)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsNerd:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(851, 0, 0, 0, 0, 819, 0, 0, 0, 0, 851, 0, 0, 0, 0, 860, 0, 0, 0, 0, 868, 0, 0, 0, 0, 860, 0, 0, 0, 0, 851, 0, 0, 0, 0, 819, 0, 0, 0, 0, 851, 0, 0, 0, 0, 860, 0, 0, 0, 0, 868, 0, 0, 0, 0, 860, 0, 0, 0, 0, 851, 0, 0, 0, 0, 819, 0, 0, 0, 0, 851, 0, 0, 0, 0, 860, 0, 0, 0, 0, 868, 0, 0, 0, 0, 860, 0, 0, 0, 0, 851, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.8, 2, 2.1, 2.2, 2.3, 2.4)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsNerd:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1.2, 1.4, 1.6, 2, 2.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.25), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.25), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.25), Vector2(0.3, 0.3)]
-}
-
-[sub_resource type="Animation" id="Animation_jc6af"]
-resource_name = "nerd_out_1"
-length = 2.5
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsNerd:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(2, 2, 2, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(960, 0, 0, 0.0666667, 0, 783.842, -0.0666667, 0, 0.0666667, 0, 608.842, -0.0666667, 0, 0, 0, 608.842, -0.0666667, 0, 0, 0, 433.846, -0.0666667, 0, 0.0666667, 0, 258.846, -0.0666667, 0, 0, 0, 258.846, -0.0666667, 0, 0, 0, 63.8458, -0.0666667, 0, 0.0666667, 0, -132.158, -0.0666667, 0, 0, 0, -132.158, -0.0666667, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.8, 1, 1.2, 1.6, 1.8, 2, 2.4)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsNerd:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(851, 0, 0, 0, 0, 819, 0, 0, 0, 0, 851, 0, 0, 0, 0, 860, 0, 0, 0, 0, 868, 0, 0, 0, 0, 860, 0, 0, 0, 0, 851, 0, 0, 0, 0, 819, 0, 0, 0, 0, 851, 0, 0, 0, 0, 860, 0, 0, 0, 0, 868, 0, 0, 0, 0, 860, 0, 0, 0, 0, 851, 0, 0, 0, 0, 819, 0, 0, 0, 0, 851, 0, 0, 0, 0, 860, 0, 0, 0, 0, 868, 0, 0, 0, 0, 860, 0, 0, 0, 0, 851, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.8, 2, 2.1, 2.2, 2.3, 2.4)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsNerd:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1.2, 1.4, 1.6, 2, 2.2, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.25), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.25), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.25), Vector2(0.3, 0.3)]
-}
-
-[sub_resource type="Animation" id="Animation_fq6fw"]
-resource_name = "old_in_1"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsOld:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(2079, 787), Vector2(1871, 829), Vector2(1769, 782), Vector2(1661, 784), Vector2(1578, 829), Vector2(1423, 781), Vector2(1301, 826), Vector2(1248, 790), Vector2(1137, 764), Vector2(1092, 791), Vector2(960, 857)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsOld:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -12.5664]
-}
-
-[sub_resource type="Animation" id="Animation_6pli7"]
-resource_name = "old_out_1"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsOld:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(960, 857), Vector2(828, 791), Vector2(783, 764), Vector2(672, 790), Vector2(619, 826), Vector2(497, 781), Vector2(342, 829), Vector2(259, 784), Vector2(151, 782), Vector2(49, 829), Vector2(-159, 787)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsOld:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -12.5664]
-}
-
-[sub_resource type="Animation" id="Animation_5ed2o"]
-resource_name = "sleepy_in_1"
-length = 2.4
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsComfySleepy:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.4, 0.0391526, 0, -0.1, -0.00569247, 0.25, 0),
-"times": PackedFloat32Array(0, 1.4, 2.3)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsComfySleepy:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.256741, 0.394757), Vector2(0.256741, 0.394757), Vector2(0.35, 0.2), Vector2(0.3, 0.3)]
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsComfySleepy:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"points": PackedFloat32Array(2097, -0.25, 0, 0.25, 0, 827.147, -0.1, 23.559, 0.1, -42.5566, 718.147, -0.25, 0, 0.25, 0, 718.147, 0, 0, 0, 0, 720.157, 0, 0, 0, 0, 734.147, 0, 0, 0, 0, 758.147, 0, 0, 0, 0, 788.147, 0, 0, 0, 0, 824.147, 0, 0, 0, 0, 860.819, 0, 0, 0, 0, 900.147, 0, 0, 0, 0, 936.147, 0, 0, 0, 0, 960.147, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6, 1, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("RescuedSaplingsComfySleepy:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2, 1, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1),
-"points": PackedFloat32Array(739, -0.25, 0, 0.25, 0, 820.294, -0.25, 0, 0.1, -3.69305, 809.568, -0.0333333, 0, 0.0333333, 0, 797.012, 0, 0, 0, 0, 785.456, -0.0333333, 0, 0.0333333, 0, 773, -0.0333333, 0, 0.0333333, 0, 785.742, -0.0333333, 0, 0.0333333, 0, 799, -0.0333333, 0, 0, 0, 799, 0, 0, 0, 0, 795, 0, 0, 0, 0, 788, 0, 0, 0, 0, 780, 0, 0, 0, 0, 774, -0.0333333, 0, 0.0333333, 0, 773, -0.0333333, 0, 0.0333333, 0, 781, -0.0333333, 0, 0.0333333, 0, 798, 0, 0, 0, 0, 820, 0, 0, 0, 0, 825, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3)
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimationPlayer:speed_scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6, 1.2, 1.3, 1.4, 1.5, 2.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [3.0, 3.0, 3.0, 3.0, 0.3, 0.3, 1.5, 1.5]
-}
-
-[sub_resource type="Animation" id="Animation_kj4kf"]
-resource_name = "sleepy_out_1"
-length = 6.0
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsComfySleepy:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("RescuedSaplingsMaid:position:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.1, -0.00569247, 0.25, 0),
+"points": PackedFloat32Array(2112, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsComfySleepy:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(960.147, 0, 0, 0, 0, 960.147, 0, 0, 0, 0, 660, 0, 0, 0, 0, 660, 0, 0, 0, 0, 360, 0, 0, 0, 0, 360, 0, 0, 0, 0, 60, 0, 0, 0, 0, 60, 0, 0, 0, 0, -260, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6, 1.4, 2, 2.8, 3.4, 4.2, 4.8, 5.6)
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("RescuedSaplingsMaid:position:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(277, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsComfySleepy:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(825, 0, 0, 0, 0, 855, 0, 0, 0, 0, 803, 0, 0, 0, 0, 685, -0.25, 20, 0.25, 20, 803, 0, 0, 0, 0, 855, 0, 0, 0, 0, 803, 0, 0, 0, 0, 685, -0.25, 20, 0.25, 20, 803, 0, 0, 0, 0, 855, 0, 0, 0, 0, 803, 0, 0, 0, 0, 685, -0.25, 20, 0.25, 20, 803, 0, 0, 0, 0, 855, 0, 0, 0, 0, 803, 0, 0, 0, 0, 685, -0.25, 20, 0.25, 20, 803, 0, 0, 0, 0, 855, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.3, 0.6, 1, 1.4, 1.7, 2, 2.4, 2.8, 3.1, 3.4, 3.8, 4.2, 4.5, 4.8, 5.2, 5.6, 5.9)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ovav8"]
+_data = {
+"RESET": SubResource("Animation_2v08l")
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("RescuedSaplingsComfySleepy:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 1.4, 1.7, 2, 2.8, 3.1, 3.4, 4.2, 4.5, 4.8, 5.6, 5.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.35, 0.227), Vector2(0.227, 0.35), Vector2(0.227, 0.35), Vector2(0.35, 0.227), Vector2(0.227, 0.35), Vector2(0.227, 0.35), Vector2(0.35, 0.227), Vector2(0.227, 0.35), Vector2(0.227, 0.35), Vector2(0.35, 0.227), Vector2(0.227, 0.35), Vector2(0.227, 0.35), Vector2(0.35, 0.227)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimationPlayer:speed_scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+
+[sub_resource type="Animation" id="Animation_3w5yu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayerOut:speed_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.5]
 }
 
-[sub_resource type="Animation" id="Animation_5wswy"]
-resource_name = "snow_in_1"
-length = 1.7
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsSnow:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"points": PackedFloat32Array(2120, 0, 0, 0, 0, 959.998, -0.233333, 0, 0.0333333, 0, 939, 0, 0, 0, 0, 929, 0, 0, 0, 0, 928, 0, 0, 0, 0, 929, 0, 0, 0, 0, 933, 0, 0, 0, 0, 938, 0, 0, 0, 0, 945, 0, 0, 0, 0, 952, 0, 0, 0, 0, 959.626, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsSnow:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"points": PackedFloat32Array(831, -0.25, 0, 0.25, 0, 830.998, -0.233333, 0, 0.0333333, 0, 813, 0, 0, 0, 0, 806, 0, 0, 0, 0, 805, 0, 0, 0, 0, 806, 0, 0, 0, 0, 809, 0, 0, 0, 0, 813, 0, 0, 0, 0, 819, 0, 0, 0, 0, 825, 0, 0, 0, 0, 830, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsSnow:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 1, 0, 0),
-"points": PackedFloat32Array(0.104095, -0.25, 0, 0.25, 0, 0.104095, 0, 0, 0, 0, -0.127415, -0.25, 0, 0.25, 0, 0.104095, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.7, 1, 1.6)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("RescuedSaplingsSnow:scale")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1.6),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.3, 0.3)]
-}
-
-[sub_resource type="Animation" id="Animation_x7mqk"]
-resource_name = "snow_out_1"
-length = 3.0
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsSnow:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 0, 0, 0, 0),
-"points": PackedFloat32Array(959.626, -0.25, 0, 0.25, 0, 959.351, -0.0333333, 0, 0.0333333, 0, 959.034, -0.0333333, 0, 0.0333333, 0, 958.597, -0.0333333, 0, 0.0333333, 0, 956, -0.0333333, 0, 0, 0, 958.597, -0.0333333, 0, 0.0333333, 0, 959.034, -0.0333333, 0, 0.0333333, 0, 959.351, -0.0333333, 0, 0, -500, -174, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 3)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsSnow:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 0, 0, 0, 0),
-"points": PackedFloat32Array(830, -0.25, 0, 0.25, 0, 834, -0.0333333, 0, 0.0333333, 0, 843, -0.0333333, 0, 0.0333333, 0, 852, -0.0333333, 0, 0.0333333, 0, 856, -0.0333333, 0, 0, 0, 852, -0.0333333, 0, 0.0333333, 0, 843, -0.0333333, 0, 0.0333333, 0, 834, -0.0333333, 0, 0.033, -80, 546, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 3)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsSnow:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 3),
-"points": PackedFloat32Array(0.104095, 0, 0, 0, 0, 0.0817433, -0.25, 0, 0.25, 0, 0.104095, -0.133333, 0, 0.3, -2.89953, -6.283, -0.55, 0, 0.55, 0),
-"times": PackedFloat32Array(0, 0.4, 0.8, 3)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("RescuedSaplingsSnow:scale")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.23597), Vector2(0.3, 0.3)]
-}
-
-[sub_resource type="Animation" id="Animation_ne1w6"]
-resource_name = "milf_out_1"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RescuedSaplingsMilf:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.2, 1.5, 1.8, 3, 3.3, 3.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.14), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.14), Vector2(0.3, 0.3)]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RescuedSaplingsMilf:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0, 403, -0.25, 0, 0.25, 0, 403, -0.25, 0, 0.25, 0, 403, -0.25, 0, 0.25, 0, -123, -0.25, 0, 0.25, 0, -123, -0.25, 0, 0.25, 0, -123, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1.2, 1.5, 1.8, 3, 3.3, 3.6)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RescuedSaplingsMilf:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(840, -0.25, 0, 0.1, -166.907, 473.429, -0.25, 0, 0.25, 0, 840, -0.1, -145.685, 0.0999999, 19.3711, 860, 0, 0, 0, 0, 880, 0, 0, 0, 0, 900, 0, 0, 0, 0, 880, 0, 0, 0, 0, 860, 0, 0, 0, 0, 840, 0, 0, 0, 0, 473.429, -0.25, 0, 0.25, 0, 840, -0.1, -145.685, 0.0999999, 19.3711, 860, 0, 0, 0, 0, 880, 0, 0, 0, 0, 900, 0, 0, 0, 0, 880, 0, 0, 0, 0, 860, 0, 0, 0, 0, 840, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.6, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2.4, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationPlayer:speed_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ovav8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hn5re"]
 _data = {
-"RESET": SubResource("Animation_2v08l"),
-"milf_in_1": SubResource("Animation_iy3ai"),
-"milf_out_1": SubResource("Animation_ne1w6"),
-"nerd_in_1": SubResource("Animation_0nia3"),
-"nerd_out_1": SubResource("Animation_jc6af"),
-"old_in_1": SubResource("Animation_fq6fw"),
-"old_out_1": SubResource("Animation_6pli7"),
-"sleepy_in_1": SubResource("Animation_5ed2o"),
-"sleepy_out_1": SubResource("Animation_kj4kf"),
-"snow_in_1": SubResource("Animation_5wswy"),
-"snow_out_1": SubResource("Animation_x7mqk")
+"RESET": SubResource("Animation_3w5yu")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqgas"]
-animation = &"sleepy_out_1"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_81twr"]
-animation = &"sleepy_in_1"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ybwof"]
-sync = true
-
-[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_y2rfc"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jw1t1"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_81twr")
-nodes/Animation/position = Vector2(-100, 100)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_gqgas")
-"nodes/Animation 2/position" = Vector2(-100, 280)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_ybwof")
-nodes/Blend2/position = Vector2(120, 160)
-nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_y2rfc")
-nodes/TimeSeek/position = Vector2(340, 140)
-nodes/output/position = Vector2(720, 140)
-node_connections = [&"Blend2", 0, &"Animation", &"Blend2", 1, &"Animation 2", &"TimeSeek", 0, &"Blend2", &"output", 0, &"TimeSeek"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -687,8 +246,7 @@ horizontal_alignment = 1
 
 [node name="RescuedSaplingsComfySleepy" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(960.147, 825)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("2_y4lop")
 
 [node name="RescuedSaplingsCool" type="Sprite2D" parent="."]
@@ -707,11 +265,12 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_po57g")
 
 [node name="RescuedSaplingsMaid" type="Sprite2D" parent="."]
-position = Vector2(5729, 1766)
+position = Vector2(2112, 277)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_en7ht")
 
 [node name="RescuedSaplingsMilf" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(2043, 840)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("7_h4sv1")
@@ -735,18 +294,17 @@ rotation = 0.0817433
 scale = Vector2(0.3, 0.23597)
 texture = ExtResource("10_unw81")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayerIn" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ovav8")
+"": SubResource("AnimationLibrary_ovav8"),
+"In": ExtResource("11_xdj82"),
+"Out": ExtResource("12_8iix6")
 }
 speed_scale = 1.2
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
+[node name="AnimationPlayerOut" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ovav8")
+"": SubResource("AnimationLibrary_hn5re"),
+"Out": ExtResource("12_8iix6")
 }
-tree_root = SubResource("AnimationNodeBlendTree_jw1t1")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Blend2/blend_amount = 0.5
-parameters/TimeSeek/seek_request = -1.0
+speed_scale = 1.5
