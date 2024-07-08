@@ -186,6 +186,40 @@ tracks/14/keys = {
 "points": PackedFloat32Array(277, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("RescuedSaplingsEmo:position:x")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-138, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("RescuedSaplingsEmo:position:y")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(843, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("RescuedSaplingsEmo:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ovav8"]
 _data = {
@@ -255,7 +289,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_ij6vd")
 
 [node name="RescuedSaplingsEmo" type="Sprite2D" parent="."]
-position = Vector2(4205, 2834)
+position = Vector2(-138, 843)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_bi1w0")
 
@@ -265,6 +299,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_po57g")
 
 [node name="RescuedSaplingsMaid" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(2112, 277)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_en7ht")
