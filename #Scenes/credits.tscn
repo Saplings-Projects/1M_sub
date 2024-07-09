@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://ch8qid26mt5fs"]
+[gd_scene load_steps=18 format=3 uid="uid://ch8qid26mt5fs"]
 
 [ext_resource type="Texture2D" uid="uid://dxkon0ylsye4v" path="res://Art/Background/0-1.credits.png" id="1_4ctv3"]
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/credits.gd" id="1_km20a"]
 [ext_resource type="Texture2D" uid="uid://cbg6dn7qw5pfy" path="res://Art/NPC/rescued_saplings_comfy_sleepy.png" id="2_y4lop"]
 [ext_resource type="Texture2D" uid="uid://dk4m7alds0v51" path="res://Art/NPC/rescued_saplings_cool.png" id="3_ij6vd"]
 [ext_resource type="Texture2D" uid="uid://dkcbfi6iaeeir" path="res://Art/NPC/rescued_saplings_emo.png" id="4_bi1w0"]
@@ -295,6 +296,7 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_km20a")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0

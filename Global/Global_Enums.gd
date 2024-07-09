@@ -94,7 +94,7 @@ enum EventType {
 }
 
 enum SaplingType {
-	Comfy,
+	Sleepy,
 	Cool,
 	Emo,
 	Gamer,
@@ -103,4 +103,5 @@ enum SaplingType {
 	Nerd,
 	Old,
 	Snow,
+	None,
 }
