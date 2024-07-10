@@ -328,12 +328,8 @@ Role 1 Role 2
 "
 horizontal_alignment = 1
 
-[node name="RescuedSaplingsComfySleepy" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("2_y4lop")
-
 [node name="RescuedSaplingsCool" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1309, 822)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_ij6vd")
@@ -374,8 +370,13 @@ position = Vector2(2079, 787)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_n610m")
 
-[node name="RescuedSaplingsSnow" type="Sprite2D" parent="."]
+[node name="RescuedSaplingsSleepy" type="Sprite2D" parent="."]
 visible = false
+position = Vector2(-260, 855)
+scale = Vector2(0.35, 0.227)
+texture = ExtResource("2_y4lop")
+
+[node name="RescuedSaplingsSnow" type="Sprite2D" parent="."]
 position = Vector2(960, 842)
 rotation = 0.0817433
 scale = Vector2(0.3, 0.23597)
