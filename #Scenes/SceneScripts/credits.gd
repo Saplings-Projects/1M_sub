@@ -1,5 +1,6 @@
 extends Node2D
 
+## All the possible team roles
 enum Roles {
 	Art,
 	Design,
@@ -15,8 +16,10 @@ enum Roles {
 	Team_lead_writing,
 }
 
+## Re-export of the global enum variable to type a shorter name
 const sapling_type: GlobalEnums.SaplingType = GlobalEnums.SaplingType
 
+## All the team members, their roles and their avatar
 const TEAM_MEMBERS: Dictionary = {
 	"Adrian": [[Roles.Team_lead_music, Roles.Music], sapling_type.Old],
 	"Ago": [[Roles.Art], sapling_type.Maid],
@@ -59,8 +62,38 @@ const TEAM_MEMBERS: Dictionary = {
 	"TyTy": [[Roles.Programming], sapling_type.Old],
 	"Vsiiesk ": [[Roles.Art], sapling_type.Nerd],
 	"Vyto (Vytonium)": [[Roles.Music], sapling_type.Old],
-	"Walles": [[Roles.Design], sapling_type.None],
+	"Walles": [[Roles.Design], sapling_type.Sleepy],
 	"Zannmaster": [[Roles.Design], sapling_type.Milf],
+}
+
+## The time needed for an animation to reach the center of the screen [br]
+## This is especially useful for animations that are very fast and we need to delay them [br]
+## This lets the previous animation time to get out of the screen center
+const ANIMATION_TIME_TO_SCREEN_CENTER: Dictionary = {
+	"cool_in_1": 2.3,
+	"emo_in_1": 0, #enters by the left, will need to wait for previous out animation to completely finish
+	"gamer_in_1": 1.1,
+	"maid_in_1": 0.7,
+	"milf_in_1": 2.6,
+	"nerd_in_1": 1.7,
+	"old_in_1": 1.5,
+	"sleepy_in_1": 0.4,
+	"snow_in_1": 0.4,
+}
+
+## Time needed for an animation to free the space at the center of the screen [br]
+## Delay the previous animation by this duration if the time it takes to reach the center is smaller
+## than the time it takes the "out" animation to free the screen center
+const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
+	"cool_out_1": 1,
+	"emo_out_1": 2.1,
+	"gamer_out_1": 1.3,
+	"maid_out_1": 0.5,
+	"milf_out_1": 0.6,
+	"nerd_out_1": 0.4,
+	"old_out_1": 0.9,
+	"sleepy_out_1": 2.2,
+	"snow_out_1": 1.1,
 }
 
 ## Launch the loop of the scene
