@@ -44,12 +44,11 @@ const TEAM_MEMBERS: Dictionary = {
 	"Kotoschneep": [[Roles.Art], sapling_type.None],
 	"Lann": [[Roles.Programming], sapling_type.Nerd],
 	"Lunar": [[Roles.Art], sapling_type.Gamer],
-	"Marineline": [[Roles.Programming], sapling_type.None], #! almost no contribution
-	"Mikotey": [[Roles.Special_thanks], sapling_type.Maid],
+	"Mikotey": [[Roles.Design], sapling_type.Maid],
 	"Minik": [[Roles.Design], sapling_type.Emo],
 	"Multi-arm": [[Roles.Programming], sapling_type.None],
 	"nára": [[Roles.Art], sapling_type.Emo],
-	"Palenque": [[Roles.Programming], sapling_type.Nerd], #! would make more sense as design
+	"Palenque": [[Roles.Design], sapling_type.Nerd],
 	"Papier": [[Roles.Programming], sapling_type.Milf],
 	"Pterion": [[Roles.Art, Roles.Design], sapling_type.Maid],
 	"ROBBERGON": [[Roles.Team_lead_design, Roles.Design], sapling_type.Snow],
@@ -57,7 +56,6 @@ const TEAM_MEMBERS: Dictionary = {
 	"Sappysque": [[Roles.Art], sapling_type.Emo],
 	"Tomzkk": [[Roles.Design, Roles.Programming], sapling_type.Old],
 	"Tradgore": [[Roles.Design, Roles.Writing], sapling_type.Sleepy],
-	"TripleCubes": [[Roles.Programming], sapling_type.None], #! almost no contribution
 	"Turtyo": [[Roles.Team_lead, Roles.Team_lead_prog, Roles.Programming], sapling_type.Gamer],
 	"TyTy": [[Roles.Programming], sapling_type.Old],
 	"Vsiiesk ": [[Roles.Art], sapling_type.Nerd],
