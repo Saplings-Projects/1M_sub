@@ -7,11 +7,16 @@ class_name HealthComponent
 ## Emit when health is changed
 signal on_health_changed(new_health: int)
 
+signal on_block_changed(new_block: int)
+
 ## The maximum health the entity can have; this is a hard limit
 @export var max_health: float = 100
 ## The health the entity currently has [br]
 ## Between 0 and max_health
 var current_health: float = 100 # ? change this to max health, or just unset since it's init by the ready
+
+
+var current_block: float = 100
 
 ## Initialize the health component, putting health to max health
 ## This only happens at game start for the player, the value is then tracked inside the [PlayerManager] singleton [br]
@@ -19,36 +24,29 @@ var current_health: float = 100 # ? change this to max health, or just unset sin
 func _ready() -> void:
 	_set_health(max_health)
 
-
-## Modify the health of the entity [br]
-## Use the is_healing boolean if you want to heal. [br]
-## If the amount is negative, nothing will change. [br]
-## Caster can be null [br]
-func modify_health(amount: float, caster: Entity, is_healing: bool = false) -> void:
-	# Allow caster to be null, but not the target.
-	# If caster is null, we assume that the modification came from an unknown source,
-	# so status won't calculate.
-	var new_health: float
-
+func take_damage_block_and_health(amount : float, _caster: Entity) -> void:
 	if amount <= 0.0:
 		return
 	
-	assert(owner != null, "No owner was set. Please call init on the Entity.")
+	var leftover_damage: float
+	leftover_damage = amount
 	
-	var target: Entity = entity_owner # TODO change this name entity_owner to make it clearer
-	
-	# if the entity calls the function on itself then ignore the caster
-	if caster == target: 
-		caster = null
+	leftover_damage = block_damage(leftover_damage)
+	health_damage(leftover_damage)
 
-	# apply modification to our health
-	if is_healing:
-		new_health = clampf(current_health + amount, 0, max_health)
-	else:
-		new_health = clampf(current_health - amount, 0, max_health)
-		
+func health_damage(damage : int) -> void:
+	var new_health : int
+	new_health = current_health
+	
+	new_health = clampf(current_health - damage, 0, max_health)
 	_set_health(new_health)
 
+func heal(amount : int) -> void:
+	var new_health : int
+	new_health = current_health
+	
+	new_health = clampf(current_health + amount, 0, max_health)
+	_set_health(new_health)
 
 ## Set the health of the entity [br]
 func _set_health(new_health: float) -> void:
@@ -56,3 +54,29 @@ func _set_health(new_health: float) -> void:
 		return
 	current_health = new_health
 	on_health_changed.emit(current_health)
+
+func block_damage(damage: int) -> int:
+	var new_block : int
+	new_block = current_block
+	
+	var leftover_damage : int
+	leftover_damage = damage - current_block
+	new_block = min(new_block - damage, 0)
+	_set_block(new_block)
+	
+	return leftover_damage
+
+func get_block(amount : int) -> void:
+	var new_block : int
+	new_block = current_block
+	
+	new_block = new_block + amount
+	_set_block(new_block)
+	
+
+func _set_block(new_block: float) -> void:
+	if (new_block == current_block):
+		return
+	
+	current_block = new_block
+	on_block_changed.emit(current_block)
