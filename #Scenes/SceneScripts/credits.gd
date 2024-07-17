@@ -1,5 +1,10 @@
 extends Node2D
 
+@onready var anim_in: AnimationPlayer = $AnimationPlayerIn
+@onready var anim_out: AnimationPlayer = $AnimationPlayerOut
+
+const CENTER_SCREEN_TIME: float = 3
+
 ## All the possible team roles
 enum Roles {
 	Art,
@@ -68,38 +73,91 @@ const TEAM_MEMBERS: Dictionary = {
 ## This is especially useful for animations that are very fast and we need to delay them [br]
 ## This lets the previous animation time to get out of the screen center
 const ANIMATION_TIME_TO_SCREEN_CENTER: Dictionary = {
-	"cool_in_1": 2.3,
-	"emo_in_1": 0, #enters by the left, will need to wait for previous out animation to completely finish
-	"gamer_in_1": 1.1,
-	"maid_in_1": 0.7,
-	"milf_in_1": 2.6,
-	"nerd_in_1": 1.7,
-	"old_in_1": 1.5,
-	"sleepy_in_1": 0.4,
-	"snow_in_1": 0.4,
+	"In/cool_in_1": 2.3,
+	"In/emo_in_1": 0, #enters by the left, will need to wait for previous out animation to completely finish
+	"In/gamer_in_1": 1.1,
+	"In/maid_in_1": 0.7,
+	"In/milf_in_1": 2.6,
+	"In/nerd_in_1": 1.7,
+	"In/old_in_1": 1.5,
+	"In/sleepy_in_1": 0.4,
+	"In/snow_in_1": 0.4,
 }
 
 ## Time needed for an animation to free the space at the center of the screen [br]
 ## Delay the previous animation by this duration if the time it takes to reach the center is smaller
 ## than the time it takes the "out" animation to free the screen center
 const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
-	"cool_out_1": 1,
-	"emo_out_1": 2.1,
-	"gamer_out_1": 1.3,
-	"maid_out_1": 0.5,
-	"milf_out_1": 0.6,
-	"nerd_out_1": 0.4,
-	"old_out_1": 0.9,
-	"sleepy_out_1": 2.2,
-	"snow_out_1": 1.1,
+	"Out/cool_out_1": 1,
+	"Out/emo_out_1": 2.1,
+	"Out/gamer_out_1": 1.3,
+	"Out/maid_out_1": 0.5,
+	"Out/milf_out_1": 0.6,
+	"Out/nerd_out_1": 0.4,
+	"Out/old_out_1": 0.9,
+	"Out/sleepy_out_1": 2.2,
+	"Out/snow_out_1": 1.1,
 }
 
 ## Launch the loop of the scene
 func _ready() -> void:
-	pass
+	_animation_loop()
 	
 
 ## The main animation loop, controls the entry timing of all the saplings [br]
 ## This is done by controling the two animation player of the scene
 func _animation_loop() -> void:
-	pass
+	await get_tree().create_timer(1).timeout
+	var team_members_names: Array = TEAM_MEMBERS.keys()
+	team_members_names.shuffle()
+	
+	# play first animation with animation player in
+	var first_member: String = team_members_names[0]
+	var roles_and_avatar: Array = TEAM_MEMBERS[first_member]
+	var previous_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
+	var sapling_type_values: Array = GlobalEnums.SaplingType.values()
+	while previous_avatar == sapling_type.None :
+		previous_avatar = sapling_type_values[randi() % sapling_type_values.size()]
+	var animation_name: String = _choose_animation(previous_avatar, true)
+	anim_in.play(animation_name)
+	#await anim_in.animation_finished
+	#show roles and name
+	await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
+	
+	for member_name: String in team_members_names.slice(1, team_members_names.size() -1 ):
+		var out_animation: String = _choose_animation(previous_avatar, false)
+		anim_out.play(out_animation)
+		# check duration to know when to start the next in animation
+		roles_and_avatar = TEAM_MEMBERS[member_name]
+		#var new_role: Array = roles_and_avatar[0]
+		var new_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
+		while new_avatar == sapling_type.None :
+			new_avatar = sapling_type_values[randi() % sapling_type_values.size()]
+		var in_animation: String = _choose_animation(new_avatar, true)
+		var time_center_out: float = ANIMATION_TIME_OUT_SCREEN_CENTER[out_animation]
+		var time_center_in: float = ANIMATION_TIME_TO_SCREEN_CENTER[in_animation]
+		var time_difference: float = max (0, time_center_out - time_center_in)
+		await get_tree().create_timer(time_difference).timeout
+		anim_in.play(in_animation)
+		# show name and roles
+		await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
+		previous_avatar = new_avatar
+		#await anim_out.animation_finished
+		
+		# loop and play all animations checking for entry / exit timing
+	# play the last out animation
+		
+		
+func _choose_animation(avatar: GlobalEnums.SaplingType, is_in: bool) -> String:
+	var avatar_name: String = GlobalEnums.SaplingType.keys()[avatar].to_lower()
+	var animations_list: Array
+	if is_in:
+		animations_list = ANIMATION_TIME_TO_SCREEN_CENTER.keys()
+	else:
+		animations_list = ANIMATION_TIME_OUT_SCREEN_CENTER.keys()
+	var animation_for_avatar: Array = animations_list.filter(
+			func(list_name: String) -> bool: 
+				return avatar_name in list_name
+	)
+	var chosen_animation: String = animation_for_avatar[randi() % animation_for_avatar.size()]
+	return chosen_animation
