@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://clmg3l3n28x38"]
+[gd_scene load_steps=14 format=3 uid="uid://clmg3l3n28x38"]
 
 [ext_resource type="Script" path="res://Entity/Player/Player.gd" id="1_4qbo7"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_cf8lx"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://UI/HealthLabel.gd" id="7_1hqya"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_mmgs7"]
 [ext_resource type="Script" path="res://Entity/Components/EnergyComponent.gd" id="9_5kwft"]
+[ext_resource type="Texture2D" uid="uid://162qbj2n5rm4" path="res://Art/Menus/shield-1.png" id="10_7aeu3"]
+[ext_resource type="Script" path="res://Entity/Player/block_display.gd" id="11_lwvyk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8bva"]
 size = Vector2(104, 93)
@@ -57,6 +59,25 @@ team = 1
 
 [node name="EnergyComponent" type="Node" parent="."]
 script = ExtResource("9_5kwft")
+
+[node name="Shield-1" type="Sprite2D" parent="." node_paths=PackedStringArray("label", "healthComponent")]
+position = Vector2(-62, -66)
+scale = Vector2(0.0210416, 0.0210416)
+texture = ExtResource("10_7aeu3")
+script = ExtResource("11_lwvyk")
+label = NodePath("Label")
+healthComponent = NodePath("../HealthComponent")
+
+[node name="Label" type="Label" parent="Shield-1"]
+offset_left = -333.0
+offset_top = -285.0
+offset_right = 285.0
+offset_bottom = 285.0
+theme_override_font_sizes/font_size = 376
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="input_event" from="Area2D" to="ClickHandler" method="_on_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="ClickHandler" method="_on_mouse_entered"]
