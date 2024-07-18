@@ -75,7 +75,7 @@ const TEAM_MEMBERS: Dictionary = {
 const ANIMATION_TIME_TO_SCREEN_CENTER: Dictionary = {
 	"In/cool_in_1": 2.3,
 	"In/emo_in_1": 0, #enters by the left, will need to wait for previous out animation to completely finish
-	"In/gamer_in_1": 1.1,
+	"In/gamer_in_1": 0.7,
 	"In/maid_in_1": 0.7,
 	"In/milf_in_1": 2.6,
 	"In/nerd_in_1": 1.7,
@@ -120,13 +120,14 @@ func _animation_loop() -> void:
 		previous_avatar = sapling_type_values[randi() % sapling_type_values.size()]
 	var animation_name: String = _choose_animation(previous_avatar, true)
 	anim_in.play(animation_name)
-	#await anim_in.animation_finished
 	#show roles and name
 	await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
 	
 	for member_name: String in team_members_names.slice(1, team_members_names.size() -1 ):
 		var out_animation: String = _choose_animation(previous_avatar, false)
 		anim_out.play(out_animation)
+		# put back the sprite for the animation going in, out of the screen
+		anim_in.play("RESET")
 		# check duration to know when to start the next in animation
 		roles_and_avatar = TEAM_MEMBERS[member_name]
 		#var new_role: Array = roles_and_avatar[0]
@@ -142,10 +143,13 @@ func _animation_loop() -> void:
 		# show name and roles
 		await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
 		previous_avatar = new_avatar
-		#await anim_out.animation_finished
 		
 		# loop and play all animations checking for entry / exit timing
 	# play the last out animation
+	var out_animation: String = _choose_animation(previous_avatar, false)
+	anim_out.play(out_animation)
+	# put back the sprite for the animation going in, out of the screen
+	anim_in.play("RESET")
 		
 		
 func _choose_animation(avatar: GlobalEnums.SaplingType, is_in: bool) -> String:
