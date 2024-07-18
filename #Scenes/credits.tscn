@@ -153,129 +153,117 @@ tracks/11/keys = {
 "points": PackedFloat32Array(1136, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/12/type = "value"
+tracks/12/type = "bezier"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("AnimationPlayerIn:speed_scale")
+tracks/12/path = NodePath("RescuedSaplingsMaidIn:position:x")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.2]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(3706, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 tracks/13/type = "bezier"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("RescuedSaplingsMaidIn:position:x")
+tracks/13/path = NodePath("RescuedSaplingsMaidIn:position:y")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(3706, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1423, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/14/type = "bezier"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("RescuedSaplingsMaidIn:position:y")
+tracks/14/path = NodePath("RescuedSaplingsEmoIn:position:x")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1423, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(2914, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/15/type = "bezier"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("RescuedSaplingsEmoIn:position:x")
+tracks/15/path = NodePath("RescuedSaplingsEmoIn:position:y")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(2914, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1455, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/16/type = "bezier"
+tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("RescuedSaplingsEmoIn:position:y")
+tracks/16/path = NodePath("RescuedSaplingsEmoIn:scale")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1455, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("RescuedSaplingsEmoIn:scale")
+tracks/17/path = NodePath("RescuedSaplingsGamerIn:position")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.3, 0.3)]
+"values": [Vector2(2938, 1154)]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("RescuedSaplingsGamerIn:position")
+tracks/18/path = NodePath("RescuedSaplingsGamerIn:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2938, 1154)]
+"values": [0.0]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("RescuedSaplingsGamerIn:rotation")
+tracks/19/path = NodePath("RescuedSaplingsCoolIn:position")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(3261, 806)]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("RescuedSaplingsCoolIn:position")
+tracks/20/path = NodePath("RescuedSaplingsCoolIn:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3261, 806)]
+"values": [Vector2(0.3, 0.3)]
 }
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("RescuedSaplingsCoolIn:scale")
+tracks/21/path = NodePath("RescuedSaplingsSleepyIn:position")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.3, 0.3)]
-}
-tracks/22/type = "value"
-tracks/22/imported = false
-tracks/22/enabled = true
-tracks/22/path = NodePath("RescuedSaplingsSleepyIn:position")
-tracks/22/interp = 1
-tracks/22/loop_wrap = true
-tracks/22/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -473,7 +461,7 @@ texture = ExtResource("9_n610m")
 
 [node name="RescuedSaplingsSleepyIn" type="Sprite2D" parent="."]
 position = Vector2(3280, 1459)
-scale = Vector2(0.35, 0.227)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_y4lop")
 
 [node name="RescuedSaplingsSnowIn" type="Sprite2D" parent="."]
@@ -488,14 +476,14 @@ libraries = {
 "In": ExtResource("11_xdj82"),
 "Out": ExtResource("12_8iix6")
 }
-speed_scale = 1.2
+speed_scale = 1.5
 
 [node name="AnimationPlayerOut" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_hn5re"),
 "Out": ExtResource("12_8iix6")
 }
-speed_scale = 1.5
+speed_scale = 2.0
 
 [node name="RescuedSaplingsCoolOut" type="Sprite2D" parent="."]
 position = Vector2(-1306, 777)
@@ -509,6 +497,7 @@ texture = ExtResource("4_bi1w0")
 
 [node name="RescuedSaplingsGamerOut" type="Sprite2D" parent="."]
 position = Vector2(-1664, 1162)
+rotation = 2.03914
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_po57g")
 
@@ -529,16 +518,17 @@ texture = ExtResource("8_xvqp0")
 
 [node name="RescuedSaplingsOldOut" type="Sprite2D" parent="."]
 position = Vector2(-1653, 817)
+rotation = -12.5664
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_n610m")
 
 [node name="RescuedSaplingsSleepyOut" type="Sprite2D" parent="."]
 position = Vector2(-1322, 1467)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.227, 0.35)
 texture = ExtResource("2_y4lop")
 
 [node name="RescuedSaplingsSnowOut" type="Sprite2D" parent="."]
 position = Vector2(-924, 831)
-rotation = 0.104095
-scale = Vector2(0.3, 0.3)
+rotation = 0.0934342
+scale = Vector2(0.3, 0.289995)
 texture = ExtResource("10_unw81")

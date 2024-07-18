@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var anim_in: AnimationPlayer = $AnimationPlayerIn
 @onready var anim_out: AnimationPlayer = $AnimationPlayerOut
+@onready var name_role_label: Label = $TextureRect/CenterContainer/Label
 
 const CENTER_SCREEN_TIME: float = 3
 
@@ -17,7 +18,7 @@ enum Roles {
 	Team_lead,
 	Team_lead_design,
 	Team_lead_music,
-	Team_lead_prog,
+	Team_lead_programming,
 	Team_lead_writing,
 }
 
@@ -61,7 +62,7 @@ const TEAM_MEMBERS: Dictionary = {
 	"Sappysque": [[Roles.Art], sapling_type.Emo],
 	"Tomzkk": [[Roles.Design, Roles.Programming], sapling_type.Old],
 	"Tradgore": [[Roles.Design, Roles.Writing], sapling_type.Sleepy],
-	"Turtyo": [[Roles.Team_lead, Roles.Team_lead_prog, Roles.Programming], sapling_type.Gamer],
+	"Turtyo": [[Roles.Team_lead, Roles.Team_lead_programming, Roles.Programming], sapling_type.Gamer],
 	"TyTy": [[Roles.Programming], sapling_type.Old],
 	"Vsiiesk ": [[Roles.Art], sapling_type.Nerd],
 	"Vyto (Vytonium)": [[Roles.Music], sapling_type.Old],
@@ -75,7 +76,7 @@ const TEAM_MEMBERS: Dictionary = {
 const ANIMATION_TIME_TO_SCREEN_CENTER: Dictionary = {
 	"In/cool_in_1": 2.3,
 	"In/emo_in_1": 0, #enters by the left, will need to wait for previous out animation to completely finish
-	"In/gamer_in_1": 0.7,
+	"In/gamer_in_1": 0.2,
 	"In/maid_in_1": 0.7,
 	"In/milf_in_1": 2.6,
 	"In/nerd_in_1": 1.7,
@@ -93,7 +94,7 @@ const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
 	"Out/gamer_out_1": 1.3,
 	"Out/maid_out_1": 0.5,
 	"Out/milf_out_1": 0.6,
-	"Out/nerd_out_1": 0.4,
+	"Out/nerd_out_1": 0.7,
 	"Out/old_out_1": 0.9,
 	"Out/sleepy_out_1": 2.2,
 	"Out/snow_out_1": 1.1,
@@ -101,6 +102,7 @@ const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
 
 ## Launch the loop of the scene
 func _ready() -> void:
+	name_role_label.text = ""
 	_animation_loop()
 	
 
@@ -114,39 +116,56 @@ func _animation_loop() -> void:
 	# play first animation with animation player in
 	var first_member: String = team_members_names[0]
 	var roles_and_avatar: Array = TEAM_MEMBERS[first_member]
+	var roles: Array = roles_and_avatar[0]
+	var roles_string: String = _role_array_to_string(roles)
 	var previous_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
 	var sapling_type_values: Array = GlobalEnums.SaplingType.values()
 	while previous_avatar == sapling_type.None :
 		previous_avatar = sapling_type_values[randi() % sapling_type_values.size()]
 	var animation_name: String = _choose_animation(previous_avatar, true)
 	anim_in.play(animation_name)
-	#show roles and name
+	await anim_in.animation_finished
+	name_role_label.text = first_member + "\n" + roles_string
 	await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
 	
+	var out_animation: String
+	
 	for member_name: String in team_members_names.slice(1, team_members_names.size() -1 ):
-		var out_animation: String = _choose_animation(previous_avatar, false)
+		out_animation = _choose_animation(previous_avatar, false)
 		anim_out.play(out_animation)
-		# put back the sprite for the animation going in, out of the screen
+		name_role_label.text = ""
 		anim_in.play("RESET")
 		# check duration to know when to start the next in animation
 		roles_and_avatar = TEAM_MEMBERS[member_name]
-		#var new_role: Array = roles_and_avatar[0]
+		var new_roles: Array = roles_and_avatar[0]
 		var new_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
+		var new_roles_string: String = _role_array_to_string(new_roles)
 		while new_avatar == sapling_type.None :
 			new_avatar = sapling_type_values[randi() % sapling_type_values.size()]
 		var in_animation: String = _choose_animation(new_avatar, true)
-		var time_center_out: float = ANIMATION_TIME_OUT_SCREEN_CENTER[out_animation]
-		var time_center_in: float = ANIMATION_TIME_TO_SCREEN_CENTER[in_animation]
-		var time_difference: float = max (0, time_center_out - time_center_in)
-		await get_tree().create_timer(time_difference).timeout
+		var in_signal: Signal
+		# special rule for the emo sapling since it enters from the left
+		# so we need to wait for the out animation to finish
+		if new_avatar == sapling_type.Emo or previous_avatar == sapling_type.Emo:
+			in_signal = anim_out.animation_finished
+		else:
+			var time_center_out: float = ANIMATION_TIME_OUT_SCREEN_CENTER[out_animation]
+			var time_center_in: float = ANIMATION_TIME_TO_SCREEN_CENTER[in_animation]
+			# calculate the time to leave between entry and exit to prevent sprites going into each other
+			var time_difference: float = max (0, time_center_out - time_center_in)
+			in_signal = get_tree().create_timer(time_difference).timeout
+		await in_signal
 		anim_in.play(in_animation)
-		# show name and roles
+		
+		await anim_in.animation_finished
+		name_role_label.text = member_name + "\n" + new_roles_string
 		await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
 		previous_avatar = new_avatar
 		
 		# loop and play all animations checking for entry / exit timing
 	# play the last out animation
-	var out_animation: String = _choose_animation(previous_avatar, false)
+	out_animation = _choose_animation(previous_avatar, false)
+	name_role_label.text = ""
 	anim_out.play(out_animation)
 	# put back the sprite for the animation going in, out of the screen
 	anim_in.play("RESET")
@@ -165,3 +184,12 @@ func _choose_animation(avatar: GlobalEnums.SaplingType, is_in: bool) -> String:
 	)
 	var chosen_animation: String = animation_for_avatar[randi() % animation_for_avatar.size()]
 	return chosen_animation
+	
+func _role_array_to_string(roles: Array) -> String:
+	var all_roles_string: PackedStringArray = []
+	for role: Roles in roles:
+		all_roles_string.append(_role_to_string(role))
+	return ", ".join(all_roles_string)
+
+func _role_to_string(role: Roles) -> String:
+	return Roles.keys()[role].replace("_", " ") 
