@@ -15,7 +15,7 @@ enum Roles {
 	Testing,
 	Writing,
 	Special_thanks,
-	Team_lead,
+	Project_lead,
 	Team_lead_design,
 	Team_lead_music,
 	Team_lead_programming,
@@ -31,7 +31,7 @@ const TEAM_MEMBERS: Dictionary = {
 	"Ago": [[Roles.Art], sapling_type.Maid],
 	"Akatsukin": [[Roles.Design], sapling_type.Nerd],
 	"Amamii": [[Roles.Art], sapling_type.Maid],
-	"Arkhand": [[Roles.Music], sapling_type.None],
+	"Arkhand": [[Roles.Music], sapling_type.Nerd],
 	"Atmama": [[Roles.Art], sapling_type.None],
 	"Biosquid": [[Roles.Programming], sapling_type.None], #! no participation yet
 	"Bishop": [[Roles.Programming], sapling_type.None],
@@ -62,7 +62,7 @@ const TEAM_MEMBERS: Dictionary = {
 	"Sappysque": [[Roles.Art], sapling_type.Emo],
 	"Tomzkk": [[Roles.Design, Roles.Programming], sapling_type.Old],
 	"Tradgore": [[Roles.Design, Roles.Writing], sapling_type.Sleepy],
-	"Turtyo": [[Roles.Team_lead, Roles.Team_lead_programming, Roles.Programming], sapling_type.Gamer],
+	"Turtyo": [[Roles.Project_lead, Roles.Team_lead_programming, Roles.Programming], sapling_type.Gamer],
 	"TyTy": [[Roles.Programming], sapling_type.Old],
 	"Vsiiesk ": [[Roles.Art], sapling_type.Nerd],
 	"Vyto (Vytonium)": [[Roles.Music], sapling_type.Old],
@@ -76,7 +76,7 @@ const TEAM_MEMBERS: Dictionary = {
 const ANIMATION_TIME_TO_SCREEN_CENTER: Dictionary = {
 	"In/cool_in_1": 2.3,
 	"In/emo_in_1": 0, #enters by the left, will need to wait for previous out animation to completely finish
-	"In/gamer_in_1": 0.2,
+	"In/gamer_in_1": 1.5,
 	"In/maid_in_1": 0.7,
 	"In/milf_in_1": 2.6,
 	"In/nerd_in_1": 1.7,
@@ -103,6 +103,7 @@ const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
 ## Launch the loop of the scene
 func _ready() -> void:
 	name_role_label.text = ""
+	name_role_label.add_theme_color_override("font_color", Color(0,0,0,0))
 	_animation_loop()
 	
 
@@ -126,12 +127,17 @@ func _animation_loop() -> void:
 	anim_in.play(animation_name)
 	await anim_in.animation_finished
 	name_role_label.text = first_member + "\n" + roles_string
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,1), 0.2)
 	await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
 	
 	var out_animation: String
 	
 	for member_name: String in team_members_names.slice(1, team_members_names.size() -1 ):
 		out_animation = _choose_animation(previous_avatar, false)
+		var in_tween: Tween = get_tree().create_tween()
+		in_tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,0), 0.2)
+		await in_tween.finished
 		anim_out.play(out_animation)
 		name_role_label.text = ""
 		anim_in.play("RESET")
@@ -158,13 +164,18 @@ func _animation_loop() -> void:
 		anim_in.play(in_animation)
 		
 		await anim_in.animation_finished
+		var out_tween: Tween = get_tree().create_tween()
 		name_role_label.text = member_name + "\n" + new_roles_string
+		out_tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,1), 0.2)
 		await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
 		previous_avatar = new_avatar
 		
 		# loop and play all animations checking for entry / exit timing
 	# play the last out animation
 	out_animation = _choose_animation(previous_avatar, false)
+	var last_tween: Tween = get_tree().create_tween()
+	last_tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,0), 0.2)
+	await last_tween.finished
 	name_role_label.text = ""
 	anim_out.play(out_animation)
 	# put back the sprite for the animation going in, out of the screen
@@ -189,7 +200,10 @@ func _role_array_to_string(roles: Array) -> String:
 	var all_roles_string: PackedStringArray = []
 	for role: Roles in roles:
 		all_roles_string.append(_role_to_string(role))
-	return ", ".join(all_roles_string)
+	if roles.size() <= 2:
+		return ", ".join(all_roles_string)
+	else:
+		return ", ".join(all_roles_string.slice(0, 2)) + "\n" + ", ".join(all_roles_string.slice(2))
 
 func _role_to_string(role: Roles) -> String:
 	return Roles.keys()[role].replace("_", " ") 
