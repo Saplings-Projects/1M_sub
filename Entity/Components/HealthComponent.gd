@@ -16,32 +16,47 @@ signal on_block_changed(new_block: int)
 var current_health: float = 100 # ? change this to max health, or just unset since it's init by the ready
 
 
-var current_block: float = 100
+var current_block: float = 0
 
 ## Initialize the health component, putting health to max health
 ## This only happens at game start for the player, the value is then tracked inside the [PlayerManager] singleton [br]
 ## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
 	_set_health(max_health)
+	PhaseManager.on_turn_start.connect(reset_block)
 
-func take_damage_block_and_health(amount : float, _caster: Entity) -> void:
+## The intended way for entities to take damage.[br]
+## Removes block first and then deals excess damage to the health[br]
+func take_damage_block_and_health(amount : float, caster: Entity) -> void:
 	if amount <= 0.0:
 		return
+		
+	assert(owner != null, "No owner was set. Please call init on the Entity.")
+	
+	var target: Entity = entity_owner # TODO change this name entity_owner to make it clearer
+	
+	# if the entity calls the function on itself then ignore the caster
+	if caster == target: 
+		caster = null
+
 	
 	var leftover_damage: float
 	leftover_damage = amount
 	
 	leftover_damage = block_damage(leftover_damage)
-	health_damage(leftover_damage)
+	_health_damage(leftover_damage)
 
-func health_damage(damage : int) -> void:
+## removes health without considering block [br]
+## primarily a helper function, but could be used in future for block ignoring attacks[br]
+func _health_damage(damage : int) -> void:
 	var new_health : int
 	new_health = current_health
 	
 	new_health = clampf(current_health - damage, 0, max_health)
 	_set_health(new_health)
 
-func heal(amount : int) -> void:
+## adds health to the unit[br]
+func heal(amount : int,  _caster : Entity) -> void:
 	var new_health : int
 	new_health = current_health
 	
@@ -55,18 +70,21 @@ func _set_health(new_health: float) -> void:
 	current_health = new_health
 	on_health_changed.emit(current_health)
 
+## Removes block from the entity[br]
 func block_damage(damage: int) -> int:
 	var new_block : int
 	new_block = current_block
 	
 	var leftover_damage : int
-	leftover_damage = damage - current_block
-	new_block = min(new_block - damage, 0)
+	leftover_damage = max( damage - current_block, 0)
+	
+	new_block = max(new_block - damage, 0)
 	_set_block(new_block)
 	
 	return leftover_damage
 
-func get_block(amount : int) -> void:
+## Adds block to the entity[br]
+func add_block(amount : int) -> void:
 	var new_block : int
 	new_block = current_block
 	
@@ -74,9 +92,14 @@ func get_block(amount : int) -> void:
 	_set_block(new_block)
 	
 
+## Set the block of the entity [br]
 func _set_block(new_block: float) -> void:
 	if (new_block == current_block):
 		return
 	
 	current_block = new_block
 	on_block_changed.emit(current_block)
+
+## Sets block to 0 [br]
+func reset_block() -> void:
+	_set_block(0)
