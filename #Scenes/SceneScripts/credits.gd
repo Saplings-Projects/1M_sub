@@ -4,7 +4,12 @@ extends Node2D
 @onready var anim_out: AnimationPlayer = $AnimationPlayerOut
 @onready var name_role_label: Label = $TextureRect/CenterContainer/Label
 
-const CENTER_SCREEN_TIME: float = 3
+const CENTER_SCREEN_TIME: float = 2
+const TEXT_FADE_IN_DURATION: float = 0.2
+const TEXT_FADE_OUT_DURATION: float = 0.2
+const COLOR_FADE_OUT: Color = Color(0,0,0,0)
+const COLOR_FADE_IN: Color = Color(0,0,0,1)
+const TIME_SCALING_TEXT_LENGTH: float = 0.05
 
 ## All the possible team roles
 enum Roles {
@@ -37,14 +42,14 @@ const TEAM_MEMBERS: Dictionary = {
 	"Bishop": [[Roles.Programming], sapling_type.None],
 	"Cheesyfrycook": [[Roles.Programming], sapling_type.None],
 	"Dat": [[Roles.Art], sapling_type.None],
-	"Dio": [[Roles.Art], sapling_type.None],
+	"Dio": [[Roles.Art], sapling_type.Sleepy],
 	"EndyStarBoy": [[Roles.Art], sapling_type.Milf],
 	"Fork": [[Roles.Music], sapling_type.Maid], #! no participation yet
 	"Hakase": [[Roles.Art], sapling_type.None],
 	"Jason": [[Roles.Music], sapling_type.None], #! no participation yet
 	"Jimance": [[Roles.Team_lead_writing, Roles.Writing], sapling_type.Old],
-	"Jona": [[Roles.Programming], sapling_type.None],
-	"Jusagi": [[Roles.Art], sapling_type.None],
+	"Jona": [[Roles.Programming], sapling_type.Gamer],
+	"Jusagi": [[Roles.Art], sapling_type.Cool],
 	"Kayessi": [[Roles.Testing], sapling_type.Old], #! no participation yet
 	"Kebbie": [[Roles.Special_thanks], sapling_type.None],
 	"Kotoschneep": [[Roles.Art], sapling_type.None],
@@ -103,7 +108,7 @@ const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
 ## Launch the loop of the scene
 func _ready() -> void:
 	name_role_label.text = ""
-	name_role_label.add_theme_color_override("font_color", Color(0,0,0,0))
+	name_role_label.add_theme_color_override("font_color", COLOR_FADE_OUT)
 	_animation_loop()
 	
 
@@ -127,16 +132,17 @@ func _animation_loop() -> void:
 	anim_in.play(animation_name)
 	await anim_in.animation_finished
 	name_role_label.text = first_member + "\n" + roles_string
+	var text_time_on_screen: float = _get_text_time_on_screen(name_role_label.text)
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,1), 0.2)
-	await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
+	tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_IN, TEXT_FADE_IN_DURATION)
+	await get_tree().create_timer(text_time_on_screen).timeout
 	
 	var out_animation: String
 	
 	for member_name: String in team_members_names.slice(1, team_members_names.size() -1 ):
 		out_animation = _choose_animation(previous_avatar, false)
 		var in_tween: Tween = get_tree().create_tween()
-		in_tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,0), 0.2)
+		in_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_OUT, TEXT_FADE_OUT_DURATION)
 		await in_tween.finished
 		anim_out.play(out_animation)
 		name_role_label.text = ""
@@ -166,15 +172,16 @@ func _animation_loop() -> void:
 		await anim_in.animation_finished
 		var out_tween: Tween = get_tree().create_tween()
 		name_role_label.text = member_name + "\n" + new_roles_string
-		out_tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,1), 0.2)
-		await get_tree().create_timer(CENTER_SCREEN_TIME).timeout
+		text_time_on_screen = _get_text_time_on_screen(name_role_label.text)
+		out_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_IN, TEXT_FADE_IN_DURATION)
+		await get_tree().create_timer(text_time_on_screen).timeout
 		previous_avatar = new_avatar
 		
 		# loop and play all animations checking for entry / exit timing
 	# play the last out animation
 	out_animation = _choose_animation(previous_avatar, false)
 	var last_tween: Tween = get_tree().create_tween()
-	last_tween.tween_property(name_role_label, "theme_override_colors/font_color", Color(0,0,0,0), 0.2)
+	last_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_OUT, TEXT_FADE_OUT_DURATION)
 	await last_tween.finished
 	name_role_label.text = ""
 	anim_out.play(out_animation)
@@ -207,3 +214,7 @@ func _role_array_to_string(roles: Array) -> String:
 
 func _role_to_string(role: Roles) -> String:
 	return Roles.keys()[role].replace("_", " ") 
+	
+
+func _get_text_time_on_screen(text: String) -> float:
+	return CENTER_SCREEN_TIME + text.length() * TIME_SCALING_TEXT_LENGTH
