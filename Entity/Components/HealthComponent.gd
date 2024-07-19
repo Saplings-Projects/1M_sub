@@ -84,7 +84,7 @@ func block_damage(damage: int) -> int:
 	return leftover_damage
 
 ## Adds block to the entity[br]
-func add_block(amount : int) -> void:
+func add_block(amount : int, _caster : Entity) -> void:
 	var new_block : int
 	new_block = current_block
 	

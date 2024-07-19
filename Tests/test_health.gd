@@ -9,6 +9,29 @@ func test_take_damage() -> void:
 	_player_health_component.take_damage_block_and_health(damage, caster)
 	assert_eq(_player_health_component.current_health, 95.0)
 
+func test_take_damage_with_block() -> void:
+	var damage: float = 10.0
+	var caster: Entity = _player
+	
+	_player_health_component.add_block(5, caster)
+	_player_health_component.take_damage_block_and_health(damage, caster)
+	assert_eq(_player_health_component.current_health, 95.0)
+
+func test_add_block() -> void:
+	var amount: float = 10
+	var caster: Entity = _player
+	
+	_player_health_component.add_block(amount, caster)
+	assert_eq(_player_health_component.current_block, amount)
+
+func test_take_damage_to_block() -> void:
+	var damage : float = 5
+	var block_amount: float = 10
+	var caster: Entity = _player
+	
+	_player_health_component.add_block(block_amount, caster)
+	_player_health_component.take_damage_block_and_health(damage, caster)
+	assert_eq(_player_health_component.current_block, 5)
 
 func test_take_lots_of_damage() -> void:
 	var damage: float = 999999.0

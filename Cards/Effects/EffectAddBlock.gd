@@ -7,4 +7,4 @@ class_name EffectAddBlock
 ## @Override [br]
 ## Refer to [EffectBase]
 func apply_effect(_caster: Entity, _target: Entity, value: int) -> void:
-	_target.get_health_component().add_block(value)
+	_target.get_health_component().add_block(value, _caster)
