@@ -12,4 +12,4 @@ func apply_effect(caster: Entity, target: Entity, value: int) -> void:
 	# calculate modified heal given caster and target stats
 	var heal: float = EntityStats.get_value_modified_by_stats(GlobalEnums.PossibleModifierNames.HEAL, caster, target, value)
 	
-	target.get_health_component().heal(heal) 
+	target.get_health_component().heal(heal, caster) 
