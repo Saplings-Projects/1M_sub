@@ -406,10 +406,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -24.5
-offset_right = 20.0
-offset_bottom = 24.5
+offset_left = -907.5
+offset_top = -310.0
+offset_right = 907.5
+offset_bottom = 247.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -419,7 +419,7 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
 text = "Name
-Role 1 Role 2
+Role 1, Role 2
 Role 3
 
 "
