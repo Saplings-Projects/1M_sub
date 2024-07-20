@@ -35,6 +35,22 @@ func test_take_damage_to_block() -> void:
 	assert_eq(_player_health_component.current_block, 5)
 	assert_eq(_player_health_component.current_health, 100)
 
+func test_reset_block_on_round_start() -> void: 
+	var block_amount: float = 10
+	var caster: Entity = _player
+	
+	_player_health_component.add_block(block_amount, caster)
+	PhaseManager.on_phase_changed.emit(GlobalEnums.Phase.PLAYER_ATTACKING, GlobalEnums.Phase.ENEMY_ATTACKING)
+	assert_eq(_player_health_component.current_block, 0)
+
+func test_dont_reset_block_on_enemy_round_start() -> void: 
+	var block_amount: float = 10
+	var caster: Entity = _player
+	
+	_player_health_component.add_block(block_amount, caster)
+	PhaseManager.on_phase_changed.emit(null, GlobalEnums.Phase.PLAYER_ATTACKING)
+	assert_eq(_player_health_component.current_block, block_amount)
+
 func test_take_lots_of_damage() -> void:
 	var damage: float = 999999.0
 	var caster: Entity = _player
