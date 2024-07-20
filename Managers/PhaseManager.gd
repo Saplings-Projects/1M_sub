@@ -12,8 +12,7 @@ signal on_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Pha
 signal on_event_win
 ## When the player is dead (reduced to 0 health)
 signal on_defeat
-## When the phase is changed to PLAYER_ATTACKING
-signal on_turn_start
+
 
 var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
 
@@ -44,6 +43,3 @@ func set_phase(phase: GlobalEnums.Phase) -> void:
 	var old_phase: GlobalEnums.Phase = current_phase
 	current_phase = phase
 	on_phase_changed.emit(current_phase, old_phase)
-	
-	if(current_phase == GlobalEnums.Phase.PLAYER_ATTACKING):
-		on_turn_start.emit()

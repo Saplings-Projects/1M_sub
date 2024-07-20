@@ -23,7 +23,7 @@ var current_block: float = 0
 ## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
 	_set_health(max_health)
-	PhaseManager.on_turn_start.connect(reset_block)
+	PhaseManager.on_phase_changed.connect(reset_block)
 
 ## The intended way for entities to take damage.[br]
 ## Removes block first and then deals excess damage to the health[br]
@@ -77,11 +77,10 @@ func block_damage(damage: int) -> int:
 	if damage <= 0.0:
 		return 0
 	
-	var new_block : int
-	new_block = current_block
+	var new_block : int = current_block
 	
 	var leftover_damage : int
-	leftover_damage = max( damage - current_block, 0)
+	leftover_damage = max(damage - current_block, 0)
 	
 	new_block = max(new_block - damage, 0)
 	_set_block(new_block)
@@ -94,6 +93,7 @@ func add_block(amount : int, _caster : Entity) -> void:
 	new_block = current_block
 	
 	new_block = new_block + amount
+	
 	_set_block(new_block)
 	
 
@@ -104,6 +104,10 @@ func _set_block(new_block: float) -> void:
 	
 	current_block = new_block
 	on_block_changed.emit(current_block)
+
+func reset_block_on_round_start(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
+	if(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING):
+		reset_block()
 
 ## Sets block to 0 [br]
 func reset_block() -> void:
