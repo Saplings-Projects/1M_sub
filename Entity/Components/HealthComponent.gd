@@ -40,8 +40,7 @@ func take_damage_block_and_health(amount : int, caster: Entity) -> void:
 		caster = null
 
 	
-	var leftover_damage: int = amount
-	leftover_damage = block_damage(leftover_damage)
+	var leftover_damage: int = block_damage(amount)
 	_health_damage(leftover_damage)
 
 ## removes health without considering block [br]
@@ -50,9 +49,8 @@ func _health_damage(damage : int) -> void:
 	if damage <= 0.0:
 		return
 	
-	var new_health : int = current_health
+	var new_health : int = clampf(current_health - damage, 0, max_health)
 	
-	new_health = clampf(new_health - damage, 0, max_health)
 	_set_health(new_health)
 
 ## adds health to the unit[br]
@@ -77,12 +75,9 @@ func block_damage(damage: int) -> int:
 	if damage <= 0.0:
 		return 0
 	
-	var new_block : int = current_block
+	var leftover_damage : int = max(damage - current_block, 0)
 	
-	var leftover_damage : int
-	leftover_damage = max(damage - current_block, 0)
-	
-	new_block = max(new_block - damage, 0)
+	var new_block : int = max(current_block - damage, 0)
 	_set_block(new_block)
 	
 	return leftover_damage
@@ -92,11 +87,8 @@ func add_block(amount : int, _caster : Entity) -> void:
 	if amount <= 0.0:
 		return
 	
-	var new_block : int
-	new_block = current_block
-	
-	new_block = new_block + amount
-	
+	var new_block : int = current_block + amount
+
 	_set_block(new_block)
 	
 
