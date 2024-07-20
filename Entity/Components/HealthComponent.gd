@@ -89,6 +89,9 @@ func block_damage(damage: int) -> int:
 
 ## Adds block to the entity[br]
 func add_block(amount : int, _caster : Entity) -> void:
+	if amount <= 0.0:
+		return
+	
 	var new_block : int
 	new_block = current_block
 	
