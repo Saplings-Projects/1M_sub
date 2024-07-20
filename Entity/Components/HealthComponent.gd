@@ -58,9 +58,7 @@ func heal(amount : int,  _caster : Entity) -> void:
 	if amount <= 0.0:
 		return
 	
-	var new_health : int = current_health
-	
-	new_health = clampf(new_health + amount, 0, max_health)
+	var new_health : int = clampf(current_health + amount, 0, max_health)
 	_set_health(new_health)
 
 ## Set the health of the entity [br]
