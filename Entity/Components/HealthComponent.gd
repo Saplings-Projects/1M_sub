@@ -23,7 +23,7 @@ var current_block: int = 0
 ## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
 	_set_health(max_health)
-	PhaseManager.on_phase_changed.connect(reset_block)
+	PhaseManager.on_phase_changed.connect(reset_block_on_round_start)
 
 ## The intended way for entities to take damage.[br]
 ## Removes block first and then deals excess damage to the health[br]
