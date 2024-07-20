@@ -20,11 +20,11 @@ enum Roles {
 	Testing,
 	Writing,
 	Special_thanks,
-	Project_lead,
 	Team_lead_design,
 	Team_lead_music,
 	Team_lead_programming,
 	Team_lead_writing,
+	Project_lead,
 }
 
 ## Re-export of the global enum variable to type a shorter name
@@ -32,7 +32,7 @@ const sapling_type: GlobalEnums.SaplingType = GlobalEnums.SaplingType
 
 ## All the team members, their roles and their avatar
 const TEAM_MEMBERS: Dictionary = {
-	"Adrian": [[Roles.Team_lead_music, Roles.Music], sapling_type.Old],
+	"Adrian": [[Roles.Team_lead_music], sapling_type.Old],
 	"Ago": [[Roles.Art], sapling_type.Maid],
 	"Akatsukin": [[Roles.Design], sapling_type.Nerd],
 	"Amamii": [[Roles.Art], sapling_type.Maid],
@@ -47,7 +47,7 @@ const TEAM_MEMBERS: Dictionary = {
 	"Fork": [[Roles.Music], sapling_type.Maid], #! no participation yet
 	"Hakase": [[Roles.Art], sapling_type.None],
 	"Jason": [[Roles.Music], sapling_type.None], #! no participation yet
-	"Jimance": [[Roles.Team_lead_writing, Roles.Writing], sapling_type.Old],
+	"Jimance": [[Roles.Team_lead_writing, Roles.Design], sapling_type.Old],
 	"Jona": [[Roles.Programming], sapling_type.Gamer],
 	"Jusagi": [[Roles.Art], sapling_type.Cool],
 	"Kayessi": [[Roles.Testing], sapling_type.Old], #! no participation yet
@@ -62,12 +62,12 @@ const TEAM_MEMBERS: Dictionary = {
 	"Palenque": [[Roles.Design], sapling_type.Nerd],
 	"Papier": [[Roles.Programming], sapling_type.Milf],
 	"Pterion": [[Roles.Art, Roles.Design], sapling_type.Maid],
-	"ROBBERGON": [[Roles.Team_lead_design, Roles.Design], sapling_type.Snow],
+	"ROBBERGON": [[Roles.Team_lead_design], sapling_type.Snow],
 	"Saphu": [[Roles.Art, Roles.Design], sapling_type.Sleepy],
 	"Sappysque": [[Roles.Art], sapling_type.Emo],
-	"Tomzkk": [[Roles.Design, Roles.Programming], sapling_type.Old],
-	"Tradgore": [[Roles.Design, Roles.Writing], sapling_type.Sleepy],
-	"Turtyo": [[Roles.Project_lead, Roles.Team_lead_programming, Roles.Programming], sapling_type.Gamer],
+	"Tomzkk": [[Roles.Programming, Roles.Design], sapling_type.Old],
+	"Tradgore": [[Roles.Writing, Roles.Design], sapling_type.Sleepy],
+	"Turtyo": [[Roles.Project_lead, Roles.Team_lead_programming, Roles.Design], sapling_type.Gamer],
 	"TyTy": [[Roles.Programming], sapling_type.Old],
 	"Vsiiesk ": [[Roles.Art], sapling_type.Nerd],
 	"Vyto (Vytonium)": [[Roles.Music], sapling_type.Old],
