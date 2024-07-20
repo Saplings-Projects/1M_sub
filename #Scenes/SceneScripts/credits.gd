@@ -115,9 +115,11 @@ func _ready() -> void:
 ## The main animation loop, controls the entry timing of all the saplings [br]
 ## This is done by controling the two animation player of the scene
 func _animation_loop() -> void:
-	await get_tree().create_timer(1).timeout
-	var team_members_names: Array = TEAM_MEMBERS.keys()
-	team_members_names.shuffle()
+	var timer: SceneTreeTimer = get_tree().create_timer(1)
+	var team_members_names: Array = _choose_member_order()
+	#var team_members_names: Array = TEAM_MEMBERS.keys()
+	#team_members_names.shuffle()
+	await timer.timeout
 	
 	# play first animation with animation player in
 	var first_member: String = team_members_names[0]
@@ -139,7 +141,7 @@ func _animation_loop() -> void:
 	
 	var out_animation: String
 	
-	for member_name: String in team_members_names.slice(1, team_members_names.size() -1 ):
+	for member_name: String in team_members_names.slice(1):
 		out_animation = _choose_animation(previous_avatar, false)
 		var in_tween: Tween = get_tree().create_tween()
 		in_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_OUT, TEXT_FADE_OUT_DURATION)
@@ -188,6 +190,54 @@ func _animation_loop() -> void:
 	# put back the sprite for the animation going in, out of the screen
 	anim_in.play("RESET")
 		
+		
+func _choose_member_order() -> Array:
+	var team_members_names: Array = TEAM_MEMBERS.keys()
+	var teams: Dictionary = {
+		Roles.Art: [],
+		Roles.Design: [],
+		Roles.Music: [],
+		Roles.Programming: [],
+		Roles.Testing: [],
+		Roles.Writing: [],
+		Roles.Special_thanks: [],
+	}
+	for member_name: String in team_members_names:
+		var member_roles: Array = TEAM_MEMBERS[member_name][0]
+		
+		var team_to_add: Roles
+		for role: Roles in Roles.values():
+			if role in member_roles:
+				match role:
+					Roles.Design:
+						# only add to team Design if it's the only role
+						if member_roles.size() == 1:
+							team_to_add = role
+							break
+					Roles.Team_lead_design:
+						team_to_add = Roles.Design
+						break
+					Roles.Team_lead_music:
+						team_to_add = Roles.Music
+						break
+					Roles.Team_lead_programming:
+						team_to_add = Roles.Programming
+						break
+					Roles.Team_lead_writing:
+						team_to_add = Roles.Writing
+						break
+					_:
+						# for everyone else, their respective roles
+							team_to_add = role
+							break
+		teams[team_to_add].append(member_name)
+	# shuffle inside each team
+	for team: Roles in teams:
+		teams[team].shuffle()
+	var final_list: Array = []
+	for sub_team: Array in teams.values():
+		final_list.append_array(sub_team)
+	return final_list
 		
 func _choose_animation(avatar: GlobalEnums.SaplingType, is_in: bool) -> String:
 	var avatar_name: String = GlobalEnums.SaplingType.keys()[avatar].to_lower()
