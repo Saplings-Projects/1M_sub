@@ -10,13 +10,13 @@ signal on_health_changed(new_health: int)
 signal on_block_changed(new_block: int)
 
 ## The maximum health the entity can have; this is a hard limit
-@export var max_health: float = 100
+@export var max_health: int = 100
 ## The health the entity currently has [br]
 ## Between 0 and max_health
-var current_health: float = 100 # ? change this to max health, or just unset since it's init by the ready
+var current_health: int = 100 # ? change this to max health, or just unset since it's init by the ready
 
 
-var current_block: float = 0
+var current_block: int = 0
 
 ## Initialize the health component, putting health to max health
 ## This only happens at game start for the player, the value is then tracked inside the [PlayerManager] singleton [br]
@@ -27,7 +27,7 @@ func _ready() -> void:
 
 ## The intended way for entities to take damage.[br]
 ## Removes block first and then deals excess damage to the health[br]
-func take_damage_block_and_health(amount : float, caster: Entity) -> void:
+func take_damage_block_and_health(amount : int, caster: Entity) -> void:
 	if amount <= 0.0:
 		return
 		
@@ -40,7 +40,7 @@ func take_damage_block_and_health(amount : float, caster: Entity) -> void:
 		caster = null
 
 	
-	var leftover_damage: float = amount
+	var leftover_damage: int = amount
 	leftover_damage = block_damage(leftover_damage)
 	_health_damage(leftover_damage)
 
@@ -66,7 +66,7 @@ func heal(amount : int,  _caster : Entity) -> void:
 	_set_health(new_health)
 
 ## Set the health of the entity [br]
-func _set_health(new_health: float) -> void:
+func _set_health(new_health: int) -> void:
 	if (new_health == current_health):
 		return
 	current_health = new_health
@@ -98,7 +98,7 @@ func add_block(amount : int, _caster : Entity) -> void:
 	
 
 ## Set the block of the entity [br]
-func _set_block(new_block: float) -> void:
+func _set_block(new_block: int) -> void:
 	if (new_block == current_block):
 		return
 	
