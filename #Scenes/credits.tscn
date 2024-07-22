@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ch8qid26mt5fs"]
+[gd_scene load_steps=20 format=3 uid="uid://ch8qid26mt5fs"]
 
 [ext_resource type="Texture2D" uid="uid://dxkon0ylsye4v" path="res://Art/Background/0-1.credits.png" id="1_4ctv3"]
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/credits.gd" id="1_km20a"]
@@ -13,6 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://b2648vdvobbt" path="res://Art/NPC/rescued_saplings_snow.png" id="10_unw81"]
 [ext_resource type="AnimationLibrary" uid="uid://dfkng08hfjpdv" path="res://Art/Animation/credits/In.res" id="11_xdj82"]
 [ext_resource type="AnimationLibrary" uid="uid://jlt8btc7fx2j" path="res://Art/Animation/credits/Out.res" id="12_8iix6"]
+
+[sub_resource type="Gradient" id="Gradient_78fca"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1cbhb"]
+gradient = SubResource("Gradient_78fca")
 
 [sub_resource type="Animation" id="Animation_2v08l"]
 length = 0.001
@@ -394,12 +399,12 @@ _data = {
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_km20a")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_4ctv3")
 
-[node name="CenterContainer" type="CenterContainer" parent="TextureRect"]
+[node name="CenterContainer" type="CenterContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -413,7 +418,7 @@ offset_bottom = 247.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="TextureRect/CenterContainer"]
+[node name="Label" type="Label" parent="Background/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -424,6 +429,13 @@ Role 3
 
 "
 horizontal_alignment = 1
+
+[node name="BlackOverlay" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_1cbhb")
 
 [node name="RescuedSaplingsCoolIn" type="Sprite2D" parent="."]
 position = Vector2(3261, 806)

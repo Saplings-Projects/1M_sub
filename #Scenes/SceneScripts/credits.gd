@@ -2,7 +2,8 @@ extends Node2D
 
 @onready var anim_in: AnimationPlayer = $AnimationPlayerIn
 @onready var anim_out: AnimationPlayer = $AnimationPlayerOut
-@onready var name_role_label: Label = $TextureRect/CenterContainer/Label
+@onready var name_role_label: Label = $Background/CenterContainer/Label
+@onready var black_overlay: TextureRect = $BlackOverlay
 
 const CENTER_SCREEN_TIME: float = 2
 const TEXT_FADE_IN_DURATION: float = 0.2
@@ -10,6 +11,8 @@ const TEXT_FADE_OUT_DURATION: float = 0.2
 const COLOR_FADE_OUT: Color = Color(0,0,0,0)
 const COLOR_FADE_IN: Color = Color(0,0,0,1)
 const TIME_SCALING_TEXT_LENGTH: float = 0.05
+
+signal animation_ended
 
 ## All the possible team roles
 enum Roles {
@@ -107,9 +110,20 @@ const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
 
 ## Launch the loop of the scene
 func _ready() -> void:
+	black_overlay.modulate.a = 0
 	name_role_label.text = ""
 	name_role_label.add_theme_color_override("font_color", COLOR_FADE_OUT)
 	_animation_loop()
+	
+	await animation_ended
+	
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(black_overlay, "modulate:a", 1, 3)
+	
+	await tween.finished
+	
+	SceneManager.goto_scene("res://#Scenes/credits_extra.tscn")
+	
 	
 
 ## The main animation loop, controls the entry timing of all the saplings [br]
@@ -189,6 +203,9 @@ func _animation_loop() -> void:
 	anim_out.play(out_animation)
 	# put back the sprite for the animation going in, out of the screen
 	anim_in.play("RESET")
+	
+	await anim_out.animation_finished
+	animation_ended.emit()
 		
 		
 func _choose_member_order() -> Array:
