@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck042otua8tmp"
-path="res://.godot/imported/new_game.png-369300297cdb357f01d12331a82eddba.ctex"
+uid="uid://dp0sfj3tdor8w"
+path="res://.godot/imported/options.png-f15251cadef310fda0725fe17c36669c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Menus/normal button/new_game.png"
-dest_files=["res://.godot/imported/new_game.png-369300297cdb357f01d12331a82eddba.ctex"]
+source_file="res://Art/Menus/Button_hovered/options.png"
+dest_files=["res://.godot/imported/options.png-f15251cadef310fda0725fe17c36669c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/MainMenu.gd" id="1_mwp8y"]
 [ext_resource type="Texture2D" uid="uid://dnbmjftura7ij" path="res://Art/Menus/main_menu_bg-2.png" id="2_00vte"]
-[ext_resource type="Texture2D" uid="uid://b0qf2xlgmuhxo" path="res://Art/Menus/normal button/continue.png" id="3_cyfby"]
-[ext_resource type="Texture2D" uid="uid://drawyashi8bx0" path="res://Art/Menus/button lighted/continue.png" id="4_ero0m"]
-[ext_resource type="Texture2D" uid="uid://ck042otua8tmp" path="res://Art/Menus/normal button/new_game.png" id="5_pjmgu"]
-[ext_resource type="Texture2D" uid="uid://dqwvbpqsi6i5t" path="res://Art/Menus/button lighted/new_game.png" id="6_8cfnl"]
-[ext_resource type="Texture2D" uid="uid://bhvskryq17bd2" path="res://Art/Menus/normal button/options.png" id="7_xg0pw"]
-[ext_resource type="Texture2D" uid="uid://dp0sfj3tdor8w" path="res://Art/Menus/button lighted/options.png" id="8_hfkh5"]
-[ext_resource type="Texture2D" uid="uid://2hmlylb45gfa" path="res://Art/Menus/normal button/credits.png" id="9_2idf7"]
-[ext_resource type="Texture2D" uid="uid://bfy3htfthvnvb" path="res://Art/Menus/normal button/quit.png" id="9_a6gfb"]
-[ext_resource type="Texture2D" uid="uid://cg7x1jklsh8pn" path="res://Art/Menus/button lighted/credits.png" id="10_4jvwa"]
-[ext_resource type="Texture2D" uid="uid://cxnt3pjokwbjy" path="res://Art/Menus/button lighted/quit.png" id="10_rs280"]
+[ext_resource type="Texture2D" uid="uid://b0qf2xlgmuhxo" path="res://Art/Menus/Button_normal/continue.png" id="3_76twh"]
+[ext_resource type="Texture2D" uid="uid://drawyashi8bx0" path="res://Art/Menus/Button_hovered/continue.png" id="4_d6gd7"]
+[ext_resource type="Texture2D" uid="uid://ck042otua8tmp" path="res://Art/Menus/Button_normal/new_game.png" id="5_jn1yb"]
+[ext_resource type="Texture2D" uid="uid://dqwvbpqsi6i5t" path="res://Art/Menus/Button_hovered/new_game.png" id="6_3ot3c"]
+[ext_resource type="Texture2D" uid="uid://bhvskryq17bd2" path="res://Art/Menus/Button_normal/options.png" id="7_whbdq"]
+[ext_resource type="Texture2D" uid="uid://dp0sfj3tdor8w" path="res://Art/Menus/Button_hovered/options.png" id="8_hktx2"]
+[ext_resource type="Texture2D" uid="uid://2hmlylb45gfa" path="res://Art/Menus/Button_normal/credits.png" id="9_70yof"]
+[ext_resource type="Texture2D" uid="uid://cg7x1jklsh8pn" path="res://Art/Menus/Button_hovered/credits.png" id="10_vce0e"]
+[ext_resource type="Texture2D" uid="uid://bfy3htfthvnvb" path="res://Art/Menus/Button_normal/quit.png" id="11_g0haw"]
+[ext_resource type="Texture2D" uid="uid://cxnt3pjokwbjy" path="res://Art/Menus/Button_hovered/quit.png" id="12_eqc6b"]
 
 [node name="Main menu" type="Control"]
 layout_mode = 3
@@ -52,7 +52,7 @@ layout_mode = 0
 offset_left = 25.0
 offset_top = 509.0
 offset_right = 465.0
-offset_bottom = 1196.0
+offset_bottom = 1162.0
 focus_mode = 2
 theme_override_constants/separation = -195
 alignment = 1
@@ -63,10 +63,8 @@ size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../New game")
 disabled = true
-texture_normal = ExtResource("3_cyfby")
-texture_pressed = ExtResource("4_ero0m")
-texture_hover = ExtResource("4_ero0m")
-texture_focused = ExtResource("4_ero0m")
+texture_normal = ExtResource("3_76twh")
+texture_focused = ExtResource("4_d6gd7")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -75,10 +73,8 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Continue")
 focus_neighbor_bottom = NodePath("../Options")
-texture_normal = ExtResource("5_pjmgu")
-texture_pressed = ExtResource("6_8cfnl")
-texture_hover = ExtResource("6_8cfnl")
-texture_focused = ExtResource("6_8cfnl")
+texture_normal = ExtResource("5_jn1yb")
+texture_focused = ExtResource("6_3ot3c")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -88,10 +84,8 @@ size_flags_vertical = 3
 focus_neighbor_top = NodePath("../New game")
 focus_neighbor_bottom = NodePath("../Credits")
 disabled = true
-texture_normal = ExtResource("7_xg0pw")
-texture_pressed = ExtResource("8_hfkh5")
-texture_hover = ExtResource("8_hfkh5")
-texture_focused = ExtResource("8_hfkh5")
+texture_normal = ExtResource("7_whbdq")
+texture_focused = ExtResource("8_hktx2")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -101,10 +95,8 @@ size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Quit")
 disabled = true
-texture_normal = ExtResource("9_2idf7")
-texture_pressed = ExtResource("10_4jvwa")
-texture_hover = ExtResource("10_4jvwa")
-texture_focused = ExtResource("10_4jvwa")
+texture_normal = ExtResource("9_70yof")
+texture_focused = ExtResource("10_vce0e")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -113,10 +105,8 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Credits")
 focus_neighbor_bottom = NodePath("../Continue")
-texture_normal = ExtResource("9_a6gfb")
-texture_pressed = ExtResource("10_rs280")
-texture_hover = ExtResource("10_rs280")
-texture_focused = ExtResource("10_rs280")
+texture_normal = ExtResource("11_g0haw")
+texture_focused = ExtResource("12_eqc6b")
 ignore_texture_size = true
 stretch_mode = 4
 
