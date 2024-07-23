@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbg6dn7qw5pfy"
-path="res://.godot/imported/rescued_saplings_comfy_sleepy.png-505737248c57e594c030b7a0843918e9.ctex"
+uid="uid://b6lam85b6kin7"
+path="res://.godot/imported/rescued_saplings_gamer-static.png-e100ef6d1a7a9a04f4040e950373097a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/NPC/rescued_saplings_comfy_sleepy.png"
-dest_files=["res://.godot/imported/rescued_saplings_comfy_sleepy.png-505737248c57e594c030b7a0843918e9.ctex"]
+source_file="res://Art/NPC/rescued_saplings_gamer-static.png"
+dest_files=["res://.godot/imported/rescued_saplings_gamer-static.png-e100ef6d1a7a9a04f4040e950373097a.ctex"]
 
 [params]
 

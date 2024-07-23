@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwqwgrrwq5phb"
-path="res://.godot/imported/rescued_saplings_maid.png-f5ca630bf0499c084b68a3ee1a28ee53.ctex"
+path="res://.godot/imported/rescued_saplings_maid-static.png-0fb5adb9af20e179c507c5c4e63a2b55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/NPC/rescued_saplings_maid.png"
-dest_files=["res://.godot/imported/rescued_saplings_maid.png-f5ca630bf0499c084b68a3ee1a28ee53.ctex"]
+source_file="res://Art/NPC/rescued_saplings_maid-static.png"
+dest_files=["res://.godot/imported/rescued_saplings_maid-static.png-0fb5adb9af20e179c507c5c4e63a2b55.ctex"]
 
 [params]
 
