@@ -12,8 +12,9 @@ config_version=5
 
 config/name="Fauna-RPG"
 config/version="v1.0-alpha (Jun 2024)"
-run/main_scene="res://#Scenes/MainMenu.tscn"
+run/main_scene="res://#Scenes/SplashScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Art/Menus/loading_splash_art-1.png"
 config/icon="res://Art/Menus/fauna_icon-1.png"
 
@@ -31,6 +32,7 @@ EnemyManager="*res://Managers/EnemyManager.gd"
 MapManager="*res://Managers/MapManager.gd"
 InventoryManager="*res://Managers/InventoryManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+XpManager="*res://Managers/XpManager.gd"
 
 [debug]
 

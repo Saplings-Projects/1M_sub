@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://ruwidm3egyrx"]
+
+[ext_resource type="Texture2D" uid="uid://bal0bt1kvkyfb" path="res://Art/Menus/xp_bar-1.png" id="1_3gny4"]
+[ext_resource type="Texture2D" uid="uid://b8o5iklqwlg8t" path="res://Art/Menus/xp_bar_over-1.png" id="2_tcjnv"]
+[ext_resource type="Script" path="res://#Scenes/xp_progress.gd" id="3_5qwyb"]
+
+[node name="XP progress" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 199.0
+offset_right = -1845.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+value = 90.0
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("1_3gny4")
+texture_over = ExtResource("2_tcjnv")
+texture_progress = ExtResource("1_3gny4")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(0.839216, 0.784314, 0.305882, 1)
+script = ExtResource("3_5qwyb")
+
+[node name="Previous buff" type="Label" parent="TextureProgressBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.895
+anchor_right = 0.5
+anchor_bottom = 0.897
+offset_left = -579.5
+offset_top = -47.785
+offset_right = -59.5
+offset_bottom = 91.353
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Previous buff
+5 XP"
+horizontal_alignment = 2
+
+[node name="Next buff" type="Label" parent="TextureProgressBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.097
+anchor_right = 0.5
+anchor_bottom = 0.097
+offset_left = -577.5
+offset_top = -43.951
+offset_right = -57.5
+offset_bottom = 97.049
+theme_override_font_sizes/font_size = 30
+text = "Next buff
+10 XP"
+horizontal_alignment = 2
+
+[node name="Current XP" type="Label" parent="TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -39.5
+offset_right = -20.0
+offset_bottom = 45.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = " 7 XP"
+horizontal_alignment = 2

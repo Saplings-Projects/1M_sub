@@ -11,9 +11,9 @@ var _should_save_persistent_data: bool = true
 ## Also loads the player's persistent data.
 func _ready() -> void:
 	super()
+	_load_persistent_data()
 	PlayerManager.set_player(self)
 	
-	_load_persistent_data()
 
 
 ## Call when the player is destroyed. [br]
@@ -57,6 +57,8 @@ func _save_persistent_data() -> void:
 	
 	# Save stat data
 	var stat_comp: StatComponent = get_stat_component()
+	# it should already be properly done, but just in case
+	stat_comp.stats.reset_modifier_dict_temp_to_default()
 	PlayerManager.player_persistent_data.saved_stats = stat_comp.stats
 
 
