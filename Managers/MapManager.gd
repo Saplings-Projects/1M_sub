@@ -69,11 +69,35 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 ## Create a map with a width array
 
 func _ready() -> void:
-	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
-	current_map = create_map()
-
+	if (!_load_map_data()):
+		map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
+		current_map = create_map()
+	SaveManager.start_save.connect(_save_map_data)
 
 ## checks if the map exists
-
 func is_map_initialized() -> bool:
 	return current_map != null
+
+func set_room_light_data(room: RoomBase) -> void:
+	current_map.rooms[room.room_position.y][room.room_position.x].light_data = room.light_data
+
+func _save_map_data() -> void:
+	var config_file: ConfigFile = SaveManager.config_file
+	config_file.set_value("MapManager", "map_width_array", map_width_array)
+	config_file.set_value("MapManager", "current_map", current_map)
+	
+	var error: Error = config_file.save("user://save_data.ini")
+	if error:
+		print("Error saving player data: ", error)
+
+func _load_map_data() -> bool:
+	var config_file: ConfigFile = SaveManager.config_file
+	var error: Error = config_file.load("user://save_data.ini")
+	if error:
+		print("Loading Error: ", error)
+		return false
+	
+	map_width_array = config_file.get_value("MapManager", "map_width_array")
+	current_map = config_file.get_value("MapManager", "current_map")
+	return true
+	
