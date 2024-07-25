@@ -9,6 +9,10 @@ func _on_start_pressed() -> void:
 		# TODO : load the last scene the player was in
 		pass
 
+func _on_continue_pressed() -> void:
+	if PlayerManager.has_saved_data():
+		SceneManager.load_scene_data()
+		#SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
 
 ## Scene to be loaded when option button is pressed
 func _on_options_pressed() -> void:

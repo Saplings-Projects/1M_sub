@@ -1,12 +1,15 @@
 extends Node
 
 var current_scene: Node = null
+var current_event: EventBase = null
+var current_event_path: String = ""
 
 func _ready() -> void:
 	var root: Node = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	PhaseManager.on_defeat.connect(on_defeat)
 	PhaseManager.on_event_win.connect(on_event_win)
+	SaveManager.start_save.connect(_save_scene_data)
 
 func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback,
@@ -57,7 +60,9 @@ func goto_scene_map(event: EventBase, selection: int) -> void:
 	var event_type_name: String = actual_event.get_event_name()
 	# go search the scene of the given event with the given selection
 	var path: String = "res://#Scenes/Events/%s/%d.tscn" % [event_type_name, selection] 
-
+	
+	current_event_path = path
+	current_event = actual_event
 	call_deferred("_deferred_goto_scene_map", actual_event, path)
 	
 ## Load the scene and start the event	
@@ -75,3 +80,24 @@ func on_defeat() -> void:
 ## Give rewards, allow player to move on the map
 func on_event_win() -> void:
 	PlayerManager.player_room.room_event.on_event_ended()
+
+func _save_scene_data() -> void:
+	for children: Node in current_scene.get_children():
+		children.owner = current_scene
+	var packed_scene: PackedScene = PackedScene.new()
+	packed_scene.pack(current_scene)
+	ResourceSaver.save(packed_scene, "user://current_scene.tscn")
+
+func load_scene_data() -> void:
+	call_deferred("_deferred_load_current_scene_from_data")
+
+func _deferred_load_current_scene_from_data() -> void:
+	current_scene.free()
+	
+	var scene: Resource = ResourceLoader.load("user://current_scene.tscn")
+	current_scene = scene.instantiate()
+	get_tree().root.add_child(current_scene)
+	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
+	get_tree().current_scene = current_scene
+
+

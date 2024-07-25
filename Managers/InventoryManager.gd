@@ -12,6 +12,9 @@ var relic_component : InventoryRelicComponent = InventoryRelicComponent.new()
 ## This is for the UI [br]
 ## The current UI is a placeholder and wil be changed in the future
 
+func _ready() -> void:
+	SaveManager.start_save.connect(_save_inventory)
+
 var inventory_HUD : PackedScene = preload("res://InventoryComponents/InventoryHUD/inventory_hud.tscn")
 var instanced_inventory_HUD : Node
 
@@ -40,3 +43,14 @@ func reset_inventory() -> void:
 	torch_component = InventoryTorchComponent.new()
 	consumable_component = InventoryConsumablesComponent.new()
 	relic_component = InventoryRelicComponent.new()
+
+func _save_inventory() -> void:
+	var config_file: ConfigFile = SaveManager.config_file
+	config_file.set_value("InventoryManager", "gold_component", gold_component)
+	config_file.set_value("InventoryManager", "torch_component", torch_component)
+	config_file.set_value("InventoryManager", "consumable_component", consumable_component)
+	config_file.set_value("InventoryManager", "relic_component", relic_component)
+	
+	var error: Error = config_file.save("user://save_data.ini")
+	if error:
+		print("Error saving inventory data: ", error)
