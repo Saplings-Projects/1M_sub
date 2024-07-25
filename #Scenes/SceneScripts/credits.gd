@@ -110,6 +110,7 @@ const ANIMATION_TIME_OUT_SCREEN_CENTER: Dictionary = {
 
 ## Launch the loop of the scene
 func _ready() -> void:
+	# start by setting up various things
 	black_overlay.modulate.a = 0
 	name_role_label.text = ""
 	name_role_label.add_theme_color_override("font_color", COLOR_FADE_OUT)
@@ -117,6 +118,7 @@ func _ready() -> void:
 	
 	await animation_ended
 	
+	# fade to black and go to next scene
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(black_overlay, "modulate:a", 1, 3)
 	
@@ -129,24 +131,28 @@ func _ready() -> void:
 ## The main animation loop, controls the entry timing of all the saplings [br]
 ## This is done by controling the two animation player of the scene
 func _animation_loop() -> void:
+	# a little timer to start the scene
 	var timer: SceneTreeTimer = get_tree().create_timer(1)
 	var team_members_names: Array = _choose_member_order()
-	#var team_members_names: Array = TEAM_MEMBERS.keys()
-	#team_members_names.shuffle()
+
 	await timer.timeout
 	
 	# play first animation with animation player in
+	# this is needed since the loop also plays the out animation of the previous avatar
+	# but there is no previous avatar before the first one
 	var first_member: String = team_members_names[0]
 	var roles_and_avatar: Array = TEAM_MEMBERS[first_member]
 	var roles: Array = roles_and_avatar[0]
 	var roles_string: String = _role_array_to_string(roles)
 	var previous_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
-	var sapling_type_values: Array = GlobalEnums.SaplingType.values()
-	while previous_avatar == sapling_type.None :
-		previous_avatar = sapling_type_values[randi() % sapling_type_values.size()]
+	# randomly select an avatar type for those that don't have one
+	# change to defaulting to MILF later
+	if previous_avatar == sapling_type.None :
+		previous_avatar = _default_avatar()
 	var animation_name: String = _choose_animation(previous_avatar, true)
 	anim_in.play(animation_name)
 	await anim_in.animation_finished
+	# member is now at the center of the screen, display their name + roles with a fade in of the text
 	name_role_label.text = first_member + "\n" + roles_string
 	var text_time_on_screen: float = _get_text_time_on_screen(name_role_label.text)
 	var tween: Tween = get_tree().create_tween()
@@ -155,46 +161,57 @@ func _animation_loop() -> void:
 	
 	var out_animation: String
 	
+	# now loop on all the remaining members
 	for member_name: String in team_members_names.slice(1):
 		out_animation = _choose_animation(previous_avatar, false)
 		var in_tween: Tween = get_tree().create_tween()
+		# fade out the text above avatar head
 		in_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_OUT, TEXT_FADE_OUT_DURATION)
 		await in_tween.finished
 		anim_out.play(out_animation)
 		name_role_label.text = ""
+		# reset position of the IN avatar
+		# the sprite for the out animation is different from the sprite of the IN
+		# when starting the out animation, if we don't reset the IN sprite it would stay at the center of the screen
 		anim_in.play("RESET")
-		# check duration to know when to start the next in animation
+		# prepare for the next member to go in
 		roles_and_avatar = TEAM_MEMBERS[member_name]
 		var new_roles: Array = roles_and_avatar[0]
 		var new_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
 		var new_roles_string: String = _role_array_to_string(new_roles)
-		while new_avatar == sapling_type.None :
-			new_avatar = sapling_type_values[randi() % sapling_type_values.size()]
+		if new_avatar == sapling_type.None :
+			new_avatar = _default_avatar()
 		var in_animation: String = _choose_animation(new_avatar, true)
+		# the signal to wait before launching the next IN animation
+		# depends on the type of the previous / next avatar
 		var in_signal: Signal
 		# special rule for the emo sapling since it enters from the left
 		# so we need to wait for the out animation to finish
 		if new_avatar == sapling_type.Emo or previous_avatar == sapling_type.Emo:
 			in_signal = anim_out.animation_finished
 		else:
+			# the time it takes for the sprite in the center of the screen to leave it
 			var time_center_out: float = ANIMATION_TIME_OUT_SCREEN_CENTER[out_animation]
+			# the time it takes for the animation going in to reach the center of the screen
 			var time_center_in: float = ANIMATION_TIME_TO_SCREEN_CENTER[in_animation]
 			# calculate the time to leave between entry and exit to prevent sprites going into each other
+			# if the animation going in is slower than the animation going out, it can start directly (thus 0)
 			var time_difference: float = max (0, time_center_out - time_center_in)
 			in_signal = get_tree().create_timer(time_difference).timeout
 		await in_signal
 		anim_in.play(in_animation)
 		
 		await anim_in.animation_finished
+		# display the name + roles of the sprite that just got to the center of the screen
 		var out_tween: Tween = get_tree().create_tween()
 		name_role_label.text = member_name + "\n" + new_roles_string
 		text_time_on_screen = _get_text_time_on_screen(name_role_label.text)
 		out_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_IN, TEXT_FADE_IN_DURATION)
 		await get_tree().create_timer(text_time_on_screen).timeout
+		# the one at the center of the screen is now the one going out for the next loop (thus becoming the previous_avatar)
 		previous_avatar = new_avatar
 		
-		# loop and play all animations checking for entry / exit timing
-	# play the last out animation
+	# play the last out animation separately (since unlike the loop, there is no other IN to play after)
 	out_animation = _choose_animation(previous_avatar, false)
 	var last_tween: Tween = get_tree().create_tween()
 	last_tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_OUT, TEXT_FADE_OUT_DURATION)
@@ -207,7 +224,21 @@ func _animation_loop() -> void:
 	await anim_out.animation_finished
 	animation_ended.emit()
 		
-		
+
+
+## What to give the people that don't have an avatar
+func _default_avatar() -> GlobalEnums.SaplingType:
+	#var avatar: GlobalEnums.SaplingType
+	#var sapling_type_values: Array = GlobalEnums.SaplingType.values()
+	#while avatar == sapling_type.None :
+			#avatar = sapling_type_values[randi() % sapling_type_values.size()]
+	return GlobalEnums.SaplingType.Milf
+	
+
+## Choose the order in which the members should appear [br]
+## The order is the following: [br]
+## - each category in alphabetical order [br]
+## - order inside a given category is random
 func _choose_member_order() -> Array:
 	var team_members_names: Array = TEAM_MEMBERS.keys()
 	var teams: Dictionary = {
@@ -223,6 +254,9 @@ func _choose_member_order() -> Array:
 		var member_roles: Array = TEAM_MEMBERS[member_name][0]
 		
 		var team_to_add: Roles
+		# check if each role is one of the member role
+		# doing it this way instead of iterating over member roles ensures that the order for roles is always the same
+		# even if the order is different for individual members
 		for role: Roles in Roles.values():
 			if role in member_roles:
 				match role:
@@ -256,6 +290,8 @@ func _choose_member_order() -> Array:
 		final_list.append_array(sub_team)
 	return final_list
 		
+## Choose the animation for a given sapling type [br]
+## Mainly useful if there are multiple possible animations
 func _choose_animation(avatar: GlobalEnums.SaplingType, is_in: bool) -> String:
 	var avatar_name: String = GlobalEnums.SaplingType.keys()[avatar].to_lower()
 	var animations_list: Array
@@ -270,6 +306,7 @@ func _choose_animation(avatar: GlobalEnums.SaplingType, is_in: bool) -> String:
 	var chosen_animation: String = animation_for_avatar[randi() % animation_for_avatar.size()]
 	return chosen_animation
 	
+## Convert the list of roles of a member to the screen to be displayed for those roles
 func _role_array_to_string(roles: Array) -> String:
 	var all_roles_string: PackedStringArray = []
 	for role: Roles in roles:
@@ -279,9 +316,12 @@ func _role_array_to_string(roles: Array) -> String:
 	else:
 		return ", ".join(all_roles_string.slice(0, 2)) + "\n" + ", ".join(all_roles_string.slice(2))
 
+
+## Convert a role to a string
 func _role_to_string(role: Roles) -> String:
 	return Roles.keys()[role].replace("_", " ") 
 	
 
+## Calculate the time a string should be displayed on screen
 func _get_text_time_on_screen(text: String) -> float:
 	return CENTER_SCREEN_TIME + text.length() * TIME_SCALING_TEXT_LENGTH
