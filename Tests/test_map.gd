@@ -24,7 +24,7 @@ func test_rule_0_map_gen() -> void:
 ## Rule 1: No Heal room before half of the map
 func test_rule_1_map_gen() -> void:
 	var current_room: RoomBase
-	for index_height: int in range(int(test_map.rooms.size()/2.0)):
+	for index_height: int in range(int(floor(test_map.rooms.size()/2.0))):
 		for index_width: int in range(test_map.rooms[index_height].size()):
 			current_room = test_map.rooms[index_height][index_width]
 			
@@ -50,15 +50,17 @@ func test_rule_2_map_gen() -> void:
 			print(index_height, " ", index_width)
 			
 			# Get child room type and compare
-			for delta_x: int in [-1, 0, 1]:
-				var child_x: int = current_room.room_position.x + delta_x
-				var child_y: int = current_room.room_position.y + 1
-				if child_y >= 0 && child_y < test_map.rooms.size() && child_x >= 0 && child_x < test_map.rooms[child_y].size() && test_map.rooms[child_y][child_x] != null:
-					var consecutive: bool = (current_room.room_event.get_event_name() in no_consecutive_room_event && 
-											 current_room.room_event.get_event_name() == test_map.rooms[child_y][child_x].room_event.get_event_name())
-			
-					assert_false(consecutive, "Should not have two consecutive Heal rooms or two consecutive Shop rooms but found %s at %s and %s at %s" % 
-								 [current_room.room_event.get_event_name(), current_room.room_position, test_map.rooms[child_y][child_x].room_event.get_event_name(), test_map.rooms[child_y][child_x].room_position])
+			# We define child rooms as rooms that can be reached from our current room
+			var child_y: int = current_room.room_position.y + 1
+			if child_y >= 0 && child_y < test_map.rooms.size():
+
+				for delta_x: int in [-1, 0, 1]:
+					var child_x: int = current_room.room_position.x + delta_x
+					if child_x >= 0 && child_x < test_map.rooms[child_y].size() && test_map.rooms[child_y][child_x] != null:
+						var consecutive: bool = current_room.room_event.get_event_name() == test_map.rooms[child_y][child_x].room_event.get_event_name()
+				
+						assert_false(consecutive, "Should not have two consecutive Heal rooms or two consecutive Shop rooms but found %s at %s and %s at %s" % 
+									[current_room.room_event.get_event_name(), current_room.room_position, test_map.rooms[child_y][child_x].room_event.get_event_name(), test_map.rooms[child_y][child_x].room_position])
 
 
 ## Rule 3: There must be at least 2 room types among destinations of Rooms that have 2 or more Paths going out.
@@ -75,6 +77,9 @@ func test_rule_3_map_gen() -> void:
 		queue = []
 		
 		for index_width: int in range(test_map.rooms[index_height].size()):
+			while queue.size() >= 3:
+				queue.pop_front()
+				
 			current_room = test_map.rooms[index_height][index_width]
 			
 			if current_room == null:
@@ -83,10 +88,7 @@ func test_rule_3_map_gen() -> void:
 			# If current_room is not null, rightmost_room_position is updated
 			rightmost_room_position = current_room.room_position
 			queue.append(current_room.room_event.get_event_name())
-			
-			while queue.size() > 3:
-				queue.pop_front()
-				
+
 			if queue.size() >= 2:
 				unique = []
 
