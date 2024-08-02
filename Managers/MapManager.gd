@@ -143,12 +143,14 @@ func is_room_event_correct(current_room: RoomBase, map: MapBase = current_map) -
 ## Draws room type randomly, with each type having a set probability [br]
 ## Algorithm taken from this: https://stackoverflow.com/a/1761646
 func draw_room_type() -> EventBase:
-	var sum: int = 0
-	for proba in GlobalVar.EVENTS_PROBABILITIES:
-		sum += proba
-	var _rand_type_number: int = randi_range(0, sum-1)
+	var _total_proba: int = 0
+	for event: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
+		# print(event)
+		_total_proba += GlobalVar.EVENTS_PROBABILITIES[event]
 
-	for _rand_type_index: int in range(GlobalVar.EVENTS_CLASSIFICATION.size()):
+	var _rand_type_number: int = randi_range(0, _total_proba-1)
+
+	for _rand_type_index: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
 		if _rand_type_number < GlobalVar.EVENTS_PROBABILITIES[_rand_type_index]:
 			return GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
 
@@ -194,6 +196,8 @@ func _ready() -> void:
 		if DebugVar.DEBUG_PRINT_EVENT_COUNT:
 			var events: Dictionary = {}
 			var total_nb_rooms: int = 0
+			var expected_probabilities: Dictionary = {"mob": 45, "random": 16, "heal": 12, "dialogue": 22, "shop": 5}
+			
 			for index_height: int in range(current_map.rooms.size()):
 				for index_width: int in range(current_map.rooms[index_height].size()):
 					if current_map.rooms[index_height][index_width] == null:
@@ -205,7 +209,7 @@ func _ready() -> void:
 					events[event] += 1
 					total_nb_rooms += 1
 			for k:String in events:
-				print("Event " + k + " has "+ str(events[k]) + " rooms. (" + str(float(events[k])*100/total_nb_rooms).pad_decimals(2) + "%)")
+				print("Event " + k + " has "+ str(events[k]) + " rooms. (is " + str(float(events[k])*100/total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
 			print("Total number of rooms generated: " + str(total_nb_rooms))
 
 ## checks if the map exists
