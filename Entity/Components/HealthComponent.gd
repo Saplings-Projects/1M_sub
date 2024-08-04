@@ -15,20 +15,22 @@ signal on_block_changed(new_block: int)
 ## Between 0 and max_health
 var current_health: int = 100 # ? change this to max health, or just unset since it's init by the ready
 
-
 var current_block: int = 0
+
+## might need to find a better way to get which team the enitiy is on
+var team: GlobalEnums.Team 
 
 ## Initialize the health component, putting health to max health
 ## This only happens at game start for the player, the value is then tracked inside the [PlayerManager] singleton [br]
 ## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
 	_set_health(max_health)
-	PhaseManager.on_phase_changed.connect(reset_block_on_round_start)
+	PhaseManager.before_phase_changed.connect(reset_block_on_round_start)
 
 ## The intended way for entities to take damage.[br]
 ## Removes block first and then deals excess damage to the health[br]
 func take_damage_block_and_health(amount : int, caster: Entity) -> void:
-	if amount <= 0.0:
+	if amount <= 0:
 		return
 		
 	assert(owner != null, "No owner was set. Please call init on the Entity.")
@@ -46,7 +48,7 @@ func take_damage_block_and_health(amount : int, caster: Entity) -> void:
 ## removes health without considering block [br]
 ## primarily a helper function, but could be used in future for block ignoring attacks[br]
 func _health_damage(damage : int) -> void:
-	if damage <= 0.0:
+	if damage <= 0:
 		return
 	
 	var new_health : int = clamp(current_health - damage, 0, max_health)
@@ -55,7 +57,7 @@ func _health_damage(damage : int) -> void:
 
 ## adds health to the unit[br]
 func heal(amount : int,  _caster : Entity) -> void:
-	if amount <= 0.0:
+	if amount <= 0:
 		return
 	
 	var new_health : int = clamp(current_health + amount, 0, max_health)
@@ -70,7 +72,7 @@ func _set_health(new_health: int) -> void:
 
 ## Removes block from the entity[br]
 func block_damage(damage: int) -> int:
-	if damage <= 0.0:
+	if damage <= 0:
 		return 0
 	
 	var leftover_damage : int = max(damage - current_block, 0)
@@ -82,7 +84,7 @@ func block_damage(damage: int) -> int:
 
 ## Adds block to the entity[br]
 func add_block(amount : int, _caster : Entity) -> void:
-	if amount <= 0.0:
+	if amount <= 0:
 		return
 	
 	var new_block : int = current_block + amount
@@ -99,8 +101,12 @@ func _set_block(new_block: int) -> void:
 	on_block_changed.emit(current_block)
 
 func reset_block_on_round_start(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
-	if(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING):
-		reset_block()
+	if(team == GlobalEnums.Team.FRIENDLY):
+		if(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING):
+			reset_block()
+	if(team == GlobalEnums.Team.ENEMY):
+		if(new_phase == GlobalEnums.Phase.ENEMY_ATTACKING):
+			reset_block()
 
 ## Sets block to 0 [br]
 func reset_block() -> void:

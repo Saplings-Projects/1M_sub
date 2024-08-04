@@ -13,6 +13,8 @@ signal on_event_win
 ## When the player is dead (reduced to 0 health)
 signal on_defeat
 
+## This is a signal to fix a bug with blocking regarding order of turn start effects, might be removed later
+signal before_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Phase)
 
 var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
 
@@ -41,5 +43,8 @@ func set_phase(phase: GlobalEnums.Phase) -> void:
 		return
 	
 	var old_phase: GlobalEnums.Phase = current_phase
+	
+	before_phase_changed.emit(phase, old_phase)
+	
 	current_phase = phase
 	on_phase_changed.emit(current_phase, old_phase)
