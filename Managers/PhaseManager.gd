@@ -45,7 +45,7 @@ func set_phase(phase: GlobalEnums.Phase) -> void:
 	
 	var old_phase: GlobalEnums.Phase = current_phase
 	
-	before_phase_changed.emit(phase, old_phase)
+	temp_before_phase_changed.emit(phase, old_phase)
 	
 	current_phase = phase
 	on_phase_changed.emit(current_phase, old_phase)
