@@ -13,8 +13,9 @@ signal on_event_win
 ## When the player is dead (reduced to 0 health)
 signal on_defeat
 
-## This is a signal to fix a bug with blocking regarding order of turn start effects, might be removed later
-signal before_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Phase)
+## This is a signal is a temporary solution to block removal while #118 and #120 are done
+## should be removed with those issues
+signal temp_before_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Phase)
 
 var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
 
