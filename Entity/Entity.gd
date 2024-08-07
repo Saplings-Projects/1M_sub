@@ -10,6 +10,8 @@ func _ready() -> void:
 	get_health_component().init_entity_component(self)
 	get_party_component().init_entity_component(self)
 	get_stat_component().init_entity_component(self)
+	
+	get_health_component().team = get_party_component().team
 
 
 func get_status_component() -> StatusComponent:

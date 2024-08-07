@@ -13,6 +13,10 @@ signal on_event_win
 ## When the player is dead (reduced to 0 health)
 signal on_defeat
 
+## This is a signal is a temporary solution to block removal while #118 and #120 are done
+## should be removed with those issues
+signal temp_before_phase_changed(new_phase: GlobalEnums.Phase, old_phase: GlobalEnums.Phase)
+
 var current_phase: GlobalEnums.Phase = GlobalEnums.Phase.NONE
 
 
@@ -38,6 +42,10 @@ func _start_game() -> void:
 func set_phase(phase: GlobalEnums.Phase) -> void:
 	if (current_phase == phase):
 		return
+	
 	var old_phase: GlobalEnums.Phase = current_phase
+	
+	temp_before_phase_changed.emit(phase, old_phase)
+	
 	current_phase = phase
 	on_phase_changed.emit(current_phase, old_phase)
