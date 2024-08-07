@@ -92,3 +92,16 @@ enum EventType {
 	Shop,
 	Dialogue,
 }
+
+enum SaplingType {
+	Sleepy,
+	Cool,
+	Emo,
+	Gamer,
+	Maid,
+	Milf,
+	Nerd,
+	Old,
+	Snow,
+	None,
+}
