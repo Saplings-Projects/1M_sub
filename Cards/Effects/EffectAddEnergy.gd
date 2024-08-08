@@ -6,4 +6,4 @@ class_name EffectAddEnergy extends EffectBase
 ## @Override [br]
 ## Refer to [EffectBase]
 func apply_effect(_caster: Entity, _target: Entity, value: int) -> void:
-    PlayerManager.player.get_energy_component().add_energy(value)
+	PlayerManager.player.get_energy_component().add_energy(value)
