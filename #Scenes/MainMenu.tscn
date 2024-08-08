@@ -50,7 +50,7 @@ text = "Title place holder"
 [node name="Menu buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 509.0
+offset_top = 481.0
 offset_right = 465.0
 offset_bottom = 1162.0
 focus_mode = 2
@@ -83,7 +83,6 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../New game")
 focus_neighbor_bottom = NodePath("../Credits")
-disabled = true
 texture_normal = ExtResource("7_whbdq")
 texture_focused = ExtResource("8_hktx2")
 ignore_texture_size = true
