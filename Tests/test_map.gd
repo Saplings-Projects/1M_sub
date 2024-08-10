@@ -109,7 +109,6 @@ func test_rule_3_map_gen() -> void:
 					 test_map.rooms[index_height][index_width].room_event.get_event_name(), test_map.rooms[index_height][index_width].room_position])
 
 		# Check if the two rightmost rooms of the floor are the same type or not
-		queue.pop_front()
 		if queue.size() >= 2:
 			unique = []
 
