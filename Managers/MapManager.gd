@@ -150,16 +150,18 @@ func pick_room_type() -> EventBase:
 	for event: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
 		_total_proba += GlobalVar.EVENTS_PROBABILITIES[event]
 
-	var _rand_type_number: int = randi_range(0, _total_proba - 1)
+	var _rand_number: int = randi_range(0, _total_proba - 1)
+	# This is just for the error message
+	var _rand_number_error: int = _rand_number
 
-	for _rand_type_index: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
-		if _rand_type_number < GlobalVar.EVENTS_PROBABILITIES[_rand_type_index]:
-			return GlobalVar.EVENTS_CLASSIFICATION[_rand_type_index].new()
+	for _rand_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
+		if _rand_number < GlobalVar.EVENTS_PROBABILITIES[_rand_type]:
+			return GlobalEnums.choose_event_from_type(_rand_type)
 
-		_rand_type_number -= GlobalVar.EVENTS_PROBABILITIES[_rand_type_index]
+		_rand_number -= GlobalVar.EVENTS_PROBABILITIES[_rand_type]
 	
 	# This shouldn't be reached
-	push_error("Error: The random number _rand_type_number is bigger than the sum of probabilities _total_proba")
+	push_error("Error: The random number _rand_number is bigger than the sum of probabilities _total_proba: %s > %s" % [_rand_number_error, _total_proba])
 	return EventMob.new()
 
 ## Assign events to existing rooms with set probabilities.

@@ -13,15 +13,13 @@ var MODIFIER_KEYS: Dictionary = {
 # Keys can be accessed with the syntax: GlobalVar.MODIFIER_KEYS.ADD_PERMANENT
 # this is useful if we need to change the reference value in multiple places
 
-## A list of all the possible events, ordered the same as GlobalEnums.EventType
-var EVENTS_CLASSIFICATION: Array[Resource] = [EventRandom, EventHeal, EventMob, EventShop, EventDialogue]
 
-## A list of the probabilities of all possible events, ordered the same as GlobalEnums.EventType
+## A list of the probabilities of all possible events
 var EVENTS_PROBABILITIES: Dictionary = {
-	GlobalEnums.EventType.Random:16,
-	GlobalEnums.EventType.Heal: 12,
-	GlobalEnums.EventType.Mob: 45, 
-	GlobalEnums.EventType.Shop: 5,
+	GlobalEnums.EventType.Random  : 16,
+	GlobalEnums.EventType.Heal    : 12,
+	GlobalEnums.EventType.Mob     : 45, 
+	GlobalEnums.EventType.Shop    : 5,
 	GlobalEnums.EventType.Dialogue: 22
 }
 
