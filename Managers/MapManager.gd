@@ -69,10 +69,11 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 ## Create a map with a width array
 
 func _ready() -> void:
-	if (!_load_map_data()):
-		map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
-		current_map = create_map()
+	#if (!_load_map_data()):
+	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
+	current_map = create_map()
 	SaveManager.start_save.connect(_save_map_data)
+	#SaveManager.start_load.connect(_load_map_data)
 
 ## checks if the map exists
 func is_map_initialized() -> bool:
@@ -90,14 +91,14 @@ func _save_map_data() -> void:
 	if error:
 		print("Error saving player data: ", error)
 
-func _load_map_data() -> bool:
-	var config_file: ConfigFile = SaveManager.config_file
-	var error: Error = config_file.load("user://save_data.ini")
-	if error:
-		print("Loading Error: ", error)
-		return false
+func load_map_data() -> void:
+	var config_file: ConfigFile = SaveManager.load_config_file()
+	if config_file == null:
+		return
 	
 	map_width_array = config_file.get_value("MapManager", "map_width_array")
 	current_map = config_file.get_value("MapManager", "current_map")
-	return true
-	
+
+func clear_map_data() -> void:
+	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
+	current_map = create_map()

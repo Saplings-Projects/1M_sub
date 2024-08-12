@@ -17,6 +17,7 @@ var disable_card_animations: bool = false
 func _ready() -> void:
 	default_deck = load("res://Cards/CardSets/DefaultDeck.tres")
 	_initialize_deck()
+	SaveManager.start_save.connect(save_data)
 
 
 # Call this from CardContainer to initialize. This allows you to get the current CardContainer from
@@ -43,4 +44,22 @@ func is_discard_hand_signal_connected(callable: Callable) -> bool:
 
 func connect_discard_hand_signal(callable: Callable) -> void:
 	card_container.on_finished_discarding_hand.connect(callable)
+
+func save_data() -> void:
+	var config_file: ConfigFile = SaveManager.config_file
+	config_file.set_value("CardManager", "current_deck", current_deck)
+	
+	var error: Error = config_file.save("user://save_data.ini")
+	if error:
+		print("Error saving player data: ", error)
+
+func load_data() -> void:
+	var config_file: ConfigFile = SaveManager.load_config_file()
+	if config_file == null:
+		return
+	
+	current_deck = config_file.get_value("CardManager", "current_deck")
+
+func clear_data() -> void:
+	current_deck = default_deck.card_set.duplicate()
 

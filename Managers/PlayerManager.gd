@@ -40,15 +40,13 @@ var player_persistent_data: PlayerPersistentData = null:
 
 
 func _ready() -> void:
-	if (!_load_player()):
-		player = null
-		is_player_initial_position_set = false
+	player = null
+	is_player_initial_position_set = false
 	SaveManager.start_save.connect(_save_player)
 
 
 func _save_player() -> void:
 	var config_file: ConfigFile = SaveManager.config_file
-	config_file.set_value("Player", "player", player)
 	config_file.set_value("Player", "position", player_position)
 	config_file.set_value("Player", "player_room", player_room)
 	config_file.set_value("Player", "player_persistent_data", player_persistent_data)
@@ -57,23 +55,19 @@ func _save_player() -> void:
 	if error:
 		print("Error saving player data: ", error)
 
-func _load_player() -> bool:
-	var config_file: ConfigFile = SaveManager.config_file
-	var error: Error = config_file.load("user://save_data.ini")
-	if error:
-		print("Loading Error: ", error)
-		return false
+func load_player() -> void:
+	var config_file: ConfigFile = SaveManager.load_config_file()
+	if config_file == null:
+		return
 	
-	player = config_file.get_value("Player", "player")
 	player_position = config_file.get_value("Player", "position")
 	player_room = config_file.get_value("Player", "player_room")
 	player_persistent_data = config_file.get_value("Player", "player_persistent_data") as PlayerPersistentData
-	return true
 
 
 func has_saved_data() -> bool:
-	var config_file: ConfigFile = SaveManager.config_file
-	return config_file.has_section_key("Player", "position")
+	var config_file: ConfigFile = SaveManager.load_config_file()
+	return config_file != null
 
 func set_player(in_player: Player) -> void:
 	player = in_player
@@ -83,7 +77,10 @@ func set_player(in_player: Player) -> void:
 
 func create_persistent_data() -> void:
 	player_persistent_data = PlayerPersistentData.new()
-	
+
+func clear_data() -> void:
+	player = null
+	is_player_initial_position_set = false
 
 ## Checks if the player is in a given room
 func is_player_in_room(room: RoomBase) -> bool:

@@ -34,6 +34,12 @@ func toggle_inventory_HUD() -> void:
 	else:
 		close_inventory_HUD()
 
+func has_torches() -> bool:
+	return torch_component.has_torches()
+
+func subtract_torch() -> void:
+	torch_component.lose_torches(1)
+
 ## Simply just makes new versions of every component class to reset all the items [br]
 ## The inventory_hud is closed before hand in case something breaks there
 
@@ -54,3 +60,12 @@ func _save_inventory() -> void:
 	var error: Error = config_file.save("user://save_data.ini")
 	if error:
 		print("Error saving inventory data: ", error)
+
+func load_inventory() -> void:
+	var config_file: ConfigFile = SaveManager.load_config_file()
+	if config_file == null:
+		return
+	gold_component = config_file.get_value("InventoryManager", "gold_component")
+	torch_component = config_file.get_value("InventoryManager", "torch_component")
+	consumable_component = config_file.get_value("InventoryManager", "consumable_component")
+	relic_component = config_file.get_value("InventoryManager", "relic_component")

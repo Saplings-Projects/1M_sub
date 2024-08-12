@@ -25,6 +25,7 @@ var _LIGHT_FLOOR_RANGE: int = 3
 @export var torch_confirmation_dialog: ConfirmationDialog
 @export var cant_set_torch_dialog: AcceptDialog
 @export var player_position_not_set_text: String
+@export var not_enough_torches_text: String
 
 var room_ui_array: Array[Array]
 var current_player_room: RoomUI
@@ -44,6 +45,9 @@ func _on_add_torch_pressed() -> void:
 		cant_set_torch_dialog.dialog_text = player_position_not_set_text
 		cant_set_torch_dialog.show()
 	#TODO: Add in torch count here
+	elif !InventoryManager.has_torches():
+		cant_set_torch_dialog.dialog_text = not_enough_torches_text
+		cant_set_torch_dialog.show()
 	else:
 		torch_confirmation_dialog.show()
 
@@ -60,6 +64,8 @@ func _add_torch_to_current_location() -> void:
 	
 	current_player_room.room.set_torch_active()
 	MapManager.set_room_light_data(current_player_room.room)
+	
+	InventoryManager.subtract_torch()
 	
 	light_overlay.queue_redraw()
 	SaveManager.execute_save()
