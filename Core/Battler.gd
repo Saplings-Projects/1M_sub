@@ -21,7 +21,8 @@ func _ready() -> void:
 		PlayerManager.on_player_initialized.connect(_on_player_initialized)
 	else:
 		_on_player_initialized()
-		
+	
+	PhaseManager.start_combat()
 	PhaseManager.on_combat_phase_changed.connect(_on_phase_changed)
 	CardManager.on_card_container_initialized.connect(_on_card_container_initialized)
 	CardManager.on_card_action_finished.connect(_handle_deaths.unbind(1))
