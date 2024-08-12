@@ -2,15 +2,19 @@ extends Node
 class_name GlobalEnums
 ## Global enums list
 
-## Where are we in the fight
-enum Phase
-{
+## For phases that are common between multiple events
+enum GlobalPhase {
 	NONE, ## Hello Youston, we are nowhere
 	GAME_STARTING, ## The game is starting
+	SCENE_STARTED, ## A new scene started
+	SCENE_END, ## The current scene ended
+}
+
+## For phases that are combat specific
+enum CombatPhase {
 	PLAYER_ATTACKING, ## The player is attacking
 	PLAYER_FINISHING, ## The player finished its turn (card discard and other stuff starts here)
 	ENEMY_ATTACKING, ## Enemy turn
-	SCENE_END, ## The current scene ended
 }
 
 ## In which team is an entity
