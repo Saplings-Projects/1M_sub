@@ -27,6 +27,7 @@ func _ready() -> void:
 	return
 	
 
+## Init phase
 func initialize_game() -> void:
 	set_global_phase(GlobalEnums.GlobalPhase.GAME_STARTING)
 	
@@ -35,6 +36,7 @@ func initialize_game() -> void:
 	_start_game()
 
 
+## Start the game
 func _start_game() -> void:
 	_set_combat_phase(GlobalEnums.CombatPhase.PLAYER_ATTACKING)
 	on_game_start.emit()
@@ -51,17 +53,21 @@ func _set_combat_phase(phase: GlobalEnums.CombatPhase) -> void:
 	
 	current_combat_phase = phase
 	on_combat_phase_changed.emit(current_combat_phase, old_phase)
-	
+
+## Call to setup combat phase [br]
+## Note: This might be used later to also properly remove block from previous fights
 func start_combat() -> void:
 	current_combat_phase_index = 0
 	_set_combat_phase(GlobalEnums.CombatPhase.values()[0])
 	
+## Go to the next phase of the combat
 func advance_to_next_combat_phase() -> void:
 	var combat_phase: Array = GlobalEnums.CombatPhase.values()
 	# advance the index by 1, going back to 0 if the index is bigger than the total number of possible phase
 	current_combat_phase_index = (current_combat_phase_index + 1) % (combat_phase.size())
 	_set_combat_phase(GlobalEnums.CombatPhase.values()[current_combat_phase_index])
 	
+## Used to set global game phase
 func set_global_phase(phase: GlobalEnums.GlobalPhase) -> void:
 	if (current_global_phase == phase):
 		return
