@@ -103,12 +103,12 @@ func _set_block(new_block: int) -> void:
 	current_block = new_block
 	on_block_changed.emit(current_block)
 
-func reset_block_on_round_start(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
+func reset_block_on_round_start(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
 	if(team == GlobalEnums.Team.FRIENDLY):
-		if(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING):
+		if(new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING):
 			reset_block()
 	if(team == GlobalEnums.Team.ENEMY):
-		if(new_phase == GlobalEnums.Phase.ENEMY_ATTACKING):
+		if(new_phase == GlobalEnums.CombatPhase.ENEMY_ATTACKING):
 			reset_block()
 
 ## Sets block to 0 [br]

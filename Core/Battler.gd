@@ -22,7 +22,7 @@ func _ready() -> void:
 	else:
 		_on_player_initialized()
 		
-	PhaseManager.on_phase_changed.connect(_on_phase_changed)
+	PhaseManager.on_combat_phase_changed.connect(_on_phase_changed)
 	CardManager.on_card_container_initialized.connect(_on_card_container_initialized)
 	CardManager.on_card_action_finished.connect(_handle_deaths.unbind(1))
 
@@ -49,11 +49,11 @@ func _on_player_initialized() -> void:
 		player_status_comp.add_status(buff, PlayerManager.player)
 
 
-func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
-	if new_phase == GlobalEnums.Phase.PLAYER_ATTACKING:
+func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
+	if new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING:
 		_on_player_start_turn()
 	
-	if new_phase == GlobalEnums.Phase.ENEMY_ATTACKING:
+	if new_phase == GlobalEnums.CombatPhase.ENEMY_ATTACKING:
 		_on_enemy_start_turn()
 
 
@@ -63,7 +63,7 @@ func _on_card_container_initialized() -> void:
 
 
 func _on_player_hand_discarded() -> void:
-	PhaseManager.set_phase(GlobalEnums.Phase.ENEMY_ATTACKING)
+	PhaseManager.advance_to_next_combat_phase()
 
 
 ## player start phase: apply status
@@ -123,7 +123,7 @@ func _try_finish_enemy_attacks() -> void:
 	if _enemy_action_list.size() > 0:
 		_handle_enemy_attack_queue()
 	else:
-		PhaseManager.set_phase(GlobalEnums.Phase.PLAYER_ATTACKING)
+		PhaseManager.advance_to_next_combat_phase()
 
 
 ## when player clicks themselves (eg: healing card)
