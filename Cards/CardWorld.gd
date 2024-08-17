@@ -10,7 +10,7 @@ var card_data: CardBase = null
 var card_cast_type : GlobalEnums.CardCastType
 
 func _ready() -> void:
-	PhaseManager.on_phase_changed.connect(_on_phase_changed)
+	PhaseManager.on_combat_phase_changed.connect(_on_phase_changed)
 
 
 func init_card(in_card_data: CardBase) -> void:
@@ -25,9 +25,9 @@ func init_card(in_card_data: CardBase) -> void:
 			break
 
 
-func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
+func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
 	# enable clicks on card only if player is in attack phase
-	get_click_handler().set_interactable(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING)
+	get_click_handler().set_interactable(new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING)
 
 
 func get_card_movement_component() -> CardMovementComponent:

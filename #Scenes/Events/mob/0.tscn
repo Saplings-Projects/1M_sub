@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d4muqvs3etnr8" path="res://Art/Card_layout/discard_pile.png" id="12_0nlrw"]
 [ext_resource type="Script" path="res://UI/DiscardPileUISetter.gd" id="13_8nsar"]
 [ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="14_os5i4"]
-[ext_resource type="PackedScene" path="res://#Scenes/xp_bar.tscn" id="15_r7cr8"]
+[ext_resource type="PackedScene" uid="uid://ruwidm3egyrx" path="res://#Scenes/xp_bar.tscn" id="15_r7cr8"]
 
 [node name="TestingScene" type="Node2D"]
 script = ExtResource("1_nmgwp")
