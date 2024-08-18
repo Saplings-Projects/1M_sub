@@ -51,11 +51,15 @@ func _on_player_initialized() -> void:
 
 
 func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
-	if new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING:
-		_on_player_start_turn()
-	
-	if new_phase == GlobalEnums.CombatPhase.ENEMY_ATTACKING:
-		_on_enemy_start_turn()
+	match new_phase:
+		GlobalEnums.CombatPhase.REMOVE_BLOCK_ALLY:
+			_remove_block_ally()
+		GlobalEnums.CombatPhase.PLAYER_ATTACKING:
+			_on_player_start_turn()
+		GlobalEnums.CombatPhase.REMOVE_BLOCK_ENEMY:
+			_remove_block_all_enemies()
+		GlobalEnums.CombatPhase.ENEMY_ATTACKING:
+			_on_enemy_start_turn()
 
 
 func _on_card_container_initialized() -> void:
@@ -66,6 +70,12 @@ func _on_card_container_initialized() -> void:
 func _on_player_hand_discarded() -> void:
 	PhaseManager.advance_to_next_combat_phase()
 
+## Remove the block of all allies (currently just the player) [br]
+## Note that later, if we add a status which allows to keep block between turns,
+## it should probably be checked here (or maybe in the health component ?)
+func _remove_block_ally() -> void:
+	PlayerManager.player.get_health_component().reset_block()
+	PhaseManager.advance_to_next_combat_phase()
 
 ## player start phase: apply status
 func _on_player_start_turn() -> void:
@@ -73,8 +83,15 @@ func _on_player_start_turn() -> void:
 	PlayerManager.player.get_energy_component().on_turn_start()
 
 
+## Remove the block of all enemies
+func _remove_block_all_enemies() -> void:
+	for enemy: Entity in _enemy_list:
+		enemy.get_health_component().reset_block()
+	PhaseManager.advance_to_next_combat_phase()
+
+
 ## enemy start phase: apply status and attack player. Afterwards, set phase to player phase
-## NOTE: these are applied in two separate loops just encase an enemy affects another member of their
+## NOTE: these are applied in two separate loops just incase an enemy affects another member of their
 ## party with a status during their attack
 func _on_enemy_start_turn() -> void:
 	# apply status
