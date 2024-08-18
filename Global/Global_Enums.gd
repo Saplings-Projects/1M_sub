@@ -13,9 +13,11 @@ enum GlobalPhase {
 ## For phases that are combat specific
 enum CombatPhase {
 	REMOVE_BLOCK_ALLY, ## Remove the block of all allied entity
+	PLAYER_TURN_START, ## Everything that happens to the player at the start of their turn except the block, like taking poison damage
 	PLAYER_ATTACKING, ## The player is attacking
 	PLAYER_FINISHING, ## The player finished its turn (card discard and other stuff starts here)
 	REMOVE_BLOCK_ENEMY, ## Remove the block of all the enemies
+	ENEMY_TURN_START, ## ## Everything that happens to enemies at the start of their turn except the block, like taking poison damage
 	ENEMY_ATTACKING, ## Enemy turn
 }
 
