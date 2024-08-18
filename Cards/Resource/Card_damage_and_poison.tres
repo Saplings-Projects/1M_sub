@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="3_0biqs"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="3_l3hyf"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="4_84i11"]
-[ext_resource type="PackedScene" path="res://Cards/Animation/Scene/Anim_Poison.tscn" id="4_vlagw"]
+[ext_resource type="PackedScene" uid="uid://c13302ahcfpuy" path="res://Cards/Animation/Scene/Anim_Poison.tscn" id="4_vlagw"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_ajuey"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_AllTargets.gd" id="5_rlt1d"]
 [ext_resource type="Script" path="res://Cards/Animation/CastAnimationData.gd" id="6_0uuxe"]
