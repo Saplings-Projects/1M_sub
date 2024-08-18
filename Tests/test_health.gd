@@ -41,7 +41,7 @@ func test_reset_block_on_round_start() -> void:
 	var caster: Entity = _player
 	
 	_player_health_component.add_block(block_amount, caster)
-	PhaseManager.temp_before_phase_changed.emit(GlobalEnums.CombatPhase.PLAYER_ATTACKING, GlobalEnums.CombatPhase.ENEMY_ATTACKING)
+	PhaseManager.on_combat_phase_changed.emit(GlobalEnums.CombatPhase.REMOVE_BLOCK_ALLY, GlobalEnums.CombatPhase.ENEMY_ATTACKING)
 	assert_eq(_player_health_component.current_block, 0)
 
 func test_take_lots_of_damage() -> void:
