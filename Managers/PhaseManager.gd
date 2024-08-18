@@ -34,7 +34,7 @@ func initialize_game() -> void:
 
 ## Start the game
 func _start_game() -> void:
-	_set_combat_phase(GlobalEnums.CombatPhase.PLAYER_ATTACKING)
+	_set_combat_phase(GlobalEnums.CombatPhase.REMOVE_BLOCK_ALLY)
 	on_game_start.emit()
 
 
