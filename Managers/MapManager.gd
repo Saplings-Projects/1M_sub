@@ -30,6 +30,10 @@ var map_width_array: Array[int]
 ## Room events that we do not want to be consecutive
 const no_consecutive_room_event: Array[String] = ["shop", "heal"]
 
+## List containing all events that we will pick from to populate the map
+var event_list: Array[GlobalEnums.EventType]
+const event_count_deviation: float = 0.5
+
 #map_floors_width changes the width of the map's floors
 ## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
 func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
@@ -142,30 +146,35 @@ func is_room_event_correct(current_room: RoomBase, map: MapBase = current_map) -
 
 	return true
 
-
-## Picks room type randomly, with each type having a set probability [br]
-## Algorithm taken from this: https://stackoverflow.com/a/1761646
-func pick_room_type() -> EventBase:
-	var _total_proba: int = 0
-	for event: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
-		_total_proba += GlobalVar.EVENTS_PROBABILITIES[event]
-
-	var _rand_number: int = randi_range(0, _total_proba - 1)
-	# This is just for the error message
-	var _rand_number_error: int = _rand_number
-
-	for _rand_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
-		if _rand_number < GlobalVar.EVENTS_PROBABILITIES[_rand_type]:
-			return GlobalEnums.choose_event_from_type(_rand_type)
-
-		_rand_number -= GlobalVar.EVENTS_PROBABILITIES[_rand_type]
+## Creates the list that contains all events that we will be picking from to populate the map
+## The number of occurences of each event is defined by the total number of rooms times the probability of the event set in Global_var.gd
+## We then add some extra events (deviation) to avoid being locked, there are rules that could prevent the remaining event types to be picked, resulting in a deadlock
+## While the number of each event is not exactly the expected number, it should be close enough to what we want
+func create_event_list() -> void:
+	var total_nb_rooms: int = 0
+	for nb: int in map_width_array:
+		total_nb_rooms += nb
 	
-	# This shouldn't be reached
-	push_error("Error: The random number _rand_number is bigger than the sum of probabilities _total_proba: %s > %s" % [_rand_number_error, _total_proba])
-	return EventMob.new()
+	for event_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
+		var event_type_list: Array[GlobalEnums.EventType]
+		var event_count: int = floor(total_nb_rooms * GlobalVar.EVENTS_PROBABILITIES[event_type]/100)
+		# The floor before boss room is composed of heal rooms
+		#if event_type == GlobalEnums.EventType.Heal:
+			#event_count -= 3
+		
+		event_type_list.resize(event_count + ceil(event_count*event_count_deviation))
+		event_type_list.fill(event_type)
+		event_list.append_array(event_type_list)
+
+## Pick an event randomly from the list
+func pick_room_type() -> GlobalEnums.EventType:
+	return event_list.pick_random()
 
 ## Assign events to existing rooms with set probabilities.
 func assign_events(map: MapBase = current_map) -> void:
+	create_event_list()
+	print(event_list)
+	
 	# Scan the whole map, assign events to valid rooms
 	for index_height: int in range(map.rooms.size()):
 		for index_width: int in range(map.rooms[index_height].size()):
@@ -185,8 +194,13 @@ func assign_events(map: MapBase = current_map) -> void:
 				_current_room.room_event = EventMob.new()
 
 			else:
+				var room_type: GlobalEnums.EventType
 				while not is_room_event_correct(_current_room, map):
-					_current_room.room_event = pick_room_type()
+					room_type = pick_room_type()
+					_current_room.room_event = GlobalEnums.choose_event_from_type(room_type)
+				
+				# We remove the event from the list only after we are sure it does not conflict with any rules
+				event_list.erase(room_type)
 
 ## Create a map with a width array
 
@@ -201,7 +215,13 @@ func _ready() -> void:
 		if DebugVar.DEBUG_PRINT_EVENT_COUNT:
 			var events: Dictionary = {}
 			var total_nb_rooms: int = 0
-			var expected_probabilities: Dictionary = {"mob": 45, "random": 16, "heal": 12, "dialogue": 22, "shop": 5}
+			var expected_probabilities: Dictionary = {
+				"mob": GlobalVar.EVENTS_PROBABILITIES[GlobalEnums.EventType.Mob], 
+				"random": GlobalVar.EVENTS_PROBABILITIES[GlobalEnums.EventType.Random], 
+				"heal": GlobalVar.EVENTS_PROBABILITIES[GlobalEnums.EventType.Heal], 
+				"dialogue": GlobalVar.EVENTS_PROBABILITIES[GlobalEnums.EventType.Dialogue], 
+				"shop": GlobalVar.EVENTS_PROBABILITIES[GlobalEnums.EventType.Shop]
+			}
 			
 			for index_height: int in range(current_map.rooms.size()):
 				for index_width: int in range(current_map.rooms[index_height].size()):
@@ -214,7 +234,7 @@ func _ready() -> void:
 					events[event] += 1
 					total_nb_rooms += 1
 			for k: String in events:
-				print("Event " + k + " has " + str(events[k]) + " rooms. (is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
+				print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * 61.0/100)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
 			print("Total number of rooms generated: " + str(total_nb_rooms))
 
 ## checks if the map exists
