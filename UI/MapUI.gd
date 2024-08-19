@@ -60,10 +60,8 @@ func _add_torch_to_current_location() -> void:
 	var accessible_room_positions: Array[RoomBase] = MapMovement.get_all_accessible_rooms_in_range(PlayerManager.player_position, _LIGHT_FLOOR_RANGE, MapManager.current_map.rooms)
 	for room: RoomBase in accessible_room_positions:
 		room.light_data.increase_light_by_torch()
-		#MapManager.set_room_light_data(room)
 	
 	current_player_room.room.set_torch_active()
-	#MapManager.set_room_light_data(current_player_room.room)
 	
 	InventoryManager.subtract_torch()
 	
