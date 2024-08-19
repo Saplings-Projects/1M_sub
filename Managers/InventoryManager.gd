@@ -48,6 +48,7 @@ func reset_inventory() -> void:
 	close_inventory_HUD()
 	gold_component = InventoryGoldComponent.new()
 	torch_component = InventoryTorchComponent.new()
+	torch_component.add_torches(3)
 	consumable_component = InventoryConsumablesComponent.new()
 	relic_component = InventoryRelicComponent.new()
 

@@ -10,7 +10,7 @@ extends Node
 const DEBUG_FREE_MOVEMENT: bool = false
 
 ## Player can skip the placeholder events by pressing on the skip button
-const DEBUG_SKIP_EVENT: bool = true
+const DEBUG_SKIP_EVENT: bool = false
 
 ## Allow player to add and remove items from the inventory with buttons [br]
 ## in the inventory UI
