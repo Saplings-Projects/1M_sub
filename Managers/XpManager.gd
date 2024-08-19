@@ -38,7 +38,9 @@ func _ready() -> void:
 	current_list_of_buffs = []
 	for level: int in xp_levels:
 		xp_levels[level][1].infinite_duration = true
-	SaveManager.start_save.connect(_save_data)
+	
+	if !SaveManager.start_save.is_connected(_save_data):
+		SaveManager.start_save.connect(_save_data)
 
 
 ## Add XP (default to one, could be more for mini-bosses or bosses)

@@ -10,5 +10,5 @@ class_name EffectDraw extends EffectBase
 ## @Override [br]
 ## Refer to [EffectBase]
 func apply_effect(caster: Entity, target: Entity, value: int) -> void:
-    var modified_value: int = EntityStats.get_value_modified_by_stats(GlobalEnums.PossibleModifierNames.DRAW, caster, target, value)
-    CardManager.card_container.draw_cards(modified_value)
+	var modified_value: int = EntityStats.get_value_modified_by_stats(GlobalEnums.PossibleModifierNames.DRAW, caster, target, value)
+	CardManager.card_container.draw_cards(modified_value)

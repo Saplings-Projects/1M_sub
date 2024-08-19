@@ -15,7 +15,8 @@ var player: Player
 var player_position: Vector2i = Vector2i(-1,-1):
 	set(position):
 		player_position = position
-		is_player_initial_position_set = true
+		if player_position.x != -1 and player_position.y != -1:
+			is_player_initial_position_set = true
 	get:
 		return player_position
 
@@ -42,7 +43,9 @@ var player_persistent_data: PlayerPersistentData = null:
 func _ready() -> void:
 	player = null
 	is_player_initial_position_set = false
-	SaveManager.start_save.connect(_save_player)
+	
+	if !SaveManager.start_save.is_connected(_save_player):
+		SaveManager.start_save.connect(_save_player)
 
 
 func _save_player() -> void:
@@ -81,6 +84,8 @@ func create_persistent_data() -> void:
 func clear_data() -> void:
 	player = null
 	is_player_initial_position_set = false
+	player_position = Vector2i(-1,-1)
+	player_room = null
 
 ## Checks if the player is in a given room
 func is_player_in_room(room: RoomBase) -> bool:

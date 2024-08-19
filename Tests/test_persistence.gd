@@ -18,16 +18,16 @@ func _create_player() -> void:
 
 
 func test_persist_player_health() -> void:
-	_player_health_component.modify_health(5.0, _player)
+	_player_health_component.take_damage_block_and_health(5, _player)
 	
-	assert_eq(_player_health_component.current_health, 95.0)
+	assert_eq(_player_health_component.current_health, 95)
 	
 	_player._should_save_persistent_data = true
 	
 	_player.free()
 	_create_player()
 	
-	assert_eq(_player_health_component.current_health, 95.0)
+	assert_eq(_player_health_component.current_health, 95)
 
 
 func test_persist_strength_status() -> void:
@@ -42,7 +42,7 @@ func test_persist_strength_status() -> void:
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	card_damage.card_effects_data[0].value = 2
 	card_damage.on_card_play(_player, _enemy)
-	assert_eq(_enemy_health_component.current_health, 96.0)
+	assert_eq(_enemy_health_component.current_health, 96)
 	
 	_player._should_save_persistent_data = true
 	
@@ -51,7 +51,7 @@ func test_persist_strength_status() -> void:
 	
 	# player should still have their permanent buff after being destroyed and recreated
 	card_damage.on_card_play(_player, _enemy_2) # enemy 2 has 50 health
-	assert_eq(_enemy_2_health_component.current_health, 46.0)
+	assert_eq(_enemy_2_health_component.current_health, 46)
 
 
 func test_persist_cards() -> void:

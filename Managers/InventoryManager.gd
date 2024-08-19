@@ -13,7 +13,8 @@ var relic_component : InventoryRelicComponent = InventoryRelicComponent.new()
 ## The current UI is a placeholder and wil be changed in the future
 
 func _ready() -> void:
-	SaveManager.start_save.connect(_save_inventory)
+	if !SaveManager.start_save.is_connected(_save_inventory):
+		SaveManager.start_save.connect(_save_inventory)
 
 var inventory_HUD : PackedScene = preload("res://InventoryComponents/InventoryHUD/inventory_hud.tscn")
 var instanced_inventory_HUD : Node

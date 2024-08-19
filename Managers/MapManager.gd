@@ -25,7 +25,7 @@ var current_map: MapBase
 ## Width should follow the following rules: [br]
 ## - Width should be odd (for symmetry + padding reason) [br]
 ## - Width should not increase or decrease by more than 2 per floor (this makes it certain all rooms on the map are accessible [br]
-var map_width_array: Array[int]
+var map_width_array: Array[int] = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
  
 #map_floors_width changes the width of the map's floors
 ## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
@@ -69,11 +69,16 @@ func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
 ## Create a map with a width array
 
 func _ready() -> void:
-	#if (!_load_map_data()):
-	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
-	current_map = create_map()
-	SaveManager.start_save.connect(_save_map_data)
-	#SaveManager.start_load.connect(_load_map_data)
+	if _has_current_map_saved():
+		print("load map data")
+		load_map_data()
+	
+	if !SaveManager.start_save.is_connected(_save_map_data):
+		SaveManager.start_save.connect(_save_map_data)
+
+func _has_current_map_saved() -> bool:
+	var config_file: ConfigFile = SaveManager.config_file
+	return config_file.has_section_key("MapManager", "current_map")
 
 ## checks if the map exists
 func is_map_initialized() -> bool:
@@ -86,7 +91,6 @@ func _save_map_data() -> void:
 	var config_file: ConfigFile = SaveManager.config_file
 	config_file.set_value("MapManager", "map_width_array", map_width_array)
 	config_file.set_value("MapManager", "current_map", current_map)
-	
 	var error: Error = config_file.save("user://save_data.ini")
 	if error:
 		print("Error saving player data: ", error)
@@ -95,10 +99,8 @@ func load_map_data() -> void:
 	var config_file: ConfigFile = SaveManager.load_config_file()
 	if config_file == null:
 		return
-	
-	map_width_array = config_file.get_value("MapManager", "map_width_array")
 	current_map = config_file.get_value("MapManager", "current_map")
+	map_width_array = config_file.get_value("MapManager", "map_width_array")
 
 func clear_map_data() -> void:
-	map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 	current_map = create_map()

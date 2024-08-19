@@ -17,7 +17,9 @@ var disable_card_animations: bool = false
 func _ready() -> void:
 	default_deck = load("res://Cards/CardSets/DefaultDeck.tres")
 	_initialize_deck()
-	SaveManager.start_save.connect(save_data)
+	
+	if !SaveManager.start_save.is_connected(save_data):
+		SaveManager.start_save.connect(save_data)
 
 
 # Call this from CardContainer to initialize. This allows you to get the current CardContainer from

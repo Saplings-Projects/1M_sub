@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbidy5j4uyopc"]
+
+[ext_resource type="Texture2D" uid="uid://162qbj2n5rm4" path="res://Art/Menus/shield-1.png" id="1_g1qck"]
+[ext_resource type="Script" path="res://Entity/Player/block_display.gd" id="2_3xjv7"]
+
+[node name="BlockDisplay" type="Sprite2D" node_paths=PackedStringArray("label")]
+visible = false
+position = Vector2(-83.1875, -87.1875)
+scale = Vector2(0.0563541, 0.0563541)
+texture = ExtResource("1_g1qck")
+script = ExtResource("2_3xjv7")
+label = NodePath("BlockAmount")
+
+[node name="BlockAmount" type="Label" parent="."]
+offset_left = -428.0
+offset_top = -428.0
+offset_right = 380.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 376
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

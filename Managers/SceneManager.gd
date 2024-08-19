@@ -36,7 +36,6 @@ func _deferred_goto_scene(path: String) -> void:
 
 	# Add it to the active scene, as child of root.
 	get_tree().root.add_child(current_scene)
-
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
 	

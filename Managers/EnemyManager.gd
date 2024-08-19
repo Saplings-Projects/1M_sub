@@ -4,5 +4,5 @@ extends Node
 
 ## The list of enemies to spawn
 @export var enemy_list: Array[Entity]:
-    set(list):
-        enemy_list = list
+	set(list):
+		enemy_list = list
