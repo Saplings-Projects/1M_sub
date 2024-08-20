@@ -156,7 +156,7 @@ func create_event_list() -> void:
 		total_nb_rooms += nb
 	
 	for event_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
-		var event_type_list: Array[GlobalEnums.EventType]
+		var event_type_list: Array[GlobalEnums.EventType] = []
 		var event_count: int = floor(total_nb_rooms * GlobalVar.EVENTS_PROBABILITIES[event_type]/100)
 		# The floor before boss room is composed of heal rooms
 		#if event_type == GlobalEnums.EventType.Heal:
@@ -234,7 +234,7 @@ func _ready() -> void:
 					events[event] += 1
 					total_nb_rooms += 1
 			for k: String in events:
-				print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * 61.0/100)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
+				print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * total_nb_rooms/100)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
 			print("Total number of rooms generated: " + str(total_nb_rooms))
 
 ## checks if the map exists
