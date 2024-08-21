@@ -47,7 +47,6 @@ func test_rule_2_map_gen() -> void:
 			# If current room is not a Heal or Shop room, ignore
 			if current_room == null or (not current_room.room_event.get_event_name() in no_consecutive_room_event):
 				continue
-			print(index_height, " ", index_width)
 			
 			# Get child room type and compare
 			# We define child rooms as rooms that can be reached from our current room
