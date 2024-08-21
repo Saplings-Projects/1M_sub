@@ -1,7 +1,7 @@
 extends GutTest
 
 func before_each() -> void:
-	InventoryManager.reset_inventory()
+	InventoryManager.init_data()
 
 func test_add_gold() -> void:
 	InventoryManager.gold_component.add_gold(10)

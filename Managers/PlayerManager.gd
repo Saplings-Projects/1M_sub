@@ -26,7 +26,7 @@ var is_player_initial_position_set: bool
 ## The actual room the player is in. [br]
 var player_room: RoomBase = null:
 	get:
-		if player_position.x == -1 or player_position.y == -1:
+		if player_position == Vector2i(-1, -1):
 			return null
 		return MapManager.current_map.rooms[player_position.y][player_position.x]
 
@@ -43,34 +43,30 @@ var player_persistent_data: PlayerPersistentData = null:
 func _ready() -> void:
 	player = null
 	is_player_initial_position_set = false
-	
-	if !SaveManager.start_save.is_connected(_save_player):
-		SaveManager.start_save.connect(_save_player)
 
-
-func _save_player() -> void:
-	var config_file: ConfigFile = SaveManager.config_file
-	config_file.set_value("Player", "position", player_position)
-	config_file.set_value("Player", "player_room", player_room)
-	config_file.set_value("Player", "player_persistent_data", player_persistent_data)
+func save_player() -> void:
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("Player", "position", player_position)
+	save_file.set_value("Player", "player_room", player_room)
+	save_file.set_value("Player", "player_persistent_data", player_persistent_data)
 	
-	var error: Error = config_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://save_data.ini")
 	if error:
-		print("Error saving player data: ", error)
+		push_error("Error saving player data: ", error)
 
 func load_player() -> void:
-	var config_file: ConfigFile = SaveManager.load_config_file()
-	if config_file == null:
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	if save_file == null:
 		return
 	
-	player_position = config_file.get_value("Player", "position")
-	player_room = config_file.get_value("Player", "player_room")
-	player_persistent_data = config_file.get_value("Player", "player_persistent_data") as PlayerPersistentData
+	player_position = save_file.get_value("Player", "position")
+	player_room = save_file.get_value("Player", "player_room")
+	player_persistent_data = save_file.get_value("Player", "player_persistent_data") as PlayerPersistentData
 
 
 func has_saved_data() -> bool:
-	var config_file: ConfigFile = SaveManager.load_config_file()
-	return config_file != null
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	return save_file != null
 
 func set_player(in_player: Player) -> void:
 	player = in_player
@@ -81,7 +77,7 @@ func set_player(in_player: Player) -> void:
 func create_persistent_data() -> void:
 	player_persistent_data = PlayerPersistentData.new()
 
-func clear_data() -> void:
+func init_data() -> void:
 	player = null
 	is_player_initial_position_set = false
 	player_position = Vector2i(-1,-1)

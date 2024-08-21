@@ -9,7 +9,6 @@ func _ready() -> void:
 	current_scene = root.get_child(root.get_child_count() - 1)
 	PhaseManager.on_defeat.connect(on_defeat)
 	PhaseManager.on_event_win.connect(on_event_win)
-	SaveManager.start_save.connect(_save_scene_data)
 
 func goto_scene(path: String) -> void:
 	# This function will usually be called from a signal callback,
@@ -80,17 +79,15 @@ func on_defeat() -> void:
 func on_event_win() -> void:
 	PlayerManager.player_room.room_event.on_event_ended()
 
-func _save_scene_data() -> void:
-	for children: Node in current_scene.get_children():
-		children.owner = current_scene
+func save_scene_data() -> void:
 	var packed_scene: PackedScene = PackedScene.new()
 	packed_scene.pack(current_scene)
 	ResourceSaver.save(packed_scene, "user://current_scene.tscn")
 	
-	var config_file: ConfigFile = SaveManager.config_file
-	config_file.set_value("SceneManager", "current_event", current_event)
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("SceneManager", "current_event", current_event)
 	
-	var error: Error = config_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://save_data.ini")
 	if error:
 		print("Error saving player data: ", error)
 
@@ -98,11 +95,10 @@ func load_scene_data() -> void:
 	call_deferred("_deferred_load_current_scene_from_data")
 
 func _deferred_load_current_scene_from_data() -> void:
-	var config_file: ConfigFile = SaveManager.load_config_file()
-	if config_file == null:
-		return
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	assert(save_file != null, "Attempting to load a scene with no config file. How did you get here???")
 	
-	current_event = config_file.get_value("SceneManager", "current_event")
+	current_event = save_file.get_value("SceneManager", "current_event")
 	
 	current_scene.free()
 	

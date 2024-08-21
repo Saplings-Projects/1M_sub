@@ -12,10 +12,6 @@ var relic_component : InventoryRelicComponent = InventoryRelicComponent.new()
 ## This is for the UI [br]
 ## The current UI is a placeholder and wil be changed in the future
 
-func _ready() -> void:
-	if !SaveManager.start_save.is_connected(_save_inventory):
-		SaveManager.start_save.connect(_save_inventory)
-
 var inventory_HUD : PackedScene = preload("res://InventoryComponents/InventoryHUD/inventory_hud.tscn")
 var instanced_inventory_HUD : Node
 
@@ -44,29 +40,29 @@ func subtract_torch() -> void:
 ## Simply just makes new versions of every component class to reset all the items [br]
 ## The inventory_hud is closed before hand in case something breaks there
 
-func reset_inventory() -> void:
+func init_data() -> void:
 	close_inventory_HUD()
 	gold_component = InventoryGoldComponent.new()
 	torch_component = InventoryTorchComponent.new()
 	consumable_component = InventoryConsumablesComponent.new()
 	relic_component = InventoryRelicComponent.new()
 
-func _save_inventory() -> void:
-	var config_file: ConfigFile = SaveManager.config_file
-	config_file.set_value("InventoryManager", "gold_component", gold_component)
-	config_file.set_value("InventoryManager", "torch_component", torch_component)
-	config_file.set_value("InventoryManager", "consumable_component", consumable_component)
-	config_file.set_value("InventoryManager", "relic_component", relic_component)
+func save_inventory() -> void:
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("InventoryManager", "gold_component", gold_component)
+	save_file.set_value("InventoryManager", "torch_component", torch_component)
+	save_file.set_value("InventoryManager", "consumable_component", consumable_component)
+	save_file.set_value("InventoryManager", "relic_component", relic_component)
 	
-	var error: Error = config_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://save_data.ini")
 	if error:
-		print("Error saving inventory data: ", error)
+		push_error("Error saving inventory data: ", error)
 
 func load_inventory() -> void:
-	var config_file: ConfigFile = SaveManager.load_config_file()
-	if config_file == null:
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	if save_file == null:
 		return
-	gold_component = config_file.get_value("InventoryManager", "gold_component")
-	torch_component = config_file.get_value("InventoryManager", "torch_component")
-	consumable_component = config_file.get_value("InventoryManager", "consumable_component")
-	relic_component = config_file.get_value("InventoryManager", "relic_component")
+	gold_component = save_file.get_value("InventoryManager", "gold_component")
+	torch_component = save_file.get_value("InventoryManager", "torch_component")
+	consumable_component = save_file.get_value("InventoryManager", "consumable_component")
+	relic_component = save_file.get_value("InventoryManager", "relic_component")

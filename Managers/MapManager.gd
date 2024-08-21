@@ -72,13 +72,10 @@ func _ready() -> void:
 	if _has_current_map_saved():
 		print("load map data")
 		load_map_data()
-	
-	if !SaveManager.start_save.is_connected(_save_map_data):
-		SaveManager.start_save.connect(_save_map_data)
 
 func _has_current_map_saved() -> bool:
-	var config_file: ConfigFile = SaveManager.config_file
-	return config_file.has_section_key("MapManager", "current_map")
+	var save_file: ConfigFile = SaveManager.save_file
+	return save_file.has_section_key("MapManager", "current_map")
 
 ## checks if the map exists
 func is_map_initialized() -> bool:
@@ -87,20 +84,20 @@ func is_map_initialized() -> bool:
 func set_room_light_data(room: RoomBase) -> void:
 	current_map.rooms[room.room_position.y][room.room_position.x].light_data = room.light_data
 
-func _save_map_data() -> void:
-	var config_file: ConfigFile = SaveManager.config_file
-	config_file.set_value("MapManager", "map_width_array", map_width_array)
-	config_file.set_value("MapManager", "current_map", current_map)
-	var error: Error = config_file.save("user://save_data.ini")
+func save_map_data() -> void:
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("MapManager", "map_width_array", map_width_array)
+	save_file.set_value("MapManager", "current_map", current_map)
+	var error: Error = save_file.save("user://save_data.ini")
 	if error:
 		print("Error saving player data: ", error)
 
 func load_map_data() -> void:
-	var config_file: ConfigFile = SaveManager.load_config_file()
-	if config_file == null:
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	if save_file == null:
 		return
-	current_map = config_file.get_value("MapManager", "current_map")
-	map_width_array = config_file.get_value("MapManager", "map_width_array")
+	current_map = save_file.get_value("MapManager", "current_map")
+	map_width_array = save_file.get_value("MapManager", "map_width_array")
 
-func clear_map_data() -> void:
+func init_data() -> void:
 	current_map = create_map()

@@ -38,9 +38,6 @@ func _ready() -> void:
 	current_list_of_buffs = []
 	for level: int in xp_levels:
 		xp_levels[level][1].infinite_duration = true
-	
-	if !SaveManager.start_save.is_connected(_save_data):
-		SaveManager.start_save.connect(_save_data)
 
 
 ## Add XP (default to one, could be more for mini-bosses or bosses)
@@ -70,20 +67,20 @@ func increase(amount: int = 1) -> void:
 	else:
 		xp_changed.emit(current_xp, previous_xp_level, next_xp_level, false)
 
-func _save_data() -> void:
-	var config_file: ConfigFile = SaveManager.config_file
-	config_file.set_value("XPManager", "current_xp", current_xp)
+func save_data() -> void:
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("XPManager", "current_xp", current_xp)
 	
-	var error: Error = config_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://save_data.ini")
 	if error:
 		print("Error saving player data: ", error)
 
 func load_data() -> void:
-	var config_file: ConfigFile = SaveManager.load_config_file()
-	if config_file == null:
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	if save_file == null:
 		return
 	
-	current_xp = config_file.get_value("XPManager", "current_xp", 0)
+	current_xp = save_file.get_value("XPManager", "current_xp", 0)
 
-func clear_data() -> void:
+func init_data() -> void:
 	current_xp = 0

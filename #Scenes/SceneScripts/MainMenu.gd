@@ -2,6 +2,7 @@ extends Control
 ## Control the flow from the main menu
 
 var continue_button: TextureButton
+@export var start_new_game_dialog: ConfirmationDialog
 
 #on opening the main menu we grab the focus of the start button
 func _ready() -> void:
@@ -17,13 +18,11 @@ func _ready() -> void:
 
 ## What happens when the start button is pressed
 func _on_start_pressed() -> void:
-	SaveManager.clear_data()
-	PlayerManager.clear_data()
-	MapManager.clear_map_data()
-	XpManager.clear_data()
-	CardManager.clear_data()
-	InventoryManager.reset_inventory()
-	SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
+	if PlayerManager.has_saved_data():
+		start_new_game_dialog.show()
+	else:
+		MapManager.init_data()
+		SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
 
 func _on_continue_pressed() -> void:
 	if PlayerManager.has_saved_data():
@@ -45,3 +44,13 @@ func _on_options_pressed() -> void:
 ## Kill the game when the quit button is pressed
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_start_new_game_dialog_confirmed() -> void:
+	SaveManager.clear_data()
+	MapManager.init_data()
+	PlayerManager.init_data()
+	XpManager.init_data()
+	CardManager.init_data()
+	InventoryManager.init_data()
+	SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
