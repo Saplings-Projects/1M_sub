@@ -48,7 +48,7 @@ func save_data() -> void:
 	var save_file: ConfigFile = SaveManager.save_file
 	save_file.set_value("CardManager", "current_deck", current_deck)
 	
-	var error: Error = save_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://data/save_data.ini")
 	if error:
 		push_error("Error saving player data: ", error)
 

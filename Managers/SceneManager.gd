@@ -82,12 +82,12 @@ func on_event_win() -> void:
 func save_scene_data() -> void:
 	var packed_scene: PackedScene = PackedScene.new()
 	packed_scene.pack(current_scene)
-	ResourceSaver.save(packed_scene, "user://current_scene.tscn")
+	ResourceSaver.save(packed_scene, "user://data/current_scene.tscn")
 	
 	var save_file: ConfigFile = SaveManager.save_file
 	save_file.set_value("SceneManager", "current_event", current_event)
 	
-	var error: Error = save_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://data/save_data.ini")
 	if error:
 		print("Error saving player data: ", error)
 
@@ -102,7 +102,7 @@ func _deferred_load_current_scene_from_data() -> void:
 	
 	current_scene.free()
 	
-	var scene: Resource = ResourceLoader.load("user://current_scene.tscn")
+	var scene: Resource = ResourceLoader.load("user://data/current_scene.tscn")
 	current_scene = scene.instantiate()
 	get_tree().root.add_child(current_scene)
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.

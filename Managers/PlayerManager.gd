@@ -50,7 +50,7 @@ func save_player() -> void:
 	save_file.set_value("Player", "player_room", player_room)
 	save_file.set_value("Player", "player_persistent_data", player_persistent_data)
 	
-	var error: Error = save_file.save("user://save_data.ini")
+	var error: Error = save_file.save("user://data/save_data.ini")
 	if error:
 		push_error("Error saving player data: ", error)
 
