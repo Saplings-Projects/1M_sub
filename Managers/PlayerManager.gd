@@ -15,7 +15,7 @@ var player: Player
 var player_position: Vector2i = Vector2i(-1,-1):
 	set(position):
 		player_position = position
-		if player_position.x != -1 and player_position.y != -1:
+		if player_position != Vector2i(-1, -1):
 			is_player_initial_position_set = true
 	get:
 		return player_position
