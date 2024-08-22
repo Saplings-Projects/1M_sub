@@ -19,14 +19,14 @@ func execute_load() -> void:
 	start_load.emit()
 
 func clear_data() -> void:
-	DirAccess.remove_absolute("user://data/current_scene.tscn")
-	DirAccess.remove_absolute("user://data/save_data.ini")
+	DirAccess.remove_absolute("user://save/current_scene.tscn")
+	DirAccess.remove_absolute("user://save/save_data.ini")
 
 func load_save_file() -> ConfigFile:
-	var error: Error = save_file.load("user://data/save_data.ini")
+	var error: Error = save_file.load("user://save/save_data.ini")
 	
-	if !DirAccess.dir_exists_absolute("user://data/"):
-		DirAccess.make_dir_absolute("user://data/")
+	if !DirAccess.dir_exists_absolute("user://save/"):
+		DirAccess.make_dir_absolute("user://save/")
 	
 	if error:
 		push_error("Error loading save_data ", error)

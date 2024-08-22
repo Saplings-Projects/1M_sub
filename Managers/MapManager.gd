@@ -88,7 +88,7 @@ func save_map_data() -> void:
 	var save_file: ConfigFile = SaveManager.save_file
 	save_file.set_value("MapManager", "map_width_array", map_width_array)
 	save_file.set_value("MapManager", "current_map", current_map)
-	var error: Error = save_file.save("user://data/save_data.ini")
+	var error: Error = save_file.save("user://save/save_data.ini")
 	if error:
 		print("Error saving player data: ", error)
 

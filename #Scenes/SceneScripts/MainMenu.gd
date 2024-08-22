@@ -21,7 +21,7 @@ func _on_start_pressed() -> void:
 	if PlayerManager.has_saved_data():
 		start_new_game_dialog.show()
 	else:
-		MapManager.init_data()
+		_init_managers()
 		SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
 
 func _on_continue_pressed() -> void:
@@ -48,9 +48,12 @@ func _on_quit_pressed() -> void:
 
 func _on_start_new_game_dialog_confirmed() -> void:
 	SaveManager.clear_data()
+	_init_managers()
+	SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
+
+func _init_managers() -> void:
 	MapManager.init_data()
 	PlayerManager.init_data()
 	XpManager.init_data()
 	CardManager.init_data()
 	InventoryManager.init_data()
-	SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
