@@ -14,10 +14,6 @@ signal on_event_win
 ## When the player is dead (reduced to 0 health)
 signal on_defeat
 
-## This is a signal is a temporary solution to block removal while #118 and #120 are done
-## should be removed with those issues
-signal temp_before_phase_changed(new_phase: GlobalEnums.CombatPhase, old_phase: GlobalEnums.CombatPhase)
-
 var current_combat_phase: GlobalEnums.CombatPhase = GlobalEnums.CombatPhase.PLAYER_ATTACKING
 var current_combat_phase_index: int = 0
 var current_global_phase: GlobalEnums.GlobalPhase = GlobalEnums.GlobalPhase.NONE
@@ -38,7 +34,7 @@ func initialize_game() -> void:
 
 ## Start the game
 func _start_game() -> void:
-	_set_combat_phase(GlobalEnums.CombatPhase.PLAYER_ATTACKING)
+	_set_combat_phase(GlobalEnums.CombatPhase.REMOVE_BLOCK_ALLY)
 	on_game_start.emit()
 
 
@@ -48,8 +44,6 @@ func _set_combat_phase(phase: GlobalEnums.CombatPhase) -> void:
 	# this is if you finish a fight on player turn, you start the next also on player turn
 		
 	var old_phase: GlobalEnums.CombatPhase = current_combat_phase
-	
-	temp_before_phase_changed.emit(phase, old_phase)
 	
 	current_combat_phase = phase
 	on_combat_phase_changed.emit(current_combat_phase, old_phase)

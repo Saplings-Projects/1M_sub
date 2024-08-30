@@ -51,11 +51,17 @@ func _on_player_initialized() -> void:
 
 
 func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
-	if new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING:
-		_on_player_start_turn()
-	
-	if new_phase == GlobalEnums.CombatPhase.ENEMY_ATTACKING:
-		_on_enemy_start_turn()
+	match new_phase:
+		GlobalEnums.CombatPhase.REMOVE_BLOCK_ALLY:
+			_remove_block_ally()
+		GlobalEnums.CombatPhase.PLAYER_TURN_START:
+			_on_player_turn_start()
+		GlobalEnums.CombatPhase.REMOVE_BLOCK_ENEMY:
+			_remove_block_all_enemies()
+		GlobalEnums.CombatPhase.ENEMY_TURN_START:
+			_on_enemy_turn_start()
+		GlobalEnums.CombatPhase.ENEMY_ATTACKING:
+			_enemy_turn()
 
 
 func _on_card_container_initialized() -> void:
@@ -66,17 +72,29 @@ func _on_card_container_initialized() -> void:
 func _on_player_hand_discarded() -> void:
 	PhaseManager.advance_to_next_combat_phase()
 
+## Remove the block of all allies (currently just the player) [br]
+## Note that later, if we add a status which allows to keep block between turns,
+## it should probably be checked here (or maybe in the health component ?)
+func _remove_block_ally() -> void:
+	PlayerManager.player.get_health_component().reset_block()
+	PhaseManager.advance_to_next_combat_phase()
 
 ## player start phase: apply status
-func _on_player_start_turn() -> void:
+func _on_player_turn_start() -> void:
 	PlayerManager.player.get_status_component().apply_turn_start_status()
 	PlayerManager.player.get_energy_component().on_turn_start()
+	PhaseManager.advance_to_next_combat_phase()
 
 
-## enemy start phase: apply status and attack player. Afterwards, set phase to player phase
-## NOTE: these are applied in two separate loops just encase an enemy affects another member of their
-## party with a status during their attack
-func _on_enemy_start_turn() -> void:
+## Remove the block of all enemies
+func _remove_block_all_enemies() -> void:
+	for enemy: Entity in _enemy_list:
+		enemy.get_health_component().reset_block()
+	PhaseManager.advance_to_next_combat_phase()
+
+
+## enemy start phase: apply status and check death
+func _on_enemy_turn_start() -> void:
 	# apply status
 	for enemy: Entity in _enemy_list:
 		enemy.get_stress_component().on_turn_start()
@@ -85,7 +103,12 @@ func _on_enemy_start_turn() -> void:
 	# if battle have ended, skip the rest of code
 	if _handle_deaths():
 		return
-	
+	else:
+		PhaseManager.advance_to_next_combat_phase()
+		
+
+## The turn of the enemies, attack player then go the player phase
+func _enemy_turn() -> void:
 	# generate list of enemy actions
 	for enemy: Enemy in _enemy_list:
 		var stress_comp: StressComponent = enemy.get_stress_component()
