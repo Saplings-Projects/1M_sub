@@ -10,6 +10,6 @@ class_name EffectHeal extends EffectBase
 func apply_effect(caster: Entity, target: Entity, value: int) -> void:
 
 	# calculate modified heal given caster and target stats
-	var heal: float = EntityStats.get_value_modified_by_stats(GlobalEnums.PossibleModifierNames.HEAL, caster, target, value)
+	var heal: int = EntityStats.get_value_modified_by_stats(GlobalEnums.PossibleModifierNames.HEAL, caster, target, value)
 	
-	target.get_health_component().modify_health(heal, caster, true) 
+	target.get_health_component().heal(heal, caster) 
