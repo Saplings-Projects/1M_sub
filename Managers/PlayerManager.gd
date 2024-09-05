@@ -46,6 +46,9 @@ func _ready() -> void:
 
 func save_player() -> void:
 	var save_file: ConfigFile = SaveManager.save_file
+	
+	#if player != null:
+		#save_file.set_value("Player", "player", player)
 	save_file.set_value("Player", "position", player_position)
 	save_file.set_value("Player", "player_room", player_room)
 	save_file.set_value("Player", "player_persistent_data", player_persistent_data)
@@ -59,9 +62,17 @@ func load_player() -> void:
 	if save_file == null:
 		return
 	
-	player_position = save_file.get_value("Player", "position")
-	player_room = save_file.get_value("Player", "player_room")
-	player_persistent_data = save_file.get_value("Player", "player_persistent_data") as PlayerPersistentData
+	#if save_file.has_section_key("Player", "player"):
+		#player = save_file.get_value("Player", "player")
+	
+	if save_file.has_section_key("Player", "position"):
+		player_position = save_file.get_value("Player", "position")
+	
+	if save_file.has_section_key("Player", "player_room"):
+		player_room = save_file.get_value("Player", "player_room")
+	
+	if save_file.has_section_key("Player", "player_persistent_data"):
+		player_persistent_data = save_file.get_value("Player", "player_persistent_data") as PlayerPersistentData
 
 
 func has_saved_data() -> bool:

@@ -96,8 +96,12 @@ func load_map_data() -> void:
 	var save_file: ConfigFile = SaveManager.load_save_file()
 	if save_file == null:
 		return
-	current_map = save_file.get_value("MapManager", "current_map")
-	map_width_array = save_file.get_value("MapManager", "map_width_array")
+	
+	if save_file.has_section_key("MapManager", "current_map"):
+		current_map = save_file.get_value("MapManager", "current_map")
+	
+	if save_file.has_section_key("MapManager", "map_width_array"):
+		map_width_array = save_file.get_value("MapManager", "map_width_array")
 
 func init_data() -> void:
 	current_map = create_map()

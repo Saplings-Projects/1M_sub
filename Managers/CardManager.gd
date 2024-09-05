@@ -57,7 +57,8 @@ func load_data() -> void:
 	if save_file == null:
 		return
 	
-	current_deck = save_file.get_value("CardManager", "current_deck")
+	if save_file.has_section_key("CardManager", "current_deck"):
+		current_deck = save_file.get_value("CardManager", "current_deck")
 
 func init_data() -> void:
 	current_deck = default_deck.card_set.duplicate()

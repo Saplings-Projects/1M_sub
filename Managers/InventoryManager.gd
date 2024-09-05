@@ -62,7 +62,15 @@ func load_inventory() -> void:
 	var save_file: ConfigFile = SaveManager.load_save_file()
 	if save_file == null:
 		return
-	gold_component = save_file.get_value("InventoryManager", "gold_component")
-	torch_component = save_file.get_value("InventoryManager", "torch_component")
-	consumable_component = save_file.get_value("InventoryManager", "consumable_component")
-	relic_component = save_file.get_value("InventoryManager", "relic_component")
+	
+	if save_file.has_section_key("InventoryManager", "gold_component"):
+		gold_component = save_file.get_value("InventoryManager", "gold_component")
+	
+	if save_file.has_section_key("InventoryManager", "torch_component"):
+		torch_component = save_file.get_value("InventoryManager", "torch_component")
+	
+	if save_file.has_section_key("InventoryManager", "consumable_component"):
+		consumable_component = save_file.get_value("InventoryManager", "consumable_component")
+	
+	if save_file.has_section_key("InventoryManager", "relic_component"):
+		relic_component = save_file.get_value("InventoryManager", "relic_component")

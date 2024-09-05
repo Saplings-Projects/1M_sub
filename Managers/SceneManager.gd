@@ -97,9 +97,10 @@ func load_scene_data() -> void:
 func _deferred_load_current_scene_from_data() -> void:
 	var save_file: ConfigFile = SaveManager.load_save_file()
 	if save_file == null:
-		push_error("Attempting to load a scene with no config file. How did you get here???")
+		push_error("Attempting to load a scene with no save file. How did you get here???")
 	
-	current_event = save_file.get_value("SceneManager", "current_event")
+	if save_file.has_section_key("SceneManager", "current_event"):
+		current_event = save_file.get_value("SceneManager", "current_event")
 	
 	current_scene.free()
 	
