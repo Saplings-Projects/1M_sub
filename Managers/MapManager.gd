@@ -34,6 +34,9 @@ const no_consecutive_room_event: Array[String] = ["shop", "heal"]
 var event_list: Array[GlobalEnums.EventType]
 const event_count_deviation: float = 0.5
 
+## Number of times a room type can be picked. If we cannot find a suitable room type in map_reset_limit tries, we regenerate all room events
+const map_reset_limit: int = 10
+
 #map_floors_width changes the width of the map's floors
 ## Generates and Populates a map with rooms that have random room types. More in depth algorithms will be added in the future
 func create_map(map_floors_width: Array[int] = map_width_array) -> MapBase:
@@ -151,6 +154,7 @@ func is_room_event_correct(current_room: RoomBase, map: MapBase = current_map) -
 ## We then add some extra events (deviation) to avoid being locked, there are rules that could prevent the remaining event types to be picked, resulting in a deadlock
 ## While the number of each event is not exactly the expected number, it should be close enough to what we want
 func create_event_list() -> void:
+	event_list = []
 	var total_nb_rooms: int = 0
 	for nb: int in map_width_array:
 		total_nb_rooms += nb
@@ -158,9 +162,6 @@ func create_event_list() -> void:
 	for event_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
 		var event_type_list: Array[GlobalEnums.EventType] = []
 		var event_count: int = floor(total_nb_rooms * GlobalVar.EVENTS_PROBABILITIES[event_type]/100)
-		# The floor before boss room is composed of heal rooms
-		#if event_type == GlobalEnums.EventType.Heal:
-			#event_count -= 3
 		
 		event_type_list.resize(event_count + ceil(event_count*event_count_deviation))
 		event_type_list.fill(event_type)
@@ -172,8 +173,9 @@ func pick_room_type() -> GlobalEnums.EventType:
 
 ## Assign events to existing rooms with set probabilities.
 func assign_events(map: MapBase = current_map) -> void:
+	var map_reset_flag: bool = false
+	var map_reset_counter: int = 0
 	create_event_list()
-	print(event_list)
 	
 	# Scan the whole map, assign events to valid rooms
 	for index_height: int in range(map.rooms.size()):
@@ -195,12 +197,34 @@ func assign_events(map: MapBase = current_map) -> void:
 
 			else:
 				var room_type: GlobalEnums.EventType
-				while not is_room_event_correct(_current_room, map):
+				map_reset_counter = 0
+				while not is_room_event_correct(_current_room, map) and map_reset_counter < map_reset_limit:
+					map_reset_counter += 1
 					room_type = pick_room_type()
 					_current_room.room_event = GlobalEnums.choose_event_from_type(room_type)
+
+				# If we couldn't find a suitable room type in map_reset_limit tries, we regenerate the map
+				if map_reset_counter >= map_reset_limit:
+					map_reset_flag = true
+					break
 				
-				# We remove the event from the list only after we are sure it does not conflict with any rules
+				# If assigned, we remove the event from the list only after we are sure it does not conflict with any rules
 				event_list.erase(room_type)
+
+		if map_reset_flag:
+			break
+
+
+	if map_reset_flag:
+		# Reset all room events to null
+		for index_height: int in range(map.rooms.size()):
+			for index_width: int in range(map.rooms[index_height].size()):
+				if map.rooms[index_height][index_width] == null:
+					continue
+
+				map.rooms[index_height][index_width].room_event = null
+
+		assign_events(map)
 
 ## Create a map with a width array
 
@@ -234,7 +258,7 @@ func _ready() -> void:
 					events[event] += 1
 					total_nb_rooms += 1
 			for k: String in events:
-				print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * total_nb_rooms/100)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
+				print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * total_nb_rooms/100.0)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
 			print("Total number of rooms generated: " + str(total_nb_rooms))
 
 ## checks if the map exists
