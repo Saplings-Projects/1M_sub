@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=13 format=3 uid="uid://c4nm7mbdlsf6r"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=13 format=3 uid="uid://c8kpsky7tt3yq"]
 
 [ext_resource type="PackedScene" uid="uid://dicabrkoa6bvl" path="res://Cards/Animation/Scene/Anim_Banana.tscn" id="1_ggtdb"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_Caster.gd" id="2_ntgql"]

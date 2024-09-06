@@ -35,6 +35,7 @@ func get_event_name() -> String:
 ## What to do once the event starts
 func on_event_started() -> void:
 	PlayerManager.is_map_movement_allowed = false
+	PhaseManager.set_global_phase(GlobalEnums.GlobalPhase.SCENE_STARTED)
 	
 ## What to do once the event ends
 func on_event_ended() -> void:
