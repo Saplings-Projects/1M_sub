@@ -173,9 +173,8 @@ func pick_room_type() -> GlobalEnums.EventType:
 
 ## Assign events to existing rooms with set probabilities.
 func assign_events(map: MapBase = current_map) -> void:
-	var map_reset_flag: bool = false
-	var map_reset_counter: int = 0
 	create_event_list()
+	var map_reset_counter: int = 0
 	
 	# Scan the whole map, assign events to valid rooms
 	for index_height: int in range(map.rooms.size()):
@@ -205,26 +204,18 @@ func assign_events(map: MapBase = current_map) -> void:
 
 				# If we couldn't find a suitable room type in map_reset_limit tries, we regenerate the map
 				if map_reset_counter >= map_reset_limit:
-					map_reset_flag = true
-					break
+					for reset_index_height: int in range(map.rooms.size()):
+						for reset_index_width: int in range(map.rooms[reset_index_height].size()):
+							if map.rooms[reset_index_height][reset_index_width] == null:
+								continue
+
+							map.rooms[reset_index_height][reset_index_width].room_event = null
+					assign_events(map)
+					return
 				
 				# If assigned, we remove the event from the list only after we are sure it does not conflict with any rules
 				event_list.erase(room_type)
 
-		if map_reset_flag:
-			break
-
-
-	if map_reset_flag:
-		# Reset all room events to null
-		for index_height: int in range(map.rooms.size()):
-			for index_width: int in range(map.rooms[index_height].size()):
-				if map.rooms[index_height][index_width] == null:
-					continue
-
-				map.rooms[index_height][index_width].room_event = null
-
-		assign_events(map)
 
 ## Create a map with a width array
 
