@@ -228,31 +228,36 @@ func _ready() -> void:
 		##### DEBUG #####
 		# Count number of each event
 		if DebugVar.DEBUG_PRINT_EVENT_COUNT:
-			var events: Dictionary = {}
-			var total_nb_rooms: int = 0
-			var expected_probabilities: Dictionary = {}
-			
-			# Loop over event probabilities to create a dict<event_name, event_probability>
-			# since we use the event names to identify the type of event, 
-			# and we do not currently have a way to get the EventType from the Event Resource (and thus cannot get the probability from the resource)
-			for event_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
-				expected_probabilities[GlobalEnums.choose_event_from_type(event_type).get_event_name()] = GlobalVar.EVENTS_PROBABILITIES[event_type]
-			
-			for index_height: int in range(current_map.rooms.size()):
-				for index_width: int in range(current_map.rooms[index_height].size()):
-					if current_map.rooms[index_height][index_width] == null:
-						continue
-						
-					var event: String = current_map.rooms[index_height][index_width].room_event.get_event_name()
-					if not event in events:
-						events[event] = 0
-					events[event] += 1
-					total_nb_rooms += 1
-			for k: String in events:
-				print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * total_nb_rooms/100.0)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
-			print("Total number of rooms generated: " + str(total_nb_rooms))
+			debug_print_event_count()
+
 
 ## checks if the map exists
-
 func is_map_initialized() -> bool:
 	return current_map != null
+
+## DEBUG
+## Prints the number and percentage of each event type, and the corresponding expected number as well
+func debug_print_event_count() -> void:
+	var events: Dictionary = {}
+	var total_nb_rooms: int = 0
+	var expected_probabilities: Dictionary = {}
+	
+	# Loop over event probabilities to create a dict<event_name, event_probability>
+	# since we use the event names to identify the type of event, 
+	# and we do not currently have a way to get the EventType from the Event Resource (and thus cannot get the probability from the resource)
+	for event_type: GlobalEnums.EventType in GlobalVar.EVENTS_PROBABILITIES:
+		expected_probabilities[GlobalEnums.choose_event_from_type(event_type).get_event_name()] = GlobalVar.EVENTS_PROBABILITIES[event_type]
+	
+	for index_height: int in range(current_map.rooms.size()):
+		for index_width: int in range(current_map.rooms[index_height].size()):
+			if current_map.rooms[index_height][index_width] == null:
+				continue
+				
+			var event: String = current_map.rooms[index_height][index_width].room_event.get_event_name()
+			if not event in events:
+				events[event] = 0
+			events[event] += 1
+			total_nb_rooms += 1
+	for k: String in events:
+		print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * total_nb_rooms/100.0)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
+	print("Total number of rooms generated: " + str(total_nb_rooms))
