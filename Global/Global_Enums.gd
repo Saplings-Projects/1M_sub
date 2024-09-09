@@ -92,7 +92,7 @@ enum PossibleModifierNames {
 
 ## All the possible types of events [br]
 ## @experimental
-##! [method EventRandom.choose_other_event] should be updated if you add a new event  
+##! [method choose_event_from_type] and [var Global_var.EVENTS_PROBABILITIES] should be updated if you add a new event  
 enum EventType {
 	Random, # ! Random should always be the first element (see EventRandom)
 	Heal,
@@ -100,3 +100,19 @@ enum EventType {
 	Shop,
 	Dialogue,
 }
+
+## Helper function that returns the Event resource depending on the given EventType
+static func choose_event_from_type(event_type: EventType) -> EventBase:
+	match event_type:
+		GlobalEnums.EventType.Random:
+			return EventRandom.new()
+		GlobalEnums.EventType.Heal:
+			return EventHeal.new()
+		GlobalEnums.EventType.Mob:
+			return EventMob.new()
+		GlobalEnums.EventType.Shop:
+			return EventShop.new()
+		GlobalEnums.EventType.Dialogue:
+			return EventDialogue.new()
+	# A case for an EventType has not been defined, so we arbitrarily return Random
+	return EventRandom.new() 
