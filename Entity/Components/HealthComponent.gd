@@ -25,10 +25,7 @@ var team: GlobalEnums.Team
 ## For enemies, this is called when the scene is instantiated (or more accurately, when each enemy is instanciated) [br]
 func _ready() -> void:
 	_set_health(max_health)
-	
-	## This is a is a temporary solution to block removal while #118 and #120 are done
-	## should be removed with those issues
-	PhaseManager.temp_before_phase_changed.connect(reset_block_on_round_start)
+
 
 ## The intended way for entities to take damage.[br]
 ## Removes block first and then deals excess damage to the health[br]
@@ -102,14 +99,6 @@ func _set_block(new_block: int) -> void:
 	
 	current_block = new_block
 	on_block_changed.emit(current_block)
-
-func reset_block_on_round_start(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
-	if(team == GlobalEnums.Team.FRIENDLY):
-		if(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING):
-			reset_block()
-	if(team == GlobalEnums.Team.ENEMY):
-		if(new_phase == GlobalEnums.Phase.ENEMY_ATTACKING):
-			reset_block()
 
 ## Sets block to 0 [br]
 func reset_block() -> void:
