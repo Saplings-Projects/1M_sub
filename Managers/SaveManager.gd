@@ -1,7 +1,5 @@
 extends Node
 
-signal start_load
-
 var save_file: ConfigFile
 
 func _ready() -> void:
@@ -14,9 +12,6 @@ func execute_save() -> void:
 	InventoryManager.save_inventory()
 	CardManager.save_data()
 	SceneManager.save_scene_data()
-
-func execute_load() -> void:
-	start_load.emit()
 
 func clear_data() -> void:
 	DirAccess.remove_absolute("user://save/current_scene.tscn")
