@@ -69,11 +69,6 @@ func load_player() -> void:
 	if save_file.has_section_key("Player", "player_persistent_data"):
 		player_persistent_data = save_file.get_value("Player", "player_persistent_data") as PlayerPersistentData
 
-
-func has_saved_data() -> bool:
-	var save_file: ConfigFile = SaveManager.load_save_file()
-	return save_file != null
-
 func set_player(in_player: Player) -> void:
 	player = in_player
 	if player != null:
@@ -88,6 +83,7 @@ func init_data() -> void:
 	is_player_initial_position_set = false
 	player_position = Vector2i(-1,-1)
 	player_room = null
+	is_map_movement_allowed = true
 
 ## Checks if the player is in a given room
 func is_player_in_room(room: RoomBase) -> bool:
