@@ -47,7 +47,7 @@ var _cards_queued_for_discard: Array[CardWorld] = []
 var _discard_timer: SceneTreeTimer = null
 
 func _ready() -> void:
-	PhaseManager.on_phase_changed.connect(_on_phase_changed)
+	PhaseManager.on_combat_phase_changed.connect(_on_phase_changed)
 	CardManager.on_deck_initialized.connect(_init_default_draw_pile)
 	CardManager.set_card_container(self)
 	CardManager.on_card_action_finished.connect(finish_active_card_action.unbind(1))
@@ -294,14 +294,14 @@ func _handle_discard_queue() -> void:
 	
 	if _cards_queued_for_discard.size() > 0:
 		_handle_discard_queue()
-	elif PhaseManager.current_phase == GlobalEnums.Phase.PLAYER_FINISHING:
+	elif PhaseManager.current_combat_phase == GlobalEnums.CombatPhase.PLAYER_FINISHING:
 		on_finished_discarding_hand.emit()
 
 
-func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
-	if new_phase == GlobalEnums.Phase.PLAYER_ATTACKING:
+func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
+	if new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING:
 		deal_to_starting_hand_size()
-	if new_phase == GlobalEnums.Phase.PLAYER_FINISHING:
+	if new_phase == GlobalEnums.CombatPhase.PLAYER_FINISHING:
 		if (cards_in_hand.size() == 0):
 			on_finished_discarding_hand.emit()
 		else:

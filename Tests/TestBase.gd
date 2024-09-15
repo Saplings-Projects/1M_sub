@@ -88,6 +88,7 @@ func before_each() -> void:
 	_player._should_save_persistent_data = false
 	_player_energy_component.ignore_cost = true
 	CardManager.disable_card_animations = true
+	PhaseManager.start_combat()
 
 ## Clear between tests
 func after_each() -> void:

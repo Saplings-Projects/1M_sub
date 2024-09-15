@@ -7,13 +7,13 @@ class_name Enemy
 ## Connect the enemy to the [PhaseManager] to make it attack when it's its turn.
 func _ready() -> void:
 	super()
-	PhaseManager.on_phase_changed.connect(_on_phase_changed)
+	PhaseManager.on_combat_phase_changed.connect(_on_phase_changed)
 	get_stress_component().init_entity_component(self)
 
 
 ## Only allow the player to interact with enemies when it's the player turn
-func _on_phase_changed(new_phase: GlobalEnums.Phase, _old_phase: GlobalEnums.Phase) -> void:
-	get_click_handler().set_interactable(new_phase == GlobalEnums.Phase.PLAYER_ATTACKING)
+func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
+	get_click_handler().set_interactable(new_phase == GlobalEnums.CombatPhase.PLAYER_ATTACKING)
 
 ## Used to get the enemy AI [br]
 ## Not in [Entity] as this is specific to enemies

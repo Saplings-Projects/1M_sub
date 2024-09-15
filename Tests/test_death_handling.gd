@@ -28,7 +28,7 @@ func after_each() -> void:
 
 func test_player_death_during_enemy_turn() -> void:
 	_player.get_health_component()._set_health(1)
-	_battler._on_enemy_start_turn()
+	_battler._enemy_turn()
 	assert_eq(_player.get_health_component().current_health, 0)
 	assert_signal_emitted(PhaseManager, "on_defeat")
 
@@ -114,7 +114,7 @@ func test_enemy_death_to_poison() -> void:
 	card_poison.on_card_play(_player, _enemy)
 
 	assert_eq(_enemy_list.size(), 2)
-	_battler._on_enemy_start_turn()
+	_battler._on_enemy_turn_start()
 	assert_eq(_enemy_list.size(), 1)
 	assert_true(_enemy.is_queued_for_deletion())
 	await get_tree().process_frame
@@ -129,7 +129,7 @@ func test_enemy_death_to_expiring_poison() -> void:
 
 	assert_eq(_enemy_list.size(), 2)
 	assert_eq(_enemy.get_status_component().current_status.size(), 1)
-	_battler._on_enemy_start_turn()
+	_battler._on_enemy_turn_start()
 	assert_eq(_enemy.get_status_component().current_status.size(), 0)
 	assert_eq(_enemy_list.size(), 1)
 	assert_true(_enemy.is_queued_for_deletion())
