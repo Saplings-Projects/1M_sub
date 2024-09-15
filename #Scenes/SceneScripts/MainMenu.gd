@@ -13,6 +13,7 @@ func _ready() -> void:
 			continue_button = child
 		child.mouse_entered.connect(_on_button_hovered.bind(child))
 	if !PlayerManager.has_saved_data():
+		continue_button.modulate.a = 0
 		continue_button.disabled = true
 	
 

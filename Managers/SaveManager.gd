@@ -18,13 +18,16 @@ func clear_data() -> void:
 	DirAccess.remove_absolute("user://save/save_data.ini")
 
 func load_save_file() -> ConfigFile:
-	var error: Error = save_file.load("user://save/save_data.ini")
-	
-	if !DirAccess.dir_exists_absolute("user://save/"):
-		DirAccess.make_dir_absolute("user://save/")
-	
-	if error:
-		push_error("Error loading save_data ", error)
+	if FileAccess.file_exists("user://save/save_data.ini"):
+		var error: Error = save_file.load("user://save/save_data.ini")
+		
+		if !DirAccess.dir_exists_absolute("user://save/"):
+			DirAccess.make_dir_absolute("user://save/")
+		
+		if error:
+			push_error("Error loading save_data ", error)
+			return null
+		
+		return save_file
+	else:
 		return null
-	
-	return save_file
