@@ -116,3 +116,61 @@ static func choose_event_from_type(event_type: EventType) -> EventBase:
 			return EventDialogue.new()
 	# A case for an EventType has not been defined, so we arbitrarily return Random
 	return EventRandom.new() 
+
+
+## All the available enemies
+enum PossibleEnemies {
+	the_snake,
+	slimeling,
+	golden_cauldron,
+	seedlings,
+	suited_bald_man,
+	emu_ku100,
+	ku10000,
+	suspiciously_cheap_slime,
+	four_dio,
+	sapoling,
+	snail,
+	cat_eyes,
+	family_friendly_pangolin,
+	the_slide,
+	undefended_soccer_net,
+	cat_5_hurricane,
+	overflowing_blender_of_mac_n_cheese,
+	green_beans,
+	spiral_of_ants,
+	mushroomling,
+	slime_in_jar,
+	matter_baby,
+	faun_club,
+	placid_puddle,
+	billy,
+	swarm_of_insects,
+	wendigo,
+	slime_mold,
+	cubicle_villager,
+	he_moves_in_a_pentagram,
+	edgar_allen_poe,
+	definitely_a_ku100,
+}
+
+## All the available mini-boss
+enum PossibleMiniBoss {
+	motorized_bears,
+	not_pickle,
+	attack_elephant,
+	orange_on_a_table,
+	untuned_kalimba,
+	clarence_the_worm,
+	one_guy,
+	fauna_inventory,
+}
+
+## All the available boss
+enum PossibleBoss {
+	bethany,
+	asmr_rically_accurate_omni_angel,
+	o_beehive,
+	the_berts,
+	nemu,
+}
