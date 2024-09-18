@@ -60,7 +60,7 @@ const TEAM_MEMBERS: Dictionary = {
 	"Lunar": [[Roles.Art], sapling_type.Gamer],
 	"Mikotey": [[Roles.Design], sapling_type.Maid],
 	"Minik": [[Roles.Design], sapling_type.Emo],
-	"Multi-arm": [[Roles.Programming], sapling_type.None],
+	"Multi-arm": [[Roles.Programming], sapling_type.None], #! no participation yet
 	"nára": [[Roles.Art], sapling_type.Emo],
 	"Palenque": [[Roles.Design], sapling_type.Nerd],
 	"Papier": [[Roles.Programming], sapling_type.Milf],
