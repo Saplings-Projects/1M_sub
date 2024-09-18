@@ -152,10 +152,7 @@ enum PossibleEnemies {
 	he_moves_in_a_pentagram,
 	edgar_allen_poe,
 	definitely_a_ku100,
-}
-
-## All the available mini-boss
-enum PossibleMiniBoss {
+	# Mini-boss
 	motorized_bears,
 	not_pickle,
 	attack_elephant,
@@ -164,10 +161,7 @@ enum PossibleMiniBoss {
 	clarence_the_worm,
 	one_guy,
 	fauna_inventory,
-}
-
-## All the available boss
-enum PossibleBoss {
+	# Boss
 	bethany,
 	asmr_rically_accurate_omni_angel,
 	o_beehive,
