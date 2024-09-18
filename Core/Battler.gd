@@ -5,16 +5,16 @@ class_name Battler
 ## This class holds a list of all the enemies, so it's a good central place to dispatch
 ## battle actions (player clicking on enemies, enemy attacks, applying status).
 
-@export var enemies_to_summon: Array[PackedScene]
+
 @export var enemy_spacing: float = 50.0
 @export var enemy_attack_delay: float = 0.3
 
-var _enemy_list: Array[Entity]
+var _enemy_list: Array[Enemy]
 var _enemy_action_list: Array[EnemyAction] = []
 
 func _ready() -> void:
 	_summon_enemies()
-	EnemyManager.enemy_list = _enemy_list
+	EnemyManager.current_enemy_group.enemy_list = _enemy_list
 	
 	# check if our player has been initialized already. If not, wait for the signal
 	if (PlayerManager.player == null):
@@ -29,16 +29,21 @@ func _ready() -> void:
 
 
 func _summon_enemies() -> void:
+	var enemy_group: EnemyGroup = EnemyManager.choose_enemy_group().instantiate()
+	EnemyManager.current_enemy_group = enemy_group
+	var enemies_to_summon: Array[PackedScene] = enemy_group.enemy_list_packed_scene
+	
 	for enemy_index: int in enemies_to_summon.size():
-		var enemy_instance: Node = enemies_to_summon[enemy_index].instantiate()
+		var enemy_instance: Enemy = enemies_to_summon[enemy_index].instantiate()
 		add_child(enemy_instance)
 		_enemy_list.append(enemy_instance)
+		EnemyManager.current_enemy_group.enemy_list.append(enemy_instance)
 		enemy_instance.get_click_handler().on_click.connect(_on_enemy_clicked.bind(enemy_instance))
 		enemy_instance.position.x += enemy_spacing * enemy_index
 	
 	# setup party
 	for enemy: Entity in _enemy_list:
-		enemy.get_party_component().set_party(_enemy_list)
+		enemy.get_party_component().set_party(_enemy_list as Array[Entity])
 
 
 func _on_player_initialized() -> void:
@@ -180,7 +185,7 @@ func _handle_enemy_deaths() -> void:
 		enemy.queue_free()
 		
 	for enemy: Enemy in _enemy_list:
-		enemy.get_party_component().set_party(_enemy_list)
+		enemy.get_party_component().set_party(_enemy_list as Array[Entity])
 
 
 ## return TRUE if battle have ended either with victory or defeat
