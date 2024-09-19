@@ -29,11 +29,22 @@ extends Node
 ## The group of enemies currently being used
 var current_enemy_group: EnemyGroup
 
+## The last recorded lower bound of the current sub-section
 var current_lower_bound: int = enemy_group_distribution.keys()[0][1]
+## The last recorded higher bound of the current sub-section
 var current_higher_bound: int = enemy_group_distribution.keys()[0][2]
-var enemy_group_array: Array[PackedScene] = enemy_group_distribution.values()[0]
+## The last used array of enemy group
+var enemy_group_array: Array[PackedScene]
+## The shuffled version of the `enemy_group_array`
 var shuffled_enemy_group_array: Array[PackedScene] = []
 
+func _ready() -> void:
+	enemy_group_array.assign(enemy_group_distribution.values()[0])
+
+## Chooses an enemy group in the following way: [br]
+## - Check if the player is in the same sub-section as the previous time this function was called [br]
+## - Choose an array of enemy group depending on player position if either sub-section changed, or the array to choose from is empty [br]
+## - Shuffle it, pop the last element of that array
 func choose_enemy_group() -> PackedScene:
 	var height_percent_position: float = MapManager.get_map_percent_with_player_position()
 	if (current_lower_bound <= height_percent_position && current_higher_bound > height_percent_position):
