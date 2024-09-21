@@ -140,8 +140,8 @@ func _animation_loop() -> void:
 	# play first animation with animation player in
 	# this is needed since the loop also plays the out animation of the previous avatar
 	# but there is no previous avatar before the first one
-	var first_member: String = team_members_names[0]
-	var roles_and_avatar: Array = TEAM_MEMBERS[first_member]
+	var first_member_name: String = team_members_names[0]
+	var roles_and_avatar: Array = TEAM_MEMBERS[first_member_name]
 	var roles: Array = roles_and_avatar[0]
 	var roles_string: String = _role_array_to_string(roles)
 	var previous_avatar: GlobalEnums.SaplingType = roles_and_avatar[1]
@@ -153,7 +153,7 @@ func _animation_loop() -> void:
 	anim_in.play(animation_name)
 	await anim_in.animation_finished
 	# member is now at the center of the screen, display their name + roles with a fade in of the text
-	name_role_label.text = first_member + "\n" + roles_string
+	name_role_label.text = first_member_name + "\n" + roles_string
 	var text_time_on_screen: float = _get_text_time_on_screen(name_role_label.text)
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(name_role_label, "theme_override_colors/font_color", COLOR_FADE_IN, TEXT_FADE_IN_DURATION)
