@@ -9,7 +9,7 @@ class_name Battler
 @export var enemy_spacing: float = 50.0
 @export var enemy_attack_delay: float = 0.3
 
-var _enemy_list: Array[Enemy]
+var _enemy_list: Array[Entity]
 var _enemy_action_list: Array[EnemyAction] = []
 
 func _ready() -> void:
@@ -43,7 +43,7 @@ func _summon_enemies() -> void:
 	
 	# setup party
 	for enemy: Entity in _enemy_list:
-		enemy.get_party_component().set_party(_enemy_list as Array[Entity])
+		enemy.get_party_component().set_party(_enemy_list )
 
 
 func _on_player_initialized() -> void:
@@ -185,7 +185,7 @@ func _handle_enemy_deaths() -> void:
 		enemy.queue_free()
 		
 	for enemy: Enemy in _enemy_list:
-		enemy.get_party_component().set_party(_enemy_list as Array[Entity])
+		enemy.get_party_component().set_party(_enemy_list )
 
 
 ## return TRUE if battle have ended either with victory or defeat

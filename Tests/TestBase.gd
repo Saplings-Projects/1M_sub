@@ -42,7 +42,7 @@ var _enemy_status_component: StatusComponent = null
 ## Enemy 2 status component
 var _enemy_2_status_component: StatusComponent = null
 ## The list of the enemies
-var _enemy_list: Array[Enemy]
+var _enemy_list: Array[Entity]
 
 
 ## Setup the environment before each test [br]

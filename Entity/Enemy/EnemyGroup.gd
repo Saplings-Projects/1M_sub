@@ -8,4 +8,4 @@ class_name EnemyGroup extends Node
 ## This could be changed to be automatically calculated maybe
 @export var positions: Array[Vector2]
 
-var enemy_list: Array[Enemy]
+var enemy_list: Array[Entity]
