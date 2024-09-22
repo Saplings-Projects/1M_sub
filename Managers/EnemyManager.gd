@@ -46,6 +46,8 @@ func _ready() -> void:
 ## - Choose an array of enemy group depending on player position if either sub-section changed, or the array to choose from is empty [br]
 ## - Shuffle it, pop the last element of that array
 func choose_enemy_group() -> PackedScene:
+	if DebugVar.DEBUG_USE_TEST_ENEMY_GROUP:
+		return load("res://Entity/Enemy/EnemyGroup/test_group.tscn") # return a test group
 	var height_percent_position: float = MapManager.get_map_percent_with_player_position()
 	if (current_lower_bound <= height_percent_position && current_higher_bound > height_percent_position):
 		# meaning we stayed in the same sub-section of the map, keep the same array of enemies
