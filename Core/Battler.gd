@@ -13,7 +13,9 @@ var _enemy_list: Array[Entity]
 var _enemy_action_list: Array[EnemyAction] = []
 
 func _ready() -> void:
-	_summon_enemies()
+	var enemy_group: EnemyGroup = EnemyManager.choose_enemy_group().instantiate()
+	add_child(enemy_group)
+	_summon_enemies(enemy_group)
 	EnemyManager.current_enemy_group.enemy_list = _enemy_list
 	
 	# check if our player has been initialized already. If not, wait for the signal
@@ -28,8 +30,7 @@ func _ready() -> void:
 	CardManager.on_card_action_finished.connect(_handle_deaths.unbind(1))
 
 
-func _summon_enemies() -> void:
-	var enemy_group: EnemyGroup = EnemyManager.choose_enemy_group().instantiate()
+func _summon_enemies(enemy_group: EnemyGroup) -> void:
 	EnemyManager.current_enemy_group = enemy_group
 	var enemies_to_summon: Array[PackedScene] = enemy_group.enemy_list_packed_scene
 	
