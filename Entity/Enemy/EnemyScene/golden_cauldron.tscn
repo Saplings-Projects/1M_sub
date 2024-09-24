@@ -5,23 +5,22 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iinmp"]
 resource_local_to_scene = true
-size = Vector2(234, 255)
+size = Vector2(533, 583)
 
 [node name="Enemy" instance=ExtResource("1_kje8b")]
 
 [node name="Sprite2D" parent="." index="3"]
-position = Vector2(8, 8)
-scale = Vector2(0.1977, 0.1977)
+scale = Vector2(0.447793, 0.447793)
 texture = ExtResource("2_nr485")
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(19, 3.5)
+position = Vector2(-3, -7)
 shape = SubResource("RectangleShape2D_iinmp")
 
 [node name="HealthLabel" parent="." index="6"]
-offset_top = -170.0
-offset_bottom = -131.0
+offset_top = -352.0
+offset_bottom = -313.0
 
 [node name="StressLabel" parent="." index="7"]
-offset_top = -214.0
-offset_bottom = -175.0
+offset_top = -411.0
+offset_bottom = -372.0
