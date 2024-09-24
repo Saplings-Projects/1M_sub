@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://85ove4xi0gf0"]
+[gd_scene load_steps=3 format=3 uid="uid://85ove4xi0gf0"]
 
 [ext_resource type="PackedScene" uid="uid://bpgsmfprnm2kk" path="res://Entity/Enemy/EnemyScene/Enemy.tscn" id="1_klc51"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53n37"]
+resource_local_to_scene = true
+size = Vector2(104, 93)
+
 [node name="Enemy" instance=ExtResource("1_klc51")]
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_53n37")
 
 [node name="StressLabel" parent="." index="7"]
 text = "10/20"

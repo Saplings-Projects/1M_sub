@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dbidy5j4uyopc" path="res://Entity/Components/block_display.tscn" id="13_u3jb7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8bva"]
+resource_local_to_scene = true
 size = Vector2(104, 93)
 
 [sub_resource type="LabelSettings" id="LabelSettings_urr12"]
