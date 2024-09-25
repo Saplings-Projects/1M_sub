@@ -5,3 +5,4 @@
 
 [node name="EnemyGroup" instance=ExtResource("1_fm87o")]
 enemy_list_packed_scene = Array[PackedScene]([ExtResource("2_wjrop")])
+positions = Array[Vector2]([Vector2(1330, 580)])

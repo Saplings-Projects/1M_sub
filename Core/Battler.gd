@@ -6,7 +6,8 @@ class_name Battler
 ## battle actions (player clicking on enemies, enemy attacks, applying status).
 
 
-@export var enemy_spacing: float = 50.0
+@export var enemy_x_spacing: float = 100
+@export var enemy_y_spacing: float = -30
 @export var enemy_attack_delay: float = 0.3
 
 var _enemy_list: Array[Entity]
@@ -40,7 +41,14 @@ func _summon_enemies(enemy_group: EnemyGroup) -> void:
 		_enemy_list.append(enemy_instance)
 		EnemyManager.current_enemy_group.enemy_list.append(enemy_instance)
 		enemy_instance.get_click_handler().on_click.connect(_on_enemy_clicked.bind(enemy_instance))
-		enemy_instance.position.x += enemy_spacing * enemy_index
+		if enemy_group.positions.size() > enemy_index:
+			# if positions are available for that enemy, use it
+			enemy_instance.global_position = enemy_group.positions[enemy_index]
+		else:
+			# otherwise use default
+			enemy_instance.global_position.x += enemy_x_spacing * enemy_index
+			enemy_instance.global_position.y += enemy_y_spacing * enemy_index
+			
 	
 	# setup party
 	for enemy: Entity in _enemy_list:

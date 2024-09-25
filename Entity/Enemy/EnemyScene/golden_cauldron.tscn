@@ -5,17 +5,20 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iinmp"]
 resource_local_to_scene = true
-size = Vector2(533, 583)
+size = Vector2(533, 777.375)
 
 [node name="Enemy" instance=ExtResource("1_kje8b")]
+position = Vector2(0, 0)
+enemy_name = 2
 
 [node name="Sprite2D" parent="." index="3"]
 scale = Vector2(0.447793, 0.447793)
 texture = ExtResource("2_nr485")
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-3, -7)
+position = Vector2(0, -52)
 shape = SubResource("RectangleShape2D_iinmp")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="HealthLabel" parent="." index="6"]
 offset_top = -352.0
