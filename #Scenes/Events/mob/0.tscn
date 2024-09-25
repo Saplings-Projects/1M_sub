@@ -62,7 +62,7 @@ hover_offset_max = 100.0
 max_rotation = 40.0
 draw_pile_ui = NodePath("../DrawPile")
 discard_pile_ui = NodePath("../DiscardPile")
-play_at_height = 500.0
+play_at_height = 800.0
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/UIControl"]
 layout_mode = 1
