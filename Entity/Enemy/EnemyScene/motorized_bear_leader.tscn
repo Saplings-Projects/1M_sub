@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://btt0xgebuosow"]
+[gd_scene load_steps=3 format=3 uid="uid://btt0xgebuosow"]
 
 [ext_resource type="PackedScene" uid="uid://bpgsmfprnm2kk" path="res://Entity/Enemy/EnemyScene/Enemy.tscn" id="1_ivea1"]
 [ext_resource type="Texture2D" uid="uid://ua4ml58lwg4r" path="res://Art/Enemies/motorized_bears/motorized_bear_leader-finished.png" id="2_4f3hy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tt6m"]
-resource_local_to_scene = true
-size = Vector2(547, 436)
 
 [node name="Enemy" instance=ExtResource("1_ivea1")]
 enemy_name = 35
@@ -14,12 +10,11 @@ enemy_name = 35
 max_health = 200
 
 [node name="Sprite2D" parent="." index="3"]
-scale = Vector2(0.282887, 0.282887)
+scale = Vector2(0.23, 0.23)
 texture = ExtResource("2_4f3hy")
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-6.5, 7)
-shape = SubResource("RectangleShape2D_4tt6m")
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PackedVector2Array(-223, 173, 94, 174, 175, 53, 172, -62, 234, -150, 32, -174, -202, -84)
 
 [node name="HealthLabel" parent="." index="6"]
 offset_top = -243.0

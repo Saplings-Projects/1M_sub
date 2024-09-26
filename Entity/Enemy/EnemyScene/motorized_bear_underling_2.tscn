@@ -1,26 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://474l8somxhox"]
+[gd_scene load_steps=3 format=3 uid="uid://xwiymm7vlijs"]
 
-[ext_resource type="PackedScene" uid="uid://bpgsmfprnm2kk" path="res://Entity/Enemy/EnemyScene/Enemy.tscn" id="1_536sf"]
-[ext_resource type="Texture2D" uid="uid://cw0id8n5qemg8" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_2-finished.png" id="2_3yx0t"]
+[ext_resource type="PackedScene" uid="uid://bpgsmfprnm2kk" path="res://Entity/Enemy/EnemyScene/Enemy.tscn" id="1_5lmv1"]
+[ext_resource type="Texture2D" uid="uid://cw0id8n5qemg8" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_2-finished.png" id="2_qqj6j"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx7am"]
-resource_local_to_scene = true
-size = Vector2(368, 300)
+[node name="Enemy" instance=ExtResource("1_5lmv1")]
 
-[node name="Enemy" instance=ExtResource("1_536sf")]
+[node name="HealthComponent" parent="." index="2"]
+max_health = 75
 
 [node name="Sprite2D" parent="." index="3"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3yx0t")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_qqj6j")
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(4, -1)
-shape = SubResource("RectangleShape2D_wx7am")
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PackedVector2Array(-125, 107, 79, 112, 140, 29, 134, -101, -62, -108, -78, -87, -56, -43, -127, 10)
 
 [node name="HealthLabel" parent="." index="6"]
-offset_top = -180.0
-offset_bottom = -141.0
+offset_left = -37.0
+offset_top = -157.0
+offset_right = 77.0
+offset_bottom = -118.0
 
 [node name="StressLabel" parent="." index="7"]
-offset_top = -220.0
-offset_bottom = -181.0
+offset_left = -37.0
+offset_top = -203.0
+offset_right = 77.0
+offset_bottom = -164.0
