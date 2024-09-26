@@ -84,7 +84,7 @@ func _choose_enemy_group_inner() -> PackedScene:
 				shuffled_enemy_group_array.shuffle()
 				return shuffled_enemy_group_array.pop_back()
 	push_error("No suitable sub-section or enemy has been found, returning a default enemy group")
-	return null #TODO add a default enemy group
+	return load("res://Entity/Enemy/EnemyGroup/test_group.tscn") # return the test group to not crash the game
 
 func save_data() -> void:
 	var save_file: ConfigFile = SaveManager.save_file
