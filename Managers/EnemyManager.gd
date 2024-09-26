@@ -76,6 +76,6 @@ func save_data() -> void:
 	save_file.set_value("EnemyManager", "enemy_group_array", enemy_group_array)
 	save_file.set_value("EnemyManager", "shuffled_enemy_group_array", shuffled_enemy_group_array)
 
-	var error: Error = save_file.save("user://save/save_data.ini")
+	var error: Error = save_file.save(SaveManager.save_file_path)
 	if error:
 		push_error("Error saving inventory data: ", error)
