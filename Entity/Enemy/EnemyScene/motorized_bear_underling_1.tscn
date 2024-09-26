@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://qwjhfnceugt0" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_1-finished.png" id="2_4k1f2"]
 
 [node name="Enemy" instance=ExtResource("1_5lmv1")]
+enemy_name = 35
 
 [node name="HealthComponent" parent="." index="2"]
 max_health = 75
