@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://474l8somxhox"]
+
+[ext_resource type="PackedScene" uid="uid://bpgsmfprnm2kk" path="res://Entity/Enemy/EnemyScene/Enemy.tscn" id="1_536sf"]
+[ext_resource type="Texture2D" uid="uid://cw0id8n5qemg8" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_2-finished.png" id="2_3yx0t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx7am"]
+resource_local_to_scene = true
+size = Vector2(368, 300)
+
+[node name="Enemy" instance=ExtResource("1_536sf")]
+
+[node name="Sprite2D" parent="." index="3"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3yx0t")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(4, -1)
+shape = SubResource("RectangleShape2D_wx7am")
+
+[node name="HealthLabel" parent="." index="6"]
+offset_top = -180.0
+offset_bottom = -141.0
+
+[node name="StressLabel" parent="." index="7"]
+offset_top = -220.0
+offset_bottom = -181.0
