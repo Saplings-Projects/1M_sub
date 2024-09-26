@@ -179,6 +179,7 @@ main menu"
 
 [node name="TopBarOverlay" parent="CanvasLayer/UIControl" instance=ExtResource("14_os5i4")]
 layout_mode = 1
+offset_bottom = -987.0
 
 [node name="XP progress" parent="CanvasLayer/UIControl" instance=ExtResource("15_r7cr8")]
 layout_mode = 1
