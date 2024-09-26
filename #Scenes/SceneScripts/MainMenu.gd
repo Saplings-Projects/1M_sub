@@ -33,6 +33,7 @@ func _on_continue_pressed() -> void:
 		CardManager.load_data()
 		InventoryManager.load_inventory()
 		SceneManager.load_scene_data()
+		EnemyManager.load_data()
 
 func _on_button_hovered(button: TextureButton) -> void:
 	button.grab_focus()

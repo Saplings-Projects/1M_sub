@@ -26,8 +26,13 @@ extends Node
 	[3, 80, 100]: [],
 }
 
-## The group of enemies currently being used
+## The group of enemies currently being used, set at the start of the combat [br]
 var current_enemy_group: EnemyGroup
+
+## The packed scene corresponding to the group of enemies, this is used to keep track of it between saves [br]
+## DO NOT FORGET to set this back to null once the fight is done [br]
+## The reset is handled via signals to be sure to not forget it when changing the battler
+var current_enemy_group_packed: PackedScene = null
 
 ## The last recorded lower bound of the current sub-section
 var current_lower_bound: int = enemy_group_distribution.keys()[0][1]
@@ -39,13 +44,26 @@ var enemy_group_array: Array[PackedScene]
 var shuffled_enemy_group_array: Array[PackedScene] = []
 
 func _ready() -> void:
-	enemy_group_array.assign(enemy_group_distribution.values()[0])
+	if enemy_group_array.is_empty():
+		enemy_group_array.assign(enemy_group_distribution.values()[0])
+	PhaseManager.on_event_win.connect(_clear_data)
+	PhaseManager.on_defeat.connect(_clear_data)
+
+
+## This calls the inner function that actually chooses the enemy group [br]
+## This is done to save the packed scene in this EnemyManger before it is returned
+func choose_enemy_group() -> PackedScene:
+	var packed_enemy_group: PackedScene = _choose_enemy_group_inner()
+	current_enemy_group_packed = packed_enemy_group
+	return packed_enemy_group
 
 ## Chooses an enemy group in the following way: [br]
 ## - Check if the player is in the same sub-section as the previous time this function was called [br]
 ## - Choose an array of enemy group depending on player position if either sub-section changed, or the array to choose from is empty [br]
 ## - Shuffle it, pop the last element of that array
-func choose_enemy_group() -> PackedScene:
+func _choose_enemy_group_inner() -> PackedScene:
+	if current_enemy_group != null:
+		return current_enemy_group_packed
 	if DebugVar.DEBUG_USE_TEST_ENEMY_GROUP:
 		return load("res://Entity/Enemy/EnemyGroup/test_group.tscn") # return a test group
 	var height_percent_position: float = MapManager.get_map_percent_with_player_position()
@@ -54,7 +72,7 @@ func choose_enemy_group() -> PackedScene:
 		if shuffled_enemy_group_array.is_empty():
 			shuffled_enemy_group_array = enemy_group_array
 			shuffled_enemy_group_array.shuffle()
-			
+
 		return shuffled_enemy_group_array.pop_back()
 	else:
 		# we entered a new sub-section, search the corresponding array of enemy group
@@ -79,3 +97,24 @@ func save_data() -> void:
 	var error: Error = save_file.save(SaveManager.save_file_path)
 	if error:
 		push_error("Error saving inventory data: ", error)
+
+func load_data() -> void:
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	if save_file == null:
+		return
+
+	if save_file.has_section_key("EnemyManager", "current_enemy_group"):
+		current_enemy_group = save_file.get_value("EnemyManager", "current_enemy_group")
+	if save_file.has_section_key("EnemyManager", "current_lower_bound"):
+		current_lower_bound = save_file.get_value("EnemyManager", "current_lower_bound")
+	if save_file.has_section_key("EnemyManager", "current_higher_bound"):
+		current_higher_bound = save_file.get_value("EnemyManager", "current_higher_bound")
+	if save_file.has_section_key("EnemyManager", "enemy_group_array"):
+		enemy_group_array = save_file.get_value("EnemyManager", "enemy_group_array")
+	if save_file.has_section_key("EnemyManager", "shuffled_enemy_group_array"):
+		shuffled_enemy_group_array = save_file.get_value("EnemyManager", "shuffled_enemy_group_array")
+
+## Clear the data regarding the current enemy group being fought
+func _clear_data() -> void:
+	current_enemy_group = null
+	current_enemy_group_packed = null
