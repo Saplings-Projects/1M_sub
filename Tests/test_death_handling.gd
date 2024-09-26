@@ -142,10 +142,10 @@ func test_enemy_list_size_enemy_manager() -> void:
 	var card_damage: CardBase = load("res://Cards/Resource/Card_Damage.tres")
 	
 	assert_eq(_enemy_list.size(), 2)
-	assert_eq(EnemyManager.enemy_list.size(), 2)
+	assert_eq(EnemyManager.current_enemy_group.enemy_list.size(), 2)
 	card_damage.on_card_play(_player, _enemy)
 	assert_eq(_enemy_list.size(), 1)
-	assert_eq(EnemyManager.enemy_list.size(), 1)
+	assert_eq(EnemyManager.current_enemy_group.enemy_list.size(), 1)
 	assert_true(_enemy.is_queued_for_deletion())
 	await get_tree().process_frame
 	assert_false(is_instance_valid(_enemy))
