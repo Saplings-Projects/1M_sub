@@ -68,3 +68,14 @@ func choose_enemy_group() -> PackedScene:
 	push_error("No suitable sub-section or enemy has been found, returning a default enemy group")
 	return null #TODO add a default enemy group
 
+func save_data() -> void:
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("EnemyManager", "current_enemy_group", current_enemy_group)
+	save_file.set_value("EnemyManager", "current_lower_bound", current_lower_bound)
+	save_file.set_value("EnemyManager", "current_higher_bound", current_higher_bound)
+	save_file.set_value("EnemyManager", "enemy_group_array", enemy_group_array)
+	save_file.set_value("EnemyManager", "shuffled_enemy_group_array", shuffled_enemy_group_array)
+
+	var error: Error = save_file.save("user://save/save_data.ini")
+	if error:
+		push_error("Error saving inventory data: ", error)
