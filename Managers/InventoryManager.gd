@@ -17,7 +17,7 @@ var instanced_inventory_HUD : Node
 
 func instance_inventory_HUD() -> void:
 	instanced_inventory_HUD = inventory_HUD.instantiate()
-	add_child(instanced_inventory_HUD)
+	get_tree().current_scene.add_child(instanced_inventory_HUD)
 
 func close_inventory_HUD() -> void:
 	if(instanced_inventory_HUD == null):
