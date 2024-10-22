@@ -17,7 +17,8 @@ func _ready() -> void:
 	var enemy_group: EnemyGroup = EnemyManager.choose_enemy_group().instantiate()
 	add_child(enemy_group)
 	_summon_enemies(enemy_group)
-	EnemyManager.current_enemy_group.enemy_list = _enemy_list
+	EnemyManager.current_enemy_group.enemy_list = enemy_group.enemy_list
+	_enemy_list = enemy_group.enemy_list
 	
 	# check if our player has been initialized already. If not, wait for the signal
 	if (PlayerManager.player == null):
