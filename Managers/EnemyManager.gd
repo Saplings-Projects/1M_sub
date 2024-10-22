@@ -70,7 +70,7 @@ func _choose_enemy_group_inner() -> PackedScene:
 	if (current_lower_bound <= height_percent_position && current_higher_bound > height_percent_position):
 		# meaning we stayed in the same sub-section of the map, keep the same array of enemies
 		if shuffled_enemy_group_array.is_empty():
-			shuffled_enemy_group_array = enemy_group_array
+			shuffled_enemy_group_array = enemy_group_array.duplicate()
 			shuffled_enemy_group_array.shuffle()
 
 		return shuffled_enemy_group_array.pop_back()
