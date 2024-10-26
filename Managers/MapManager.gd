@@ -299,4 +299,4 @@ func get_map_percent_with_player_position() -> float:
 	var player_position: Vector2i = PlayerManager.player_position
 	var number_of_floors: int = map_width_array.size()
 	var player_y_floor: int = player_position.y
-	return (player_y_floor/number_of_floors) * 100
+	return (player_y_floor as float / number_of_floors as float) * 100
