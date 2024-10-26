@@ -8,7 +8,7 @@
 script = ExtResource("1_3jnpp")
 enemy_group_distribution = {
 [1, 0, 20]: [ExtResource("2_7seft"), ExtResource("3_t6wf7")],
-[1, 20, 40]: [],
+[1, 20, 40]: [ExtResource("2_7seft")],
 [1, 40, 60]: [],
 [1, 60, 80]: [],
 [1, 80, 100]: [],
