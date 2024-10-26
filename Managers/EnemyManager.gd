@@ -79,8 +79,8 @@ func _choose_enemy_group_inner() -> PackedScene:
 		for key: Array[int] in enemy_group_distribution:
 			# include lower bound, exclude higher bound
 			if (key[1] <= height_percent_position && key[2] > height_percent_position):
-				enemy_group_array = enemy_group_distribution[key]
-				shuffled_enemy_group_array = enemy_group_array
+				enemy_group_array = enemy_group_distribution[key].duplicate()
+				shuffled_enemy_group_array = enemy_group_array.duplicate()
 				shuffled_enemy_group_array.shuffle()
 				return shuffled_enemy_group_array.pop_back()
 	push_error("No suitable sub-section or enemy has been found, returning a default enemy group")
