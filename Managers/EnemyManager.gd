@@ -76,10 +76,13 @@ func _choose_enemy_group_inner() -> PackedScene:
 		return shuffled_enemy_group_array.pop_back()
 	else:
 		# we entered a new sub-section, search the corresponding array of enemy group
-		for key: Array[int] in enemy_group_distribution:
+		for key: Array in enemy_group_distribution:
 			# include lower bound, exclude higher bound
 			if (key[1] <= height_percent_position && key[2] > height_percent_position):
-				enemy_group_array = enemy_group_distribution[key].duplicate()
+				var new_enemy_group: Array = enemy_group_distribution[key]
+				if new_enemy_group.is_empty():
+					break # go to load the test group
+				enemy_group_array.assign(new_enemy_group) # assign performs a copy
 				shuffled_enemy_group_array = enemy_group_array.duplicate()
 				shuffled_enemy_group_array.shuffle()
 				return shuffled_enemy_group_array.pop_back()
