@@ -82,6 +82,9 @@ func _choose_enemy_group_inner() -> PackedScene:
 		for key: Array in enemy_group_distribution:
 			# include lower bound, exclude higher bound
 			if (key[1] <= height_percent_position && key[2] > height_percent_position):
+				# update lower and higher bound
+				current_lower_bound = key[1]
+				current_higher_bound = key[2]
 				var new_enemy_group_array: Array = enemy_group_distribution[key]
 				if new_enemy_group_array.is_empty():
 					break # go to load the test group
