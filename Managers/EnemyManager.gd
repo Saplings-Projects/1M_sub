@@ -88,7 +88,10 @@ func _choose_enemy_group_inner() -> PackedScene:
 				var new_enemy_group_array: Array = enemy_group_distribution[key]
 				if new_enemy_group_array.is_empty():
 					break # go to load the test group
-				enemy_group_array.assign(new_enemy_group_array) # assign performs a copy
+				# assign does NOT perform a copy, but we are not modifying this array, thus it's fine for now
+				# if later we need to modify the array, think of changing this to perform a copy
+				enemy_group_array.assign(new_enemy_group_array)
+				# duplicate will only copy the arrays, not the elements (but are currently not modifying those)
 				shuffled_enemy_group_array = enemy_group_array.duplicate()
 				shuffled_enemy_group_array.shuffle()
 				return shuffled_enemy_group_array.pop_back()
