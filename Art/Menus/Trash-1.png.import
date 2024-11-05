@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6fmkrnbs4mf6"
-path="res://.godot/imported/CatTree.png-d58f5c3bb4506352afe76dd76a5fa527.ctex"
+uid="uid://dd06ocktximw7"
+path="res://.godot/imported/Trash-1.png-ce07c71134e16d0aecc8b7d0db00fb11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Background/CatTree.png"
-dest_files=["res://.godot/imported/CatTree.png-d58f5c3bb4506352afe76dd76a5fa527.ctex"]
+source_file="res://Art/Menus/Trash-1.png"
+dest_files=["res://.godot/imported/Trash-1.png-ce07c71134e16d0aecc8b7d0db00fb11.ctex"]
 
 [params]
 

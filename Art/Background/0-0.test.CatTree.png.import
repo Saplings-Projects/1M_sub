@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q8og304npj17"
-path="res://.godot/imported/Tourch.png-94c708f8cbc15c61a8fc8ebd4d244dbc.ctex"
+uid="uid://c6fmkrnbs4mf6"
+path="res://.godot/imported/0-0.test.CatTree.png-85c2a2ddf3b5a611c2c6d4f74b8e8a51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Items/Tourch.png"
-dest_files=["res://.godot/imported/Tourch.png-94c708f8cbc15c61a8fc8ebd4d244dbc.ctex"]
+source_file="res://Art/Background/0-0.test.CatTree.png"
+dest_files=["res://.godot/imported/0-0.test.CatTree.png-85c2a2ddf3b5a611c2c6d4f74b8e8a51.ctex"]
 
 [params]
 

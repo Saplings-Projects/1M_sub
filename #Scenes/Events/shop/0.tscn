@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="1_7gwvp"]
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/ShopScene.gd" id="1_u1m6k"]
 [ext_resource type="PackedScene" uid="uid://cdt4k2reymt2i" path="res://Shop/shop_item_card.tscn" id="4_bbct0"]
-[ext_resource type="Texture2D" uid="uid://c6fmkrnbs4mf6" path="res://Art/Background/CatTree.png" id="6_ppjdl"]
+[ext_resource type="Texture2D" uid="uid://c6fmkrnbs4mf6" path="res://Art/Background/0-0.test.CatTree.png" id="6_ppjdl"]
 [ext_resource type="PackedScene" uid="uid://bmklwr3ycyicn" path="res://Shop/shop_item_relic.tscn" id="8_i0gsy"]
 [ext_resource type="PackedScene" uid="uid://c4bsmddaua2ye" path="res://Shop/shop_item_consumable.tscn" id="10_jre48"]
 [ext_resource type="PackedScene" uid="uid://tfeo4epmhse0" path="res://Shop/shop_item_torch.tscn" id="11_3t8vb"]
 [ext_resource type="Script" path="res://#Scenes/Events/shop/CardRemoval.gd" id="12_1uxnd"]
-[ext_resource type="Texture2D" uid="uid://dd06ocktximw7" path="res://Art/Background/Trash.png" id="12_yofyg"]
+[ext_resource type="Texture2D" uid="uid://dd06ocktximw7" path="res://Art/Menus/Trash-1.png" id="12_yofyg"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

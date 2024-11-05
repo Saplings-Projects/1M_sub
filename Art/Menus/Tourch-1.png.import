@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd06ocktximw7"
-path="res://.godot/imported/Trash.png-b76c4a8e7231dce5a7a6c2092684f711.ctex"
+uid="uid://q8og304npj17"
+path="res://.godot/imported/Tourch-1.png-725c85a730fc6605077802284887b207.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Background/Trash.png"
-dest_files=["res://.godot/imported/Trash.png-b76c4a8e7231dce5a7a6c2092684f711.ctex"]
+source_file="res://Art/Menus/Tourch-1.png"
+dest_files=["res://.godot/imported/Tourch-1.png-725c85a730fc6605077802284887b207.ctex"]
 
 [params]
 
