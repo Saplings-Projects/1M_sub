@@ -24,6 +24,13 @@ func init_card(in_card_data: CardBase) -> void:
 			card_cast_type = GlobalEnums.CardCastType.TARGET
 			break
 
+## takes money and increases price of shop removal, should only be used when this is wanted
+func remove_this_from_player_deck_with_price() -> void:
+	ShopManager.remove_card_from_player_deck_with_price(card_data)
+
+## this should be used most of the time we want to take a card from the player
+func remove_this_from_player_deck_without_price() -> void:
+	ShopManager.remove_card_from_player_deck_without_price(card_data)
 
 func _on_phase_changed(new_phase: GlobalEnums.CombatPhase, _old_phase: GlobalEnums.CombatPhase) -> void:
 	# enable clicks on card only if player is in attack phase
