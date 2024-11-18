@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=10 format=3 uid="uid://bsrdu33ukb1ym"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_wynd3"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_cag57"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="3_t1un7"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="4_m8hst"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_mxn24"]
+
+[sub_resource type="Resource" id="Resource_0buo4"]
+script = ExtResource("1_wynd3")
+
+[sub_resource type="Resource" id="Resource_bk02b"]
+script = ExtResource("3_t1un7")
+
+[sub_resource type="Resource" id="Resource_2lb6r"]
+script = ExtResource("2_cag57")
+effect = SubResource("Resource_0buo4")
+value = 1
+targeting_function = SubResource("Resource_bk02b")
+
+[sub_resource type="Resource" id="Resource_1hn6q"]
+script = ExtResource("4_m8hst")
+energy_cost = 2
+
+[resource]
+script = ExtResource("5_mxn24")
+application_type = 0
+card_title = "NULL"
+card_description = "NULL"
+card_effects_data = Array[ExtResource("2_cag57")]([SubResource("Resource_2lb6r")])
+energy_info = SubResource("Resource_1hn6q")

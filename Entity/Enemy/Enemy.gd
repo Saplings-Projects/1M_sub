@@ -5,9 +5,6 @@ class_name Enemy
 ## The name of the enemy, used for display purpose
 @export var enemy_name: GlobalEnums.PossibleEnemies
 
-## The attack set of the enemy
-@export var enemy_attack_tree: EnemyActionTree
-
 ## @Override [br]
 ## See [Entity] for more information [br]
 ## Connect the enemy to the [PhaseManager] to make it attack when it's its turn.

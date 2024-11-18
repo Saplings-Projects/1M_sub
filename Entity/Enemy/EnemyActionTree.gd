@@ -16,9 +16,17 @@ class_name EnemyActionTree extends Resource
 	load("res://Cards/Resource/Card_Get_block.tres"): NextCardProbability.new(100, load("res://Cards/Resource/Card_Damage.tres"))
 }
 
+## The last action that was played
 var last_chosen_action: CardBase = null
 
+## Call to choose the next action given the previous action
 func choose_next_action() -> CardBase:
+	var chosen_action: CardBase = _choose_next_action_inner()
+	last_chosen_action = chosen_action
+	return chosen_action
+
+## The actual choice function, the inner pattern is used to change [last_chosen_action] easily
+func _choose_next_action_inner() -> CardBase:
 	var possible_next_action: Array = action_tree[last_chosen_action]
 	# checking the total of the probabilities
 	var total_probability: int = 0
