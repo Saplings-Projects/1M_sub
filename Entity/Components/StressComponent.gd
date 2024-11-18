@@ -32,6 +32,9 @@ var has_hit_overstress: bool = false
 ## Between 0 and [member StressComponent.max_stress]
 var current_stress: int
 
+## The action to use when the enemy overstress
+@export var overstress_attack: CardBase = null
+
 ## @Override [br]
 ## Initialize the stress component, putting stress to max stress [br]
 ## This does not happen at game start for the player, as only enemies have a stress component [br]
@@ -39,6 +42,9 @@ var current_stress: int
 func _ready() -> void:
 	default_stress = floor(max_stress / 2.)
 	_set_stress(default_stress)
+	if overstress_attack == null:
+		# use default
+		overstress_attack = load("res://Cards/Resource/Enemy/Overstress/Card_EnemyAttackOverstress.tres")
 
 
 ## Used to emit the specific signal for this class [br]
@@ -121,12 +127,5 @@ func on_calmed() -> void:
 
 
 ## Makes the entity execute a powerful attack
-static func on_overstress() -> CardBase:
-	var attack: CardBase = CardBase.new()
-	var basic_effect_data: EffectData = EffectData.new( EffectDamage.new(),
-														null,
-														5,
-														TargetingBase.new())
-	attack.card_effects_data.append(basic_effect_data)
-	attack.application_type = GlobalEnums.ApplicationType.FRIENDLY_ONLY
-	return attack
+func on_overstress() -> CardBase:
+	return overstress_attack

@@ -127,7 +127,7 @@ func _enemy_turn() -> void:
 	# generate list of enemy actions
 	for enemy: Enemy in _enemy_list:
 		var stress_comp: StressComponent = enemy.get_stress_component()
-		var enemy_attack: CardBase = enemy.get_behavior_component().get_attack(stress_comp.has_hit_overstress)
+		var enemy_attack: CardBase = enemy.get_behavior_component().get_attack(stress_comp)
 		
 		var enemy_action: EnemyAction = EnemyAction.new(enemy, enemy_attack, PlayerManager.player)
 		_enemy_action_list.append(enemy_action)

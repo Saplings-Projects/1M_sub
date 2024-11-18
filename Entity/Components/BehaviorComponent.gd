@@ -10,25 +10,12 @@ class_name BehaviorComponent
 @export var attack: CardBase = null
 @export var overstress_attack: CardBase = null
 
-
-## Setup the attack of the enemy [br]
-## This is a basic attack that deals 1 damage to the target [br]
-## @experimental
-## This will change as enemies will need to have more than a single type of move possible (and even different movement depending on the enemy)
-func _ready() -> void:
-	attack = CardBase.new()
-	var basic_effect_data: EffectData = EffectData.new( EffectDamage.new(),
-														null,
-														1,
-														TargetingBase.new())
-	attack.card_effects_data.append(basic_effect_data)
-	attack.application_type = GlobalEnums.ApplicationType.FRIENDLY_ONLY
-	
-	overstress_attack = StressComponent.on_overstress()
+## The attack set of the enemy
+@export var enemy_attack_tree: EnemyActionTree
 	
 	
-func get_attack(has_hit_overstress: bool) -> CardBase:
-	if has_hit_overstress:
-		return overstress_attack
+func get_attack(stress_component: StressComponent) -> CardBase:
+	if stress_component.has_hit_overstress:
+		return stress_component.on_overstress()
 	else:
-		return attack
+		return enemy_attack_tree.choose_next_action()
