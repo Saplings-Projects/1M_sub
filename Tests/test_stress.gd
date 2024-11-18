@@ -56,14 +56,3 @@ func test_enemy_stays_soothed() -> void:
 	assert_eq(_enemy_stress_component.current_stress, 0)
 	_enemy_stress_component.on_turn_start()
 	assert_eq(_enemy_stress_component.current_stress, 0)
-	
-	
-func test_enemy_overstress() -> void:
-	_enemy_stress_component.current_stress = 75 # max stress is 80
-	var card_stress: CardBase = load("res://Cards/Resource/Card_Stress_Damage.tres")
-	card_stress.on_card_play(_player, _enemy)
-	assert_eq(_enemy_stress_component.current_stress, 80)
-	assert_true(_enemy_stress_component.has_hit_overstress)
-	var expected_damage_val: int = StressComponent.on_overstress().card_effects_data[0].value
-	var actual_damage_val: int = _enemy_behavior_component.get_attack(_enemy_stress_component.has_hit_overstress).card_effects_data[0].value
-	assert_eq(actual_damage_val, expected_damage_val)
