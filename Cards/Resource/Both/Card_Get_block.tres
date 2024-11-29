@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectAddBlock.gd" id="1_2ga3f"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_f1j0k"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_up8rw"]
-[ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="3_hmcm7"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetSelf.gd" id="3_c28ln"]
 
 [sub_resource type="Resource" id="Resource_1hvmi"]
 script = ExtResource("1_2ga3f")
 
-[sub_resource type="Resource" id="Resource_frq70"]
-script = ExtResource("3_hmcm7")
+[sub_resource type="Resource" id="Resource_0jk1u"]
+script = ExtResource("3_c28ln")
 
 [sub_resource type="Resource" id="Resource_4tqh2"]
 script = ExtResource("2_up8rw")
 effect = SubResource("Resource_1hvmi")
 value = 5
-targeting_function = SubResource("Resource_frq70")
+targeting_function = SubResource("Resource_0jk1u")
 
 [resource]
 script = ExtResource("1_f1j0k")
