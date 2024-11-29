@@ -14,5 +14,5 @@ func _init() -> void:
 ## @Override [br]
 ## See [TargetingBase] for more information [br]
 @warning_ignore("unused_parameter")
-func generate_target_list(targeted_entity: Entity) -> Array[Entity]:
+func generate_target_list(caster: Entity, targeted_entity: Entity) -> Array[Entity]:
 	return EnemyManager.current_enemy_group.enemy_list 

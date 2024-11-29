@@ -19,5 +19,6 @@ func _init() -> void:
 ## Generate the list of entities that are targeted by the effect [br]
 ## The default implementation of the targeting is to return the targeted entity, but there can be a lot more types of possible targeting. [br]
 ## Other types of targeting are defined by children class that override the functions of this class [br]
-func generate_target_list(targeted_entity: Entity) -> Array[Entity]:
+@warning_ignore("unused_parameter")
+func generate_target_list(caster: Entity, targeted_entity: Entity) -> Array[Entity]:
 	return [targeted_entity]
