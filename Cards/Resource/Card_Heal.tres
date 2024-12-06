@@ -26,6 +26,7 @@ energy_cost = 2
 script = ExtResource("1_y1itd")
 application_type = 0
 card_title = "Heal"
+card_type = 0
 card_description = "Heal 1 damage"
 card_effects_data = Array[ExtResource("2_y7dlo")]([SubResource("Resource_mabur")])
 energy_info = SubResource("Resource_1hn6q")

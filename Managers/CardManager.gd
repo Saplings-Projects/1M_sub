@@ -15,7 +15,7 @@ var disable_card_animations: bool = false
 
 
 func _ready() -> void:
-	default_deck = load("res://Cards/CardSets/DefaultDeck.tres")
+	default_deck = load("res://Cards/CardSets/CardArtTest.tres")
 	_initialize_deck()
 
 

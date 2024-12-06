@@ -17,8 +17,6 @@ func init_card(in_card_data: CardBase) -> void:
 	card_data = in_card_data
 	on_card_data_initialized.emit(card_data)
 	
-	card_cast_type = GlobalEnums.CardCastType.INSTA_CAST
-	
 	for effectData : EffectData in card_data.card_effects_data:
 		if(effectData.targeting_function.cast_type == GlobalEnums.CardCastType.TARGET):
 			card_cast_type = GlobalEnums.CardCastType.TARGET

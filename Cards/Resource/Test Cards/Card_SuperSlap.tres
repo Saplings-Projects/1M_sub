@@ -34,5 +34,6 @@ animation_data = SubResource("Resource_uhx7l")
 script = ExtResource("7_hdjv3")
 application_type = 1
 card_title = "Super Slap"
+card_type = 0
 card_description = "Deal 2 damage to all targets."
 card_effects_data = Array[ExtResource("5_ipfy3")]([SubResource("Resource_5b3is")])

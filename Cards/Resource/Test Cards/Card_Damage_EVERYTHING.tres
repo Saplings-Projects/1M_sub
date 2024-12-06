@@ -26,6 +26,7 @@ energy_cost = 2
 script = ExtResource("1_lia0m")
 application_type = 2
 card_title = "Damage EVERYTHING"
+card_type = 0
 card_description = "Deal 10 to EVERYTHING"
 card_effects_data = Array[ExtResource("2_581pa")]([SubResource("Resource_4ktkc")])
 energy_info = SubResource("Resource_fw3pq")

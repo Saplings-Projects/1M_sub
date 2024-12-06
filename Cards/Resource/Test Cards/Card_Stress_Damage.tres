@@ -40,6 +40,7 @@ energy_cost = 1
 script = ExtResource("7_mwudb")
 application_type = 1
 card_title = "Stress damage"
+card_type = 0
 card_description = "Inflict 10 damage to all enemies and stress the targeted enemy by 10"
 card_effects_data = Array[ExtResource("2_qpe8d")]([SubResource("Resource_erfad"), SubResource("Resource_l78bb")])
 energy_info = SubResource("Resource_j3owp")

@@ -11,6 +11,7 @@ energy_cost = 2
 script = ExtResource("1_5s3qc")
 application_type = 1
 card_title = "NULL"
+card_type = 0
 card_description = "NULL"
 card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
 energy_info = SubResource("Resource_1hn6q")

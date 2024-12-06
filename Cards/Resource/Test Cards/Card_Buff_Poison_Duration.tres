@@ -43,6 +43,7 @@ energy_cost = 1
 script = ExtResource("5_n2tug")
 application_type = 0
 card_title = "Buff poison duration"
+card_type = 0
 card_description = "Add 2 to the duration of poison applied by targeted entity for 6 turns"
 card_effects_data = Array[ExtResource("4_y13fe")]([SubResource("Resource_chqbm")])
 energy_info = SubResource("Resource_noiey")

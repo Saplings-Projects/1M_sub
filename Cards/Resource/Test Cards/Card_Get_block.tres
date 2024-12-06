@@ -21,5 +21,6 @@ targeting_function = SubResource("Resource_frq70")
 script = ExtResource("1_f1j0k")
 application_type = 0
 card_title = "Get Block"
+card_type = 0
 card_description = "Get 5 Block"
 card_effects_data = Array[ExtResource("2_up8rw")]([SubResource("Resource_4tqh2")])

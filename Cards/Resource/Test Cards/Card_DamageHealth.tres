@@ -26,6 +26,7 @@ energy_cost = 1
 script = ExtResource("3_bkc3b")
 application_type = 1
 card_title = "Damage Health"
+card_type = 0
 card_description = "Deals damage equal to health lost"
 card_effects_data = Array[ExtResource("2_v2ps8")]([SubResource("Resource_ggt87")])
 energy_info = SubResource("Resource_noiey")
