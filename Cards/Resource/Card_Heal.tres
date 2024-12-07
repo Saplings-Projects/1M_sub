@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=10 format=3 uid="uid://d12g33rc6c3u5"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=11 format=3 uid="uid://d12g33rc6c3u5"]
 
 [ext_resource type="Script" path="res://Cards/Effects/EffectHeal.gd" id="1_lmpwp"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_y1itd"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_y7dlo"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="3_ctdsn"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="3_ufppv"]
+[ext_resource type="Texture2D" uid="uid://ceex1yybqmow" path="res://Art/Card_art/Ara-Ara-Ryussei.png" id="4_g5b4a"]
 
 [sub_resource type="Resource" id="Resource_8ubmy"]
 script = ExtResource("1_lmpwp")
@@ -26,7 +27,10 @@ energy_cost = 2
 script = ExtResource("1_y1itd")
 application_type = 0
 card_title = "Heal"
+card_key_art = ExtResource("4_g5b4a")
 card_type = 0
+card_cast_type = 1
 card_description = "Heal 1 damage"
+card_artist_name = "NULL"
 card_effects_data = Array[ExtResource("2_y7dlo")]([SubResource("Resource_mabur")])
 energy_info = SubResource("Resource_1hn6q")

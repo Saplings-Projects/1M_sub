@@ -43,5 +43,6 @@ card_title = "Sweep"
 card_key_art = ExtResource("7_0nrhs")
 card_type = 0
 card_description = "Deal small damage to all enemies."
+card_artist_name = "Wombat Wobbles"
 card_effects_data = Array[ExtResource("5_vpt48")]([SubResource("Resource_o7fub")])
 energy_info = SubResource("Resource_1b3h2")

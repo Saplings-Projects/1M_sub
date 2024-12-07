@@ -40,6 +40,10 @@ func _on_card_initialized(in_card_data: CardBase) -> void:
 	
 	var energy_label: Label = card_ui.get_node("Energy")
 	energy_label.text = "E: " + str(in_card_data.energy_info.energy_cost)
+	
+	var author_label: Label = card_ui.get_node("Artist")
+	author_label.text = "Art by: " + str(in_card_data.card_artist_name)
+	
 	if in_card_data.card_key_art:
 		key_art.texture = in_card_data.card_key_art
 	else:

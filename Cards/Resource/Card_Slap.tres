@@ -43,5 +43,6 @@ card_title = "Slap"
 card_key_art = ExtResource("7_l4uwj")
 card_type = 0
 card_description = "Deal small damage."
+card_artist_name = "Qworty_Warrior"
 card_effects_data = Array[ExtResource("5_n1vj7")]([SubResource("Resource_5b3is")])
 energy_info = SubResource("Resource_kckbn")

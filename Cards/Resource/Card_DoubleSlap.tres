@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_3xx6g"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_qnpt1"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="6_w8hw4"]
-[ext_resource type="Texture2D" uid="uid://5krqial3puhf" path="res://Art/Card_art/Double_Slap-Makai.png" id="7_el78u"]
+[ext_resource type="Texture2D" uid="uid://dcshd0d2qnen4" path="res://Art/Card_art/Double_Slap-Makai.png" id="7_el78u"]
 
 [sub_resource type="Resource" id="Resource_ya0yf"]
 script = ExtResource("2_1g03o")
@@ -38,4 +38,5 @@ card_title = "Double Slap"
 card_key_art = ExtResource("7_el78u")
 card_type = 0
 card_description = "Deal small damage twice."
+card_artist_name = "Makai"
 card_effects_data = Array[ExtResource("5_qnpt1")]([SubResource("Resource_glf0q"), SubResource("Resource_glf0q")])

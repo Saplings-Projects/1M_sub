@@ -7,7 +7,7 @@ class_name CardWorld
 signal on_card_data_initialized(card_data: CardBase)
 
 var card_data: CardBase = null
-var card_cast_type : GlobalEnums.CardCastType
+var card_cast_type : GlobalEnums.CardCastType = GlobalEnums.CardCastType.INSTA_CAST
 
 func _ready() -> void:
 	PhaseManager.on_combat_phase_changed.connect(_on_phase_changed)

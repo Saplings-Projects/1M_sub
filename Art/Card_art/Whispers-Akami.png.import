@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk8x6lew3blic"
-path="res://.godot/imported/Broom-Iyzeekiil.png-1353dba2acbf4514574e2da12ba639c0.ctex"
+uid="uid://bqhc00t1xhhet"
+path="res://.godot/imported/Whispers-Akami.png-a177486086293389fd205f93684db4cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Broom-Iyzeekiil.png"
-dest_files=["res://.godot/imported/Broom-Iyzeekiil.png-1353dba2acbf4514574e2da12ba639c0.ctex"]
+source_file="res://Art/Card_art/Whispers-Akami.png"
+dest_files=["res://.godot/imported/Whispers-Akami.png-a177486086293389fd205f93684db4cd.ctex"]
 
 [params]
 

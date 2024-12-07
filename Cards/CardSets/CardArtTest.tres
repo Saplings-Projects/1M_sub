@@ -1,14 +1,19 @@
-[gd_resource type="Resource" script_class="CardSetBase" load_steps=9 format=3 uid="uid://dgcxa6ohm5o80"]
+[gd_resource type="Resource" script_class="CardSetBase" load_steps=14 format=3 uid="uid://dgcxa6ohm5o80"]
 
 [ext_resource type="Script" path="res://Cards/CardSetBase.gd" id="1_1a7v4"]
 [ext_resource type="Resource" uid="uid://c8kpsky7tt3yq" path="res://Cards/Resource/Card_Banana.tres" id="1_hq3yg"]
 [ext_resource type="Resource" uid="uid://vydmm1p103mg" path="res://Cards/Resource/Card_Sweep.tres" id="2_rigu4"]
-[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="3_0i2mg"]
 [ext_resource type="Resource" uid="uid://dans622owjixj" path="res://Cards/Resource/Card_Slap.tres" id="4_bjebw"]
 [ext_resource type="Resource" uid="uid://qxm7k4pr54m2" path="res://Cards/Resource/Card_AraAra.tres" id="5_i37bd"]
 [ext_resource type="Resource" uid="uid://j12dgeub7ix4" path="res://Cards/Resource/Card_DoubleSlap.tres" id="6_yc6bh"]
 [ext_resource type="Resource" uid="uid://cmhwcuf1ef634" path="res://Cards/Resource/Card_Broom.tres" id="7_kdtr8"]
+[ext_resource type="Resource" uid="uid://cndn68ie86usa" path="res://Cards/Resource/Card_Uuuuu.tres" id="8_018w3"]
+[ext_resource type="Resource" uid="uid://t4pfpsparcir" path="res://Cards/Resource/Card_Whispers.tres" id="9_67g1d"]
+[ext_resource type="Resource" uid="uid://3wswcvpmk8s2" path="res://Cards/Resource/Card_Wrench.tres" id="9_vry63"]
+[ext_resource type="Resource" uid="uid://bqtlo8flqqwdl" path="res://Cards/Resource/Card_MicBonk.tres" id="10_8athf"]
+[ext_resource type="Resource" uid="uid://cxk0880vdngpf" path="res://Cards/Resource/Card_Sneeze.tres" id="11_4u3id"]
+[ext_resource type="Resource" uid="uid://po6k4vvaiqfp" path="res://Cards/Resource/Card_Wink.tres" id="12_otcqx"]
 
 [resource]
 script = ExtResource("1_1a7v4")
-card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("1_hq3yg"), ExtResource("2_rigu4"), ExtResource("3_0i2mg"), ExtResource("4_bjebw"), ExtResource("5_i37bd"), ExtResource("6_yc6bh"), ExtResource("7_kdtr8")])
+card_set = Array[Resource("res://Cards/CardBase.gd")]([ExtResource("12_otcqx"), ExtResource("5_i37bd"), ExtResource("1_hq3yg"), ExtResource("7_kdtr8"), ExtResource("6_yc6bh"), ExtResource("10_8athf"), ExtResource("4_bjebw"), ExtResource("11_4u3id"), ExtResource("2_rigu4"), ExtResource("8_018w3"), ExtResource("9_67g1d"), ExtResource("9_vry63")])

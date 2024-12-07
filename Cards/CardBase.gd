@@ -29,6 +29,9 @@ class_name CardBase
 ## The description of the card
 @export var card_description: String = "NULL"
 
+## Name of the artist that made the card art
+@export var card_artist_name: String = "NULL"
+
 ## A list of the effects that the card will apply when played [br]
 ## Effect data is not purely the effect, it also contains information about targets among other things, see [EffectData]
 @export var card_effects_data: Array[EffectData] = []

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://caxbd2ppk3ans"]
+[gd_scene load_steps=13 format=3 uid="uid://caxbd2ppk3ans"]
 
 [ext_resource type="Script" path="res://Cards/CardWorld.gd" id="1_4el5m"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="3_du4nn"]
@@ -9,6 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://ctuwyu04bxqjc" path="res://Art/Card_layout/card_power_border.png" id="7_l4ic7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ooxvf"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sfsg0"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4g8pf"]
+font_size = 12
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_87106"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_satev"]
 font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Control"]
@@ -26,13 +39,15 @@ time_to_lock_hover = 0.3
 script = ExtResource("6_qvt2l")
 
 [node name="KeyArt" type="TextureRect" parent="."]
+texture_filter = 4
 layout_mode = 2
-offset_left = -112.875
-offset_top = -180.88
-offset_right = 119.255
-offset_bottom = -36.835
+offset_left = -113.0
+offset_top = -179.0
+offset_right = 117.0
+offset_bottom = -31.0
 mouse_filter = 2
 expand_mode = 2
+stretch_mode = 5
 
 [node name="CardUI" type="Control" parent="." node_paths=PackedStringArray("key_art", "attack_ui", "skill_ui", "power_ui")]
 anchors_preset = 0
@@ -89,29 +104,18 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="CardUI/AttackUI"]
-custom_minimum_size = Vector2(188, 127)
+custom_minimum_size = Vector2(188, 100)
 layout_direction = 1
 layout_mode = 2
 offset_left = 53.0
-offset_top = 234.0
+offset_top = 234.1
 offset_right = 241.0
-offset_bottom = 361.0
-text = "This is a test description for a card. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+offset_bottom = 334.1
+text = "This is a test description for a card."
 label_settings = SubResource("LabelSettings_ooxvf")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="VerticalLayout" type="VBoxContainer" parent="CardUI/AttackUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="Energy" type="Label" parent="CardUI/AttackUI"]
 layout_mode = 0
@@ -119,6 +123,17 @@ offset_left = 45.0
 offset_top = 46.0
 offset_right = 85.0
 offset_bottom = 69.0
+text = "E:0"
+label_settings = SubResource("LabelSettings_sfsg0")
+
+[node name="Artist" type="Label" parent="CardUI/AttackUI"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 354.0
+offset_right = 108.0
+offset_bottom = 371.0
+text = "Author"
+label_settings = SubResource("LabelSettings_4g8pf")
 
 [node name="SkillUI" type="Control" parent="CardUI"]
 visible = false
@@ -165,29 +180,18 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="CardUI/SkillUI"]
-custom_minimum_size = Vector2(188, 127)
+custom_minimum_size = Vector2(188, 100)
 layout_direction = 1
 layout_mode = 2
 offset_left = 46.0
-offset_top = 222.0
+offset_top = 229.0
 offset_right = 234.0
-offset_bottom = 349.0
-text = "This is a test description for a card. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+offset_bottom = 330.0
+text = "This is a test description for a card. Lorem ipsum dolor sit amet"
 label_settings = SubResource("LabelSettings_ooxvf")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="VerticalLayout" type="VBoxContainer" parent="CardUI/SkillUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="Energy" type="Label" parent="CardUI/SkillUI"]
 layout_mode = 0
@@ -195,6 +199,15 @@ offset_left = 61.0
 offset_top = 34.0
 offset_right = 101.0
 offset_bottom = 57.0
+label_settings = SubResource("LabelSettings_87106")
+
+[node name="Artist" type="Label" parent="CardUI/SkillUI"]
+offset_left = 49.0
+offset_top = 347.0
+offset_right = 103.0
+offset_bottom = 364.0
+text = "Author"
+label_settings = SubResource("LabelSettings_4g8pf")
 
 [node name="PowerUI" type="Control" parent="CardUI"]
 visible = false
@@ -241,29 +254,18 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="CardUI/PowerUI"]
-custom_minimum_size = Vector2(188, 127)
+custom_minimum_size = Vector2(188, 100)
 layout_direction = 1
 layout_mode = 2
 offset_left = 51.0
-offset_top = 229.0
+offset_top = 228.0
 offset_right = 239.0
-offset_bottom = 356.0
-text = "This is a test description for a card. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+offset_bottom = 329.0
+text = "This is a test description for a card. Lorem ipsum dolor sit amet"
 label_settings = SubResource("LabelSettings_ooxvf")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="VerticalLayout" type="VBoxContainer" parent="CardUI/PowerUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -14.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="Energy" type="Label" parent="CardUI/PowerUI"]
 layout_mode = 0
@@ -271,6 +273,15 @@ offset_left = 65.0
 offset_top = 40.0
 offset_right = 105.0
 offset_bottom = 63.0
+label_settings = SubResource("LabelSettings_satev")
+
+[node name="Artist" type="Label" parent="CardUI/PowerUI"]
+offset_left = 52.0
+offset_top = 346.0
+offset_right = 106.0
+offset_bottom = 363.0
+text = "Author"
+label_settings = SubResource("LabelSettings_4g8pf")
 
 [connection signal="gui_input" from="CardUI/AttackUI/SelectionButton" to="ClickHandler" method="_on_gui_input_event"]
 [connection signal="mouse_entered" from="CardUI/AttackUI/SelectionButton" to="ClickHandler" method="_on_mouse_entered"]

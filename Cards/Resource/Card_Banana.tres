@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=23 format=3 uid="uid://c8kpsky7tt3yq"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=22 format=3 uid="uid://c8kpsky7tt3yq"]
 
 [ext_resource type="PackedScene" uid="uid://dicabrkoa6bvl" path="res://Cards/Animation/Scene/Anim_Banana.tscn" id="1_ggtdb"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_Caster.gd" id="2_ntgql"]
@@ -7,11 +7,10 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_gk4p6"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetRandomEnemies.gd" id="6_cjttu"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="7_curxv"]
-[ext_resource type="Texture2D" uid="uid://jgq42k5yjy11" path="res://Art/Card_art/Banana-JamGates.png" id="7_v6ri6"]
+[ext_resource type="Texture2D" uid="uid://d3m067dbr54t3" path="res://Art/Card_art/Banana-JamGates.png" id="7_v6ri6"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="7_wyv0k"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Vulnerability.gd" id="8_peypb"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="9_2683w"]
-[ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="9_enfei"]
 
 [sub_resource type="Resource" id="Resource_hxttn"]
 script = ExtResource("2_ntgql")
@@ -54,14 +53,15 @@ status_modifier_base_value = SubResource("Resource_wnq5j")
 script = ExtResource("7_curxv")
 status_to_apply = SubResource("Resource_7ocbr")
 
-[sub_resource type="Resource" id="Resource_usa8p"]
-script = ExtResource("9_enfei")
+[sub_resource type="Resource" id="Resource_g7lah"]
+script = ExtResource("6_cjttu")
+number_of_targets = 1
 
 [sub_resource type="Resource" id="Resource_jaknt"]
 script = ExtResource("5_gk4p6")
 effect = SubResource("Resource_geh6e")
 value = 0
-targeting_function = SubResource("Resource_usa8p")
+targeting_function = SubResource("Resource_g7lah")
 
 [resource]
 script = ExtResource("7_wyv0k")
@@ -69,5 +69,7 @@ application_type = 1
 card_title = "Banana"
 card_key_art = ExtResource("7_v6ri6")
 card_type = 0
+card_cast_type = 0
 card_description = "Deal small damage and inflict Distracted"
+card_artist_name = "JamGates"
 card_effects_data = Array[ExtResource("5_gk4p6")]([SubResource("Resource_5b3is"), SubResource("Resource_jaknt")])

@@ -62,5 +62,6 @@ application_type = 1
 card_title = "Damage and poison"
 card_type = 0
 card_description = "Deals 1 damage and applies 2 poison"
+card_artist_name = "NULL"
 card_effects_data = Array[ExtResource("2_13rlh")]([SubResource("Resource_73uy7"), SubResource("Resource_tmm5r")])
 energy_info = SubResource("Resource_noiey")

@@ -30,5 +30,7 @@ targeting_function = SubResource("Resource_j8krj")
 script = ExtResource("5_r13bp")
 application_type = 1
 card_title = "Random poison"
+card_type = 0
 card_description = "Apply poison randomly 3 times"
+card_artist_name = "NULL"
 card_effects_data = Array[ExtResource("3_67010")]([SubResource("Resource_hpkt0")])
