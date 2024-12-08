@@ -69,7 +69,6 @@ application_type = 1
 card_title = "Banana"
 card_key_art = ExtResource("7_v6ri6")
 card_type = 0
-card_cast_type = 0
 card_description = "Deal small damage and inflict Distracted"
 card_artist_name = "JamGates"
 card_effects_data = Array[ExtResource("5_gk4p6")]([SubResource("Resource_5b3is"), SubResource("Resource_jaknt")])

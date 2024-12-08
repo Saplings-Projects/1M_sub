@@ -29,7 +29,6 @@ application_type = 1
 card_title = "Ara-Ara"
 card_key_art = ExtResource("4_clb3t")
 card_type = 1
-card_cast_type = 0
 card_description = "Deal medium Soothe twice."
 card_artist_name = "Ryussei"
 card_effects_data = Array[ExtResource("2_v5swq")]([SubResource("Resource_105p5"), SubResource("Resource_105p5")])

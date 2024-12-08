@@ -13,5 +13,6 @@ application_type = 1
 card_title = "NULL"
 card_type = 0
 card_description = "NULL"
+card_artist_name = "NULL"
 card_effects_data = Array[Resource("res://Cards/Effects/EffectData.gd")]([])
 energy_info = SubResource("Resource_1hn6q")

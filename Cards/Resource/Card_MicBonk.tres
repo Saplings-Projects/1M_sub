@@ -38,7 +38,6 @@ application_type = 2
 card_title = "Mic Bonk"
 card_key_art = ExtResource("1_5b2o6")
 card_type = 1
-card_cast_type = 1
 card_description = "Deal small damage to self. Deal Soothe to all enemies."
 card_artist_name = "wizstays"
 card_effects_data = Array[ExtResource("2_4xmy4")]([SubResource("Resource_vh773"), SubResource("Resource_3assf")])
