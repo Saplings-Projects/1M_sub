@@ -169,3 +169,9 @@ enum PossibleEnemies {
 	o_beehive,
 	the_berts,
 }
+
+enum CardType {
+	ATTACK,
+	SKILL,
+	POWER
+}
