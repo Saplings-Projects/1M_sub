@@ -6,8 +6,7 @@ var consumable : Consumable
 
 
 func _ready() -> void:
-	var rand : RandomNumberGenerator = RandomNumberGenerator.new()
-	consumable = ShopManager.shop_consumable_pool[rand.randi_range(0, ShopManager.shop_consumable_pool.size() - 1)]
+	consumable = ShopManager.shop_consumable_pool[RandomGenerator.get_random_int(0, ShopManager.shop_consumable_pool.size() - 1)]
 	
 	
 	consumableImage.texture_normal = load(consumable.image_path)

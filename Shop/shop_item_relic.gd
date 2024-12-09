@@ -5,8 +5,7 @@ var relic : Relic
 @export var clickHandler : ClickHandler
 
 func _ready() -> void:
-	var rand : RandomNumberGenerator = RandomNumberGenerator.new()
-	relic = ShopManager.shop_relic_pool[rand.randi_range(0, ShopManager.shop_relic_pool.size() - 1)]
+	relic = ShopManager.shop_relic_pool[RandomGenerator.get_random_int(0, ShopManager.shop_relic_pool.size() - 1)]
 	
 	relicImage.texture_normal = load(relic.sprite_path)
 	clickHandler.on_click.connect(on_shop_item_clicked)
