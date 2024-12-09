@@ -26,6 +26,9 @@ func init_card(in_card_data: CardBase) -> void:
 
 ## takes money and increases price of shop removal, should only be used when this is wanted
 func remove_this_from_player_deck_with_price() -> void:
+	if(!InventoryManager.gold_component.can_afford(ShopManager.card_removal_price)):
+		return
+	
 	ShopManager.remove_card_from_player_deck_with_price(card_data)
 
 ## this should be used most of the time we want to take a card from the player

@@ -16,6 +16,9 @@ func increase_removal_price() -> void:
 ## Removes given card, takes money, and increases shop prices. Should only be used by the shop removal[br]
 ## or potentionaly a specific event
 func remove_card_from_player_deck_with_price(card : CardBase) -> void:
+	if(!InventoryManager.gold_component.can_afford(ShopManager.card_removal_price)):
+		return
+	
 	CardManager.current_deck.erase(card)
 	InventoryManager.gold_component.lose_gold(card_removal_price)
 	increase_removal_price()
