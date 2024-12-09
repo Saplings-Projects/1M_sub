@@ -30,26 +30,26 @@ text = "Return"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
-offset_left = 334.0
-offset_top = 279.0
-offset_right = 1434.0
-offset_bottom = 694.0
+offset_left = 266.0
+offset_top = 94.0
+offset_right = 1766.0
+offset_bottom = 909.0
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(186.475, 200)
+custom_minimum_size = Vector2(500, 700)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 200
-theme_override_constants/v_separation = 300
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 35
+theme_override_constants/v_separation = 15
 columns = 4
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 842.0
-offset_top = 717.0
-offset_right = 1085.0
-offset_bottom = 775.0
+offset_left = 900.0
+offset_top = 923.0
+offset_right = 1143.0
+offset_bottom = 981.0
 text = "Showing "
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

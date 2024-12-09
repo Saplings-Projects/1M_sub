@@ -8,10 +8,11 @@ var cardworld: CardWorld = null
 var cardui: Control = null
 var key_art: Control = null
 
-const KEY_ART_SCALE: Vector2 = Vector2(.7, .7)
-const CARD_SCALE: Vector2 = Vector2(.1, .7)
+const KEY_ART_SCALE: Vector2 = Vector2(1, 1)
+const CARD_SCALE: Vector2 = Vector2(1, 1)
 const CARDUI_INDEX: int = 2
-const CARDUI_POS: Vector2 = Vector2(150,200)
+const CARDUI_POS: Vector2 = Vector2(150,275)
+const KEYART_UI_OFFSET: Vector2 = Vector2(50, 130)
 const SIZE_OFFSET: Vector2 = Vector2(10,10)
 
 #deletes the root node CardScrollUI with the on screen button
@@ -51,10 +52,10 @@ func populate(parent_name: String) -> void:
 		
 		#cardui.scale = CARD_SCALE
 		#cardui.anchors_preset = CORNER_TOP_LEFT
-		cardui.position = CARDUI_POS
+		#cardui.position = CARDUI_POS
 		
 		#key_art.scale = KEY_ART_SCALE
-		key_art.position = cardui.position - Vector2(80, 130)
+		#key_art.position = cardui.position - Vector2(50, 130)
 
 		$ScrollContainer/GridContainer.add_child(cardworld)
 		

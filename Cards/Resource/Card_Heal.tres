@@ -29,7 +29,6 @@ application_type = 0
 card_title = "Heal"
 card_key_art = ExtResource("4_g5b4a")
 card_type = 0
-card_cast_type = 1
 card_description = "Heal 1 damage"
 card_artist_name = "NULL"
 card_effects_data = Array[ExtResource("2_y7dlo")]([SubResource("Resource_mabur")])
