@@ -19,3 +19,6 @@ const DEBUG_ACTIVE_INVENTORY_DEBUG_BUTTONS : bool = false
 ## Temporary debug option to print the number of each generated event type [br]
 ## TO BE REMOVED after implmentation
 const DEBUG_PRINT_EVENT_COUNT : bool = false
+
+## Makes player start with a lot of gold
+const DEBUG_START_WITH_A_LOT_OF_GOLD : bool = false
