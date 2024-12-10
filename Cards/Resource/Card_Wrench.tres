@@ -18,7 +18,7 @@ script = ExtResource("3_whtgc")
 [sub_resource type="Resource" id="Resource_e0b3t"]
 script = ExtResource("2_0qlp0")
 effect = SubResource("Resource_s0kkh")
-value = 10
+value = 6
 targeting_function = SubResource("Resource_nrjwh")
 
 [sub_resource type="Resource" id="Resource_2mgb4"]
@@ -54,6 +54,6 @@ application_type = 1
 card_title = "Wrench"
 card_key_art = ExtResource("7_tf8vf")
 card_type = 0
-card_description = "Deal medium damage and inflict Sapped."
+card_description = "Deal 6 damage and inflict Sapped"
 card_artist_name = "FalseIndigo"
 card_effects_data = Array[ExtResource("2_0qlp0")]([SubResource("Resource_e0b3t"), SubResource("Resource_bk18n")])

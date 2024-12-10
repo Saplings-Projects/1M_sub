@@ -25,7 +25,7 @@ font_color = Color(0, 0, 0, 1)
 font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Control"]
-custom_minimum_size = Vector2(320, 400)
+custom_minimum_size = Vector2(350, 470)
 layout_mode = 3
 anchors_preset = 0
 offset_left = -84.0
@@ -124,10 +124,10 @@ autowrap_mode = 2
 
 [node name="Energy" type="Label" parent="CardUI/AttackUI"]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 46.0
-offset_right = 85.0
-offset_bottom = 69.0
+offset_left = 49.0
+offset_top = 216.0
+offset_right = 89.0
+offset_bottom = 239.0
 text = "E:0"
 label_settings = SubResource("LabelSettings_sfsg0")
 
@@ -200,10 +200,10 @@ autowrap_mode = 2
 
 [node name="Energy" type="Label" parent="CardUI/SkillUI"]
 layout_mode = 0
-offset_left = 61.0
-offset_top = 34.0
-offset_right = 101.0
-offset_bottom = 57.0
+offset_left = 34.0
+offset_top = 212.0
+offset_right = 74.0
+offset_bottom = 235.0
 label_settings = SubResource("LabelSettings_87106")
 
 [node name="Artist" type="Label" parent="CardUI/SkillUI"]

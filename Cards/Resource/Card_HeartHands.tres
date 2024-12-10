@@ -16,7 +16,7 @@ script = ExtResource("3_w54vk")
 [sub_resource type="Resource" id="Resource_xywky"]
 script = ExtResource("2_q8mlq")
 effect = SubResource("Resource_ust4n")
-value = 15
+value = 8
 targeting_function = SubResource("Resource_hjt2o")
 
 [sub_resource type="Resource" id="Resource_nnnc5"]
@@ -29,7 +29,7 @@ application_type = 1
 card_title = "Heart Hands"
 card_key_art = ExtResource("4_4gu7g")
 card_type = 1
-card_description = "Deal heavy Soothe."
+card_description = "Deal 8 Soothe."
 card_artist_name = "Neid"
 card_effects_data = Array[ExtResource("2_q8mlq")]([SubResource("Resource_xywky")])
 energy_info = SubResource("Resource_nnnc5")

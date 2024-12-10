@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardBase" load_steps=22 format=3 uid="uid://c8kpsky7tt3yq"]
+[gd_resource type="Resource" script_class="CardBase" load_steps=24 format=3 uid="uid://c8kpsky7tt3yq"]
 
 [ext_resource type="PackedScene" uid="uid://dicabrkoa6bvl" path="res://Cards/Animation/Scene/Anim_Banana.tscn" id="1_ggtdb"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_Caster.gd" id="2_ntgql"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="7_wyv0k"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Vulnerability.gd" id="8_peypb"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="9_2683w"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="11_bdxdq"]
 
 [sub_resource type="Resource" id="Resource_hxttn"]
 script = ExtResource("2_ntgql")
@@ -31,7 +32,7 @@ number_of_targets = 1
 [sub_resource type="Resource" id="Resource_5b3is"]
 script = ExtResource("5_gk4p6")
 effect = SubResource("Resource_hsf7j")
-value = 5
+value = 2
 targeting_function = SubResource("Resource_tdk2b")
 animation_data = SubResource("Resource_uhx7l")
 
@@ -63,12 +64,17 @@ effect = SubResource("Resource_geh6e")
 value = 0
 targeting_function = SubResource("Resource_g7lah")
 
+[sub_resource type="Resource" id="Resource_7f5w1"]
+script = ExtResource("11_bdxdq")
+energy_cost = 1
+
 [resource]
 script = ExtResource("7_wyv0k")
 application_type = 1
 card_title = "Banana"
 card_key_art = ExtResource("7_v6ri6")
 card_type = 0
-card_description = "Deal small damage and inflict Distracted"
+card_description = "Deal 2 damage and inflict Distracted."
 card_artist_name = "JamGates"
 card_effects_data = Array[ExtResource("5_gk4p6")]([SubResource("Resource_5b3is"), SubResource("Resource_jaknt")])
+energy_info = SubResource("Resource_7f5w1")

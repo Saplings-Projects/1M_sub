@@ -28,13 +28,13 @@ script = ExtResource("6_psgfr")
 [sub_resource type="Resource" id="Resource_o7fub"]
 script = ExtResource("5_vpt48")
 effect = SubResource("Resource_o3g2m")
-value = 5
+value = 6
 targeting_function = SubResource("Resource_hgr8v")
 animation_data = SubResource("Resource_hig8o")
 
 [sub_resource type="Resource" id="Resource_1b3h2"]
 script = ExtResource("8_s7t2e")
-energy_cost = 2
+energy_cost = 3
 
 [resource]
 script = ExtResource("8_nfy04")
@@ -42,7 +42,7 @@ application_type = 1
 card_title = "Sweep"
 card_key_art = ExtResource("7_0nrhs")
 card_type = 0
-card_description = "Deal small damage to all enemies."
+card_description = "Deal 6 damage to all enemies."
 card_artist_name = "Wombat Wobbles"
 card_effects_data = Array[ExtResource("5_vpt48")]([SubResource("Resource_o7fub")])
 energy_info = SubResource("Resource_1b3h2")

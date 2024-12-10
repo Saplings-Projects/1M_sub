@@ -50,7 +50,7 @@ script = ExtResource("3_wo44d")
 [sub_resource type="Resource" id="Resource_sepdk"]
 script = ExtResource("2_pp84o")
 effect = SubResource("Resource_5xlth")
-value = 5
+value = 2
 targeting_function = SubResource("Resource_4t3av")
 
 [sub_resource type="Resource" id="Resource_6ulnm"]
@@ -63,7 +63,7 @@ application_type = 1
 card_title = "Whispers"
 card_key_art = ExtResource("7_gdolv")
 card_type = 1
-card_description = "Deal small Soothe and inflict Cursed to all enemies."
+card_description = "Deal 2 Soothe and inflict Cursed to all enemies."
 card_artist_name = "Akami"
 card_effects_data = Array[ExtResource("2_pp84o")]([SubResource("Resource_ajc7k"), SubResource("Resource_sepdk")])
 energy_info = SubResource("Resource_6ulnm")

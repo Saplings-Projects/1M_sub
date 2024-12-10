@@ -16,7 +16,7 @@ script = ExtResource("3_reiqj")
 [sub_resource type="Resource" id="Resource_0prdd"]
 script = ExtResource("2_votuv")
 effect = SubResource("Resource_12d0o")
-value = 10
+value = 7
 targeting_function = SubResource("Resource_ansma")
 
 [sub_resource type="Resource" id="Resource_a81q1"]
@@ -29,7 +29,7 @@ application_type = 0
 card_title = "Take Cover"
 card_key_art = ExtResource("4_k0xkm")
 card_type = 0
-card_description = "Gain medium Defense"
+card_description = "Gain 7 Defense."
 card_artist_name = "TheCT"
 card_effects_data = Array[ExtResource("2_votuv")]([SubResource("Resource_0prdd")])
 energy_info = SubResource("Resource_a81q1")
