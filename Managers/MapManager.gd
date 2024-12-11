@@ -300,3 +300,6 @@ func get_map_percent_with_player_position() -> float:
 	var number_of_floors: int = map_width_array.size()
 	var player_y_floor: int = player_position.y
 	return (player_y_floor as float / number_of_floors as float) * 100
+
+func get_floors() -> int:
+	return map_width_array.size()
