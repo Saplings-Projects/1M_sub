@@ -32,9 +32,10 @@ var current_song: GlobalEnums.MusicTrack = GlobalEnums.MusicTrack.NO_TRACK
 
 func _ready() -> void:
 	add_child(music_stream)
+	add_child(sfx_stream)
 
 func start_music(song: GlobalEnums.MusicTrack) -> void:
-	if current_song == song:
+	if current_song == song or song == GlobalEnums.MusicTrack.NO_TRACK:
 		return
 	
 	if music_stream.playing and current_song != song:
@@ -45,14 +46,19 @@ func start_music(song: GlobalEnums.MusicTrack) -> void:
 		_on_volume_fade_finished(song)
 
 func stop_music() -> void:
+	var volume_tween: Tween = create_tween()
+	volume_tween.tween_property(music_stream, "volume_db", -100, 0.25)
+	volume_tween.tween_callback(_on_volume_fade_stop)
+
+func _on_volume_fade_stop() -> void:
+	current_song = GlobalEnums.MusicTrack.NO_TRACK
+	music_stream.volume_db = 0
 	music_stream.stop()
 
 func _on_volume_fade_finished(song: GlobalEnums.MusicTrack) -> void:
 	music_stream.stream = _get_music_track(song)
+	music_stream.volume_db = 0
 	music_stream.play()
-	if music_stream.volume_db < 0:
-		var volume_tween: Tween = create_tween()
-		volume_tween.tween_property(music_stream, "volume_db", 0, 1)
 	current_song = song
 
 func _get_music_track(song: GlobalEnums.MusicTrack) -> AudioStream:
@@ -60,6 +66,7 @@ func _get_music_track(song: GlobalEnums.MusicTrack) -> AudioStream:
 
 func play_sfx(sfx: GlobalEnums.SoundEffect) -> void:
 	sfx_stream.stream = _get_sound_effect(sfx)
+	sfx_stream.volume_db = 0
 	sfx_stream.play()
 
 func _get_sound_effect(sfx: GlobalEnums.SoundEffect) -> AudioStream:

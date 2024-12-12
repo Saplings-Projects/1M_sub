@@ -6,7 +6,6 @@ var continue_button: TextureButton
 
 #on opening the main menu we grab the focus of the start button
 func _ready() -> void:
-	#AudioManager.start_music(GlobalEnums.MusicTrack.HEAL)
 	$"Menu buttons/Continue".grab_focus()
 	$"game version".text = ProjectSettings.get_setting("application/config/version")
 	for child in get_node("Menu buttons").get_children():
@@ -24,7 +23,6 @@ func _on_start_pressed() -> void:
 		start_new_game_dialog.show()
 	else:
 		_init_managers()
-		#AudioManager.start_music(GlobalEnums.MusicTrack.AREA_ONE)
 		SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
 
 func _on_continue_pressed() -> void:
@@ -42,6 +40,7 @@ func _on_button_hovered(button: TextureButton) -> void:
 
 ## Scene to be loaded when option button is pressed
 func _on_options_pressed() -> void:
+	AudioManager.play_sfx(GlobalEnums.SoundEffect.UUUUU)
 	SceneManager.goto_scene("res://#Scenes/OptionsMenu.tscn")
 
 
@@ -53,7 +52,6 @@ func _on_quit_pressed() -> void:
 func _on_start_new_game_dialog_confirmed() -> void:
 	SaveManager.clear_data()
 	_init_managers()
-	#AudioManager.start_music(GlobalEnums.MusicTrack.AREA_ONE)
 	SceneManager.goto_scene("res://#Scenes/MapUI.tscn")
 
 func _init_managers() -> void:
