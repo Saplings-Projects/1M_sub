@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bpgsmfprnm2kk"]
+[gd_scene load_steps=16 format=3 uid="uid://bpgsmfprnm2kk"]
 
 [ext_resource type="Script" path="res://Entity/Enemy/Enemy.gd" id="1_ya6nf"]
 [ext_resource type="Script" path="res://Entity/Components/StatComponent.gd" id="2_twygh"]
@@ -14,9 +14,6 @@
 [ext_resource type="Script" path="res://Entity/Components/StressComponent.gd" id="11_qf75g"]
 [ext_resource type="PackedScene" uid="uid://dbidy5j4uyopc" path="res://Entity/Components/block_display.tscn" id="13_u3jb7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8bva"]
-size = Vector2(104, 93)
-
 [sub_resource type="LabelSettings" id="LabelSettings_urr12"]
 font_size = 26
 
@@ -25,7 +22,6 @@ font_size = 26
 font_color = Color(0.435294, 0.67451, 0.815686, 1)
 
 [node name="Enemy" type="Node2D"]
-position = Vector2(0, 50)
 script = ExtResource("1_ya6nf")
 
 [node name="StatComponent" type="Node" parent="."]
@@ -46,9 +42,8 @@ script = ExtResource("6_m32ri")
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5, 2.5)
-shape = SubResource("RectangleShape2D_b8bva")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-38, 48, 43, 48, 44, -44, -37, -44)
 
 [node name="HealthLabel" type="Label" parent="." node_paths=PackedStringArray("health_component")]
 offset_left = -57.0

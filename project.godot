@@ -20,6 +20,7 @@ config/icon="res://Art/Menus/fauna_icon-1.png"
 
 [autoload]
 
+SaveManager="*res://Managers/SaveManager.gd"
 SceneManager="*res://Managers/SceneManager.gd"
 SignalBus="*res://Global/SignalBus.gd"
 DebugVar="*res://Global/DEBUG_VAR.gd"
@@ -28,7 +29,7 @@ CardManager="*res://Managers/CardManager.gd"
 PhaseManager="*res://Managers/PhaseManager.gd"
 RandomGenerator="*res://Managers/RandomGenerator.gd"
 GlobalVar="*res://Global/GLOBAL_VAR.gd"
-EnemyManager="*res://Managers/EnemyManager.gd"
+EnemyManager="*res://Managers/EnemyManager.tscn"
 MapManager="*res://Managers/MapManager.gd"
 InventoryManager="*res://Managers/InventoryManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"

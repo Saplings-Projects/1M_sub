@@ -25,7 +25,7 @@ var current_map: MapBase
 ## Width should follow the following rules: [br]
 ## - Width should be odd (for symmetry + padding reason) [br]
 ## - Width should not increase or decrease by more than 2 per floor (this makes it certain all rooms on the map are accessible [br]
-var map_width_array: Array[int]
+var map_width_array: Array[int] = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 
 ## Room events that we do not want to be consecutive
 const no_consecutive_room_event: Array[String] = ["shop", "heal"]
@@ -220,8 +220,11 @@ func assign_events(map: MapBase = current_map) -> void:
 ## Create a map with a width array
 
 func _ready() -> void:
+	if _has_current_map_saved():
+		print("load map data")
+		load_map_data()
 	if not is_map_initialized():
-		map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
+		#map_width_array = [1, 3, 5, 7, 9, 11, 9, 7, 5, 3, 1]
 		current_map = create_map()
 
 
@@ -230,10 +233,38 @@ func _ready() -> void:
 		if DebugVar.DEBUG_PRINT_EVENT_COUNT:
 			debug_print_event_count()
 
+func _has_current_map_saved() -> bool:
+	var save_file: ConfigFile = SaveManager.save_file
+	return save_file.has_section_key("MapManager", "current_map")
 
 ## checks if the map exists
 func is_map_initialized() -> bool:
 	return current_map != null
+
+func set_room_light_data(room: RoomBase) -> void:
+	current_map.rooms[room.room_position.y][room.room_position.x].light_data = room.light_data
+
+func save_map_data() -> void:
+	var save_file: ConfigFile = SaveManager.save_file
+	save_file.set_value("MapManager", "map_width_array", map_width_array)
+	save_file.set_value("MapManager", "current_map", current_map)
+	var error: Error = save_file.save(SaveManager.save_file_path)
+	if error:
+		print("Error saving player data: ", error)
+
+func load_map_data() -> void:
+	var save_file: ConfigFile = SaveManager.load_save_file()
+	if save_file == null:
+		return
+	
+	if save_file.has_section_key("MapManager", "current_map"):
+		current_map = save_file.get_value("MapManager", "current_map")
+	
+	if save_file.has_section_key("MapManager", "map_width_array"):
+		map_width_array = save_file.get_value("MapManager", "map_width_array")
+
+func init_data() -> void:
+	current_map = create_map()
 
 ## DEBUG
 ## Prints the number and percentage of each event type, and the corresponding expected number as well
@@ -261,3 +292,11 @@ func debug_print_event_count() -> void:
 	for k: String in events:
 		print("Event " + k + " has " + str(events[k]) + " rooms (expected: "+ str(float(expected_probabilities[k] * total_nb_rooms/100.0)).pad_decimals(2) +"). (The percentage is " + str(float(events[k]) * 100 / total_nb_rooms).pad_decimals(2) + "%, expected: " + str(expected_probabilities[k]) + "%)")
 	print("Total number of rooms generated: " + str(total_nb_rooms))
+	
+
+## Returns the percent height of the player in the current map
+func get_map_percent_with_player_position() -> float:
+	var player_position: Vector2i = PlayerManager.player_position
+	var number_of_floors: int = map_width_array.size()
+	var player_y_floor: int = player_position.y
+	return (player_y_floor as float / number_of_floors as float) * 100
