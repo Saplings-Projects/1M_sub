@@ -27,3 +27,8 @@ func _on_options_pressed() -> void:
 ## Kill the game when the quit button is pressed
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+## Go to the credits
+func _on_credits_pressed() -> void:
+	SceneManager.goto_scene("res://#Scenes/credits.tscn")
