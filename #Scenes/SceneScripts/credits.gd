@@ -41,26 +41,23 @@ const TEAM_MEMBERS: Dictionary = {
 	"Amamii": [[Roles.Art], sapling_type.Maid],
 	"Arkhand": [[Roles.Music], sapling_type.Nerd],
 	"Atmama": [[Roles.Art], sapling_type.None],
-	"Biosquid": [[Roles.Programming], sapling_type.None], #! no participation yet
+	"Biosquid": [[Roles.Programming], sapling_type.None],
 	"Bishop": [[Roles.Programming], sapling_type.None],
 	"Cheesyfrycook": [[Roles.Programming], sapling_type.None],
 	"Dat": [[Roles.Art], sapling_type.None],
 	"Dio": [[Roles.Art], sapling_type.Sleepy],
 	"EndyStarBoy": [[Roles.Art], sapling_type.Milf],
-	"Fork": [[Roles.Music], sapling_type.Maid], #! no participation yet
 	"Hakase": [[Roles.Art], sapling_type.None],
-	"Jason": [[Roles.Music], sapling_type.None], #! no participation yet
 	"Jimance": [[Roles.Team_lead_writing, Roles.Design], sapling_type.Old],
 	"Jona": [[Roles.Programming], sapling_type.Gamer],
 	"Jusagi": [[Roles.Art], sapling_type.Cool],
-	"Kayessi": [[Roles.Testing], sapling_type.Old], #! no participation yet
 	"Kebbie": [[Roles.Special_thanks], sapling_type.None],
 	"Kotoschneep": [[Roles.Art], sapling_type.None],
 	"Lann": [[Roles.Programming], sapling_type.Nerd],
 	"Lunar": [[Roles.Art], sapling_type.Gamer],
 	"Mikotey": [[Roles.Design], sapling_type.Maid],
 	"Minik": [[Roles.Design], sapling_type.Emo],
-	"Multi-arm": [[Roles.Programming], sapling_type.None], #! no participation yet
+	"Multi-arm": [[Roles.Programming], sapling_type.None],
 	"nára": [[Roles.Art], sapling_type.Emo],
 	"Palenque": [[Roles.Design], sapling_type.Nerd],
 	"Papier": [[Roles.Programming], sapling_type.Milf],
@@ -72,7 +69,6 @@ const TEAM_MEMBERS: Dictionary = {
 	"Tradgore": [[Roles.Writing, Roles.Design], sapling_type.Sleepy],
 	"Turtyo": [[Roles.Project_lead, Roles.Team_lead_programming, Roles.Design], sapling_type.Gamer],
 	"TyTy": [[Roles.Programming], sapling_type.Old],
-	"Vsiiesk ": [[Roles.Art], sapling_type.Nerd],
 	"Vyto (Vytonium)": [[Roles.Music], sapling_type.Old],
 	"Walles": [[Roles.Design], sapling_type.Sleepy],
 	"Zannmaster": [[Roles.Design], sapling_type.Milf],
