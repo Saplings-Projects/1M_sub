@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://nr0k304sanb1"]
+
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/GalleryItem.gd" id="1_c4r4u"]
+[ext_resource type="Texture2D" uid="uid://dvr6ky4vqv4lf" path="res://Art/Enemies/golden_cauldron-finished.png" id="1_lq7eu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8tpm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[node name="GalleryItem" type="Node2D"]
+script = ExtResource("1_c4r4u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.309804)
+
+[node name="Back" type="Button" parent="."]
+offset_left = 28.0
+offset_top = 18.0
+offset_right = 128.0
+offset_bottom = 68.0
+text = "Back
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 114.0
+offset_top = 104.0
+offset_right = 1814.0
+offset_bottom = 1004.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8tpm")
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_lq7eu")
+
+[connection signal="pressed" from="Back" to="." method="_back_to_gallery"]

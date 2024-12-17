@@ -51,9 +51,9 @@ text = "Title place holder"
 [node name="Menu buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 481.0
+offset_top = 388.0
 offset_right = 465.0
-offset_bottom = 1162.0
+offset_bottom = 1069.0
 focus_mode = 2
 theme_override_constants/separation = -195
 alignment = 1
@@ -114,6 +114,15 @@ texture_focused = ExtResource("12_eqc6b")
 ignore_texture_size = true
 stretch_mode = 4
 
+[node name="Gallery" type="Button" parent="."]
+layout_mode = 2
+offset_left = 69.0
+offset_top = 929.0
+offset_right = 434.0
+offset_bottom = 999.0
+text = "Gallery
+"
+
 [node name="StartNewGameDialog" type="ConfirmationDialog" parent="."]
 title = ""
 initial_position = 4
@@ -127,4 +136,5 @@ cancel_button_text = "No"
 [connection signal="pressed" from="Menu buttons/New game" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Menu buttons/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Menu buttons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Gallery" to="." method="_on_gallery_pressed"]
 [connection signal="confirmed" from="StartNewGameDialog" to="." method="_on_start_new_game_dialog_confirmed"]

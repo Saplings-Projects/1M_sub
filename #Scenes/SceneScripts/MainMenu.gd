@@ -47,6 +47,8 @@ func _on_options_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
+func _on_gallery_pressed() -> void:
+	SceneManager.goto_scene("res://#Scenes/GalleryScene.tscn")
 
 func _on_start_new_game_dialog_confirmed() -> void:
 	SaveManager.clear_data()
