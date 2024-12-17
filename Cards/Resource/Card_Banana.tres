@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_gk4p6"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetRandomEnemies.gd" id="6_cjttu"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="7_curxv"]
-[ext_resource type="Texture2D" uid="uid://d3m067dbr54t3" path="res://Art/Card_art/Banana-JamGates.png" id="7_v6ri6"]
+[ext_resource type="Texture2D" uid="uid://d3m067dbr54t3" path="res://Art/Card_art/Banana__JamGates.png" id="7_v6ri6"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="7_wyv0k"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Vulnerability.gd" id="8_peypb"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="9_2683w"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c00sf3k3cqsuu"
-path="res://.godot/imported/Pspspsps-HDAK art.jpg-8762530e3934c46c654d5305484ae2be.ctex"
+uid="uid://dubre0k4rjull"
+path="res://.godot/imported/Fun_Facts__Evan_C.png-ad350f12128e7396682a4b918ba2307b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Pspspsps-HDAK art.jpg"
-dest_files=["res://.godot/imported/Pspspsps-HDAK art.jpg-8762530e3934c46c654d5305484ae2be.ctex"]
+source_file="res://Art/Card_art/Fun_Facts__Evan_C.png"
+dest_files=["res://.godot/imported/Fun_Facts__Evan_C.png-ad350f12128e7396682a4b918ba2307b.ctex"]
 
 [params]
 

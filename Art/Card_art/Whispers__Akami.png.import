@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0gtttv5pemg4"
-path="res://.godot/imported/Ancient Meme-SleepySensei.png-26b3c1b5cae3432415cb98792461791b.ctex"
+uid="uid://bqhc00t1xhhet"
+path="res://.godot/imported/Whispers__Akami.png-7f526f3f4752314cc24d0052bc60a7fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Ancient Meme-SleepySensei.png"
-dest_files=["res://.godot/imported/Ancient Meme-SleepySensei.png-26b3c1b5cae3432415cb98792461791b.ctex"]
+source_file="res://Art/Card_art/Whispers__Akami.png"
+dest_files=["res://.godot/imported/Whispers__Akami.png-7f526f3f4752314cc24d0052bc60a7fd.ctex"]
 
 [params]
 

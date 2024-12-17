@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwedsclhthx3v"
-path="res://.godot/imported/Take Cover-TheCT.png-065af2de13e504cfaed98e5248b68b94.ctex"
+uid="uid://03ndp6txwgy0"
+path="res://.godot/imported/SneezeEN__FalseIndigo.jpg-5b5382da3ce0034f37f28da7e14376d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Take Cover-TheCT.png"
-dest_files=["res://.godot/imported/Take Cover-TheCT.png-065af2de13e504cfaed98e5248b68b94.ctex"]
+source_file="res://Art/Card_art/SneezeEN__FalseIndigo.jpg"
+dest_files=["res://.godot/imported/SneezeEN__FalseIndigo.jpg-5b5382da3ce0034f37f28da7e14376d2.ctex"]
 
 [params]
 

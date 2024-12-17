@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_7lphh"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_vpt48"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="6_psgfr"]
-[ext_resource type="Texture2D" uid="uid://ch2cu51f0g2ue" path="res://Art/Card_art/Sweep-Wombat Wobbles.png" id="7_0nrhs"]
+[ext_resource type="Texture2D" uid="uid://ch2cu51f0g2ue" path="res://Art/Card_art/Sweep__Wombat_Wobbles.png" id="7_0nrhs"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="8_nfy04"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="8_s7t2e"]
 

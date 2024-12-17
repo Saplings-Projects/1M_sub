@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Vulnerability.gd" id="5_3c8vc"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="6_8bb26"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="7_njqb5"]
-[ext_resource type="Texture2D" uid="uid://d3cnn7hymcfty" path="res://Art/Card_art/Stealth Crouch-Activepaste.png" id="8_gox6p"]
+[ext_resource type="Texture2D" uid="uid://d3cnn7hymcfty" path="res://Art/Card_art/Stealth__Crouch_Activepaste.png" id="8_gox6p"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="9_ra01k"]
 
 [sub_resource type="Resource" id="Resource_5733r"]

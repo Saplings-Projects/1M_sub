@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="6_qgd6c"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="7_mpneo"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="8_bhamk"]
-[ext_resource type="Texture2D" uid="uid://brvk1lv7wv56o" path="res://Art/Card_art/Gaslight-Count Shaman.png" id="9_0w08r"]
+[ext_resource type="Texture2D" uid="uid://brvk1lv7wv56o" path="res://Art/Card_art/Gaslight__Count_Shaman.png" id="9_0w08r"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="10_co6hl"]
 
 [sub_resource type="Resource" id="Resource_5jqa1"]

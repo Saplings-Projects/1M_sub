@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch2cu51f0g2ue"
-path="res://.godot/imported/Sweep-Wombat Wobbles.png-5a1b75e96954a2d2bc0219f85b087088.ctex"
+uid="uid://dmpqbitqwghhd"
+path="res://.godot/imported/Headbutt_Attack__akiyamegurine.png-fc1af7bf3c43001b9b70acdba83f7428.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Sweep-Wombat Wobbles.png"
-dest_files=["res://.godot/imported/Sweep-Wombat Wobbles.png-5a1b75e96954a2d2bc0219f85b087088.ctex"]
+source_file="res://Art/Card_art/Headbutt_Attack__akiyamegurine.png"
+dest_files=["res://.godot/imported/Headbutt_Attack__akiyamegurine.png-fc1af7bf3c43001b9b70acdba83f7428.ctex"]
 
 [params]
 

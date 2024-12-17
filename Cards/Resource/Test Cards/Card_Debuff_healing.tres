@@ -45,5 +45,6 @@ application_type = 2
 card_title = "debuff healing"
 card_type = 0
 card_description = "Debuffs your capacity to heal by 1 for 3 turns"
+card_artist_name = "NULL"
 card_effects_data = Array[ExtResource("4_hb64u")]([SubResource("Resource_8p0l4")])
 energy_info = SubResource("Resource_mrt6b")

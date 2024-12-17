@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="7_v3uka"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="8_hcs33"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="9_abwv7"]
-[ext_resource type="Texture2D" uid="uid://03ndp6txwgy0" path="res://Art/Card_art/Sneeze(EN)-FalseIndigo.jpg" id="10_f6vi1"]
+[ext_resource type="Texture2D" uid="uid://03ndp6txwgy0" path="res://Art/Card_art/SneezeEN__FalseIndigo.jpg" id="10_f6vi1"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="11_dxiit"]
 
 [sub_resource type="Resource" id="Resource_gbvk7"]

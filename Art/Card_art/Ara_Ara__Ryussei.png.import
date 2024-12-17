@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lbpkjj08hdty"
-path="res://.godot/imported/GreenDartGun-Sir K.png-28c05157a32295e4873287fe662e0b2f.ctex"
+uid="uid://ceex1yybqmow"
+path="res://.godot/imported/Ara_Ara__Ryussei.png-ff9fcad74325a8b45ffcea0f808c978f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/GreenDartGun-Sir K.png"
-dest_files=["res://.godot/imported/GreenDartGun-Sir K.png-28c05157a32295e4873287fe662e0b2f.ctex"]
+source_file="res://Art/Card_art/Ara_Ara__Ryussei.png"
+dest_files=["res://.godot/imported/Ara_Ara__Ryussei.png-ff9fcad74325a8b45ffcea0f808c978f.ctex"]
 
 [params]
 

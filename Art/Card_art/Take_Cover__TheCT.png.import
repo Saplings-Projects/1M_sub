@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcshd0d2qnen4"
-path="res://.godot/imported/Double_Slap-Makai.png-2f28fccfa874799e8fd482638f8de539.ctex"
+uid="uid://dwedsclhthx3v"
+path="res://.godot/imported/Take_Cover__TheCT.png-89b22d4971dd66c829c24f6194c8183c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Double_Slap-Makai.png"
-dest_files=["res://.godot/imported/Double_Slap-Makai.png-2f28fccfa874799e8fd482638f8de539.ctex"]
+source_file="res://Art/Card_art/Take_Cover__TheCT.png"
+dest_files=["res://.godot/imported/Take_Cover__TheCT.png-89b22d4971dd66c829c24f6194c8183c.ctex"]
 
 [params]
 

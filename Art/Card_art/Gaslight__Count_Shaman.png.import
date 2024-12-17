@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqhc00t1xhhet"
-path="res://.godot/imported/Whispers-Akami.png-a177486086293389fd205f93684db4cd.ctex"
+uid="uid://brvk1lv7wv56o"
+path="res://.godot/imported/Gaslight__Count_Shaman.png-7da90873343665c3c0ef0838fc6945ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Whispers-Akami.png"
-dest_files=["res://.godot/imported/Whispers-Akami.png-a177486086293389fd205f93684db4cd.ctex"]
+source_file="res://Art/Card_art/Gaslight__Count_Shaman.png"
+dest_files=["res://.godot/imported/Gaslight__Count_Shaman.png-7da90873343665c3c0ef0838fc6945ef.ctex"]
 
 [params]
 

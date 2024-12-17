@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="4_a7wms"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Weakness.gd" id="5_nravh"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="6_852tp"]
-[ext_resource type="Texture2D" uid="uid://drdbxjegehyfu" path="res://Art/Card_art/Wrench-FalseIndigo.jpg" id="7_tf8vf"]
+[ext_resource type="Texture2D" uid="uid://drdbxjegehyfu" path="res://Art/Card_art/Wrench__FalseIndigo.jpg" id="7_tf8vf"]
 
 [sub_resource type="Resource" id="Resource_s0kkh"]
 script = ExtResource("1_65i06")

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_vf582"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_n1vj7"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="6_e7rmt"]
-[ext_resource type="Texture2D" uid="uid://ut7roqv457x8" path="res://Art/Card_art/Slap-Qworty_Warrior.png" id="7_l4uwj"]
+[ext_resource type="Texture2D" uid="uid://ut7roqv457x8" path="res://Art/Card_art/Slap__Qworty_Warrior.png" id="7_l4uwj"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="8_f6akw"]
 
 [sub_resource type="Resource" id="Resource_x0fd8"]

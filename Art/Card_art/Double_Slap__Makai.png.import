@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dubre0k4rjull"
-path="res://.godot/imported/Fun Facts-Evan C.png-510d502185f34351b77e63d9fd6612a4.ctex"
+uid="uid://dcshd0d2qnen4"
+path="res://.godot/imported/Double_Slap__Makai.png-fdccbce328f29235d7dc8f63168addf0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Fun Facts-Evan C.png"
-dest_files=["res://.godot/imported/Fun Facts-Evan C.png-510d502185f34351b77e63d9fd6612a4.ctex"]
+source_file="res://Art/Card_art/Double_Slap__Makai.png"
+dest_files=["res://.godot/imported/Double_Slap__Makai.png-fdccbce328f29235d7dc8f63168addf0.ctex"]
 
 [params]
 

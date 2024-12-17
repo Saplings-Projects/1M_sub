@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://3s4aet1ciesh" path="res://Cards/Resource/Test Cards/Card_damage_and_poison.tres" id="5_giy28"]
 [ext_resource type="Resource" uid="uid://uv2rili0xf3x" path="res://Cards/Resource/Test Cards/Card_Damage_EVERYTHING.tres" id="6_gr534"]
 [ext_resource type="Resource" uid="uid://d4lugn62mmlep" path="res://Cards/Resource/Test Cards/Card_DrawCards.tres" id="7_y1gya"]
-[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Card_Heal.tres" id="8_haia1"]
+[ext_resource type="Resource" uid="uid://d12g33rc6c3u5" path="res://Cards/Resource/Test Cards/Card_Heal.tres" id="8_haia1"]
 [ext_resource type="Resource" uid="uid://ctx8jsvac84so" path="res://Cards/Resource/Test Cards/Card_Poison.tres" id="9_1tkbv"]
 [ext_resource type="Resource" uid="uid://btj36bhn3n2tr" path="res://Cards/Resource/Test Cards/Card_Strength.tres" id="10_7m46u"]
 [ext_resource type="Resource" uid="uid://b4kmg3lm0e45q" path="res://Cards/Resource/Test Cards/Card_Vulnerability.tres" id="11_0eivv"]

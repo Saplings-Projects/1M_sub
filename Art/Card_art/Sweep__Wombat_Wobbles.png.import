@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://03ndp6txwgy0"
-path="res://.godot/imported/Sneeze(EN)-FalseIndigo.jpg-586bbda8360732c98aa6ff05b2baef08.ctex"
+uid="uid://ch2cu51f0g2ue"
+path="res://.godot/imported/Sweep__Wombat_Wobbles.png-21190932e85f25cfd4ce7e6fe2b49d02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Sneeze(EN)-FalseIndigo.jpg"
-dest_files=["res://.godot/imported/Sneeze(EN)-FalseIndigo.jpg-586bbda8360732c98aa6ff05b2baef08.ctex"]
+source_file="res://Art/Card_art/Sweep__Wombat_Wobbles.png"
+dest_files=["res://.godot/imported/Sweep__Wombat_Wobbles.png-21190932e85f25cfd4ce7e6fe2b49d02.ctex"]
 
 [params]
 

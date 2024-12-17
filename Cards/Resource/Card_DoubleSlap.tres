@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="4_3xx6g"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="5_qnpt1"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="6_w8hw4"]
-[ext_resource type="Texture2D" uid="uid://dcshd0d2qnen4" path="res://Art/Card_art/Double_Slap-Makai.png" id="7_el78u"]
+[ext_resource type="Texture2D" uid="uid://dcshd0d2qnen4" path="res://Art/Card_art/Double_Slap__Makai.png" id="7_el78u"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="8_fucj6"]
 
 [sub_resource type="Resource" id="Resource_ya0yf"]

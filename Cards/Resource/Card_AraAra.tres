@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectSooth.gd" id="1_go3mx"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_v5swq"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="3_rpqa3"]
-[ext_resource type="Texture2D" uid="uid://ceex1yybqmow" path="res://Art/Card_art/Ara-Ara-Ryussei.png" id="4_clb3t"]
+[ext_resource type="Texture2D" uid="uid://ceex1yybqmow" path="res://Art/Card_art/Ara_Ara__Ryussei.png" id="4_clb3t"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_6vs2o"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_ra44s"]
 

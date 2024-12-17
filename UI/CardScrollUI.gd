@@ -48,15 +48,6 @@ func populate(parent_name: String) -> void:
 		cardui = cardworld.get_node("CardUI")
 		key_art = cardworld.get_node("KeyArt")
 
-		#cardworld.custom_minimum_size = (cardui.size * CARD_SCALE) + SIZE_OFFSET
-		
-		#cardui.scale = CARD_SCALE
-		#cardui.anchors_preset = CORNER_TOP_LEFT
-		#cardui.position = CARDUI_POS
-		
-		#key_art.scale = KEY_ART_SCALE
-		#key_art.position = cardui.position - Vector2(50, 130)
-
 		$ScrollContainer/GridContainer.add_child(cardworld)
 		
 		cardworld.init_card(card)

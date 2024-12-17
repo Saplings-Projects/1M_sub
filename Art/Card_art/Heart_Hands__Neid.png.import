@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brvk1lv7wv56o"
-path="res://.godot/imported/Gaslight-Count Shaman.png-61a8bb81cc9e74cbca3156a296243133.ctex"
+uid="uid://djnajlyj6kgfb"
+path="res://.godot/imported/Heart_Hands__Neid.png-1b7a17da330a5ae782e9b38c0b7f7dd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Gaslight-Count Shaman.png"
-dest_files=["res://.godot/imported/Gaslight-Count Shaman.png-61a8bb81cc9e74cbca3156a296243133.ctex"]
+source_file="res://Art/Card_art/Heart_Hands__Neid.png"
+dest_files=["res://.godot/imported/Heart_Hands__Neid.png-1b7a17da330a5ae782e9b38c0b7f7dd4.ctex"]
 
 [params]
 

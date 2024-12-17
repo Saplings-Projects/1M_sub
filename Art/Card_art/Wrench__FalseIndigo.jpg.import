@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ut7roqv457x8"
-path="res://.godot/imported/Slap-Qworty_Warrior.png-0e89ebdbefcc39b6c9bba5f7408294d8.ctex"
+uid="uid://drdbxjegehyfu"
+path="res://.godot/imported/Wrench__FalseIndigo.jpg-25f503cb9a102e29ebb577db86084e5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Slap-Qworty_Warrior.png"
-dest_files=["res://.godot/imported/Slap-Qworty_Warrior.png-0e89ebdbefcc39b6c9bba5f7408294d8.ctex"]
+source_file="res://Art/Card_art/Wrench__FalseIndigo.jpg"
+dest_files=["res://.godot/imported/Wrench__FalseIndigo.jpg-25f503cb9a102e29ebb577db86084e5a.ctex"]
 
 [params]
 

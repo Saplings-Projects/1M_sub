@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c13302ahcfpuy" path="res://Cards/Animation/Scene/Anim_Poison.tscn" id="1_1fnxh"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_5bpdn"]
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_8vdey"]
-[ext_resource type="Texture2D" uid="uid://c00sf3k3cqsuu" path="res://Art/Card_art/Pspspsps-HDAK art.jpg" id="1_r55xq"]
+[ext_resource type="Texture2D" uid="uid://c00sf3k3cqsuu" path="res://Art/Card_art/Pspspsps__HDAK_art.jpg" id="1_r55xq"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="2_6rj0a"]
 [ext_resource type="Script" path="res://Cards/Animation/CastPosition/CastPos_AllTargets.gd" id="2_122d8"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="3_2ijdv"]

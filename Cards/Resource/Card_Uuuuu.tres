@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="4_o215l"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Weakness.gd" id="5_x0twn"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="6_8atrn"]
-[ext_resource type="Texture2D" uid="uid://dbvny3j5euw0" path="res://Art/Card_art/Uuuuu-TheAllSeeingHat.png" id="7_dauda"]
+[ext_resource type="Texture2D" uid="uid://dbvny3j5euw0" path="res://Art/Card_art/Uuuuu__TheAllSeeingHat.png" id="7_dauda"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="8_de8my"]
 
 [sub_resource type="Resource" id="Resource_t1rho"]

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Poison.gd" id="5_5ba6r"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="6_hn5y5"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="7_hsogo"]
-[ext_resource type="Texture2D" uid="uid://dubre0k4rjull" path="res://Art/Card_art/Fun Facts-Evan C.png" id="8_5pmo6"]
+[ext_resource type="Texture2D" uid="uid://dubre0k4rjull" path="res://Art/Card_art/Fun_Facts__Evan_C.png" id="8_5pmo6"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="9_evfbo"]
 
 [sub_resource type="Resource" id="Resource_umv2e"]

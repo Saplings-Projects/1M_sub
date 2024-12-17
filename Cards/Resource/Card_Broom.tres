@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Cards/Targeting/TargetingBase.gd" id="6_eipkf"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectAddBlock.gd" id="7_u53qs"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="8_q81bm"]
-[ext_resource type="Texture2D" uid="uid://bk8x6lew3blic" path="res://Art/Card_art/Broom-Iyzeekiil.png" id="9_2xwy0"]
+[ext_resource type="Texture2D" uid="uid://bk8x6lew3blic" path="res://Art/Card_art/Broom__Iyzeekiil.png" id="9_2xwy0"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="10_grkci"]
 
 [sub_resource type="Resource" id="Resource_yqpdg"]

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Vulnerability.gd" id="5_clcu6"]
 [ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="6_gbivk"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="7_grm1m"]
-[ext_resource type="Texture2D" uid="uid://dmpqbitqwghhd" path="res://Art/Card_art/Headbutt Attack-akiyamegurine.png" id="8_68bwp"]
+[ext_resource type="Texture2D" uid="uid://dmpqbitqwghhd" path="res://Art/Card_art/Headbutt_Attack__akiyamegurine.png" id="8_68bwp"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="9_mwcyy"]
 
 [sub_resource type="Resource" id="Resource_xf8un"]

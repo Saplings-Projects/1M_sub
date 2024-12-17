@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmpqbitqwghhd"
-path="res://.godot/imported/Headbutt Attack-akiyamegurine.png-b1123c82bb904912ce29272d6ab7a198.ctex"
+uid="uid://d3cnn7hymcfty"
+path="res://.godot/imported/Stealth__Crouch_Activepaste.png-e281887ac99e47213bf78d4d7f95d665.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Card_art/Headbutt Attack-akiyamegurine.png"
-dest_files=["res://.godot/imported/Headbutt Attack-akiyamegurine.png-b1123c82bb904912ce29272d6ab7a198.ctex"]
+source_file="res://Art/Card_art/Stealth__Crouch_Activepaste.png"
+dest_files=["res://.godot/imported/Stealth__Crouch_Activepaste.png-e281887ac99e47213bf78d4d7f95d665.ctex"]
 
 [params]
 

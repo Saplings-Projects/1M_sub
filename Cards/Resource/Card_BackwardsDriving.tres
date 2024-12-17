@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Cards/CardBase.gd" id="1_c1dbl"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_hw1qu"]
 [ext_resource type="Script" path="res://Cards/Targeting/TargetAllEnemies.gd" id="3_d3h4w"]
-[ext_resource type="Texture2D" uid="uid://bqybfrr0tsouj" path="res://Art/Card_art/Backwards Driving-HDAK art.jpg" id="4_46tjm"]
+[ext_resource type="Texture2D" uid="uid://bqybfrr0tsouj" path="res://Art/Card_art/Backwards_Driving__HDAK_art.jpg" id="4_46tjm"]
 [ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="4_iu1y4"]
 [ext_resource type="Script" path="res://Cards/EnergyData.gd" id="5_3en4n"]
 [ext_resource type="Script" path="res://Status/Debuffs/Debuff_Vulnerability.gd" id="5_hqfro"]
