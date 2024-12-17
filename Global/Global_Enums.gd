@@ -101,6 +101,20 @@ enum EventType {
 	Dialogue,
 }
 
+
+enum SaplingType {
+	Sleepy,
+	Cool,
+	Emo,
+	Gamer,
+	Maid,
+	Milf,
+	Nerd,
+	Old,
+	Snow,
+	None,
+}
+
 ## Helper function that returns the Event resource depending on the given EventType
 static func choose_event_from_type(event_type: EventType) -> EventBase:
 	match event_type:

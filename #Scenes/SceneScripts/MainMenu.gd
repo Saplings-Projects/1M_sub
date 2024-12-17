@@ -49,6 +49,10 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 
+## Go to the credits
+func _on_credits_pressed() -> void:
+	SceneManager.goto_scene("res://#Scenes/credits.tscn")
+
 func _on_start_new_game_dialog_confirmed() -> void:
 	SaveManager.clear_data()
 	_init_managers()
