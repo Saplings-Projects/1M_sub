@@ -45,5 +45,6 @@ application_type = 0
 card_title = "Buff heal"
 card_type = 0
 card_description = "Buffs healing by 1 for 3 turns"
+card_artist_name = "NULL"
 card_effects_data = Array[ExtResource("2_0ql41")]([SubResource("Resource_0xps1")])
 energy_info = SubResource("Resource_308lg")

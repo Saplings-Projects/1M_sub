@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://caxbd2ppk3ans"]
+[gd_scene load_steps=14 format=3 uid="uid://caxbd2ppk3ans"]
 
 [ext_resource type="Script" path="res://Cards/CardWorld.gd" id="1_4el5m"]
 [ext_resource type="Script" path="res://Input/ClickHandler.gd" id="3_du4nn"]
+[ext_resource type="Texture2D" uid="uid://bp8i226lbqwmc" path="res://Art/Card_art/no_card_art.png" id="4_v52q6"]
 [ext_resource type="Script" path="res://UI/CardUISetter.gd" id="5_hkyxd"]
 [ext_resource type="Texture2D" uid="uid://bibs3cixt54ob" path="res://Art/Card_layout/card_skill_border.png" id="5_j7fcj"]
 [ext_resource type="Texture2D" uid="uid://d22aduyb416x4" path="res://Art/Card_layout/card_attack_border.png" id="5_nas3u"]
@@ -49,6 +50,7 @@ offset_top = 110.0
 offset_right = 289.0
 offset_bottom = 258.0
 mouse_filter = 2
+texture = ExtResource("4_v52q6")
 expand_mode = 2
 stretch_mode = 5
 

@@ -170,7 +170,7 @@ func test_card_heal() -> void:
 func test_card_heal_with_strength_buff() -> void:
 	var card_heal: CardBase = load("res://Cards/Resource/Test Cards/Card_Heal.tres")
 	var buff: CardBase = load("res://Cards/Resource/Test Cards/Card_Strength.tres")
-
+	StatModifiers.ready_card_modifier(buff)
 
 	_player_health_component._set_health(90)
 
@@ -182,6 +182,7 @@ func test_card_heal_with_strength_buff() -> void:
 func test_card_heal_with_heal_buff() -> void:
 	var card_heal: CardBase = load("res://Cards/Resource/Test Cards/Card_Heal.tres")
 	var buff: CardBase = load("res://Cards/Resource/Test Cards/Card_Buff_healing.tres")
+	StatModifiers.ready_card_modifier(buff)
 
 	_player_health_component._set_health(90)
 
@@ -195,6 +196,7 @@ func test_card_heal_with_heal_buff() -> void:
 func test_card_heal_with_heal_debuff() -> void:
 	var card_heal: CardBase = load("res://Cards/Resource/Test Cards/Card_Heal.tres")
 	var debuff: CardBase = load("res://Cards/Resource/Test Cards/Card_Debuff_healing.tres")
+	StatModifiers.ready_card_modifier(debuff)
 
 	_player_health_component._set_health(90)
 
