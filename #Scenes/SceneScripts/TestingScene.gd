@@ -10,20 +10,15 @@ func _ready() -> void:
 	PhaseManager.initialize_game()
 
 func _play_music() -> void:
-	var number_of_floors: float = MapManager.get_floors()
-	
-	# Offset by 1 since it's reading from an array
-	var current_player_floor: float = PlayerManager.player_position.y + 1
-	
-	var percentage_complete: float = (current_player_floor / number_of_floors) * 100
+	var percentage_complete: float = MapManager.get_map_percent_with_player_position()
 	var music_track: GlobalEnums.MusicTrack
-	if percentage_complete <= 33:
+	if MapManager.is_on_last_floor():
+		music_track = GlobalEnums.MusicTrack.BOSS
+	elif percentage_complete <= 33:
 		music_track = GlobalEnums.MusicTrack.AREA_ONE
 	elif percentage_complete > 33 and percentage_complete <= 66:
 		music_track = GlobalEnums.MusicTrack.AREA_TWO
 	elif percentage_complete > 66 and percentage_complete <= 99:
 		music_track = GlobalEnums.MusicTrack.AREA_THREE
-	else:
-		music_track = GlobalEnums.MusicTrack.BOSS
 	
 	AudioManager.start_music(music_track)

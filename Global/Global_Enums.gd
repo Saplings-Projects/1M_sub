@@ -192,6 +192,7 @@ enum MusicTrack {
 	BOSS,
 	HEAL,
 	SHOP,
+	MAIN_MENU,
 	NO_TRACK
 }
 

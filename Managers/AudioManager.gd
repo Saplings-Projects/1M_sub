@@ -8,6 +8,7 @@ var battle_area_3: AudioStream = preload("res://Audio/Battle/area_3.wav")
 var boss: AudioStream = preload("res://Audio/Battle/boss_1.wav")
 var heal_event: AudioStream = preload("res://Audio/World/heal.wav")
 var shop_event: AudioStream = preload("res://Audio/World/shop.wav")
+var main_menu: AudioStream = preload("res://Audio/MainMenu/cicadas.wav")
 
 var music_dictionary: Dictionary = {
 	GlobalEnums.MusicTrack.AREA_ONE: battle_area_1,
@@ -15,7 +16,8 @@ var music_dictionary: Dictionary = {
 	GlobalEnums.MusicTrack.AREA_THREE: battle_area_3,
 	GlobalEnums.MusicTrack.BOSS: boss,
 	GlobalEnums.MusicTrack.HEAL: heal_event,
-	GlobalEnums.MusicTrack.SHOP: shop_event
+	GlobalEnums.MusicTrack.SHOP: shop_event,
+	GlobalEnums.MusicTrack.MAIN_MENU: main_menu
 }
 
 # SFX
@@ -31,6 +33,7 @@ var sfx_stream: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 var current_song: GlobalEnums.MusicTrack = GlobalEnums.MusicTrack.NO_TRACK
 
 func _ready() -> void:
+	music_stream
 	add_child(music_stream)
 	add_child(sfx_stream)
 
