@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8hbst1klk5ng"]
+[gd_scene load_steps=8 format=3 uid="uid://b8hbst1klk5ng"]
 
 [ext_resource type="PackedScene" uid="uid://bam77cwf4emyr" path="res://#Scenes/TopBarOverlay.tscn" id="1_7gwvp"]
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/ShopScene.gd" id="1_u1m6k"]
 [ext_resource type="PackedScene" uid="uid://cdt4k2reymt2i" path="res://Shop/shop_item_card.tscn" id="4_bbct0"]
 [ext_resource type="Texture2D" uid="uid://c6fmkrnbs4mf6" path="res://Art/Background/0-0.test.CatTree.png" id="6_ppjdl"]
-[ext_resource type="PackedScene" uid="uid://bmklwr3ycyicn" path="res://Shop/shop_item_relic.tscn" id="8_i0gsy"]
-[ext_resource type="PackedScene" uid="uid://c4bsmddaua2ye" path="res://Shop/shop_item_consumable.tscn" id="10_jre48"]
 [ext_resource type="PackedScene" uid="uid://tfeo4epmhse0" path="res://Shop/shop_item_torch.tscn" id="11_3t8vb"]
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/CardRemoval.gd" id="12_1uxnd"]
 [ext_resource type="Texture2D" uid="uid://dd06ocktximw7" path="res://Art/Menus/Trash-1.png" id="12_yofyg"]
@@ -15,10 +13,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 41.0
-offset_top = -11.0
-offset_right = 41.0
-offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1m6k")
@@ -60,52 +54,6 @@ offset_left = 891.0
 offset_top = 414.0
 offset_right = 891.0
 offset_bottom = 414.0
-
-[node name="Item" type="Control" parent="ShopItems"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ShopItemItem" parent="ShopItems/Item" instance=ExtResource("8_i0gsy")]
-offset_left = 183.0
-offset_top = 904.0
-offset_right = 183.0
-offset_bottom = 904.0
-
-[node name="ShopItemItem2" parent="ShopItems/Item" instance=ExtResource("8_i0gsy")]
-offset_left = 363.0
-offset_top = 901.0
-offset_right = 363.0
-offset_bottom = 901.0
-
-[node name="ShopItem" parent="ShopItems/Item" instance=ExtResource("8_i0gsy")]
-offset_left = 552.0
-offset_top = 906.0
-offset_right = 552.0
-offset_bottom = 906.0
-
-[node name="Consumables" type="Control" parent="ShopItems"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ShopItemConsumable" parent="ShopItems/Consumables" instance=ExtResource("10_jre48")]
-offset_left = 257.0
-offset_top = 113.0
-offset_right = 257.0
-offset_bottom = 113.0
-
-[node name="ShopItemConsumable2" parent="ShopItems/Consumables" instance=ExtResource("10_jre48")]
-offset_left = 472.0
-offset_top = 117.0
-offset_right = 472.0
-offset_bottom = 117.0
-
-[node name="ShopItemConsumable3" parent="ShopItems/Consumables" instance=ExtResource("10_jre48")]
-offset_left = 650.0
-offset_top = 107.0
-offset_right = 650.0
-offset_bottom = 107.0
 
 [node name="CardRemoval" type="TextureButton" parent="ShopItems"]
 layout_mode = 1
@@ -161,14 +109,3 @@ offset_bottom = 1111.0
 mouse_filter = 2
 texture = ExtResource("6_ppjdl")
 expand_mode = 1
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1352.0
-offset_top = 226.0
-offset_right = 1815.0
-offset_bottom = 392.0
-theme_override_font_sizes/font_size = 116
-text = "Proceed"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,6 +1,7 @@
 extends CardPileUISetter
 
 @onready var priceText : Label = $CardRemoval/ColorRect/Label
+@onready var sceneRoot : Node =  $"../.."
 
 func _ready() -> void:
 	priceText.text = str(ShopManager.card_removal_price)
@@ -14,7 +15,7 @@ func _pressed() -> void:
 	var uiPile: Control = cardUI.instantiate()
 	
 	uiPile.populate(get_name())
-	parent.add_child(uiPile)
+	sceneRoot.add_child(uiPile)
 	queue_free()
 
 func _on_button_pressed() -> void:
