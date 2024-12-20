@@ -72,10 +72,10 @@ script = ExtResource("4_jtp2y")
 
 [node name="Gold" type="Label" parent="."]
 layout_mode = 0
-offset_left = 554.0
-offset_top = 31.0
-offset_right = 608.0
-offset_bottom = 54.0
+offset_left = 517.0
+offset_top = 34.0
+offset_right = 635.0
+offset_bottom = 57.0
 text = "Gold: 99999999"
 script = ExtResource("7_dey8e")
 
