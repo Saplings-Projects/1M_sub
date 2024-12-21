@@ -52,9 +52,9 @@ func populate(parent_name: String) -> void:
 	for card: CardBase in cards_to_display:
 
 		cardworld = card_scene.instantiate()
-    cardui = cardworld.get_node("CardUI")
+		cardui = cardworld.get_node("CardUI")
 		key_art = cardworld.get_node("KeyArt")
-    
+	
 		cardui = cardworld.get_child(CARDUI_INDEX)
 
 		cardworld.custom_minimum_size = (cardui.size * CARD_SCALE) + SIZE_OFFSET
