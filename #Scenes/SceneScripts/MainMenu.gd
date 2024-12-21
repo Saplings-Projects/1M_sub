@@ -33,6 +33,7 @@ func _on_continue_pressed() -> void:
 		CardManager.load_data()
 		InventoryManager.load_inventory()
 		SceneManager.load_scene_data()
+		EnemyManager.load_data()
 
 func _on_button_hovered(button: TextureButton) -> void:
 	button.grab_focus()
@@ -46,6 +47,10 @@ func _on_options_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
+
+## Go to the credits
+func _on_credits_pressed() -> void:
+	SceneManager.goto_scene("res://#Scenes/credits.tscn")
 
 func _on_start_new_game_dialog_confirmed() -> void:
 	SaveManager.clear_data()

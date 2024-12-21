@@ -62,7 +62,7 @@ func save_inventory() -> void:
 	save_file.set_value("InventoryManager", "consumable_component", consumable_component)
 	save_file.set_value("InventoryManager", "relic_component", relic_component)
 	
-	var error: Error = save_file.save("user://save/save_data.ini")
+	var error: Error = save_file.save(SaveManager.save_file_path)
 	if error:
 		push_error("Error saving inventory data: ", error)
 
