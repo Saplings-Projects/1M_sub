@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bam77cwf4emyr"]
+[gd_scene load_steps=9 format=3 uid="uid://bam77cwf4emyr"]
 
 [ext_resource type="Texture2D" uid="uid://cjlatwiw7r80d" path="res://Art/Map/icon.png" id="1_a5uhs"]
 [ext_resource type="Script" path="res://UI/InventoryButton.gd" id="1_ml7tf"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://hqkt8t1v2f5h" path="res://Art/Card_layout/deck_pile.png" id="3_87q1i"]
 [ext_resource type="Script" path="res://UI/DeckPileUISetter.gd" id="4_jtp2y"]
 [ext_resource type="Script" path="res://UI/GoldLabel.gd" id="7_dey8e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_khmn7"]
+font_size = 24
 
 [node name="TopBarOverlay" type="Control"]
 layout_mode = 3
@@ -72,11 +75,12 @@ script = ExtResource("4_jtp2y")
 
 [node name="Gold" type="Label" parent="."]
 layout_mode = 0
-offset_left = 517.0
-offset_top = 34.0
-offset_right = 635.0
-offset_bottom = 57.0
-text = "Gold: 99999999"
+offset_left = 504.0
+offset_top = 33.0
+offset_right = 627.0
+offset_bottom = 67.0
+text = "Gold: 1000"
+label_settings = SubResource("LabelSettings_khmn7")
 script = ExtResource("7_dey8e")
 
 [connection signal="pressed" from="Inventory" to="Inventory" method="_on_pressed"]
