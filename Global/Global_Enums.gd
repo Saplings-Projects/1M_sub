@@ -184,6 +184,23 @@ enum PossibleEnemies {
 	the_berts,
 }
 
+# Enums to each music track
+enum MusicTrack {
+	AREA_ONE,
+	AREA_TWO,
+	AREA_THREE,
+	BOSS,
+	HEAL,
+	SHOP,
+	MAIN_MENU,
+	NO_TRACK
+}
+
+# Enums to each SFX
+enum SoundEffect {
+	UUUUU
+}
+
 enum CardType {
 	ATTACK,
 	SKILL,

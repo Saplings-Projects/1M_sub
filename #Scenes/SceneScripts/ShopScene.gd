@@ -2,6 +2,7 @@ extends Control
 class_name ShopScene
 
 func _ready() -> void:
+	AudioManager.start_music(GlobalEnums.MusicTrack.SHOP)
 	
 	# This code has to happen after the map has done '.on_event_started' [br]
 	# so I just put a .1 delay on it
