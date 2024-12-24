@@ -64,6 +64,6 @@ func test_enemy_overstress() -> void:
 	card_stress.on_card_play(_player, _enemy)
 	assert_eq(_enemy_stress_component.current_stress, 80)
 	assert_true(_enemy_stress_component.has_hit_overstress)
-	var expected_damage_val: int = StressComponent.on_overstress().card_effects_data[0].value
-	var actual_damage_val: int = _enemy_behavior_component.get_attack(_enemy_stress_component.has_hit_overstress).card_effects_data[0].value
+	var expected_damage_val: int = _enemy_2_stress_component.on_overstress().card_effects_data[0].value
+	var actual_damage_val: int = _enemy_behavior_component.get_attack(_enemy_stress_component).card_effects_data[0].value
 	assert_eq(actual_damage_val, expected_damage_val)
