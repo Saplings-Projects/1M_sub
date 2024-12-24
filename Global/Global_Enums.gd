@@ -200,3 +200,9 @@ enum MusicTrack {
 enum SoundEffect {
 	UUUUU
 }
+
+enum CardType {
+	ATTACK,
+	SKILL,
+	POWER
+}
