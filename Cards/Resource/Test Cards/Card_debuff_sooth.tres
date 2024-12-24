@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=12 format=3 uid="uid://b8vwac1aeweiy"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectApplyStatus.gd" id="1_s0fhw"]
+[ext_resource type="Script" path="res://Status/Debuffs/Debuff_Sooth.gd" id="2_v0vvp"]
+[ext_resource type="Script" path="res://Entity/Components/Stats/StatModifiers.gd" id="3_ssm1f"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="4_wtnve"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="5_y670f"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="6_5diek"]
+
+[sub_resource type="Resource" id="Resource_4tvm0"]
+script = ExtResource("3_ssm1f")
+permanent_add = 0
+permanent_multiply = 1.0
+temporary_add = -1
+temporary_multiply = 1.0
+
+[sub_resource type="Resource" id="Resource_3fv80"]
+script = ExtResource("2_v0vvp")
+infinite_duration = false
+status_turn_duration = 5
+status_power = 1.0
+status_modifier_base_value = SubResource("Resource_4tvm0")
+
+[sub_resource type="Resource" id="Resource_vrvdx"]
+script = ExtResource("1_s0fhw")
+status_to_apply = SubResource("Resource_3fv80")
+
+[sub_resource type="Resource" id="Resource_1dfso"]
+script = ExtResource("5_y670f")
+
+[sub_resource type="Resource" id="Resource_6jvca"]
+script = ExtResource("4_wtnve")
+effect = SubResource("Resource_vrvdx")
+value = 0
+targeting_function = SubResource("Resource_1dfso")
+
+[resource]
+script = ExtResource("6_5diek")
+application_type = 0
+card_title = "Debuff sooth"
+card_description = "Debuff sooth of player by 1 for 5 turns"
+card_effects_data = Array[ExtResource("4_wtnve")]([SubResource("Resource_6jvca")])

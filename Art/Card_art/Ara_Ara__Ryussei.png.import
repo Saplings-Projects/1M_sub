@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnnelgrlm6grx"
-path="res://.godot/imported/rescued_saplings_nerd-1.test.png-aed7cd7ec416325aa101246a37df79b7.ctex"
+uid="uid://ceex1yybqmow"
+path="res://.godot/imported/Ara_Ara__Ryussei.png-ff9fcad74325a8b45ffcea0f808c978f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/NPC/rescued_saplings_nerd-1.test.png"
-dest_files=["res://.godot/imported/rescued_saplings_nerd-1.test.png-aed7cd7ec416325aa101246a37df79b7.ctex"]
+source_file="res://Art/Card_art/Ara_Ara__Ryussei.png"
+dest_files=["res://.godot/imported/Ara_Ara__Ryussei.png-ff9fcad74325a8b45ffcea0f808c978f.ctex"]
 
 [params]
 
