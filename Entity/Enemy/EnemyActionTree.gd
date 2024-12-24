@@ -13,8 +13,8 @@ class_name EnemyActionTree extends Resource
 ## The default is an example using the [NextCardProbability] class, and alternating between damage and block
 ## This uses the path to the cards as a key
 @export var action_tree: Dictionary = {
-	"res://Cards/Resource/Card_Damage.tres": NextCardProbability.new(100, load("res://Cards/Resource/Card_Get_block.tres")),
-	"res://Cards/Resource/Card_Get_block.tres": NextCardProbability.new(100, load("res://Cards/Resource/Card_Damage.tres"))
+	"res://Cards/Resource/Enemy/Normal/Card_EnemyAttack.tres" : NextCardProbability.new(100, load("res://Cards/Resource/Both/Card_Get_block.tres")),
+	"res://Cards/Resource/Both/Card_Get_block.tres": NextCardProbability.new(100, load("res://Cards/Resource/Enemy/Normal/Card_EnemyAttack.tres"))
 }
 
 ## The last action that was played
