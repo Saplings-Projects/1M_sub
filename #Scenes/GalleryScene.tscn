@@ -1,10 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://budiktemb6mck"]
+[gd_scene load_steps=11 format=3 uid="uid://budiktemb6mck"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/GalleryMenu.gd" id="1_87kxa"]
 [ext_resource type="Texture2D" uid="uid://dvr6ky4vqv4lf" path="res://Art/Enemies/golden_cauldron-finished.png" id="2_nwnkr"]
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/GalleryArtInfo.gd" id="2_q254t"]
+[ext_resource type="Texture2D" uid="uid://ua4ml58lwg4r" path="res://Art/Enemies/motorized_bears/motorized_bear_leader-finished.png" id="4_5lusa"]
+[ext_resource type="Texture2D" uid="uid://qwjhfnceugt0" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_1-finished.png" id="5_wt8jc"]
+[ext_resource type="Texture2D" uid="uid://cw0id8n5qemg8" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_2-finished.png" id="6_ylaeb"]
 
-[node name="GalleryScene" type="Node2D"]
+[sub_resource type="Resource" id="Resource_pomo2"]
+script = ExtResource("2_q254t")
+art_name = "Golden Cauldron"
+author = "Ceres Fauna?"
+texture = ExtResource("2_nwnkr")
+
+[sub_resource type="Resource" id="Resource_j3yf8"]
+script = ExtResource("2_q254t")
+art_name = "Motorized Bear Leader"
+author = "Ceres Fauna?"
+texture = ExtResource("4_5lusa")
+
+[sub_resource type="Resource" id="Resource_o5tj0"]
+script = ExtResource("2_q254t")
+art_name = "Motorized Bear Underling 1"
+author = "Ceres Fauna?"
+texture = ExtResource("5_wt8jc")
+
+[sub_resource type="Resource" id="Resource_6yf4y"]
+script = ExtResource("2_q254t")
+art_name = "Motorized Bear Underling 2"
+author = "Ceres Fauna?"
+texture = ExtResource("6_ylaeb")
+
+[node name="GalleryScene" type="Node2D" node_paths=PackedStringArray("mobs_box_tab", "cards_box_tab")]
 script = ExtResource("1_87kxa")
+mobs_box_tab = NodePath("TabContainer/Mobs/ScrollContainer/MobsGridContainer")
+mobs_list = Array[ExtResource("2_q254t")]([SubResource("Resource_pomo2"), SubResource("Resource_j3yf8"), SubResource("Resource_o5tj0"), SubResource("Resource_6yf4y")])
+cards_box_tab = NodePath("TabContainer/Cards/ScrollContainer/CardsGridContainer")
 
 [node name="BackToMainMenu" type="Button" parent="."]
 offset_left = 20.0
@@ -13,32 +44,52 @@ offset_right = 270.0
 offset_bottom = 115.0
 text = "Back to Main Menu"
 
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+offset_left = 160.0
+offset_top = 218.0
+offset_right = 360.0
+offset_bottom = 418.0
+texture_normal = ExtResource("2_nwnkr")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_left = 160.0
 offset_top = 187.0
 offset_right = 1760.0
 offset_bottom = 987.0
+all_tabs_in_front = true
 
 [node name="Mobs" type="TabBar" parent="TabContainer"]
 layout_mode = 2
 
-[node name="TextureButton" type="TextureButton" parent="TabContainer/Mobs"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Mobs"]
 layout_mode = 0
-offset_left = 46.0
-offset_top = 40.0
-offset_right = 246.0
-offset_bottom = 240.0
-texture_normal = ExtResource("2_nwnkr")
-ignore_texture_size = true
-stretch_mode = 0
+offset_right = 1601.0
+offset_bottom = 768.0
+
+[node name="MobsGridContainer" type="GridContainer" parent="TabContainer/Mobs/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 4
 
 [node name="Cards" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Cards"]
+layout_mode = 0
+offset_right = 1598.0
+offset_bottom = 771.0
+
+[node name="CardsGridContainer" type="GridContainer" parent="TabContainer/Cards/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 4
 
 [node name="Music" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="BackToMainMenu" to="." method="_back_to_main_menu_pressed"]
-[connection signal="pressed" from="TabContainer/Mobs/TextureButton" to="." method="_go_to_gallery_item"]
+[connection signal="pressed" from="TextureButton" to="." method="_go_to_gallery_item"]

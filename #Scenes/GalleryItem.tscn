@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://nr0k304sanb1"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/GalleryItem.gd" id="1_c4r4u"]
-[ext_resource type="Texture2D" uid="uid://dvr6ky4vqv4lf" path="res://Art/Enemies/golden_cauldron-finished.png" id="1_lq7eu"]
+[ext_resource type="PackedScene" uid="uid://caxbd2ppk3ans" path="res://Cards/Card.tscn" id="2_3mqsx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8tpm"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -11,8 +11,10 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="GalleryItem" type="Node2D"]
+[node name="GalleryItem" type="Node2D" node_paths=PackedStringArray("art_texture_node", "art_scroll_container")]
 script = ExtResource("1_c4r4u")
+art_texture_node = NodePath("ArtScrollContainer/Art")
+art_scroll_container = NodePath("ArtScrollContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -32,17 +34,25 @@ offset_bottom = 68.0
 text = "Back
 "
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Card" parent="." instance=ExtResource("2_3mqsx")]
+visible = false
+offset_left = 590.0
+offset_top = 60.0
+offset_right = 940.0
+offset_bottom = 530.0
+scale = Vector2(2, 2)
+
+[node name="ArtScrollContainer" type="ScrollContainer" parent="."]
+visible = false
 offset_left = 114.0
 offset_top = 104.0
 offset_right = 1814.0
 offset_bottom = 1004.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a8tpm")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer"]
+[node name="Art" type="TextureRect" parent="ArtScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_lq7eu")
 
 [connection signal="pressed" from="Back" to="." method="_back_to_gallery"]
