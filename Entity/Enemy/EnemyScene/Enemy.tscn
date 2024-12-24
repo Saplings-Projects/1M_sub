@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://UI/StressLabel.gd" id="8_w2u2o"]
 [ext_resource type="Script" path="res://Entity/Components/PartyComponent.gd" id="8_yr066"]
 [ext_resource type="Script" path="res://Entity/Components/BehaviorComponent.gd" id="9_kvor6"]
-[ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/Test Cards/Card_EnemyAttack.tres" id="10_l5325"]
+[ext_resource type="Resource" uid="uid://bsrdu33ukb1ym" path="res://Cards/Resource/test_cards/Card_EnemyAttack.tres" id="10_l5325"]
 [ext_resource type="Script" path="res://Entity/Components/StressComponent.gd" id="11_qf75g"]
 [ext_resource type="PackedScene" uid="uid://dbidy5j4uyopc" path="res://Entity/Components/block_display.tscn" id="13_u3jb7"]
 
