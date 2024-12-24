@@ -34,6 +34,7 @@ MapManager="*res://Managers/MapManager.gd"
 InventoryManager="*res://Managers/InventoryManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 XpManager="*res://Managers/XpManager.gd"
+ShopManager="*res://Shop/ShopManager.tscn"
 
 [debug]
 
