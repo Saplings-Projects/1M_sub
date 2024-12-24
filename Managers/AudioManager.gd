@@ -27,13 +27,12 @@ var sfx_dictionary: Dictionary = {
 	GlobalEnums.SoundEffect.UUUUU: uuuuu
 }
 
-var music_stream: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-var sfx_stream: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+var music_stream: AudioStreamPlayer = AudioStreamPlayer.new()
+var sfx_stream: AudioStreamPlayer = AudioStreamPlayer.new()
 
 var current_song: GlobalEnums.MusicTrack = GlobalEnums.MusicTrack.NO_TRACK
 
 func _ready() -> void:
-	music_stream
 	add_child(music_stream)
 	add_child(sfx_stream)
 
