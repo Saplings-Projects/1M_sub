@@ -191,6 +191,6 @@ enum CardType {
 }
 
 enum EnemyAction {
-	BasicAttack,
 	GetBlock,
+	BasicAttack,
 }

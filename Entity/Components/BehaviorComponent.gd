@@ -3,12 +3,7 @@ class_name BehaviorComponent
 ## Controls the way enemies behave during a fight.
 ##
 ## TODO: right now this just holds a single attack. In the future, we can have this component control the AI decision making for the enemy.
-## 
-
-
-## The attack that the enemy will do
-@export var attack: CardBase = null
-@export var overstress_attack: CardBase = null
+##
 
 ## The attack set of the enemy
 @export var enemy_attack_tree: EnemyActionTree
