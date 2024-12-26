@@ -20,6 +20,10 @@ class_name CardBase
 ## The name of the card
 @export var card_title: String = "NULL"
 
+## The card name for the enemy, only used by enemies in their decks, cards exclusive to Player should not use this [br]
+## See the [EnemyActionTree] to see the use of this
+@export var enemy_card_name: GlobalEnums.EnemyAction
+
 ## The art used on the card (ie the image at the top, not the layout of the card)
 @export var card_key_art: Texture2D = null
 

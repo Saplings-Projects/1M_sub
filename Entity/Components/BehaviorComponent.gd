@@ -12,6 +12,11 @@ class_name BehaviorComponent
 
 ## The attack set of the enemy
 @export var enemy_attack_tree: EnemyActionTree
+
+func _ready() -> void:
+	if enemy_attack_tree == null:
+		# give default action tree if no action tree is already set
+		enemy_attack_tree = EnemyActionTree.new()
 	
 	
 func get_attack(stress_component: StressComponent) -> CardBase:

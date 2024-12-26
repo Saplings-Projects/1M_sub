@@ -13,22 +13,22 @@ class_name EnemyActionTree extends Resource
 ## The default is an example using the [NextCardProbability] class, and alternating between damage and block
 ## This uses the path to the cards as a key
 @export var action_tree: Dictionary = {
-	"res://Cards/Resource/Enemy/Normal/Card_EnemyAttack.tres" : NextCardProbability.new(100, load("res://Cards/Resource/Both/Card_Get_block.tres")),
-	"res://Cards/Resource/Both/Card_Get_block.tres": NextCardProbability.new(100, load("res://Cards/Resource/Enemy/Normal/Card_EnemyAttack.tres"))
+	GlobalEnums.EnemyAction.BasicAttack : [NextCardProbability.new(100, load("res://Cards/Resource/Both/Card_Get_block.tres"))],
+	GlobalEnums.EnemyAction.GetBlock : [NextCardProbability.new(100, load("res://Cards/Resource/Enemy/Normal/Card_EnemyAttack.tres"))]
 }
 
 ## The last action that was played
-var last_chosen_action: CardBase = null
+var last_chosen_action_name: GlobalEnums.EnemyAction
 
 ## Call to choose the next action given the previous action
 func choose_next_action() -> CardBase:
 	var chosen_action: CardBase = _choose_next_action_inner()
-	last_chosen_action = chosen_action
+	last_chosen_action_name = chosen_action.enemy_card_name
 	return chosen_action
 
 ## The actual choice function, the inner pattern is used to change [last_chosen_action] easily
 func _choose_next_action_inner() -> CardBase:
-	var possible_next_action: Array = action_tree[last_chosen_action]
+	var possible_next_action: Array = action_tree[last_chosen_action_name]
 	# checking the total of the probabilities
 	var total_probability: int = 0
 	for card_probability: NextCardProbability in possible_next_action:
@@ -42,4 +42,4 @@ func _choose_next_action_inner() -> CardBase:
 		else:
 			probability_sum += card_probability.probability
 	push_error("The next action choice for the enemy didn't find a suitable next action, returning default")
-	return load("res://Cards/Resource/Card_Damage.tres")
+	return load("res://Cards/Resource/Enemy/Normal/Card_EnemyAttack.tres")

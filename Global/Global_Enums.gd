@@ -189,3 +189,8 @@ enum CardType {
 	SKILL,
 	POWER
 }
+
+enum EnemyAction {
+	BasicAttack,
+	GetBlock,
+}
