@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyActionTree" load_steps=7 format=3 uid="uid://bge5wqhr8jgj0"]
+
+[ext_resource type="Resource" uid="uid://bi101t4e16eyn" path="res://Cards/Resource/Enemy/Normal/Card_Block_And_Attack.tres" id="1_7ay63"]
+[ext_resource type="Script" path="res://Entity/Enemy/EnemyActionTree.gd" id="1_yj3at"]
+[ext_resource type="Script" path="res://Entity/Enemy/NextCardProbability.gd" id="2_5h3sb"]
+[ext_resource type="Resource" uid="uid://dluk3gyluaxe6" path="res://Cards/Resource/Both/Card_Big_Block.tres" id="3_dpwwb"]
+
+[sub_resource type="Resource" id="Resource_io36s"]
+script = ExtResource("2_5h3sb")
+probability = 100
+card = ExtResource("1_7ay63")
+
+[sub_resource type="Resource" id="Resource_2cubn"]
+script = ExtResource("2_5h3sb")
+probability = 100
+card = ExtResource("3_dpwwb")
+
+[resource]
+script = ExtResource("1_yj3at")
+action_tree = {
+"Big_Block": SubResource("Resource_io36s"),
+"Block_And_Attack": SubResource("Resource_2cubn")
+}
