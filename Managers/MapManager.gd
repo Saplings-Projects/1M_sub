@@ -300,3 +300,11 @@ func get_map_percent_with_player_position() -> float:
 	var number_of_floors: int = map_width_array.size()
 	var player_y_floor: int = player_position.y
 	return (player_y_floor as float / number_of_floors as float) * 100
+
+func is_on_last_floor() -> bool:
+	var number_of_floors: int = map_width_array.size()
+	
+	# Add one since we want to compare the number of floors and player position is zero-index based
+	var player_position_y: int = PlayerManager.player_position.y + 1
+	
+	return number_of_floors == player_position_y
