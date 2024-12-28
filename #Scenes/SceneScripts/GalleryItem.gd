@@ -7,7 +7,7 @@ class_name GalleryItem
 # Card, Art, or Sapling Message
 # Create Different objects for the different materials, then show/hide based on the material we want to show
 @export var art_texture_node: TextureRect
-
+@export var art_author: Label
 @export var art_scroll_container: Control
 
 var gallery_info: GalleryInfo = null
@@ -15,6 +15,7 @@ var gallery_info: GalleryInfo = null
 func _ready() -> void:
 	if gallery_info is GalleryArtInfo:
 		art_scroll_container.visible = true
+		art_author.text = "Art by: " + gallery_info.author
 		art_texture_node.texture = gallery_info.texture
 	elif gallery_info is GalleryCardInfo:
 		var card_world: CardWorld = card.instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://budiktemb6mck"]
+[gd_scene load_steps=21 format=3 uid="uid://budiktemb6mck"]
 
 [ext_resource type="Script" path="res://#Scenes/SceneScripts/GalleryMenu.gd" id="1_87kxa"]
 [ext_resource type="Texture2D" uid="uid://dvr6ky4vqv4lf" path="res://Art/Enemies/golden_cauldron-finished.png" id="2_nwnkr"]
@@ -6,36 +6,86 @@
 [ext_resource type="Texture2D" uid="uid://ua4ml58lwg4r" path="res://Art/Enemies/motorized_bears/motorized_bear_leader-finished.png" id="4_5lusa"]
 [ext_resource type="Texture2D" uid="uid://qwjhfnceugt0" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_1-finished.png" id="5_wt8jc"]
 [ext_resource type="Texture2D" uid="uid://cw0id8n5qemg8" path="res://Art/Enemies/motorized_bears/motorized_bear_underlings_2-finished.png" id="6_ylaeb"]
+[ext_resource type="Script" path="res://#Scenes/SceneScripts/GalleryMusicInfo.gd" id="7_twyl5"]
 
 [sub_resource type="Resource" id="Resource_pomo2"]
 script = ExtResource("2_q254t")
 art_name = "Golden Cauldron"
-author = "Ceres Fauna?"
+author = "Pterion"
 texture = ExtResource("2_nwnkr")
 
 [sub_resource type="Resource" id="Resource_j3yf8"]
 script = ExtResource("2_q254t")
 art_name = "Motorized Bear Leader"
-author = "Ceres Fauna?"
+author = "Pterion"
 texture = ExtResource("4_5lusa")
 
 [sub_resource type="Resource" id="Resource_o5tj0"]
 script = ExtResource("2_q254t")
 art_name = "Motorized Bear Underling 1"
-author = "Ceres Fauna?"
+author = "Pterion"
 texture = ExtResource("5_wt8jc")
 
 [sub_resource type="Resource" id="Resource_6yf4y"]
 script = ExtResource("2_q254t")
 art_name = "Motorized Bear Underling 2"
-author = "Ceres Fauna?"
+author = "Pterion"
 texture = ExtResource("6_ylaeb")
 
-[node name="GalleryScene" type="Node2D" node_paths=PackedStringArray("mobs_box_tab", "cards_box_tab")]
+[sub_resource type="Resource" id="Resource_b1o8k"]
+script = ExtResource("7_twyl5")
+title = "Area One Theme"
+audio_enum = 0
+artist = "Adrian"
+
+[sub_resource type="Resource" id="Resource_vqv6b"]
+script = ExtResource("7_twyl5")
+title = "Area Two Theme"
+audio_enum = 1
+artist = "Adrian"
+
+[sub_resource type="Resource" id="Resource_liu02"]
+script = ExtResource("7_twyl5")
+title = "Area Three Theme"
+audio_enum = 2
+artist = "Arkhand"
+
+[sub_resource type="Resource" id="Resource_jvqx0"]
+script = ExtResource("7_twyl5")
+title = "Boss Theme"
+audio_enum = 3
+artist = "Adrian"
+
+[sub_resource type="Resource" id="Resource_vnqb1"]
+script = ExtResource("7_twyl5")
+title = "Heal Theme"
+audio_enum = 4
+artist = "Arkhand"
+
+[sub_resource type="Resource" id="Resource_lvcsn"]
+script = ExtResource("7_twyl5")
+title = "Shop Theme"
+audio_enum = 5
+artist = "Arkhand"
+
+[sub_resource type="Theme" id="Theme_acrei"]
+default_font_size = 28
+
+[sub_resource type="Theme" id="Theme_merag"]
+default_font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_tf4ep"]
+font_size = 28
+
+[node name="GalleryScene" type="Node2D" node_paths=PackedStringArray("mobs_box_tab", "cards_box_tab", "music_box_tab", "author_label")]
 script = ExtResource("1_87kxa")
 mobs_box_tab = NodePath("TabContainer/Mobs/ScrollContainer/MobsGridContainer")
 mobs_list = Array[ExtResource("2_q254t")]([SubResource("Resource_pomo2"), SubResource("Resource_j3yf8"), SubResource("Resource_o5tj0"), SubResource("Resource_6yf4y")])
 cards_box_tab = NodePath("TabContainer/Cards/ScrollContainer/CardsGridContainer")
+music_box_tab = NodePath("TabContainer/Music/ScrollContainer/MusicGridContainer")
+music_list = Array[ExtResource("7_twyl5")]([SubResource("Resource_b1o8k"), SubResource("Resource_vqv6b"), SubResource("Resource_liu02"), SubResource("Resource_jvqx0"), SubResource("Resource_vnqb1"), SubResource("Resource_lvcsn")])
+music_text_theme = SubResource("Theme_acrei")
+author_label = NodePath("TabContainer/Music/Author")
 
 [node name="BackToMainMenu" type="Button" parent="."]
 offset_left = 20.0
@@ -62,6 +112,7 @@ offset_bottom = 987.0
 all_tabs_in_front = true
 
 [node name="Mobs" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Mobs"]
@@ -75,12 +126,13 @@ size_flags_horizontal = 6
 columns = 4
 
 [node name="Cards" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Cards"]
 layout_mode = 0
-offset_right = 1598.0
-offset_bottom = 771.0
+offset_right = 1601.0
+offset_bottom = 768.0
 
 [node name="CardsGridContainer" type="GridContainer" parent="TabContainer/Cards/ScrollContainer"]
 layout_mode = 2
@@ -88,8 +140,33 @@ size_flags_horizontal = 6
 columns = 4
 
 [node name="Music" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Music"]
+custom_minimum_size = Vector2(1601, 768)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MusicGridContainer" type="GridContainer" parent="TabContainer/Music/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 4
+
+[node name="LinkButton" type="Button" parent="TabContainer/Music/ScrollContainer/MusicGridContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme = SubResource("Theme_merag")
+text = "Test"
+
+[node name="Author" type="Label" parent="TabContainer/Music"]
+layout_mode = 0
+offset_left = 695.0
+offset_top = 678.0
+offset_right = 790.0
+offset_bottom = 717.0
+label_settings = SubResource("LabelSettings_tf4ep")
 
 [connection signal="pressed" from="BackToMainMenu" to="." method="_back_to_main_menu_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="_go_to_gallery_item"]

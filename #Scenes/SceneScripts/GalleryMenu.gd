@@ -8,9 +8,15 @@ extends Node
 
 @export var cards_box_tab: Control
 
+@export var music_box_tab: Control
+@export var music_list: Array[GalleryMusicInfo]
+@export var music_text_theme: Theme
+@export var author_label: Label
+
 func _ready() -> void:
 	_populate_mobs_tab()
 	_populate_cards_tab()
+	_populate_music_tab()
 
 func _back_to_main_menu_pressed() -> void:
 	SceneManager.goto_scene("res://#Scenes/MainMenu.tscn")
@@ -44,3 +50,17 @@ func _populate_cards_tab() -> void:
 		card_world.card_data = load(cards.card_resource.resource_path)
 		card_world.get_click_handler().on_click.connect(_go_to_gallery_item.bind(cards))
 		cards_box_tab.add_child(card_world)
+
+func _populate_music_tab() -> void:
+	for music in music_list:
+		var link_button: Button = Button.new()
+		link_button.custom_minimum_size = Vector2(200, 100)
+		link_button.theme = music_text_theme
+		link_button.text = music.title
+		link_button.pressed.connect(_play_music.bind(music))
+		music_box_tab.add_child(link_button)
+
+func _play_music(gallery_music_info: GalleryMusicInfo) -> void:
+	AudioManager.start_music(gallery_music_info.audio_enum)
+	author_label.text = "Composed By " + gallery_music_info.artist
+	author_label.visible = true
