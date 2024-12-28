@@ -6,7 +6,3 @@ class_name NextCardProbability extends Resource
 @export var probability: int = 0
 ## The card to be played
 @export var card: CardBase = null
-
-func _init(new_probability: int, new_card: CardBase) -> void:
-	probability = new_probability
-	card = new_card
