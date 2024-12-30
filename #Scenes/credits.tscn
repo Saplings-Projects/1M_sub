@@ -14,10 +14,10 @@
 [ext_resource type="AnimationLibrary" uid="uid://dfkng08hfjpdv" path="res://Art/Animation/credits/In.res" id="11_xdj82"]
 [ext_resource type="AnimationLibrary" uid="uid://jlt8btc7fx2j" path="res://Art/Animation/credits/Out.res" id="12_8iix6"]
 
-[sub_resource type="Gradient" id="Gradient_78fca"]
+[sub_resource type="Gradient" id="Gradient_s6c1g"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1cbhb"]
-gradient = SubResource("Gradient_78fca")
+gradient = SubResource("Gradient_s6c1g")
 
 [sub_resource type="Animation" id="Animation_2v08l"]
 length = 0.001
