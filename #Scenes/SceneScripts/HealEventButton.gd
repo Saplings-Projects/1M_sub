@@ -5,9 +5,11 @@ var button_has_been_pressed: bool
 
 func _ready() -> void:
 	black_overlay.modulate.a = 0
-	button_has_been_pressed = false
+	disabled = false
+	visible = true
 
 func _on_pressed() -> void:
+	disabled = true
 	var tween_to_black: Tween = get_tree().create_tween()
 	# turn screen black
 	tween_to_black.tween_property(black_overlay, "modulate:a", 1, 2)
@@ -17,6 +19,7 @@ func _on_pressed() -> void:
 
 	# wait for screen to be black before healing
 	await tween_to_black.finished
+	visible = false
 	player_health_comp.heal(heal_amount, null)
 	# wait a bit
 	await get_tree().create_timer(2).timeout
