@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="CardBase" load_steps=15 format=3 uid="uid://bi101t4e16eyn"]
+
+[ext_resource type="Script" path="res://Cards/Effects/EffectDamage.gd" id="1_06h88"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectAddBlock.gd" id="1_ruhyb"]
+[ext_resource type="Script" path="res://Cards/Effects/EffectData.gd" id="2_pkj5v"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetSelf.gd" id="3_354ej"]
+[ext_resource type="Script" path="res://Cards/Targeting/TargetPlayer.gd" id="3_jcsa5"]
+[ext_resource type="Script" path="res://Cards/EnergyData.gd" id="4_gdqys"]
+[ext_resource type="Script" path="res://Cards/CardBase.gd" id="5_dg36i"]
+
+[sub_resource type="Resource" id="Resource_ss6ls"]
+script = ExtResource("1_ruhyb")
+
+[sub_resource type="Resource" id="Resource_cyyn5"]
+script = ExtResource("3_354ej")
+
+[sub_resource type="Resource" id="Resource_alrab"]
+script = ExtResource("2_pkj5v")
+effect = SubResource("Resource_ss6ls")
+value = 5
+targeting_function = SubResource("Resource_cyyn5")
+
+[sub_resource type="Resource" id="Resource_0buo4"]
+script = ExtResource("1_06h88")
+
+[sub_resource type="Resource" id="Resource_bk02b"]
+script = ExtResource("3_jcsa5")
+
+[sub_resource type="Resource" id="Resource_2lb6r"]
+script = ExtResource("2_pkj5v")
+effect = SubResource("Resource_0buo4")
+value = 3
+targeting_function = SubResource("Resource_bk02b")
+
+[sub_resource type="Resource" id="Resource_1hn6q"]
+script = ExtResource("4_gdqys")
+energy_cost = 2
+
+[resource]
+script = ExtResource("5_dg36i")
+application_type = 2
+card_title = "NULL"
+enemy_card_name = "Block_And_Attack"
+card_type = 0
+card_description = "NULL"
+card_artist_name = "NULL"
+card_effects_data = Array[ExtResource("2_pkj5v")]([SubResource("Resource_alrab"), SubResource("Resource_2lb6r")])
+energy_info = SubResource("Resource_1hn6q")

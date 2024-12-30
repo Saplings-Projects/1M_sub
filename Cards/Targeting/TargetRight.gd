@@ -11,7 +11,8 @@ func _init() -> void:
 
 ## @Override [br]
 ## See [TargetingBase] for more information [br]
-func generate_target_list(targeted_entity: Entity) -> Array[Entity]:
+@warning_ignore("unused_parameter")
+func generate_target_list(caster: Entity, targeted_entity: Entity) -> Array[Entity]:
 	var enemy_list: Array[Entity] = EnemyManager.current_enemy_group.enemy_list 
 	var index_of_current_target: int = enemy_list.find(targeted_entity)
 	assert(index_of_current_target != -1, "The targeted enemy is not in the list of enemies")

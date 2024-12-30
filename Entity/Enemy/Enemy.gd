@@ -2,6 +2,7 @@ extends Entity
 class_name Enemy
 ## Base enemy class.
 
+## The name of the enemy, used for display purpose
 @export var enemy_name: GlobalEnums.PossibleEnemies
 
 ## @Override [br]

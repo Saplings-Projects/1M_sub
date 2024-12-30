@@ -20,6 +20,10 @@ class_name CardBase
 ## The name of the card
 @export var card_title: String = "NULL"
 
+## The card name for the enemy, only used by enemies in their decks, cards exclusive to Player should not use this [br]
+## See the [EnemyActionTree] to see the use of this
+@export var enemy_card_name: String = "NULL"
+
 ## The art used on the card (ie the image at the top, not the layout of the card)
 @export var card_key_art: Texture2D = null
 
@@ -76,7 +80,7 @@ func on_card_play(caster: Entity, base_target: Entity) -> void:
 func _handle_effects_queue(caster: Entity, base_target: Entity) -> void:
 	var card_effect: EffectData = _card_effects_queue[0]
 	var animation_data: CastAnimationData = card_effect.animation_data
-	var list_targets: Array[Entity] = card_effect.targeting_function.generate_target_list(base_target)
+	var list_targets: Array[Entity] = card_effect.targeting_function.generate_target_list(caster, base_target)
 	var created_cast_animations: Array[CastAnimation] = []
 	
 	var can_use_animation: bool = animation_data != null and animation_data.can_use_animation()
